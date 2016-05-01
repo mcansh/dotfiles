@@ -1,0 +1,19 @@
+'.source.jade':
+
+    # filters snippets
+
+    ':markdown':
+        'prefix': 'markdown'
+        'body': '''
+            :markdown
+                ${1:# Markdown}
+                $2
+        '''
+
+    ':coffee-script':
+        'prefix': 'coffee'
+        'body': '''
+            :coffee-script
+                ${1:console.log 'This is coffee script'}
+                $2
+        '''

@@ -1,0 +1,34 @@
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+[user]
+	name = Logan McAnsh
+	email = l.m@loganmcansh.com
+	signingkey = 2A2E3847
+[push]
+	default = simple
+[color]
+	ui = 1
+[alias]
+	co = checkout
+	cm = commit
+	p = push
+	a = "add -A"
+	s = status
+	d = diff
+	b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
+	# list aliases
+	la = "!git config -l | grep alias | cut -c 7-"
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+	ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+[help]
+	autocorrect = 0
+[credential]
+	helper = store
+[commit]
+	gpgsign = true
+[init]
+	templatedir = /Users/loganmcansh/.git_template/
+[gpg]
+	program = gpg2

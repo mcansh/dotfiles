@@ -1,0 +1,60 @@
+"*":
+  "atom-beautify":
+    _analyticsUserId: "a3f27696-0ef6-42cb-a42f-e3aa394ac295"
+    general:
+      _analyticsUserId: "7f2b31c9-55d1-47a2-b0d9-e777e0790060"
+  "atom-material-ui":
+    fonts:
+      useRoboto: true
+      useRobotoInUI: true
+    panels:
+      depth: true
+      panelContrast: true
+    tabs:
+      rippleAccentColor: true
+      tabSize: "Small"
+    treeView: {}
+    ui:
+      slimScrollbar: true
+  "autocomplete-plus": {}
+  core:
+    disabledPackages: [
+      "snippets-jade"
+      "atom-bourbon-snippets"
+    ]
+    ignoredNames: [
+      ".git"
+      ".DS_Store"
+      ".sass-cache"
+      "config.codekit"
+      "._DS_Store"
+      "._*"
+    ]
+    themes: [
+      "one-dark-ui"
+      "chester-atom-syntax"
+    ]
+  editor:
+    backUpBeforeSaving: true
+    fontFamily: "hack"
+    fontSize: 16
+    invisibles: {}
+    scrollPastEnd: true
+    showIndentGuide: true
+    softWrap: true
+  "exception-reporting":
+    userId: "1a3d270b-cff2-90b9-feb3-8ababdfe3d4e"
+  minimap: {}
+  "one-dark-ui":
+    layoutMode: "Compact"
+    tabSizing: "Even"
+  pigments:
+    extendAutocompleteToVariables: true
+    markerType: "dot"
+    mergeColorDuplicates: true
+  "tree-view":
+    hideIgnoredNames: true
+    hideVcsIgnoredFiles: true
+  welcome:
+    showOnStartup: false
+  whitespace: {}

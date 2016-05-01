@@ -1,0 +1,35 @@
+".source.jade":
+    "html":
+        "prefix": "html"
+        "body": """
+            doctype html
+            html(lang="en")
+              head
+                title ${1:Untitled}
+                meta(charset="utf-8")
+                meta(name="viewport", content="width=device-width, initial-scale=1")
+                meta(name="description", content="${2:description}")
+                meta(name="keywords", content="${3:keywords}")
+                meta(name="author", content="Logan McAnsh")
+                meta(name="theme-color", content="${4:######}")
+                link(rel="shortcut icon" href="img/favicon.ico")
+                link(rel="stylesheet", href="css/style.css")
+                // Apple Touch Icons
+                link(rel="shortcut icon" href="assets/favicon/png/favicon-32.png" sizes="32x32")
+                link(rel="apple-touch-icon-precomposed" sizes="228x228" href="assets/favicon/png/favicon-228.png")
+                link(rel="apple-touch-icon-precomposed" sizes="195x195" href="assets/favicon/png/favicon-195.png")
+                link(rel="apple-touch-icon-precomposed" sizes="152x152" href="assets/favicon/png/favicon-152.png")
+                link(rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/favicon/png/favicon-144.png")
+                link(rel="apple-touch-icon-precomposed" sizes="128x128" href="assets/favicon/png/favicon-128.png")
+                link(rel="apple-touch-icon-precomposed" sizes="120x120" href="assets/favicon/png/favicon-120.png")
+                link(rel="apple-touch-icon-precomposed" sizes="96x96" href="assets/favicon/png/favicon-96.png")
+                link(rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/favicon/png/favicon-72.png")
+                link(rel="apple-touch-icon-precomposed" href="assets/favicon/png/favicon-57.png")
+                // Twitter Card
+                meta(name="twitter:card" content="summary")
+                meta(name="twitter:site" content="${5:@logansmcansh}")
+                meta(name="twitter:title" content="Logan McAnsh")
+                meta(name="twitter:description" content="${6:Logan McAnsh}")
+                meta(name="twitter:image" content="${7:SOME URL HERE}")
+              body
+        """

@@ -1,0 +1,45 @@
+'.source.jade':
+
+    # jade syntax snippets
+
+    'each val in [ 1, 2 ]':
+        'prefix': 'each'
+        'body': '''
+            - each ${1:val} in ${2:[ bla ]}
+                ${4:div= ${1:val}}
+        '''
+
+    'for( var i = 0; i <= 0; i++ )':
+        'prefix': 'for'
+        'body': '''
+            - for( var ${1:i} = ${2:0}; ${1:i} ${3:<= 0}; ${1:i}${4:++} )
+                ${5:div= ${1:val}}
+        '''
+
+    'extends ./templates/layout.jade':
+        'prefix': 'extends'
+        'body': '''
+            extends ${1:${2:./template}/${3:file}.${4:jade}}
+            $5
+        '''
+
+    'include ./includes/file.jade':
+        'prefix': 'include'
+        'body': '''
+            include ${1:${2:./includes}/${3:file}.${4:jade}}
+            $5
+        '''
+
+    '- var name = value':
+        'prefix': 'var'
+        'body': '''
+            - var ${1:name} = ${2:value}
+            $3
+        '''
+
+    'block blockname':
+        'prefix': 'block'
+        'body': '''
+            block ${1:blockname}
+            $2
+        '''
