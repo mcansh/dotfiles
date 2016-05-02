@@ -11,17 +11,20 @@
 [color]
 	ui = 1
 [alias]
+	# add and commit untracked files
 	co = checkout
 	cm = commit
 	p = push
 	a = "add -A"
 	s = status
 	d = diff
-	b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
 	# list aliases
 	la = "!git config -l | grep alias | cut -c 7-"
+	# i dont remember what these do tbh
 	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
 	ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+	b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
+
 [help]
 	autocorrect = 0
 [credential]
