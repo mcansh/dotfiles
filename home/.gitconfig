@@ -13,13 +13,15 @@
 [alias]
 	# add and commit untracked files
 	co = checkout
-	cm = commit
+	cm = "commit -sam"
 	p = push
 	a = "add -A"
 	s = status
 	d = diff
+
 	# list aliases
 	la = "!git config -l | grep alias | cut -c 7-"
+
 	# i dont remember what these do tbh
 	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
 	ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative

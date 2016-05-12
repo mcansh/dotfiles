@@ -37,7 +37,7 @@
   editor:
     backUpBeforeSaving: true
     fontFamily: "hack"
-    fontSize: 16
+    fontSize: 15
     invisibles: {}
     scrollPastEnd: true
     showIndentGuide: true

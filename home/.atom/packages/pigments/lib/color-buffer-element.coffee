@@ -67,8 +67,12 @@ class ColorBufferElement extends HTMLElement
       @requestSelectionUpdate()
     @subscriptions.add @editor.onDidChangeSelectionRange =>
       @requestSelectionUpdate()
-    @subscriptions.add @editor.displayBuffer.onDidTokenize =>
-      @editorConfigChanged()
+
+    if @editor.onDidTokenize?
+      @subscriptions.add @editor.onDidTokenize => @editorConfigChanged()
+    else
+      @subscriptions.add @editor.displayBuffer.onDidTokenize =>
+        @editorConfigChanged()
 
     @subscriptions.add atom.config.observe 'editor.fontSize', =>
       @editorConfigChanged()
@@ -249,7 +253,7 @@ class ColorBufferElement extends HTMLElement
     return if @editor.isDestroyed()
 
     markers = @colorBuffer.findValidColorMarkers({
-      intersectsScreenRowRange: @editorElement.getVisibleRowRange?() ? @editor.displayBuffer.getVisibleRowRange?()
+      intersectsScreenRowRange: @editorElement.getVisibleRowRange?() ? @editor.getVisibleRowRange?()
     })
 
     for m in @displayedMarkers when m not in markers
@@ -360,7 +364,7 @@ class ColorBufferElement extends HTMLElement
 
   colorMarkerForMouseEvent: (event) ->
     position = @screenPositionForMouseEvent(event)
-    bufferPosition = @colorBuffer.displayBuffer.bufferPositionForScreenPosition(position)
+    bufferPosition = @colorBuffer.editor.bufferPositionForScreenPosition(position)
 
     @colorBuffer.getColorMarkerAtBufferPosition(bufferPosition)
 

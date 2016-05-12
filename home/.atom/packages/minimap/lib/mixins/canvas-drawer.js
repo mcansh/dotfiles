@@ -415,13 +415,20 @@ export default class CanvasDrawer extends Mixin {
     let tokenLines = []
     if (typeof editor.tokenizedLinesForScreenRows === 'function') {
       for (let tokenizedLine of editor.tokenizedLinesForScreenRows(startRow, endRow)) {
-        const invisibleRegExp = this.getInvisibleRegExpForLine(tokenizedLine)
-        tokenLines.push(tokenizedLine.tokens.map((token) => {
+        if (tokenizedLine) {
+          const invisibleRegExp = this.getInvisibleRegExpForLine(tokenizedLine)
+          tokenLines.push(tokenizedLine.tokens.map((token) => {
+            return {
+              value: token.value.replace(invisibleRegExp, ' '),
+              scopes: token.scopes.slice()
+            }
+          }))
+        } else {
           return {
-            value: token.value.replace(invisibleRegExp, ' '),
-            scopes: token.scopes.slice()
+            value: '',
+            scopes: []
           }
-        }))
+        }
       }
     } else {
       const displayLayer = editor.displayLayer
@@ -431,6 +438,7 @@ export default class CanvasDrawer extends Mixin {
         let tokens = []
         let scopes = []
         let textIndex = 0
+        // console.log(lineText, invisibleRegExp, lineText.replace(invisibleRegExp, ' '))
         for (let tagCode of tagCodes) {
           if (displayLayer.isOpenTagCode(tagCode)) {
             scopes.push(displayLayer.tagForCode(tagCode))
@@ -503,13 +511,15 @@ export default class CanvasDrawer extends Mixin {
    */
   getInvisibleRegExp () {
     let invisibles = this.getTextEditor().getInvisibles()
-    let regexp = ''
-    if (invisibles.cr != null) { regexp += invisibles.cr + '|' }
-    if (invisibles.eol != null) { regexp += invisibles.eol + '|' }
-    if (invisibles.space != null) { regexp += invisibles.space + '|' }
-    if (invisibles.tab != null) { regexp += invisibles.tab + '|' }
+    let regexp = []
+    if (invisibles.cr != null) { regexp.push(invisibles.cr) }
+    if (invisibles.eol != null) { regexp.push(invisibles.eol) }
+    if (invisibles.space != null) { regexp.push(invisibles.space) }
+    if (invisibles.tab != null) { regexp.push(invisibles.tab) }
 
-    return new RegExp(_.escapeRegExp(regexp.slice(0, -1)), 'g')
+    return RegExp(regexp.filter((s) => {
+      return typeof s === 'string'
+    }).map(_.escapeRegExp).join('|'), 'g')
   }
 
   /**

@@ -1,7 +1,7 @@
 {
   "name": "pigments",
   "main": "./lib/pigments",
-  "version": "0.26.0",
+  "version": "0.26.3",
   "description": "A package to display colors in project and files.",
   "keywords": [
     "colors",
@@ -67,10 +67,10 @@
     "url": "https://github.com/abe33/atom-pigments/issues"
   },
   "homepage": "https://github.com/abe33/atom-pigments#readme",
-  "_id": "pigments@0.26.0",
-  "_shasum": "4fe0998c175d17c5a4c81c2cff2c9da73fbadee2",
-  "_resolved": "file:../d-116224-759-hgn6ki/package.tgz",
-  "_from": "../d-116224-759-hgn6ki/package.tgz",
+  "_id": "pigments@0.26.3",
+  "_shasum": "df7d76845903ac29a2e52fb00dfcf274cb03c092",
+  "_resolved": "file:../d-116412-13642-1xqgs9i/package.tgz",
+  "_from": "../d-116412-13642-1xqgs9i/package.tgz",
   "_atomModuleCache": {
     "version": 1,
     "dependencies": [
@@ -196,7 +196,7 @@
       },
       {
         "name": "fs-plus",
-        "version": "2.8.1",
+        "version": "2.8.2",
         "path": "node_modules/fs-plus/lib/fs-plus.js"
       },
       {
@@ -313,6 +313,7 @@
         "lib/renderers/region-renderer.coffee",
         "lib/renderers/square-dot.coffee",
         "lib/renderers/underline.coffee",
+        "lib/scope-from-file-name.coffee",
         "lib/sticky-title.coffee",
         "lib/svg-colors.coffee",
         "lib/tasks/load-paths-handler.coffee",

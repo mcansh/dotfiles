@@ -1,5 +1,27 @@
-<a name="v0.25.1"></a>
-# v0.25.1 (2016-03-24)
+<a name="v0.26.3"></a>
+# v0.26.3 (2016-05-12)
+
+## Bug Fixes
+
+- Fix remaining deprecations with custom markers properties ([ad9bc229](https://github.com/abe33/atom-pigments/commit/ad9bc229960bc02abd1cc01fc18f9eaa5d07d688))
+
+<a name="v0.26.2"></a>
+# v0.26.2 (2016-05-05)
+
+## Bug Fixes
+
+- Fix issue with API not available yet on stable ([e88d4feb](https://github.com/abe33/atom-pigments/commit/e88d4feb306b640d9d94288c8b7e68bdfe3429bb))
+
+<a name="v0.26.1"></a>
+# v0.26.1 (2016-05-05)
+
+## Bug Fixes
+
+- Fix deprecations ([b4f51775](https://github.com/abe33/atom-pigments/commit/b4f51775b10723cddcad78b51cf82be487c4f532))
+- Fix access to marker displayBuffer reference ([3e17f2f2](https://github.com/abe33/atom-pigments/commit/3e17f2f2ab750059815db80e3112fa785335a515), [#176](https://github.com/abe33/atom-pigments/issues/176))
+
+<a name="v0.26.0"></a>
+# v0.26.0 (2016-03-24)
 
 ## Bug Fixes
 
