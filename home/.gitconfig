@@ -17,14 +17,19 @@
 	p = push
 	a = "add -A"
 	s = status
+	remove = "rm --cached -r"
 	d = diff
 
 	# list aliases
 	la = "!git config -l | grep alias | cut -c 7-"
 
-	# i dont remember what these do tbh
+	# shows files in current repo?
 	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+
+	# displays commits of current repo
 	ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+	
+	# shows current branch's last commit with absolute date
 	b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
 
 [help]
