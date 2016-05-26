@@ -22,7 +22,14 @@ alias appflush="/System/Library/Frameworks/CoreServices.framework/Frameworks/Lau
 # software updates becuase laziness
 alias update="softwareupdate -iav"
 
+# update everything
+alias updateall='sudo softwareupdate -i -a; brew update; brew upgrade --all; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update' 
+
 
 # Merge PDF files
 # Usage: "mergepdf -o output.pdf input{1,2,3}.pdf"
 alias mergepdf="/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py"
+
+
+# alias for aliases
+alias alias='ln -s'
