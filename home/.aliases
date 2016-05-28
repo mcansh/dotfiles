@@ -23,7 +23,7 @@ alias appflush="/System/Library/Frameworks/CoreServices.framework/Frameworks/Lau
 alias update="softwareupdate -iav"
 
 # update everything
-alias updateall="sudo softwareupdate -i -a; brew update; brew upgrade --all; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update"
+alias updateall="sudo softwareupdate -iava; brew update; brew upgrade --all; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update"
 
 
 # Merge PDF files
