@@ -41,6 +41,7 @@ describe 'ColorMarkerElement', ->
       text
       colorBuffer: {
         editor
+        useNativeDecorations: -> false
         selectColorMarkerAndOpenPicker: jasmine.createSpy('select-color')
         ignoredScopes: []
         getMarkerLayer: -> editor
@@ -51,6 +52,7 @@ describe 'ColorMarkerElement', ->
     colorMarkerElement = new ColorMarkerElement
     colorMarkerElement.setContainer
       editor: editor
+      useNativeDecorations: -> false
       requestMarkerUpdate: ([marker]) -> marker.render()
 
     colorMarkerElement.setModel(colorMarker)
@@ -69,6 +71,7 @@ describe 'ColorMarkerElement', ->
       colorMarkerElement = new ColorMarkerElement
       colorMarkerElement.setContainer
         editor: editor
+        useNativeDecorations: -> false
         requestMarkerUpdate: ([marker]) -> marker.render()
 
       colorMarkerElement.setModel(colorMarker)
@@ -94,6 +97,7 @@ describe 'ColorMarkerElement', ->
       colorMarkerElement = new ColorMarkerElement
       colorMarkerElement.setContainer
         editor: editor
+        useNativeDecorations: -> false
         requestMarkerUpdate: ([marker]) -> marker.render()
 
       colorMarkerElement.setModel(colorMarker)
@@ -144,6 +148,7 @@ describe 'ColorMarkerElement', ->
       colorMarkerElement = new ColorMarkerElement
       colorMarkerElement.setContainer
         editor: editor
+        useNativeDecorations: -> false
         requestMarkerUpdate: ([marker]) -> marker.render()
 
       colorMarkerElement.setModel(colorMarker)
@@ -194,6 +199,7 @@ describe 'ColorMarkerElement', ->
       colorMarkerElement = new ColorMarkerElement
       colorMarkerElement.setContainer
         editor: editor
+        useNativeDecorations: -> false
         requestMarkerUpdate: ([marker]) -> marker.render()
 
       colorMarkerElement.setModel(colorMarker)
@@ -253,6 +259,7 @@ describe 'ColorMarkerElement', ->
         text
         colorBuffer: {
           editor
+          useNativeDecorations: -> false
           project:
             colorPickerAPI:
               open: jasmine.createSpy('color-picker.open')
@@ -284,6 +291,7 @@ describe 'ColorMarkerElement', ->
         colorMarkerElement = new ColorMarkerElement
         colorMarkerElement.setContainer
           editor: editor
+          useNativeDecorations: -> false
           requestMarkerUpdate: ([marker]) -> marker.render()
 
         colorMarkerElement.setModel(colorMarker)
@@ -320,6 +328,7 @@ describe 'ColorMarkerElement', ->
         text
         colorBuffer: {
           editor
+          useNativeDecorations: -> false
           project:
             colorPickerAPI:
               open: jasmine.createSpy('color-picker.open')
@@ -351,6 +360,7 @@ describe 'ColorMarkerElement', ->
         colorMarkerElement = new ColorMarkerElement
         colorMarkerElement.setContainer
           editor: editor
+          useNativeDecorations: -> false
           requestMarkerUpdate: ([marker]) -> marker.render()
 
         colorMarkerElement.setModel(colorMarker)

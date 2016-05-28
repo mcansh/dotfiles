@@ -79,7 +79,19 @@ module.exports =
     markerType:
       type: 'string'
       default: 'background'
-      enum: ['background', 'outline', 'underline', 'dot', 'square-dot', 'gutter']
+      enum: [
+        'native-background'
+        'native-underline'
+        'native-outline'
+        'native-dot'
+        'native-square-dot'
+        'background'
+        'outline'
+        'underline'
+        'dot'
+        'square-dot'
+        'gutter'
+      ]
     sortPaletteColors:
       type: 'string'
       default: 'none'
@@ -101,6 +113,8 @@ module.exports =
       title: 'Ignore VCS Ignored Paths'
 
   activate: (state) ->
+    @patchAtom()
+
     @project = if state.project?
       atom.deserializers.deserialize(state.project)
     else
@@ -284,6 +298,54 @@ module.exports =
 
     JSON.stringify(o, null, 2)
     .replace(///#{atom.project.getPaths().join('|')}///g, '<root>')
+
+  patchAtom: ->
+    requireCore = (name) ->
+      require Object.keys(require.cache).filter((s) -> s.indexOf(name) > -1)[0]
+
+    HighlightComponent = requireCore('highlights-component')
+    TextEditorPresenter = requireCore('text-editor-presenter')
+
+    unless TextEditorPresenter.getTextInScreenRange?
+      TextEditorPresenter::getTextInScreenRange = (screenRange) ->
+        if @displayLayer?
+          @model.getTextInRange(@displayLayer.translateScreenRange(screenRange))
+        else
+          @model.bufferRangeForScreenRange(screenRange)
+
+      _buildHighlightRegions = TextEditorPresenter::buildHighlightRegions
+      TextEditorPresenter::buildHighlightRegions = (screenRange) ->
+        regions = _buildHighlightRegions.call(this, screenRange)
+
+        if regions.length is 1
+          regions[0].text = @getTextInScreenRange(screenRange)
+        else
+          regions[0].text = @getTextInScreenRange([
+            screenRange.start
+            [screenRange.start.row, Infinity]
+          ])
+          regions[regions.length - 1].text = @getTextInScreenRange([
+            [screenRange.end.row, 0]
+            screenRange.end
+          ])
+
+          if regions.length > 2
+            regions[1].text = @getTextInScreenRange([
+              [screenRange.start.row + 1, 0]
+              [screenRange.end.row - 1, Infinity]
+            ])
+
+        regions
+
+      _updateHighlightRegions = HighlightComponent::updateHighlightRegions
+      HighlightComponent::updateHighlightRegions = (id, newHighlightState) ->
+        _updateHighlightRegions.call(this, id; newHighlightState)
+
+        if newHighlightState.class?.match /^pigments-native-background\s/
+          for newRegionState, i in newHighlightState.regions
+            regionNode = @regionNodesByHighlightId[id][i]
+
+            regionNode.textContent = newRegionState.text if newRegionState.text?
 
   loadDeserializersAndRegisterViews: ->
     ColorBuffer = require './color-buffer'

@@ -1,5 +1,5 @@
 if [ -f ~/.bashrc ]; then
-  source ~/.aliases
   source ~/.bashrc
+  source ~/.aliases
   eval "$(hub alias -s)"
 fi

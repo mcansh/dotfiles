@@ -28,4 +28,4 @@ if [[ -n "$SSH_CONNECTION" ]] ;then
 fi
 
 #Set my editor to Atom
-export EDITOR="atom"
+export EDITOR="atom-beta"
