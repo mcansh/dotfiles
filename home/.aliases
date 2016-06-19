@@ -20,10 +20,11 @@ alias appflush="/System/Library/Frameworks/CoreServices.framework/Frameworks/Lau
 
 
 # software updates becuase laziness
-alias update="softwareupdate -iav"
+alias update="softwareupdate -ia --verbose"
 
 # update everything
-alias updateall="sudo softwareupdate -iava; brew update; brew upgrade --all; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update"
+#alias updateall="sudo softwareupdate -ia --verbose; brew update; brew upgrade --all; brew cleanup; sudo gem install -n /usr/local/bin; npm update -g; sudo gem update --system /usr/bin/update_rubygems; sudo gem update /usr/local/bin"
+alias updateall="sudo softwareupdate -ia --verbose; brew update; brew upgrade --all; brew cleanup;"
 
 
 # Merge PDF files
@@ -32,3 +33,13 @@ alias mergepdf="/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Re
 
 # alias for aliases
 alias makethisgohere="ln -s"
+
+# zip stuff
+alias zip="zip -r -X"
+alias tar="tar -jcvf"
+
+# make list actually list all
+alias ls="ls -a"
+
+# install gems on el cap / Sierra
+alias geminstall="sudo gem install -n /usr/local/bin"

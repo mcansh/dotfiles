@@ -83,5 +83,6 @@
     "tmp": "tmp/typescript-1.8.10.tgz_1460493736776_0.9304528103675693"
   },
   "directories": {},
-  "_resolved": "https://registry.npmjs.org/typescript/-/typescript-1.8.10.tgz"
+  "_resolved": "https://registry.npmjs.org/typescript/-/typescript-1.8.10.tgz",
+  "readme": "ERROR: No README data found!"
 }

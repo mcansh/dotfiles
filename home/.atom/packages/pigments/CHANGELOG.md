@@ -1,3 +1,72 @@
+<a name="v0.29.2"></a>
+# v0.29.2 (2016-06-09)
+
+## Bug Fixes
+
+- Guard against null marker in dot offset update ([8f05eac2](https://github.com/abe33/atom-pigments/commit/8f05eac2ea3f86479e68d45e63558d9fc9032692), [#197](https://github.com/abe33/atom-pigments/issues/197))
+
+<a name="v0.29.1"></a>
+# v0.29.1 (2016-06-01)
+
+## Bug Fixes
+
+- Fix bad text retrieval on stable ([d7f26f3c](https://github.com/abe33/atom-pigments/commit/d7f26f3c5d9e72a51eef54faf15a2c83620fcede), [#196](https://github.com/abe33/atom-pigments/issues/196))
+
+<a name="v0.29.0"></a>
+# v0.29.0 (2016-05-30)
+
+## Features
+
+- Add a border around dot and gutter decorations in a selection ([594d5405](https://github.com/abe33/atom-pigments/commit/594d54055f0c87ab85cf5c4d2fe58c4792a18599))
+
+## Bug Fixes
+
+- Use a single class to deal with decoration in selections ([bca3916f](https://github.com/abe33/atom-pigments/commit/bca3916f1b6836d4b37bf44941314e693a2a545c), [#193](https://github.com/abe33/atom-pigments/issues/193))
+
+<a name="v0.28.4"></a>
+# v0.28.4 (2016-05-29)
+
+## Bug Fixes
+
+- Fix missing noNamePrefix param in variable serialize output ([49b596b5](https://github.com/abe33/atom-pigments/commit/49b596b573ce21db1b5c2fa5d6b5baa649954e02))
+
+<a name="v0.28.3"></a>
+# v0.28.3 (2016-05-29)
+
+## Bug Fixes
+
+- Prevent invalid matches on latex colors ([36662063](https://github.com/abe33/atom-pigments/commit/36662063a6a15704f5fb105c9f66dd9dc6cf5059))
+
+<a name="v0.28.2"></a>
+# v0.28.2 (2016-05-29)
+
+## Bug Fixes
+
+- Fix variables no longer parsed properly ([fccbdeb8](https://github.com/abe33/atom-pigments/commit/fccbdeb8e6b926940f667b37d9d593f158261d10))
+
+<a name="v0.28.1"></a>
+# v0.28.1 (2016-05-29)
+
+## Bug Fixes
+
+- Fix issue when deserialising project ([a870be8a](https://github.com/abe33/atom-pigments/commit/a870be8a2c30160510f3e4e3fddcbe84c2f03949))
+
+<a name="v0.28.0"></a>
+# v0.28.0 (2016-05-29)
+
+## Features
+
+- Implement latex color mixing form ([af6b47ed](https://github.com/abe33/atom-pigments/commit/af6b47ed205bddabae027568f11127557c015ff1), [#174](https://github.com/abe33/atom-pigments/issues/174))
+- Add support for inline latex color ([5b36740d](https://github.com/abe33/atom-pigments/commit/5b36740d9c815b0503c90a74831a5ec25483789d))
+  <br>For [#174](https://github.com/abe33/atom-pigments/issues/174))
+- Implement \definecolor expressions for LaTex ([a21c190f](https://github.com/abe33/atom-pigments/commit/a21c190fba1c79a2e385ef54647eabd36fb34ef3))  <br>Includes a new CMYK expression as well
+  For [#174](https://github.com/abe33/atom-pigments/issues/174))
+
+## Bug Fixes
+
+- Do not suggest alternative sass version ([09851f3f](https://github.com/abe33/atom-pigments/commit/09851f3fc20143e14997168ecf740abeb0137d6e), [#171](https://github.com/abe33/atom-pigments/issues/171))
+- Fix changes not an array on stable ([5e8f7a48](https://github.com/abe33/atom-pigments/commit/5e8f7a4836d62c0dfddf8b84196960c4e3dba5e2), [#194](https://github.com/abe33/atom-pigments/issues/194))
+
 <a name="v0.27.1"></a>
 # v0.27.1 (2016-05-26)
 

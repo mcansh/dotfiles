@@ -28,10 +28,10 @@ $ = null
 # return data;
 # }
 getScrollTop = (editor) ->
-  view = editor.viewRegistry.getView(editor)
+  view = atom.views.getView(editor)
   view.getScrollTop()
 setScrollTop = (editor, value) ->
-  view = editor.viewRegistry.getView(editor)
+  view = atom.views.getView(editor)
   view.setScrollTop value
 
 getCursors = (editor) ->
@@ -547,7 +547,7 @@ plugin.checkUnsupportedOptions = ->
   unsupportedOptions = getUnsupportedOptions()
   if unsupportedOptions.length isnt 0
     atom.notifications.addWarning("Please run Atom command 'Atom-Beautify: Migrate Settings'.", {
-      detail : "You have unsupported options: #{unsupportedOptions.join(', ')}",
+      detail : "You can open the Atom command palette with `cmd-shift-p` (OSX) or `ctrl-shift-p` (Linux/Windows) in Atom. You have unsupported options: #{unsupportedOptions.join(', ')}",
       dismissable : true
     })
 

@@ -35,3 +35,16 @@ atom-text-editor::shadow .cursor {
 atom-text-editor::shadow pigments-markers::shadow pigments-color-marker.dot:after, pigments-markers::shadow pigments-color-marker.dot:after, pigments-color-marker.dot:after {
   transform: translate(0, -50%),scale(0.6);;
 }
+
+
+// Add this to atom if you want change the alpha transparency to your wrap guide
+atom-text-editor::shadow {
+  .wrap-guide {
+    background-color : fade(@syntax-wrap-guide-color, 08%);
+  }
+}
+
+.tree-view,
+atom-text-editor {
+  font-family: "SFMono-Regular", "SF Mono Regular";
+}

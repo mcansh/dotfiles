@@ -1,7 +1,7 @@
 {
   "name": "pigments",
   "main": "./lib/pigments",
-  "version": "0.27.1",
+  "version": "0.29.2",
   "description": "A package to display colors in project and files.",
   "keywords": [
     "colors",
@@ -67,10 +67,10 @@
     "url": "https://github.com/abe33/atom-pigments/issues"
   },
   "homepage": "https://github.com/abe33/atom-pigments#readme",
-  "_id": "pigments@0.27.1",
-  "_shasum": "94f1c49a55f8994fa1f737b9dccf0c3591edd1da",
-  "_resolved": "file:../d-116426-16180-1ckc2zo/package.tgz",
-  "_from": "../d-116426-16180-1ckc2zo/package.tgz",
+  "_id": "pigments@0.29.2",
+  "_shasum": "3f3d3bdee92f7d05436aaa62e28bebc2ba050920",
+  "_resolved": "file:../d-11659-4166-osfzdx/package.tgz",
+  "_from": "../d-11659-4166-osfzdx/package.tgz",
   "_atomModuleCache": {
     "version": 1,
     "dependencies": [
@@ -201,7 +201,7 @@
       },
       {
         "name": "fs-plus",
-        "version": "2.8.2",
+        "version": "2.9.1",
         "path": "node_modules/fs-plus/lib/fs-plus.js"
       },
       {

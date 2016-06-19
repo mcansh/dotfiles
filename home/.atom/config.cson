@@ -36,7 +36,7 @@
     ]
   editor:
     backUpBeforeSaving: true
-    fontFamily: "hack"
+    fontFamily: "SFMono-Regular"
     fontSize: 15
     invisibles: {}
     scrollPastEnd: true
@@ -58,3 +58,6 @@
   welcome:
     showOnStartup: false
   whitespace: {}
+".sass.source":
+  editor:
+    autoIndentOnPaste: true

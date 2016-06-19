@@ -285,8 +285,11 @@ class ColorBufferElement extends HTMLElement
 
     if @isDotType(type)
       @gutterSubscription.add @editor.onDidChange (changes) =>
-        changes?.forEach (change) =>
-          @updateDotDecorationsOffsets(change.start.row)
+        if Array.isArray changes
+          changes?.forEach (change) =>
+            @updateDotDecorationsOffsets(change.start.row)
+        else
+          @updateDotDecorationsOffsets(changes.start.row)
 
     @updateGutterDecorations(type)
 
@@ -347,6 +350,7 @@ class ColorBufferElement extends HTMLElement
 
     for m in @displayedMarkers
       deco = @decorationByMarkerId[m.id]
+      continue unless m.marker?
       markerRow = m.marker.getStartScreenPosition().row
       continue unless row is markerRow
 
@@ -496,12 +500,12 @@ class ColorBufferElement extends HTMLElement
 
       continue unless markerRange? and range?
       if markerRange.intersectsWith(range)
-        classes.push('in-selection') unless 'in-selection' in classes
+        classes[0] += '-in-selection' unless classes[0].match(/-in-selection$/)?
         props.class = classes.join(' ')
         decoration.setProperties(props)
         return
 
-    classes = classes.filter (cls) -> cls isnt 'in-selection'
+    classes = classes.map (cls) -> cls.replace('-in-selection', '')
     props.class = classes.join(' ')
     decoration.setProperties(props)
 

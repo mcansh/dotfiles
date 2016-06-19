@@ -28,6 +28,7 @@ sass_handler = (match, solver) ->
         match[2]
         0
         match[0].length
+        true
       ])
     if match[1] isnt all_hyphen
       solver.appendResult([
@@ -35,6 +36,7 @@ sass_handler = (match, solver) ->
         match[2]
         0
         match[0].length
+        true
       ])
 
   solver.endParsing(match[0].length)
@@ -100,3 +102,39 @@ registry.createExpression 'pigments:stylus_hash', '^[ \\t]*([a-zA-Z_$][a-zA-Z0-9
     solver.abortParsing()
 
 registry.createExpression 'pigments:stylus', '^[ \\t]*([a-zA-Z_$][a-zA-Z0-9\\-_]*)\\s*=(?!=)\\s*([^\\n\\r;]*);?$', ['styl', 'stylus']
+
+registry.createExpression 'pigments:latex', '\\\\definecolor(\\{[^\\}]+\\})\\{([^\\}]+)\\}\\{([^\\}]+)\\}', ['tex'], (match, solver) ->
+  [_, name, mode, value] = match
+
+  value = switch mode
+    when 'RGB' then "rgb(#{value})"
+    when 'gray' then "gray(#{Math.round(parseFloat(value) * 100)}%)"
+    when 'rgb'
+      values = value.split(',').map (n) -> Math.floor(n * 255)
+      "rgb(#{values.join(',')})"
+    when 'cmyk' then "cmyk(#{value})"
+    when 'HTML' then "##{value}"
+    else value
+
+  solver.appendResult([
+    name
+    value
+    0
+    _.length
+    false
+    true
+  ])
+  solver.endParsing(_.length)
+
+registry.createExpression 'pigments:latex_mix', '\\\\definecolor(\\{[^\\}]+\\})(\\{[^\\}\\n!]+[!][^\\}\\n]+\\})', ['tex'], (match, solver) ->
+  [_, name, value] = match
+
+  solver.appendResult([
+    name
+    value
+    0
+    _.length
+    false
+    true
+  ])
+  solver.endParsing(_.length)

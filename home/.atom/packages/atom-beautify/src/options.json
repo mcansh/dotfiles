@@ -3443,31 +3443,17 @@
     "description": "Options for language Marko",
     "collapsed": true,
     "beautifiers": [
-      "JS Beautify"
+      "Marko Beautifier"
     ],
     "properties": {
-      "indent_inner_html": {
-        "type": "boolean",
-        "default": false,
-        "description": "Indent <head> and <body> sections. (Supported by JS Beautify)",
-        "title": "Indent inner html",
-        "beautifiers": [
-          "JS Beautify"
-        ],
-        "key": "indent_inner_html",
-        "language": {
-          "name": "HTML",
-          "namespace": "html"
-        }
-      },
       "indent_size": {
         "type": "integer",
         "default": 4,
         "minimum": 0,
-        "description": "Indentation size/length (Supported by JS Beautify)",
+        "description": "Indentation size/length (Supported by Marko Beautifier)",
         "title": "Indent size",
         "beautifiers": [
-          "JS Beautify"
+          "Marko Beautifier"
         ],
         "key": "indent_size",
         "language": {
@@ -3478,12 +3464,44 @@
       "indent_char": {
         "type": "string",
         "default": " ",
-        "description": "Indentation character (Supported by JS Beautify)",
+        "description": "Indentation character (Supported by Marko Beautifier)",
         "title": "Indent char",
         "beautifiers": [
-          "JS Beautify"
+          "Marko Beautifier"
         ],
         "key": "indent_char",
+        "language": {
+          "name": "HTML",
+          "namespace": "html"
+        }
+      },
+      "syntax": {
+        "type": "string",
+        "default": "html",
+        "enum": [
+          "html",
+          "concise"
+        ],
+        "description": "[html|concise] (Supported by Marko Beautifier)",
+        "title": "Syntax",
+        "beautifiers": [
+          "Marko Beautifier"
+        ],
+        "key": "syntax",
+        "language": {
+          "name": "Marko",
+          "namespace": "marko"
+        }
+      },
+      "indent_inner_html": {
+        "type": "boolean",
+        "default": false,
+        "description": "Indent <head> and <body> sections. (Supported by Marko Beautifier)",
+        "title": "Indent inner html",
+        "beautifiers": [
+          "Marko Beautifier"
+        ],
+        "key": "indent_inner_html",
         "language": {
           "name": "HTML",
           "namespace": "html"
@@ -3498,10 +3516,10 @@
           "end-expand",
           "none"
         ],
-        "description": "[collapse|expand|end-expand|none] (Supported by JS Beautify)",
+        "description": "[collapse|expand|end-expand|none] (Supported by Marko Beautifier)",
         "title": "Brace style",
         "beautifiers": [
-          "JS Beautify"
+          "Marko Beautifier"
         ],
         "key": "brace_style",
         "language": {
@@ -3517,10 +3535,10 @@
           "separate",
           "normal"
         ],
-        "description": "[keep|separate|normal] (Supported by JS Beautify)",
+        "description": "[keep|separate|normal] (Supported by Marko Beautifier)",
         "title": "Indent scripts",
         "beautifiers": [
-          "JS Beautify"
+          "Marko Beautifier"
         ],
         "key": "indent_scripts",
         "language": {
@@ -3531,10 +3549,10 @@
       "wrap_line_length": {
         "type": "integer",
         "default": 250,
-        "description": "Maximum characters per line (0 disables) (Supported by JS Beautify)",
+        "description": "Maximum characters per line (0 disables) (Supported by Marko Beautifier)",
         "title": "Wrap line length",
         "beautifiers": [
-          "JS Beautify"
+          "Marko Beautifier"
         ],
         "key": "wrap_line_length",
         "language": {
@@ -3549,10 +3567,10 @@
           "auto",
           "force"
         ],
-        "description": "Wrap attributes to new lines [auto|force] (Supported by JS Beautify)",
+        "description": "Wrap attributes to new lines [auto|force] (Supported by Marko Beautifier)",
         "title": "Wrap attributes",
         "beautifiers": [
-          "JS Beautify"
+          "Marko Beautifier"
         ],
         "key": "wrap_attributes",
         "language": {
@@ -3564,10 +3582,10 @@
         "type": "integer",
         "default": 4,
         "minimum": 0,
-        "description": "Indent wrapped attributes to after N characters (Supported by JS Beautify)",
+        "description": "Indent wrapped attributes to after N characters (Supported by Marko Beautifier)",
         "title": "Wrap attributes indent size",
         "beautifiers": [
-          "JS Beautify"
+          "Marko Beautifier"
         ],
         "key": "wrap_attributes_indent_size",
         "language": {
@@ -3578,10 +3596,10 @@
       "preserve_newlines": {
         "type": "boolean",
         "default": true,
-        "description": "Preserve line-breaks (Supported by JS Beautify)",
+        "description": "Preserve line-breaks (Supported by Marko Beautifier)",
         "title": "Preserve newlines",
         "beautifiers": [
-          "JS Beautify"
+          "Marko Beautifier"
         ],
         "key": "preserve_newlines",
         "language": {
@@ -3592,10 +3610,10 @@
       "max_preserve_newlines": {
         "type": "integer",
         "default": 10,
-        "description": "Number of line-breaks to be preserved in one chunk (Supported by JS Beautify)",
+        "description": "Number of line-breaks to be preserved in one chunk (Supported by Marko Beautifier)",
         "title": "Max preserve newlines",
         "beautifiers": [
-          "JS Beautify"
+          "Marko Beautifier"
         ],
         "key": "max_preserve_newlines",
         "language": {
@@ -3647,10 +3665,10 @@
         "items": {
           "type": "string"
         },
-        "description": "List of tags (defaults to inline) that should not be reformatted (Supported by JS Beautify)",
+        "description": "List of tags (defaults to inline) that should not be reformatted (Supported by Marko Beautifier)",
         "title": "Unformatted",
         "beautifiers": [
-          "JS Beautify"
+          "Marko Beautifier"
         ],
         "key": "unformatted",
         "language": {
@@ -3661,10 +3679,10 @@
       "end_with_newline": {
         "type": "boolean",
         "default": false,
-        "description": "End output with newline (Supported by JS Beautify)",
+        "description": "End output with newline (Supported by Marko Beautifier)",
         "title": "End with newline",
         "beautifiers": [
-          "JS Beautify"
+          "Marko Beautifier"
         ],
         "key": "end_with_newline",
         "language": {
@@ -3682,10 +3700,10 @@
         "items": {
           "type": "string"
         },
-        "description": "List of tags (defaults to [head,body,/html] that should have an extra newline before them. (Supported by JS Beautify)",
+        "description": "List of tags (defaults to [head,body,/html] that should have an extra newline before them. (Supported by Marko Beautifier)",
         "title": "Extra liners",
         "beautifiers": [
-          "JS Beautify"
+          "Marko Beautifier"
         ],
         "key": "extra_liners",
         "language": {
@@ -3704,10 +3722,10 @@
         "title": "Default Beautifier",
         "order": -2,
         "type": "string",
-        "default": "JS Beautify",
+        "default": "Marko Beautifier",
         "description": "Default Beautifier to be used for Marko",
         "enum": [
-          "JS Beautify"
+          "Marko Beautifier"
         ]
       },
       "beautify_on_save": {
