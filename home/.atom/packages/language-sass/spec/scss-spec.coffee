@@ -40,6 +40,73 @@ describe 'SCSS grammar', ->
       expect(tokens[0]).toEqual value: '@', scopes: ['source.css.scss', 'meta.at-rule.at-root.scss', 'keyword.control.at-rule.at-root.scss', 'punctuation.definition.keyword.scss']
       expect(tokens[1]).toEqual value: 'at-root', scopes: ['source.css.scss', 'meta.at-rule.at-root.scss', 'keyword.control.at-rule.at-root.scss']
 
+  describe '@include', ->
+    it 'tokenizes it correctly', ->
+      {tokens} = grammar.tokenizeLine '@include'
+
+      expect(tokens[0]).toEqual value: '@', scopes: ['source.css.scss', 'meta.at-rule.include.scss', 'keyword.control.at-rule.include.scss', 'punctuation.definition.keyword.scss']
+      expect(tokens[1]).toEqual value: 'include', scopes: ['source.css.scss', 'meta.at-rule.include.scss', 'keyword.control.at-rule.include.scss']
+
+      {tokens} = grammar.tokenizeLine '@include media{}'
+
+      expect(tokens[0]).toEqual value: '@', scopes: ['source.css.scss', 'meta.at-rule.include.scss', 'keyword.control.at-rule.include.scss', 'punctuation.definition.keyword.scss']
+      expect(tokens[1]).toEqual value: 'include', scopes: ['source.css.scss', 'meta.at-rule.include.scss', 'keyword.control.at-rule.include.scss']
+      expect(tokens[3]).toEqual value: 'media', scopes: ['source.css.scss', 'meta.at-rule.include.scss', 'entity.name.function.scss']
+      expect(tokens[4]).toEqual value: '{', scopes: ['source.css.scss', 'meta.property-list.scss', 'punctuation.section.property-list.begin.bracket.curly.scss']
+
+      {tokens} = grammar.tokenizeLine '@include media($width: 100px){}'
+
+      expect(tokens[3]).toEqual value: 'media', scopes: ['source.css.scss', 'meta.at-rule.include.scss', 'entity.name.function.scss']
+      expect(tokens[4]).toEqual value: '(', scopes: ['source.css.scss', 'meta.at-rule.include.scss', 'punctuation.definition.parameters.begin.bracket.round.scss']
+      expect(tokens[6]).toEqual value: ':', scopes: ['source.css.scss', 'meta.at-rule.include.scss', 'punctuation.definition']
+      expect(tokens[10]).toEqual value: ')', scopes: ['source.css.scss', 'meta.at-rule.include.scss', 'punctuation.definition.parameters.end.bracket.round.scss']
+      expect(tokens[11]).toEqual value: '{', scopes: ['source.css.scss', 'meta.property-list.scss', 'punctuation.section.property-list.begin.bracket.curly.scss']
+
+  describe '@mixin', ->
+    it 'tokenizes solitary @mixin correctly', ->
+      {tokens} = grammar.tokenizeLine '@mixin'
+
+      expect(tokens[0]).toEqual value: '@', scopes: ['source.css.scss', 'meta.at-rule.mixin.scss', 'keyword.control.at-rule.mixin.scss', 'punctuation.definition.keyword.scss']
+      expect(tokens[1]).toEqual value: 'mixin', scopes: ['source.css.scss', 'meta.at-rule.mixin.scss', 'keyword.control.at-rule.mixin.scss']
+
+    it 'tokenizes @mixin with no arguments correctly', ->
+      {tokens} = grammar.tokenizeLine '@mixin media{}'
+
+      expect(tokens[0]).toEqual value: '@', scopes: ['source.css.scss', 'meta.at-rule.mixin.scss', 'keyword.control.at-rule.mixin.scss', 'punctuation.definition.keyword.scss']
+      expect(tokens[1]).toEqual value: 'mixin', scopes: ['source.css.scss', 'meta.at-rule.mixin.scss', 'keyword.control.at-rule.mixin.scss']
+      expect(tokens[3]).toEqual value: 'media', scopes: ['source.css.scss', 'meta.at-rule.mixin.scss', 'entity.name.function.scss']
+      expect(tokens[4]).toEqual value: '{', scopes: ['source.css.scss', 'meta.property-list.scss', 'punctuation.section.property-list.begin.bracket.curly.scss']
+
+    it 'tokenizes @mixin with arguments correctly', ->
+      {tokens} = grammar.tokenizeLine '@mixin media ($width){}'
+
+      expect(tokens[3]).toEqual value: 'media', scopes: ['source.css.scss', 'meta.at-rule.mixin.scss', 'entity.name.function.scss']
+      expect(tokens[5]).toEqual value: '(', scopes: ['source.css.scss', 'meta.at-rule.mixin.scss', 'punctuation.definition.parameters.begin.bracket.round.scss']
+      expect(tokens[7]).toEqual value: ')', scopes: ['source.css.scss', 'meta.at-rule.mixin.scss', 'punctuation.definition.parameters.end.bracket.round.scss']
+      expect(tokens[8]).toEqual value: '{', scopes: ['source.css.scss', 'meta.property-list.scss', 'punctuation.section.property-list.begin.bracket.curly.scss']
+
+  describe '@namespace', ->
+    it 'tokenizes solitary @namespace correctly', ->
+      {tokens} = grammar.tokenizeLine '@namespace'
+
+      expect(tokens[0]).toEqual value: '@', scopes: ['source.css.scss', 'meta.at-rule.namespace.scss', 'keyword.control.at-rule.namespace.scss', 'punctuation.definition.keyword.scss']
+      expect(tokens[1]).toEqual value: 'namespace', scopes: ['source.css.scss', 'meta.at-rule.namespace.scss', 'keyword.control.at-rule.namespace.scss']
+
+    it 'tokenizes default namespace definition with url() correctly', ->
+      {tokens} = grammar.tokenizeLine '@namespace url(XML-namespace-URL);'
+
+      expect(tokens[0]).toEqual value: '@', scopes: ['source.css.scss', 'meta.at-rule.namespace.scss', 'keyword.control.at-rule.namespace.scss', 'punctuation.definition.keyword.scss']
+      expect(tokens[1]).toEqual value: 'namespace', scopes: ['source.css.scss', 'meta.at-rule.namespace.scss', 'keyword.control.at-rule.namespace.scss']
+      expect(tokens[3]).toEqual value: 'url', scopes: ['source.css.scss', 'meta.at-rule.namespace.scss', 'support.function.misc.scss']
+
+    it 'tokenizes namespace prefix definition with url() correctly', ->
+      {tokens} = grammar.tokenizeLine '@namespace prefix url(XML-namespace-URL);'
+
+      expect(tokens[0]).toEqual value: '@', scopes: ['source.css.scss', 'meta.at-rule.namespace.scss', 'keyword.control.at-rule.namespace.scss', 'punctuation.definition.keyword.scss']
+      expect(tokens[1]).toEqual value: 'namespace', scopes: ['source.css.scss', 'meta.at-rule.namespace.scss', 'keyword.control.at-rule.namespace.scss']
+      expect(tokens[3]).toEqual value: 'prefix', scopes: ['source.css.scss', 'meta.at-rule.namespace.scss', 'entity.name.namespace-prefix.scss']
+      expect(tokens[5]).toEqual value: 'url', scopes: ['source.css.scss', 'meta.at-rule.namespace.scss', 'support.function.misc.scss']
+
   describe '@page', ->
     it 'tokenizes it correctly', ->
       tokens = grammar.tokenizeLines """
@@ -86,6 +153,26 @@ describe 'SCSS grammar', ->
       expect(tokens[1][2]).toEqual value: ':', scopes: ['source.css.scss', 'meta.property-list.scss', 'punctuation.separator.key-value.scss']
       expect(tokens[1][3]).toEqual value: ' ', scopes: ['source.css.scss', 'meta.property-list.scss']
       expect(tokens[1][4]).toEqual value: 'center', scopes: ['source.css.scss', 'meta.property-list.scss', 'meta.property-value.scss', 'support.constant.property-value.scss']
+
+  describe '@supports', ->
+    it 'tokenizes solitary @supports correctly', ->
+      {tokens} = grammar.tokenizeLine '@supports'
+
+      expect(tokens[0]).toEqual value: '@', scopes: ['source.css.scss', 'meta.at-rule.supports.scss', 'keyword.control.at-rule.supports.scss', 'punctuation.definition.keyword.scss']
+      expect(tokens[1]).toEqual value: 'supports', scopes: ['source.css.scss', 'meta.at-rule.supports.scss', 'keyword.control.at-rule.supports.scss']
+
+    it 'tokenizes @supports with logical operators correctly', ->
+      {tokens} = grammar.tokenizeLine '@supports not (display: flex){}'
+
+      expect(tokens[0]).toEqual value: '@', scopes: ['source.css.scss', 'meta.at-rule.supports.scss', 'keyword.control.at-rule.supports.scss', 'punctuation.definition.keyword.scss']
+      expect(tokens[1]).toEqual value: 'supports', scopes: ['source.css.scss', 'meta.at-rule.supports.scss', 'keyword.control.at-rule.supports.scss']
+      expect(tokens[3]).toEqual value: 'not', scopes: ['source.css.scss', 'meta.at-rule.supports.scss', 'keyword.control.operator']
+      expect(tokens[5]).toEqual value: '(', scopes: ['source.css.scss', 'meta.at-rule.supports.scss', 'punctuation.definition.condition.begin.bracket.round.scss']
+      expect(tokens[6]).toEqual value: 'display', scopes: ['source.css.scss', 'meta.at-rule.supports.scss', 'support.type.property-name.scss']
+      expect(tokens[7]).toEqual value: ':', scopes: ['source.css.scss', 'meta.at-rule.supports.scss', 'punctuation.separator.key-value.scss']
+      expect(tokens[9]).toEqual value: 'flex', scopes: ['source.css.scss', 'meta.at-rule.supports.scss', 'support.constant.property-value.scss']
+      expect(tokens[10]).toEqual value: ')', scopes: ['source.css.scss', 'meta.at-rule.supports.scss', 'punctuation.definition.condition.end.bracket.round.scss']
+      expect(tokens[11]).toEqual value: '{', scopes: ['source.css.scss', 'meta.property-list.scss', 'punctuation.section.property-list.begin.bracket.curly.scss']
 
   describe 'property-list', ->
     it 'tokenizes the property-name and property-value', ->

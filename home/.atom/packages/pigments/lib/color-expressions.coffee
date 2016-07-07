@@ -14,7 +14,7 @@
   namePrefixes
 } = require './regexes'
 
-{strip} = require './utils'
+{strip, insensitive} = require './utils'
 
 ExpressionsRegistry = require './expressions-registry'
 ColorExpression = require './color-expression'
@@ -84,7 +84,7 @@ registry.createExpression 'pigments:int_hexa_6', "0x(#{hexadecimal}{6})(?!#{hexa
 
 # rgb(50,120,200)
 registry.createExpression 'pigments:css_rgb', strip("
-  rgb#{ps}\\s*
+  #{insensitive 'rgb'}#{ps}\\s*
     (#{intOrPercent}|#{variables})
     #{comma}
     (#{intOrPercent}|#{variables})
@@ -101,7 +101,7 @@ registry.createExpression 'pigments:css_rgb', strip("
 
 # rgba(50,120,200,0.7)
 registry.createExpression 'pigments:css_rgba', strip("
-  rgba#{ps}\\s*
+  #{insensitive 'rgba'}#{ps}\\s*
     (#{intOrPercent}|#{variables})
     #{comma}
     (#{intOrPercent}|#{variables})
@@ -137,14 +137,14 @@ registry.createExpression 'pigments:stylus_rgba', strip("
 
 # hsl(210,50%,50%)
 registry.createExpression 'pigments:css_hsl', strip("
-  hsl#{ps}\\s*
+  #{insensitive 'hsl'}#{ps}\\s*
     (#{float}|#{variables})
     #{comma}
     (#{optionalPercent}|#{variables})
     #{comma}
     (#{optionalPercent}|#{variables})
   #{pe}
-"), ['*'], (match, expression, context) ->
+"), ['css', 'sass', 'scss', 'styl', 'stylus'], (match, expression, context) ->
   [_,h,s,l] = match
 
   hsl = [
@@ -158,9 +158,32 @@ registry.createExpression 'pigments:css_hsl', strip("
   @hsl = hsl
   @alpha = 1
 
+# hsl(210,50%,50%)
+registry.createExpression 'pigments:less_hsl', strip("
+  hsl#{ps}\\s*
+    (#{float}|#{variables})
+    #{comma}
+    (#{floatOrPercent}|#{variables})
+    #{comma}
+    (#{floatOrPercent}|#{variables})
+  #{pe}
+"), ['less'], (match, expression, context) ->
+  [_,h,s,l] = match
+
+  hsl = [
+    context.readInt(h)
+    context.readFloatOrPercent(s) * 100
+    context.readFloatOrPercent(l) * 100
+  ]
+
+  return @invalid = true if hsl.some (v) -> not v? or isNaN(v)
+
+  @hsl = hsl
+  @alpha = 1
+
 # hsla(210,50%,50%,0.7)
 registry.createExpression 'pigments:css_hsla', strip("
-  hsla#{ps}\\s*
+  #{insensitive 'hsla'}#{ps}\\s*
     (#{float}|#{variables})
     #{comma}
     (#{optionalPercent}|#{variables})
@@ -185,7 +208,7 @@ registry.createExpression 'pigments:css_hsla', strip("
 
 # hsv(210,70%,90%)
 registry.createExpression 'pigments:hsv', strip("
-  (?:hsv|hsb)#{ps}\\s*
+  (?:#{insensitive 'hsv'}|#{insensitive 'hsb'})#{ps}\\s*
     (#{float}|#{variables})
     #{comma}
     (#{optionalPercent}|#{variables})
@@ -208,7 +231,7 @@ registry.createExpression 'pigments:hsv', strip("
 
 # hsva(210,70%,90%,0.7)
 registry.createExpression 'pigments:hsva', strip("
-  (?:hsva|hsba)#{ps}\\s*
+  (?:#{insensitive 'hsva'}|#{insensitive 'hsba'})#{ps}\\s*
     (#{float}|#{variables})
     #{comma}
     (#{optionalPercent}|#{variables})
@@ -229,6 +252,54 @@ registry.createExpression 'pigments:hsva', strip("
   return @invalid = true if hsv.some (v) -> not v? or isNaN(v)
 
   @hsv = hsv
+  @alpha = context.readFloat(a)
+
+# hcg(210,60%,50%)
+registry.createExpression 'pigments:hcg', strip("
+  (?:#{insensitive 'hcg'})#{ps}\\s*
+    (#{float}|#{variables})
+    #{comma}
+    (#{optionalPercent}|#{variables})
+    #{comma}
+    (#{optionalPercent}|#{variables})
+  #{pe}
+"), ['*'], (match, expression, context) ->
+  [_,h,c,gr] = match
+
+  hcg = [
+    context.readInt(h)
+    context.readFloat(c)
+    context.readFloat(gr)
+  ]
+
+  return @invalid = true if hcg.some (v) -> not v? or isNaN(v)
+
+  @hcg = hcg
+  @alpha = 1
+
+# hcga(210,60%,50%,0.7)
+registry.createExpression 'pigments:hcga', strip("
+  (?:#{insensitive 'hcga'})#{ps}\\s*
+    (#{float}|#{variables})
+    #{comma}
+    (#{optionalPercent}|#{variables})
+    #{comma}
+    (#{optionalPercent}|#{variables})
+    #{comma}
+    (#{float}|#{variables})
+  #{pe}
+"), ['*'], (match, expression, context) ->
+  [_,h,c,gr,a] = match
+
+  hcg = [
+    context.readInt(h)
+    context.readFloat(c)
+    context.readFloat(gr)
+  ]
+
+  return @invalid = true if hcg.some (v) -> not v? or isNaN(v)
+
+  @hcg = hcg
   @alpha = context.readFloat(a)
 
 # vec4(0.2, 0.5, 0.9, 0.7)
@@ -254,7 +325,7 @@ registry.createExpression 'pigments:vec4', strip("
 
 # hwb(210,40%,40%)
 registry.createExpression 'pigments:hwb', strip("
-  hwb#{ps}\\s*
+  #{insensitive 'hwb'}#{ps}\\s*
     (#{float}|#{variables})
     #{comma}
     (#{optionalPercent}|#{variables})
@@ -274,7 +345,7 @@ registry.createExpression 'pigments:hwb', strip("
 
 # cmyk(0,0.5,1,0)
 registry.createExpression 'pigments:cmyk', strip("
-  cmyk#{ps}\\s*
+  #{insensitive 'cmyk'}#{ps}\\s*
     (#{float}|#{variables})
     #{comma}
     (#{float}|#{variables})
@@ -296,7 +367,7 @@ registry.createExpression 'pigments:cmyk', strip("
 # gray(50%)
 # The priority is set to 1 to make sure that it appears before named colors
 registry.createExpression 'pigments:gray', strip("
-  gray#{ps}\\s*
+  #{insensitive 'gray'}#{ps}\\s*
     (#{optionalPercent}|#{variables})
     (?:#{comma}(#{float}|#{variables}))?
   #{pe}"), 1, ['*'], (match, expression, context) ->
@@ -781,7 +852,7 @@ registry.createExpression 'pigments:contrast_1_argument', strip("
   {@rgb} = context.contrast(baseColor)
 
 # color(green tint(50%))
-registry.createExpression 'pigments:css_color_function', "(?:#{namePrefixes})(color#{ps}(#{notQuote})#{pe})", ['*'], (match, expression, context) ->
+registry.createExpression 'pigments:css_color_function', "(?:#{namePrefixes})(#{insensitive 'color'}#{ps}(#{notQuote})#{pe})", ['css', 'less', 'sass', 'scss', 'styl', 'stylus'], (match, expression, context) ->
   try
     [_,expr] = match
     for k,v of context.vars
@@ -790,7 +861,7 @@ registry.createExpression 'pigments:css_color_function', "(?:#{namePrefixes})(co
       ///g, v.value)
 
     cssColor = require 'css-color-function'
-    rgba = cssColor.convert(expr)
+    rgba = cssColor.convert(expr.toLowerCase())
     @rgba = context.readColor(rgba).rgba
     @colorExpression = expr
   catch e
@@ -1085,7 +1156,8 @@ registry.createExpression 'pigments:average', strip("
   baseColor1 = context.readColor(color1)
   baseColor2 = context.readColor(color2)
 
-  return @invalid = true if context.isInvalid(baseColor1) or context.isInvalid(baseColor2)
+  if context.isInvalid(baseColor1) or context.isInvalid(baseColor2)
+    return @invalid = true
 
   {@rgba} = baseColor1.blend(baseColor2, context.BlendModes.AVERAGE)
 

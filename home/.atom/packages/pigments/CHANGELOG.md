@@ -1,3 +1,30 @@
+<a name="v0.31.0"></a>
+# v0.31.0 (2016-07-05)
+
+## Features
+
+- Add support for HCG color model ([6e722f0a](https://github.com/abe33/atom-pigments/commit/6e722f0a19c6f2aa9189959ce4522a9584cfd9f3), [#204](https://github.com/abe33/atom-pigments/issues/204))
+
+<a name="v0.30.0"></a>
+# v0.30.0 (2016-07-04)
+
+## Features
+
+- Add contextual menu and commands to copy formatted color value ([1830f897](https://github.com/abe33/atom-pigments/commit/1830f8979134e51c09be211f7871effa9a37cd80), [#170](https://github.com/abe33/atom-pigments/issues/170))
+
+## Bug Fixes
+
+- Fix support for case-insensitive CSS expressions ([879a0603](https://github.com/abe33/atom-pigments/commit/879a0603f6205ca67cc7aea6377b8e1b94e93c4e), [#177](https://github.com/abe33/atom-pigments/issues/177))
+
+<a name="v0.29.3"></a>
+# v0.29.3 (2016-06-28)
+
+## Bug Fixes
+
+- Fix native decorations not destroyed along the color buffer element ([fb6ca435](https://github.com/abe33/atom-pigments/commit/fb6ca435bff0bff3f5294b5a45e5e428d1044de5))
+- Fix invalid handling of less HSL constructs ([c7c4774f](https://github.com/abe33/atom-pigments/commit/c7c4774f367adacb3cdfa614e3713a4fe9dbe7cd), [#199](https://github.com/abe33/atom-pigments/issues/199))
+- Fix invalid short circuit when parsing a couple expression ([b7a8e812](https://github.com/abe33/atom-pigments/commit/b7a8e81259cef9c13834647b53e0061b49d6d598), [#200](https://github.com/abe33/atom-pigments/issues/200))
+
 <a name="v0.29.2"></a>
 # v0.29.2 (2016-06-09)
 

@@ -1,7 +1,7 @@
 /*
  * Your Stylesheet
  *
- * This stylesheet is loaded when Atom starts up and is reloaded automatically
+ * This stylesheet is loaded when Atom starts up and is reloaded automagically
  * when it is changed and saved.
  *
  * Add your own CSS or Less to fully customize Atom.
@@ -9,42 +9,34 @@
  * http://lesscss.org
  */
 
-
-/*
- * Examples
- * (To see them, uncomment and save)
- */
-
-// style the background color of the tree view
-.tree-view {
-  // background-color: whitesmoke;
-}
-
-// style the background and foreground colors on the atom-text-editor-element itself
-atom-text-editor {
-  // color: white;
-  // background-color: hsl(180, 24%, 12%);
-}
-
-// To style other content in the text editor's shadow DOM, use the ::shadow expression
-atom-text-editor::shadow .cursor {
-  // border-color: red;
-}
-
 // Make Pigments circle smaller
 atom-text-editor::shadow pigments-markers::shadow pigments-color-marker.dot:after, pigments-markers::shadow pigments-color-marker.dot:after, pigments-color-marker.dot:after {
   transform: translate(0, -50%),scale(0.6);;
 }
 
-
-// Add this to atom if you want change the alpha transparency to your wrap guide
+// Make wrap guide invisible
 atom-text-editor::shadow {
   .wrap-guide {
-    background-color : fade(@syntax-wrap-guide-color, 08%);
+    background-color : fade(@syntax-wrap-guide-color, 0%);
   }
 }
 
-.tree-view,
+// Not a fan of italic comments
+.comment {
+  font-style: normal !important;
+  font-weight: normal !important;
+}
+
+// Make the font San Francisco Mono
 atom-text-editor {
   font-family: "SFMono-Regular", "SF Mono Regular";
+}
+
+// Make the tree-view font San Francisco Light if it's not already
+.tree-view {
+  font-family: "SFUIText-Light", "SF UI Text Light";
+}
+
+.minimap .cursor-line {
+  background: green;
 }

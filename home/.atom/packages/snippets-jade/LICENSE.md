@@ -23,4 +23,4 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 Copyright (c) 2014 GitHub Inc.
 
-[Full text](https://github.com/atom/language-html/blob/master/LICENSE.md)
+[MIT](https://github.com/atom/language-html/blob/master/LICENSE.md)

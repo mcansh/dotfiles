@@ -4,6 +4,7 @@
   hexRGBAToRGB
   hexToRGB
   hslToRGB
+  hcgToRGB
   hsvToHWB
   hsvToRGB
   hwbToHSV
@@ -15,6 +16,7 @@
   rgbToHSL
   rgbToHSV
   rgbToHWB
+  rgbToHCG
 } = require './color-conversions'
 SVGColors = require './svg-colors'
 
@@ -27,6 +29,13 @@ class Color
     ['blue',  2]
     ['alpha', 3]
   ]
+
+  @isValid: (color) ->
+    color? and not color.invalid and
+    color.red? and color.green? and
+    color.blue? and color.alpha? and
+    not isNaN(color.red) and not isNaN(color.green) and
+    not isNaN(color.blue) and not isNaN(color.alpha)
 
   constructor: (r=0,g=0,b=0,a=1) ->
     if typeof r is 'object'
@@ -86,6 +95,21 @@ class Color
     set: (hsva) ->
       [h,s,v,@alpha] = hsva
       [@red, @green, @blue] = hsvToRGB.apply(@constructor, [h,s,v])
+  }
+
+  Object.defineProperty Color.prototype, 'hcg', {
+    enumerable: true
+    get: -> rgbToHCG(@red, @green, @blue)
+    set: (hcg) ->
+      [@red, @green, @blue] = hcgToRGB.apply(@constructor, hcg)
+  }
+
+  Object.defineProperty Color.prototype, 'hcga', {
+    enumerable: true
+    get: -> @hcg.concat(@alpha)
+    set: (hcga) ->
+      [h,c,gr,@alpha] = hcga
+      [@red, @green, @blue] = hcgToRGB.apply(@constructor, [h,c,gr])
   }
 
   Object.defineProperty Color.prototype, 'hsl', {
@@ -201,9 +225,7 @@ class Color
   isLiteral: -> not @variables? or @variables.length is 0
 
   isValid: ->
-    !@invalid and
-    @red? and @green? and @blue? and @alpha? and
-    !isNaN(@red) and !isNaN(@green) and !isNaN(@blue) and !isNaN(@alpha)
+    @constructor.isValid(this)
 
   clone: -> new Color(@red, @green, @blue, @alpha)
 

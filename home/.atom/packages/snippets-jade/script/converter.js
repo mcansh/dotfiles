@@ -12,22 +12,20 @@ const HTML2JADE_OPTIONS = {
 	numeric: true
 };
 
-const SNIPPET_SRC_PATH = '../src/snippets-html.cson';
+const SNIPPET_SRC_PATH = '../language-html/snippets/language-html.cson';
 const SNIPPET_DIST_PATH = '../snippets/snippets-jade.cson';
 
 const snippetConvert = (snippet, key, callback) => {
+	const fixedSnippetBody = snippet['body']
+		.replace(/\$/g, '__').replace('body', 'body_');
 
-	html2jade.convertHtml(snippet['body']
-		.replace('$', '__').replace(':', '-----').replace('{', '----').replace('}', '---')
-		.replace('body', 'body_'),
+	html2jade.convertHtml(fixedSnippetBody,
 		HTML2JADE_OPTIONS, (error, jade) => {
 			snippet['body'] = jade
-				.replace(/__/g, '$').replace(/-----/g, ':').replace(/----/g, '{').replace(/---/g, '}')
-				.replace(/body_/, 'body')
+				.replace(/__/g, '$').replace(/body_/, 'body')
 				.replace(/\| /, '').replace(/\n$/, '');
 
 			callback(error);
-			console.log(snippet['body']);
 		});
 };
 
@@ -36,7 +34,7 @@ async.waterfall([
 		const snippetsRoot = CSON.parse(file.toString());
 		const snippets = snippetsRoot[Object.keys(snippetsRoot)[0]];
 		async.forEachOf(snippets, snippetConvert,
-			error => callback(error, CSON.stringify({'.source.jade': snippets})));
+			error => callback(error, CSON.stringify({'.source.jade, .source.pug': snippets}, null, '\t')));
 	},
 	fs.writeFile.bind(null, SNIPPET_DIST_PATH)
 ], error => {

@@ -1,0 +1,43 @@
+{
+  "name": "double-tag",
+  "main": "./lib/main",
+  "version": "0.2.0",
+  "description": "Faster HTML tag editing",
+  "keywords": [
+    "html"
+  ],
+  "activationCommands": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dsandstrom/atom-double-tag.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {},
+  "readme": "# Double Tag\n\n###### An Atom Package - [Atom.io](https://atom.io/packages/double-tag) : [Github](https://github.com/dsandstrom/atom-double-tag)\n[![Build Status](https://travis-ci.org/dsandstrom/atom-double-tag.svg?branch=master)](https://travis-ci.org/dsandstrom/atom-double-tag)\n\nEdit both the start and end HTML tags at the same time.\n\n![Screen Recording](https://cloud.githubusercontent.com/assets/1400414/15229336/75130366-1845-11e6-9ad7-f6f9359c1eca.gif)\n\n### How To Use\nEdit the start tag (`<div>`) and the matching end tag (`</div>`) will be changed automatically.\n\n### Configs\n* **ignoredTags** - HTML tags that are ignored.  (Default:\n`area, base, body, br, col, command, embed, head, hr, html, img, input, keygen, link, meta, param, source, title, track, wbr`)\n\n\n### Notes\n* Supported Languages: HTML, PHP, ERB, JSX\n* In beta.  Issues and Pull Requests are welcome.\n* Recording done with: [screen-recorder](https://atom.io/packages/screen-recorder)\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/dsandstrom/atom-double-tag/issues"
+  },
+  "homepage": "https://github.com/dsandstrom/atom-double-tag#readme",
+  "_id": "double-tag@0.2.0",
+  "_shasum": "3cb2b6fb675399b0ce59f9a4989af95f7de41b24",
+  "_resolved": "file:../d-11667-1644-xjv2tp/package.tgz",
+  "_from": "../d-11667-1644-xjv2tp/package.tgz",
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [],
+    "extensions": {
+      ".coffee": [
+        "lib/double-tag.coffee",
+        "lib/main.coffee"
+      ],
+      ".json": [
+        "package.json"
+      ]
+    },
+    "folders": []
+  }
+}

@@ -379,7 +379,13 @@ export default class MinimapElement {
    */
   attach (parent) {
     if (this.attached) { return }
-    (parent || this.getTextEditorElementRoot()).appendChild(this)
+
+    const container = parent || this.getTextEditorElementRoot()
+    let minimaps = container.querySelectorAll('atom-text-editor-minimap')
+    if (minimaps.length) {
+      Array.prototype.forEach.call(minimaps, (el) => { el.destroy() })
+    }
+    container.appendChild(this)
   }
 
   /**
@@ -923,6 +929,9 @@ export default class MinimapElement {
   measureHeightAndWidth (visibilityChanged, forceUpdate = true) {
     if (!this.minimap) { return }
 
+    const safeFlexBasis = this.style.flexBasis
+    this.style.flexBasis = ''
+
     let wasResized = this.width !== this.clientWidth || this.height !== this.clientHeight
 
     this.height = this.clientHeight
@@ -957,6 +966,8 @@ export default class MinimapElement {
       }
 
       this.updateCanvasesSize(canvasWidth)
+    } else {
+      this.style.flexBasis = safeFlexBasis
     }
   }
 

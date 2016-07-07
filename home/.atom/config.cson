@@ -1,8 +1,7 @@
 "*":
   "atom-beautify":
-    _analyticsUserId: "a3f27696-0ef6-42cb-a42f-e3aa394ac295"
     general:
-      _analyticsUserId: "7f2b31c9-55d1-47a2-b0d9-e777e0790060"
+      _analyticsUserId: "a3f27696-0ef6-42cb-a42f-e3aa394ac295"
   "atom-material-ui":
     fonts:
       useRoboto: true
@@ -32,20 +31,26 @@
     ]
     themes: [
       "one-dark-ui"
-      "chester-atom-syntax"
+      "civic-syntax"
     ]
   editor:
     backUpBeforeSaving: true
     fontFamily: "SFMono-Regular"
-    fontSize: 15
+    fontSize: 18
     invisibles: {}
     scrollPastEnd: true
     showIndentGuide: true
     softWrap: true
   "exception-reporting":
     userId: "1a3d270b-cff2-90b9-feb3-8ababdfe3d4e"
-  minimap: {}
+  minimap:
+    plugins:
+      cursorline: true
+      cursorlineDecorationsZIndex: 0
   "one-dark-ui":
+    layoutMode: "Compact"
+    tabSizing: "Even"
+  "one-light-ui":
     layoutMode: "Compact"
     tabSizing: "Even"
   pigments:

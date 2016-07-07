@@ -1,7 +1,7 @@
 {
   "name": "pigments",
   "main": "./lib/pigments",
-  "version": "0.29.2",
+  "version": "0.31.0",
   "description": "A package to display colors in project and files.",
   "keywords": [
     "colors",
@@ -67,10 +67,10 @@
     "url": "https://github.com/abe33/atom-pigments/issues"
   },
   "homepage": "https://github.com/abe33/atom-pigments#readme",
-  "_id": "pigments@0.29.2",
-  "_shasum": "3f3d3bdee92f7d05436aaa62e28bebc2ba050920",
-  "_resolved": "file:../d-11659-4166-osfzdx/package.tgz",
-  "_from": "../d-11659-4166-osfzdx/package.tgz",
+  "_id": "pigments@0.31.0",
+  "_shasum": "1d20b02a2c3bb36e25b77f356f18e2788269a8a5",
+  "_resolved": "file:../d-11665-9082-ex30fb/package.tgz",
+  "_from": "../d-11665-9082-ex30fb/package.tgz",
   "_atomModuleCache": {
     "version": 1,
     "dependencies": [
@@ -111,7 +111,7 @@
       },
       {
         "name": "es5-ext",
-        "version": "0.10.11",
+        "version": "0.10.12",
         "path": "node_modules/atom-utils/node_modules/event-kit/node_modules/grim/node_modules/emissary/node_modules/es6-weak-map/node_modules/es5-ext/index.js"
       },
       {
@@ -121,7 +121,7 @@
       },
       {
         "name": "es6-symbol",
-        "version": "3.0.2",
+        "version": "3.1.0",
         "path": "node_modules/atom-utils/node_modules/event-kit/node_modules/grim/node_modules/emissary/node_modules/es6-weak-map/node_modules/es5-ext/node_modules/es6-symbol/index.js"
       },
       {
@@ -1070,7 +1070,7 @@
         ],
         "dependencies": {
           "es6-iterator": "2",
-          "es6-symbol": "~3.0.2"
+          "es6-symbol": "~3.1"
         }
       },
       {
@@ -1093,7 +1093,7 @@
         ],
         "dependencies": {
           "d": "~0.1.1",
-          "es5-ext": "~0.10.10"
+          "es5-ext": "~0.10.11"
         }
       },
       {

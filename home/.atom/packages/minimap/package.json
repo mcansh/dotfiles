@@ -1,7 +1,7 @@
 {
   "name": "minimap",
   "main": "./lib/main",
-  "version": "4.24.6",
+  "version": "4.24.7",
   "private": true,
   "description": "A preview of the full source code.",
   "author": {
@@ -92,10 +92,10 @@
     "url": "https://github.com/atom-minimap/minimap/issues"
   },
   "homepage": "https://github.com/atom-minimap/minimap#readme",
-  "_id": "minimap@4.24.6",
-  "_shasum": "035178c2b1248cc38c49395fdf79f0dfc2611e1c",
-  "_resolved": "file:../d-116514-8339-16d2ubq/package.tgz",
-  "_from": "../d-116514-8339-16d2ubq/package.tgz",
+  "_id": "minimap@4.24.7",
+  "_shasum": "29430c1bfec468bd8f7b3528ebf77a052d575ff8",
+  "_resolved": "file:../d-11666-4063-1pbj3ni/package.tgz",
+  "_from": "../d-11666-4063-1pbj3ni/package.tgz",
   "_atomModuleCache": {
     "version": 1,
     "dependencies": [
@@ -131,7 +131,7 @@
       },
       {
         "name": "es5-ext",
-        "version": "0.10.11",
+        "version": "0.10.12",
         "path": "node_modules/atom-utils/node_modules/event-kit/node_modules/grim/node_modules/emissary/node_modules/es6-weak-map/node_modules/es5-ext/index.js"
       },
       {
@@ -141,7 +141,7 @@
       },
       {
         "name": "es6-symbol",
-        "version": "3.0.2",
+        "version": "3.1.0",
         "path": "node_modules/atom-utils/node_modules/event-kit/node_modules/grim/node_modules/emissary/node_modules/es6-weak-map/node_modules/es5-ext/node_modules/es6-symbol/index.js"
       },
       {
@@ -962,7 +962,7 @@
         ],
         "dependencies": {
           "es6-iterator": "2",
-          "es6-symbol": "~3.0.2"
+          "es6-symbol": "~3.1"
         }
       },
       {
@@ -985,7 +985,7 @@
         ],
         "dependencies": {
           "d": "~0.1.1",
-          "es5-ext": "~0.10.10"
+          "es5-ext": "~0.10.11"
         }
       },
       {

@@ -85,10 +85,10 @@ describe 'ColorBufferElement', ->
           atom.workspace.open('four-variables.styl').then (o) -> editor = o
 
         runs ->
-            editorElement = atom.views.getView(editor)
-            colorBuffer = project.colorBufferForEditor(editor)
-            colorBufferElement = atom.views.getView(colorBuffer)
-            colorBufferElement.attach()
+          editorElement = atom.views.getView(editor)
+          colorBuffer = project.colorBufferForEditor(editor)
+          colorBufferElement = atom.views.getView(colorBuffer)
+          colorBufferElement.attach()
 
       it 'attaches itself in the target text editor element', ->
         expect(colorBufferElement.parentNode).toExist()
@@ -206,12 +206,17 @@ describe 'ColorBufferElement', ->
 
       describe 'when the current pane is splitted to the right', ->
         beforeEach ->
-          if parseFloat(atom.getVersion()) > 1.5
+          version = parseFloat(atom.getVersion().split('.').slice(1,2).join('.'))
+          if version > 5
             atom.commands.dispatch(editorElement, 'pane:split-right-and-copy-active-item')
           else
             atom.commands.dispatch(editorElement, 'pane:split-right')
-          editor = atom.workspace.getTextEditors()[1]
-          colorBufferElement = atom.views.getView(project.colorBufferForEditor(editor))
+
+          waitsFor 'text editor', ->
+            editor = atom.workspace.getTextEditors()[1]
+
+          waitsFor 'color buffer element', ->
+            colorBufferElement = atom.views.getView(project.colorBufferForEditor(editor))
           waitsFor 'color buffer element markers', ->
             colorBufferElement.shadowRoot.querySelectorAll('pigments-color-marker').length
 

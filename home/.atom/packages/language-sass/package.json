@@ -1,6 +1,6 @@
 {
   "name": "language-sass",
-  "version": "0.54.0",
+  "version": "0.55.0",
   "description": "Sass/SCSS language support in Atom",
   "license": "MIT",
   "engines": {
@@ -18,12 +18,12 @@
   "devDependencies": {
     "coffeelint": "^1.10.1"
   },
-  "readme": "# Sass/SCSS language support in Atom [![Build Status](https://travis-ci.org/atom/language-sass.svg?branch=master)](https://travis-ci.org/atom/language-sass)\n\nAdds syntax highlighting and snippets to Sass/SCSS files in Atom.\n\nOriginally [converted](http://atom.io/docs/latest/converting-a-text-mate-bundle)\nfrom the [Sass TextMate bundle](https://github.com/alexsancho/SASS.tmbundle).\n\nContributions are greatly appreciated. Please fork this repository and open a\npull request to add snippets, make grammar tweaks, etc.\n",
+  "readme": "# Sass/SCSS language support in Atom\n[![OS X Build Status](https://travis-ci.org/atom/language-sass.svg?branch=master)](https://travis-ci.org/atom/language-sass)\n[![Windows Build Status](https://ci.appveyor.com/api/projects/status/g7p16vainm4iuoot/branch/master?svg=true)](https://ci.appveyor.com/project/Atom/language-sass/branch/master)\n[![Dependency Status](https://david-dm.org/atom/language-sass.svg)](https://david-dm.org/atom/language-sass)\n\nAdds syntax highlighting and snippets to Sass/SCSS files in Atom.\n\nOriginally [converted](http://atom.io/docs/latest/converting-a-text-mate-bundle) from the [Sass TextMate bundle](https://github.com/alexsancho/SASS.tmbundle).\n\nContributions are greatly appreciated. Please fork this repository and open a pull request to add snippets, make grammar tweaks, etc.\n",
   "readmeFilename": "README.md",
-  "_id": "language-sass@0.54.0",
-  "_shasum": "637c9c0f1e5276d61519e7f2a071cf50eda111cf",
-  "_resolved": "file:../d-116512-18608-hfrrqb/package.tgz",
-  "_from": "../d-116512-18608-hfrrqb/package.tgz",
+  "_id": "language-sass@0.55.0",
+  "_shasum": "d197626d01ae22618c4e0d38190b0679f0f4caff",
+  "_resolved": "file:../d-116526-15395-n8gme/package.tgz",
+  "_from": "../d-116526-15395-n8gme/package.tgz",
   "_atomModuleCache": {
     "version": 1,
     "dependencies": [],

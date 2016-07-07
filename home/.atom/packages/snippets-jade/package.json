@@ -1,6 +1,6 @@
 {
   "name": "snippets-jade",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "provide basic snippets for jade",
   "keywords": [
     "jade",
@@ -25,10 +25,10 @@
     "url": "https://github.com/rail-rain/snippets-jade/issues"
   },
   "homepage": "https://github.com/rail-rain/snippets-jade#readme",
-  "_id": "snippets-jade@0.1.1",
-  "_shasum": "78f9fdc899fb3d1ea598fb48007a2570f86f7cb5",
-  "_resolved": "file:../d-116024-54103-m25vrr/package.tgz",
-  "_from": "../d-116024-54103-m25vrr/package.tgz",
+  "_id": "snippets-jade@0.2.0",
+  "_shasum": "b2541e45f8a7df6130e8747f1a9a453c1afd04c5",
+  "_resolved": "file:../d-11665-9085-1tpynlk/package.tgz",
+  "_from": "../d-11665-9085-1tpynlk/package.tgz",
   "_atomModuleCache": {
     "version": 1,
     "dependencies": [],

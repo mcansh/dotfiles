@@ -3358,6 +3358,41 @@
       }
     }
   },
+  "lua": {
+    "title": "Lua",
+    "type": "object",
+    "description": "Options for language Lua",
+    "collapsed": true,
+    "beautifiers": [
+      "lua"
+    ],
+    "properties": {
+      "disabled": {
+        "title": "Disable Beautifying Language",
+        "order": -3,
+        "type": "boolean",
+        "default": false,
+        "description": "Disable Lua Beautification"
+      },
+      "default_beautifier": {
+        "title": "Default Beautifier",
+        "order": -2,
+        "type": "string",
+        "default": "lua",
+        "description": "Default Beautifier to be used for Lua",
+        "enum": [
+          "lua"
+        ]
+      },
+      "beautify_on_save": {
+        "title": "Beautify On Save",
+        "order": -1,
+        "type": "boolean",
+        "default": false,
+        "description": "Automatically beautify Lua files on save"
+      }
+    }
+  },
   "markdown": {
     "title": "Markdown",
     "type": "object",
