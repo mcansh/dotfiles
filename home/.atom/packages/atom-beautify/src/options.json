@@ -7,6 +7,13 @@
     "beautifiers": [
       "Uncrustify"
     ],
+    "grammars": [
+      "Apex"
+    ],
+    "extensions": [
+      "cls",
+      "trigger"
+    ],
     "properties": {
       "configPath": {
         "type": "string",
@@ -56,6 +63,13 @@
     "beautifiers": [
       "Uncrustify"
     ],
+    "grammars": [
+      "Arduino"
+    ],
+    "extensions": [
+      "ino",
+      "pde"
+    ],
     "properties": {
       "configPath": {
         "type": "string",
@@ -104,6 +118,12 @@
     "collapsed": true,
     "beautifiers": [
       "Uncrustify"
+    ],
+    "grammars": [
+      "C#"
+    ],
+    "extensions": [
+      "cs"
     ],
     "properties": {
       "configPath": {
@@ -155,6 +175,15 @@
       "Uncrustify",
       "clang-format"
     ],
+    "grammars": [
+      "C",
+      "opencl"
+    ],
+    "extensions": [
+      "h",
+      "c",
+      "cl"
+    ],
     "properties": {
       "configPath": {
         "type": "string",
@@ -205,6 +234,12 @@
     "beautifiers": [
       "Coffee Formatter",
       "coffee-fmt"
+    ],
+    "grammars": [
+      "CoffeeScript"
+    ],
+    "extensions": [
+      "coffee"
     ],
     "properties": {
       "indent_size": {
@@ -519,6 +554,14 @@
     "beautifiers": [
       "Pretty Diff"
     ],
+    "grammars": [
+      "html"
+    ],
+    "extensions": [
+      "cfm",
+      "cfml",
+      "cfc"
+    ],
     "properties": {
       "indent_size": {
         "type": "integer",
@@ -613,6 +656,21 @@
       "Uncrustify",
       "clang-format"
     ],
+    "grammars": [
+      "C++"
+    ],
+    "extensions": [
+      "h",
+      "hh",
+      "cc",
+      "cpp",
+      "cxx",
+      "C",
+      "c++",
+      "hpp",
+      "hxx",
+      "h++"
+    ],
     "properties": {
       "configPath": {
         "title": "Config Path",
@@ -661,7 +719,13 @@
     "description": "Options for language Crystal",
     "collapsed": true,
     "beautifiers": [
-      "crystal"
+      "Crystal"
+    ],
+    "grammars": [
+      "Crystal"
+    ],
+    "extensions": [
+      "cr"
     ],
     "properties": {
       "disabled": {
@@ -675,10 +739,10 @@
         "title": "Default Beautifier",
         "order": -2,
         "type": "string",
-        "default": "crystal",
+        "default": "Crystal",
         "description": "Default Beautifier to be used for Crystal",
         "enum": [
-          "crystal"
+          "Crystal"
         ]
       },
       "beautify_on_save": {
@@ -699,6 +763,12 @@
       "CSScomb",
       "JS Beautify",
       "Pretty Diff"
+    ],
+    "grammars": [
+      "CSS"
+    ],
+    "extensions": [
+      "css"
     ],
     "properties": {
       "indent_size": {
@@ -936,6 +1006,12 @@
     "beautifiers": [
       "Pretty Diff"
     ],
+    "grammars": [
+      "CSV"
+    ],
+    "extensions": [
+      "csv"
+    ],
     "properties": {
       "disabled": {
         "title": "Disable Beautifying Language",
@@ -971,6 +1047,12 @@
     "beautifiers": [
       "Uncrustify",
       "dfmt"
+    ],
+    "grammars": [
+      "D"
+    ],
+    "extensions": [
+      "d"
     ],
     "properties": {
       "configPath": {
@@ -1022,6 +1104,11 @@
     "beautifiers": [
       "Pretty Diff"
     ],
+    "grammars": [
+      "JavaScript Template",
+      "HTML (Angular)"
+    ],
+    "extensions": [],
     "properties": {
       "indent_size": {
         "type": "integer",
@@ -1170,6 +1257,12 @@
     "beautifiers": [
       "elm-format"
     ],
+    "grammars": [
+      "Elm"
+    ],
+    "extensions": [
+      "elm"
+    ],
     "properties": {
       "disabled": {
         "title": "Disable Beautifying Language",
@@ -1205,6 +1298,13 @@
     "beautifiers": [
       "HTML Beautifier",
       "Pretty Diff"
+    ],
+    "grammars": [
+      "HTML (Ruby - ERB)",
+      "HTML (Rails)"
+    ],
+    "extensions": [
+      "erb"
     ],
     "properties": {
       "indent_size": {
@@ -1300,6 +1400,12 @@
     "beautifiers": [
       "erl_tidy"
     ],
+    "grammars": [
+      "Erlang"
+    ],
+    "extensions": [
+      "erl"
+    ],
     "properties": {
       "disabled": {
         "title": "Disable Beautifying Language",
@@ -1334,6 +1440,12 @@
     "collapsed": true,
     "beautifiers": [
       "Gherkin formatter"
+    ],
+    "grammars": [
+      "Gherkin"
+    ],
+    "extensions": [
+      "feature"
     ],
     "properties": {
       "indent_size": {
@@ -1400,6 +1512,12 @@
     "beautifiers": [
       "gofmt"
     ],
+    "grammars": [
+      "Go"
+    ],
+    "extensions": [
+      "go"
+    ],
     "properties": {
       "disabled": {
         "title": "Disable Beautifying Language",
@@ -1434,6 +1552,13 @@
     "collapsed": true,
     "beautifiers": [
       "Fortran Beautifier"
+    ],
+    "grammars": [
+      "Fortran - Modern"
+    ],
+    "extensions": [
+      "f90",
+      "F90"
     ],
     "properties": {
       "emacs_path": {
@@ -1498,6 +1623,14 @@
     "beautifiers": [
       "JS Beautify",
       "Pretty Diff"
+    ],
+    "grammars": [
+      "Handlebars",
+      "HTML (Handlebars)"
+    ],
+    "extensions": [
+      "hbs",
+      "handlebars"
     ],
     "properties": {
       "indent_inner_html": {
@@ -1786,6 +1919,12 @@
     "beautifiers": [
       "stylish-haskell"
     ],
+    "grammars": [
+      "Haskell"
+    ],
+    "extensions": [
+      "hs"
+    ],
     "properties": {
       "disabled": {
         "title": "Disable Beautifying Language",
@@ -1821,6 +1960,12 @@
     "beautifiers": [
       "JS Beautify",
       "Pretty Diff"
+    ],
+    "grammars": [
+      "HTML"
+    ],
+    "extensions": [
+      "html"
     ],
     "properties": {
       "indent_inner_html": {
@@ -2109,6 +2254,14 @@
     "beautifiers": [
       "Pug Beautify"
     ],
+    "grammars": [
+      "Jade",
+      "Pug"
+    ],
+    "extensions": [
+      "jade",
+      "pug"
+    ],
     "properties": {
       "indent_size": {
         "type": "integer",
@@ -2173,6 +2326,12 @@
     "beautifiers": [
       "Uncrustify"
     ],
+    "grammars": [
+      "Java"
+    ],
+    "extensions": [
+      "java"
+    ],
     "properties": {
       "configPath": {
         "type": "string",
@@ -2223,6 +2382,12 @@
       "JS Beautify",
       "JSCS Fixer",
       "Pretty Diff"
+    ],
+    "grammars": [
+      "JavaScript"
+    ],
+    "extensions": [
+      "js"
     ],
     "properties": {
       "indent_size": {
@@ -2544,6 +2709,12 @@
       "JS Beautify",
       "Pretty Diff"
     ],
+    "grammars": [
+      "JSON"
+    ],
+    "extensions": [
+      "json"
+    ],
     "properties": {
       "indent_size": {
         "type": "integer",
@@ -2862,6 +3033,14 @@
     "beautifiers": [
       "Pretty Diff"
     ],
+    "grammars": [
+      "JSX",
+      "JavaScript (JSX)"
+    ],
+    "extensions": [
+      "jsx",
+      "js"
+    ],
     "properties": {
       "indent_size": {
         "type": "integer",
@@ -3010,6 +3189,12 @@
     "beautifiers": [
       "Latex Beautify"
     ],
+    "grammars": [
+      "LaTeX"
+    ],
+    "extensions": [
+      "tex"
+    ],
     "properties": {
       "indent_char": {
         "type": "string",
@@ -3149,6 +3334,12 @@
     "beautifiers": [
       "CSScomb",
       "Pretty Diff"
+    ],
+    "grammars": [
+      "LESS"
+    ],
+    "extensions": [
+      "less"
     ],
     "properties": {
       "indent_size": {
@@ -3364,6 +3555,12 @@
     "description": "Options for language Lua",
     "collapsed": true,
     "beautifiers": [
+      "Lua beautifier"
+    ],
+    "grammars": [
+      "Lua"
+    ],
+    "extensions": [
       "lua"
     ],
     "properties": {
@@ -3378,10 +3575,10 @@
         "title": "Default Beautifier",
         "order": -2,
         "type": "string",
-        "default": "lua",
+        "default": "Lua beautifier",
         "description": "Default Beautifier to be used for Lua",
         "enum": [
-          "lua"
+          "Lua beautifier"
         ]
       },
       "beautify_on_save": {
@@ -3401,6 +3598,13 @@
     "beautifiers": [
       "Remark",
       "Tidy Markdown"
+    ],
+    "grammars": [
+      "GitHub Markdown"
+    ],
+    "extensions": [
+      "markdown",
+      "md"
     ],
     "properties": {
       "gfm": {
@@ -3479,6 +3683,12 @@
     "collapsed": true,
     "beautifiers": [
       "Marko Beautifier"
+    ],
+    "grammars": [
+      "Marko"
+    ],
+    "extensions": [
+      "marko"
     ],
     "properties": {
       "indent_size": {
@@ -3780,6 +3990,12 @@
     "beautifiers": [
       "JS Beautify"
     ],
+    "grammars": [
+      "HTML (Mustache)"
+    ],
+    "extensions": [
+      "mustache"
+    ],
     "properties": {
       "indent_inner_html": {
         "type": "boolean",
@@ -4063,6 +4279,15 @@
       "Uncrustify",
       "clang-format"
     ],
+    "grammars": [
+      "Objective-C",
+      "Objective-C++"
+    ],
+    "extensions": [
+      "m",
+      "mm",
+      "h"
+    ],
     "properties": {
       "configPath": {
         "title": "Config Path",
@@ -4113,6 +4338,12 @@
     "beautifiers": [
       "ocp-indent"
     ],
+    "grammars": [
+      "OCaml"
+    ],
+    "extensions": [
+      "ml"
+    ],
     "properties": {
       "disabled": {
         "title": "Disable Beautifying Language",
@@ -4148,6 +4379,10 @@
     "beautifiers": [
       "Uncrustify"
     ],
+    "grammars": [
+      "Pawn"
+    ],
+    "extensions": [],
     "properties": {
       "configPath": {
         "type": "string",
@@ -4196,6 +4431,13 @@
     "collapsed": true,
     "beautifiers": [
       "Perltidy"
+    ],
+    "grammars": [
+      "Perl",
+      "Perl 6"
+    ],
+    "extensions": [
+      "pl"
     ],
     "properties": {
       "perltidy_profile": {
@@ -4246,6 +4488,14 @@
     "beautifiers": [
       "PHP-CS-Fixer",
       "PHPCBF"
+    ],
+    "grammars": [
+      "PHP"
+    ],
+    "extensions": [
+      "php",
+      "module",
+      "inc"
     ],
     "properties": {
       "cs_fixer_path": {
@@ -4354,6 +4604,12 @@
     "beautifiers": [
       "puppet-lint"
     ],
+    "grammars": [
+      "Puppet"
+    ],
+    "extensions": [
+      "pp"
+    ],
     "properties": {
       "disabled": {
         "title": "Disable Beautifying Language",
@@ -4389,6 +4645,12 @@
     "beautifiers": [
       "autopep8",
       "yapf"
+    ],
+    "grammars": [
+      "Python"
+    ],
+    "extensions": [
+      "py"
     ],
     "properties": {
       "max_line_length": {
@@ -4488,6 +4750,13 @@
     "beautifiers": [
       "Pretty Diff"
     ],
+    "grammars": [
+      "Riot.js",
+      "HTML (Riot Tag)"
+    ],
+    "extensions": [
+      "tag"
+    ],
     "properties": {
       "indent_size": {
         "type": "integer",
@@ -4581,6 +4850,13 @@
       "Rubocop",
       "Ruby Beautify"
     ],
+    "grammars": [
+      "Ruby",
+      "Ruby on Rails"
+    ],
+    "extensions": [
+      "rb"
+    ],
     "properties": {
       "indent_size": {
         "type": "integer",
@@ -4665,6 +4941,13 @@
     "beautifiers": [
       "rustfmt"
     ],
+    "grammars": [
+      "Rust"
+    ],
+    "extensions": [
+      "rs",
+      "rlib"
+    ],
     "properties": {
       "rustfmt_path": {
         "type": "string",
@@ -4714,6 +4997,12 @@
     "beautifiers": [
       "CSScomb",
       "Pretty Diff"
+    ],
+    "grammars": [
+      "Sass"
+    ],
+    "extensions": [
+      "sass"
     ],
     "properties": {
       "indent_size": {
@@ -4932,6 +5221,12 @@
       "CSScomb",
       "Pretty Diff"
     ],
+    "grammars": [
+      "SCSS"
+    ],
+    "extensions": [
+      "scss"
+    ],
     "properties": {
       "indent_size": {
         "type": "integer",
@@ -5148,6 +5443,10 @@
     "beautifiers": [
       "Pretty Diff"
     ],
+    "grammars": [
+      "Spacebars"
+    ],
+    "extensions": [],
     "properties": {
       "indent_size": {
         "type": "integer",
@@ -5240,6 +5539,13 @@
     "beautifiers": [
       "sqlformat"
     ],
+    "grammars": [
+      "SQL (Rails)",
+      "SQL"
+    ],
+    "extensions": [
+      "sql"
+    ],
     "properties": {
       "indent_size": {
         "type": "integer",
@@ -5329,6 +5635,12 @@
     "collapsed": true,
     "beautifiers": [
       "Pretty Diff"
+    ],
+    "grammars": [
+      "SVG"
+    ],
+    "extensions": [
+      "svg"
     ],
     "properties": {
       "indent_size": {
@@ -5422,6 +5734,13 @@
     "beautifiers": [
       "Pretty Diff"
     ],
+    "grammars": [
+      "HTML (Swig)",
+      "SWIG"
+    ],
+    "extensions": [
+      "swig"
+    ],
     "properties": {
       "indent_size": {
         "type": "integer",
@@ -5513,6 +5832,12 @@
     "collapsed": true,
     "beautifiers": [
       "Pretty Diff"
+    ],
+    "grammars": [
+      "TSS"
+    ],
+    "extensions": [
+      "tss"
     ],
     "properties": {
       "indent_size": {
@@ -5696,6 +6021,12 @@
     "beautifiers": [
       "Pretty Diff"
     ],
+    "grammars": [
+      "HTML (Twig)"
+    ],
+    "extensions": [
+      "twig"
+    ],
     "properties": {
       "indent_size": {
         "type": "integer",
@@ -5843,6 +6174,12 @@
     "collapsed": true,
     "beautifiers": [
       "TypeScript Formatter"
+    ],
+    "grammars": [
+      "TypeScript"
+    ],
+    "extensions": [
+      "ts"
     ],
     "properties": {
       "indent_size": {
@@ -6153,6 +6490,13 @@
     "beautifiers": [
       "Uncrustify"
     ],
+    "grammars": [
+      "Vala"
+    ],
+    "extensions": [
+      "vala",
+      "vapi"
+    ],
     "properties": {
       "configPath": {
         "type": "string",
@@ -6201,6 +6545,12 @@
     "collapsed": true,
     "beautifiers": [
       "Pretty Diff"
+    ],
+    "grammars": [
+      "Visualforce"
+    ],
+    "extensions": [
+      "page"
     ],
     "properties": {
       "indent_size": {
@@ -6294,6 +6644,24 @@
     "beautifiers": [
       "JS Beautify",
       "Pretty Diff"
+    ],
+    "grammars": [
+      "SLD",
+      "XML",
+      "XHTML",
+      "XSD",
+      "XSL",
+      "JSP",
+      "GSP"
+    ],
+    "extensions": [
+      "sld",
+      "xml",
+      "xhtml",
+      "xsd",
+      "xsl",
+      "jsp",
+      "gsp"
     ],
     "properties": {
       "indent_inner_html": {
@@ -6581,6 +6949,12 @@
     "collapsed": true,
     "beautifiers": [
       "Pretty Diff"
+    ],
+    "grammars": [
+      "XTemplate"
+    ],
+    "extensions": [
+      "xtemplate"
     ],
     "properties": {
       "indent_size": {

@@ -1,6 +1,6 @@
 {
   "name": "snippets-jade",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "provide basic snippets for jade",
   "keywords": [
     "jade",
@@ -11,6 +11,9 @@
     "url": "git+https://github.com/rail-rain/snippets-jade.git"
   },
   "license": "MIT",
+  "scripts": {
+    "build": "node convert.js"
+  },
   "engines": {
     "atom": "*"
   },
@@ -25,14 +28,17 @@
     "url": "https://github.com/rail-rain/snippets-jade/issues"
   },
   "homepage": "https://github.com/rail-rain/snippets-jade#readme",
-  "_id": "snippets-jade@0.2.0",
-  "_shasum": "b2541e45f8a7df6130e8747f1a9a453c1afd04c5",
-  "_resolved": "file:../d-11665-9085-1tpynlk/package.tgz",
-  "_from": "../d-11665-9085-1tpynlk/package.tgz",
+  "_id": "snippets-jade@0.2.1",
+  "_shasum": "34ec4bf195abbf10ab69a30851d4b98771f20816",
+  "_resolved": "file:../d-116615-17417-w6h04t/package.tgz",
+  "_from": "../d-116615-17417-w6h04t/package.tgz",
   "_atomModuleCache": {
     "version": 1,
     "dependencies": [],
     "extensions": {
+      ".js": [
+        "convert.js"
+      ],
       ".json": [
         "package.json"
       ]

@@ -29,3 +29,8 @@ fi
 
 #Set my editor to Atom
 export EDITOR="atom-beta"
+
+
+if [ -f $(brew --prefix)/etc/brew-wrap ];then
+  source $(brew --prefix)/etc/brew-wrap
+fi

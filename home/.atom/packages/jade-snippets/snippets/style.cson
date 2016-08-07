@@ -5,8 +5,8 @@
     'link(rel="stylesheet", href="css/style.css")':
         'prefix': 'link'
         'body': '''
-            link(rel='${1:stylesheet}', href='${2:css/style.css}', ${3:attr})
-            $4
+            link(rel='${1:stylesheet}', href='${2:css/style.css}')
+            $3
         '''
 
     'style.':

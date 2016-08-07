@@ -122,7 +122,7 @@ atom-text-editor .search-results .marker.current-result .region,
   }
 
   &.other.symbol {
-    color: @green;
+    color: @cyan;
   }
 
   &.other.placeholder {
@@ -142,7 +142,7 @@ atom-text-editor .search-results .marker.current-result .region,
   }
 
   &.other {
-    color: @orange;
+    color: @syntax-text-color;
   }
 }
 
@@ -169,6 +169,8 @@ atom-text-editor .search-results .marker.current-result .region,
 }
 
 .punctuation {
+  color: @syntax-text-color;
+
   &.definition {
     &.comment {
       color: @green;
@@ -233,7 +235,7 @@ atom-text-editor .search-results .marker.current-result .region,
   }
 
   &.other.inherited-class {
-    color: @green;
+    color: @cyan;
   }
   &.name.class, &.name.type.class {
     color: @orange;
@@ -257,6 +259,8 @@ atom-text-editor .search-results .marker.current-result .region,
 }
 
 .meta {
+  color: @syntax-text-color;
+
   &.class {
     color: @orange;
   }

@@ -2,8 +2,13 @@
 alias g="git"
 alias ga="git add -A"
 alias gp="git push"
+alias gpf="git push -f"
 alias gc="git commit -sam"
 alias projects="cd Dropbox\ \(Personal\)/Sites/"
+
+# Open a file in Atom Beta
+# i.e 'open "atom-beta" .aliases'
+#alias open="open -a"
 
 
 # Hide/show all desktop icons (useful when presenting)
@@ -34,7 +39,7 @@ alias mergepdf="/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Re
 # alias for aliases
 alias makethisgohere="ln -s"
 
-# zip stuff
+# compress stuff
 alias zip="zip -r -X"
 alias tar="tar -jcvf"
 

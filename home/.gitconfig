@@ -5,7 +5,7 @@
 [user]
 	name = Logan McAnsh
 	email = l.m@loganmcansh.com
-	signingkey = 2A2E3847
+	signingkey = 56CE567FB897A796
 [push]
 	default = simple
 [color]
@@ -28,7 +28,7 @@
 
 	# displays commits of current repo
 	ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
-	
+
 	# shows current branch's last commit with absolute date
 	b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
 

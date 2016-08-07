@@ -1,38 +1,64 @@
 {
-  "name": "civic-syntax",
-  "theme": "syntax",
-  "version": "0.2.0",
+  "_args": [
+    [
+      {
+        "raw": "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/d-11674-38312-lpqosh/package.tgz",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/d-11674-38312-lpqosh/package.tgz",
+        "spec": "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/d-11674-38312-lpqosh/package.tgz",
+        "type": "local"
+      },
+      "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/apm-install-dir-11674-38312-dj3pdo"
+    ]
+  ],
+  "_from": "../d-11674-38312-lpqosh/package.tgz",
+  "_id": "civic-syntax@0.2.2",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/civic-syntax",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/d-11674-38312-lpqosh/package.tgz",
+    "scope": null,
+    "escapedName": null,
+    "name": null,
+    "rawSpec": "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/d-11674-38312-lpqosh/package.tgz",
+    "spec": "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/d-11674-38312-lpqosh/package.tgz",
+    "type": "local"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "file:../d-11674-38312-lpqosh/package.tgz",
+  "_shasum": "0b9b025c18479c77d524c220c86f7266bfb6b960",
+  "_shrinkwrap": null,
+  "_spec": "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/d-11674-38312-lpqosh/package.tgz",
+  "_where": "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/apm-install-dir-11674-38312-dj3pdo",
+  "bugs": {
+    "url": "https://github.com/emlai/civic-syntax/issues"
+  },
+  "dependencies": {},
   "description": "Dark syntax theme inspired by Xcode 8's Civic theme",
+  "devDependencies": {},
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "homepage": "https://github.com/emlai/civic-syntax#readme",
   "keywords": [
     "syntax",
     "theme"
   ],
+  "license": "MIT",
+  "name": "civic-syntax",
+  "optionalDependencies": {},
+  "readme": "# Civic syntax theme\n\nDark syntax theme inspired by Xcode 8's Civic theme.\n\n\n## Contributing\n\nPull requests are welcome!\n",
+  "readmeFilename": "README.md",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/emlai/civic-syntax.git"
   },
-  "license": "MIT",
-  "engines": {
-    "atom": ">=1.0.0 <2.0.0"
-  },
-  "readme": "# Civic syntax theme\n\nDark syntax theme inspired by Xcode 8's Civic theme.\n",
-  "readmeFilename": "README.md",
-  "bugs": {
-    "url": "https://github.com/emlai/civic-syntax/issues"
-  },
-  "homepage": "https://github.com/emlai/civic-syntax#readme",
-  "_id": "civic-syntax@0.2.0",
-  "_shasum": "d517eeb66b6410276b92d3107a645e2b8b896043",
-  "_resolved": "file:../d-116530-11545-1h6hrui/package.tgz",
-  "_from": "../d-116530-11545-1h6hrui/package.tgz",
-  "_atomModuleCache": {
-    "version": 1,
-    "dependencies": [],
-    "extensions": {
-      ".json": [
-        "package.json"
-      ]
-    },
-    "folders": []
-  }
+  "theme": "syntax",
+  "version": "0.2.2"
 }

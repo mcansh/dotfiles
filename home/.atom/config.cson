@@ -36,13 +36,16 @@
   editor:
     backUpBeforeSaving: true
     fontFamily: "SFMono-Regular"
-    fontSize: 18
+    fontSize: 19
     invisibles: {}
     scrollPastEnd: true
     showIndentGuide: true
     softWrap: true
   "exception-reporting":
     userId: "1a3d270b-cff2-90b9-feb3-8ababdfe3d4e"
+  "integrated-learn-environment":
+    oauthToken: "75c7904cf74ad5de1452b366465027fef82ac730150a12f850e191f9e2fc6dfc"
+    vm_port: 9561
   minimap:
     plugins:
       cursorline: true

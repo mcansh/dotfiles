@@ -1,9 +1,9 @@
 {
   "name": "atom-beautify",
   "main": "./src/beautify",
-  "version": "0.29.9",
+  "version": "0.29.10",
   "private": true,
-  "description": "Beautify HTML, CSS, JavaScript, PHP, Python, Ruby, Java, C, C++, C#, Objective-C, CoffeeScript, TypeScript, Coldfusion, and SQL in Atom",
+  "description": "Beautify HTML, CSS, JavaScript, PHP, Python, Ruby, Java, C, C++, C#, Objective-C, CoffeeScript, TypeScript, Coldfusion, SQL, and more in Atom",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Glavin001/atom-beautify.git"
@@ -90,13 +90,17 @@
     {
       "name": "Joost van Doorn",
       "url": "https://github.com/JoostvDoorn"
+    },
+    {
+      "name": "Arman Yessenamanov",
+      "url": "https://github.com/yesenarman"
     }
   ],
   "engines": {
     "atom": ">=1.6.0 <2.0.0"
   },
   "dependencies": {
-    "async": "^1.2.1",
+    "async": "^2.0.0",
     "atom-message-panel": "^1.2.4",
     "atom-space-pen-views": "^2.0.5",
     "bluebird": "^3.3.5",
@@ -110,14 +114,16 @@
     "expand-home-dir": "0.0.3",
     "extend": "^3.0.0",
     "gherkin": "2.12.2",
+    "github": "^2.2.0",
     "handlebars": "^4.0.2",
     "js-beautify": "^1.6.3",
-    "jscs": "^3.0.3",
+    "jscs": "^3.0.7",
     "lodash": "^4.8.2",
     "loophole": "^1.0.0",
-    "marko-prettyprint": "^1.1.0",
-    "node-dir": "^0.1.8",
+    "marko-prettyprint": "^1.1.8",
+    "node-dir": "^0.1.15",
     "node-uuid": "^1.4.3",
+    "open": "0.0.5",
     "prettydiff": "^1.16.27",
     "pug-beautify": "^0.1.1",
     "remark": "^4.2.2",
@@ -125,9 +131,9 @@
     "space-pen": "^5.1.1",
     "strip-json-comments": "^2.0.1",
     "temp": "^0.8.3",
-    "tidy-markdown": "^2.0.1",
+    "tidy-markdown": "^2.0.3",
     "typescript": "^1.8.10",
-    "typescript-formatter": "^2.1.0",
+    "typescript-formatter": "^2.3.0",
     "underscore-plus": "^1.6.6",
     "universal-analytics": "^0.3.11",
     "which": "^1.1.1",
@@ -163,7 +169,6 @@
     "css",
     "javascript",
     "json",
-    "css",
     "sass",
     "scss",
     "less",
@@ -197,7 +202,62 @@
     "golang",
     "svg",
     "elm",
-    "lua"
+    "lua",
+    "arduino",
+    "crystal",
+    "csv",
+    "ejs",
+    "erlang",
+    "gherkin",
+    "fortran",
+    "haskell",
+    "jade",
+    "jsx",
+    "latex",
+    "ocaml",
+    "perl",
+    "puppet",
+    "riot.js",
+    "rust",
+    "spacebars",
+    "swig",
+    "tss",
+    "twig",
+    "visualforce",
+    "xtemplate",
+    "autopep8",
+    "coffee formatter",
+    "coffee-fmt",
+    "clang-format",
+    "dfmt",
+    "elm-format",
+    "html beautifier",
+    "csscomb",
+    "gherkin formatter",
+    "gofmt",
+    "latex beautify",
+    "fortran beautifier",
+    "js beautify",
+    "jscs fixer",
+    "lua beautifier",
+    "ocp-indent",
+    "perltidy",
+    "php-cs-fixer",
+    "phpcbf",
+    "pretty diff",
+    "pug beautify",
+    "puppet-lint",
+    "remark",
+    "rubocop",
+    "ruby beautify",
+    "rustfmt",
+    "sqlformat",
+    "stylish-haskell",
+    "tidy markdown",
+    "typescript formatter",
+    "yapf",
+    "erl_tidy",
+    "marko beautifier"
   ],
   "devDependencies": {
     "coffeelint": "^1.10.1",
@@ -210,20 +270,20 @@
     "lint": "coffeelint src/ spec/",
     "code-docs": "codo && open docs/code/index.html"
   },
-  "readme": "# [atom-beautify](https://github.com/Glavin001/atom-beautify)\n\n[![Build Status](https://travis-ci.org/Glavin001/atom-beautify.svg?branch=master)](https://travis-ci.org/Glavin001/atom-beautify)\n[![Build status](https://ci.appveyor.com/api/projects/status/himnq7tjxl2fdc8u?svg=true)](https://ci.appveyor.com/project/Glavin001/atom-beautify)\n[![Gitter chat](https://img.shields.io/badge/gitter-Glavin001%2Fatom--beautify-1dce73.svg)](https://gitter.im/Glavin001/atom-beautify)\n[![Paypal Donations](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=X2RK5DKN6YXPJ&lc=CA&item_name=Atom%2dBeautify&item_number=atom%2dbeautify&currency_code=CAD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted)\n\n[![Throughput Graph](https://graphs.waffle.io/Glavin001/atom-beautify/throughput.svg)](https://waffle.io/Glavin001/atom-beautify/metrics)\n\n> [Beautify](https://github.com/beautify-web/js-beautify)\nHTML (including [Handlebars](http://handlebarsjs.com/)),\nCSS (including [Sass](http://sass-lang.com/) and [Less](http://lesscss.org/)),\nJavaScript, and much more in Atom.\n\nAtom Package: https://atom.io/packages/atom-beautify\n\n```bash\napm install atom-beautify\n```\n\nOr Settings/Preferences ➔ Packages ➔ Search for `atom-beautify`\n\n## Language Support\n\n- [x] JavaScript and JSON\n- [x] HTML, including\n  - [x] [Handlebars](http://handlebarsjs.com/)\n  - [x] [Mustache](http://mustache.github.io)\n  - [x] [Embedded Ruby (ERB)](https://github.com/Glavin001/atom-beautify/issues/80)\n    - Requires [htmlbeautifier](https://github.com/threedaymonk/htmlbeautifier)\n  - [x] XML\n  - [x] SVG\n  - [x] [Marko](https://github.com/marko-js/marko)\n- [x] CSS, including\n  - [Sass](http://sass-lang.com/)\n  - [Less](http://lesscss.org/)\n- [x] [SQL](https://github.com/Glavin001/atom-beautify/pull/67)\n  - Requires [python-sqlparse](https://github.com/andialbrecht/sqlparse)\n- [x] [Markdown](https://github.com/Glavin001/atom-beautify/issues/292)\n- [x] [Perl](https://github.com/Glavin001/atom-beautify/issues/33)\n  - Requires [perltidy](http://perltidy.sourceforge.net/)\n- [x] [PHP](https://github.com/Glavin001/atom-beautify/issues/26)  \n  - Requires [php-cs-fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer) to be already installed.\n- [x] [Python](https://github.com/Glavin001/atom-beautify/issues/24)\n  - Requires [autopep8](https://github.com/hhatto/autopep8) or [YAPF](https://github.com/google/yapf) to be already installed.\n  - Beautifies to [PEP 8](https://www.python.org/dev/peps/pep-0008/).\n- [x] [Ruby](https://github.com/Glavin001/atom-beautify/issues/25)\n  - Requires [Ruby Beautify](https://github.com/erniebrodeur/ruby-beautify)\n- [x] [CoffeeScript](https://github.com/Glavin001/atom-beautify/issues/31)\n- [x] [Golang](https://github.com/Glavin001/atom-beautify/issues/176)\n- [x] [Java](https://github.com/Glavin001/atom-beautify/issues/45)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [C](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [C++](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [C#](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [Objective-C](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [D](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/) or [dfmt](https://github.com/Hackerpilot/dfmt)\n- [x] [Fortran](https://github.com/Glavin001/atom-beautify/issues/300)\n  - Requires [GNU Emacs](http://www.gnu.org/software/emacs/)\n- [x] [Pawn](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [Vala](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [TypeScript](https://github.com/Glavin001/atom-beautify/issues/49)\n- [x] [Haskell](https://github.com/Glavin001/atom-beautify/issues/628)\n  - Requires [stylish-haskell](https://github.com/jaspervdj/stylish-haskell)\n- [x] [Elm](https://github.com/Glavin001/atom-beautify/pull/700)\n  - Requires [Elm-Format](https://github.com/avh4/elm-format)\n- [x] [Erlang](https://github.com/Glavin001/atom-beautify/pull/683)\n  - Requires erlang syntax_tools to be installed\n- [x] [Crystal](https://github.com/Glavin001/atom-beautify/pull/900)\n- [x] [Lua](https://github.com/Glavin001/atom-beautify/pull/973)\n\n## Usage\n\nOpen the [Command Palette](https://github.com/atom/command-palette), and type `Beautify`.\n\nIt will only beautify selected text if a selection is found -- if not, the whole file will be beautified.\n\n### Shortcut\n\nYou can also type <kbd>Ctrl</kbd>-<kbd>Alt</kbd>-<kbd>B</kbd> as a shortcut or click `Packages > Beautify` in the menu.\n\n#### Custom Keyboard Shortcuts\n\nSee [Keymaps In-Depth](https://atom.io/docs/latest/behind-atom-keymaps-in-depth) for more details.\n\nFor example:\n\n```coffeescript\n'.editor':\n  'ctrl-alt-b': 'atom-beautify:beautify-editor'\n```\n\n## Configuration\n\nEdit your `.jsbeautifyrc` file in any of the following locations:\n\n- Atom Package Settings  \n  `Atom` ➔ `Preferences` ➔ Search for `atom-beautify`\n- Same directory as current file\n- Project root  \n`atom-beautify` will recursively look up from the current file's directory to find `.jsbeautifyrc`.\n- Your user's home directory\n\n**Note**: *Comments are supported in `.jsbeautifyrc` thanks to [strip-json-comments](https://github.com/sindresorhus/strip-json-comments).*\n\nSee examples of both ways inside [`examples/`](https://github.com/donaldpipowitch/atom-beautify/tree/master/examples)\n\nSee [all supported options in the documentation at  `docs/options.md`](https://github.com/Glavin001/atom-beautify/blob/master/docs/options.md).\n\n### Simple\n\nSee [examples/simple-jsbeautifyrc/.jsbeautifyrc](https://github.com/donaldpipowitch/atom-beautify/blob/master/examples/simple-jsbeautifyrc/.jsbeautifyrc).\n\n```json\n{\n  \"indent_size\": 2,\n  \"indent_char\": \" \",\n  \"other\": \" \",\n  \"indent_level\": 0,\n  \"indent_with_tabs\": false,\n  \"preserve_newlines\": true,\n  \"max_preserve_newlines\": 2,\n  \"jslint_happy\": true,\n  \"indent_handlebars\": true\n}\n```\n\n### Nested\n\nSee [examples/nested-jsbeautifyrc/.jsbeautifyrc](https://github.com/donaldpipowitch/atom-beautify/blob/master/examples/nested-jsbeautifyrc/.jsbeautifyrc).\n\n```json\n{\n  \"html\": {\n    \"brace_style\": \"collapse\",\n    \"indent_char\": \" \",\n    \"indent_scripts\": \"normal\",\n    \"indent_size\": 6,\n    \"max_preserve_newlines\": 1,\n    \"preserve_newlines\": true,\n    \"unformatted\": [\"a\", \"sub\", \"sup\", \"b\", \"i\", \"u\"],\n    \"wrap_line_length\": 0\n  },\n  \"css\": {\n    \"indent_char\": \" \",\n    \"indent_size\": 4\n  },\n  \"js\": {\n    \"indent_size\": 2,\n    \"indent_char\": \" \",\n    \"indent_level\": 0,\n    \"indent_with_tabs\": false,\n    \"preserve_newlines\": true,\n    \"max_preserve_newlines\": 2,\n    \"jslint_happy\": true\n  },\n  \"sql\": {\n    \"indent_size\": 4,\n    \"indent_char\": \" \",\n    \"indent_level\": 0,\n    \"indent_with_tabs\": false\n  }\n}\n```\n\n## Contributing\n\n[See all contributors on GitHub](https://github.com/donaldpipowitch/atom-beautify/graphs/contributors).\n\nPlease update the [CHANGELOG.md](https://github.com/donaldpipowitch/atom-beautify/blob/master/CHANGELOG.md),\nadd yourself as a contributor to the [package.json](https://github.com/donaldpipowitch/atom-beautify/blob/master/package.json),\nand submit a [Pull Request on GitHub](https://help.github.com/articles/using-pull-requests/).\n\n## License\n\n[MIT](https://github.com/donaldpipowitch/atom-beautify/blob/master/LICENSE.md) © [Glavin Wiechert](https://github.com/Glavin001)\n",
+  "readme": "# :lipstick: [atom-beautify](https://github.com/Glavin001/atom-beautify)\n\n[![Build Status](https://travis-ci.org/Glavin001/atom-beautify.svg?branch=master)](https://travis-ci.org/Glavin001/atom-beautify)\n[![Build status](https://ci.appveyor.com/api/projects/status/himnq7tjxl2fdc8u?svg=true)](https://ci.appveyor.com/project/Glavin001/atom-beautify)\n[![Gitter chat](https://img.shields.io/badge/gitter-Glavin001%2Fatom--beautify-1dce73.svg)](https://gitter.im/Glavin001/atom-beautify)\n[![Paypal Donations](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=X2RK5DKN6YXPJ&lc=CA&item_name=Atom%2dBeautify&item_number=atom%2dbeautify&currency_code=CAD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted)\n\n[![Throughput Graph](https://graphs.waffle.io/Glavin001/atom-beautify/throughput.svg)](https://waffle.io/Glavin001/atom-beautify/metrics)\n\n> Beautify HTML, CSS, JavaScript, PHP, Python, Ruby, Java, C, C++, C#, Objective-C, CoffeeScript, TypeScript, Coldfusion, SQL, and more in Atom\n\n| Before | After |\n| --- | ---- |\n| Original HTML | Beautified HTML |\n| ![image](https://cloud.githubusercontent.com/assets/1885333/16542727/db52adc6-408a-11e6-824e-04aed06bd2f7.png) | ![image](https://cloud.githubusercontent.com/assets/1885333/16542728/dcac3700-408a-11e6-8e35-9c8fc4432edc.png) |\n\n## Table of Contents\n\n- [Installation](#installation)\n- [Language Support](#language-support)\n- [Usage](#usage)\n  - [Selection of Code](#selection-of-code)\n  - [Beautify On Save](#beautify-on-save)\n  - [Keyboard Shortcut](#keyboard-shortcut)\n    - [Custom Keyboard Shortcuts](#custom-keyboard-shortcuts)\n- [Configuration](#configuration)\n  - [Simple](#simple)\n  - [Nested](#nested-recommended)\n- [Troubleshooting](#troubleshooting)\n- [Contributing](#contributing)\n\n## Installation\n\nAtom Package: https://atom.io/packages/atom-beautify\n\n```bash\napm install atom-beautify\n```\n\nOr Settings/Preferences ➔ Packages ➔ Search for `atom-beautify`\n\n## Language Support\n\nSee [all supported options in the documentation at  `docs/options.md`](https://github.com/Glavin001/atom-beautify/blob/master/docs/options.md).\n\n| Language | Grammars | File Extensions | Supported Beautifiers |\n| --- | --- | --- | ---- |\n| Apex | `Apex` |`.cls`, `.trigger` | [`Uncrustify`](https://github.com/uncrustify/uncrustify) (Default) |\n| Arduino | `Arduino` |`.ino`, `.pde` | [`Uncrustify`](https://github.com/uncrustify/uncrustify) (Default) |\n| C | `C`, `opencl` |`.h`, `.c`, `.cl` | [`Uncrustify`](https://github.com/uncrustify/uncrustify) (Default), [`clang-format`](https://clang.llvm.org/docs/ClangFormat.html) |\n| Coldfusion | `html` |`.cfm`, `.cfml`, `.cfc` | [`Pretty Diff`](https://github.com/prettydiff/prettydiff) (Default) |\n| CoffeeScript | `CoffeeScript` |`.coffee` | [`Coffee Formatter`](https://github.com/Glavin001/Coffee-Formatter), [`coffee-fmt`](https://github.com/sterpe/coffee-fmt) (Default) |\n| C++ | `C++` |`.h`, `.hh`, `.cc`, `.cpp`, `.cxx`, `.C`, `.c++`, `.hpp`, `.hxx`, `.h++` | [`Uncrustify`](https://github.com/uncrustify/uncrustify) (Default), [`clang-format`](https://clang.llvm.org/docs/ClangFormat.html) |\n| Crystal | `Crystal` |`.cr` | [`Crystal`](http://crystal-lang.org) (Default) |\n| C# | `C#` |`.cs` | [`Uncrustify`](https://github.com/uncrustify/uncrustify) (Default) |\n| CSS | `CSS` |`.css` | [`CSScomb`](https://github.com/csscomb/csscomb.js), [`JS Beautify`](https://github.com/beautify-web/js-beautify) (Default), [`Pretty Diff`](https://github.com/prettydiff/prettydiff) |\n| CSV | `CSV` |`.csv` | [`Pretty Diff`](https://github.com/prettydiff/prettydiff) (Default) |\n| D | `D` |`.d` | [`Uncrustify`](https://github.com/uncrustify/uncrustify) (Default), [`dfmt`](https://github.com/Hackerpilot/dfmt) |\n| EJS | `JavaScript Template`, `HTML (Angular)` | | [`Pretty Diff`](https://github.com/prettydiff/prettydiff) (Default) |\n| Elm | `Elm` |`.elm` | [`elm-format`](https://github.com/avh4/elm-format) (Default) |\n| ERB | `HTML (Ruby - ERB)`, `HTML (Rails)` |`.erb` | [`HTML Beautifier`](https://github.com/threedaymonk/htmlbeautifier), [`Pretty Diff`](https://github.com/prettydiff/prettydiff) (Default) |\n| Erlang | `Erlang` |`.erl` | [`erl_tidy`](http://erlang.org/doc/man/erl_tidy.html) (Default) |\n| Fortran | `Fortran - Modern` |`.f90` | [`Fortran Beautifier`](https://github.com/Glavin001/atom-beautify/blob/master/src/beautifiers/fortran-beautifier/emacs-fortran-formating-script.lisp) (Default) |\n| gherkin | `Gherkin` |`.feature` | [`Gherkin formatter`](https://github.com/Glavin001/atom-beautify/blob/master/src/beautifiers/gherkin.coffee) (Default) |\n| Go | `Go` |`.go` | [`gofmt`](https://golang.org/cmd/gofmt/) (Default) |\n| Handlebars | `Handlebars`, `HTML (Handlebars)` |`.hbs`, `.handlebars` | [`JS Beautify`](https://github.com/beautify-web/js-beautify) (Default), [`Pretty Diff`](https://github.com/prettydiff/prettydiff) |\n| Haskell | `Haskell` |`.hs` | [`stylish-haskell`](https://github.com/jaspervdj/stylish-haskell) (Default) |\n| HTML | `HTML` |`.html` | [`JS Beautify`](https://github.com/beautify-web/js-beautify) (Default), [`Pretty Diff`](https://github.com/prettydiff/prettydiff) |\n| Jade | `Jade`, `Pug` |`.jade`, `.pug` | [`Pug Beautify`](https://github.com/vingorius/pug-beautify) (Default) |\n| Java | `Java` |`.java` | [`Uncrustify`](https://github.com/uncrustify/uncrustify) (Default) |\n| JavaScript | `JavaScript` |`.js` | [`JS Beautify`](https://github.com/beautify-web/js-beautify) (Default), [`JSCS Fixer`](https://github.com/jscs-dev/node-jscs/), [`Pretty Diff`](https://github.com/prettydiff/prettydiff) |\n| JSON | `JSON` |`.json` | [`JS Beautify`](https://github.com/beautify-web/js-beautify) (Default), [`Pretty Diff`](https://github.com/prettydiff/prettydiff) |\n| JSX | `JSX`, `JavaScript (JSX)` |`.jsx`, `.js` | [`Pretty Diff`](https://github.com/prettydiff/prettydiff) (Default) |\n| LaTeX | `LaTeX` |`.tex` | [`Latex Beautify`](https://github.com/cmhughes/latexindent.pl) (Default) |\n| LESS | `LESS` |`.less` | [`CSScomb`](https://github.com/csscomb/csscomb.js), [`Pretty Diff`](https://github.com/prettydiff/prettydiff) (Default) |\n| Lua | `Lua` |`.lua` | [`Lua beautifier`](https://github.com/Glavin001/atom-beautify/blob/master/src/beautifiers/lua-beautifier/beautifier.pl) (Default) |\n| Markdown | `GitHub Markdown` |`.markdown`, `.md` | [`Remark`](https://github.com/wooorm/remark), [`Tidy Markdown`](https://github.com/slang800/tidy-markdown) (Default) |\n| Marko | `Marko` |`.marko` | [`Marko Beautifier`](https://github.com/marko-js/marko-prettyprint) (Default) |\n| Mustache | `HTML (Mustache)` |`.mustache` | [`JS Beautify`](https://github.com/beautify-web/js-beautify) (Default) |\n| Objective-C | `Objective-C`, `Objective-C++` |`.m`, `.mm`, `.h` | [`Uncrustify`](https://github.com/uncrustify/uncrustify) (Default), [`clang-format`](https://clang.llvm.org/docs/ClangFormat.html) |\n| OCaml | `OCaml` |`.ml` | [`ocp-indent`](https://www.typerex.org/ocp-indent.html) (Default) |\n| Pawn | `Pawn` | | [`Uncrustify`](https://github.com/uncrustify/uncrustify) (Default) |\n| Perl | `Perl`, `Perl 6` |`.pl` | [`Perltidy`](http://perltidy.sourceforge.net/) (Default) |\n| PHP | `PHP` |`.php`, `.module`, `.inc` | [`PHP-CS-Fixer`](http://php.net/manual/en/install.php) (Default), [`PHPCBF`](http://php.net/manual/en/install.php) |\n| Puppet | `Puppet` |`.pp` | [`puppet-lint`](http://puppet-lint.com/) (Default) |\n| Python | `Python` |`.py` | [`autopep8`](https://github.com/hhatto/autopep8) (Default), [`yapf`](https://github.com/google/yapf) |\n| Riot.js | `Riot.js`, `HTML (Riot Tag)` |`.tag` | [`Pretty Diff`](https://github.com/prettydiff/prettydiff) (Default) |\n| Ruby | `Ruby`, `Ruby on Rails` |`.rb` | [`Rubocop`](https://github.com/bbatsov/rubocop) (Default), [`Ruby Beautify`](https://github.com/erniebrodeur/ruby-beautify) |\n| Rust | `Rust` |`.rs`, `.rlib` | [`rustfmt`](https://github.com/nrc/rustfmt) (Default) |\n| Sass | `Sass` |`.sass` | [`CSScomb`](https://github.com/csscomb/csscomb.js), [`Pretty Diff`](https://github.com/prettydiff/prettydiff) (Default) |\n| SCSS | `SCSS` |`.scss` | [`CSScomb`](https://github.com/csscomb/csscomb.js), [`Pretty Diff`](https://github.com/prettydiff/prettydiff) (Default) |\n| Spacebars | `Spacebars` | | [`Pretty Diff`](https://github.com/prettydiff/prettydiff) (Default) |\n| SQL | `SQL (Rails)`, `SQL` |`.sql` | [`sqlformat`](https://github.com/andialbrecht/sqlparse) (Default) |\n| SVG | `SVG` |`.svg` | [`Pretty Diff`](https://github.com/prettydiff/prettydiff) (Default) |\n| Swig | `HTML (Swig)`, `SWIG` |`.swig` | [`Pretty Diff`](https://github.com/prettydiff/prettydiff) (Default) |\n| TSS | `TSS` |`.tss` | [`Pretty Diff`](https://github.com/prettydiff/prettydiff) (Default) |\n| Twig | `HTML (Twig)` |`.twig` | [`Pretty Diff`](https://github.com/prettydiff/prettydiff) (Default) |\n| TypeScript | `TypeScript` |`.ts` | [`TypeScript Formatter`](https://github.com/vvakame/typescript-formatter) (Default) |\n| Vala | `Vala` |`.vala`, `.vapi` | [`Uncrustify`](https://github.com/uncrustify/uncrustify) (Default) |\n| Visualforce | `Visualforce` |`.page` | [`Pretty Diff`](https://github.com/prettydiff/prettydiff) (Default) |\n| XML | `SLD`, `XML`, `XHTML`, `XSD`, `XSL`, `JSP` |`.sld`, `.xml`, `.xhtml`, `.xsd`, `.xsl`, `.jsp` | [`JS Beautify`](https://github.com/beautify-web/js-beautify), [`Pretty Diff`](https://github.com/prettydiff/prettydiff) (Default) |\n| XTemplate | `XTemplate` |`.xtemplate` | [`Pretty Diff`](https://github.com/prettydiff/prettydiff) (Default) |\n\n## Usage\n\nOpen the [Command Palette](https://github.com/atom/command-palette), type `Beautify`, and run `Beautify Editor`.\n\n![image](https://cloud.githubusercontent.com/assets/1885333/16542583/1c8d975c-4085-11e6-8307-e35df7430a10.png)\n\n### Selection of Code\n\nIt will only beautify selected text if a selection is found -- if not, the whole file will be beautified.\n\n| Selection of Code | Beautify Selection of Code | Beautify Entire File |\n| --- | --- | --- |\n| Select code in Atom editor | Only that selection is beautified | Without a selection all code is beautified |\n| ![image](https://cloud.githubusercontent.com/assets/1885333/16542597/b3f90c84-4085-11e6-8a0e-1b8604ae385c.png) | ![image](https://cloud.githubusercontent.com/assets/1885333/16542598/b5a86b10-4085-11e6-80cf-0afaf1a819c3.png) | ![image](https://cloud.githubusercontent.com/assets/1885333/16542603/b798ec24-4085-11e6-880e-8d3a2741940f.png) |\n\n### Beautify On Save\n\n`Beautify On Save` can be enabled for each language individually.\n\nFor example, for language `HTML` go into Atom-Beautify's package settings (`Atom` ➔ `Preferences` ➔ Search for `atom-beautify`), find `HTML`, and toggle the `Beautify On Save` option.\n\n![atom-beautify-setup-beautify-on-save](https://cloud.githubusercontent.com/assets/1885333/16542692/3e781e74-4089-11e6-9cf2-5a19af161093.gif)\n\n\n### Keyboard Shortcut\n\nYou can also type <kbd>Ctrl</kbd>-<kbd>Alt</kbd>-<kbd>B</kbd> as a shortcut or click `Packages > Beautify` in the menu.\n\n#### Custom Keyboard Shortcuts\n\nSee [Keymaps In-Depth](https://atom.io/docs/latest/behind-atom-keymaps-in-depth) for more details.\n\nFor example:\n\n```coffeescript\n'.editor':\n  'ctrl-alt-b': 'atom-beautify:beautify-editor'\n```\n\n## Configuration\n\nEdit your `.jsbeautifyrc` file in any of the following locations:\n\n- Atom Package Settings  \n  `Atom` ➔ `Preferences` ➔ Search for `atom-beautify`\n- Same directory as current file\n- Project root  \n`atom-beautify` will recursively look up from the current file's directory to find `.jsbeautifyrc`.\n- Your user's home directory\n\n**Note**: *Comments are supported in `.jsbeautifyrc` thanks to [strip-json-comments](https://github.com/sindresorhus/strip-json-comments).*\n\nSee examples of both ways inside [`examples/`](https://github.com/donaldpipowitch/atom-beautify/tree/master/examples)\n\nSee [all supported options in the documentation at  `docs/options.md`](https://github.com/Glavin001/atom-beautify/blob/master/docs/options.md).\n\n### Simple\n\nSee [examples/simple-jsbeautifyrc/.jsbeautifyrc](https://github.com/donaldpipowitch/atom-beautify/blob/master/examples/simple-jsbeautifyrc/.jsbeautifyrc).\n\n```json\n{\n  \"indent_size\": 2,\n  \"indent_char\": \" \",\n  \"other\": \" \",\n  \"indent_level\": 0,\n  \"indent_with_tabs\": false,\n  \"preserve_newlines\": true,\n  \"max_preserve_newlines\": 2,\n  \"jslint_happy\": true,\n  \"indent_handlebars\": true\n}\n```\n\n### Nested (Recommended)\n\nSee [examples/nested-jsbeautifyrc/.jsbeautifyrc](https://github.com/donaldpipowitch/atom-beautify/blob/master/examples/nested-jsbeautifyrc/.jsbeautifyrc).\n\n```json\n{\n  \"html\": {\n    \"brace_style\": \"collapse\",\n    \"indent_char\": \" \",\n    \"indent_scripts\": \"normal\",\n    \"indent_size\": 6,\n    \"max_preserve_newlines\": 1,\n    \"preserve_newlines\": true,\n    \"unformatted\": [\"a\", \"sub\", \"sup\", \"b\", \"i\", \"u\"],\n    \"wrap_line_length\": 0\n  },\n  \"css\": {\n    \"indent_char\": \" \",\n    \"indent_size\": 4\n  },\n  \"js\": {\n    \"indent_size\": 2,\n    \"indent_char\": \" \",\n    \"indent_level\": 0,\n    \"indent_with_tabs\": false,\n    \"preserve_newlines\": true,\n    \"max_preserve_newlines\": 2,\n    \"jslint_happy\": true\n  },\n  \"sql\": {\n    \"indent_size\": 4,\n    \"indent_char\": \" \",\n    \"indent_level\": 0,\n    \"indent_with_tabs\": false\n  }\n}\n```\n\n## Troubleshooting\n\nSee [`docs/troubleshooting.md`](https://github.com/Glavin001/atom-beautify/blob/master/docs/troubleshooting.md).\n\n## Contributing\n\n[See all contributors on GitHub](https://github.com/donaldpipowitch/atom-beautify/graphs/contributors).\n\nPlease update the [CHANGELOG.md](https://github.com/donaldpipowitch/atom-beautify/blob/master/CHANGELOG.md),\nadd yourself as a contributor to the [package.json](https://github.com/donaldpipowitch/atom-beautify/blob/master/package.json),\nand submit a [Pull Request on GitHub](https://help.github.com/articles/using-pull-requests/).\n\n## License\n\n[MIT](https://github.com/donaldpipowitch/atom-beautify/blob/master/LICENSE.md) © [Glavin Wiechert](https://github.com/Glavin001)\n",
   "readmeFilename": "README.md",
   "homepage": "https://github.com/Glavin001/atom-beautify#readme",
-  "_id": "atom-beautify@0.29.9",
-  "_shasum": "5ddd8d6cb019bb4d89df2642db00a2923892d426",
-  "_resolved": "file:../d-116528-2148-105cxkp/package.tgz",
-  "_from": "../d-116528-2148-105cxkp/package.tgz",
+  "_id": "atom-beautify@0.29.10",
+  "_shasum": "acaf3c4761b37404c100fd7fa2216167d1475821",
+  "_resolved": "file:../d-116619-6623-17j2hef/package.tgz",
+  "_from": "../d-116619-6623-17j2hef/package.tgz",
   "_atomModuleCache": {
     "version": 1,
     "dependencies": [
       {
         "name": "async",
-        "version": "1.5.2",
-        "path": "node_modules/async/lib/async.js"
+        "version": "2.0.0",
+        "path": "node_modules/async/dist/async.js"
       },
       {
         "name": "atom-message-panel",
@@ -416,9 +476,69 @@
         "path": "node_modules/gherkin/lib/gherkin.js"
       },
       {
+        "name": "github",
+        "version": "2.2.0",
+        "path": "node_modules/github/lib/index.js"
+      },
+      {
+        "name": "follow-redirects",
+        "version": "0.0.7",
+        "path": "node_modules/github/node_modules/follow-redirects/index.js"
+      },
+      {
+        "name": "debug",
+        "version": "2.2.0",
+        "path": "node_modules/github/node_modules/follow-redirects/node_modules/debug/node.js"
+      },
+      {
+        "name": "ms",
+        "version": "0.7.1",
+        "path": "node_modules/github/node_modules/follow-redirects/node_modules/debug/node_modules/ms/index.js"
+      },
+      {
+        "name": "stream-consume",
+        "version": "0.1.0",
+        "path": "node_modules/github/node_modules/follow-redirects/node_modules/stream-consume/index.js"
+      },
+      {
+        "name": "https-proxy-agent",
+        "version": "1.0.0",
+        "path": "node_modules/github/node_modules/https-proxy-agent/https-proxy-agent.js"
+      },
+      {
+        "name": "agent-base",
+        "version": "2.0.1",
+        "path": "node_modules/github/node_modules/https-proxy-agent/node_modules/agent-base/agent.js"
+      },
+      {
+        "name": "semver",
+        "version": "5.0.3",
+        "path": "node_modules/github/node_modules/https-proxy-agent/node_modules/agent-base/node_modules/semver/semver.js"
+      },
+      {
+        "name": "debug",
+        "version": "2.2.0",
+        "path": "node_modules/github/node_modules/https-proxy-agent/node_modules/debug/node.js"
+      },
+      {
+        "name": "ms",
+        "version": "0.7.1",
+        "path": "node_modules/github/node_modules/https-proxy-agent/node_modules/debug/node_modules/ms/index.js"
+      },
+      {
+        "name": "mime",
+        "version": "1.3.4",
+        "path": "node_modules/github/node_modules/mime/mime.js"
+      },
+      {
         "name": "handlebars",
         "version": "4.0.5",
         "path": "node_modules/handlebars/lib/index.js"
+      },
+      {
+        "name": "async",
+        "version": "1.5.2",
+        "path": "node_modules/handlebars/node_modules/async/lib/async.js"
       },
       {
         "name": "optimist",
@@ -447,7 +567,7 @@
       },
       {
         "name": "uglify-js",
-        "version": "2.6.4",
+        "version": "2.7.0",
         "path": "node_modules/handlebars/node_modules/uglify-js/tools/node.js"
       },
       {
@@ -602,7 +722,7 @@
       },
       {
         "name": "jscs",
-        "version": "3.0.5",
+        "version": "3.0.7",
         "path": "node_modules/jscs/lib/checker.js"
       },
       {
@@ -667,12 +787,12 @@
       },
       {
         "name": "cst",
-        "version": "0.4.3",
+        "version": "0.4.6",
         "path": "node_modules/jscs/node_modules/cst/lib/index.js"
       },
       {
         "name": "core-js",
-        "version": "2.4.0",
+        "version": "2.4.1",
         "path": "node_modules/jscs/node_modules/cst/node_modules/babel-runtime/node_modules/core-js/index.js"
       },
       {
@@ -682,12 +802,12 @@
       },
       {
         "name": "babylon",
-        "version": "6.8.2",
+        "version": "6.8.4",
         "path": "node_modules/jscs/node_modules/cst/node_modules/babylon/lib/index.js"
       },
       {
         "name": "source-map-support",
-        "version": "0.4.0",
+        "version": "0.4.2",
         "path": "node_modules/jscs/node_modules/cst/node_modules/source-map-support/source-map-support.js"
       },
       {
@@ -832,7 +952,7 @@
       },
       {
         "name": "inherit",
-        "version": "2.2.3",
+        "version": "2.2.4",
         "path": "node_modules/jscs/node_modules/js-yaml/node_modules/inherit/index.js"
       },
       {
@@ -952,7 +1072,7 @@
       },
       {
         "name": "balanced-match",
-        "version": "0.4.1",
+        "version": "0.4.2",
         "path": "node_modules/jscs/node_modules/minimatch/node_modules/brace-expansion/node_modules/balanced-match/index.js"
       },
       {
@@ -1032,7 +1152,7 @@
       },
       {
         "name": "rimraf",
-        "version": "2.5.2",
+        "version": "2.5.3",
         "path": "node_modules/jscs/node_modules/prompt/node_modules/utile/node_modules/rimraf/rimraf.js"
       },
       {
@@ -1147,7 +1267,7 @@
       },
       {
         "name": "to-single-quotes",
-        "version": "2.0.0",
+        "version": "2.0.1",
         "path": "node_modules/jscs/node_modules/to-single-quotes/index.js"
       },
       {
@@ -1192,7 +1312,7 @@
       },
       {
         "name": "balanced-match",
-        "version": "0.4.1",
+        "version": "0.4.2",
         "path": "node_modules/jscs/node_modules/vow-fs/node_modules/glob/node_modules/minimatch/node_modules/brace-expansion/node_modules/balanced-match/index.js"
       },
       {
@@ -1237,7 +1357,7 @@
       },
       {
         "name": "marko-prettyprint",
-        "version": "1.1.7",
+        "version": "1.1.8",
         "path": "node_modules/marko-prettyprint/src/index.js"
       },
       {
@@ -1247,7 +1367,7 @@
       },
       {
         "name": "marko",
-        "version": "3.6.2",
+        "version": "3.7.4",
         "path": "node_modules/marko-prettyprint/node_modules/marko/runtime/marko-runtime.js"
       },
       {
@@ -1301,28 +1421,13 @@
         "path": "node_modules/marko-prettyprint/node_modules/marko/node_modules/lasso-package-root/node_modules/lasso-caching-fs/src/index.js"
       },
       {
-        "name": "minimatch",
-        "version": "0.2.14",
-        "path": "node_modules/marko-prettyprint/node_modules/marko/node_modules/minimatch/minimatch.js"
-      },
-      {
-        "name": "lru-cache",
-        "version": "2.7.3",
-        "path": "node_modules/marko-prettyprint/node_modules/marko/node_modules/minimatch/node_modules/lru-cache/lib/lru-cache.js"
-      },
-      {
-        "name": "sigmund",
-        "version": "1.0.1",
-        "path": "node_modules/marko-prettyprint/node_modules/marko/node_modules/minimatch/node_modules/sigmund/sigmund.js"
-      },
-      {
         "name": "object-assign",
         "version": "4.1.0",
         "path": "node_modules/marko-prettyprint/node_modules/marko/node_modules/object-assign/index.js"
       },
       {
         "name": "property-handlers",
-        "version": "1.0.1",
+        "version": "1.1.0",
         "path": "node_modules/marko-prettyprint/node_modules/marko/node_modules/property-handlers/lib/index.js"
       },
       {
@@ -1402,7 +1507,7 @@
       },
       {
         "name": "balanced-match",
-        "version": "0.4.1",
+        "version": "0.4.2",
         "path": "node_modules/marko-prettyprint/node_modules/minimatch/node_modules/brace-expansion/node_modules/balanced-match/index.js"
       },
       {
@@ -1412,7 +1517,7 @@
       },
       {
         "name": "node-dir",
-        "version": "0.1.14",
+        "version": "0.1.15",
         "path": "node_modules/node-dir/index.js"
       },
       {
@@ -1427,7 +1532,7 @@
       },
       {
         "name": "balanced-match",
-        "version": "0.4.1",
+        "version": "0.4.2",
         "path": "node_modules/node-dir/node_modules/minimatch/node_modules/brace-expansion/node_modules/balanced-match/index.js"
       },
       {
@@ -1439,6 +1544,11 @@
         "name": "node-uuid",
         "version": "1.4.7",
         "path": "node_modules/node-uuid/uuid.js"
+      },
+      {
+        "name": "open",
+        "version": "0.0.5",
+        "path": "node_modules/open/lib/open.js"
       },
       {
         "name": "prettydiff",
@@ -1522,7 +1632,7 @@
       },
       {
         "name": "micromatch",
-        "version": "2.3.10",
+        "version": "2.3.11",
         "path": "node_modules/remark/node_modules/chokidar/node_modules/anymatch/node_modules/micromatch/index.js"
       },
       {
@@ -1697,7 +1807,7 @@
       },
       {
         "name": "binary-extensions",
-        "version": "1.4.1",
+        "version": "1.5.0",
         "path": "node_modules/remark/node_modules/chokidar/node_modules/is-binary-path/node_modules/binary-extensions/binary-extensions.json"
       },
       {
@@ -2007,7 +2117,7 @@
       },
       {
         "name": "balanced-match",
-        "version": "0.4.1",
+        "version": "0.4.2",
         "path": "node_modules/remark/node_modules/minimatch/node_modules/brace-expansion/node_modules/balanced-match/index.js"
       },
       {
@@ -2087,13 +2197,18 @@
       },
       {
         "name": "stringify-entities",
-        "version": "1.0.1",
+        "version": "1.2.0",
         "path": "node_modules/remark/node_modules/stringify-entities/index.js"
       },
       {
         "name": "character-entities-html4",
         "version": "1.0.0",
         "path": "node_modules/remark/node_modules/stringify-entities/node_modules/character-entities-html4/index.js"
+      },
+      {
+        "name": "character-entities-legacy",
+        "version": "1.0.0",
+        "path": "node_modules/remark/node_modules/stringify-entities/node_modules/character-entities-legacy/index.js"
       },
       {
         "name": "to-vfile",
@@ -2142,7 +2257,7 @@
       },
       {
         "name": "unist-util-remove-position",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "path": "node_modules/remark/node_modules/unist-util-remove-position/index.js"
       },
       {
@@ -2332,7 +2447,7 @@
       },
       {
         "name": "es5-ext",
-        "version": "0.10.11",
+        "version": "0.10.12",
         "path": "node_modules/space-pen/node_modules/grim/node_modules/emissary/node_modules/es6-weak-map/node_modules/es5-ext/index.js"
       },
       {
@@ -2342,7 +2457,7 @@
       },
       {
         "name": "es6-symbol",
-        "version": "3.0.2",
+        "version": "3.1.0",
         "path": "node_modules/space-pen/node_modules/grim/node_modules/emissary/node_modules/es6-weak-map/node_modules/es5-ext/node_modules/es6-symbol/index.js"
       },
       {
@@ -2457,7 +2572,7 @@
       },
       {
         "name": "typescript-formatter",
-        "version": "2.2.0",
+        "version": "2.3.0",
         "path": "node_modules/typescript-formatter/index.js"
       },
       {
@@ -2467,12 +2582,12 @@
       },
       {
         "name": "glob-expand",
-        "version": "0.1.0",
+        "version": "0.2.0",
         "path": "node_modules/typescript-formatter/node_modules/glob-expand/build/code/expand.js"
       },
       {
         "name": "glob",
-        "version": "4.4.2",
+        "version": "4.5.3",
         "path": "node_modules/typescript-formatter/node_modules/glob-expand/node_modules/glob/glob.js"
       },
       {
@@ -2502,7 +2617,7 @@
       },
       {
         "name": "balanced-match",
-        "version": "0.4.1",
+        "version": "0.4.2",
         "path": "node_modules/typescript-formatter/node_modules/glob-expand/node_modules/glob/node_modules/minimatch/node_modules/brace-expansion/node_modules/balanced-match/index.js"
       },
       {
@@ -2519,11 +2634,6 @@
         "name": "wrappy",
         "version": "1.0.2",
         "path": "node_modules/typescript-formatter/node_modules/glob-expand/node_modules/glob/node_modules/once/node_modules/wrappy/wrappy.js"
-      },
-      {
-        "name": "lodash",
-        "version": "1.2.1",
-        "path": "node_modules/typescript-formatter/node_modules/glob-expand/node_modules/lodash/dist/lodash.js"
       },
       {
         "name": "underscore-plus",
@@ -2547,7 +2657,7 @@
       },
       {
         "name": "request",
-        "version": "2.72.0",
+        "version": "2.73.0",
         "path": "node_modules/universal-analytics/node_modules/request/index.js"
       },
       {
@@ -2857,7 +2967,7 @@
       },
       {
         "name": "qs",
-        "version": "6.1.0",
+        "version": "6.2.0",
         "path": "node_modules/universal-analytics/node_modules/request/node_modules/qs/lib/index.js"
       },
       {
@@ -2965,6 +3075,7 @@
       ".json": [
         ".csscomb.json",
         "coffeelint.json",
+        "node_modules/async/bower.json",
         "node_modules/async/package.json",
         "node_modules/atom-message-panel/package.json",
         "node_modules/atom-space-pen-views/node_modules/fuzzaldrin/package.json",
@@ -3014,6 +3125,24 @@
         "node_modules/extend/component.json",
         "node_modules/extend/package.json",
         "node_modules/gherkin/package.json",
+        "node_modules/github/lib/routes.json",
+        "node_modules/github/node_modules/follow-redirects/node_modules/debug/bower.json",
+        "node_modules/github/node_modules/follow-redirects/node_modules/debug/component.json",
+        "node_modules/github/node_modules/follow-redirects/node_modules/debug/node_modules/ms/package.json",
+        "node_modules/github/node_modules/follow-redirects/node_modules/debug/package.json",
+        "node_modules/github/node_modules/follow-redirects/node_modules/stream-consume/package.json",
+        "node_modules/github/node_modules/follow-redirects/package.json",
+        "node_modules/github/node_modules/https-proxy-agent/node_modules/agent-base/node_modules/semver/package.json",
+        "node_modules/github/node_modules/https-proxy-agent/node_modules/agent-base/package.json",
+        "node_modules/github/node_modules/https-proxy-agent/node_modules/debug/bower.json",
+        "node_modules/github/node_modules/https-proxy-agent/node_modules/debug/component.json",
+        "node_modules/github/node_modules/https-proxy-agent/node_modules/debug/node_modules/ms/package.json",
+        "node_modules/github/node_modules/https-proxy-agent/node_modules/debug/package.json",
+        "node_modules/github/node_modules/https-proxy-agent/package.json",
+        "node_modules/github/node_modules/mime/package.json",
+        "node_modules/github/node_modules/mime/types.json",
+        "node_modules/github/package.json",
+        "node_modules/handlebars/node_modules/async/package.json",
         "node_modules/handlebars/node_modules/optimist/node_modules/minimist/package.json",
         "node_modules/handlebars/node_modules/optimist/node_modules/wordwrap/package.json",
         "node_modules/handlebars/node_modules/optimist/package.json",
@@ -3238,7 +3367,6 @@
         "node_modules/marko-prettyprint/node_modules/marko/compiler/taglib-finder/package.json",
         "node_modules/marko-prettyprint/node_modules/marko/compiler/taglib-loader/package.json",
         "node_modules/marko-prettyprint/node_modules/marko/compiler/util/package.json",
-        "node_modules/marko-prettyprint/node_modules/marko/coverage/coverage.json",
         "node_modules/marko-prettyprint/node_modules/marko/node_modules/app-module-path/package.json",
         "node_modules/marko-prettyprint/node_modules/marko/node_modules/async-writer/package.json",
         "node_modules/marko-prettyprint/node_modules/marko/node_modules/browser-refresh-client/package.json",
@@ -3249,9 +3377,6 @@
         "node_modules/marko-prettyprint/node_modules/marko/node_modules/htmljs-parser/package.json",
         "node_modules/marko-prettyprint/node_modules/marko/node_modules/lasso-package-root/node_modules/lasso-caching-fs/package.json",
         "node_modules/marko-prettyprint/node_modules/marko/node_modules/lasso-package-root/package.json",
-        "node_modules/marko-prettyprint/node_modules/marko/node_modules/minimatch/node_modules/lru-cache/package.json",
-        "node_modules/marko-prettyprint/node_modules/marko/node_modules/minimatch/node_modules/sigmund/package.json",
-        "node_modules/marko-prettyprint/node_modules/marko/node_modules/minimatch/package.json",
         "node_modules/marko-prettyprint/node_modules/marko/node_modules/object-assign/package.json",
         "node_modules/marko-prettyprint/node_modules/marko/node_modules/property-handlers/package.json",
         "node_modules/marko-prettyprint/node_modules/marko/node_modules/raptor-args/package.json",
@@ -3296,6 +3421,7 @@
         "node_modules/node-uuid/bower.json",
         "node_modules/node-uuid/component.json",
         "node_modules/node-uuid/package.json",
+        "node_modules/open/package.json",
         "node_modules/prettydiff/.bower.json",
         "node_modules/prettydiff/bower.json",
         "node_modules/prettydiff/inch.json",
@@ -3441,8 +3567,11 @@
         "node_modules/remark/node_modules/parse-entities/node_modules/character-reference-invalid/package.json",
         "node_modules/remark/node_modules/parse-entities/package.json",
         "node_modules/remark/node_modules/repeat-string/package.json",
+        "node_modules/remark/node_modules/stringify-entities/lib/dangerous.json",
         "node_modules/remark/node_modules/stringify-entities/node_modules/character-entities-html4/index.json",
         "node_modules/remark/node_modules/stringify-entities/node_modules/character-entities-html4/package.json",
+        "node_modules/remark/node_modules/stringify-entities/node_modules/character-entities-legacy/index.json",
+        "node_modules/remark/node_modules/stringify-entities/node_modules/character-entities-legacy/package.json",
         "node_modules/remark/node_modules/stringify-entities/package.json",
         "node_modules/remark/node_modules/to-vfile/package.json",
         "node_modules/remark/node_modules/trim/component.json",
@@ -3546,7 +3675,6 @@
         "node_modules/typescript-formatter/node_modules/glob-expand/node_modules/glob/node_modules/once/node_modules/wrappy/package.json",
         "node_modules/typescript-formatter/node_modules/glob-expand/node_modules/glob/node_modules/once/package.json",
         "node_modules/typescript-formatter/node_modules/glob-expand/node_modules/glob/package.json",
-        "node_modules/typescript-formatter/node_modules/glob-expand/node_modules/lodash/package.json",
         "node_modules/typescript-formatter/node_modules/glob-expand/package.json",
         "node_modules/typescript-formatter/package.json",
         "node_modules/typescript-formatter/tsconfig.json",
@@ -3635,8 +3763,7 @@
         "node_modules/universal-analytics/node_modules/request/node_modules/mime-types/node_modules/mime-db/package.json",
         "node_modules/universal-analytics/node_modules/request/node_modules/mime-types/package.json",
         "node_modules/universal-analytics/node_modules/request/node_modules/oauth-sign/package.json",
-        "node_modules/universal-analytics/node_modules/request/node_modules/qs/bower.json",
-        "node_modules/universal-analytics/node_modules/request/node_modules/qs/component.json",
+        "node_modules/universal-analytics/node_modules/request/node_modules/qs/.jscs.json",
         "node_modules/universal-analytics/node_modules/request/node_modules/qs/package.json",
         "node_modules/universal-analytics/node_modules/request/node_modules/stringstream/package.json",
         "node_modules/universal-analytics/node_modules/request/node_modules/tough-cookie/package.json",
@@ -3670,9 +3797,105 @@
         "src/options.json"
       ],
       ".js": [
+        "node_modules/async/apply.js",
+        "node_modules/async/applyEach.js",
+        "node_modules/async/applyEachSeries.js",
+        "node_modules/async/asyncify.js",
+        "node_modules/async/auto.js",
+        "node_modules/async/autoInject.js",
+        "node_modules/async/cargo.js",
+        "node_modules/async/compose.js",
+        "node_modules/async/concat.js",
+        "node_modules/async/concatSeries.js",
+        "node_modules/async/constant.js",
+        "node_modules/async/detect.js",
+        "node_modules/async/detectLimit.js",
+        "node_modules/async/detectSeries.js",
+        "node_modules/async/dir.js",
         "node_modules/async/dist/async.js",
         "node_modules/async/dist/async.min.js",
-        "node_modules/async/lib/async.js",
+        "node_modules/async/doDuring.js",
+        "node_modules/async/doUntil.js",
+        "node_modules/async/doWhilst.js",
+        "node_modules/async/during.js",
+        "node_modules/async/each.js",
+        "node_modules/async/eachLimit.js",
+        "node_modules/async/eachOf.js",
+        "node_modules/async/eachOfLimit.js",
+        "node_modules/async/eachOfSeries.js",
+        "node_modules/async/eachSeries.js",
+        "node_modules/async/ensureAsync.js",
+        "node_modules/async/every.js",
+        "node_modules/async/everyLimit.js",
+        "node_modules/async/everySeries.js",
+        "node_modules/async/filter.js",
+        "node_modules/async/filterLimit.js",
+        "node_modules/async/filterSeries.js",
+        "node_modules/async/forever.js",
+        "node_modules/async/index.js",
+        "node_modules/async/internal/DoublyLinkedList.js",
+        "node_modules/async/internal/applyEach.js",
+        "node_modules/async/internal/concat.js",
+        "node_modules/async/internal/consoleFunc.js",
+        "node_modules/async/internal/createTester.js",
+        "node_modules/async/internal/doLimit.js",
+        "node_modules/async/internal/doParallel.js",
+        "node_modules/async/internal/doParallelLimit.js",
+        "node_modules/async/internal/doSeries.js",
+        "node_modules/async/internal/eachOfLimit.js",
+        "node_modules/async/internal/filter.js",
+        "node_modules/async/internal/findGetResult.js",
+        "node_modules/async/internal/getIterator.js",
+        "node_modules/async/internal/initialParams.js",
+        "node_modules/async/internal/iterator.js",
+        "node_modules/async/internal/map.js",
+        "node_modules/async/internal/notId.js",
+        "node_modules/async/internal/once.js",
+        "node_modules/async/internal/onlyOnce.js",
+        "node_modules/async/internal/parallel.js",
+        "node_modules/async/internal/queue.js",
+        "node_modules/async/internal/reject.js",
+        "node_modules/async/internal/setImmediate.js",
+        "node_modules/async/internal/withoutIndex.js",
+        "node_modules/async/log.js",
+        "node_modules/async/map.js",
+        "node_modules/async/mapLimit.js",
+        "node_modules/async/mapSeries.js",
+        "node_modules/async/mapValues.js",
+        "node_modules/async/mapValuesLimit.js",
+        "node_modules/async/mapValuesSeries.js",
+        "node_modules/async/memoize.js",
+        "node_modules/async/nextTick.js",
+        "node_modules/async/parallel.js",
+        "node_modules/async/parallelLimit.js",
+        "node_modules/async/priorityQueue.js",
+        "node_modules/async/queue.js",
+        "node_modules/async/race.js",
+        "node_modules/async/reduce.js",
+        "node_modules/async/reduceRight.js",
+        "node_modules/async/reflect.js",
+        "node_modules/async/reflectAll.js",
+        "node_modules/async/reject.js",
+        "node_modules/async/rejectLimit.js",
+        "node_modules/async/rejectSeries.js",
+        "node_modules/async/retry.js",
+        "node_modules/async/retryable.js",
+        "node_modules/async/seq.js",
+        "node_modules/async/series.js",
+        "node_modules/async/setImmediate.js",
+        "node_modules/async/some.js",
+        "node_modules/async/someLimit.js",
+        "node_modules/async/someSeries.js",
+        "node_modules/async/sortBy.js",
+        "node_modules/async/timeout.js",
+        "node_modules/async/times.js",
+        "node_modules/async/timesLimit.js",
+        "node_modules/async/timesSeries.js",
+        "node_modules/async/transform.js",
+        "node_modules/async/unmemoize.js",
+        "node_modules/async/until.js",
+        "node_modules/async/waterfall.js",
+        "node_modules/async/whilst.js",
         "node_modules/atom-message-panel/lib/LineMessageView.js",
         "node_modules/atom-message-panel/lib/MessagePanelView.js",
         "node_modules/atom-message-panel/lib/PlainMessageView.js",
@@ -4453,6 +4676,52 @@
         "node_modules/gherkin/lib/gherkin/lexer/zh_tw.js",
         "node_modules/gherkin/lib/gherkin/lexer/zh_tw.min.js",
         "node_modules/gherkin/lib/gherkin.js",
+        "node_modules/github/doc/apidoc.js",
+        "node_modules/github/examples/addLabelsToIssue.js",
+        "node_modules/github/examples/createFile.js",
+        "node_modules/github/examples/getContent.js",
+        "node_modules/github/examples/getFollowing.js",
+        "node_modules/github/examples/getIssuesForRepo.js",
+        "node_modules/github/examples/getOrgPublicMembers.js",
+        "node_modules/github/examples/getRawBlob.js",
+        "node_modules/github/examples/getReactionsForIssue.js",
+        "node_modules/github/examples/getReleaseAsset.js",
+        "node_modules/github/examples/getRepos.js",
+        "node_modules/github/examples/getStarred.js",
+        "node_modules/github/examples/getUser.js",
+        "node_modules/github/examples/getUserById.js",
+        "node_modules/github/examples/listOrgs.js",
+        "node_modules/github/examples/lockIssue.js",
+        "node_modules/github/examples/paginationCustomHeaders.js",
+        "node_modules/github/examples/searchIssues.js",
+        "node_modules/github/examples/searchMostStarredRepos.js",
+        "node_modules/github/examples/testPromise.js",
+        "node_modules/github/lib/error.js",
+        "node_modules/github/lib/generate.js",
+        "node_modules/github/lib/index.js",
+        "node_modules/github/lib/promise.js",
+        "node_modules/github/lib/util.js",
+        "node_modules/github/node_modules/follow-redirects/create.js",
+        "node_modules/github/node_modules/follow-redirects/http.js",
+        "node_modules/github/node_modules/follow-redirects/https.js",
+        "node_modules/github/node_modules/follow-redirects/index.js",
+        "node_modules/github/node_modules/follow-redirects/node_modules/debug/browser.js",
+        "node_modules/github/node_modules/follow-redirects/node_modules/debug/debug.js",
+        "node_modules/github/node_modules/follow-redirects/node_modules/debug/node.js",
+        "node_modules/github/node_modules/follow-redirects/node_modules/debug/node_modules/ms/index.js",
+        "node_modules/github/node_modules/follow-redirects/node_modules/stream-consume/index.js",
+        "node_modules/github/node_modules/https-proxy-agent/https-proxy-agent.js",
+        "node_modules/github/node_modules/https-proxy-agent/node_modules/agent-base/agent.js",
+        "node_modules/github/node_modules/https-proxy-agent/node_modules/agent-base/node_modules/semver/semver.js",
+        "node_modules/github/node_modules/https-proxy-agent/node_modules/agent-base/patch-core.js",
+        "node_modules/github/node_modules/https-proxy-agent/node_modules/debug/browser.js",
+        "node_modules/github/node_modules/https-proxy-agent/node_modules/debug/debug.js",
+        "node_modules/github/node_modules/https-proxy-agent/node_modules/debug/node.js",
+        "node_modules/github/node_modules/https-proxy-agent/node_modules/debug/node_modules/ms/index.js",
+        "node_modules/github/node_modules/mime/build/build.js",
+        "node_modules/github/node_modules/mime/build/test.js",
+        "node_modules/github/node_modules/mime/cli.js",
+        "node_modules/github/node_modules/mime/mime.js",
         "node_modules/handlebars/dist/amd/handlebars/base.js",
         "node_modules/handlebars/dist/amd/handlebars/compiler/ast.js",
         "node_modules/handlebars/dist/amd/handlebars/compiler/base.js",
@@ -4552,6 +4821,9 @@
         "node_modules/handlebars/lib/handlebars.runtime.js",
         "node_modules/handlebars/lib/index.js",
         "node_modules/handlebars/lib/precompiler.js",
+        "node_modules/handlebars/node_modules/async/dist/async.js",
+        "node_modules/handlebars/node_modules/async/dist/async.min.js",
+        "node_modules/handlebars/node_modules/async/lib/async.js",
         "node_modules/handlebars/node_modules/optimist/example/bool.js",
         "node_modules/handlebars/node_modules/optimist/example/boolean_double.js",
         "node_modules/handlebars/node_modules/optimist/example/boolean_single.js",
@@ -6188,6 +6460,9 @@
         "node_modules/jscs/node_modules/cst/node_modules/babel-runtime/node_modules/core-js/library/modules/es7.object.define-getter.js",
         "node_modules/jscs/node_modules/cst/node_modules/babel-runtime/node_modules/core-js/library/modules/es7.object.define-setter.js",
         "node_modules/jscs/node_modules/cst/node_modules/babel-runtime/node_modules/core-js/library/modules/es7.object.entries.js",
+        "node_modules/jscs/node_modules/cst/node_modules/babel-runtime/node_modules/core-js/library/modules/es7.object.enumerable-entries.js",
+        "node_modules/jscs/node_modules/cst/node_modules/babel-runtime/node_modules/core-js/library/modules/es7.object.enumerable-keys.js",
+        "node_modules/jscs/node_modules/cst/node_modules/babel-runtime/node_modules/core-js/library/modules/es7.object.enumerable-values.js",
         "node_modules/jscs/node_modules/cst/node_modules/babel-runtime/node_modules/core-js/library/modules/es7.object.get-own-property-descriptors.js",
         "node_modules/jscs/node_modules/cst/node_modules/babel-runtime/node_modules/core-js/library/modules/es7.object.lookup-getter.js",
         "node_modules/jscs/node_modules/cst/node_modules/babel-runtime/node_modules/core-js/library/modules/es7.object.lookup-setter.js",
@@ -6507,6 +6782,9 @@
         "node_modules/jscs/node_modules/cst/node_modules/babel-runtime/node_modules/core-js/modules/es7.object.define-getter.js",
         "node_modules/jscs/node_modules/cst/node_modules/babel-runtime/node_modules/core-js/modules/es7.object.define-setter.js",
         "node_modules/jscs/node_modules/cst/node_modules/babel-runtime/node_modules/core-js/modules/es7.object.entries.js",
+        "node_modules/jscs/node_modules/cst/node_modules/babel-runtime/node_modules/core-js/modules/es7.object.enumerable-entries.js",
+        "node_modules/jscs/node_modules/cst/node_modules/babel-runtime/node_modules/core-js/modules/es7.object.enumerable-keys.js",
+        "node_modules/jscs/node_modules/cst/node_modules/babel-runtime/node_modules/core-js/modules/es7.object.enumerable-values.js",
         "node_modules/jscs/node_modules/cst/node_modules/babel-runtime/node_modules/core-js/modules/es7.object.get-own-property-descriptors.js",
         "node_modules/jscs/node_modules/cst/node_modules/babel-runtime/node_modules/core-js/modules/es7.object.lookup-getter.js",
         "node_modules/jscs/node_modules/cst/node_modules/babel-runtime/node_modules/core-js/modules/es7.object.lookup-setter.js",
@@ -6593,10 +6871,13 @@
         "node_modules/jscs/node_modules/cst/node_modules/babylon/lib/util/identifier.js",
         "node_modules/jscs/node_modules/cst/node_modules/babylon/lib/util/location.js",
         "node_modules/jscs/node_modules/cst/node_modules/babylon/lib/util/whitespace.js",
+        "node_modules/jscs/node_modules/cst/node_modules/source-map-support/amd-test/browser-source-map-support.js",
         "node_modules/jscs/node_modules/cst/node_modules/source-map-support/amd-test/require.js",
+        "node_modules/jscs/node_modules/cst/node_modules/source-map-support/amd-test/script.js",
         "node_modules/jscs/node_modules/cst/node_modules/source-map-support/browser-source-map-support.js",
         "node_modules/jscs/node_modules/cst/node_modules/source-map-support/browser-test/script.js",
         "node_modules/jscs/node_modules/cst/node_modules/source-map-support/build.js",
+        "node_modules/jscs/node_modules/cst/node_modules/source-map-support/header-test/script.js",
         "node_modules/jscs/node_modules/cst/node_modules/source-map-support/header-test/server.js",
         "node_modules/jscs/node_modules/cst/node_modules/source-map-support/node_modules/source-map/Makefile.dryice.js",
         "node_modules/jscs/node_modules/cst/node_modules/source-map-support/node_modules/source-map/build/assert-shim.js",
@@ -8515,6 +8796,7 @@
         "node_modules/marko-prettyprint/node_modules/marko/compiler/index.js",
         "node_modules/marko-prettyprint/node_modules/marko/compiler/taglib-finder/index-browser.js",
         "node_modules/marko-prettyprint/node_modules/marko/compiler/taglib-finder/index.js",
+        "node_modules/marko-prettyprint/node_modules/marko/compiler/taglib-loader/DependencyChain.js",
         "node_modules/marko-prettyprint/node_modules/marko/compiler/taglib-loader/Taglib/Attribute.js",
         "node_modules/marko-prettyprint/node_modules/marko/compiler/taglib-loader/Taglib/ImportedVariable.js",
         "node_modules/marko-prettyprint/node_modules/marko/compiler/taglib-loader/Taglib/NestedVariable.js",
@@ -8557,8 +8839,6 @@
         "node_modules/marko-prettyprint/node_modules/marko/compiler/util/resolve.js",
         "node_modules/marko-prettyprint/node_modules/marko/compiler/util/safeVarName.js",
         "node_modules/marko-prettyprint/node_modules/marko/compiler/util/tokenizer.js",
-        "node_modules/marko-prettyprint/node_modules/marko/coverage/lcov-report/prettify.js",
-        "node_modules/marko-prettyprint/node_modules/marko/coverage/lcov-report/sorter.js",
         "node_modules/marko-prettyprint/node_modules/marko/express.js",
         "node_modules/marko-prettyprint/node_modules/marko/hot-reload/index.js",
         "node_modules/marko-prettyprint/node_modules/marko/node-require-browser.js",
@@ -8584,10 +8864,6 @@
         "node_modules/marko-prettyprint/node_modules/marko/node_modules/htmljs-parser/notify-util.js",
         "node_modules/marko-prettyprint/node_modules/marko/node_modules/lasso-package-root/node_modules/lasso-caching-fs/src/index.js",
         "node_modules/marko-prettyprint/node_modules/marko/node_modules/lasso-package-root/src/index.js",
-        "node_modules/marko-prettyprint/node_modules/marko/node_modules/minimatch/minimatch.js",
-        "node_modules/marko-prettyprint/node_modules/marko/node_modules/minimatch/node_modules/lru-cache/lib/lru-cache.js",
-        "node_modules/marko-prettyprint/node_modules/marko/node_modules/minimatch/node_modules/sigmund/bench.js",
-        "node_modules/marko-prettyprint/node_modules/marko/node_modules/minimatch/node_modules/sigmund/sigmund.js",
         "node_modules/marko-prettyprint/node_modules/marko/node_modules/object-assign/index.js",
         "node_modules/marko-prettyprint/node_modules/marko/node_modules/property-handlers/lib/index.js",
         "node_modules/marko-prettyprint/node_modules/marko/node_modules/raptor-args/lib/Parser.js",
@@ -8736,6 +9012,7 @@
         "node_modules/node-dir/node_modules/minimatch/node_modules/brace-expansion/node_modules/concat-map/index.js",
         "node_modules/node-uuid/benchmark/benchmark.js",
         "node_modules/node-uuid/uuid.js",
+        "node_modules/open/lib/open.js",
         "node_modules/prettydiff/api/dom.js",
         "node_modules/prettydiff/api/node-local.js",
         "node_modules/prettydiff/lib/csspretty.js",
@@ -8967,8 +9244,8 @@
         "node_modules/remark/node_modules/parse-entities/node_modules/character-reference-invalid/index.js",
         "node_modules/remark/node_modules/repeat-string/index.js",
         "node_modules/remark/node_modules/stringify-entities/index.js",
-        "node_modules/remark/node_modules/stringify-entities/lib/expression.js",
         "node_modules/remark/node_modules/stringify-entities/node_modules/character-entities-html4/index.js",
+        "node_modules/remark/node_modules/stringify-entities/node_modules/character-entities-legacy/index.js",
         "node_modules/remark/node_modules/to-vfile/index.js",
         "node_modules/remark/node_modules/to-vfile/lib/to-vfile.js",
         "node_modules/remark/node_modules/trim/index.js",
@@ -9749,16 +10026,6 @@
         "node_modules/typescript-formatter/node_modules/glob-expand/node_modules/glob/node_modules/once/node_modules/wrappy/wrappy.js",
         "node_modules/typescript-formatter/node_modules/glob-expand/node_modules/glob/node_modules/once/once.js",
         "node_modules/typescript-formatter/node_modules/glob-expand/node_modules/glob/sync.js",
-        "node_modules/typescript-formatter/node_modules/glob-expand/node_modules/lodash/dist/lodash.compat.js",
-        "node_modules/typescript-formatter/node_modules/glob-expand/node_modules/lodash/dist/lodash.compat.min.js",
-        "node_modules/typescript-formatter/node_modules/glob-expand/node_modules/lodash/dist/lodash.js",
-        "node_modules/typescript-formatter/node_modules/glob-expand/node_modules/lodash/dist/lodash.legacy.js",
-        "node_modules/typescript-formatter/node_modules/glob-expand/node_modules/lodash/dist/lodash.legacy.min.js",
-        "node_modules/typescript-formatter/node_modules/glob-expand/node_modules/lodash/dist/lodash.min.js",
-        "node_modules/typescript-formatter/node_modules/glob-expand/node_modules/lodash/dist/lodash.mobile.js",
-        "node_modules/typescript-formatter/node_modules/glob-expand/node_modules/lodash/dist/lodash.mobile.min.js",
-        "node_modules/typescript-formatter/node_modules/glob-expand/node_modules/lodash/dist/lodash.underscore.js",
-        "node_modules/typescript-formatter/node_modules/glob-expand/node_modules/lodash/dist/lodash.underscore.min.js",
         "node_modules/underscore-plus/lib/underscore-plus.js",
         "node_modules/underscore-plus/node_modules/underscore/underscore-min.js",
         "node_modules/underscore-plus/node_modules/underscore/underscore.js",
@@ -10097,7 +10364,6 @@
         "node_modules/tidy-markdown/node_modules/front-matter/node_modules/yaml-js/src/lib/util.coffee",
         "node_modules/tidy-markdown/node_modules/front-matter/node_modules/yaml-js/src/lib/yaml.coffee",
         "node_modules/tidy-markdown/node_modules/pad/src/pad.coffee",
-        "node_modules/typescript-formatter/node_modules/glob-expand/Gruntfile.coffee",
         "src/beautifiers/autopep8.coffee",
         "src/beautifiers/beautifier.coffee",
         "src/beautifiers/clang-format.coffee",
@@ -10222,7 +10488,7 @@
           "src/views"
         ],
         "dependencies": {
-          "async": "^1.2.1",
+          "async": "^2.0.0",
           "atom-message-panel": "^1.2.4",
           "atom-space-pen-views": "^2.0.5",
           "bluebird": "^3.3.5",
@@ -10236,14 +10502,16 @@
           "expand-home-dir": "0.0.3",
           "extend": "^3.0.0",
           "gherkin": "2.12.2",
+          "github": "^2.2.0",
           "handlebars": "^4.0.2",
           "js-beautify": "^1.6.3",
-          "jscs": "^3.0.3",
+          "jscs": "^3.0.7",
           "lodash": "^4.8.2",
           "loophole": "^1.0.0",
-          "marko-prettyprint": "^1.1.0",
-          "node-dir": "^0.1.8",
+          "marko-prettyprint": "^1.1.8",
+          "node-dir": "^0.1.15",
           "node-uuid": "^1.4.3",
+          "open": "0.0.5",
           "prettydiff": "^1.16.27",
           "pug-beautify": "^0.1.1",
           "remark": "^4.2.2",
@@ -10251,14 +10519,24 @@
           "space-pen": "^5.1.1",
           "strip-json-comments": "^2.0.1",
           "temp": "^0.8.3",
-          "tidy-markdown": "^2.0.1",
+          "tidy-markdown": "^2.0.3",
           "typescript": "^1.8.10",
-          "typescript-formatter": "^2.1.0",
+          "typescript-formatter": "^2.3.0",
           "underscore-plus": "^1.6.6",
           "universal-analytics": "^0.3.11",
           "which": "^1.1.1",
           "winston": "^2.2.0",
           "yaml-front-matter": "^3.2.3"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/async",
+          "node_modules/async/dist",
+          "node_modules/async/internal"
+        ],
+        "dependencies": {
+          "lodash": "^4.8.0"
         }
       },
       {
@@ -10420,6 +10698,66 @@
         ],
         "dependencies": {
           "pseudomap": "^1.0.1"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/github/doc",
+          "node_modules/github/examples",
+          "node_modules/github/lib",
+          "node_modules/github",
+          "node_modules/github/test"
+        ],
+        "dependencies": {
+          "follow-redirects": "0.0.7",
+          "https-proxy-agent": "^1.0.0",
+          "mime": "^1.2.11"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/github/node_modules/follow-redirects"
+        ],
+        "dependencies": {
+          "debug": "^2.2.0",
+          "stream-consume": "^0.1.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/github/node_modules/follow-redirects/node_modules/debug"
+        ],
+        "dependencies": {
+          "ms": "0.7.1"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/github/node_modules/https-proxy-agent",
+          "node_modules/github/node_modules/https-proxy-agent/test"
+        ],
+        "dependencies": {
+          "agent-base": "2",
+          "debug": "2",
+          "extend": "3"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/github/node_modules/https-proxy-agent/node_modules/agent-base",
+          "node_modules/github/node_modules/https-proxy-agent/node_modules/agent-base/test"
+        ],
+        "dependencies": {
+          "extend": "~3.0.0",
+          "semver": "~5.0.1"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/github/node_modules/https-proxy-agent/node_modules/debug"
+        ],
+        "dependencies": {
+          "ms": "0.7.1"
         }
       },
       {
@@ -10631,7 +10969,7 @@
           "chalk": "~1.1.0",
           "cli-table": "~0.3.1",
           "commander": "~2.9.0",
-          "cst": "^0.4.0",
+          "cst": "^0.4.3",
           "estraverse": "^4.1.0",
           "exit": "~0.1.2",
           "glob": "^5.0.1",
@@ -11063,7 +11401,7 @@
           "node_modules/jscs/node_modules/prompt/node_modules/utile/node_modules/rimraf"
         ],
         "dependencies": {
-          "glob": "^7.0.0"
+          "glob": "^7.0.5"
         }
       },
       {
@@ -11226,12 +11564,10 @@
           "node_modules/marko-prettyprint/node_modules/marko/compiler",
           "node_modules/marko-prettyprint/node_modules/marko/compiler/ast",
           "node_modules/marko-prettyprint/node_modules/marko/compiler/taglib-finder",
-          "node_modules/marko-prettyprint/node_modules/marko/compiler/taglib-loader/Taglib",
           "node_modules/marko-prettyprint/node_modules/marko/compiler/taglib-loader",
+          "node_modules/marko-prettyprint/node_modules/marko/compiler/taglib-loader/Taglib",
           "node_modules/marko-prettyprint/node_modules/marko/compiler/taglib-lookup",
           "node_modules/marko-prettyprint/node_modules/marko/compiler/util",
-          "node_modules/marko-prettyprint/node_modules/marko/coverage",
-          "node_modules/marko-prettyprint/node_modules/marko/coverage/lcov-report",
           "node_modules/marko-prettyprint/node_modules/marko",
           "node_modules/marko-prettyprint/node_modules/marko/hot-reload",
           "node_modules/marko-prettyprint/node_modules/marko/runtime",
@@ -11253,7 +11589,7 @@
           "events": "^1.0.2",
           "htmljs-parser": "^1.5.3",
           "lasso-package-root": "^1.0.0",
-          "minimatch": "^0.2.14",
+          "minimatch": "^3.0.2",
           "object-assign": "^4.1.0",
           "property-handlers": "^1.0.0",
           "raptor-args": "^1.0.0",
@@ -11316,16 +11652,6 @@
         ],
         "dependencies": {
           "raptor-async": "^1.1.2"
-        }
-      },
-      {
-        "paths": [
-          "node_modules/marko-prettyprint/node_modules/marko/node_modules/minimatch",
-          "node_modules/marko-prettyprint/node_modules/marko/node_modules/minimatch/test"
-        ],
-        "dependencies": {
-          "lru-cache": "2",
-          "sigmund": "~1.0.0"
         }
       },
       {
@@ -11942,7 +12268,8 @@
           "node_modules/remark/node_modules/stringify-entities/lib"
         ],
         "dependencies": {
-          "character-entities-html4": "^1.0.0"
+          "character-entities-html4": "^1.0.0",
+          "character-entities-legacy": "^1.0.0"
         }
       },
       {
@@ -11989,7 +12316,7 @@
           "node_modules/remark/node_modules/unist-util-remove-position"
         ],
         "dependencies": {
-          "unist-util-visit": "^1.0.0"
+          "unist-util-visit": "^1.1.0"
         }
       },
       {
@@ -12350,7 +12677,7 @@
         ],
         "dependencies": {
           "es6-iterator": "2",
-          "es6-symbol": "~3.0.2"
+          "es6-symbol": "~3.1"
         }
       },
       {
@@ -12373,7 +12700,7 @@
         ],
         "dependencies": {
           "d": "~0.1.1",
-          "es5-ext": "~0.10.10"
+          "es5-ext": "~0.10.11"
         }
       },
       {
@@ -12488,17 +12815,17 @@
         "dependencies": {
           "commandpost": "^1.0.0",
           "editorconfig": "^0.13.2",
-          "glob-expand": "^0.1.0"
+          "glob-expand": "^0.2.0"
         }
       },
       {
         "paths": [
-          "node_modules/typescript-formatter/node_modules/glob-expand",
-          "node_modules/typescript-formatter/node_modules/glob-expand/build/code"
+          "node_modules/typescript-formatter/node_modules/glob-expand/build/code",
+          "node_modules/typescript-formatter/node_modules/glob-expand"
         ],
         "dependencies": {
-          "glob": "~4.4.2",
-          "lodash": "1.2.x"
+          "glob": "~4.5.x",
+          "lodash": "~4.13.x"
         }
       },
       {
@@ -12581,7 +12908,7 @@
           "combined-stream": "~1.0.5",
           "extend": "~3.0.0",
           "forever-agent": "~0.6.1",
-          "form-data": "~1.0.0-rc3",
+          "form-data": "~1.0.0-rc4",
           "har-validator": "~2.0.6",
           "hawk": "~3.1.3",
           "http-signature": "~1.1.0",
@@ -12591,7 +12918,7 @@
           "mime-types": "~2.1.7",
           "node-uuid": "~1.4.7",
           "oauth-sign": "~0.8.1",
-          "qs": "~6.1.0",
+          "qs": "~6.2.0",
           "stringstream": "~0.0.4",
           "tough-cookie": "~2.2.0",
           "tunnel-agent": "~0.4.1"

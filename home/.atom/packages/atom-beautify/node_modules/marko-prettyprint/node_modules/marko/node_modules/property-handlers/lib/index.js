@@ -1,3 +1,5 @@
+'use strict';
+
 function removeDashes(str) {
     return str.replace(/-([a-z])/g, function (match, lower) {
         return lower.toUpperCase();
@@ -25,7 +27,7 @@ module.exports = function invokeHandlers(config, handlers, options) {
         }
 
         if (path) {
-            message = 'Error while handling properties for ' + path + ': ' + message;
+            message += ' (' + path + ')';
         }
 
         var e = new Error(message);
@@ -54,7 +56,11 @@ module.exports = function invokeHandlers(config, handlers, options) {
             }
 
             if (!handler) {
-                error('Invalid option of "' + keyNoDashes + '". Allowed: ' + Object.keys(handlers).join(', '));
+                let badProperty = JSON.stringify(k);
+                if (k !== keyNoDashes) {
+                    badProperty += '/' + JSON.stringify(keyNoDashes);
+                }
+                error('Invalid option of ' + badProperty + '. Allowed: ' + Object.keys(handlers).join(', '));
             }
 
             try {
@@ -74,8 +80,7 @@ module.exports = function invokeHandlers(config, handlers, options) {
     if (handlers._end) {
         try {
             handlers._end();
-        }
-        catch(e) {
+        } catch(e) {
             error('Error after applying properties', e);
         }
     }

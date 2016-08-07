@@ -5,8 +5,8 @@
     'script':
         'prefix': 'script.source'
         'body': '''
-            script(type='${1:text/javascript}', src='${2:js/main.js}', ${3:attr})
-            $4
+            script(type='${1:text/javascript}', src='${2:js/main.js}')
+            $3
         '''
 
     'script.':
