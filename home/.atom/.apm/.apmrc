@@ -3,5 +3,3 @@
 ;
 ; You should instead edit your .apmrc config located in ~/.atom/.apmrc
 cache = /Users/loganmcansh/.homesick/repos/dotfiles/home/.atom/.apm
-; Hide progress-bar to prevent npm from altering apm console output.
-progress = false

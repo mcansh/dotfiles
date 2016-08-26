@@ -292,9 +292,9 @@ class ColorBufferElement extends HTMLElement
       @gutterSubscription.add @editor.onDidChange (changes) =>
         if Array.isArray changes
           changes?.forEach (change) =>
-            @updateDotDecorationsOffsets(change.start.row)
+            @updateDotDecorationsOffsets(change.start.row, change.newExtent.row)
         else
-          @updateDotDecorationsOffsets(changes.start.row)
+          @updateDotDecorationsOffsets(changes.start.row, changes.newExtent.row)
 
     @updateGutterDecorations(type)
 
@@ -350,23 +350,24 @@ class ColorBufferElement extends HTMLElement
     @displayedMarkers = markers
     @emitter.emit 'did-update'
 
-  updateDotDecorationsOffsets: (row) ->
+  updateDotDecorationsOffsets: (rowStart, rowEnd) ->
     markersByRows = {}
 
-    for m in @displayedMarkers
-      deco = @decorationByMarkerId[m.id]
-      continue unless m.marker?
-      markerRow = m.marker.getStartScreenPosition().row
-      continue unless row is markerRow
+    for row in [rowStart..rowEnd]
+      for m in @displayedMarkers
+        deco = @decorationByMarkerId[m.id]
+        continue unless m.marker?
+        markerRow = m.marker.getStartScreenPosition().row
+        continue unless row is markerRow
 
-      markersByRows[row] ?= 0
+        markersByRows[row] ?= 0
 
-      rowLength = @editorElement.pixelPositionForScreenPosition([row, Infinity]).left
+        rowLength = @editorElement.pixelPositionForScreenPosition([row, Infinity]).left
 
-      decoWidth = 14
+        decoWidth = 14
 
-      deco.properties.item.style.left = "#{rowLength + markersByRows[row] * decoWidth}px"
-      markersByRows[row]++
+        deco.properties.item.style.left = "#{rowLength + markersByRows[row] * decoWidth}px"
+        markersByRows[row]++
 
   getGutterDecorationItem: (marker) ->
     div = document.createElement('div')
@@ -544,12 +545,17 @@ class ColorBufferElement extends HTMLElement
 
   colorMarkerForMouseEvent: (event) ->
     position = @screenPositionForMouseEvent(event)
+
+    return unless position?
+
     bufferPosition = @colorBuffer.editor.bufferPositionForScreenPosition(position)
 
     @colorBuffer.getColorMarkerAtBufferPosition(bufferPosition)
 
   screenPositionForMouseEvent: (event) ->
     pixelPosition = @pixelPositionForMouseEvent(event)
+
+    return unless pixelPosition?
 
     if @editorElement.screenPositionForPixelPosition?
       @editorElement.screenPositionForPixelPosition(pixelPosition)
@@ -565,6 +571,9 @@ class ColorBufferElement extends HTMLElement
       @editor
 
     rootElement = @getEditorRoot()
+
+    return unless rootElement.querySelector('.lines')?
+
     {top, left} = rootElement.querySelector('.lines').getBoundingClientRect()
     top = clientY - top + scrollTarget.getScrollTop()
     left = clientX - left + scrollTarget.getScrollLeft()

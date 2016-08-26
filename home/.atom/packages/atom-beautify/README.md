@@ -1,7 +1,10 @@
 # :lipstick: [atom-beautify](https://github.com/Glavin001/atom-beautify)
 
-[![Build Status](https://travis-ci.org/Glavin001/atom-beautify.svg?branch=master)](https://travis-ci.org/Glavin001/atom-beautify)
-[![Build status](https://ci.appveyor.com/api/projects/status/himnq7tjxl2fdc8u?svg=true)](https://ci.appveyor.com/project/Glavin001/atom-beautify)
+| Mac OS <img src="https://cloud.githubusercontent.com/assets/1885333/17059766/2530c9d8-4ffd-11e6-9529-3fa47dbff616.png" width="50px"> | <img src="https://cloud.githubusercontent.com/assets/1885333/17059750/11c4474e-4ffd-11e6-89e1-2486ca5b3234.png" width="100px"> | <img src="https://cloud.githubusercontent.com/assets/1885333/17059763/206a7d4a-4ffd-11e6-859e-7856902fb300.png" width="100px"> |
+| --- | --- | --- |
+| [![Build Status](https://travis-ci.org/Glavin001/atom-beautify.svg?branch=master)](https://travis-ci.org/Glavin001/atom-beautify) | [![Build Status](https://travis-ci.org/Glavin001/atom-beautify.svg?branch=master)](https://travis-ci.org/Glavin001/atom-beautify) | [![Build status](https://ci.appveyor.com/api/projects/status/himnq7tjxl2fdc8u?svg=true)](https://ci.appveyor.com/project/Glavin001/atom-beautify) |
+
+
 [![Gitter chat](https://img.shields.io/badge/gitter-Glavin001%2Fatom--beautify-1dce73.svg)](https://gitter.im/Glavin001/atom-beautify)
 [![Paypal Donations](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=X2RK5DKN6YXPJ&lc=CA&item_name=Atom%2dBeautify&item_number=atom%2dbeautify&currency_code=CAD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted)
 
@@ -39,6 +42,13 @@ apm install atom-beautify
 
 Or Settings/Preferences ➔ Packages ➔ Search for `atom-beautify`
 
+### Important Notice: Analytics
+
+By default `Anonymous Analytics` is enabled.
+If you do not wish to have usage data sent to Google Analytics then please disable `Anonymous Analytics` option before using Atom-Beautify.
+See [`Anonymous Analytics` section of docs](https://github.com/Glavin001/atom-beautify/blob/master/docs/options.md#anonymous-analytics) for details.
+Thank you.
+
 ## Language Support
 
 See [all supported options in the documentation at  `docs/options.md`](https://github.com/Glavin001/atom-beautify/blob/master/docs/options.md).
@@ -60,7 +70,7 @@ See [all supported options in the documentation at  `docs/options.md`](https://g
 | Elm | `Elm` |`.elm` | [`elm-format`](https://github.com/avh4/elm-format) (Default) |
 | ERB | `HTML (Ruby - ERB)`, `HTML (Rails)` |`.erb` | [`HTML Beautifier`](https://github.com/threedaymonk/htmlbeautifier), [`Pretty Diff`](https://github.com/prettydiff/prettydiff) (Default) |
 | Erlang | `Erlang` |`.erl` | [`erl_tidy`](http://erlang.org/doc/man/erl_tidy.html) (Default) |
-| Fortran | `Fortran - Modern` |`.f90` | [`Fortran Beautifier`](https://github.com/Glavin001/atom-beautify/blob/master/src/beautifiers/fortran-beautifier/emacs-fortran-formating-script.lisp) (Default) |
+| Fortran | `Fortran - Modern` |`.f90`, `.F90` | [`Fortran Beautifier`](https://github.com/Glavin001/atom-beautify/blob/master/src/beautifiers/fortran-beautifier/emacs-fortran-formating-script.lisp) (Default) |
 | gherkin | `Gherkin` |`.feature` | [`Gherkin formatter`](https://github.com/Glavin001/atom-beautify/blob/master/src/beautifiers/gherkin.coffee) (Default) |
 | Go | `Go` |`.go` | [`gofmt`](https://golang.org/cmd/gofmt/) (Default) |
 | Handlebars | `Handlebars`, `HTML (Handlebars)` |`.hbs`, `.handlebars` | [`JS Beautify`](https://github.com/beautify-web/js-beautify) (Default), [`Pretty Diff`](https://github.com/prettydiff/prettydiff) |
@@ -98,7 +108,8 @@ See [all supported options in the documentation at  `docs/options.md`](https://g
 | TypeScript | `TypeScript` |`.ts` | [`TypeScript Formatter`](https://github.com/vvakame/typescript-formatter) (Default) |
 | Vala | `Vala` |`.vala`, `.vapi` | [`Uncrustify`](https://github.com/uncrustify/uncrustify) (Default) |
 | Visualforce | `Visualforce` |`.page` | [`Pretty Diff`](https://github.com/prettydiff/prettydiff) (Default) |
-| XML | `SLD`, `XML`, `XHTML`, `XSD`, `XSL`, `JSP` |`.sld`, `.xml`, `.xhtml`, `.xsd`, `.xsl`, `.jsp` | [`JS Beautify`](https://github.com/beautify-web/js-beautify), [`Pretty Diff`](https://github.com/prettydiff/prettydiff) (Default) |
+| Vue | `Vue Component` |`.vue` | `Vue Beautifier` (Default) |
+| XML | `SLD`, `XML`, `XHTML`, `XSD`, `XSL`, `JSP`, `GSP` |`.sld`, `.xml`, `.xhtml`, `.xsd`, `.xsl`, `.jsp`, `.gsp` | [`JS Beautify`](https://github.com/beautify-web/js-beautify), [`Pretty Diff`](https://github.com/prettydiff/prettydiff) (Default) |
 | XTemplate | `XTemplate` |`.xtemplate` | [`Pretty Diff`](https://github.com/prettydiff/prettydiff) (Default) |
 
 ## Usage

@@ -3,6 +3,7 @@ Color = require './color'
 ColorParser = null
 ColorExpression = require './color-expression'
 SVGColors = require './svg-colors'
+DVIPnames = require './dvipnames'
 BlendModes = require './blend-modes'
 scopeFromFileName = require './scope-from-file-name'
 {split, clamp, clampInt} = require './utils'
@@ -25,7 +26,7 @@ scopeFromFileName = require './scope-from-file-name'
 module.exports =
 class ColorContext
   constructor: (options={}) ->
-    {variables, colorVariables, @referenceVariable, @referencePath, @rootPaths, @parser, @colorVars, @vars, @defaultVars, @defaultColorVars, sorted, @registry} = options
+    {variables, colorVariables, @referenceVariable, @referencePath, @rootPaths, @parser, @colorVars, @vars, @defaultVars, @defaultColorVars, sorted, @registry, @sassScopeSuffix} = options
 
     variables ?= []
     colorVariables ?= []
@@ -159,7 +160,7 @@ class ColorContext
     return if not realValue? or realValue in @usedVariables
 
     scope = if @colorVars[value]?
-      scopeFromFileName(@colorVars[value].path)
+      @scopeFromFileName(@colorVars[value].path)
     else
       '*'
 
@@ -184,6 +185,14 @@ class ColorContext
         result.variables = (result.variables ? []).concat(@readUsedVariables())
 
     return result
+
+  scopeFromFileName: (path) ->
+    scope = scopeFromFileName(path)
+
+    if scope is 'sass' or scope is 'scss'
+      scope = [scope, @sassScopeSuffix].join(':')
+
+    scope
 
   readFloat: (value) ->
     res = parseFloat(value)

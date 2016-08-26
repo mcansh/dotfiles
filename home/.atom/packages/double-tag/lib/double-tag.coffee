@@ -64,7 +64,7 @@ class DoubleTag
                     origTagLength == newTagLength
 
   setFrontOfStartTag: ->
-    frontRegex = /<(a-z)?/i
+    frontRegex = /<[a-z]+/i
     frontOfStartTag = @cursor.getBeginningOfCurrentWordBufferPosition(
       {wordRegex: frontRegex}
     )
@@ -79,7 +79,7 @@ class DoubleTag
     row = @frontOfStartTag.row
     rowLength = @editor.buffer.lineLengthForRow(row)
 
-    backRegex = /[>\s/]/
+    backRegex = /($|[>\s/])/
     scanRange = new Range(@frontOfStartTag, new Point(row, rowLength))
     backOfStartTag = null
     @editor.buffer.scanInRange backRegex, scanRange, (obj) ->

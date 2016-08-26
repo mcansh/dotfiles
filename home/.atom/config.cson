@@ -31,7 +31,7 @@
     ]
     themes: [
       "one-dark-ui"
-      "civic-syntax"
+      "chester-atom-syntax"
     ]
   editor:
     backUpBeforeSaving: true
@@ -44,8 +44,8 @@
   "exception-reporting":
     userId: "1a3d270b-cff2-90b9-feb3-8ababdfe3d4e"
   "integrated-learn-environment":
-    oauthToken: "75c7904cf74ad5de1452b366465027fef82ac730150a12f850e191f9e2fc6dfc"
-    vm_port: 9561
+    oauthToken: "aa10d5d5759be4a95d9fe97f5bdee4cb66d527affc540a1459120600cadaea82"
+    vm_port: 10365
   minimap:
     plugins:
       cursorline: true
