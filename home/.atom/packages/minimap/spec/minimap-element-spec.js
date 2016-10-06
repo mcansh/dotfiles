@@ -3,7 +3,6 @@
 import fs from 'fs-plus'
 import Main from '../lib/main'
 import Minimap from '../lib/minimap'
-import MinimapElement from '../lib/minimap-element'
 import {stylesheet} from './helpers/workspace'
 import {mousemove, mousedown, mouseup, mousewheel, touchstart, touchmove} from './helpers/events'
 
@@ -42,31 +41,41 @@ describe('MinimapElement', () => {
     // on DOM after the test run.
     jasmineContent = document.body.querySelector('#jasmine-content')
 
-    atom.config.set('minimap.charHeight', 4)
-    atom.config.set('minimap.charWidth', 2)
-    atom.config.set('minimap.interline', 1)
-    atom.config.set('minimap.textOpacity', 1)
-    atom.config.set('minimap.smoothScrolling', true)
-    atom.config.set('minimap.adjustMinimapWidthOnlyIfSmaller', true)
-    atom.config.set('minimap.plugins', {})
+    waitsForPromise(() => atom.packages.activatePackage('minimap'))
 
-    MinimapElement.registerViewProvider(Minimap)
+    runs(() => {
+      atom.config.set('minimap.charHeight', 4)
+      atom.config.set('minimap.charWidth', 2)
+      atom.config.set('minimap.interline', 1)
+      atom.config.set('minimap.textOpacity', 1)
+      atom.config.set('minimap.autoToggle', true)
+      atom.config.set('minimap.displayMinimapOnLeft', false)
+      atom.config.set('minimap.displayCodeHighlights', false)
+      atom.config.set('minimap.displayPluginsControls', false)
+      atom.config.set('minimap.minimapScrollIndicator', false)
+      atom.config.set('minimap.adjustMinimapWidthToSoftWrap', false)
+      atom.config.set('minimap.smoothScrolling', true)
+      atom.config.set('minimap.adjustMinimapWidthOnlyIfSmaller', true)
+      atom.config.set('minimap.plugins', {})
 
-    editor = atom.workspace.buildTextEditor({})
-    editorElement = atom.views.getView(editor)
-    jasmineContent.insertBefore(editorElement, jasmineContent.firstChild)
-    editorElement.setHeight(50)
+      editor = atom.workspace.buildTextEditor({})
+      editor.autoHeight = false
 
-    minimap = new Minimap({textEditor: editor})
-    dir = atom.project.getDirectories()[0]
+      editorElement = atom.views.getView(editor)
+      jasmineContent.insertBefore(editorElement, jasmineContent.firstChild)
+      editorElement.setHeight(50)
 
-    largeSample = fs.readFileSync(dir.resolve('large-file.coffee')).toString()
-    mediumSample = fs.readFileSync(dir.resolve('two-hundred.txt')).toString()
-    smallSample = fs.readFileSync(dir.resolve('sample.coffee')).toString()
+      minimap = new Minimap({textEditor: editor})
+      dir = atom.project.getDirectories()[0]
 
-    editor.setText(largeSample)
+      largeSample = fs.readFileSync(dir.resolve('large-file.coffee')).toString()
+      mediumSample = fs.readFileSync(dir.resolve('two-hundred.txt')).toString()
+      smallSample = fs.readFileSync(dir.resolve('sample.coffee')).toString()
 
-    minimapElement = atom.views.getView(minimap)
+      editor.setText(largeSample)
+
+      minimapElement = atom.views.getView(minimap)
+    })
   })
 
   it('has been registered in the view registry', () => {
@@ -175,7 +184,7 @@ describe('MinimapElement', () => {
           additionnalStyleNode.textContent = `
             ${stylesheet}
 
-            .editor {
+            atom-text-editor::shadow .editor, .editor {
               color: red;
               -webkit-filter: hue-rotate(180deg);
             }
@@ -205,7 +214,7 @@ describe('MinimapElement', () => {
           additionnalStyleNode.textContent = `
             ${stylesheet}
 
-            .editor {
+            atom-text-editor::shadow .editor, .editor {
               color: rgba(255, 0, 0, 0);
               -webkit-filter: hue-rotate(180deg);
             }
@@ -536,6 +545,7 @@ describe('MinimapElement', () => {
             expect(minimapElement.drawLines).toHaveBeenCalled()
 
             const [firstLine, lastLine] = minimapElement.drawLines.argsForCall[0]
+
             expect(firstLine).toEqual(100)
             expect(lastLine === 102 || lastLine === 111).toBeTruthy()
           })
@@ -770,6 +780,17 @@ describe('MinimapElement', () => {
           it('scrolls the editor to the line below the mouse', () => {
             mousedown(canvas)
             expect(editorElement.getScrollTop()).toBeCloseTo(480)
+          })
+        })
+
+        describe('when moveCursorOnMinimapClick is true', () => {
+          beforeEach(() => {
+            atom.config.set('minimap.moveCursorOnMinimapClick', true)
+          })
+
+          it('moves the cursor to the corresponding line', () => {
+            mousedown(canvas)
+            expect(editor.getCursorScreenPosition()).toEqual([40, 0])
           })
         })
       })
@@ -1203,11 +1224,13 @@ describe('MinimapElement', () => {
     describe('when minimap.displayCodeHighlights is changed', () => {
       beforeEach(() => {
         spyOn(minimapElement, 'requestForcedUpdate').andCallThrough()
-        atom.config.set('minimap.displayCodeHighlights', true)
 
-        waitsFor('minimap frame requested', () => {
-          return minimapElement.frameRequested
-        })
+        waitsFor('minimap attached', () => minimapElement.attached)
+
+        runs(() => { atom.config.set('minimap.displayCodeHighlights', true) })
+
+        waitsFor('minimap frame requested', () => minimapElement.frameRequested)
+
         runs(() => { nextAnimationFrame() })
       })
 
@@ -1273,6 +1296,7 @@ describe('MinimapElement', () => {
       describe('when the minimap is not attached yet', () => {
         beforeEach(() => {
           editor = atom.workspace.buildTextEditor({})
+          editor.autoHeight = false
           editorElement = atom.views.getView(editor)
           editorElement.setHeight(50)
           editor.setLineHeightInPixels(10)

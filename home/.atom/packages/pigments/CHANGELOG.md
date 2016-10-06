@@ -1,3 +1,63 @@
+<a name="v0.37.0"></a>
+# v0.37.0 (2016-10-04)
+
+## Features
+
+- Add setting to control reload notifications ([a869c819](https://github.com/abe33/atom-pigments/commit/a869c81906ff9f7ccfa945b9fbc1914856deb477), [#232](https://github.com/abe33/atom-pigments/issues/232))
+
+<a name="v0.36.0"></a>
+# v0.36.0 (2016-09-30)
+
+## Features
+
+- Implement a better reload command ([6fd1f4e3](https://github.com/abe33/atom-pigments/commit/6fd1f4e31b748c958e7708ff5687e2430691fc13))  <br>It will actually clear paths and variables to properly rescan the project
+- Change default marker type to `native-background`
+
+<a name="v0.35.3"></a>
+# v0.35.3 (2016-09-29)
+
+## Bug Fixes
+
+- Fix default colors not always available in context ([122725b0](https://github.com/abe33/atom-pigments/commit/122725b04ccf8f36bab528895246f16cd6a28446))
+
+<a name="v0.35.2"></a>
+# v0.35.2 (2016-09-28)
+
+## Bug Fixes
+
+- Fix autocomplete provider ([8d234c7d](https://github.com/abe33/atom-pigments/commit/8d234c7d618f0c5e8cefa6603c4953f8b0f7418d))
+
+<a name="v0.35.1"></a>
+# v0.35.1 (2016-09-24)
+
+- Remove console log.
+
+<a name="v0.35.0"></a>
+# v0.35.0 (2016-09-22)
+
+## Features
+
+- Add support for QT rgba function ([d1322d4f](https://github.com/abe33/atom-pigments/commit/d1322d4f2983ea01f74a41e9fe4d0ff59990a8d3), [#226](https://github.com/abe33/atom-pigments/issues/226))
+- Implement sass default variables support ([b9b65efb](https://github.com/abe33/atom-pigments/commit/b9b65efbddddc538e192dcc7b522c2740e13559d), [#223](https://github.com/abe33/atom-pigments/issues/223))
+- Implement suggestion from value for all variables ([182761b8](https://github.com/abe33/atom-pigments/commit/182761b8e1bfb1448dd403b3d2dc46583fa1a0cf), [#142](https://github.com/abe33/atom-pigments/issues/142))
+
+## Bug Fixes
+
+- Change default source names to also handle CSS files ([0db760db](https://github.com/abe33/atom-pigments/commit/0db760dba33da81e3721e4632627d22042184ba5), [#224](https://github.com/abe33/atom-pigments/issues/224))
+
+<a name="v0.34.0"></a>
+# v0.34.0 (2016-08-27)
+
+## Bug Fixes
+
+- Fix restoration of project settings view ([4aa200fd](https://github.com/abe33/atom-pigments/commit/4aa200fd0865be12c4faae2dd5cf1adda03a07fa))
+- Fix color search serialization ([ab002ebd](https://github.com/abe33/atom-pigments/commit/ab002ebd26b8b5c0c0f03dfece379908d080e5a6))
+- Fix error on palette element restoration ([f200085a](https://github.com/abe33/atom-pigments/commit/f200085ac84d3856f73b04586c504f85d2aca04f))
+
+## Performances
+
+- Lazily load color project dependencies ([898b7071](https://github.com/abe33/atom-pigments/commit/898b70716fd759bedbc01d5b7320ad8503ca4531))
+
 <a name="v0.33.1"></a>
 # v0.33.1 (2016-08-25)
 

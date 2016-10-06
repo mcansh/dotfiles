@@ -1,5 +1,4 @@
 export PATH=/usr/local/git/bin:/usr/local/bin:$PATH
-export PATH=${PATH}:/Users/loganmcansh/Downloads/Android/Mac/adb
 
 # Open github repo from terminal
 source ~/.open-on-github.sh

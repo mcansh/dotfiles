@@ -29,10 +29,12 @@
       "._DS_Store"
       "._*"
     ]
+    telemetryConsent: "limited"
     themes: [
       "one-dark-ui"
-      "chester-atom-syntax"
+      "dracula-theme"
     ]
+    useCustomTitleBar: true
   editor:
     backUpBeforeSaving: true
     fontFamily: "SFMono-Regular"
@@ -44,8 +46,8 @@
   "exception-reporting":
     userId: "1a3d270b-cff2-90b9-feb3-8ababdfe3d4e"
   "integrated-learn-environment":
-    oauthToken: "aa10d5d5759be4a95d9fe97f5bdee4cb66d527affc540a1459120600cadaea82"
-    vm_port: 10365
+    oauthToken: "75c7904cf74ad5de1452b366465027fef82ac730150a12f850e191f9e2fc6dfc"
+    vm_port: 9561
   minimap:
     plugins:
       cursorline: true
@@ -68,4 +70,4 @@
   whitespace: {}
 ".sass.source":
   editor:
-    autoIndentOnPaste: true
+    autoIndentOnPaste: false

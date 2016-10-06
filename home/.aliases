@@ -1,14 +1,12 @@
-# shortcuts
+# git shortcuts
 alias g="git"
 alias ga="git add -A"
 alias gp="git push"
 alias gpf="git push -f"
 alias gc="git commit -sam"
-alias projects="cd Dropbox\ \(Personal\)/Sites/"
-
-# Open a file in Atom Beta
-# i.e 'open "atom-beta" .aliases'
-#alias open="open -a"
+alias gpu="git pull"
+alias gd="git diff -staged"
+alias fixthatfuckingcommit="git commit --amend -sam"
 
 
 # Hide/show all desktop icons (useful when presenting)
@@ -28,23 +26,30 @@ alias appflush="/System/Library/Frameworks/CoreServices.framework/Frameworks/Lau
 alias update="softwareupdate -ia --verbose"
 
 # update everything
-#alias updateall="sudo softwareupdate -ia --verbose; brew update; brew upgrade --all; brew cleanup; sudo gem install -n /usr/local/bin; npm update -g; sudo gem update --system /usr/bin/update_rubygems; sudo gem update /usr/local/bin"
-alias updateall="sudo softwareupdate -ia --verbose; brew update; brew upgrade --all; brew cleanup;"
+alias updateall="brew update; brew upgrade --all; brew cleanup; sudo gem install -n /usr/local/bin; npm update -g; sudo gem update --system /usr/bin/update_rubygems; sudo gem update /usr/local/bin"
 
 
 # Merge PDF files
 # Usage: "mergepdf -o output.pdf input{1,2,3}.pdf"
 alias mergepdf="/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py"
 
-# alias for aliases
+
+# alias for making symlinks (alias)
 alias makethisgohere="ln -s"
+
 
 # compress stuff
 alias zip="zip -r -X"
 alias tar="tar -jcvf"
 
+
 # make list actually list all
 alias ls="ls -a"
 
-# install gems on el cap / Sierra
+
+# install gems on El Capitan / Sierra
 alias geminstall="sudo gem install -n /usr/local/bin"
+
+
+# maintenance scripts
+alias maintenance="sudo periodic daily weekly monthly"

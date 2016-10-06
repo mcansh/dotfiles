@@ -590,6 +590,75 @@ Maximum characters per line (0 disables) (Supported by Pretty Diff)
 }
 ```
 
+####  [Clojure](#clojure) 
+
+**Supported Beautifiers**:  [`cljfmt`](#cljfmt) 
+
+| Option | cljfmt |
+| --- | --- |
+| `disabled` | :white_check_mark: |
+| `default_beautifier` | :white_check_mark: |
+| `beautify_on_save` | :white_check_mark: |
+
+**Description**:
+
+Options for language Clojure
+
+#####  [Disable Beautifying Language](#disable-beautifying-language) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Disable Clojure Beautification
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Disable Beautifying Language*" and change it to your desired configuration.
+
+#####  [Default Beautifier](#default-beautifier) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Default**: `cljfmt`
+
+**Type**: `string`
+
+**Enum**:  `cljfmt` 
+
+**Description**:
+
+Default Beautifier to be used for Clojure
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Default Beautifier*" and change it to your desired configuration.
+
+#####  [Beautify On Save](#beautify-on-save) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Automatically beautify Clojure files on save
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Beautify On Save*" and change it to your desired configuration.
+
 ####  [CoffeeScript](#coffeescript) 
 
 **Supported Beautifiers**:  [`Coffee Formatter`](#coffee-formatter)  [`coffee-fmt`](#coffee-fmt) 
@@ -1407,27 +1476,27 @@ Path to uncrustify config file. i.e. uncrustify.cfg (Supported by Uncrustify)
 
 ####  [CSS](#css) 
 
-**Supported Beautifiers**:  [`CSScomb`](#csscomb)  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
+**Supported Beautifiers**:  [`CSScomb`](#csscomb)  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff)  [`SassConvert`](#sassconvert) 
 
-| Option | CSScomb | JS Beautify | Pretty Diff |
-| --- | --- | --- | --- |
-| `disabled` | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| `default_beautifier` | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| `beautify_on_save` | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| `align_assignments` | :x: | :x: | :white_check_mark: |
-| `configPath` | :white_check_mark: | :x: | :x: |
-| `convert_quotes` | :x: | :x: | :white_check_mark: |
-| `end_with_newline` | :x: | :white_check_mark: | :x: |
-| `force_indentation` | :x: | :x: | :white_check_mark: |
-| `indent_char` | :x: | :white_check_mark: | :white_check_mark: |
-| `indent_comments` | :x: | :x: | :white_check_mark: |
-| `indent_size` | :x: | :white_check_mark: | :white_check_mark: |
-| `newline_between_rules` | :x: | :white_check_mark: | :white_check_mark: |
-| `no_lead_zero` | :x: | :x: | :white_check_mark: |
-| `predefinedConfig` | :white_check_mark: | :x: | :x: |
-| `preserve_newlines` | :x: | :white_check_mark: | :white_check_mark: |
-| `selector_separator_newline` | :x: | :white_check_mark: | :x: |
-| `wrap_line_length` | :x: | :white_check_mark: | :white_check_mark: |
+| Option | CSScomb | JS Beautify | Pretty Diff | SassConvert |
+| --- | --- | --- | --- | --- |
+| `disabled` | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `default_beautifier` | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `beautify_on_save` | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `align_assignments` | :x: | :x: | :white_check_mark: | :x: |
+| `configPath` | :white_check_mark: | :x: | :x: | :x: |
+| `convert_quotes` | :x: | :x: | :white_check_mark: | :x: |
+| `end_with_newline` | :x: | :white_check_mark: | :x: | :x: |
+| `force_indentation` | :x: | :x: | :white_check_mark: | :x: |
+| `indent_char` | :x: | :white_check_mark: | :white_check_mark: | :x: |
+| `indent_comments` | :x: | :x: | :white_check_mark: | :x: |
+| `indent_size` | :x: | :white_check_mark: | :white_check_mark: | :x: |
+| `newline_between_rules` | :x: | :white_check_mark: | :white_check_mark: | :x: |
+| `no_lead_zero` | :x: | :x: | :white_check_mark: | :x: |
+| `predefinedConfig` | :white_check_mark: | :x: | :x: | :x: |
+| `preserve_newlines` | :x: | :white_check_mark: | :white_check_mark: | :x: |
+| `selector_separator_newline` | :x: | :white_check_mark: | :x: | :x: |
+| `wrap_line_length` | :x: | :white_check_mark: | :white_check_mark: | :x: |
 
 **Description**:
 
@@ -1458,7 +1527,7 @@ Disable CSS Beautification
 
 **Type**: `string`
 
-**Enum**:  `CSScomb`  `JS Beautify`  `Pretty Diff` 
+**Enum**:  `CSScomb`  `JS Beautify`  `Pretty Diff`  `SassConvert` 
 
 **Description**:
 
@@ -2019,6 +2088,7 @@ Path to uncrustify config file. i.e. uncrustify.cfg (Supported by Uncrustify)
 | `indent_with_tabs` | :white_check_mark: |
 | `preserve_newlines` | :white_check_mark: |
 | `space_after_anon_function` | :white_check_mark: |
+| `space_in_paren` | :white_check_mark: |
 | `wrap_line_length` | :white_check_mark: |
 
 **Description**:
@@ -2250,6 +2320,30 @@ Add a space before an anonymous function's parens, ie. function () (Supported by
 {
     "js": {
         "space_after_anon_function": false
+    }
+}
+```
+
+#####  [Space in paren](#space-in-paren) 
+
+**Namespace**: `js`
+
+**Key**: `space_in_paren`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Add padding spaces within paren, ie. f( a, b ) (Supported by Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "space_in_paren": false
     }
 }
 ```
@@ -4207,7 +4301,7 @@ Path to uncrustify config file. i.e. uncrustify.cfg (Supported by Uncrustify)
 | `preserve_newlines` | :white_check_mark: | :x: | :white_check_mark: |
 | `space_after_anon_function` | :white_check_mark: | :x: | :white_check_mark: |
 | `space_before_conditional` | :white_check_mark: | :x: | :x: |
-| `space_in_paren` | :white_check_mark: | :x: | :x: |
+| `space_in_paren` | :white_check_mark: | :x: | :white_check_mark: |
 | `unescape_strings` | :white_check_mark: | :x: | :x: |
 | `wrap_line_length` | :white_check_mark: | :x: | :white_check_mark: |
 
@@ -4676,11 +4770,11 @@ Add a space before an anonymous function's parens, ie. function () (Supported by
 
 **Type**: `boolean`
 
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
 
 **Description**:
 
-Add padding spaces within paren, ie. f( a, b ) (Supported by JS Beautify)
+Add padding spaces within paren, ie. f( a, b ) (Supported by JS Beautify, Pretty Diff)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -4765,7 +4859,7 @@ Wrap lines at next opportunity after N characters (Supported by JS Beautify, Pre
 | `preserve_newlines` | :white_check_mark: | :white_check_mark: |
 | `space_after_anon_function` | :white_check_mark: | :white_check_mark: |
 | `space_before_conditional` | :white_check_mark: | :x: |
-| `space_in_paren` | :white_check_mark: | :x: |
+| `space_in_paren` | :white_check_mark: | :white_check_mark: |
 | `unescape_strings` | :white_check_mark: | :x: |
 | `wrap_line_length` | :white_check_mark: | :white_check_mark: |
 
@@ -5234,11 +5328,11 @@ Add a space before an anonymous function's parens, ie. function () (Supported by
 
 **Type**: `boolean`
 
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
 
 **Description**:
 
-Add padding spaces within paren, ie. f( a, b ) (Supported by JS Beautify)
+Add padding spaces within paren, ie. f( a, b ) (Supported by JS Beautify, Pretty Diff)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -5314,6 +5408,7 @@ Wrap lines at next opportunity after N characters (Supported by JS Beautify, Pre
 | `indent_with_tabs` | :white_check_mark: |
 | `preserve_newlines` | :white_check_mark: |
 | `space_after_anon_function` | :white_check_mark: |
+| `space_in_paren` | :white_check_mark: |
 | `wrap_line_length` | :white_check_mark: |
 
 **Description**:
@@ -5545,6 +5640,30 @@ Add a space before an anonymous function's parens, ie. function () (Supported by
 {
     "js": {
         "space_after_anon_function": false
+    }
+}
+```
+
+#####  [Space in paren](#space-in-paren) 
+
+**Namespace**: `js`
+
+**Key**: `space_in_paren`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Add padding spaces within paren, ie. f( a, b ) (Supported by Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "space_in_paren": false
     }
 }
 ```
@@ -7451,6 +7570,183 @@ Maximum characters per line (0 disables) (Supported by JS Beautify)
 }
 ```
 
+####  [Nunjucks](#nunjucks) 
+
+**Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
+
+| Option | Pretty Diff |
+| --- | --- |
+| `disabled` | :white_check_mark: |
+| `default_beautifier` | :white_check_mark: |
+| `beautify_on_save` | :white_check_mark: |
+| `indent_char` | :white_check_mark: |
+| `indent_size` | :white_check_mark: |
+| `preserve_newlines` | :white_check_mark: |
+| `wrap_line_length` | :white_check_mark: |
+
+**Description**:
+
+Options for language Nunjucks
+
+#####  [Disable Beautifying Language](#disable-beautifying-language) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Disable Nunjucks Beautification
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Disable Beautifying Language*" and change it to your desired configuration.
+
+#####  [Default Beautifier](#default-beautifier) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Default**: `Pretty Diff`
+
+**Type**: `string`
+
+**Enum**:  `Pretty Diff` 
+
+**Description**:
+
+Default Beautifier to be used for Nunjucks
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Default Beautifier*" and change it to your desired configuration.
+
+#####  [Beautify On Save](#beautify-on-save) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Automatically beautify Nunjucks files on save
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Beautify On Save*" and change it to your desired configuration.
+
+#####  [Indent char](#indent-char) 
+
+**Namespace**: `html`
+
+**Key**: `indent_char`
+
+**Default**: ` `
+
+**Type**: `string`
+
+**Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Indentation character (Supported by Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "indent_char": " "
+    }
+}
+```
+
+#####  [Indent size](#indent-size) 
+
+**Namespace**: `html`
+
+**Key**: `indent_size`
+
+**Default**: `4`
+
+**Type**: `integer`
+
+**Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Indentation size/length (Supported by Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "indent_size": 4
+    }
+}
+```
+
+#####  [Preserve newlines](#preserve-newlines) 
+
+**Namespace**: `html`
+
+**Key**: `preserve_newlines`
+
+**Default**: `true`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Preserve line-breaks (Supported by Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "preserve_newlines": true
+    }
+}
+```
+
+#####  [Wrap line length](#wrap-line-length) 
+
+**Namespace**: `html`
+
+**Key**: `wrap_line_length`
+
+**Default**: `250`
+
+**Type**: `integer`
+
+**Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Maximum characters per line (0 disables) (Supported by Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "wrap_line_length": 250
+    }
+}
+```
+
 ####  [Objective-C](#objective-c) 
 
 **Supported Beautifiers**:  [`Uncrustify`](#uncrustify)  [`clang-format`](#clang-format) 
@@ -8242,6 +8538,102 @@ sort imports (requires isort installed) (Supported by autopep8)
 }
 ```
 
+####  [R](#r) 
+
+**Supported Beautifiers**:  [`formatR`](#formatr) 
+
+| Option | formatR |
+| --- | --- |
+| `disabled` | :white_check_mark: |
+| `default_beautifier` | :white_check_mark: |
+| `beautify_on_save` | :white_check_mark: |
+| `indent_size` | :white_check_mark: |
+
+**Description**:
+
+Options for language R
+
+#####  [Disable Beautifying Language](#disable-beautifying-language) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Disable R Beautification
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Disable Beautifying Language*" and change it to your desired configuration.
+
+#####  [Default Beautifier](#default-beautifier) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Default**: `formatR`
+
+**Type**: `string`
+
+**Enum**:  `formatR` 
+
+**Description**:
+
+Default Beautifier to be used for R
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Default Beautifier*" and change it to your desired configuration.
+
+#####  [Beautify On Save](#beautify-on-save) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Automatically beautify R files on save
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Beautify On Save*" and change it to your desired configuration.
+
+#####  [Indent size](#indent-size) 
+
+**Namespace**: `r`
+
+**Key**: `indent_size`
+
+**Default**: `4`
+
+**Type**: `integer`
+
+**Supported Beautifiers**:  [`formatR`](#formatr) 
+
+**Description**:
+
+Indentation size/length (Supported by formatR)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "r": {
+        "indent_size": 4
+    }
+}
+```
+
 ####  [Riot.js](#riot.js) 
 
 **Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
@@ -8665,25 +9057,13 @@ Path to rustfmt program (Supported by rustfmt)
 
 ####  [Sass](#sass) 
 
-**Supported Beautifiers**:  [`CSScomb`](#csscomb)  [`Pretty Diff`](#pretty-diff) 
+**Supported Beautifiers**:  [`SassConvert`](#sassconvert) 
 
-| Option | CSScomb | Pretty Diff |
-| --- | --- | --- |
-| `disabled` | :white_check_mark: | :white_check_mark: |
-| `default_beautifier` | :white_check_mark: | :white_check_mark: |
-| `beautify_on_save` | :white_check_mark: | :white_check_mark: |
-| `align_assignments` | :x: | :white_check_mark: |
-| `configPath` | :white_check_mark: | :x: |
-| `convert_quotes` | :x: | :white_check_mark: |
-| `force_indentation` | :x: | :white_check_mark: |
-| `indent_char` | :x: | :white_check_mark: |
-| `indent_comments` | :x: | :white_check_mark: |
-| `indent_size` | :x: | :white_check_mark: |
-| `newline_between_rules` | :x: | :white_check_mark: |
-| `no_lead_zero` | :x: | :white_check_mark: |
-| `predefinedConfig` | :white_check_mark: | :x: |
-| `preserve_newlines` | :x: | :white_check_mark: |
-| `wrap_line_length` | :x: | :white_check_mark: |
+| Option | SassConvert |
+| --- | --- |
+| `disabled` | :white_check_mark: |
+| `default_beautifier` | :white_check_mark: |
+| `beautify_on_save` | :white_check_mark: |
 
 **Description**:
 
@@ -8710,11 +9090,11 @@ Disable Sass Beautification
 
 **Important**: This option is only configurable from within Atom Beautify's setting panel.
 
-**Default**: `Pretty Diff`
+**Default**: `SassConvert`
 
 **Type**: `string`
 
-**Enum**:  `CSScomb`  `Pretty Diff` 
+**Enum**:  `SassConvert` 
 
 **Description**:
 
@@ -8744,331 +9124,27 @@ Automatically beautify Sass files on save
 2. Go into *Packages* and search for "*Atom Beautify*" package.
 3. Find the option "*Beautify On Save*" and change it to your desired configuration.
 
-#####  [Align assignments](#align-assignments) 
-
-**Namespace**: `css`
-
-**Key**: `align_assignments`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
-
-**Description**:
-
-If lists of assignments or properties should be vertically aligned for faster and easier reading. (Supported by Pretty Diff)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "css": {
-        "align_assignments": false
-    }
-}
-```
-
-#####  [comb custom config file](#comb-custom-config-file) 
-
-**Namespace**: `css`
-
-**Key**: `configPath`
-
-**Type**: `string`
-
-**Supported Beautifiers**:  [`CSScomb`](#csscomb) 
-
-**Description**:
-
-Path to custom CSScomb config file, used in absense of a `.csscomb.json` or `.csscomb.cson` at the root of your project. (Supported by CSScomb)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "css": {
-        "configPath": ""
-    }
-}
-```
-
-#####  [Convert quotes](#convert-quotes) 
-
-**Namespace**: `css`
-
-**Key**: `convert_quotes`
-
-**Default**: `none`
-
-**Type**: `string`
-
-**Enum**:  `none`  `double`  `single` 
-
-**Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
-
-**Description**:
-
-Convert the quote characters delimiting strings from either double or single quotes to the other. (Supported by Pretty Diff)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "css": {
-        "convert_quotes": "none"
-    }
-}
-```
-
-#####  [Force indentation](#force-indentation) 
-
-**Namespace**: `css`
-
-**Key**: `force_indentation`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
-
-**Description**:
-
-if indentation should be forcefully applied to markup even if it disruptively adds unintended whitespace to the documents rendered output (Supported by Pretty Diff)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "css": {
-        "force_indentation": false
-    }
-}
-```
-
-#####  [Indent char](#indent-char) 
-
-**Namespace**: `css`
-
-**Key**: `indent_char`
-
-**Default**: ` `
-
-**Type**: `string`
-
-**Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
-
-**Description**:
-
-Indentation character (Supported by Pretty Diff)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "css": {
-        "indent_char": " "
-    }
-}
-```
-
-#####  [Indent comments](#indent-comments) 
-
-**Namespace**: `css`
-
-**Key**: `indent_comments`
-
-**Default**: `true`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
-
-**Description**:
-
-Determines whether comments should be indented. (Supported by Pretty Diff)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "css": {
-        "indent_comments": true
-    }
-}
-```
-
-#####  [Indent size](#indent-size) 
-
-**Namespace**: `css`
-
-**Key**: `indent_size`
-
-**Default**: `4`
-
-**Type**: `integer`
-
-**Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
-
-**Description**:
-
-Indentation size/length (Supported by Pretty Diff)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "css": {
-        "indent_size": 4
-    }
-}
-```
-
-#####  [Newline between rules](#newline-between-rules) 
-
-**Namespace**: `css`
-
-**Key**: `newline_between_rules`
-
-**Default**: `true`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
-
-**Description**:
-
-Add a newline between CSS rules (Supported by Pretty Diff)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "css": {
-        "newline_between_rules": true
-    }
-}
-```
-
-#####  [No lead zero](#no-lead-zero) 
-
-**Namespace**: `css`
-
-**Key**: `no_lead_zero`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
-
-**Description**:
-
-If in CSS values leading 0s immediately preceeding a decimal should be removed or prevented. (Supported by Pretty Diff)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "css": {
-        "no_lead_zero": false
-    }
-}
-```
-
-#####  [comb predefined config](#comb-predefined-config) 
-
-**Namespace**: `css`
-
-**Key**: `predefinedConfig`
-
-**Default**: `csscomb`
-
-**Type**: `string`
-
-**Enum**:  `csscomb`  `yandex`  `zen` 
-
-**Supported Beautifiers**:  [`CSScomb`](#csscomb) 
-
-**Description**:
-
-Used if neither a project or custom config file exists. (Supported by CSScomb)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "css": {
-        "predefinedConfig": "csscomb"
-    }
-}
-```
-
-#####  [Preserve newlines](#preserve-newlines) 
-
-**Namespace**: `css`
-
-**Key**: `preserve_newlines`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
-
-**Description**:
-
-Retain empty lines. Consecutive empty lines will be converted to a single empty line. (Supported by Pretty Diff)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "css": {
-        "preserve_newlines": false
-    }
-}
-```
-
-#####  [Wrap line length](#wrap-line-length) 
-
-**Namespace**: `css`
-
-**Key**: `wrap_line_length`
-
-**Type**: `integer`
-
-**Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
-
-**Description**:
-
-Maximum amount of characters per line (0 = disable) (Supported by Pretty Diff)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "css": {
-        "wrap_line_length": 0
-    }
-}
-```
-
 ####  [SCSS](#scss) 
 
-**Supported Beautifiers**:  [`CSScomb`](#csscomb)  [`Pretty Diff`](#pretty-diff) 
+**Supported Beautifiers**:  [`CSScomb`](#csscomb)  [`Pretty Diff`](#pretty-diff)  [`SassConvert`](#sassconvert) 
 
-| Option | CSScomb | Pretty Diff |
-| --- | --- | --- |
-| `disabled` | :white_check_mark: | :white_check_mark: |
-| `default_beautifier` | :white_check_mark: | :white_check_mark: |
-| `beautify_on_save` | :white_check_mark: | :white_check_mark: |
-| `align_assignments` | :x: | :white_check_mark: |
-| `configPath` | :white_check_mark: | :x: |
-| `convert_quotes` | :x: | :white_check_mark: |
-| `force_indentation` | :x: | :white_check_mark: |
-| `indent_char` | :x: | :white_check_mark: |
-| `indent_comments` | :x: | :white_check_mark: |
-| `indent_size` | :x: | :white_check_mark: |
-| `newline_between_rules` | :x: | :white_check_mark: |
-| `no_lead_zero` | :x: | :white_check_mark: |
-| `predefinedConfig` | :white_check_mark: | :x: |
-| `preserve_newlines` | :x: | :white_check_mark: |
-| `wrap_line_length` | :x: | :white_check_mark: |
+| Option | CSScomb | Pretty Diff | SassConvert |
+| --- | --- | --- | --- |
+| `disabled` | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `default_beautifier` | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `beautify_on_save` | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| `align_assignments` | :x: | :white_check_mark: | :x: |
+| `configPath` | :white_check_mark: | :x: | :x: |
+| `convert_quotes` | :x: | :white_check_mark: | :x: |
+| `force_indentation` | :x: | :white_check_mark: | :x: |
+| `indent_char` | :x: | :white_check_mark: | :x: |
+| `indent_comments` | :x: | :white_check_mark: | :x: |
+| `indent_size` | :x: | :white_check_mark: | :x: |
+| `newline_between_rules` | :x: | :white_check_mark: | :x: |
+| `no_lead_zero` | :x: | :white_check_mark: | :x: |
+| `predefinedConfig` | :white_check_mark: | :x: | :x: |
+| `preserve_newlines` | :x: | :white_check_mark: | :x: |
+| `wrap_line_length` | :x: | :white_check_mark: | :x: |
 
 **Description**:
 
@@ -9099,7 +9175,7 @@ Disable SCSS Beautification
 
 **Type**: `string`
 
-**Enum**:  `CSScomb`  `Pretty Diff` 
+**Enum**:  `CSScomb`  `Pretty Diff`  `SassConvert` 
 
 **Description**:
 
@@ -10465,6 +10541,7 @@ Maximum amount of characters per line (0 = disable) (Supported by Pretty Diff)
 | `indent_with_tabs` | :white_check_mark: |
 | `preserve_newlines` | :white_check_mark: |
 | `space_after_anon_function` | :white_check_mark: |
+| `space_in_paren` | :white_check_mark: |
 | `wrap_line_length` | :white_check_mark: |
 
 **Description**:
@@ -10696,6 +10773,30 @@ Add a space before an anonymous function's parens, ie. function () (Supported by
 {
     "js": {
         "space_after_anon_function": false
+    }
+}
+```
+
+#####  [Space in paren](#space-in-paren) 
+
+**Namespace**: `js`
+
+**Key**: `space_in_paren`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Add padding spaces within paren, ie. f( a, b ) (Supported by Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "space_in_paren": false
     }
 }
 ```
@@ -11280,6 +11381,183 @@ Wrap lines at next opportunity after N characters (Supported by TypeScript Forma
 {
     "js": {
         "wrap_line_length": 0
+    }
+}
+```
+
+####  [UX Markup](#ux-markup) 
+
+**Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
+
+| Option | Pretty Diff |
+| --- | --- |
+| `disabled` | :white_check_mark: |
+| `default_beautifier` | :white_check_mark: |
+| `beautify_on_save` | :white_check_mark: |
+| `indent_char` | :white_check_mark: |
+| `indent_size` | :white_check_mark: |
+| `preserve_newlines` | :white_check_mark: |
+| `wrap_line_length` | :white_check_mark: |
+
+**Description**:
+
+Options for language UX Markup
+
+#####  [Disable Beautifying Language](#disable-beautifying-language) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Disable UX Markup Beautification
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Disable Beautifying Language*" and change it to your desired configuration.
+
+#####  [Default Beautifier](#default-beautifier) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Default**: `Pretty Diff`
+
+**Type**: `string`
+
+**Enum**:  `Pretty Diff` 
+
+**Description**:
+
+Default Beautifier to be used for UX Markup
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Default Beautifier*" and change it to your desired configuration.
+
+#####  [Beautify On Save](#beautify-on-save) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Automatically beautify UX Markup files on save
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Beautify On Save*" and change it to your desired configuration.
+
+#####  [Indent char](#indent-char) 
+
+**Namespace**: `html`
+
+**Key**: `indent_char`
+
+**Default**: ` `
+
+**Type**: `string`
+
+**Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Indentation character (Supported by Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "indent_char": " "
+    }
+}
+```
+
+#####  [Indent size](#indent-size) 
+
+**Namespace**: `html`
+
+**Key**: `indent_size`
+
+**Default**: `4`
+
+**Type**: `integer`
+
+**Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Indentation size/length (Supported by Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "indent_size": 4
+    }
+}
+```
+
+#####  [Preserve newlines](#preserve-newlines) 
+
+**Namespace**: `html`
+
+**Key**: `preserve_newlines`
+
+**Default**: `true`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Preserve line-breaks (Supported by Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "preserve_newlines": true
+    }
+}
+```
+
+#####  [Wrap line length](#wrap-line-length) 
+
+**Namespace**: `html`
+
+**Key**: `wrap_line_length`
+
+**Default**: `250`
+
+**Type**: `integer`
+
+**Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Maximum characters per line (0 disables) (Supported by Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "wrap_line_length": 250
     }
 }
 ```
@@ -13913,11 +14191,11 @@ Indentation uses tabs, overrides `Indent Size` and `Indent Char` (Supported by J
 
 **Type**: `boolean`
 
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
 
 **Description**:
 
-Add padding spaces within paren, ie. f( a, b ) (Supported by JS Beautify)
+Add padding spaces within paren, ie. f( a, b ) (Supported by JS Beautify, Pretty Diff)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -15231,6 +15509,30 @@ Indentation uses tabs, overrides `Indent Size` and `Indent Char` (Supported by P
 {
     "js": {
         "indent_with_tabs": false
+    }
+}
+```
+
+#####  [Space in paren](#space-in-paren) 
+
+**Namespace**: `js`
+
+**Key**: `space_in_paren`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Add padding spaces within paren, ie. f( a, b ) (Supported by Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "space_in_paren": false
     }
 }
 ```
@@ -16649,6 +16951,35 @@ Indentation uses tabs, overrides `Indent Size` and `Indent Char` (Supported by C
 {
     "js": {
         "indent_with_tabs": false
+    }
+}
+```
+
+
+### formatR
+
+#####  [Indent size](#indent-size) 
+
+**Namespace**: `r`
+
+**Key**: `indent_size`
+
+**Default**: `4`
+
+**Type**: `integer`
+
+**Supported Beautifiers**:  [`formatR`](#formatr) 
+
+**Description**:
+
+Indentation size/length (Supported by formatR)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "r": {
+        "indent_size": 4
     }
 }
 ```

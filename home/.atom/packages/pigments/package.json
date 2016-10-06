@@ -2,42 +2,214 @@
   "_args": [
     [
       {
-        "raw": "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/d-116725-54286-rf93un/package.tgz",
+        "raw": "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/d-11694-41133-741bw8/package.tgz",
         "scope": null,
         "escapedName": null,
         "name": null,
-        "rawSpec": "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/d-116725-54286-rf93un/package.tgz",
-        "spec": "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/d-116725-54286-rf93un/package.tgz",
+        "rawSpec": "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/d-11694-41133-741bw8/package.tgz",
+        "spec": "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/d-11694-41133-741bw8/package.tgz",
         "type": "local"
       },
-      "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/apm-install-dir-116725-54286-ckju3s"
+      "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/apm-install-dir-11694-41133-h6noyi"
     ]
   ],
-  "_from": "../d-116725-54286-rf93un/package.tgz",
-  "_id": "pigments@0.33.1",
+  "_from": "../d-11694-41133-741bw8/package.tgz",
+  "_id": "pigments@0.37.0",
   "_inCache": true,
   "_installable": true,
   "_location": "/pigments",
   "_phantomChildren": {},
   "_requested": {
-    "raw": "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/d-116725-54286-rf93un/package.tgz",
+    "raw": "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/d-11694-41133-741bw8/package.tgz",
     "scope": null,
     "escapedName": null,
     "name": null,
-    "rawSpec": "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/d-116725-54286-rf93un/package.tgz",
-    "spec": "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/d-116725-54286-rf93un/package.tgz",
+    "rawSpec": "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/d-11694-41133-741bw8/package.tgz",
+    "spec": "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/d-11694-41133-741bw8/package.tgz",
     "type": "local"
   },
   "_requiredBy": [
     "#USER"
   ],
-  "_resolved": "file:../d-116725-54286-rf93un/package.tgz",
-  "_shasum": "bd1250ab8050591a5d905eb25f0a2fb8b7055bc0",
+  "_resolved": "file:../d-11694-41133-741bw8/package.tgz",
+  "_shasum": "2c8e92049614b6c274aad087caee9c3e3658fa18",
   "_shrinkwrap": null,
-  "_spec": "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/d-116725-54286-rf93un/package.tgz",
-  "_where": "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/apm-install-dir-116725-54286-ckju3s",
+  "_spec": "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/d-11694-41133-741bw8/package.tgz",
+  "_where": "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/apm-install-dir-11694-41133-h6noyi",
   "bugs": {
     "url": "https://github.com/abe33/atom-pigments/issues"
+  },
+  "configSchema": {
+    "traverseIntoSymlinkDirectories": {
+      "type": "boolean",
+      "default": false
+    },
+    "sourceNames": {
+      "type": "array",
+      "default": [
+        "**/*.css",
+        "**/*.styl",
+        "**/*.stylus",
+        "**/*.less",
+        "**/*.sass",
+        "**/*.scss"
+      ],
+      "description": "Glob patterns of files to scan for variables.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "ignoredNames": {
+      "type": "array",
+      "default": [
+        "vendor/*",
+        "node_modules/*",
+        "spec/*",
+        "test/*"
+      ],
+      "description": "Glob patterns of files to ignore when scanning the project for variables.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "ignoredBufferNames": {
+      "type": "array",
+      "default": [],
+      "description": "Glob patterns of files that won't get any colors highlighted",
+      "items": {
+        "type": "string"
+      }
+    },
+    "extendedSearchNames": {
+      "type": "array",
+      "default": [
+        "**/*.css"
+      ],
+      "description": "When performing the `find-colors` command, the search will scans all the files that match the `sourceNames` glob patterns and the one defined in this setting."
+    },
+    "supportedFiletypes": {
+      "type": "array",
+      "default": [
+        "*"
+      ],
+      "description": "An array of file extensions where colors will be highlighted. If the wildcard `*` is present in this array then colors in every file will be highlighted."
+    },
+    "filetypesForColorWords": {
+      "type": "array",
+      "default": [
+        "css",
+        "less",
+        "styl",
+        "stylus",
+        "sass",
+        "scss"
+      ],
+      "description": "An array of file extensions where color values such as `red`, `azure` or `whitesmoke` will be highlighted. By default CSS and CSS pre-processors files are supported.\n\nYou can use `none` or whatever value that doesn't match a file extension to completely prevent color words from being highlighted."
+    },
+    "ignoredScopes": {
+      "type": "array",
+      "default": [],
+      "description": "Regular expressions of scopes in which colors are ignored. For example, to ignore all colors in comments you can use `\\.comment`.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "autocompleteScopes": {
+      "type": "array",
+      "default": [
+        ".source.css",
+        ".source.css.less",
+        ".source.sass",
+        ".source.css.scss",
+        ".source.stylus"
+      ],
+      "description": "The autocomplete provider will only complete color names in editors whose scope is present in this list.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "extendAutocompleteToVariables": {
+      "type": "boolean",
+      "default": false,
+      "description": "When enabled, the autocomplete provider will also provides completion for non-color variables."
+    },
+    "extendAutocompleteToColorValue": {
+      "type": "boolean",
+      "default": false,
+      "description": "When enabled, the autocomplete provider will also provides color value."
+    },
+    "autocompleteSuggestionsFromValue": {
+      "type": "boolean",
+      "default": false,
+      "description": "When enabled, the autocomplete provider will suggests color variables from hexadecimal values."
+    },
+    "markerType": {
+      "type": "string",
+      "default": "native-background",
+      "enum": [
+        "native-background",
+        "native-underline",
+        "native-outline",
+        "native-dot",
+        "native-square-dot",
+        "background",
+        "outline",
+        "underline",
+        "dot",
+        "square-dot",
+        "gutter"
+      ]
+    },
+    "sassShadeAndTintImplementation": {
+      "type": "string",
+      "default": "compass",
+      "enum": [
+        "compass",
+        "bourbon"
+      ],
+      "description": "Sass doesn't provide any implementation for shade and tint function, and Compass and Bourbon have different implementation for these two methods. This setting allow you to chose which implementation to use."
+    },
+    "sortPaletteColors": {
+      "type": "string",
+      "default": "none",
+      "enum": [
+        "none",
+        "by name",
+        "by color"
+      ]
+    },
+    "groupPaletteColors": {
+      "type": "string",
+      "default": "none",
+      "enum": [
+        "none",
+        "by file"
+      ]
+    },
+    "mergeColorDuplicates": {
+      "type": "boolean",
+      "default": false
+    },
+    "delayBeforeScan": {
+      "type": "integer",
+      "default": 500,
+      "description": "Number of milliseconds after which the current buffer will be scanned for changes in the colors. This delay starts at the end of the text input and will be aborted if you start typing again during the interval."
+    },
+    "ignoreVcsIgnoredPaths": {
+      "type": "boolean",
+      "default": true,
+      "title": "Ignore VCS Ignored Paths"
+    },
+    "notifyReloads": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether Pigments will use a notification once the `Pigments: Reload` command completes or not. The notification includes informations about the result of the reload."
+    },
+    "dismissableReloadNotifications": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether the reload notifications should be dismissed by a user action or not."
+    }
   },
   "consumedServices": {
     "color-picker": {
@@ -67,11 +239,18 @@
     "underscore-plus": "1.x"
   },
   "description": "A package to display colors in project and files.",
+  "deserializers": {
+    "Palette": "deserializePalette",
+    "ColorSearch": "deserializeColorSearch",
+    "ColorProject": "deserializeColorProject",
+    "ColorProjectElement": "deserializeColorProjectElement",
+    "VariablesCollection": "deserializeVariablesCollection"
+  },
   "devDependencies": {
     "temp": "~0.8.1"
   },
   "engines": {
-    "atom": ">=1.0.0 <2.0.0"
+    "atom": ">=1.7.0 <2.0.0"
   },
   "homepage": "https://github.com/abe33/atom-pigments#readme",
   "keywords": [
@@ -105,5 +284,8 @@
     "type": "git",
     "url": "git+https://github.com/abe33/atom-pigments.git"
   },
-  "version": "0.33.1"
+  "version": "0.37.0",
+  "viewProviders": [
+    "pigmentsViewProvider"
+  ]
 }

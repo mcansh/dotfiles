@@ -1,31 +1,41 @@
-
-Color = require './color'
-ColorParser = null
-ColorExpression = require './color-expression'
-SVGColors = require './svg-colors'
-DVIPnames = require './dvipnames'
-BlendModes = require './blend-modes'
-scopeFromFileName = require './scope-from-file-name'
-{split, clamp, clampInt} = require './utils'
-{
-  int
-  float
-  percent
-  optionalPercent
-  intOrPercent
-  floatOrPercent
-  comma
-  notQuote
-  hexadecimal
-  ps
-  pe
-  variables
-  namePrefixes
-} = require './regexes'
+[
+  Color, ColorParser, ColorExpression, SVGColors, BlendModes,
+  int, float, percent, optionalPercent, intOrPercent, floatOrPercent, comma,
+  notQuote, hexadecimal, ps, pe, variables, namePrefixes,
+  split, clamp, clampInt, scopeFromFileName
+] = []
 
 module.exports =
 class ColorContext
   constructor: (options={}) ->
+    unless Color?
+      Color = require './color'
+      SVGColors = require './svg-colors'
+      BlendModes = require './blend-modes'
+      ColorExpression ?= require './color-expression'
+
+      {
+        int, float, percent, optionalPercent, intOrPercent, floatOrPercent
+        comma, notQuote, hexadecimal, ps, pe, variables, namePrefixes
+      } = require './regexes'
+
+      ColorContext::SVGColors = SVGColors
+      ColorContext::Color = Color
+      ColorContext::BlendModes = BlendModes
+      ColorContext::int = int
+      ColorContext::float = float
+      ColorContext::percent = percent
+      ColorContext::optionalPercent = optionalPercent
+      ColorContext::intOrPercent = intOrPercent
+      ColorContext::floatOrPercent = floatOrPercent
+      ColorContext::comma = comma
+      ColorContext::notQuote = notQuote
+      ColorContext::hexadecimal = hexadecimal
+      ColorContext::ps = ps
+      ColorContext::pe = pe
+      ColorContext::variablesRE = variables
+      ColorContext::namePrefixes = namePrefixes
+
     {variables, colorVariables, @referenceVariable, @referencePath, @rootPaths, @parser, @colorVars, @vars, @defaultVars, @defaultColorVars, sorted, @registry, @sassScopeSuffix} = options
 
     variables ?= []
@@ -47,19 +57,19 @@ class ColorContext
       @defaultColorVars = {}
 
       for v in @variables
-        @vars[v.name] = v
-        @defaultVars[v.name] = v if v.path.match /\/.pigments$/
+        @vars[v.name] = v unless v.default
+        @defaultVars[v.name] = v if v.default
 
       for v in @colorVariables
-        @colorVars[v.name] = v
-        @defaultColorVars[v.name] = v if v.path.match /\/.pigments$/
+        @colorVars[v.name] = v unless v.default
+        @defaultColorVars[v.name] = v if v.default
 
     if not @registry.getExpression('pigments:variables')? and @colorVariables.length > 0
       expr = ColorExpression.colorExpressionForColorVariables(@colorVariables)
       @registry.addExpression(expr)
 
     unless @parser?
-      ColorParser = require './color-parser'
+      ColorParser ?= require './color-parser'
       @parser = new ColorParser(@registry, this)
 
     @usedVariables = []
@@ -149,6 +159,9 @@ class ColorContext
     if @colorVars[value]?
       @usedVariables.push(value)
       @colorVars[value].value
+    else if @defaultColorVars[value]?
+      @usedVariables.push(value)
+      @defaultColorVars[value].value
     else
       value
 
@@ -187,6 +200,8 @@ class ColorContext
     return result
 
   scopeFromFileName: (path) ->
+    scopeFromFileName ?= require './scope-from-file-name'
+
     scope = scopeFromFileName(path)
 
     if scope is 'sass' or scope is 'scss'
@@ -279,17 +294,17 @@ class ColorContext
   ##    ##     ##    ##     ##  ##       ##    ##
   ##     #######     ##    #### ########  ######
 
-  SVGColors: SVGColors
+  split: (value) ->
+    {split, clamp, clampInt} = require './utils' unless split?
+    split(value)
 
-  Color: Color
+  clamp: (value) ->
+    {split, clamp, clampInt} = require './utils' unless clamp?
+    clamp(value)
 
-  BlendModes: BlendModes
-
-  split: (value) -> split(value)
-
-  clamp: (value) -> clamp(value)
-
-  clampInt: (value) -> clampInt(value)
+  clampInt: (value) ->
+    {split, clamp, clampInt} = require './utils' unless clampInt?
+    clampInt(value)
 
   isInvalid: (color) -> not Color.isValid(color)
 
@@ -330,29 +345,3 @@ class ColorContext
   ##    ##   ##   ##       ##    ##  ##         ## ##   ##
   ##    ##    ##  ##       ##    ##  ##        ##   ##  ##
   ##    ##     ## ########  ######   ######## ##     ## ##
-
-  int: int
-
-  float: float
-
-  percent: percent
-
-  optionalPercent: optionalPercent
-
-  intOrPercent: intOrPercent
-
-  floatOrPercent: floatOrPercent
-
-  comma: comma
-
-  notQuote: notQuote
-
-  hexadecimal: hexadecimal
-
-  ps: ps
-
-  pe: pe
-
-  variablesRE: variables
-
-  namePrefixes: namePrefixes
