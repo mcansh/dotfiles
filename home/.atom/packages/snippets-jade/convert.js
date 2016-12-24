@@ -32,25 +32,43 @@ function snippetConvert(snippet, key) {
 			snippet['body'] = 'address${1:.$2}\n\t$3';
 			break;
 		case 'Area':
-			snippet['body'] = 'area(${1:shape="${2:default}", }coords="$3"${4:, href="${5:#}"})\n$0';
+			snippet['body'] = 'area(${1:shape="${2:default}", }coords="$3"${4:, href="${5:#}", alt="$6"})\n$0';
+			break;
+		case 'Bi-Directional Isolation':
+			snippet['body'] = 'bdi${1:(dir="${2:rtl}")} $3\n$0';
 			break;
 		case 'Button':
 			snippet['body'] = 'button(type="${1:button}"${2:, name="${3:button}"}) $4\n$0';
 			break;
 		case 'Column':
-			snippet['body'] = 'col $1\n$0';
+			snippet['body'] = 'col${1:(span="${2:2}")}\n$0';
+			break;
+		case 'Data List':
+			snippet['body'] = 'datalist${1:.$2} $3\n$0';
 			break;
 		case 'Details':
 			snippet['body'] = 'details${1:(open)} $2\n$0';
 			break;
+		case 'Description List':
+			snippet['body'] = 'dl${1:.$2} $3\n$0';
+			break;
 		case 'Label':
 			snippet['body'] = 'label${1:(for="$2")} $3\n$0'
 			break;
+		case 'Meter':
+			snippet['body'] = 'meter(value="$1"${2:, min="${3:0}", max="${4:100}"}) $5\n$0';
+			break;
+		case 'Object':
+			snippet['body'] = 'object(${1:type="$2"}${3:, data="${4:https://}"}) $5\n$0';
+			break;
 		case 'Option':
-			snippet['body'] = 'option${1:(value="${2:option}")} ${3:option}\n$0';
+			snippet['body'] = 'option${1:(value="$2")} $3\n$0';
+			break;
+		case 'Quote':
+			snippet['body'] = 'q${1:(cite="$2")} $3\n$0';
 			break;
 		case 'Preformatted Text':
-			snippet['body'] = 'pre.\n\t$1';
+			snippet['body'] = 'pre $1\n$0';
 			break;
 		case 'Script':
 			snippet['body'] = 'script${1:(type="${2:text/javascript}")}.\n\t$3';

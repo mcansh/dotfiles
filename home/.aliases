@@ -1,12 +1,23 @@
 # git shortcuts
 alias g="git"
 alias ga="git add -A"
+alias gcl="git clone"
+alias gs="git s"
 alias gp="git push"
 alias gpf="git push -f"
 alias gc="git commit -sam"
 alias gpu="git pull"
-alias gd="git diff -staged"
+alias gd="git diff"
+alias gdd="git diff --staged"
+alias gco="git checkout"
 alias fixthatfuckingcommit="git commit --amend -sam"
+alias youregonnalearntoday="cd ~/learn; source ~/.flatiron_bash"
+alias atom="atom-beta ."
+alias apm='apm-beta'
+alias server='python -m SimpleHTTPServer'
+
+# keep a log of installed brew files
+alias brewfile="brew bundle dump"
 
 
 # Hide/show all desktop icons (useful when presenting)
@@ -22,7 +33,7 @@ alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resource
 alias appflush="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
 
 
-# software updates becuase laziness
+# software updates because laziness
 alias update="softwareupdate -ia --verbose"
 
 # update everything

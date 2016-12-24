@@ -5,7 +5,7 @@
 [user]
 	name = Logan McAnsh
 	email = l.m@loganmcansh.com
-	signingkey = 56CE567FB897A796
+	signingkey = 40EB94F1
 [push]
 	default = simple
 [color]
@@ -31,6 +31,7 @@
 
 	# shows current branch's last commit with absolute date
 	b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
+	ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
 
 [help]
 	autocorrect = 0
@@ -38,9 +39,10 @@
 	helper = store
 [commit]
 	gpgsign = true
-[init]
+#[init]
 	templatedir = /Users/loganmcansh/.git_template/
 [gpg]
-	program = gpg2
+	program = gpg
 [core]
-	excludesfile = /Users/loganmcansh/.gitignore
+	excludesfile = /Users/loganmcansh/.gitignore_global
+	editor = atom --wait

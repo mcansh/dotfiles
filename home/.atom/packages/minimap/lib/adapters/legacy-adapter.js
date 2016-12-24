@@ -1,9 +1,9 @@
-'use babel'
+'use strict'
 
 /**
  * @access private
  */
-export default class LegacyAdapter {
+module.exports = class LegacyAdapter {
   constructor (textEditor) { this.textEditor = textEditor }
 
   enableCache () { this.useCache = true }
@@ -71,5 +71,9 @@ export default class LegacyAdapter {
     }
     if (this.useCache) { this.maxScrollTopCache = maxScrollTop }
     return maxScrollTop
+  }
+
+  editorDestroyed () {
+    return !this.textEditor || this.textEditor.isDestroyed()
   }
 }

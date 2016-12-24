@@ -10,12 +10,12 @@
  */
 
 // Make Pigments circle smaller
-atom-text-editor::shadow pigments-markers::shadow pigments-color-marker.dot:after, pigments-markers::shadow pigments-color-marker.dot:after, pigments-color-marker.dot:after {
+atom-text-editor.editor pigments-markers::shadow pigments-color-marker.syntax--dot:after, pigments-markers::shadow pigments-color-marker.dot:after, pigments-color-marker.dot:after {
   transform: translate(0, -50%),scale(0.6);;
 }
 
 // Make wrap guide invisible
-atom-text-editor::shadow {
+atom-text-editor.editor .wrap-guide {
   .wrap-guide {
     background-color : fade(@syntax-wrap-guide-color, 0%);
   }

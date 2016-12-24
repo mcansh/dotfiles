@@ -17,9 +17,23 @@
       slimScrollbar: true
   "autocomplete-plus": {}
   core:
+    customFileTypes:
+      "source.ini": [
+        ".buckconfig"
+        ".flowconfig"
+        ".hgrc"
+      ]
+      "source.json": [
+        ".arcconfig"
+        "BUCK.autodeps"
+      ]
+      "source.python": [
+        "BUCK"
+      ]
     disabledPackages: [
       "snippets-jade"
       "atom-bourbon-snippets"
+      "emmet"
     ]
     ignoredNames: [
       ".git"
@@ -29,6 +43,7 @@
       "._DS_Store"
       "._*"
     ]
+    projectHome: "/Users/loganmcansh/iCloud/GitHub"
     telemetryConsent: "limited"
     themes: [
       "one-dark-ui"
@@ -52,6 +67,27 @@
     plugins:
       cursorline: true
       cursorlineDecorationsZIndex: 0
+  nuclide:
+    "nuclide-adb-logcat": {}
+    "nuclide-arcanist": {}
+    "nuclide-buck": {}
+    "nuclide-clang": {}
+    "nuclide-console": {}
+    "nuclide-datatip": {}
+    "nuclide-debugger-native": {}
+    "nuclide-debugger-node": {}
+    "nuclide-debugger-php": {}
+    "nuclide-definition-preview": {}
+    "nuclide-flow": {}
+    "nuclide-hack": {}
+    "nuclide-health": {}
+    "nuclide-ios-simulator-logs": {}
+    "nuclide-ocaml": {}
+    "nuclide-python": {}
+    "nuclide-react-native": {}
+    "nuclide-related-files": {}
+    "nuclide-remote-projects": {}
+    "nuclide-swift": {}
   "one-dark-ui":
     layoutMode: "Compact"
     tabSizing: "Even"
@@ -62,6 +98,8 @@
     extendAutocompleteToVariables: true
     markerType: "dot"
     mergeColorDuplicates: true
+  "pristine-ui":
+    layoutMode: "Compact"
   "tree-view":
     hideIgnoredNames: true
     hideVcsIgnoredFiles: true

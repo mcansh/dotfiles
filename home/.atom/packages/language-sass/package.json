@@ -2,40 +2,40 @@
   "_args": [
     [
       {
-        "raw": "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/d-116829-15909-1o1tjlw/package.tgz",
+        "raw": "/private/var/folders/nt/9jj5k7w16hl0y7p_dlslx4g40000gn/T/d-1161027-72138-1891be0/package.tgz",
         "scope": null,
         "escapedName": null,
         "name": null,
-        "rawSpec": "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/d-116829-15909-1o1tjlw/package.tgz",
-        "spec": "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/d-116829-15909-1o1tjlw/package.tgz",
+        "rawSpec": "/private/var/folders/nt/9jj5k7w16hl0y7p_dlslx4g40000gn/T/d-1161027-72138-1891be0/package.tgz",
+        "spec": "/private/var/folders/nt/9jj5k7w16hl0y7p_dlslx4g40000gn/T/d-1161027-72138-1891be0/package.tgz",
         "type": "local"
       },
-      "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/apm-install-dir-116829-15909-408fsy"
+      "/private/var/folders/nt/9jj5k7w16hl0y7p_dlslx4g40000gn/T/apm-install-dir-1161027-72138-kclktp"
     ]
   ],
-  "_from": "../d-116829-15909-1o1tjlw/package.tgz",
-  "_id": "language-sass@0.57.0",
+  "_from": "../d-1161027-72138-1891be0/package.tgz",
+  "_id": "language-sass@0.57.1",
   "_inCache": true,
   "_installable": true,
   "_location": "/language-sass",
   "_phantomChildren": {},
   "_requested": {
-    "raw": "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/d-116829-15909-1o1tjlw/package.tgz",
+    "raw": "/private/var/folders/nt/9jj5k7w16hl0y7p_dlslx4g40000gn/T/d-1161027-72138-1891be0/package.tgz",
     "scope": null,
     "escapedName": null,
     "name": null,
-    "rawSpec": "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/d-116829-15909-1o1tjlw/package.tgz",
-    "spec": "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/d-116829-15909-1o1tjlw/package.tgz",
+    "rawSpec": "/private/var/folders/nt/9jj5k7w16hl0y7p_dlslx4g40000gn/T/d-1161027-72138-1891be0/package.tgz",
+    "spec": "/private/var/folders/nt/9jj5k7w16hl0y7p_dlslx4g40000gn/T/d-1161027-72138-1891be0/package.tgz",
     "type": "local"
   },
   "_requiredBy": [
     "#USER"
   ],
-  "_resolved": "file:../d-116829-15909-1o1tjlw/package.tgz",
-  "_shasum": "f1171b6f3fdeb72fd5c1f1f9040527348812e96c",
+  "_resolved": "file:../d-1161027-72138-1891be0/package.tgz",
+  "_shasum": "a548032f5ea79491355fcc08755375a1461face2",
   "_shrinkwrap": null,
-  "_spec": "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/d-116829-15909-1o1tjlw/package.tgz",
-  "_where": "/private/var/folders/h1/z4_2cpfs1k70w_qbn3x2rls80000gn/T/apm-install-dir-116829-15909-408fsy",
+  "_spec": "/private/var/folders/nt/9jj5k7w16hl0y7p_dlslx4g40000gn/T/d-1161027-72138-1891be0/package.tgz",
+  "_where": "/private/var/folders/nt/9jj5k7w16hl0y7p_dlslx4g40000gn/T/apm-install-dir-1161027-72138-kclktp",
   "bugs": {
     "url": "https://github.com/atom/language-sass/issues"
   },
@@ -52,11 +52,11 @@
   "license": "MIT",
   "name": "language-sass",
   "optionalDependencies": {},
-  "readme": "# Sass/SCSS language support in Atom\n[![OS X Build Status](https://travis-ci.org/atom/language-sass.svg?branch=master)](https://travis-ci.org/atom/language-sass)\n[![Windows Build Status](https://ci.appveyor.com/api/projects/status/g7p16vainm4iuoot/branch/master?svg=true)](https://ci.appveyor.com/project/Atom/language-sass/branch/master)\n[![Dependency Status](https://david-dm.org/atom/language-sass.svg)](https://david-dm.org/atom/language-sass)\n\nAdds syntax highlighting and snippets to Sass/SCSS files in Atom.\n\nOriginally [converted](http://atom.io/docs/latest/converting-a-text-mate-bundle) from the [Sass TextMate bundle](https://github.com/alexsancho/SASS.tmbundle).\n\nContributions are greatly appreciated. Please fork this repository and open a pull request to add snippets, make grammar tweaks, etc.\n",
+  "readme": "# Sass/SCSS language support in Atom\n[![macOS Build Status](https://travis-ci.org/atom/language-sass.svg?branch=master)](https://travis-ci.org/atom/language-sass)\n[![Windows Build Status](https://ci.appveyor.com/api/projects/status/g7p16vainm4iuoot/branch/master?svg=true)](https://ci.appveyor.com/project/Atom/language-sass/branch/master)\n[![Dependency Status](https://david-dm.org/atom/language-sass.svg)](https://david-dm.org/atom/language-sass)\n\nAdds syntax highlighting and snippets to Sass/SCSS files in Atom.\n\nOriginally [converted](http://flight-manual.atom.io/hacking-atom/sections/converting-from-textmate) from the [Sass TextMate bundle](https://github.com/alexsancho/SASS.tmbundle).\n\nContributions are greatly appreciated. Please fork this repository and open a pull request to add snippets, make grammar tweaks, etc.\n",
   "readmeFilename": "README.md",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/atom/language-sass.git"
   },
-  "version": "0.57.0"
+  "version": "0.57.1"
 }

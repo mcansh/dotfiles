@@ -4,6 +4,58 @@ All notable changes to the project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+[1.7.25] - 2016-11-13
+---------------------
+### Added
+- **New icons:** Rollup (new logo), SilverStripe (`.ss`)
+- [[`435769b`]]: Copies of Octicons noticeably affected by Atom 1.13's [upgrade to Octicons 4.4.0]: `Settings`, `Dashboard`, `Tag`, `Terminal`, `Video`
+
+[`435769b`]: https://github.com/Alhadis/FileIcons/commit/435769bbc5d14f11352d9c633a60ebd5d3cf2142
+[upgrade to Octicons 4.4.0]: https://github.com/atom/atom/pull/13138
+
+### Changed
+- `.ss` files no longer associated with Scheme
+
+
+[1.7.24] - 2016-11-03
+---------------------
+### Added
+- **New icons:** Codecov (`codecov.yml`), NSIS (new logo), Reason (`.re`, `.rei`), Snyk (`.synk`)
+- **Support:** Boot (`Makefile.boot`), Generic (`.abnf`, `.bnf`, `.ebnf`)
+
+### Changed
+- Solid-filled icons now used for `.js`, `.jsx`, `.ts` and `.tsx` files
+
+
+[1.7.23] - 2016-10-27
+---------------------
+### Added
+- **New icon:** EditorConfig (`.editorconfig`)
+- **Support:** Bower Rails (`Bowerfile`), Docker Compose (`.docker-compose.*`), Docker Sync (`docker-sync.yml`), Gear (`.lintstagedrc`), OpenType feature files (`.fea`), PostCSS (`.postcssrc`, `postcss.config.js`), Zsh (`.antigen`, `.zpreztorc`)
+
+
+[1.7.22] - 2016-10-14
+---------------------
+### Added
+- **New icons:** Glyphs (`.glyphs`), Yarn (`yarn.lock`)
+
+### Fixed
+- [[`#435`](https://github.com/DanBrooker/file-icons/issues/435)] Icon of [`markdown-preview`] misaligned after reloading
+- [[`#437`](https://github.com/DanBrooker/file-icons/issues/437)] Ambiguous wording of package settings
+
+[`markdown-preview`]: https://github.com/atom/markdown-preview
+
+
+[1.7.21] - 2016-10-12
+---------------------
+### Added
+- **New icons:** DyLib (`.dylib`), mruby (`.mrb`), SVN (`.svn`), Wercker (`wercker.yml`)
+- **Support:** Git (`.keep`), `.vagrant` folders
+
+### Fixed
+- [[`#429`](https://github.com/DanBrooker/file-icons/issues/429)] Tab-icon colours not obeying value of user's _"Changed only"_ setting.
+
+
 [1.7.20] - 2016-10-04
 ---------------------
 ### Added
@@ -858,7 +910,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 Initial release.
 
 
-[Unpublished]: https://github.com/DanBrooker/file-icons/compare/v1.7.20...HEAD
+[Unpublished]: https://github.com/DanBrooker/file-icons/compare/v1.7.25...HEAD
+[1.7.25]: https://github.com/DanBrooker/file-icons/releases/tag/v1.7.25
+[1.7.24]: https://github.com/DanBrooker/file-icons/releases/tag/v1.7.24
+[1.7.23]: https://github.com/DanBrooker/file-icons/releases/tag/v1.7.23
+[1.7.22]: https://github.com/DanBrooker/file-icons/releases/tag/v1.7.22
+[1.7.21]: https://github.com/DanBrooker/file-icons/releases/tag/v1.7.21
 [1.7.20]: https://github.com/DanBrooker/file-icons/releases/tag/v1.7.20
 [1.7.19]: https://github.com/DanBrooker/file-icons/releases/tag/v1.7.19
 [1.7.18]: https://github.com/DanBrooker/file-icons/releases/tag/v1.7.18

@@ -1,48 +1,70 @@
 {
-  "name": "snippets-jade",
-  "version": "0.2.1",
-  "description": "provide basic snippets for jade",
-  "keywords": [
-    "jade",
-    "snippets"
+  "_args": [
+    [
+      {
+        "raw": "/private/var/folders/nt/9jj5k7w16hl0y7p_dlslx4g40000gn/T/d-1161017-29413-1g8ty6a/package.tgz",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "/private/var/folders/nt/9jj5k7w16hl0y7p_dlslx4g40000gn/T/d-1161017-29413-1g8ty6a/package.tgz",
+        "spec": "/private/var/folders/nt/9jj5k7w16hl0y7p_dlslx4g40000gn/T/d-1161017-29413-1g8ty6a/package.tgz",
+        "type": "local"
+      },
+      "/private/var/folders/nt/9jj5k7w16hl0y7p_dlslx4g40000gn/T/apm-install-dir-1161017-29413-tmifet"
+    ]
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rail-rain/snippets-jade.git"
+  "_from": "../d-1161017-29413-1g8ty6a/package.tgz",
+  "_id": "snippets-jade@0.2.2",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/snippets-jade",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "/private/var/folders/nt/9jj5k7w16hl0y7p_dlslx4g40000gn/T/d-1161017-29413-1g8ty6a/package.tgz",
+    "scope": null,
+    "escapedName": null,
+    "name": null,
+    "rawSpec": "/private/var/folders/nt/9jj5k7w16hl0y7p_dlslx4g40000gn/T/d-1161017-29413-1g8ty6a/package.tgz",
+    "spec": "/private/var/folders/nt/9jj5k7w16hl0y7p_dlslx4g40000gn/T/d-1161017-29413-1g8ty6a/package.tgz",
+    "type": "local"
   },
-  "license": "MIT",
-  "scripts": {
-    "build": "node convert.js"
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "file:../d-1161017-29413-1g8ty6a/package.tgz",
+  "_shasum": "44f6357266e61cdf0995063c09cd72928133f80a",
+  "_shrinkwrap": null,
+  "_spec": "/private/var/folders/nt/9jj5k7w16hl0y7p_dlslx4g40000gn/T/d-1161017-29413-1g8ty6a/package.tgz",
+  "_where": "/private/var/folders/nt/9jj5k7w16hl0y7p_dlslx4g40000gn/T/apm-install-dir-1161017-29413-tmifet",
+  "bugs": {
+    "url": "https://github.com/rail-rain/snippets-jade/issues"
+  },
+  "dependencies": {},
+  "description": "provide basic snippets for jade",
+  "devDependencies": {
+    "async": "^1.4.2",
+    "cson-parser": "^1.2.0",
+    "html2jade": "^0.8.6"
   },
   "engines": {
     "atom": "*"
   },
-  "readmeFilename": "README.md",
-  "devDependencies": {
-    "async": "^1.4.2",
-    "cson-parser": "^1.2.0",
-    "html2jade": "^0.8.4"
-  },
-  "readme": "# snippets-jade\n\nbasic snippets of jade-language\n\nthis is converted from snippets of [language-html](https://github.com/atom/language-html)\n",
-  "bugs": {
-    "url": "https://github.com/rail-rain/snippets-jade/issues"
-  },
   "homepage": "https://github.com/rail-rain/snippets-jade#readme",
-  "_id": "snippets-jade@0.2.1",
-  "_shasum": "34ec4bf195abbf10ab69a30851d4b98771f20816",
-  "_resolved": "file:../d-116615-17417-w6h04t/package.tgz",
-  "_from": "../d-116615-17417-w6h04t/package.tgz",
-  "_atomModuleCache": {
-    "version": 1,
-    "dependencies": [],
-    "extensions": {
-      ".js": [
-        "convert.js"
-      ],
-      ".json": [
-        "package.json"
-      ]
-    },
-    "folders": []
-  }
+  "keywords": [
+    "jade",
+    "snippets"
+  ],
+  "license": "MIT",
+  "name": "snippets-jade",
+  "optionalDependencies": {},
+  "readme": "# snippets-jade\n\nbasic snippets of jade-language\n\nthis is converted from snippets of [language-html](https://github.com/atom/language-html)\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rail-rain/snippets-jade.git"
+  },
+  "scripts": {
+    "build": "node convert.js"
+  },
+  "version": "0.2.2"
 }

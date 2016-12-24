@@ -1,9 +1,9 @@
-'use babel'
+'use strict'
 
 /**
  * @access private
  */
-export default class StableAdapter {
+module.exports = class StableAdapter {
   constructor (textEditor) {
     this.textEditor = textEditor
     this.textEditorElement = atom.views.getView(this.textEditor)
@@ -28,6 +28,8 @@ export default class StableAdapter {
   }
 
   getHeight () {
+    if (this.editorDestroyed()) { return 0 }
+
     if (this.useCache) {
       if (!this.heightCache) {
         this.heightCache = this.textEditorElement.getHeight()
@@ -38,6 +40,8 @@ export default class StableAdapter {
   }
 
   getScrollTop () {
+    if (this.editorDestroyed()) { return 0 }
+
     if (this.useCache) {
       if (!this.scrollTopCache) {
         this.scrollTopCache = this.computeScrollTop()
@@ -48,6 +52,8 @@ export default class StableAdapter {
   }
 
   computeScrollTop () {
+    if (this.editorDestroyed()) { return 0 }
+
     const scrollTop = this.textEditorElement.getScrollTop()
     const lineHeight = this.textEditor.getLineHeightInPixels()
     let firstRow = this.textEditorElement.getFirstVisibleScreenRow()
@@ -64,10 +70,14 @@ export default class StableAdapter {
   }
 
   setScrollTop (scrollTop) {
+    if (this.editorDestroyed()) { return }
+
     this.textEditorElement.setScrollTop(scrollTop)
   }
 
   getScrollLeft () {
+    if (this.editorDestroyed()) { return 0 }
+
     if (this.useCache) {
       if (!this.scrollLeftCache) {
         this.scrollLeftCache = this.textEditorElement.getScrollLeft()
@@ -78,15 +88,22 @@ export default class StableAdapter {
   }
 
   getMaxScrollTop () {
+    if (this.editorDestroyed()) { return 0 }
+
     if (this.maxScrollTopCache != null && this.useCache) {
       return this.maxScrollTopCache
     }
 
-    let maxScrollTop = this.textEditorElement.getScrollHeight() - this.getHeight()
-    let lineHeight = this.textEditor.getLineHeightInPixels()
+    let maxScrollTop
+    if (this.textEditorElement.getMaxScrollTop) {
+      maxScrollTop = this.textEditorElement.getMaxScrollTop()
+    } else {
+      maxScrollTop = this.textEditorElement.getScrollHeight() - this.getHeight()
 
-    if (this.scrollPastEnd) {
-      maxScrollTop -= this.getHeight() - 3 * lineHeight
+      if (this.scrollPastEnd) {
+        const lineHeight = this.textEditor.getLineHeightInPixels()
+        maxScrollTop -= this.getHeight() - 3 * lineHeight
+      }
     }
 
     if (this.useCache) {
@@ -94,5 +111,12 @@ export default class StableAdapter {
     }
 
     return maxScrollTop
+  }
+
+  editorDestroyed () {
+    return !this.textEditor ||
+           this.textEditor.isDestroyed() ||
+           !this.textEditorElement.getModel() ||
+           !this.textEditorElement.parentNode
   }
 }

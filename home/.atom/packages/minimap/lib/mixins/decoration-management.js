@@ -1,6 +1,5 @@
-'use babel'
+'use strict'
 
-import Mixin from 'mixto'
 let _, path, Emitter, Decoration
 
 /**
@@ -10,7 +9,7 @@ let _, path, Emitter, Decoration
  * This mixin is injected into the `Minimap` prototype, so every methods defined
  * in this file will be available on any `Minimap` instance.
  */
-export default class DecorationManagement extends Mixin {
+module.exports = class DecorationManagement {
 
   /**
    * Initializes the decorations related properties.
@@ -476,7 +475,7 @@ export default class DecorationManagement extends Mixin {
    * @access private
    */
   emitDecorationChanges (type, decoration) {
-    if (!this.textEditor || this.textEditor.isDestroyed()) { return }
+    if (this.editorDestroyed()) { return }
 
     this.invalidateDecorationForScreenRowsCache()
 
@@ -576,7 +575,9 @@ export default class DecorationManagement extends Mixin {
     for (let i = 0, len = decorations.length; i < len; i++) {
       let decoration = decorations[i]
 
-      this.emitDecorationChanges(decoration.getProperties().type, decoration)
+      if (!this.adapter.editorDestroyed()) {
+        this.emitDecorationChanges(decoration.getProperties().type, decoration)
+      }
       this.emitter.emit('did-remove-decoration', {
         marker: marker,
         decoration: decoration
