@@ -47,7 +47,7 @@
     telemetryConsent: "limited"
     themes: [
       "one-dark-ui"
-      "dracula-theme"
+      "atom-panda-syntax"
     ]
     useCustomTitleBar: true
   editor:
