@@ -16,9 +16,16 @@ alias atom="atom-beta ."
 alias apm='apm-beta'
 alias server='python -m SimpleHTTPServer'
 
-# keep a log of installed brew files
-alias brewfile="brew bundle dump"
+# keep a log of installed atom packages
+alias atomlist='apm list --installed --bare > ~/.homesick/repos/dotfiles/home/atom-list.txt'
+# install the packages in that log
+alias atominstall='apm install --packages-file ~/.homesick/repos/dotfiles/home/atom-list.txt'
 
+# keep a log of installed brew files
+alias brewfile="brew bundle dump --force; mv brewfile ~/.homesick/repos/dotfiles/home/Brewfile"
+
+# stuff to do when backing up
+alias backupdotfiles='atomlist; brewfile'
 
 # Hide/show all desktop icons (useful when presenting)
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"

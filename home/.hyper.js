@@ -96,7 +96,7 @@ module.exports = {
 
     // the shell to run when spawning a new session (i.e. /usr/local/bin/fish)
     // if left empty, your system's login shell will be used by default
-    shell: '',
+    shell: '/bin/zsh',
 
     // for setting shell arguments (i.e. for using interactive shellArgs: ['-i'])
     // by default ['--login'] will be used
@@ -106,7 +106,7 @@ module.exports = {
     env: {},
 
     // set to false for no bell
-    bell: 'SOUND',
+    bell: 'false',
 
     // if true, selected text will automatically be copied to the clipboard
     copyOnSelect: false,
@@ -128,8 +128,9 @@ module.exports = {
     `hyperlinks`,
     `hyper-blink`,
     `hypercwd`,
+    `hyperterm-panda`,
     `hyperterm-close-on-left`,
-    `hyper-simple-vibrancy`
+    // `hyper-simple-vibrancy`
   ],
 
   // in development, you can create a directory under

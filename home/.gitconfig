@@ -4,8 +4,8 @@
 	required = true
 [user]
 	name = Logan McAnsh
-	email = l.m@loganmcansh.com
-	signingkey = 40EB94F1
+	email = logan@mcan.sh
+	signingkey = C33D163F
 [push]
 	default = simple
 [color]
