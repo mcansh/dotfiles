@@ -10,3 +10,13 @@ I use [Homesick](https://github.com/technicalpickles/homesick) to manage and ins
 $ homesick clone mcansh/dotfiles
 $ homesick symlink dotfiles
 ```
+
+install atom packages/themes
+```
+$ atominstall
+```
+
+install homebrew packages
+```
+brew bundle
+```
