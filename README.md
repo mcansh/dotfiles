@@ -11,12 +11,7 @@ $ homesick clone mcansh/dotfiles
 $ homesick symlink dotfiles
 ```
 
-install atom packages/themes
+run the install command
 ```
-$ atominstall
-```
-
-install homebrew packages
-```
-brew bundle
+$ homesick exec dotfiles install-script.sh
 ```
