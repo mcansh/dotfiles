@@ -11,5 +11,5 @@ I use [Homesick](https://github.com/technicalpickles/homesick) to manage and ins
 ```
 $ homesick clone mcansh/dotfiles
 $ homesick symlink dotfiles
-$ homesick exec dotfiles install-script.sh
-```
+$ ~/.homesick/repos/dotfiles/install-script.sh
+```homesick
