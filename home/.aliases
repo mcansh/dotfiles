@@ -1,3 +1,6 @@
+alias atom="atom ."
+#alias webpack="npm run --prefix source/js build"
+
 # git shortcuts
 alias g="git"
 alias ga="git add -A"
@@ -10,10 +13,23 @@ alias gpu="git pull"
 alias gd="git diff"
 alias gdd="git diff --staged"
 alias gco="git checkout"
+
+# fuck bundler
+alias be="bundle exec"
+
+# fix commit messages
 alias fixthatfuckingcommit="git commit --amend -sam"
+
+# use the learn bash and cd into my Learn folder
 alias youregonnalearntoday="cd ~/learn; source ~/.flatiron_bash"
+
+# atom beta > atom
 alias atom="atom-beta ."
+
+# apm beta > api
 alias apm='apm-beta'
+
+# start a simple server
 alias server='python -m SimpleHTTPServer'
 
 # keep a log of installed atom packages
@@ -44,7 +60,7 @@ alias appflush="/System/Library/Frameworks/CoreServices.framework/Frameworks/Lau
 alias update="softwareupdate -ia --verbose"
 
 # update everything
-alias updateall="brew update; brew upgrade --all; brew cleanup; sudo gem install -n /usr/local/bin; npm update -g; sudo gem update --system /usr/bin/update_rubygems; sudo gem update /usr/local/bin"
+alias updateall="brew update; brew upgrade --all; brew cleanup; npm update -g; sudo gem update --system /usr/bin/update_rubygems; sudo gem update /usr/local/bin"
 
 
 # Merge PDF files
@@ -57,7 +73,7 @@ alias makethisgohere="ln -s"
 
 
 # compress stuff
-alias zip="zip -r -X"
+alias zip="zip -r"
 alias tar="tar -jcvf"
 
 
@@ -71,3 +87,6 @@ alias geminstall="sudo gem install -n /usr/local/bin"
 
 # maintenance scripts
 alias maintenance="sudo periodic daily weekly monthly"
+
+# slack emoji magic
+alias slackmoji="sips -Z 128 $1"

@@ -12,6 +12,7 @@
 	ui = 1
 [alias]
 	# add and commit untracked files
+	sha = rev-parse HEAD
 	co = checkout
 	cm = "commit -sam"
 	p = push

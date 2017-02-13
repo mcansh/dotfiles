@@ -4,7 +4,7 @@ module.exports = {
     fontSize: 13,
 
     // font family with optional fallbacks
-    fontFamily: '"SFMono-Regular", monospace',
+    fontFamily: '"SFMono-Regular"',
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
     // cursorColor: 'rgba(248,28,229,0.8)',
@@ -20,13 +20,14 @@ module.exports = {
     backgroundColor: '#2b3e50',
 
     // border color (window, tabs)
-    borderColor: '#2b3e50',
+    borderColor: 'none',
 
     // custom css to embed in the main window
     css: `
       .tab_tab {
         position: relative;
-        width: 100%
+        width: 100%;
+        border: none
       }
       .tab_tab::after {
         content: '';
