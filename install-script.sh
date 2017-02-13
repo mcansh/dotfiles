@@ -46,7 +46,7 @@ sudo -u $SUDO_USER /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.
 sudo -u $SUDO_USER /usr/bin/ruby -e "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 # Setup Software
-echo "Installing software from cask... (may take a bit if the internet is shit)"
+echo "Installing software from cask... (may take a bit if your internet is shit)"
 cask_apps="atom-beta codekit cyberduck handbrake hyper sonos transmission-nightly google-chrome"
 
 sudo -u $SUDO_USER brew install mas # We will need this in a bit for installing MAS
@@ -57,7 +57,7 @@ sudo -u $SUDO_USER brew tap homebrew/bundle
 sudo -u $SUDO_USER brew tap homebrew/core
 sudo -u $SUDO_USER brew tap homebrew/dupes
 sudo -u $SUDO_USER brew cask install Caskroom/cask/$cask_apps
-brew bundle ~/.homesick/repos/dotfiles/Brewfile
+sudo -u $SUDO_USER brew bundle
 
 # Install Atom Packages
 echo "Installing Atom Packages... This may take a sec"
@@ -67,7 +67,7 @@ if [ apm ]; then
 else if [apm-beta]; then
   apm-beta install --packages-file ~/.homesick/repos/dotfiles/atom-list.txt
 else
-  echo "Could'nt find apm or apm-beta... You'll need to manually install your atom packages"
+  echo "Couldn't find apm or apm-beta... You'll need to manually install your atom packages 😭"
 fi
 
 # Install Mac Store Apps
