@@ -50,25 +50,3 @@ brew 'readline'
 brew 'thefuck'
 brew 'homebrew/dupes/zlib'
 brew 'homebrew/versions/gnupg21'
-brew 'atom-beta'
-brew 'codekit'
-brew 'cyberduck'
-brew 'handbrake'
-brew 'hyper'
-brew 'sonos'
-brew 'transmission-nightly'
-brew 'google-chrome'
-mas 'Xcode', id: 497799835
-mas 'Boxy', id: 1053031090
-mas '1Password', id: 443987910
-mas 'Filters for Photos', id: 1083965373
-mas 'Screens', id: 446107677
-mas 'Tweetbot', id: 557168941
-mas 'Deliveries', id: 924726344
-mas 'Icon Slate', id: 439697913
-mas 'MiniPlay', id: 936243210
-mas 'Squash', id: 1152443474
-mas 'Cashew', id: 1126100185
-mas 'Battery Health', id: 490192174
-mas 'Redacted', id: 984968384
-mas 'GIF Brewery 3', id: 1081413713

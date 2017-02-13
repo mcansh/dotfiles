@@ -57,15 +57,15 @@ sudo -u $SUDO_USER brew tap homebrew/bundle
 sudo -u $SUDO_USER brew tap homebrew/core
 sudo -u $SUDO_USER brew tap homebrew/dupes
 sudo -u $SUDO_USER brew cask install Caskroom/cask/$cask_apps
+brew bundle ~/.homesick/repos/dotfiles/Brewfile
 
 # Install Atom Packages
-atom_packages="Lucario atom-beautify atom-jade atom-material-ui atom-panda-syntax autoclose-html autocomplete-css-with-stylus-support autocomplete-emojis chester-atom-syntax civic-syntax double-tag dracula-theme emmet file-icons integrated-learn-environment itg-dark-syntax jade-snippets language-pug language-sass language-stylus linter linter-eslint minimap minimap-cursorline multi-cursor nord-atom-syntax open-in-browser package-sync pigments ramda-syntax snippets-jade sort-lines stylus-autocompile"
-
 echo "Installing Atom Packages... This may take a sec"
+
 if [ apm ]; then
-  apm install $atom_packages
+  apm install --packages-file ~/.homesick/repos/dotfiles/atom-list.txt
 else if [apm-beta]; then
-  apm-beta install $atom_packages
+  apm-beta install --packages-file ~/.homesick/repos/dotfiles/atom-list.txt
 else
   echo "Could'nt find apm or apm-beta... You'll need to manually install your atom packages"
 fi
