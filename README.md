@@ -2,6 +2,8 @@
 
 my macbooks dotfiles
 
+install script based on my man nullbrx's [dotfiles](https://github.com/nullbrx/dotfiles)
+
 ## Installation
 
 I use [Homesick](https://github.com/technicalpickles/homesick) to manage and install my dotfiles.
@@ -9,9 +11,5 @@ I use [Homesick](https://github.com/technicalpickles/homesick) to manage and ins
 ```
 $ homesick clone mcansh/dotfiles
 $ homesick symlink dotfiles
-```
-
-run the install command
-```
 $ homesick exec dotfiles install-script.sh
 ```
