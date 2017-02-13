@@ -40,8 +40,6 @@
 	helper = store
 [commit]
 	gpgsign = true
-#[init]
-	templatedir = /Users/loganmcansh/.git_template/
 [gpg]
 	program = gpg
 [core]
