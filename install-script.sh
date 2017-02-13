@@ -8,7 +8,7 @@ echo "Logging to" $LOG_FILE
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# Set Hostname
+# Set HostName/ComputerName/LocalHostName
 sudo -u $SUDO_USER scutil --set ComputerName "🚀😺"
 sudo -u $SUDO_USER scutil --set LocalHostName "mcansh"
 sudo -u $SUDO_USER scutil --set HostName "mcansh"
@@ -18,16 +18,15 @@ echo "Host name is set to $(hostname)" # TODO Make sure this actually sticks aft
 echo "Setting up computer configuration"
 systemsetup -setcomputersleep 3 # Computer sleeps after 3 minutes
 defaults write com.apple.screensaver askForPassword 1 # Force password entry after sleep
+defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText "This computer belongs to Logan McAnsh, if found please call 586 4198018" # add a message to the login screen
 defaults write com.apple.Safari AutoOpenSafeDownloads -bool false # stop safari from opening downloaded files automatically
-defaults write com.apple.dock autohide -bool true && defaults write com.apple.dock autohide-delay -float 0 && defaults write com.apple.dock autohide-time-modifier -float 0 && killall Dock # autohide dock
+defaults write com.apple.dock autohide -bool true && defaults write com.apple.dock autohide-delay -float 0 && defaults write com.apple.dock autohide-time-modifier -float 0 && killall Dock # autohide dock and remove delay
+defaults write com.apple.Dock orientation -string left # position the dock on the left side
 defaults write com.apple.PowerChime ChimeOnAllHardware -bool true; open /System/Library/CoreServices/PowerChime.app & # enable the PowerChime
-dotfiles=".aliases .bash_profile .bash_prompt .bashrc .gitconfig .hyper.js .open-on-github.sh .zshrc"
 defaults write NSGlobalDomain _HIHideMenuBar -bool true # autohide the menubar
 defaults write NSGlobalDomain AppleInterfaceStyle Dark # dark dock/menubar
 killall Dock # restart dock
 killall -KILL SystemUIServer # restart menubar
-
-mv $DIR/$dotfiles ~/ # move dotfiles to user dir
 
 
 # Check if FileValut is on
