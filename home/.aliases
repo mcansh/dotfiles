@@ -44,14 +44,11 @@ alias backupdotfiles='atomlist; brewfile'
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 
-
 # Lock the screen (when going AFK)
 alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 
-
 # Clean up LaunchServices to remove duplicates in the “Open With” menu
 alias appflush="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
-
 
 # software updates because laziness
 alias update="softwareupdate -ia --verbose"
@@ -59,28 +56,22 @@ alias update="softwareupdate -ia --verbose"
 # update everything
 alias updateall="brew update; brew upgrade --all; brew cleanup; npm update -g; sudo gem update --system /usr/bin/update_rubygems; sudo gem update /usr/local/bin"
 
-
 # Merge PDF files
 # Usage: "mergepdf -o output.pdf input{1,2,3}.pdf"
 alias mergepdf="/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py"
 
-
 # alias for making symlinks (alias)
 alias makethisgohere="ln -s"
-
 
 # compress stuff
 alias zip="zip -r"
 alias tar="tar -jcvf"
 
-
 # make list actually list all
 alias ls="ls -a"
 
-
 # install gems on El Capitan / Sierra
 alias geminstall="sudo gem install -n /usr/local/bin"
-
 
 # maintenance scripts
 alias maintenance="sudo periodic daily weekly monthly"
