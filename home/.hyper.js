@@ -4,7 +4,7 @@ module.exports = {
     fontSize: 13,
 
     // font family with optional fallbacks
-    fontFamily: '"SFMono-Regular"',
+    fontFamily: 'SFMono-Regular',
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
     // cursorColor: 'rgba(248,28,229,0.8)',
@@ -21,6 +21,8 @@ module.exports = {
 
     // border color (window, tabs)
     borderColor: 'none',
+
+    cursorBlink: true,
 
     // custom css to embed in the main window
     css: `
@@ -54,10 +56,6 @@ module.exports = {
         color: #417EB9;
         transition: 300ms all ease-in-out;
       }
-      x-screen a.hover {
-        color: #3BA155;
-        text-decoration: none
-      }
     `,
 
     // set to `true` if you're using a Linux set up
@@ -71,7 +69,7 @@ module.exports = {
     showWindowControls: '',
 
     // custom padding (css format, i.e.: `top right bottom left`)
-    padding: '0px 14px',
+    padding: '5px 14px',
 
     // the full list. if you're going to provide the full color palette,
     // including the 6 x 6 color cubes and the grayscale map, just provide
@@ -109,11 +107,11 @@ module.exports = {
     // set to false for no bell
     bell: 'false',
 
-    // if true, selected text will automatically be copied to the clipboard
-    copyOnSelect: false,
-
     // URL to custom bell
     // bellSoundURL: 'http://example.com/bell.mp3',
+
+    // if true, selected text will automatically be copied to the clipboard
+    copyOnSelect: false,
 
     // for advanced config flags please refer to https://hyper.is/#cfg
     windowSize: [650,440],
@@ -127,7 +125,6 @@ module.exports = {
   //   `project#1.0.1`
   plugins: [
     `hyperlinks`,
-    `hyper-blink`,
     `hypercwd`,
     `hyperterm-panda`,
     `hyperterm-close-on-left`,

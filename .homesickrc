@@ -16,9 +16,9 @@ echo "Host name is set to $(hostname)" # TODO Make sure this actually sticks aft
 
 # Mac configuration
 echo "Setting up computer configuration"
-systemsetup -setcomputersleep 3 # Computer sleeps after 3 minutes
+sudo -u $SUDO_USER systemsetup -setcomputersleep 3 # Computer sleeps after 3 minutes
 defaults write com.apple.screensaver askForPassword 1 # Force password entry after sleep
-defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText "This computer belongs to Logan McAnsh, if found please call 586 4198018" # add a message to the login screen
+defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText "This computer belongs to Logan McAnsh" # add a message to the login screen
 defaults write com.apple.Safari AutoOpenSafeDownloads -bool false # stop safari from opening downloaded files automatically
 defaults write com.apple.dock autohide -bool true && defaults write com.apple.dock autohide-delay -float 0 && defaults write com.apple.dock autohide-time-modifier -float 0 && killall Dock # autohide dock and remove delay
 defaults write com.apple.Dock orientation -string left # position the dock on the left side
@@ -60,7 +60,7 @@ sudo -u $SUDO_USER brew cask install Caskroom/cask/$cask_apps
 sudo -u $SUDO_USER brew bundle
 
 # Install Atom Packages
-echo "Installing Atom Packages... This may take a sec"
+echo "Installing Atom Packages... This will take a few..."
 
 if [ apm ]; then
   apm install --packages-file ~/.homesick/repos/dotfiles/atom-list.txt
@@ -72,16 +72,16 @@ fi
 
 # Install Mac Store Apps
 if mas account; then
-    echo "Installing Mac Store Apps..."
-    mac_apps_ids="497799835 1053031090 443987910 1083965373 446107677 557168941 924726344 439697913 936243210 1152443474 1126100185 490192174 984968384 1081413713"
-    sudo -u $SUDO_USER mas install $mac_apps_ids
+  echo "Installing Mac Store Apps..."
+  mac_apps_ids="497799835 1053031090 443987910 1083965373 446107677 557168941 924726344 439697913 936243210 1152443474 1126100185 490192174 984968384 1081413713"
+  sudo -u $SUDO_USER mas install $mac_apps_ids
 else
-    echo "Not signed in to MAS. You'll need to install them manually for now :("
+  echo "Not signed in to MAS. You'll need to install them manually 😭"
 fi
 
 
-# TODO Mac Software Update Check and install updates
+# Mac Software Update Check and install updates
 softwareupdate -ia --verbose
 
-#WE OUT
-echo "all done!:) 🙏🙏🙏🙏🙏🙏🙏🙏🙏🙏🙏🙏🙏"
+# WE OUT
+echo "Welcome to your newly configured MacBook"
