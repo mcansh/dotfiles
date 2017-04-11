@@ -5,6 +5,7 @@ module.exports = {
 
     // font family with optional fallbacks
     fontFamily: 'SFMono-Regular',
+    uiFontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
     // cursorColor: 'rgba(248,28,229,0.8)',
@@ -22,7 +23,7 @@ module.exports = {
     // border color (window, tabs)
     borderColor: 'none',
 
-    cursorBlink: true,
+    cursorBlink: false,
 
     // custom css to embed in the main window
     css: `
@@ -128,6 +129,7 @@ module.exports = {
     `hypercwd`,
     `hyperterm-panda`,
     `hyperterm-close-on-left`,
+    `hyperterm-alternatescroll`
     // `hyper-simple-vibrancy`
   ],
 

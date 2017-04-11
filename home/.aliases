@@ -21,6 +21,7 @@ alias fixthatfuckingcommit="git commit --amend -sam"
 alias youregonnalearntoday="cd ~/learn; source ~/.flatiron_bash"
 
 # atom beta > atom
+alias a="atom"
 alias atom="atom-beta ."
 
 # apm beta > api
@@ -36,6 +37,8 @@ alias atominstall='apm install --packages-file ~/.homesick/repos/dotfiles/atom-l
 
 # keep a log of installed brew files
 alias brewfile="brew bundle dump --force; mv brewfile ~/.homesick/repos/dotfiles/Brewfile"
+
+alias brewup="brew update && brew doctor && brew outdated && brew upgrade && brew cleanup"
 
 # stuff to do when backing up
 alias backupdotfiles='atomlist; brewfile'
