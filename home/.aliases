@@ -84,3 +84,6 @@ alias slackmoji="sips -Z 128 $1"
 
 # add space to dock
 alias space="defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}'; killall Dock"
+
+alias cloneOpen='f() { git clone $1 && cd $1 && atom };f'
+#alias example='f() { echo Your arg was $1. };f'
