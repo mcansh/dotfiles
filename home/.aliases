@@ -85,5 +85,19 @@ alias slackmoji="sips -Z 128 $1"
 # add space to dock
 alias space="defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}'; killall Dock"
 
-alias cloneOpen='f() { git clone $1 && cd $1 && atom };f'
-#alias example='f() { echo Your arg was $1. };f'
+# clone repo, cd into it, fork it on github, and open it in atom
+# requires https://hub.github.com/
+alias cloneOpen='f() {
+  if [[ $# == 2 ]]
+  then
+    git clone "$1/$2" &&
+    cd $2 &&
+    git fork $2
+    atom
+  else
+    git clone $1 &&
+    cd $1 &&
+    git fork $1 &&
+    atom
+  fi
+};f'

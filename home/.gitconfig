@@ -5,7 +5,7 @@
 [user]
 	name = Logan McAnsh
 	email = logan@mcan.sh
-	signingkey = C33D163F
+	signingkey = D01F199AC33D163F
 [push]
 	default = simple
 [color]
@@ -30,7 +30,7 @@
 	# displays commits of current repo
 	ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
 
-	# shows current branch's last commit with absolute date
+	# shows every branch's last commit absolute date
 	b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
 	ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
 
@@ -45,5 +45,3 @@
 [core]
 	excludesfile = /Users/loganmcansh/.gitignore_global
 	editor = atom --wait
-[init]
-	templatedir = ~/.git_template
