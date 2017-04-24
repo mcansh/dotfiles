@@ -45,3 +45,5 @@
 [core]
 	excludesfile = /Users/loganmcansh/.gitignore_global
 	editor = atom --wait
+[hub]
+	protocol = ssh

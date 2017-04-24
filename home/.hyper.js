@@ -27,6 +27,9 @@ module.exports = {
 
     // custom css to embed in the main window
     css: `
+      .tabs_nav.nav_1qfk {
+        overflow: hidden;
+      }
       .tab_tab {
         position: relative;
         width: 100%;

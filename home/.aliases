@@ -76,6 +76,9 @@ alias ls="ls -a"
 # install gems on El Capitan / Sierra
 alias geminstall="sudo gem install -n /usr/local/bin"
 
+# update gem quickly
+alias bup="bundle up"
+
 # maintenance scripts
 alias maintenance="sudo periodic daily weekly monthly"
 
