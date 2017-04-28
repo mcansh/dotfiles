@@ -41,7 +41,7 @@ alias brewfile="brew bundle dump --force; mv brewfile ~/.homesick/repos/dotfiles
 alias brewup="brew update && brew doctor && brew outdated && brew upgrade && brew cleanup"
 
 # stuff to do when backing up
-alias backupdotfiles='atomlist; brewfile'
+alias backupdotfiles='atomlist && brewfile'
 
 # Hide/show all desktop icons (useful when presenting)
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
@@ -85,6 +85,9 @@ alias maintenance="sudo periodic daily weekly monthly"
 # slack emoji magic
 alias slackmoji="sips -Z 128 $1"
 
+# gifify 60fps
+alias gifify60="gifify -r 60 $1"
+
 # add space to dock
 alias space="defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}'; killall Dock"
 
@@ -93,7 +96,10 @@ alias space="defaults write com.apple.dock persistent-apps -array-add '{"tile-ty
 alias cloneOpen='f() {
   if [[ $# == 1 && $1 == *"//github.com/"* ]]
   then
-    echo "feature coming soon"
+    url=$1
+    path=${url#*://github.com/}
+    repo=${path#*/}
+    git clone "$url" && echo "$path"
   elif [[ $# == 2 ]]
   then
     git clone "$1/$2" &&
@@ -103,7 +109,6 @@ alias cloneOpen='f() {
   else
     git clone $1 &&
     cd $1 &&
-    git fork $1 &&
     atom
   fi
 };f'
