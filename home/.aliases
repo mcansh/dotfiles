@@ -11,8 +11,10 @@ alias gd="git diff"
 alias gdd="git diff --staged"
 alias gco="git checkout"
 
+alias o="open ."
+
 # fuck bundler
-alias be="bundle exec"
+alias b="bundle exec"
 
 # fix commit messages
 alias fixthatfuckingcommit="git commit --amend -sam"
@@ -53,7 +55,7 @@ alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resource
 # Clean up LaunchServices to remove duplicates in the “Open With” menu
 alias appflush="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
 
-# software updates because laziness
+# software updates
 alias update="softwareupdate -ia --verbose"
 
 # update everything
@@ -92,23 +94,24 @@ alias gifify60="gifify -r 60 $1"
 alias space="defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}'; killall Dock"
 
 # clone repo, cd into it, fork it on github, and open it in atom
-# requires https://hub.github.com/
+# requires https://hub.github.com for forking and cloning (user/repos)
 alias cloneOpen='f() {
   if [[ $# == 1 && $1 == *"//github.com/"* ]]
   then
     url=$1
-    path=${url#*://github.com/}
-    repo=${path#*/}
-    git clone "$url" && echo "$path"
+    userRepo=${url#*://github.com/}
+    repo=${userRepo#*/}
+    echo "git clone $userRepo && cd $repo && git fork && atom ."
+    git clone $userRepo && cd $repo && git fork && atom .
   elif [[ $# == 2 ]]
   then
-    git clone "$1/$2" &&
-    cd $2 &&
-    git fork $2
-    atom
+    user=$1
+    repo=$2
+    git clone "$user/$repo" && cd $repo && git fork && atom .
   else
+    # this would if the repo is yours, so no need to fork it
     git clone $1 &&
     cd $1 &&
-    atom
+    atom .
   fi
 };f'
