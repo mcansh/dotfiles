@@ -128,12 +128,12 @@ module.exports = {
   //   `@company/project`
   //   `project#1.0.1`
   plugins: [
-    // `hyperlinks`,
-    `hypercwd`,
-    `hyperterm-panda`,
-    `hyperterm-close-on-left`,
-    `hyperterm-alternatescroll`
-    // `hyper-simple-vibrancy`
+    // 'hyperlinks',
+    'hypercwd',
+    'hyperterm-cobalt2-theme',
+    // `hyperterm-panda`,
+    'hyperterm-close-on-left',
+    'hyperterm-alternatescroll'
   ],
 
   // in development, you can create a directory under
