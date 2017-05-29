@@ -93,25 +93,34 @@ alias gifify60="gifify -r 60 $1"
 # add space to dock
 alias space="defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}'; killall Dock"
 
-# clone repo, cd into it, fork it on github, and open it in atom
+# clone repo, cd into it, fork it on github (if its a github repo), and open it in atom
 # requires https://hub.github.com for forking and cloning (user/repos)
 alias cloneOpen='f() {
-  if [[ $# == 1 && $1 == *"//github.com/"* ]]
-  then
-    url=$1
-    userRepo=${url#*://github.com/}
-    repo=${userRepo#*/}
-    echo "git clone $userRepo && cd $repo && git fork && atom ."
-    git clone $userRepo && cd $repo && git fork && atom .
-  elif [[ $# == 2 ]]
-  then
-    user=$1
-    repo=$2
-    git clone "$user/$repo" && cd $repo && git fork && atom .
-  else
-    # this would if the repo is yours, so no need to fork it
-    git clone $1 &&
-    cd $1 &&
-    atom .
-  fi
+  urls=('github.com' 'bitbucket.org' 'gitlab.com')
+  url=$1
+  for i in "${urls[@]}"
+  do
+    if [[ $url =~ $i ]]
+    then
+      if [[ $url =~ 'http://' || $url =~ 'https://' ]]
+      then
+        userRepo=${url#*://$i/}
+      elif [[ $url =~ 'git@' ]]
+      then
+        userRepo=${url#*@$i:}
+      fi
+      repo=${userRepo#*/}
+      repo_no_ext=$(basename ${repo#*/} .git)
+      echo $userRepo
+      echo $repo
+      echo $repo_no_ext
+
+      if [[ $url =~ 'github.com' ]]
+      then
+        git clone $url && cd $repo_no_ext && git fork && atom .
+      else
+        git clone $url && cd $repo_no_ext && atom .
+      fi
+    fi
+  done
 };f'
