@@ -47,7 +47,11 @@ sudo -u $SUDO_USER /usr/bin/ruby -e "$(curl -fsSL https://raw.github.com/robbyru
 
 # Setup Software
 echo "Installing software from cask... (may take a bit if your internet is shit)"
-cask_apps="atom codekit cyberduck handbrake hyper transmission google-chrome zoomus"
+cask_apps=('atom-beta' 'codekit' 'cyberduck' 'handbrake' 'hyper' 'transmission-nightly' 'google-chrome' 'google-chrome-canary' 'zoomus' 'whiskey' 'slack')
+for i in "${cask_apps[@]}"
+do
+  brew cask install "${cask_apps[@]}"
+done
 
 sudo -u $SUDO_USER brew install mas # We will need this in a bit for installing MAS
 sudo -u $SUDO_USER brew install gnupg21 android-platform-tools gifify hub pinentry-mac thefuck
