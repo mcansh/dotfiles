@@ -1,100 +1,101 @@
+# Did you know that double quotes actually make a difference here?
+# Well I found that double quote meant the terminal executed some
+# commands on launch
+
 # git shortcuts
-alias g="git"
-alias ga="git add -A"
-alias gcl="git clone"
-alias gs="git s"
-alias gp="git push"
-alias gpf="git push -f"
-alias gc="git commit -sam"
-alias gpu="git pull"
-alias gd="git diff"
-alias gdd="git diff --staged"
-alias gco="git checkout"
+alias g='git'
+alias ga='git add -A'
+alias gcl='git clone'
+alias gs='git s'
+alias gp='git push'
+alias gpf='git push -f'
+alias gc='git commit -sam'
+alias gpu='git pull'
+alias gd='git diff'
+alias gdd='git diff --staged'
+alias gco='git checkout'
 
-alias o="open ."
+alias o='open .'
 
-# fuck bundler
-alias b="bundle exec"
+# fuck ruby <3
+alias b='bundle exec'
 
 # fix commit messages
-alias fixthatfuckingcommit="git commit --amend -sam"
-
-# use the learn bash and cd into my Learn folder
-alias youregonnalearntoday="cd ~/learn; source ~/.flatiron_bash"
+alias fixthatfuckingcommit='git commit --amend -sam'
 
 # atom beta > atom
-alias a="atom"
-alias atom="atom-beta ."
+alias a='atom'
+alias atom='atom-beta .'
 
-# apm beta > api
+# apm beta > apm
 alias apm='apm-beta'
 
-# start a simple server
+# start a local server
 alias server='python -m SimpleHTTPServer'
 
 # keep a log of installed atom packages
 alias atomlist='apm list --installed --bare > ~/.homesick/repos/dotfiles/atom-list.txt'
+
 # install the packages in that log
 alias atominstall='apm install --packages-file ~/.homesick/repos/dotfiles/atom-list.txt'
 
 # keep a log of installed brew files
-alias brewfile="brew bundle dump --force; mv brewfile ~/.homesick/repos/dotfiles/Brewfile"
+alias brewfile='brew bundle dump --force; mv brewfile ~/.homesick/repos/dotfiles/Brewfile'
 
-alias brewup="brew update && brew doctor && brew outdated && brew upgrade && brew cleanup"
+alias brewup='brew update && brew doctor && brew outdated && brew upgrade && brew cleanup'
 
 # stuff to do when backing up
 alias backupdotfiles='atomlist && brewfile'
 
 # Hide/show all desktop icons (useful when presenting)
-alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
-alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
+alias hidedesktop='defaults write com.apple.finder CreateDesktop -bool false && killall Finder'
+alias showdesktop='defaults write com.apple.finder CreateDesktop -bool true && killall Finder'
 
 # Lock the screen (when going AFK)
-alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+alias afk='/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend'
 
 # Clean up LaunchServices to remove duplicates in the “Open With” menu
-alias appflush="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
+alias appflush='/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder'
 
 # software updates
-alias update="softwareupdate -ia --verbose"
+alias update='softwareupdate -ia --verbose'
+
+# update ruby gems
+alias gemupdate='gem update ~/.gem'
+
+# update npm and global node_modules
+alias npmupdate='sudo npm update -g'
 
 # update everything
-alias updateall="brewup; sudo npm update -g; sudo gem update --system /usr/bin/update_rubygems; sudo gem update /usr/local/bin; update"
-
-# Merge PDF files
-# Usage: "mergepdf -o output.pdf input{1,2,3}.pdf"
-alias mergepdf="/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py"
+alias updateall='brewup && npmupdate && gemupdate'
 
 # alias for making symlinks (alias)
-alias makethisgohere="ln -s"
-
-# compress stuff
-alias zip="zip -r"
-alias tar="tar -jcvf"
+alias makethisgohere='ln -s'
 
 # make list actually list all
-alias ls="ls -a"
+alias ls='ls -a'
 
-# install gems on El Capitan / Sierra
-alias geminstall="sudo gem install -n /usr/local/bin"
-
-# update gem quickly
-alias bup="bundle up"
+# update gems in gemfile
+alias bup='bundle update'
 
 # maintenance scripts
-alias maintenance="sudo periodic daily weekly monthly"
+alias maintenance='sudo periodic daily weekly monthly'
 
 # slack emoji magic
-alias slackmoji="sips -Z 128 $1"
+alias slackmoji='sips -Z 128 $1'
 
 # gifify 60fps
-alias gifify60="gifify -r 60 $1"
+alias gifify60='gifify -r 60 $1 -o "$1.gif"'
 
 # add space to dock
 alias space="defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}'; killall Dock"
 
+alias please='sudo $(fc -ln -1)'
+
+alias addESLint='cp ~/.eslintrc ./'
+
 # clone repo, cd into it, fork it on github (if its a github repo), and open it in atom
-# requires https://hub.github.com for forking and cloning (user/repos)
+# requires https://hub.github.com for forking and cloning (in the fashion that I am)
 alias cloneOpen='f() {
   urls=('github.com' 'bitbucket.org' 'gitlab.com')
   url=$1
@@ -124,3 +125,7 @@ alias cloneOpen='f() {
     fi
   done
 };f'
+
+
+alias dl='cd ~/Downloads'
+alias p='cd ~/Projects'
