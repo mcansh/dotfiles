@@ -30,35 +30,26 @@ module.exports = {
       .tabs_nav.nav_1qfk {
         overflow: hidden;
       }
+
       .tab_tab {
-        position: relative;
+        background: rgba(255,255,255,0.05);
         width: 100%;
         border: none
       }
-      .tab_tab::after {
-        content: '';
-        transform: scaleX(0);
-        transform-origin: left center;
+      
+      .tab_tab.tab_active {
+        background: none;
       }
 
-      .tab_active::after {
-        position: absolute;
-        content: '';
-        width: 100%;
-        height: 2px;
-        bottom: 0;
-        left: 0;
-        background: #3BA155;
-        transition: 300ms all ease-in-out;
-        transform: scaleX(1);
+      .tabs_borderShim.borderShim_nfs {
+        border-color: transparent !important;
       }
     `,
 
     // custom css to embed in the terminal window
     termCSS: `
       x-screen a {
-        color: #417EB9;
-        transition: 300ms all ease-in-out;
+        color: #fee553;
       }
     `,
 
@@ -127,14 +118,9 @@ module.exports = {
   //   `hyperpower`
   //   `@company/project`
   //   `project#1.0.1`
-  plugins: [
-    // 'hyperlinks',
-    'hypercwd',
-    'hyperterm-cobalt2-theme',
-    // `hyperterm-panda`,
-    'hyperterm-close-on-left',
-    'hyperterm-alternatescroll'
-  ],
+  plugins: ["hyperterm-cobalt2-theme", "hypercwd", "hyperterm-alternatescroll", "hyperlinks", "hyperterm-close-on-left"],
+  // `hyperterm-panda`,
+
 
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here
