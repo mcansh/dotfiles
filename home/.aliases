@@ -85,7 +85,7 @@ alias maintenance='sudo periodic daily weekly monthly'
 alias slackmoji='sips -Z 128 $1'
 
 # gifify 60fps
-alias gifify60='gifify -r 60 $1 -o "$1.gif"'
+alias gifify60='gifify -r 60 $1'
 
 # add space to dock
 alias space="defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}'; killall Dock"
