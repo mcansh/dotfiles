@@ -22,16 +22,13 @@ brew "lame"
 brew "git"
 brew "xvid"
 brew "ffmpeg"
-brew "jpeg"
-brew "libtool"
-brew "imagemagick"
-brew "gifify"
 brew "gmp"
-brew "libtasn1"
 brew "libunistring"
 brew "nettle"
 brew "guetzli"
 brew "hub"
+brew "jpeg"
+brew "libtool"
 brew "libusb"
 brew "libusb-compat"
 brew "libyaml"
@@ -42,6 +39,8 @@ brew "npth"
 brew "openssl@1.1"
 brew "phantomjs"
 brew "postgresql"
+brew "rbenv"
+brew "ruby"
 brew "thefuck"
 brew "yarn"
 brew "youtube-dl"
@@ -54,9 +53,7 @@ mas "1Password", id: 443987910
 mas "Battery Health", id: 490192174
 mas "Boxy", id: 1053031090
 mas "Cashew", id: 1126100185
-mas "Deliveries", id: 924726344
 mas "Filters for Photos", id: 1083965373
-mas "GIF Brewery 3", id: 1081413713
 mas "Icon Slate", id: 439697913
 mas "MiniPlay", id: 936243210
 mas "Pages", id: 409201541
