@@ -16,7 +16,7 @@ echo "Host name is set to $(hostname)" # TODO Make sure this actually sticks aft
 
 # Mac configuration
 echo "Setting up computer configuration"
-sudo -u $SUDO_USER systemsetup -setcomputersleep 3 # Computer sleeps after 3 minutes
+sudo -u $SUDO_USER systemsetup -setcomputersleep 2 # Computer sleeps after 2 minutes
 defaults write com.apple.screensaver askForPassword 1 # Force password entry after sleep
 defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText "This computer belongs to Logan McAnsh" # add a message to the login screen
 defaults write com.apple.Safari AutoOpenSafeDownloads -bool false # stop safari from opening downloaded files automatically
@@ -64,7 +64,7 @@ echo "Installing Atom Packages... This will take a few..."
 
 if [ apm ]; then
   apm install --packages-file ~/.homesick/repos/dotfiles/atom-list.txt
-else if [apm-beta]; then
+else if [ apm-beta ]; then
   apm-beta install --packages-file ~/.homesick/repos/dotfiles/atom-list.txt
 else
   echo "Couldn't find apm or apm-beta... You'll need to manually install your atom packages 😭"
@@ -73,7 +73,7 @@ fi
 # Install Mac Store Apps
 if mas account; then
   echo "Installing Mac Store Apps..."
-  mac_apps_ids="497799835 1053031090 443987910 1083965373 446107677 557168941 924726344 439697913 936243210 1152443474 1126100185 490192174 984968384 1081413713"
+  mac_apps_ids="497799835 443987910 924726344 557168941 409201541 439697913 490192174 1152443474 984968384"
   sudo -u $SUDO_USER mas install $mac_apps_ids
 else
   echo "Not signed in to MAS. You'll need to install them manually 😭"
