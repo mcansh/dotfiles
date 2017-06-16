@@ -23,12 +23,10 @@ alias b='bundle exec'
 # fix commit messages
 alias fixthatfuckingcommit='git commit --amend -sam'
 
-# atom beta > atom
-alias a='atom'
-alias atom='atom-beta .'
-
-# apm beta > apm
+# remap atom commands to atom-beta
 alias apm='apm-beta'
+alias atom='atom-beta .'
+alias a='atom'
 
 # start a local server
 alias server='python -m SimpleHTTPServer'
@@ -88,11 +86,7 @@ alias slackmoji='sips -Z 128 $1'
 alias gifify60='gifify -r 60 $1'
 
 # add space to dock
-alias space="defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}'; killall Dock"
-
-alias please='sudo $(fc -ln -1)'
-
-alias addESLint='cp ~/.eslintrc ./'
+alias space='defaults write com.apple.dock persistent-apps -array-add "{'tile-type'='spacer-tile';}"; killall Dock'
 
 # clone repo, cd into it, fork it on github (if its a github repo), and open it in atom
 # requires https://hub.github.com for forking and cloning (in the fashion that I am)
@@ -126,6 +120,13 @@ alias cloneOpen='f() {
   done
 };f'
 
+# zip a given folder
+alias zip='f() {
+  filename=$1
+  zip -r $filename.zip $filename
+};f'
 
-alias dl='cd ~/Downloads'
-alias p='cd ~/Projects'
+alias please='sudo $(fc -ln -1)'
+
+alias addESLint='cp ~/.eslintrc ./'
+alias addNextJSESLint='cp ~/.eslintrc-nextjs ./eslintrc'
