@@ -21,7 +21,7 @@ module.exports = {
     backgroundColor: '#2b3e50',
 
     // border color (window, tabs)
-    borderColor: 'none',
+    borderColor: 'transparent',
 
     cursorBlink: false,
 
@@ -34,9 +34,9 @@ module.exports = {
       .tab_tab {
         background: rgba(255,255,255,0.05);
         width: 100%;
-        border: none
+        border: none;
       }
-      
+
       .tab_tab.tab_active {
         background: none;
       }
@@ -118,8 +118,14 @@ module.exports = {
   //   `hyperpower`
   //   `@company/project`
   //   `project#1.0.1`
-  plugins: ["hyperterm-cobalt2-theme", "hypercwd", "hyperterm-alternatescroll", "hyperlinks", "hyperterm-close-on-left"],
-  // `hyperterm-panda`,
+  plugins: [
+    'hyperterm-cobalt2-theme',
+    'hypercwd',
+    'hyperterm-alternatescroll',
+    'hyperlinks',
+    'hyperterm-close-on-left',
+    // 'hyperterm-panda'
+  ],
 
 
   // in development, you can create a directory under
