@@ -121,12 +121,6 @@ alias cloneOpen='f() {
   done
 };f'
 
-# zip a given folder
-alias zip='f() {
-  filename=$1
-  zip -r $filename.zip $filename
-};f'
-
 alias please='sudo $(fc -ln -1)'
 
 alias addESLint='cp ~/.eslintrc.js ./ && yarn add --dev eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react'
