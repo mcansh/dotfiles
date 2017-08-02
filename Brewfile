@@ -54,15 +54,11 @@ cask "google-chrome-canary"
 cask "sublime-text"
 cask "transmission"
 cask "zoomus"
-mas "1Password", id: 443987910
 mas "Battery Health", id: 490192174
-mas "Boxy", id: 1053031090
 mas "Cashew", id: 1126100185
+mas "Contrast", id: 1254981365
 mas "Filters for Photos", id: 1083965373
 mas "Icon Slate", id: 439697913
-mas "MiniPlay", id: 936243210
 mas "Pages", id: 409201541
 mas "Redacted", id: 984968384
 mas "Squash", id: 1152443474
-mas "Tweetbot", id: 557168941
-mas "Xcode", id: 497799835
