@@ -110,9 +110,6 @@ alias cloneOpen='f() {
       fi
       repo=${userRepo#*/}
       repo_no_ext=$(basename ${repo#*/} .git)
-      echo $userRepo
-      echo $repo
-      echo $repo_no_ext
 
       if [[ $url =~ 'github.com' ]]
       then
