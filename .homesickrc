@@ -12,7 +12,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 sudo -u $SUDO_USER scutil --set ComputerName "🚀😺"
 sudo -u $SUDO_USER scutil --set LocalHostName "mcansh"
 sudo -u $SUDO_USER scutil --set HostName "mcansh"
-echo "Host name is set to $(hostname)" # TODO Make sure this actually sticks after restart
+echo "Host name is set to $(hostname)"
 
 # Mac configuration
 echo "Setting up computer configuration"
@@ -37,13 +37,20 @@ fi
 if [ "$(fdesetup status)" == "FileVault is Off." ]; then
   echo "Disk encryption not enabled. Enabling now..."
   fdesetup enable
+  echo "Disk encryption is now enabled. 💯🔥"
 fi
 
-# Setup Brew
+# Install Brew
 sudo -u $SUDO_USER /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-# Setup oh my zsh
+# Install ZSH
+sudo -u $SUDO_USER brew install zsh zsh-completions
+
+# Install oh my ZSH
 sudo -u $SUDO_USER /usr/bin/ruby -e "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+# Install Zeit's theme (usage is in .zshrc)
+sudo -u $SUDO_USER curl https://raw.githubusercontent.com/zeit/zeit.zsh-theme/master/zeit.zsh-theme -Lo ~/.oh-my-zsh/themes/zeit.zsh-theme
 
 # Setup Software
 echo "Installing software from cask... (may take a bit if your internet is shit)"
