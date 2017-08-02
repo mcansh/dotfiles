@@ -16,6 +16,8 @@ alias gpu='git pull'
 alias gd='git diff'
 alias gdd='git diff --staged'
 alias gco='git checkout'
+alias gh='git open'
+alias gt='git tag'
 
 alias o='open .'
 
