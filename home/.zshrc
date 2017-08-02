@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=~/.oh-my-zsh
+export ZSH=/Users/logansmcansh/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -88,14 +88,14 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Load ~/.aliases
-[ -f .aliases ] && source .aliases
+source ~/.aliases
 
 # load hub
 eval "$(hub alias -s)"
 
 # load thefuck
 # You can use whatever you want as an alias, like for Mondays:
-eval "$(thefuck --alias FUCK)"
+# eval "$(thefuck --alias FUCK)"
 
 # GPG
 # export GPG_TTY=$(tty)
@@ -116,3 +116,5 @@ fi
 
 # load rbenv
 eval "$(rbenv init - --no-rehash)"
+
+eval $(thefuck --alias)
