@@ -113,7 +113,12 @@ alias cloneOpen='f() {
 
       if [[ $url =~ 'github.com' ]]
       then
-        git clone $url && cd $repo_no_ext && git fork && atom .
+        if [[ ${userRepo:0:17} = "learn-co-students" ]]
+        then
+          git clone $url && cd $repo_no_ext && git fork && git remote remove origin && git remote rename mcansh origin && atom .
+        else
+          git clone $url && cd $repo_no_ext && git fork && atom .
+        fi
       else
         git clone $url && cd $repo_no_ext && atom .
       fi
