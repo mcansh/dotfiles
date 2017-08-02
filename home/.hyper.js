@@ -119,12 +119,12 @@ module.exports = {
   //   `@company/project`
   //   `project#1.0.1`
   plugins: [
-    'hyperterm-cobalt2-theme',
+    'hyperterm-close-on-left',
     'hypercwd',
     'hyperterm-alternatescroll',
     'hyperlinks',
-    'hyperterm-close-on-left',
-    // 'hyperterm-panda'
+    "hyperterm-cobalt2-theme"
+    // 'hyperterm-panda',
   ],
 
 
