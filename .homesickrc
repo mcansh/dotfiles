@@ -82,13 +82,11 @@ else
 fi
 
 # Install Mac Store Apps
-if mas account; then
-  echo "Installing Mac Store Apps..."
-  mac_apps_ids="497799835 443987910 924726344 557168941 409201541 439697913 490192174 1152443474 984968384"
-  sudo -u $SUDO_USER mas install $mac_apps_ids
-else
-  echo "Not signed in to MAS. You'll need to install them manually 😭"
-fi
+open "/Applications/App Store.app"
+echo "Ensure you are signed in to the App Store, then hit return"; read
+echo "Installing Mac Store Apps..."
+mac_apps_ids=""
+sudo -u $SUDO_USER mas install $mac_apps_ids
 
 
 # Mac Software Update Check and install updates
