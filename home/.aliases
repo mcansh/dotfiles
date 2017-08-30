@@ -31,6 +31,9 @@ alias fixthatfuckingcommit='git commit --amend -sam'
 alias apm='apm-beta'
 alias atom='atom-beta .'
 alias a='atom'
+alias code='code-insiders .'
+alias c='code'
+
 
 # start a local server
 alias server='python -m SimpleHTTPServer'
