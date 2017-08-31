@@ -81,13 +81,6 @@ else
   echo "Couldn't find apm or apm-beta... You'll need to manually install your atom packages 😭"
 fi
 
-# Install Mac Store Apps
-open "/Applications/App Store.app"
-echo "Ensure you are signed in to the App Store, then hit return"; read
-echo "Installing Mac Store Apps..."
-mac_apps_ids=""
-sudo -u $SUDO_USER mas install $mac_apps_ids
-
 
 # Mac Software Update Check and install updates
 softwareupdate -ia --verbose
