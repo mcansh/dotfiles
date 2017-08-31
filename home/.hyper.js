@@ -5,42 +5,38 @@ module.exports = {
 
     // font family with optional fallbacks
     fontFamily: 'SFMono-Medium',
-    uiFontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
-    // cursorColor: 'rgba(248,28,229,0.8)',
-    cursorColor: '#EAC72E',
+    cursorColor: 'rgba(248,28,229,0.8)',
 
     // `BEAM` for |, `UNDERLINE` for _, `BLOCK` for █
     cursorShape: 'BLOCK',
+
+    // set to true for blinking cursor
+    cursorBlink: false,
 
     // color of the text
     foregroundColor: '#fff',
 
     // terminal background color
-    backgroundColor: '#2b3e50',
+    backgroundColor: '#000',
 
     // border color (window, tabs)
-    borderColor: 'transparent',
-
-    cursorBlink: false,
+    borderColor: '#333',
 
     // custom css to embed in the main window
     css: `
       .tabs_nav.nav_1qfk {
         overflow: hidden;
       }
-
       .tab_tab {
         background: rgba(255,255,255,0.05);
         width: 100%;
         border: none;
       }
-
       .tab_tab.tab_active {
         background: none;
       }
-
       .tabs_borderShim.borderShim_nfs {
         border-color: transparent !important;
       }
@@ -70,27 +66,27 @@ module.exports = {
     // including the 6 x 6 color cubes and the grayscale map, just provide
     // an array here instead of a color map object
     colors: {
-      black: '#2F3D50',
-      red: '#B73730',
-      green: '#EA9E2C',
-      yellow: '#FC8589',
-      blue: '#417EB9',
-      magenta: '#954EB4',
-      cyan: '#85C774',
-      white: '#BEC3C7',
-      lightBlack: '#2D3B4C',
-      lightRed: '#DD4941',
-      lightGreen: '#3BA155',
-      lightYellow: '#EAC72E',
-      lightBlue: '#4F93D8',
-      lightMagenta: '#954EB4',
-      lightCyan: '#45BD9A',
+      black: '#000000',
+      red: '#ff0000',
+      green: '#33ff00',
+      yellow: '#ffff00',
+      blue: '#0066ff',
+      magenta: '#cc00ff',
+      cyan: '#00ffff',
+      white: '#d0d0d0',
+      lightBlack: '#808080',
+      lightRed: '#ff0000',
+      lightGreen: '#33ff00',
+      lightYellow: '#ffff00',
+      lightBlue: '#0066ff',
+      lightMagenta: '#cc00ff',
+      lightCyan: '#00ffff',
       lightWhite: '#ffffff'
     },
 
     // the shell to run when spawning a new session (i.e. /usr/local/bin/fish)
     // if left empty, your system's login shell will be used by default
-    shell: '/bin/zsh',
+    shell: '',
 
     // for setting shell arguments (i.e. for using interactive shellArgs: ['-i'])
     // by default ['--login'] will be used
@@ -109,7 +105,6 @@ module.exports = {
     copyOnSelect: false,
 
     // for advanced config flags please refer to https://hyper.is/#cfg
-    windowSize: [650,440],
   },
 
   // a list of plugins to fetch and install from npm
@@ -126,7 +121,6 @@ module.exports = {
     "hyperterm-cobalt2-theme"
     // 'hyperterm-panda',
   ],
-
 
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here
