@@ -1,5 +1,13 @@
+// Future versions of Hyper may add additional config options,
+// which will not automatically be merged into this file.
+// See https://hyper.is#cfg for all currently supported options.
+
 module.exports = {
   config: {
+    // Choose either "stable" for receiving highly polished,
+    // or "canary" for less polished but more frequent updates
+    updateChannel: 'canary',
+
     // default font size in pixels for all tabs
     fontSize: 13,
 
@@ -49,8 +57,7 @@ module.exports = {
       }
     `,
 
-    // set to `true` if you're using a Linux set up
-    // that doesn't shows native menus
+    // set to `true` (without backticks) if you're using a Linux setup that doesn't show native menus
     // default: `false` on Linux, `true` on Windows (ignored on macOS)
     showHamburgerMenu: '',
 
@@ -86,6 +93,16 @@ module.exports = {
 
     // the shell to run when spawning a new session (i.e. /usr/local/bin/fish)
     // if left empty, your system's login shell will be used by default
+    //
+    // Windows
+    // - Make sure to use a full path if the binary name doesn't work
+    // - Remove `--login` in shellArgs
+    //
+    // Bash on Windows
+    // - Example: `C:\\Windows\\System32\\bash.exe`
+    //
+    // Powershell on Windows
+    // - Example: `C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe`
     shell: '',
 
     // for setting shell arguments (i.e. for using interactive shellArgs: ['-i'])
@@ -98,11 +115,15 @@ module.exports = {
     // set to false for no bell
     bell: 'false',
 
+    // if true, selected text will automatically be copied to the clipboard
+    copyOnSelect: false
+
+    // if true, on right click selected text will be copied or pasted if no
+    // selection is present (true by default on Windows)
+    // quickEdit: true
+
     // URL to custom bell
     // bellSoundURL: 'http://example.com/bell.mp3',
-
-    // if true, selected text will automatically be copied to the clipboard
-    copyOnSelect: false,
 
     // for advanced config flags please refer to https://hyper.is/#cfg
   },
@@ -127,5 +148,8 @@ module.exports = {
   // to load it and avoid it being `npm install`ed
   localPlugins: [],
 
-  updateChannel: 'canary'
+  keymaps: {
+    // Example
+    // 'window:devtools': 'cmd+alt+o',
+  }
 };
