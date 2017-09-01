@@ -141,7 +141,7 @@ module.exports = {
     'hypercwd',
     'hyperterm-alternatescroll',
     'hyperlinks',
-    "hyperterm-cobalt2-theme"
+    // 'hyperterm-cobalt2-theme'
     // 'hyperterm-panda',
   ],
 
