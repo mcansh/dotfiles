@@ -4,14 +4,15 @@
 
 # git shortcuts
 alias g='git'
-alias ga='git add -A'
+alias ga='git add'
+alias gaa='git add -A'
 alias gcl='git clone'
 alias gcl-submodules='git clone --recursive' # clone a repo with submodules
 alias gimme-submodules='git submodule update --init --recursive' # when you already cloned the repo and need the submodules
 alias gs='git s'
 alias gp='git push'
 alias gpf='git push -f'
-alias gc='git commit -sam'
+alias gc='git commit -sm'
 alias gpu='git pull'
 alias gd='git diff'
 alias gdd='git diff --staged'
