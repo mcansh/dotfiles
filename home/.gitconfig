@@ -45,6 +45,6 @@
 	program = gpg
 [core]
 	excludesfile = /Users/loganmcansh/.gitignore_global
-	editor = atom --wait
+	editor = code --wait
 [hub]
 	protocol = ssh

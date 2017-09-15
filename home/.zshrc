@@ -105,7 +105,7 @@ fi
 
 
 # Set my editor to Atom
-export EDITOR="/usr/local/bin/atom-beta"
+export EDITOR="/usr/local/bin/code-insiders"
 
 autoload -Uz compinit
 if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
@@ -118,3 +118,5 @@ fi
 eval "$(rbenv init - --no-rehash)"
 
 eval $(thefuck --alias)
+
+export N_PREFIX='/usr/local'
