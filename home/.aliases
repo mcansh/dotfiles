@@ -70,11 +70,8 @@ alias update='softwareupdate -ia --verbose'
 # update ruby gems
 alias gemupdate='gem update ~/.gem'
 
-# update npm and global node_modules
-alias npmupdate='sudo npm update -g'
-
 # update everything
-alias updateall='brewup && npmupdate && gemupdate'
+alias updateall='brewup  && gemupdate'
 
 # alias for making symlinks (alias)
 alias makethisgohere='ln -s'
