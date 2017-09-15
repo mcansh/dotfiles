@@ -30,32 +30,13 @@ module.exports = {
     backgroundColor: '#000',
 
     // border color (window, tabs)
-    borderColor: '#333',
+    borderColor: 'transparent',
 
     // custom css to embed in the main window
-    css: `
-      .tabs_nav.nav_1qfk {
-        overflow: hidden;
-      }
-      .tab_tab {
-        background: rgba(255,255,255,0.05);
-        width: 100%;
-        border: none;
-      }
-      .tab_tab.tab_active {
-        background: none;
-      }
-      .tabs_borderShim.borderShim_nfs {
-        border-color: transparent !important;
-      }
-    `,
+    css: '',
 
     // custom css to embed in the terminal window
-    termCSS: `
-      x-screen a {
-        color: #fee553;
-      }
-    `,
+    termCSS: '',
 
     // set to `true` (without backticks) if you're using a Linux setup that doesn't show native menus
     // default: `false` on Linux, `true` on Windows (ignored on macOS)
@@ -148,7 +129,9 @@ module.exports = {
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here
   // to load it and avoid it being `npm install`ed
-  localPlugins: [],
+  localPlugins: [
+    // 'hyper-powerley'
+  ],
 
   keymaps: {
     // Example
