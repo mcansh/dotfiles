@@ -13,3 +13,8 @@ $ homesick clone mcansh/dotfiles
 $ homesick symlink dotfiles
 $ homesick rc dotfiles
 ```
+
+In order to sync vs code settings run:
+```bash
+$ ln -s ./settings.json ~/Library/Application\ Support/Code\ -\ Insiders/User
+```
