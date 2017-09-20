@@ -12,17 +12,19 @@
 [color]
 	ui = 1
 [alias]
-	# add and commit untracked files
+	# show last commit's sha
 	sha = rev-parse HEAD
 	co = checkout
-	cm = "commit -sam"
+	cm = "commit -sm"
 	p = push
+	# add and commit untracked files
 	a = "add -A"
 	s = status
-	remove = "rm -r --cached ."
+	# remove file from git
+	remove = "rm -r --cached"
 	d = diff
 
-	# list aliases
+	# list these aliases
 	la = "!git config -l | grep alias | cut -c 7-"
 
 	# shows files in current repo?
