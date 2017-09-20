@@ -45,6 +45,6 @@
 	program = gpg
 [core]
 	excludesfile = /Users/loganmcansh/.gitignore_global
-	editor = code --wait
+	editor = code-insiders --wait
 [hub]
 	protocol = ssh
