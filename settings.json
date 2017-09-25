@@ -20,9 +20,9 @@
   "workbench.colorTheme": "Cobalt2",
   "eslint.autoFixOnSave": true,
   "editor.formatOnSave": true,
-  "eslint.options": {
-    "configFile": "/Volumes/Macintosh SSD/Users/logansmcansh/.eslintrc.js"
-  },
+  // "eslint.options": {
+  //   "configFile": "/Volumes/Macintosh SSD/Users/logansmcansh/.eslintrc.js"
+  // },
   "vscode_custom_css.imports": [
     "/Volumes/Macintosh SSD/Users/logansmcansh/.vscodestyles.css"
   ],
@@ -41,5 +41,7 @@
   },
   "prettier.eslintIntegration": true,
   "prettier.trailingComma": "all",
-  "terminal.integrated.fontSize": 14
+  "terminal.integrated.fontSize": 14,
+  "prettier.singleQuote": true,
+  "window.zoomLevel": 0
 }
