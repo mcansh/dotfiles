@@ -29,10 +29,7 @@ alias b='bundle exec'
 # fix commit messages
 alias fixthatfuckingcommit='git commit --amend -sam'
 
-# remap atom commands to atom-beta
-alias apm='apm-beta'
-alias atom='atom-beta .'
-alias a='atom'
+# Code
 alias code='code-insiders .'
 alias c='code'
 
@@ -42,19 +39,10 @@ alias hideAllFiles='defaults write com.apple.finder AppleShowAllFiles NO && kill
 # start a local server
 alias server='python -m SimpleHTTPServer'
 
-# keep a log of installed atom packages
-alias atomlist='apm list --installed --bare > ~/.homesick/repos/dotfiles/atom-list.txt'
-
-# install the packages in that log
-alias atominstall='apm install --packages-file ~/.homesick/repos/dotfiles/atom-list.txt'
-
 # keep a log of installed brew files
 alias brewfile='brew bundle dump --force; mv brewfile ~/.homesick/repos/dotfiles/Brewfile'
 
 alias brewup='brew update && brew doctor && brew outdated && brew upgrade && brew cleanup'
-
-# stuff to do when backing up
-alias backupdotfiles='atomlist && brewfile'
 
 # Hide/show all desktop icons (useful when presenting)
 alias hidedesktop='defaults write com.apple.finder CreateDesktop -bool false && killall Finder'
@@ -96,7 +84,7 @@ alias gifify60='gifify -r 60 $1'
 # add space to dock
 alias space='defaults write com.apple.dock persistent-apps -array-add "{'tile-type'='spacer-tile';}"; killall Dock'
 
-# clone repo, cd into it, fork it on github (if its a github repo), and open it in atom
+# clone repo, cd into it, fork it on github (if its a github repo), and open it in code-insiders
 # requires https://hub.github.com for forking and cloning (in the fashion that I am)
 alias cloneOpen='f() {
   urls=('github.com' 'bitbucket.org' 'gitlab.com')
@@ -119,12 +107,12 @@ alias cloneOpen='f() {
       then
         if [[ ${userRepo:0:17} = "learn-co-students" ]]
         then
-          git clone $url && cd $repo_no_ext && git fork && git remote remove origin && git remote rename mcansh origin && atom .
+          git clone $url && cd $repo_no_ext && git fork && git remote remove origin && git remote rename mcansh origin && c
         else
-          git clone $url && cd $repo_no_ext && git fork && atom .
+          git clone $url && cd $repo_no_ext && git fork && c
         fi
       else
-        git clone $url && cd $repo_no_ext && atom .
+        git clone $url && cd $repo_no_ext && c
       fi
     fi
   done
