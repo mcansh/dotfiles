@@ -43,5 +43,6 @@
   "prettier.trailingComma": "all",
   "terminal.integrated.fontSize": 14,
   "prettier.singleQuote": true,
-  "window.zoomLevel": 0
+  "window.zoomLevel": 0,
+  "javascript.format.enable": false
 }
