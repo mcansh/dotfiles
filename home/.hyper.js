@@ -50,7 +50,7 @@ module.exports = {
     // custom padding (css format, i.e.: `top right bottom left`)
     padding: '12px 14px',
 
-    windowSize: [650,440],
+    windowSize: [650, 440],
 
     // the full list. if you're going to provide the full color palette,
     // including the 6 x 6 color cubes and the grayscale map, just provide
@@ -71,7 +71,7 @@ module.exports = {
       lightBlue: '#0066ff',
       lightMagenta: '#cc00ff',
       lightCyan: '#00ffff',
-      lightWhite: '#ffffff'
+      lightWhite: '#ffffff',
     },
 
     // the shell to run when spawning a new session (i.e. /usr/local/bin/fish)
@@ -99,7 +99,7 @@ module.exports = {
     bell: 'false',
 
     // if true, selected text will automatically be copied to the clipboard
-    copyOnSelect: false
+    copyOnSelect: false,
 
     // if true, on right click selected text will be copied or pasted if no
     // selection is present (true by default on Windows)
@@ -129,12 +129,10 @@ module.exports = {
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here
   // to load it and avoid it being `npm install`ed
-  localPlugins: [
-    // 'hyper-powerley'
-  ],
+  localPlugins: [],
 
   keymaps: {
     // Example
     // 'window:devtools': 'cmd+alt+o',
-  }
+  },
 };
