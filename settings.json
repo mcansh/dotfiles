@@ -44,5 +44,6 @@
   "terminal.integrated.fontSize": 14,
   "prettier.singleQuote": true,
   "window.zoomLevel": 0,
-  "javascript.format.enable": false
+  "javascript.format.enable": false,
+  "html.format.enable": false
 }
