@@ -126,5 +126,5 @@ alias addNextJSESLint='cp ~/.eslintrc-nextjs.js ./.eslintrc.js && yarn add -D es
 alias fix-zsh-permissions='sudo chown -R logansmcansh:staff .oh-my-zsh .zs .zsh*'
 
 
-alias yarn-upgrade='yarn upgrade-interactive'
+alias yarn-upgrade='yarn upgrade-interactive --latest'
 alias yarn-global-upgrade='yarn global upgrade-interactive'
