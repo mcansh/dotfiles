@@ -21,6 +21,7 @@
 	# remove file from git
 	remove = "rm -r --cached"
 	d = diff
+	fix = 'commit --fixup'
 
 	# list these aliases
 	la = "!git config -l | grep alias | cut -c 7-"
