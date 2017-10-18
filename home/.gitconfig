@@ -9,8 +9,6 @@
 	signingkey = D01F199AC33D163F
 [push]
 	default = simple
-[color]
-	ui = 1
 [alias]
 	# show last commit's sha
 	sha = rev-parse HEAD
@@ -50,3 +48,12 @@
 	editor = code-insiders --wait
 [hub]
 	protocol = ssh
+[color]
+  pager = true
+  ui = auto
+  status = auto
+  diff = auto
+  branch = auto
+  showBranch = auto
+  interactive = auto
+  grep = auto

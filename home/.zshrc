@@ -114,9 +114,9 @@ else
   compinit -C
 fi
 
-# load rbenv
-eval "$(rbenv init - --no-rehash)"
-
 eval $(thefuck --alias)
 
 export N_PREFIX='/usr/local'
+
+export GEM_HOME=$HOME/.gem
+PATH=$PATH:$HOME/.gem/bin
