@@ -120,3 +120,4 @@ export N_PREFIX='/usr/local'
 
 export GEM_HOME=$HOME/.gem
 PATH=$PATH:$HOME/.gem/bin
+eval "$(rbenv init -)"
