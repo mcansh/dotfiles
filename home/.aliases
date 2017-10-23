@@ -119,3 +119,4 @@ alias fix-zsh-permissions='sudo chown -R logansmcansh:staff .oh-my-zsh .zs .zsh*
 
 alias yarn-upgrade='yarn upgrade-interactive --latest'
 alias yarn-global-upgrade='yarn global upgrade-interactive'
+alias list_global_npm_packages='npm list -g --depth=0'
