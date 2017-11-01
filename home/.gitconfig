@@ -21,7 +21,7 @@
 	# remove file from git
 	remove = "rm -r --cached"
 	d = diff
-	fix = 'commit --fixup'
+	fix = "commit --fixup"
 
 	# list these aliases
 	la = "!git config -l | grep alias | cut -c 7-"
@@ -34,8 +34,6 @@
 
 	# shows every branch's last commit absolute date
 	b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
-	ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
-
 [help]
 	autocorrect = 0
 [credential]
