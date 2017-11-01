@@ -45,5 +45,6 @@
   "prettier.singleQuote": true,
   "window.zoomLevel": 0,
   "javascript.format.enable": false,
-  "html.format.enable": false
+  "html.format.enable": false,
+  "window.title": "${dirty} ${activeEditorMedium}${separator}${rootName}"
 }
