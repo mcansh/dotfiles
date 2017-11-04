@@ -12,7 +12,8 @@ module.exports = {
     fontSize: 13,
 
     // font family with optional fallbacks
-    fontFamily: 'SFMono-Medium',
+    fontFamily:
+      'SFMono-MediumMenlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
     cursorColor: 'rgba(248,28,229,0.8)',
@@ -96,7 +97,7 @@ module.exports = {
     env: {},
 
     // set to false for no bell
-    bell: 'false',
+    bell: false,
 
     // if true, selected text will automatically be copied to the clipboard
     copyOnSelect: false,
