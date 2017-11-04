@@ -121,3 +121,6 @@ export N_PREFIX='/usr/local'
 export GEM_HOME=$HOME/.gem
 PATH=$PATH:$HOME/.gem/bin
 eval "$(rbenv init -)"
+
+SHELL_SCRIPTS_PATH="/Users/logansmcansh/dotfiles/home/scripts"
+export PATH="$PATH:$SHELL_SCRIPTS_PATH"
