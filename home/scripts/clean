@@ -7,7 +7,9 @@ brew cask cleanup
 
 # Remove .DS_Store files
 find "$HOME" -name '.DS_Store' -delete
-rm -rf "$HOME"/Downloads/*
+
+# Remove .icloud files
+find "$HOME" -iname '*.icloud' -delete
 
 # Remove unused git branches
 cd "$HOME/repos"
