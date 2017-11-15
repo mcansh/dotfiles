@@ -7,6 +7,14 @@
 #     fs.link_files $PKG_PATH
 # }
 
+pkg.link() {
+  files=(zshrc aliases hyper.js vscodestyles.css)
+  # link files into $HOME
+  for file in ${files[@]}; do
+    fs.link_file $file
+  done
+}
+
 # pkg.push() {
 #     git.push
 # }
