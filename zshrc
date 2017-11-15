@@ -1,4 +1,4 @@
-export ZSH=/Users/$USER/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 ZSH_THEME="zeit"
 
@@ -35,7 +35,7 @@ export GEM_HOME=$HOME/.gem
 PATH=$PATH:$HOME/.gem/bin
 eval "$(rbenv init -)"
 
-SHELL_SCRIPTS_PATH="/Users/logansmcansh/dotfiles/home/scripts"
+SHELL_SCRIPTS_PATH="$HOME/.scripts"
 export PATH="$PATH:$SHELL_SCRIPTS_PATH"
 
 export PATH="$HOME/.ellipsis/bin:$PATH"
