@@ -8,7 +8,7 @@
 # }
 
 pkg.link() {
-  files=(zshrc aliases hyper.js vscodestyles.css)
+  files=(zshrc aliases hyper.js vscodestyles.css install.sh)
   # link files into $HOME
   for file in ${files[@]}; do
     fs.link_file $file

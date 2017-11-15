@@ -12,7 +12,13 @@ I use [ellipsis](http://ellipsis.sh) to manage and install my dotfiles.
 $ ellipsis install mcansh/dotfiles
 ```
 
-In order to sync vs code settings run:
+## Install Script
 ```bash
-$ ln -s ./settings.json ~/Library/Application\ Support/Code\ -\ Insiders/User/settings.json
+$ sh $HOME/.install.sh
+```
+
+## VS Code
+In order to sync vs code settings run: (after installing my dotfile config)
+```bash
+$ makethisgohere $HOME/.settings.json ~/Library/Application\ Support/Code\ -\ Insiders/User/settings.json
 ```
