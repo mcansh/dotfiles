@@ -14,5 +14,5 @@ $ ellipsis install mcansh/dotfiles
 
 In order to sync vs code settings run:
 ```bash
-$ ln -s ./settings.json ~/Library/Application\ Support/Code\ -\ Insiders/User
+$ ln -s ./settings.json ~/Library/Application\ Support/Code\ -\ Insiders/User/settings.json
 ```
