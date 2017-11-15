@@ -6,12 +6,10 @@ install script based on my man nullbrx's [dotfiles](https://github.com/nullbrx/d
 
 ## Installation
 
-I use [Homesick](https://github.com/technicalpickles/homesick) to manage and install my dotfiles.
+I use [ellipsis](http://ellipsis.sh) to manage and install my dotfiles.
 
 ```
-$ homesick clone mcansh/dotfiles
-$ homesick symlink dotfiles
-$ homesick rc dotfiles
+$ ellipsis install mcansh/dotfiles
 ```
 
 In order to sync vs code settings run:
