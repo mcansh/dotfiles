@@ -43,7 +43,20 @@ alias server='python -m SimpleHTTPServer'
 # keep a log of installed brew files
 alias brewfile='brew bundle dump --force; mv brewfile ~/.homesick/repos/dotfiles/Brewfile'
 
-alias brewup='brew update && brew doctor && brew outdated && brew upgrade && brew cleanup'
+function brewup {
+  echo '1/5 Updating Homebrew 📦'
+  brew update
+  echo '2/5 Checking Homebrew for issues ⛔️'
+  brew doctor
+  echo '3/5 Getting a list of oudated packages 📜'
+  brew outdated
+  echo '4/5 Upgrading packages 🎉'
+  brew upgrade
+  echo '5/5 Cleaning up 🚮'
+  brew cleanup
+  echo 'Done. 🎉'
+}
+
 
 # Hide/show all desktop icons (useful when presenting)
 alias hidedesktop='defaults write com.apple.finder CreateDesktop -bool false && killall Finder'
