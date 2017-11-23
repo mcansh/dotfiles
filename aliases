@@ -98,10 +98,9 @@ alias gifify60='gifify -r 60 $1'
 # add space to dock
 alias space='defaults write com.apple.dock persistent-apps -array-add "{'tile-type'='spacer-tile';}"; killall Dock'
 
-# clone repo, cd into it, fork it on github (if its a github repo), and open it in code-insiders
-# requires https://hub.github.com for forking and cloning (in the fashion that I am)
-alias cloneOpen='f() {
-  urls=('github.com' 'bitbucket.org' 'gitlab.com')
+# clone repo, cd into it, and open it in your desired editor.
+function cloneOpen {
+urls=('github.com' 'bitbucket.org' 'gitlab.com')
   url=$1
   for i in "${urls[@]}"
   do
@@ -117,10 +116,10 @@ alias cloneOpen='f() {
       repo=${userRepo#*/}
       repo_no_ext=$(basename ${repo#*/} .git)
 
-      git clone $url && cd $repo_no_ext && c
+      git clone $url && cd $repo_no_ext && $EDITOR .
     fi
   done
-};f'
+}
 
 alias please='sudo $(fc -ln -1)'
 
