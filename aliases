@@ -50,7 +50,7 @@ function brewup {
   brew doctor
   echo '3/5 Getting a list of oudated packages 📜'
   brew outdated
-  echo '4/5 Upgrading packages 🎉'
+  echo '4/5 Upgrading packages 🚚'
   brew upgrade
   echo '5/5 Cleaning up 🚮'
   brew cleanup
