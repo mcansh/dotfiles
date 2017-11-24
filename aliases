@@ -116,7 +116,12 @@ urls=('github.com' 'bitbucket.org' 'gitlab.com')
       repo=${userRepo#*/}
       repo_no_ext=$(basename ${repo#*/} .git)
 
-      git clone $url && cd $repo_no_ext && $EDITOR .
+      echo "1/3 Cloning repo from $i 🚚"
+      git clone $url
+      echo "Changing directories to $repo_no_ext 🔨"
+      cd $repo_no_ext
+      echo "Opening in $EDITOR 🛠"
+      $EDITOR .
     fi
   done
 }
