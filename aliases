@@ -44,17 +44,17 @@ alias server='python -m SimpleHTTPServer'
 alias brewfile='brew bundle dump --force; mv brewfile ~/.homesick/repos/dotfiles/Brewfile'
 
 function brewup {
-  echo '1/5 Updating Homebrew 📦'
+  echo '> 1/5 Updating Homebrew 📦'
   brew update
-  echo '2/5 Checking Homebrew for issues ⛔️'
+  echo '> 2/5 Checking Homebrew for issues ⛔️'
   brew doctor
-  echo '3/5 Getting a list of oudated packages 📜'
+  echo '> 3/5 Getting a list of oudated packages 📜'
   brew outdated
-  echo '4/5 Upgrading packages 🚚'
+  echo '> 4/5 Upgrading packages 🚚'
   brew upgrade
-  echo '5/5 Cleaning up 🚮'
+  echo '> 5/5 Cleaning up 🚮'
   brew cleanup
-  echo 'Done. 🎉'
+  echo '> Done. 🎉'
 }
 
 
@@ -116,11 +116,11 @@ urls=('github.com' 'bitbucket.org' 'gitlab.com')
       repo=${userRepo#*/}
       repo_no_ext=$(basename ${repo#*/} .git)
 
-      echo "1/3 Cloning repo from $i 🚚"
+      echo "> 1/3 Cloning repo from $i 🚚"
       git clone $url
-      echo "Changing directories to $repo_no_ext 🔨"
+      echo "> Changing directories to $repo_no_ext 🔨"
       cd $repo_no_ext
-      echo "Opening in $EDITOR 🛠"
+      echo "> Opening in $EDITOR 🛠"
       $EDITOR .
     fi
   done
