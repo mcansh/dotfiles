@@ -137,3 +137,18 @@ alias fix-zsh-permissions='sudo chown -R logansmcansh:staff .oh-my-zsh .zs .zsh*
 alias yarn-upgrade='yarn upgrade-interactive --latest'
 alias yarn-global-upgrade='yarn global upgrade-interactive'
 alias list_global_npm_packages='npm list -g --depth=0'
+alias gimme_bash='exec bash --login'
+
+function gitFixLastCommit {
+  gitDiffCount="$(git diff --cached --numstat | wc -l)"
+  if (($gitDiffCount > 0))
+  then
+    echo "> 1/2 Getting last commit's sha"
+    sha="$(git rev-parse HEAD)"
+    echo '> 2/2 commiting staged files'
+    git commit -s --fixup $sha
+    echo '> Done. 🌮'
+  else
+    echo "> Stage some stuff and then try again"
+  fi
+}
