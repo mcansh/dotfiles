@@ -47,7 +47,8 @@ function brewup {
   echo '> 1/5 Updating Homebrew 📦'
   brew update
   echo '> 2/5 Checking Homebrew for issues ⛔️'
-  brew doctor
+  # brew doctor
+  brew doctor `brew doctor --list-checks | grep -v stray_headers`
   echo '> 3/5 Getting a list of oudated packages 📜'
   brew outdated
   echo '> 4/5 Upgrading packages 🚚'
