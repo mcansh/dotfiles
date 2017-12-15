@@ -20,9 +20,6 @@
   "workbench.colorTheme": "Cobalt2",
   "eslint.autoFixOnSave": true,
   "editor.formatOnSave": true,
-  // "eslint.options": {
-  //   "configFile": "/Volumes/Macintosh SSD/Users/logansmcansh/.eslintrc.js"
-  // },
   "vscode_custom_css.imports": [
     "/Volumes/Macintosh SSD/Users/loganmcansh/.vscodestyles.css"
   ],
@@ -46,5 +43,6 @@
   "window.zoomLevel": 0,
   "javascript.format.enable": false,
   "html.format.enable": false,
-  "window.title": "${dirty} ${activeEditorMedium}${separator}${rootName}"
+  "window.title": "${dirty} ${activeEditorMedium}${separator}${rootName}",
+  "workbench.editor.tabSizing": "shrink"
 }
