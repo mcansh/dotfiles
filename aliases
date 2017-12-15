@@ -44,22 +44,23 @@ alias server='python -m SimpleHTTPServer'
 alias brewfile='brew bundle dump --force; mv brewfile ~/.homesick/repos/dotfiles/Brewfile'
 
 function brewup {
-  echo '> 1/5 Updating Homebrew 📦'
+  echo '> 1/6 Updating Homebrew 📦'
   brew update
-  echo '> 2/5 Checking Homebrew for issues ⛔️'
-  # brew doctor
-  brew doctor `brew doctor --list-checks | grep -v stray_headers`
-  echo '> 3/5 Getting a list of oudated packages 📜'
+  echo '> 2/6 Checking Homebrew for issues ⛔️'
+  brew doctor
+  echo '> 3/6 Getting a list of oudated packages 📜'
   brew outdated
   outdatedPackages="$(brew outdated --numstat | wc -l)"
   if (( $outdatedPackages > 0 ))
   then
-    echo '> 4/5 Upgrading packages 🚚'
+    echo '> 4/6 Upgrading packages 🚚'
     brew upgrade
   else
     echo 'No updates are available'
   fi
-  echo '> 5/5 Cleaning up 🚮'
+  echo "> 5/6 Removing dead symlinks 💀"
+  brew prune
+  echo '> 6/6 Cleaning up 🚮'
   brew cleanup
   echo '> Done. 🎉'
 }
