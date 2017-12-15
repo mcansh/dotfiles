@@ -1,5 +1,5 @@
 {
-  "editor.fontSize": 16,
+  "editor.fontSize": 13,
   "editor.fontFamily": "Operator Mono, Menlo, Monaco, 'Courier New', monospace",
   "editor.fontWeight": "400",
   "editor.tabSize": 2,
@@ -24,7 +24,7 @@
   //   "configFile": "/Volumes/Macintosh SSD/Users/logansmcansh/.eslintrc.js"
   // },
   "vscode_custom_css.imports": [
-    "/Volumes/Macintosh SSD/Users/logansmcansh/.vscodestyles.css"
+    "/Volumes/Macintosh SSD/Users/loganmcansh/.vscodestyles.css"
   ],
   "color-highlight.markerType": "dot-after",
   "color-highlight.matchWords": true,
