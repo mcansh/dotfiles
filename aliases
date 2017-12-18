@@ -149,6 +149,10 @@ alias list_global_npm_packages='npm list -g --depth=0'
 alias gimme_bash='exec bash --login'
 
 function gitFixLastCommit {
+  emojis=('🌮' '🦄' '🍕' '📜' '📦')
+  length=${#emojis[@]}
+  index=$((RANDOM % $length + 1))
+  emoji=${emojis[$index]}
   gitDiffCount="$(git diff --cached --numstat | wc -l)"
   if (($gitDiffCount > 0))
   then
@@ -156,8 +160,13 @@ function gitFixLastCommit {
     sha="$(git rev-parse HEAD)"
     echo '> 2/2 commiting staged files'
     git commit -s --fixup $sha
-    echo '> Done. 🌮'
+    echo "> Done. ${emoji}"
   else
     echo "> Stage some stuff and then try again"
   fi
 }
+
+
+alias list_downloads='sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* "select LSQuarantineDataURLString from LSQuarantineEvent"'
+
+alias clear_downloads='sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* "delete from LSQuarantineEvent"'
