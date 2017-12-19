@@ -37,7 +37,6 @@
     "**/node_modules": true
   },
   "prettier.eslintIntegration": true,
-  "prettier.trailingComma": "all",
   "terminal.integrated.fontSize": 14,
   "prettier.singleQuote": true,
   "window.zoomLevel": 0,
