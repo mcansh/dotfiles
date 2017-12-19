@@ -170,3 +170,10 @@ function gitFixLastCommit {
 alias list_downloads='sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* "select LSQuarantineDataURLString from LSQuarantineEvent"'
 
 alias clear_downloads='sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* "delete from LSQuarantineEvent"'
+
+alias docker_list_containers='docker ps -aq'
+alias docker_list_images='docker images -f "dangling=true" -q'
+alias docker_remove_all_images='docker rmi -f $(docker images -q)'
+alias docker_remove_all_containers='docker rm -f $(docker ps -a -q)'
+alias docker_remove_containers='docker ps -q |xargs docker rm'
+alias docker_remove_images='docker images -q |xargs docker rmi'
