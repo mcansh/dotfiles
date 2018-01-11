@@ -17,7 +17,7 @@
   "editor.formatOnPaste": true,
   "workbench.statusBar.visible": true,
   "workbench.startupEditor": "none",
-  "workbench.colorTheme": "Cobalt2",
+  "workbench.colorTheme": "City Lights",
   "eslint.autoFixOnSave": true,
   "editor.formatOnSave": true,
   "vscode_custom_css.imports": [
@@ -43,5 +43,6 @@
   "javascript.format.enable": false,
   "html.format.enable": false,
   "window.title": "${dirty} ${activeEditorMedium}${separator}${rootName}",
-  "workbench.editor.tabSizing": "shrink"
+  "workbench.editor.tabSizing": "shrink",
+  "editor.wordWrapColumn": 120
 }

@@ -37,5 +37,10 @@
     "prefix": "style",
     "body": ["<style jsx global>{`\n\t$1\n`}</style>"],
     "description": "Globally style a nextjs component/app with styled-jsx"
+  },
+  "Insert React Ref": {
+    "prefix": "ref",
+    "body": "ref={c => { this.$1 = c }}",
+    "description": "Inset a ref prop"
   }
 }
