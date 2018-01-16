@@ -177,3 +177,41 @@ alias docker_remove_all_images='docker rmi -f $(docker images -q)'
 alias docker_remove_all_containers='docker rm -f $(docker ps -a -q)'
 alias docker_remove_containers='docker ps -q |xargs docker rm'
 alias docker_remove_images='docker images -q |xargs docker rmi'
+
+source ~/.secrets
+
+function deployPowerleyCards {
+  if [ -z "$powerleycards" ] && [ -z "$1" ]
+  then
+    echo "> Please supply a tag and try again"
+  else
+    # aws tag will be the first arg passed or pulled from ~/.secrets
+    aws_tag=${1:-$powerleycards}
+
+    # pull version from local package.json
+    version=$(node -p -e "require('./package.json').version")
+
+    # get fresh auth tokens
+    echo "> 1/4 Getting Fresh AWS Tokens"
+    eval $(aws ecr get-login --no-include-email | sed 's|https://||')
+
+    # build powerley cards with aws env creds
+    echo "> 2/4 Building Powerley Cards Image"
+    docker build -t powerleycards .
+
+    # get the above build's image id
+    imageId=$(docker images -q powerleycards)
+
+    echo ${imageId}
+
+    # tag the image with aws specific tag
+    echo "> 3/4 Tagging image"
+    docker tag ${imageId} ${aws_tag}:${version}
+
+    # push image to aws
+    echo "> 4/4 Pushing Powerley Cards Image to AWS"
+    # docker push ${aws_tag}
+
+    echo "> Done 🍩"
+  fi
+}
