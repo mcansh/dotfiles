@@ -84,7 +84,7 @@ alias update='softwareupdate -ia --verbose'
 alias gemupdate='gem update ~/.gem'
 
 # update everything
-alias updateall='brewup  && gemupdate'
+alias updateall='brewup && gemupdate && update'
 
 # alias for making symlinks (alias)
 alias makethisgohere='ln -s'
