@@ -210,7 +210,7 @@ function deployPowerleyCards {
 
     # push image to aws
     echo "> 4/4 Pushing Powerley Cards Image to AWS"
-    # docker push ${aws_tag}
+    docker push ${aws_tag}
 
     echo "> Done 🍩"
   fi
