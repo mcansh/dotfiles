@@ -17,9 +17,12 @@
   "editor.formatOnPaste": true,
   "workbench.statusBar.visible": true,
   "workbench.startupEditor": "none",
-  "workbench.colorTheme": "City Lights",
+  "workbench.colorTheme": "Cobalt2",
   "eslint.autoFixOnSave": true,
   "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.formatOnSave": false
+  },
   "vscode_custom_css.imports": [
     "/Volumes/Macintosh SSD/Users/loganmcansh/.vscodestyles.css"
   ],
@@ -36,13 +39,17 @@
     "**/.next": true,
     "**/node_modules": true
   },
-  "prettier.eslintIntegration": true,
   "terminal.integrated.fontSize": 14,
-  "prettier.singleQuote": true,
   "window.zoomLevel": 0,
-  "javascript.format.enable": false,
-  "html.format.enable": false,
   "window.title": "${dirty} ${activeEditorMedium}${separator}${rootName}",
   "workbench.editor.tabSizing": "shrink",
-  "editor.wordWrapColumn": 120
+  "eslint.alwaysShowStatus": true,
+  "extensions.ignoreRecommendations": false,
+  "workbench.editor.tabCloseButton": "off",
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "editor.snippetSuggestions": "top",
+  "javascript.format.enable": false,
+  "eslint.packageManager": "yarn"
 }

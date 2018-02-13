@@ -137,15 +137,15 @@ urls=('github.com' 'bitbucket.org' 'gitlab.com')
 
 alias please='sudo $(fc -ln -1)'
 
-alias addESLint='cp ~/.eslintrc.js ./ && yarn add -D eslint eslint-config-airbnb-base eslint-plugin-{import, prettier}'
-alias addNextJSESLint='cp ~/.eslintrc-nextjs.js ./.eslintrc.js && yarn add -D babel-eslint eslint eslint-config-{airbnb, prettier} eslint-plugin-{import, jsx-a11y, prettier, react} prettier'
+alias addESLint='cp ~/.eslintrc.js ./ && yarn add -D eslint eslint-config-airbnb-base eslint-plugin-{import,prettier}'
+alias addNextJSESLint='cp ~/.eslintrc-nextjs.js ./.eslintrc.js && yarn add -D babel-eslint eslint eslint-config-{airbnb,prettier} eslint-plugin-{import,jsx-a11y,prettier,react} prettier'
 
 alias fix-zsh-permissions='sudo chown -R $whoami:staff .oh-my-zsh .zs .zsh*'
 
 
 alias yarn-upgrade='yarn upgrade-interactive --latest'
 alias yarn-global-upgrade='yarn global upgrade-interactive'
-alias list_global_npm_packages='npm list -g --depth=0'
+alias npm-list-global='npm list -g --depth=0'
 alias gimme_bash='exec bash --login'
 
 function gitFixLastCommit {
@@ -201,8 +201,6 @@ function deployPowerleyCards {
 
     # get the above build's image id
     imageId=$(docker images -q powerleycards)
-
-    echo ${imageId}
 
     # tag the image with aws specific tag
     echo "> 3/4 Tagging image"
