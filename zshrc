@@ -29,8 +29,6 @@ fi
 
 eval $(thefuck --alias)
 
-export N_PREFIX='/usr/local'
-
 export GEM_HOME=$HOME/.gem
 PATH=$PATH:$HOME/.gem/bin
 eval "$(rbenv init -)"
@@ -39,4 +37,4 @@ SHELL_SCRIPTS_PATH="$HOME/.scripts"
 export PATH="$PATH:$SHELL_SCRIPTS_PATH"
 
 export PATH="$HOME/.ellipsis/bin:$PATH"
-export PATH=~/.local/bin:$PATH
+export PATH="$PATH:`yarn global bin`"
