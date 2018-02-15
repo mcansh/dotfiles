@@ -51,7 +51,7 @@ function brewfile {
   mv brewfile ~/dot-dotfiles/Brewfile
   echo '> Done 👌'
 }
-alias installBrewfile='brew bundle --file=~dot-dotfiles/Brewfile'
+alias installBrewfile='brew bundle --file=~/dot-dotfiles/Brewfile'
 
 function brewup {
   echo '> 1/6 Updating Homebrew 📦'
