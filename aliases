@@ -44,7 +44,7 @@ alias hideAllFiles='defaults write com.apple.finder AppleShowAllFiles NO && kill
 alias server='python -m SimpleHTTPServer'
 
 # keep a log of installed brew files
-alias brewfile='brew bundle dump --force; mv brewfile ~/.homesick/repos/dotfiles/Brewfile'
+alias brewfile='brew bundle dump --force; mv brewfile~/dot-dotfiles/Brewfile'
 
 function brewup {
   echo '> 1/6 Updating Homebrew 📦'
