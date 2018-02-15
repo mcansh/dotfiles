@@ -21,7 +21,7 @@ $ sh $HOME/.install.sh
 
 ## VS Code
 
-In order to sync vs code settings run: (after installing my dotfile config)
+In order to sync VS Code settings run: (after installing my dotfile config, with VS Code closed)
 
 ```bash
 $ rm ~/Library/Application\ Support/Code\ -\ Insiders/User/settings.json
