@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# Set up logging environment
+LOG_FILE='/Users/'$(logname)'/Desktop/install-log.log'
+
+exec &> >(tee -a "$LOG_FILE")
+echo "Logging to" $LOG_FILE
+
 # Set HostName/ComputerName/LocalHostName
 sudo -u $USER scutil --set ComputerName "🚀😺"
 sudo -u $USER scutil --set LocalHostName "mcansh"
@@ -22,14 +28,12 @@ killall -KILL SystemUIServer # restart menubar
 
 
 # Check if FileValut is on
+echo '> 3/4 Checking FileValue Status'
 if [ "$(fdesetup status)" == "FileVault is On." ]; then
-  echo "> 3/4 Disk encryption is already enabled. 🔥"
-fi
-
-if [ "$(fdesetup status)" == "FileVault is Off." ]; then
-  echo "Disk encryption not enabled. Enabling now..."
+  echo "> Disk encryption is already enabled. 🔥"
+elif [ "$(fdesetup status)" == "FileVault is Off." ]; then
+  echo "> Disk encryption not enabled. Enabling now..."
   fdesetup enable
-  echo "> 3/4 Disk encryption is now enabled. 💯🔥"
 fi
 
 # Install Brew
@@ -46,18 +50,12 @@ sudo -u $USER curl https://raw.githubusercontent.com/zeit/zeit.zsh-theme/master/
 
 # Setup Software
 sudo -u $USER brew install mas # We will need this in a bit for installing MAS
-sudo -u $USER brew install gnupg21 android-platform-tools gifify hub pinentry-mac thefuck
 sudo -u $USER brew tap caskroom/cask
 sudo -u $USER brew tap caskroom/versions
 sudo -u $USER brew tap homebrew/bundle
 sudo -u $USER brew tap homebrew/core
 sudo -u $USER brew tap homebrew/dupes
-sudo -u $USER brew cask install Caskroom/cask/$cask_apps
-sudo -u $USER brew bundle
-
-echo "> 4/4 Installing software from cask... (may take a bit if your internet is shit)"
-cask_apps=('1password' 'handbrake' 'codekit' 'hyper' 'dropbox' 'slack-beta' 'firefoxnightly' 'visual-studio-code-insiders' 'google-chrome-canary' 'whiskey' 'google-chrome-dev' 'zoomus')
-brew cask install $cask_apps
+sudo -u $USER brew bundle --file=~/dot-dotfiles/Brewfile # Install brew formalue from brewfile
 
 # Mac Software Update Check and install updates
 softwareupdate -ia --verbose

@@ -2,7 +2,7 @@
 
 my macbooks dotfiles
 
-install script based on my man nullbrx's
+install script based on nullbrx's
 [dotfiles](https://github.com/nullbrx/dotfiles)
 
 ## Installation
