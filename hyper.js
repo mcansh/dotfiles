@@ -124,9 +124,10 @@ module.exports = {
     'hyperterm-alternatescroll',
     'hyperlinks',
     // 'hyperterm-cobalt2-theme',
-    'verminal',
     // 'nova-hyperterm',
     // 'hyperterm-panda',
+    'hyper-website-theme',
+    'verminal',
   ],
 
   // in development, you can create a directory under
