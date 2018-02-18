@@ -37,4 +37,5 @@ SHELL_SCRIPTS_PATH="$HOME/.scripts"
 export PATH="$PATH:$SHELL_SCRIPTS_PATH"
 
 export PATH="$HOME/.ellipsis/bin:$PATH"
-export PATH="$PATH:`yarn global bin`"
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+

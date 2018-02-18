@@ -34,8 +34,8 @@ alias b='bundle exec'
 alias fixthatfuckingcommit='git commit --amend -sam'
 
 # Code
-alias code='code-insiders .'
-alias c='code'
+alias code='code-insiders'
+alias c='code-insiders .'
 
 alias showAllFiles='defaults write com.apple.finder AppleShowAllFiles YES && killall Finder'
 alias hideAllFiles='defaults write com.apple.finder AppleShowAllFiles NO && killall Finder'
@@ -90,11 +90,18 @@ alias appflush='/System/Library/Frameworks/CoreServices.framework/Frameworks/Lau
 # software updates
 alias update='softwareupdate -ia --verbose'
 
-# update ruby gems
-alias gemupdate='gem update ~/.gem'
-
 # update everything
-alias updateall='brewup && gemupdate && update'
+function updateall {
+  echo '▲ 1/4 Running Homebrew update script'
+  brewup
+  echo '▲ 2/4 Updating Rubygems'
+  gem update
+  gem update --system
+  echo '▲ 3/4 Running Yarn Global Upgrade'
+  yarn global upgrade
+  echo '▲ 4/4 Running macOS Upgrade'
+  update
+}
 
 # alias for making symlinks (alias)
 alias makethisgohere='ln -s'
