@@ -31,5 +31,12 @@
     "prefix": "ref",
     "body": "ref={c => { this.$1 = c }}",
     "description": "Inset a ref prop"
+  },
+  "Styled Components Theme Props": {
+    "prefix": ":tp",
+    "body": [
+      "${props => props.theme.$1}"
+    ],
+    "description": "Theme Props"
   }
 }
