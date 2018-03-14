@@ -13,7 +13,7 @@ module.exports = {
 
     // font family with optional fallbacks
     fontFamily:
-      'SFMono-MediumMenlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+      'SFMono-Medium, Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
     cursorColor: 'rgba(248,28,229,0.8)',
@@ -126,8 +126,8 @@ module.exports = {
     // 'hyperterm-cobalt2-theme',
     // 'nova-hyperterm',
     // 'hyperterm-panda',
-    'hyper-website-theme',
-    'verminal',
+    // 'hyper-website-theme',
+    // 'verminal',
   ],
 
   // in development, you can create a directory under
