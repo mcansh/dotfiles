@@ -15,9 +15,6 @@
   "editor.cursorBlinking": "solid",
   "editor.colorDecorators": false,
   "editor.minimap.enabled": true,
-  "vscode_custom_css.imports": [
-    "/Volumes/Macintosh SSD/Users/loganmcansh/.vscodestyles.css"
-  ],
   "workbench.activityBar.visible": true,
   "workbench.sideBar.location": "left",
   "editor.minimap.showSlider": "always",

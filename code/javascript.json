@@ -1,5 +1,5 @@
 {
-  "New NextJS Component": {
+  "New Component": {
     "prefix": "next",
     "body": [
       "import React from 'react';",
@@ -9,6 +9,22 @@
       ");\n",
       "$1.propTypes = {\n",
       "};\n",
+      "export default $1;"
+    ],
+    "description": "Create a new NextJS Component"
+  },
+  "New Class": {
+    "prefix": "class",
+    "body": [
+      "import React, { Component } from 'react';",
+      "import PropTypes from 'prop-types';\n",
+      "class $1 extends Component {",
+      "  static propTypes = {};\n",
+      "  componentDidMount = () => {};\n",
+      "  render() {",
+      "    return <p>$2</p>;",
+      "  }",
+      "}\n",
       "export default $1;"
     ],
     "description": "Create a new NextJS Component"
