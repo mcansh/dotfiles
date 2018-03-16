@@ -59,7 +59,7 @@ sudo -u $USER brew tap homebrew/dupes
 sudo -u $USER brew bundle --file=~/dot-dotfiles/Brewfile # Install brew formalue from brewfile
 
 # Mac Software Update Check and install updates
-softwareupdate -ia --verbose
+softwareupdate -ia --verbose --restart
 
 # WE OUT
 echo "> Welcome to your newly configured MacBook"
