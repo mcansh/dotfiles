@@ -18,11 +18,12 @@ sudo -u $USER systemsetup -setcomputersleep 2 # Computer sleeps after 2 minutes
 defaults write com.apple.screensaver askForPassword 1 # Force password entry after sleep
 defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText "This computer belongs to Logan McAnsh" # add a message to the login screen
 defaults write com.apple.Safari AutoOpenSafeDownloads -bool false # stop safari from opening downloaded files automatically
-defaults write com.apple.dock autohide -bool true && defaults write com.apple.dock autohide-delay -float 0 && defaults write com.apple.dock autohide-time-modifier -float 0 && killall Dock # autohide dock and remove delay
+defaults write com.apple.dock autohide -bool true && defaults write com.apple.dock autohide-delay -float 0 && defaults write com.apple.dock autohide-time-modifier -float 0 # autohide dock and remove delay
 defaults write com.apple.Dock orientation -string left # position the dock on the left side
 defaults write com.apple.PowerChime ChimeOnAllHardware -bool true; open /System/Library/CoreServices/PowerChime.app & # enable the PowerChime
 defaults write NSGlobalDomain _HIHideMenuBar -bool true # autohide the menubar
 defaults write NSGlobalDomain AppleInterfaceStyle Dark # dark dock/menubar
+defaults write com.apple.screencapture disable-shadow -bool true # remove shadow from screenshots
 killall Dock # restart dock
 killall -KILL SystemUIServer # restart menubar
 
