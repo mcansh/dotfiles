@@ -54,6 +54,8 @@ function brewfile {
 
 alias installBrewfile='brew bundle --file=~/dot-dotfiles/Brewfile'
 
+alias backupGlobalYarn='cp ~/.config/yarn/global/package.json ~/dotfiles/npm-global.json'
+
 function brewup {
   echo '> 1/6 Updating Homebrew 📦'
   brew update
