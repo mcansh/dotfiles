@@ -48,9 +48,10 @@ function brewfile {
   echo '> 1/2 Generating Brewfile'
   brew bundle dump --force
   echo '> 2/2 Moving Brewfile'
-  mv brewfile ~/dot-dotfiles/Brewfile
+  mv brewfile ~/dotfiles/Brewfile
   echo '> Done 👌'
 }
+
 alias installBrewfile='brew bundle --file=~/dot-dotfiles/Brewfile'
 
 function brewup {
