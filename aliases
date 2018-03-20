@@ -40,9 +40,6 @@ alias c='code-insiders .'
 alias showAllFiles='defaults write com.apple.finder AppleShowAllFiles YES && killall Finder'
 alias hideAllFiles='defaults write com.apple.finder AppleShowAllFiles NO && killall Finder'
 
-# start a local server
-alias server='python -m SimpleHTTPServer'
-
 # keep a log of installed brew files
 function brewfile {
   echo '> 1/2 Generating Brewfile'

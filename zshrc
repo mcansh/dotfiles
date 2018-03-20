@@ -2,7 +2,7 @@ export ZSH=$HOME/.oh-my-zsh
 
 ZSH_THEME="zeit"
 
-plugins=(git zsh-autosuggestions zsh-completions zsh-syntax-highlighting)
+plugins=(git zsh-autosuggestions zsh-completions zsh-syntax-highlighting yarn-autocompletions)
 
 autoload -U compinit && compinit
 
