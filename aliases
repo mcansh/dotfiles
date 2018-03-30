@@ -99,7 +99,7 @@ function updateall {
   gem update --system
   echo '▲ [3/5] Running Yarn Global Upgrade'
   yarn global upgrade
-  echo '▲ [4/5] Updating Apps from MAS
+  echo '▲ [4/5] Updating Apps from MAS'
   mas outdated && mas upgrade
   echo '▲ [5/5] Running macOS Upgrade'
   update
