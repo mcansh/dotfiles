@@ -1,6 +1,6 @@
 {
-  "New Component": {
-    "prefix": "next",
+  "New Component with Props": {
+    "prefix": "componentwithprops",
     "body": [
       "import React from 'react';",
       "import PropTypes from 'prop-types';\n",
@@ -9,6 +9,17 @@
       ");\n",
       "$1.propTypes = {\n",
       "};\n",
+      "export default $1;"
+    ],
+    "description": "Create a new NextJS Component"
+  },
+  "New Component": {
+    "prefix": "component",
+    "body": [
+      "import React from 'react';\n",
+      "const $1 = () => (",
+      "$2",
+      ");\n",
       "export default $1;"
     ],
     "description": "Create a new NextJS Component"
@@ -49,7 +60,7 @@
     "description": "Inset a ref prop"
   },
   "Styled Components Theme Props": {
-    "prefix": ":tp",
+    "prefix": "tp",
     "body": [
       "${props => props.theme.$1}"
     ],
