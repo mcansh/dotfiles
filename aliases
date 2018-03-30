@@ -92,14 +92,16 @@ alias update='softwareupdate -ia --verbose'
 
 # update everything
 function updateall {
-  echo '▲ 1/4 Running Homebrew update script'
+  echo '▲ [1/5] Running Homebrew update script'
   brewup
-  echo '▲ 2/4 Updating Rubygems'
+  echo '▲ [2/5] Updating Rubygems'
   gem update
   gem update --system
-  echo '▲ 3/4 Running Yarn Global Upgrade'
+  echo '▲ [3/5] Running Yarn Global Upgrade'
   yarn global upgrade
-  echo '▲ 4/4 Running macOS Upgrade'
+  echo '▲ [4/5] Updating Apps from MAS
+  mas outdated && mas upgrade
+  echo '▲ [5/5] Running macOS Upgrade'
   update
 }
 
