@@ -110,6 +110,8 @@ module.exports = {
     // bellSoundURL: 'http://example.com/bell.mp3',
 
     // for advanced config flags please refer to https://hyper.is/#cfg
+
+    wickedBorderColor: '#ffc600',
   },
 
   // a list of plugins to fetch and install from npm
