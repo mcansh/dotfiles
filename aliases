@@ -44,10 +44,11 @@ alias b='bundle exec'
 # fix commit messages
 alias fixthatfuckingcommit='git commit --amend -sam'
 
-# Code
+# VS Code
 alias code='code-insiders'
 alias c='code-insiders .'
 
+# Hidden files
 alias showhiddenfiles='defaults write com.apple.finder AppleShowAllFiles YES && killall Finder'
 alias hidehiddenfiles='defaults write com.apple.finder AppleShowAllFiles NO && killall Finder'
 
@@ -167,11 +168,7 @@ urls=('github.com' 'bitbucket.org' 'gitlab.com')
 
 alias please='sudo $(fc -ln -1)'
 
-alias addESLint='cp ~/.eslintrc.js ./ && yarn add -D eslint eslint-config-airbnb-base eslint-plugin-{import,prettier}'
-alias addNextJSESLint='cp ~/.eslintrc-nextjs.js ./.eslintrc.js && yarn add -D babel-eslint eslint eslint-config-{airbnb,prettier} eslint-plugin-{import,jsx-a11y,prettier,react} prettier'
-
 alias fix-zsh-permissions='sudo chown -R $whoami:staff .oh-my-zsh .zs .zsh*'
-
 
 alias yarn-upgrade='yarn upgrade-interactive --latest'
 alias yarn-global-upgrade='yarn global upgrade-interactive'
@@ -196,11 +193,11 @@ function gitFixLastCommit {
   fi
 }
 
-
+# list and clear downloads table
 alias list_downloads='sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* "select LSQuarantineDataURLString from LSQuarantineEvent"'
-
 alias clear_downloads='sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* "delete from LSQuarantineEvent"'
 
+# docker
 alias docker_list_containers='docker ps -aq'
 alias docker_list_images='docker images -f "dangling=true" -q'
 alias docker_remove_all_images='docker rmi -f $(docker images -q)'
