@@ -1,45 +1,4 @@
 {
-  "New Component with Props": {
-    "prefix": "componentwithprops",
-    "body": [
-      "import React from 'react';",
-      "import PropTypes from 'prop-types';\n",
-      "const $1 = props => (",
-      "$2",
-      ");\n",
-      "$1.propTypes = {\n",
-      "};\n",
-      "export default $1;"
-    ],
-    "description": "Create a new NextJS Component"
-  },
-  "New Component": {
-    "prefix": "component",
-    "body": [
-      "import React from 'react';\n",
-      "const $1 = () => (",
-      "$2",
-      ");\n",
-      "export default $1;"
-    ],
-    "description": "Create a new NextJS Component"
-  },
-  "New Class": {
-    "prefix": "class",
-    "body": [
-      "import React, { Component } from 'react';",
-      "import PropTypes from 'prop-types';\n",
-      "class $1 extends Component {",
-      "  static propTypes = {};\n",
-      "  componentDidMount = () => {};\n",
-      "  render() {",
-      "    return <p>$2</p>;",
-      "  }",
-      "}\n",
-      "export default $1;"
-    ],
-    "description": "Create a new NextJS Component"
-  },
   "Style JSX": {
     "prefix": "stylejsx",
     "body": [
@@ -53,11 +12,6 @@
       "<style jsx global>{`\n\t$1\n`}</style>"
     ],
     "description": "Globally style a next.js component/app with styled-jsx"
-  },
-  "Insert React Ref": {
-    "prefix": "ref",
-    "body": "ref={c => { this.$1 = c }}",
-    "description": "Inset a ref prop"
   },
   "Styled Components Theme Props": {
     "prefix": "tp",
