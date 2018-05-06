@@ -25,6 +25,11 @@ alias gco='git checkout'
 alias gh='git browse'
 alias gt='git tag'
 
+function gcompare {
+  version=$(node -p "require('./package.json').version")
+  hub compare $version...master
+}
+
 function gnp {
   current_branch="$(git rev-parse --abbrev-ref HEAD)"
   count="$(git rev-list origin/$(current_branch)...$(current_branch) --count)"
