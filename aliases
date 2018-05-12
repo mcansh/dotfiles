@@ -25,7 +25,7 @@ alias gco='git checkout'
 alias gh='git browse'
 alias gt='git tag'
 
-function gcompare {
+function git_compare_release_to_master {
   version=$(node -p "require('./package.json').version")
   hub compare $version...master
 }
