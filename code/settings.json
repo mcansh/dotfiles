@@ -29,7 +29,7 @@
     "**/.next": true,
     "**/node_modules": true
   },
-  "workbench.colorTheme": "Cobalt2",
+  "workbench.colorTheme": "Night Owl",
   "workbench.editor.tabCloseButton": "right",
   "emmet.includeLanguages": {
     "javascript": "javascriptreact"
@@ -56,5 +56,6 @@
   "terminal.integrated.fontSize": 14,
   "workbench.statusBar.visible": true,
   "workbench.statusBar.feedback.visible": false,
-  "editor.fontLigatures": true
+  "editor.fontLigatures": true,
+  "terminal.integrated.rendererType": "dom"
 }
