@@ -1,17 +1,21 @@
 tap "heroku/brew"
 tap "homebrew/dupes"
+tap "homebrew/cask-versions"
 tap "homebrew/core"
 tap "homebrew/php"
+tap "homebrew/cask"
 tap "homebrew/bundle"
 tap "homebrew/services"
 tap "yonaskolb/xcodegen", "https://github.com/yonaskolb/XcodeGen.git"
-tap "caskroom/versions"
-tap "caskroom/cask"
 brew "python"
 brew "awscli"
 brew "carthage"
+brew "cmatrix"
+brew "imagemagick"
 brew "gifify"
+brew "git"
 brew "gpg-agent"
+brew "harfbuzz"
 brew "node"
 brew "heroku"
 brew "httpie"
@@ -20,10 +24,11 @@ brew "libiconv"
 brew "libxml2"
 brew "libxslt"
 brew "mas"
+brew "python@2"
+brew "mongodb", restart_service: true
 brew "mysql"
 brew "pinentry-mac"
 brew "postgresql", restart_service: true
-brew "python@2"
 brew "rbenv"
 brew "thefuck"
 brew "watchman"
@@ -45,10 +50,10 @@ cask "qlstephen"
 cask "webpquicklook"
 cask "whiskey"
 cask "zoomus"
-cask "caskroom/versions/google-chrome-canary"
-cask "caskroom/versions/google-chrome-dev"
-cask "caskroom/versions/slack-beta"
-cask "caskroom/versions/visual-studio-code-insiders"
+cask "homebrew/cask-versions/google-chrome-canary"
+cask "homebrew/cask-versions/google-chrome-dev"
+cask "homebrew/cask-versions/slack-beta"
+cask "homebrew/cask-versions/visual-studio-code-insiders"
 mas "Battery Health", id: 490192174
 mas "Bear", id: 1091189122
 mas "Boxy", id: 1053031090
@@ -63,5 +68,5 @@ mas "Outline", id: 1356178125
 mas "Pages", id: 409201541
 mas "Redacted", id: 984968384
 mas "Squash", id: 1152443474
-mas "Tweetbot", id: 557168941
+mas "Tweetbot", id: 1384080005
 mas "Xcode", id: 497799835
