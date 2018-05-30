@@ -29,7 +29,7 @@
     "**/.next": true,
     "**/node_modules": true
   },
-  "workbench.colorTheme": "Night Owl",
+  "workbench.colorTheme": "Cobalt2",
   "workbench.editor.tabCloseButton": "right",
   "emmet.includeLanguages": {
     "javascript": "javascriptreact"
