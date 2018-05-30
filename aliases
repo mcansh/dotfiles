@@ -25,12 +25,13 @@ alias gco='git checkout'
 alias gh='git browse'
 alias gt='git tag'
 
-function git_compare_release_to_master {
+function gitCompareRelease {
+  branch=${1-master}
   version=$(node -p "require('./package.json').version")
-  hub compare $version...master
+  hub compare $version...$branch
 }
 
-function gnp {
+function gitNotPushed {
   current_branch="$(git rev-parse --abbrev-ref HEAD)"
   count="$(git rev-list origin/$(current_branch)...$(current_branch) --count)"
   if (($count > 0))
