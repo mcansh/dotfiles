@@ -75,7 +75,7 @@ function brewup {
   echo '> 1/6 Updating Homebrew 📦'
   brew update
   echo '> 2/6 Checking Homebrew for issues ⛔️'
-  brew doctor
+  brew doctor $(brew doctor --list-checks | grep -vE 'check_for_stray_(dylibs|static_libs|headers)')
   echo '> 3/6 Getting a list of oudated packages 📜'
   brew outdated
   outdatedPackages="$(brew outdated --numstat | wc -l)"
