@@ -14,18 +14,53 @@ echo "> 1/4 Host name is set to $(hostname)"
 
 # Mac configuration
 echo "> 2/4 Setting up computer configuration"
-sudo -u $USER systemsetup -setcomputersleep 2 # Computer sleeps after 2 minutes
-defaults write com.apple.screensaver askForPassword 1 # Force password entry after sleep
-defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText "This computer belongs to Logan McAnsh" # add a message to the login screen
-defaults write com.apple.Safari AutoOpenSafeDownloads -bool false # stop safari from opening downloaded files automatically
-defaults write com.apple.dock autohide -bool true && defaults write com.apple.dock autohide-delay -float 0 && defaults write com.apple.dock autohide-time-modifier -float 0 # autohide dock and remove delay
-defaults write com.apple.Dock orientation -string left # position the dock on the left side
-defaults write com.apple.PowerChime ChimeOnAllHardware -bool true; open /System/Library/CoreServices/PowerChime.app & # enable the PowerChime
-defaults write NSGlobalDomain _HIHideMenuBar -bool true # autohide the menubar
-defaults write NSGlobalDomain AppleInterfaceStyle Dark # dark dock/menubar
-defaults write com.apple.screencapture disable-shadow -bool true # remove shadow from screenshots
-killall Dock # restart dock
-killall -KILL SystemUIServer # restart menubar
+
+# Computer sleeps after 2 minutes
+sudo -u $USER systemsetup -setcomputersleep 2
+
+# Force password entry after sleep
+defaults write com.apple.screensaver askForPassword 1
+
+# Add a message to the login screen
+defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText "This computer belongs to Logan McAnsh"
+
+# Stop safari from opening downloaded files automatically
+defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
+
+# Set sidebar icon size to small
+defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 1
+
+# Autohide dock and remove delay
+defaults write com.apple.dock autohide -bool true && defaults write com.apple.dock autohide-delay -float 0 && defaults write com.apple.dock autohide-time-modifier -float 0
+
+# Position the dock on the left side
+defaults write com.apple.Dock orientation -string left
+
+# Enable the PowerChime
+# defaults write com.apple.PowerChime ChimeOnAllHardware -bool true; open /System/Library/CoreServices/PowerChime.app
+
+# Autohide the menubar
+defaults write NSGlobalDomain _HIHideMenuBar -bool true
+
+# Set dark dock/menubar
+# defaults write NSGlobalDomain AppleInterfaceStyle Dark
+
+# Remove shadow from screenshots
+defaults write com.apple.screencapture disable-shadow -bool true
+
+# Expand save panel by default
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+
+# Expand print panel by default
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
+
+# Restart dock
+killall Dock
+
+# Restart menubar
+killall -KILL SystemUIServer
 
 
 # Check if FileValut is on
