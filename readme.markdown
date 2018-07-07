@@ -31,5 +31,5 @@ $ makethisgohere $HOME/.code/settings.json ~/Library/Application\ Support/Code\ 
 For my snippets
 
 ```bash
-$ makethisgohere $HOME/.code/javascript.json ~/Library/Application Support/Code - Insiders/User/snippets/javascript.json
+$ makethisgohere $HOME/.code/javascript.json ~/Library/Application\ Support/Code\ -\ Insiders/User/snippets/javascript.json
 ```
