@@ -8,7 +8,7 @@
 # }
 
 pkg.link() {
-  files=(zshrc aliases hyper.js code install.sh)
+  files=(zshrc aliases hyper.js code gitconfig yarnrc)
   # link files into $HOME
   for file in ${files[@]}; do
     fs.link_file $file
