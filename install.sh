@@ -65,12 +65,15 @@ defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 
+# Give NPM proper global install permissions
+sudo chown -R $USER /usr/local/lib/node_modules
+sudo chown -R $(whoami) ~/.npm
+
 # Restart dock
 killall Dock
 
 # Restart menubar
 killall -KILL SystemUIServer
-
 
 # Check if FileValut is on
 echo '> 3/4 Checking FileValue Status'
