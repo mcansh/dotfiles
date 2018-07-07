@@ -25,11 +25,11 @@ In order to sync VS Code settings run: (after installing my dotfile config, with
 
 ```bash
 $ rm ~/Library/Application\ Support/Code\ -\ Insiders/User/settings.json
-$ makethisgohere $HOME/.code/.settings.json ~/Library/Application\ Support/Code\ -\ Insiders/User/settings.json
+$ makethisgohere $HOME/.code/settings.json ~/Library/Application\ Support/Code\ -\ Insiders/User/settings.json
 ```
 
 For my snippets
 
 ```bash
-$ makethisgohere $HOME/.code/.javascript.json ~/Library/Application Support/Code - Insiders/User/snippets/javascript.json
+$ makethisgohere $HOME/.code/javascript.json ~/Library/Application Support/Code - Insiders/User/snippets/javascript.json
 ```
