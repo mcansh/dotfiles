@@ -37,5 +37,5 @@ $ makethisgohere $HOME/.code/javascript.json ~/Library/Application\ Support/Code
 For my keybindings
 
 ```bash
-$ makethisgohere ~/dev/dot-dotfiles/code/keybindings.json ~/Library/Application\ Support/Code\ -\ Insiders/User
+$ makethisgohere $HOME/.code/keybindings.json ~/Library/Application\ Support/Code\ -\ Insiders/User
 ```
