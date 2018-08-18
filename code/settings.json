@@ -1,6 +1,6 @@
 {
   "window.zoomLevel": -1,
-  "editor.fontFamily": "Operator Mono, Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontFamily": "Operator Mono, 'SF Mono', Menlo, Monaco, 'Courier New', monospace",
   "editor.fontSize": 20,
   "editor.letterSpacing": 0.5,
   "workbench.editor.tabSizing": "shrink",
@@ -14,10 +14,9 @@
   "editor.fontWeight": "400",
   "editor.cursorBlinking": "solid",
   "editor.colorDecorators": false,
-  "editor.minimap.enabled": true,
+  "editor.minimap.enabled": false,
   "workbench.activityBar.visible": false,
   "workbench.sideBar.location": "left",
-  "editor.minimap.showSlider": "always",
   "workbench.startupEditor": "newUntitledFile",
   "extensions.ignoreRecommendations": false,
   "files.exclude": {
@@ -58,5 +57,24 @@
   "workbench.statusBar.feedback.visible": false,
   "editor.fontLigatures": true,
   "terminal.integrated.rendererType": "dom",
-  "terminal.integrated.shell.osx": "zsh"
+  "terminal.integrated.shell.osx": "zsh",
+  "gitlens.advanced.messages": {
+    "suppressShowKeyBindingsNotice": true
+  },
+  "sync.gist": "29965be72fcd39acdded1c8e768d140d",
+  "sync.host": "",
+  "sync.pathPrefix": "",
+  "sync.quietSync": false,
+  "sync.askGistName": false,
+  "sync.removeExtensions": true,
+  "sync.syncExtensions": true,
+  "sync.autoDownload": false,
+  "sync.autoUpload": false,
+  "sync.lastUpload": "2018-07-18T15:35:58.302Z",
+  "sync.lastDownload": "",
+  "sync.forceDownload": false,
+  "gitlens.settings.mode": "advanced",
+  "gitlens.codeLens.scopes": [
+    "containers"
+  ],
 }
