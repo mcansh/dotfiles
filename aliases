@@ -90,7 +90,6 @@ function brewup {
   brew prune
   echo '> 6/6 Cleaning up 🚮'
   brew cleanup
-  brew cask cleanup
   echo '> Done. 🎉'
 }
 
