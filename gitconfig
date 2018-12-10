@@ -22,6 +22,7 @@
 	remove = "rm -r --cached"
 	d = diff
 	fix = "commit --fixup"
+	unstage = "reset --"
 
 	# list these aliases
 	la = "!git config -l | grep alias | cut -c 7-"
