@@ -109,6 +109,7 @@ alias update='softwareupdate -ia --verbose'
 
 # update everything
 function updateall {
+  arg=$1 
   echo '▲ [1/5] Running Homebrew update script'
   brewup
   echo '▲ [2/5] Updating Rubygems'
@@ -118,8 +119,14 @@ function updateall {
   yarn global upgrade
   echo '▲ [4/5] Updating Apps from MAS'
   mas outdated && mas upgrade
-  echo '▲ [5/5] Running macOS Upgrade'
-  update
+  if [[ $arg == "--restart" ]]
+  then 
+    echo '▲ [5/5] Running macOS Upgrade with "--restart"'
+    update --restart
+  else
+    echo '▲ [5/5] Running macOS Upgrade'
+    update
+  fi
 }
 
 # alias for making symlinks (alias)
