@@ -1,0 +1,151 @@
+#!/usr/bin/env bash
+
+# Run without downloading:
+# curl https://raw.githubusercontent.com/mcansh/dotfiles/master/.macos | bash
+
+# Set up logging environment
+LOG_FILE='/Users/'$(logname)'/Desktop/install-log.log'
+
+exec &> >(tee -a "$LOG_FILE")
+echo "Logging to" $LOG_FILE
+
+# Ask for the administrator password upfront
+sudo -v
+
+# Keep-alive: update existing `sudo` time stamp until `.macos` has finished
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+echo "Hello $(whoami)! Let's get you set up."
+
+###############################################################################
+# homebrew                                                                    #
+###############################################################################
+
+echo "installing homebrew"
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+echo "brew installing stuff"
+# hub: a github-specific version of git
+# fish: my preferred shell
+# ccat: cat with syntax highlighting
+# thefuck: will try to autocorrect your command upon error when you type 'fuck'
+# mas: update/install apps from the mac app store
+# gifify: make gifs
+# ffmpeg: for gifify
+# awscli: self explanitory
+# postgres: databases
+# httpie: easy api calls
+brew install hub fish ccat thefuck mas gifify awscli postgres httpie ffmpeg youtube-dl
+brew tap caskroom/cask caskroom/versions homebrew/bundle homebrew/core homebrew/dupes
+
+# yarn: without node because we'll get it from installing n later
+brew install yarn --without-node
+
+echo "installing node (via n-install)"
+curl -L https://git.io/n-install | bash
+
+echo "node --version: $(node --version)"
+echo "npm --version: $(npm --version)"
+
+echo "installing a few global npm packages"
+yarn global add release trash-cli fkill-cli
+
+echo "installing apps with brew cask"
+brew cask install 1password android-platform-tools backblaze codekit docker emojipedia firefox-nightly google-chrome-canary google-chrome-dev graphql-playground handbrake hyper iina now outline-manager postman rescuetime rocket sketch sketch-beta slack-beta spectacle transmit visual-studio-code-insiders zoomus
+
+echo "installing apps from the Mac App Storee"
+mas install 1254981365 913158085 1351639930 1294126402 439697913 408981434 453114608 409203825 1356178125 409201541 984968384 1152443474 1384080005 1385985095 497799835
+
+echo "Generating an RSA token for GitHub"
+mkdir -p ~/.ssh
+ssh-keygen -t rsa -b 4096 -C "logan@mcan.sh"
+echo "Host *\n AddKeysToAgent yes\n UseKeychain yes\n IdentityFile ~/.ssh/id_rsa" | tee ~/.ssh/config
+eval "$(ssh-agent -s)"
+echo "run 'pbcopy < ~/.ssh/id_rsa.pub' and paste that into GitHub"
+
+
+echo "cloning dotfiles"
+git clone git@github.com:mcansh/dotfiles.git "${HOME}/dotfiles"
+ln -s "${HOME}/dotfiles/.bash_profile" "${HOME}/.bash_profile"
+ln -s "${HOME}/dotfiles/.gitignore_global" "${HOME}/.gitignore_global"
+ln -s "${HOME}/dotfiles/.hyper.js" "${HOME}/.hyper.js"
+ln -s "${HOME}/dotfiles/.gitconfig" "${HOME}/.gitconfig"
+ln -s "${HOME}/dotfiles/.yarnrc" "${HOME}/.yarnrc"
+ln -s "${HOME}/dotfiles/scode/settings.json" "$HOME/Library/Application\ Support/Code\ -\ Insiders/User"
+ln -s "${HOME}/dotfiles/scode/keybindings.json" "${HOME}/Library/Application\ Support/Code\ -\ Insiders/User"
+ln -s "${HOME}/dotfiles/fish" "$HOME/.config/fish"
+ln -s "${HOME}/dotfiles/omf" "$HOME/.config/omf"
+
+
+echo "making system modifications:"
+
+# Set HostName/ComputerName/LocalHostName
+scutil --set ComputerName "🚀😺"
+scutil --set LocalHostName "mcansh"
+scutil --set HostName "mcansh"
+
+# Computer sleeps after 2 minutes
+systemsetup -setcomputersleep 2
+
+# Force password entry after sleep
+defaults write com.apple.screensaver askForPassword 1
+
+# Add a message to the login screen
+defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText "This computer belongs to Logan McAnsh"
+
+# Stop safari from opening downloaded files automatically
+defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
+
+# Set sidebar icon size to small
+defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 1
+
+# Autohide dock and remove delay
+defaults write com.apple.dock autohide -bool true && defaults write com.apple.dock autohide-delay -float 0 && defaults write com.apple.dock autohide-time-modifier -float 0
+
+# Position the dock on the left side
+defaults write com.apple.Dock orientation -string left
+
+# Enable the PowerChime
+# defaults write com.apple.PowerChime ChimeOnAllHardware -bool true; open /System/Library/CoreServices/PowerChime.app
+
+# Autohide the menubar
+defaults write NSGlobalDomain _HIHideMenuBar -bool true
+
+# Set dark dock/menubar
+# defaults write NSGlobalDomain AppleInterfaceStyle Dark
+
+# Remove shadow from screenshots
+defaults write com.apple.screencapture disable-shadow -bool true
+
+# Expand save panel by default
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+
+# Expand print panel by default
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
+
+# Give NPM proper global install permissions
+sudo chown -R $USER /usr/local/lib/node_modules
+sudo chown -R $(whoami) ~/.npm
+
+# Restart dock
+killall Dock
+
+# Restart menubar
+killall -KILL SystemUIServer
+
+# Check if FileValut is on
+echo '> 3/4 Checking FileValue Status'
+if [ "$(fdesetup status)" == "FileVault is On." ]; then
+  echo "> Disk encryption is already enabled. 🔥"
+elif [ "$(fdesetup status)" == "FileVault is Off." ]; then
+  echo "> Disk encryption not enabled. Enabling now..."
+  fdesetup enable
+fi
+
+# Mac Software Update Check and install updates
+softwareupdate -ia --verbose --restart
+
+# WE OUT
+echo "> Welcome to your newly configured MacBook"
