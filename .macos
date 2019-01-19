@@ -71,8 +71,10 @@ ln -s "${HOME}/dotfiles/.gitignore_global" "${HOME}/.gitignore_global"
 ln -s "${HOME}/dotfiles/.hyper.js" "${HOME}/.hyper.js"
 ln -s "${HOME}/dotfiles/.gitconfig" "${HOME}/.gitconfig"
 ln -s "${HOME}/dotfiles/.yarnrc" "${HOME}/.yarnrc"
-ln -s "$HOME/.code/settings.json" "$HOME/Library/Application\ Support/Code\ -\ Insiders/User"
-ln -s "$HOME/.code/keybindings.json" "${HOME}/Library/Application\ Support/Code\ -\ Insiders/User"
+ln -s "${HOME}/dotfiles/scode/settings.json" "$HOME/Library/Application\ Support/Code\ -\ Insiders/User"
+ln -s "${HOME}/dotfiles/scode/keybindings.json" "${HOME}/Library/Application\ Support/Code\ -\ Insiders/User"
+ln -s "${HOME}/dotfiles/fish" "$HOME/.config/fish"
+ln -s "${HOME}/dotfiles/omf" "$HOME/.config/omf"
 
 
 echo "making system modifications:"
