@@ -67,6 +67,7 @@ alias ls='ls -1a'
 
 # alias for making symlinks (alias)
 alias makethisgohere='ln -s'
+alias ...='cd ../../'
 
 # maintenance scripts
 alias maintenance='sudo periodic daily weekly monthly'
