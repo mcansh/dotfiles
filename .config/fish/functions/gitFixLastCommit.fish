@@ -1,17 +1,13 @@
-function gitFixLastCommit {
-  emojis=('🌮' '🦄' '🍕' '📜' '📦')
-  length=${#emojis[@]}
-  index=$((RANDOM % $length + 1))
-  emoji=${emojis[$index]}
-  gitDiffCount="$(git diff --cached --numstat | wc -l)"
-  if (($gitDiffCount > 0))
-  then
+function gitFixLastCommit
+  set -l emoji (random choice '🌮' '🦄' '🍕' '📜' '📦')
+  set -l gitDiffCount (git diff --staged --shortstat | awk '{print $1}')
+  if test $gitDiffCount -gt 0
     echo "> 1/2 Getting last commit's sha"
-    sha="$(git rev-parse HEAD)"
+    set -l sha (git rev-parse HEAD)
     echo '> 2/2 commiting staged files'
     git commit -s --fixup $sha
-    echo "> Done. ${emoji}"
+    echo "> Done. $emoji"
   else
     echo "> Stage some stuff and then try again"
-  fi
-}
+  end
+end
