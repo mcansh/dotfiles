@@ -1,3 +1,6 @@
+# software updates
+alias update='softwareupdate -ia --verbose'
+
 # update everything
 function updateall
   echo '▲ [1/5] Running Homebrew update script'
@@ -13,7 +16,7 @@ function updateall
   if test $argv = '--restart'
     echo '▲ [5/5] Running macOS Upgrade with "--restart"'
     echo '▲ using "--restart" requires root privileges, I don\'t make the rules'
-    sudo update --restart
+    sudo softwareupdate -iaR --verbose
   else
     echo '▲ [5/5] Running macOS Upgrade'
     update
