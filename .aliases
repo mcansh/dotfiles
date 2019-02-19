@@ -1,0 +1,218 @@
+# Did you know that double quotes actually make a difference here?
+# Well I found that double quote meant the terminal executed some
+# commands on launch
+
+# git shortcuts
+alias g='git'
+alias ga='git add'
+alias gaa='git add -A'
+alias gcl='git clone'
+alias gcp='git cherry-pick -x'
+alias gcc='git cherry-pick --continue'
+alias gca='git cherry-pick --abort'
+alias gcl-submodules='git clone --recursive' # clone a repo with submodules
+alias gimme-submodules='git submodule update --init --recursive' # when you already cloned the repo and need the submodules
+alias gs='git s'
+alias gp='git push'
+alias gpf='git push -f'
+alias gc='git commit -sm'
+alias gf='git commit -s --fixup'
+alias gl='g ld'
+alias gpu='git pull'
+alias gd='git diff'
+alias gdd='git diff --staged'
+alias gco='git checkout'
+alias gh='git browse'
+alias gt='git tag'
+
+function gitCompareRelease {
+  branch=${1-master}
+  version=$(node -p "require('./package.json').version")
+  hub compare $version...$branch
+}
+
+function gitNotPushed {
+  current_branch="$(git rev-parse --abbrev-ref HEAD)"
+  count="$(git rev-list origin/$(current_branch)...$(current_branch) --count)"
+  if (($count > 0))
+  then
+    git log origin/$(current_branch)..$(current_branch)
+  else
+    echo "origin/$current_branch is up to date with $current_branch"
+  fi
+}
+
+alias o='open .'
+
+# fuck ruby <3
+alias b='bundle exec'
+
+# fix commit messages
+alias fixthatfuckingcommit='git commit --amend -sam'
+
+# VS Code
+alias code='code-insiders'
+alias c='code-insiders .'
+
+# Hidden files
+alias showhiddenfiles='defaults write com.apple.finder AppleShowAllFiles YES && killall Finder'
+alias hidehiddenfiles='defaults write com.apple.finder AppleShowAllFiles NO && killall Finder'
+
+# keep a log of installed brew files
+function brewfile {
+  echo '> 1/2 Generating Brewfile'
+  brew bundle dump --force
+  echo '> 2/2 Moving Brewfile'
+  mv brewfile ~/dotfiles/Brewfile
+  echo '> Done 👌'
+}
+
+alias installBrewfile='brew bundle --file=~/dot-dotfiles/Brewfile'
+
+alias backupGlobalYarn='cp ~/.config/yarn/global/package.json ~/dotfiles/npm-global.json'
+
+function brewup {
+  echo '> 1/6 Updating Homebrew 📦'
+  brew update
+  echo '> 2/6 Checking Homebrew for issues ⛔️'
+  brew doctor $(brew doctor --list-checks | grep -vE 'check_for_stray_(dylibs|static_libs|headers)')
+  echo '> 3/6 Getting a list of oudated packages 📜'
+  brew outdated
+  outdatedPackages="$(brew outdated --numstat | wc -l)"
+  if (( $outdatedPackages > 0 ))
+  then
+    echo '> 4/6 Upgrading packages 🚚'
+    brew upgrade
+  else
+    echo 'No updates are available'
+  fi
+  echo "> 5/6 Removing dead symlinks 💀"
+  brew prune
+  echo '> 6/6 Cleaning up 🚮'
+  brew cleanup
+  echo '> Done. 🎉'
+}
+
+
+# Hide/show all desktop icons (useful when presenting)
+alias hidedesktop='defaults write com.apple.finder CreateDesktop -bool false && killall Finder'
+alias showdesktop='defaults write com.apple.finder CreateDesktop -bool true && killall Finder'
+
+# Lock the screen (when going AFK)
+alias afk='/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend'
+
+# Clean up LaunchServices to remove duplicates in the “Open With” menu
+alias appflush='/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder'
+
+# software updates
+alias update='softwareupdate -ia --verbose'
+
+# update everything
+function updateall {
+  arg=$1 
+  echo '▲ [1/5] Running Homebrew update script'
+  brewup
+  echo '▲ [2/5] Updating Rubygems'
+  gem update
+  gem update --system
+  echo '▲ [3/5] Running Yarn Global Upgrade'
+  yarn global upgrade
+  echo '▲ [4/5] Updating Apps from MAS'
+  mas outdated && mas upgrade
+  if [[ $arg == "--restart" ]]
+  then 
+    echo '▲ [5/5] Running macOS Upgrade with "--restart"'
+    update --restart
+  else
+    echo '▲ [5/5] Running macOS Upgrade'
+    update
+  fi
+}
+
+# alias for making symlinks (alias)
+alias makethisgohere='ln -s'
+
+# make list actually list all
+alias ls='ls -a'
+
+# update gems in gemfile
+alias bup='bundle update'
+
+# maintenance scripts
+alias maintenance='sudo periodic daily weekly monthly'
+
+# slack emoji magic
+alias slackmoji='sips -Z 128 $1'
+
+# gifify 60fps
+alias gifify60='gifify -r 60 $1'
+
+# add space to dock
+alias space='defaults write com.apple.dock persistent-apps -array-add "{'tile-type'='spacer-tile';}"; killall Dock'
+
+# clone repo, cd into it, and open it in your desired editor.
+function cloneOpen {
+urls=('github.com' 'bitbucket.org' 'gitlab.com')
+  url=$1
+  for i in "${urls[@]}"
+  do
+    if [[ $url =~ $i ]]
+    then
+      if [[ $url =~ 'http://' || $url =~ 'https://' ]]
+      then
+        userRepo=${url#*://$i/}
+      elif [[ $url =~ 'git@' ]]
+      then
+        userRepo=${url#*@$i:}
+      fi
+      repo=${userRepo#*/}
+      repo_no_ext=$(basename ${repo#*/} .git)
+
+      echo "> 1/3 Cloning repo from $i 🚚"
+      git clone $url
+      echo "> 2/3 Changing directories to $repo_no_ext 🔨"
+      cd $repo_no_ext
+      echo "> 3/3 Opening in $EDITOR 🛠"
+      $EDITOR .
+    fi
+  done
+}
+
+alias please='sudo $(fc -ln -1)'
+
+alias fix-zsh-permissions='sudo chown -R $whoami:staff .oh-my-zsh .zs .zsh*'
+
+alias yarn-upgrade='yarn upgrade-interactive --latest'
+alias yarn-global-upgrade='yarn global upgrade-interactive'
+alias npm-list-global='npm list -g --depth=0'
+alias gimme_bash='exec bash --login'
+
+function gitFixLastCommit {
+  emojis=('🌮' '🦄' '🍕' '📜' '📦')
+  length=${#emojis[@]}
+  index=$((RANDOM % $length + 1))
+  emoji=${emojis[$index]}
+  gitDiffCount="$(git diff --cached --numstat | wc -l)"
+  if (($gitDiffCount > 0))
+  then
+    echo "> 1/2 Getting last commit's sha"
+    sha="$(git rev-parse HEAD)"
+    echo '> 2/2 commiting staged files'
+    git commit -s --fixup $sha
+    echo "> Done. ${emoji}"
+  else
+    echo "> Stage some stuff and then try again"
+  fi
+}
+
+# list and clear downloads table
+alias list_downloads='sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* "select LSQuarantineDataURLString from LSQuarantineEvent"'
+alias clear_downloads='sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* "delete from LSQuarantineEvent"'
+
+# docker
+alias docker_list_containers='docker ps -aq'
+alias docker_list_images='docker images -f "dangling=true" -q'
+alias docker_remove_all_images='docker rmi -f $(docker images -q)'
+alias docker_remove_all_containers='docker rm -f $(docker ps -a -q)'
+alias docker_remove_containers='docker ps -q |xargs docker rm'
+alias docker_remove_images='docker images -q |xargs docker rmi'
