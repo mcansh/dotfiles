@@ -12,7 +12,8 @@ function updateall
   mas upgrade
   if test $argv = '--restart'
     echo '▲ [5/5] Running macOS Upgrade with "--restart"'
-    update --restart
+    echo '▲ using "--restart" requires root privileges, I don\'t make the rules'
+    sudo update --restart
   else
     echo '▲ [5/5] Running macOS Upgrade'
     update
