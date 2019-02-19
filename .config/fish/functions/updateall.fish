@@ -10,7 +10,7 @@ function updateall
   echo '▲ [4/5] Updating Apps from MAS'
   mas outdated
   mas upgrade
-  if test "$argv" = 'update'
+  if test $argv = '--restart'
     echo '▲ [5/5] Running macOS Upgrade with "--restart"'
     update --restart
   else
