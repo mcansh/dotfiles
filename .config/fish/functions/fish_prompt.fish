@@ -1,0 +1,1 @@
+/Users/loganmcansh/.local/share/omf/themes/zeit-fish-theme/fish_prompt.fish
