@@ -6,9 +6,9 @@
 [user]
 	name = Logan McAnsh
 	email = logan@mcan.sh
-	signingkey = D01F199AC33D163F
+	signingkey = 7FCB5BFE416D9B56
 [push]
-	default = simple
+	default = current
 [alias]
 	# show last commit's sha
 	sha = rev-parse HEAD
@@ -22,7 +22,7 @@
 	remove = "rm -r --cached"
 	d = diff
 	fix = "commit --fixup"
-	unstage = "reset --"
+	unstage ="reset --"
 
 	# list these aliases
 	la = "!git config -l | grep alias | cut -c 7-"
@@ -46,6 +46,7 @@
 [core]
 	excludesfile = /Users/loganmcansh/.gitignore_global
 	editor = code-insiders --wait
+	ignorecase = false
 [hub]
 	protocol = ssh
 [color]
@@ -57,3 +58,5 @@
   showBranch = auto
   interactive = auto
   grep = auto
+[rebase]
+  autosquash = true
