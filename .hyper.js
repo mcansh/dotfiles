@@ -87,7 +87,7 @@ module.exports = {
     //
     // Powershell on Windows
     // - Example: `C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe`
-    shell: 'zsh',
+    shell: '/usr/local/bin/fish',
 
     // for setting shell arguments (i.e. for using interactive shellArgs: ['-i'])
     // by default ['--login'] will be used
@@ -112,6 +112,8 @@ module.exports = {
     // for advanced config flags please refer to https://hyper.is/#cfg
 
     wickedBorderColor: '#ffc600',
+
+    verminal: { minimal: true },
   },
 
   // a list of plugins to fetch and install from npm
@@ -122,14 +124,17 @@ module.exports = {
   //   `project#1.0.1`
   plugins: [
     'hyperterm-close-on-left',
-    'hypercwd',
+    // 'hypercwd',
     'hyperterm-alternatescroll',
     'hyperlinks',
-    'hyperterm-cobalt2-theme',
+    // 'hyperterm-cobalt2-theme',
     // 'nova-hyperterm',
     // 'hyperterm-panda',
     // 'hyper-website-theme',
     // 'verminal',
+    'hyper-search',
+    'hyper-night-owl',
+    'hyper-samewd'
   ],
 
   // in development, you can create a directory under

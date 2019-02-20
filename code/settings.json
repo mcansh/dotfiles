@@ -1,7 +1,7 @@
 {
   "window.zoomLevel": -1,
-  "editor.fontFamily": "Operator Mono, 'SF Mono', Menlo, Monaco, 'Courier New', monospace",
-  "editor.fontSize": 20,
+  "editor.fontFamily": "'Dank Mono', 'Operator Mono', 'SF Mono', Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontSize": 12,
   "editor.letterSpacing": 0.5,
   "workbench.editor.tabSizing": "shrink",
   "html.format.enable": true,
@@ -14,7 +14,6 @@
   "editor.fontWeight": "400",
   "editor.cursorBlinking": "solid",
   "editor.colorDecorators": false,
-  "editor.minimap.enabled": false,
   "workbench.activityBar.visible": false,
   "workbench.sideBar.location": "left",
   "workbench.startupEditor": "newUntitledFile",
@@ -28,53 +27,85 @@
     "**/.next": true,
     "**/node_modules": true
   },
-  "workbench.colorTheme": "Cobalt2",
   "workbench.editor.tabCloseButton": "right",
   "emmet.includeLanguages": {
-    "javascript": "javascriptreact"
+    "javascript": "javascriptreact",
   },
   "editor.snippetSuggestions": "top",
   "workbench.editor.enablePreviewFromQuickOpen": false,
   "window.title": "${dirty} ${activeEditorMedium}${separator}${rootName}",
   "atomKeymap.promptV3Features": true,
   "editor.formatOnSave": true,
+  "[typescript]": {
+    "editor.formatOnSave": false
+  },
+  "[typescriptreact]": {
+    "editor.formatOnSave": false
+  },
   "[javascript]": {
     "editor.formatOnSave": false
   },
   "eslint.alwaysShowStatus": true,
   "eslint.autoFixOnSave": true,
   "eslint.packageManager": "yarn",
+  "eslint.options": {
+    "extensions": [
+      ".html",
+      ".js",
+      ".jsx",
+      "typescript",
+      "typescriptreact"
+    ]
+  },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "html",
+    {
+      "language": "typescript",
+      "autoFix": true
+    },
+    {
+      "language": "typescriptreact",
+      "autoFix": true
+    }
+  ],
   "color-highlight.markerType": "dot-after",
   "color-highlight.matchWords": true,
   "files.insertFinalNewline": true,
   "git.enableCommitSigning": true,
   "html.format.indentInnerHtml": true,
   "javascript.format.enable": false,
-  "terminal.explorerKind": "external",
+  "terminal.explorerKind": "integrated",
   "terminal.external.osxExec": "Hyper.app",
   "terminal.integrated.fontSize": 14,
   "workbench.statusBar.visible": true,
   "workbench.statusBar.feedback.visible": false,
   "editor.fontLigatures": true,
   "terminal.integrated.rendererType": "dom",
-  "terminal.integrated.shell.osx": "zsh",
+  "terminal.integrated.shell.osx": "fish",
   "gitlens.advanced.messages": {
     "suppressShowKeyBindingsNotice": true
   },
   "sync.gist": "29965be72fcd39acdded1c8e768d140d",
-  "sync.host": "",
-  "sync.pathPrefix": "",
   "sync.quietSync": false,
   "sync.askGistName": false,
   "sync.removeExtensions": true,
   "sync.syncExtensions": true,
   "sync.autoDownload": false,
   "sync.autoUpload": false,
-  "sync.lastUpload": "2018-07-18T15:35:58.302Z",
-  "sync.lastDownload": "",
   "sync.forceDownload": false,
   "gitlens.settings.mode": "advanced",
   "gitlens.codeLens.scopes": [
     "containers"
   ],
+  "javascript.validate.enable": false,
+  "editor.minimap.enabled": false,
+  "breadcrumbs.enabled": true,
+  "workbench.editor.labelFormat": "short",
+  "workbench.iconTheme": "material-icon-theme",
+  "git.autofetch": true,
+  "npm.enableScriptExplorer": true,
+  "workbench.list.keyboardNavigation": "simple",
+  "workbench.colorTheme": "Night Owl"
 }
