@@ -1,5 +1,6 @@
 # git shortcuts
-alias git='hub'
+# alias git='hub'
+eval "$(hub alias -s)"
 alias g='git'
 alias gb="git branch"
 alias ga='git add'
