@@ -1,111 +1,117 @@
 {
-  "window.zoomLevel": -1,
-  "editor.fontFamily": "'Dank Mono', 'Operator Mono', 'SF Mono', Menlo, Monaco, 'Courier New', monospace",
-  "editor.fontSize": 12,
-  "editor.letterSpacing": 0.5,
-  "workbench.editor.tabSizing": "shrink",
-  "html.format.enable": true,
-  "html.format.preserveNewLines": true,
-  "files.trimTrailingWhitespace": true,
-  "editor.tabSize": 2,
-  "editor.cursorStyle": "line",
-  "editor.wordWrap": "on",
-  "editor.multiCursorModifier": "ctrlCmd",
-  "editor.fontWeight": "400",
-  "editor.cursorBlinking": "solid",
-  "editor.colorDecorators": false,
-  "workbench.activityBar.visible": false,
-  "workbench.sideBar.location": "left",
-  "workbench.startupEditor": "newUntitledFile",
-  "extensions.ignoreRecommendations": false,
-  "files.exclude": {
-    "**/.git": true,
-    "**/.svn": true,
-    "**/.hg": true,
-    "**/CVS": true,
-    "**/.DS_Store": true,
-    "**/.next": true,
-    "**/node_modules": true
-  },
-  "workbench.editor.tabCloseButton": "right",
-  "emmet.includeLanguages": {
-    "javascript": "javascriptreact",
-  },
-  "editor.snippetSuggestions": "top",
-  "workbench.editor.enablePreviewFromQuickOpen": false,
-  "window.title": "${dirty} ${activeEditorMedium}${separator}${rootName}",
-  "atomKeymap.promptV3Features": true,
-  "editor.formatOnSave": true,
-  "[typescript]": {
-    "editor.formatOnSave": false
-  },
-  "[typescriptreact]": {
-    "editor.formatOnSave": false
-  },
-  "[javascript]": {
-    "editor.formatOnSave": false
-  },
-  "eslint.alwaysShowStatus": true,
-  "eslint.autoFixOnSave": true,
-  "eslint.packageManager": "yarn",
-  "eslint.options": {
-    "extensions": [
-      ".html",
-      ".js",
-      ".jsx",
-      "typescript",
-      "typescriptreact"
-    ]
-  },
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "html",
-    {
-      "language": "typescript",
-      "autoFix": true
+    "window.zoomLevel": -1,
+    "editor.fontFamily": "'Dank Mono', 'Operator Mono', 'SF Mono', Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontSize": 12,
+    "editor.letterSpacing": 0.5,
+    "workbench.editor.tabSizing": "shrink",
+    "html.format.enable": true,
+    "html.format.preserveNewLines": true,
+    "files.trimTrailingWhitespace": true,
+    "editor.tabSize": 2,
+    "editor.cursorStyle": "line",
+    "editor.wordWrap": "on",
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.fontWeight": "400",
+    "editor.cursorBlinking": "solid",
+    "editor.colorDecorators": false,
+    "workbench.activityBar.visible": false,
+    "workbench.sideBar.location": "left",
+    "workbench.startupEditor": "newUntitledFile",
+    "extensions.ignoreRecommendations": false,
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/.next": true,
+        "**/node_modules": true
     },
-    {
-      "language": "typescriptreact",
-      "autoFix": true
-    }
-  ],
-  "color-highlight.markerType": "dot-after",
-  "color-highlight.matchWords": true,
-  "files.insertFinalNewline": true,
-  "git.enableCommitSigning": true,
-  "html.format.indentInnerHtml": true,
-  "javascript.format.enable": false,
-  "terminal.explorerKind": "integrated",
-  "terminal.external.osxExec": "Hyper.app",
-  "terminal.integrated.fontSize": 14,
-  "workbench.statusBar.visible": true,
-  "workbench.statusBar.feedback.visible": false,
-  "editor.fontLigatures": true,
-  "terminal.integrated.rendererType": "dom",
-  "terminal.integrated.shell.osx": "fish",
-  "gitlens.advanced.messages": {
-    "suppressShowKeyBindingsNotice": true
-  },
-  "sync.gist": "29965be72fcd39acdded1c8e768d140d",
-  "sync.quietSync": false,
-  "sync.askGistName": false,
-  "sync.removeExtensions": true,
-  "sync.syncExtensions": true,
-  "sync.autoDownload": false,
-  "sync.autoUpload": false,
-  "sync.forceDownload": false,
-  "gitlens.settings.mode": "advanced",
-  "gitlens.codeLens.scopes": [
-    "containers"
-  ],
-  "javascript.validate.enable": false,
-  "editor.minimap.enabled": false,
-  "breadcrumbs.enabled": true,
-  "workbench.editor.labelFormat": "short",
-  "workbench.iconTheme": "material-icon-theme",
-  "git.autofetch": true,
-  "npm.enableScriptExplorer": true,
-  "workbench.list.keyboardNavigation": "simple",
-  "workbench.colorTheme": "Night Owl"
+    "workbench.editor.tabCloseButton": "right",
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact",
+    },
+    "editor.snippetSuggestions": "top",
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "window.title": "${dirty} ${activeEditorMedium}${separator}${rootName}",
+    "atomKeymap.promptV3Features": true,
+    "editor.formatOnSave": true,
+    "[typescript]": {
+        "editor.formatOnSave": false
+    },
+    "[typescriptreact]": {
+        "editor.formatOnSave": false
+    },
+    "[javascript]": {
+        "editor.formatOnSave": false
+    },
+    "eslint.alwaysShowStatus": true,
+    "eslint.autoFixOnSave": true,
+    "eslint.packageManager": "yarn",
+    "eslint.options": {
+        "extensions": [
+            ".html",
+            ".js",
+            ".jsx",
+            "typescript",
+            "typescriptreact"
+        ]
+    },
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "html",
+        {
+            "language": "typescript",
+            "autoFix": true
+        },
+        {
+            "language": "typescriptreact",
+            "autoFix": true
+        }
+    ],
+    "color-highlight.markerType": "dot-after",
+    "color-highlight.matchWords": true,
+    "files.insertFinalNewline": true,
+    "git.enableCommitSigning": true,
+    "html.format.indentInnerHtml": true,
+    "javascript.format.enable": false,
+    "terminal.explorerKind": "integrated",
+    "terminal.external.osxExec": "Hyper.app",
+    "terminal.integrated.fontSize": 14,
+    "workbench.statusBar.visible": true,
+    "workbench.statusBar.feedback.visible": false,
+    "editor.fontLigatures": true,
+    "terminal.integrated.rendererType": "dom",
+    "terminal.integrated.shell.osx": "fish",
+    "gitlens.advanced.messages": {
+        "suppressShowKeyBindingsNotice": true
+    },
+    "sync.gist": "29965be72fcd39acdded1c8e768d140d",
+    "sync.quietSync": false,
+    "sync.askGistName": false,
+    "sync.removeExtensions": true,
+    "sync.syncExtensions": true,
+    "sync.autoDownload": false,
+    "sync.autoUpload": false,
+    "sync.forceDownload": false,
+    "gitlens.settings.mode": "advanced",
+    "gitlens.codeLens.scopes": [
+        "containers"
+    ],
+    "javascript.validate.enable": false,
+    "editor.minimap.enabled": false,
+    "breadcrumbs.enabled": true,
+    "workbench.editor.labelFormat": "short",
+    "workbench.iconTheme": "city-lights-icons-vsc",
+    "git.autofetch": true,
+    "npm.enableScriptExplorer": true,
+    "workbench.list.keyboardNavigation": "simple",
+    "workbench.list.automaticKeyboardNavigation": false,
+    "workbench.colorTheme": "ZEIT",
+    // starbucks - apparently i'm blind sometimes
+    /*
+  "editor.fontSize": 16,
+  "terminal.integrated.fontSize": 16,
+  /**/
 }
