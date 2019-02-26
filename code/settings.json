@@ -110,8 +110,7 @@
     "workbench.list.automaticKeyboardNavigation": false,
     "workbench.colorTheme": "ZEIT",
     // starbucks - apparently i'm blind sometimes
-    /*
-  "editor.fontSize": 16,
-  "terminal.integrated.fontSize": 16,
-  /**/
+    /**/ /*
+    "editor.fontSize": 16,
+    "terminal.integrated.fontSize": 16,*/
 }
