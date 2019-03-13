@@ -13,7 +13,7 @@ module.exports = {
 
     // font family with optional fallbacks
     fontFamily:
-      '"Operator Mono", SFMono-Medium, Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+      '"Dank Mono", "Operator Mono", SFMono-Medium, Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
     cursorColor: 'rgba(248,28,229,0.8)',
@@ -130,10 +130,10 @@ module.exports = {
     // 'hyperterm-cobalt2-theme',
     // 'nova-hyperterm',
     // 'hyperterm-panda',
-    // 'hyper-website-theme',
+    'hyper-website-theme',
     // 'verminal',
     'hyper-search',
-    'hyper-night-owl',
+    // 'hyper-night-owl',
     'hyper-samewd'
   ],
 
