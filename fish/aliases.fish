@@ -1,8 +1,7 @@
 # git shortcuts
-# alias git='hub'
-eval "$(hub alias -s)"
+alias git='hub'
 alias g='git'
-alias gb="git branch"
+alias gb='git branch'
 alias ga='git add'
 alias gaa='git add -A'
 alias gcl='git clone'
@@ -24,50 +23,38 @@ alias gco='git checkout'
 alias gh='git browse'
 alias gt='git tag'
 
-alias o='open .'
+# Hide/show all desktop icons (useful when presenting)
+alias hidedesktop='defaults write com.apple.finder CreateDesktop -bool false && killall Finder'
+alias showdesktop='defaults write com.apple.finder CreateDesktop -bool true && killall Finder'
 
-# software updates
-alias update='softwareupdate -ia --verbose'
+# re-run the last command as sudo
+alias please='sudo bash -c "(history -p !!)"'
+
+# Clean up LaunchServices to remove duplicates in the “Open With” menu
+alias appflush='/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder'
+
+# maintenance scripts
+alias maintenance='sudo periodic daily weekly monthly'
+
+# add space to dock
+alias space='defaults write com.apple.dock persistent-apps -array-add "{'tile-type'='spacer-tile';}"; killall Dock'
+
+# slack emoji magic
+alias slackmoji='sips -Z 128 $1'
+
+# gifify 60fps
+alias gifify60='gifify -r 60 $1'
 
 # VS Code
 alias code='code-insiders'
 alias c='code-insiders .'
-
-function brewup
-  echo '> 1/5 Updating Homebrew 📦'
-  brew update
-  echo '> 2/5 Checking Homebrew for issues ⛔️'
-  brew doctor
-  echo '> 3/5 Getting a list of oudated packages 📜'
-  brew outdated
-  echo '> 4/5 Upgrading packages 🚚'
-  brew upgrade
-  echo '> 5/5 Cleaning up 🚮'
-  brew cleanup
-  echo '> Done. 🎉'
-end
-
-# update everything
-function updateall
-  echo '▲ [1/5] Running Homebrew update script'
-  brewup
-  echo '▲ [2/5] Updating Rubygems'
-  gem update
-  gem update --system
-  echo '▲ [3/5] Running Yarn Global Upgrade'
-  yarn global upgrade
-  echo '▲ [4/5] Updating Apps from MAS'
-  mas outdated
-  mas upgrade
-  echo '▲ [5/5] Running macOS Upgrade'
-  update
-end
 
 # list all
 alias ls='ls -1a'
 
 # alias for making symlinks (alias)
 alias makethisgohere='ln -s'
+alias ...='cd ../../'
 
 # maintenance scripts
 alias maintenance='sudo periodic daily weekly monthly'
@@ -77,6 +64,7 @@ alias slackmoji='sips -Z 128 $1'
 
 alias yarn-upgrade='yarn upgrade-interactive --latest'
 alias yarn-global-upgrade='yarn global upgrade-interactive'
+alias npm-list-global='npm list -g --depth=0'
 
 # list and clear downloads table
 alias list_downloads='sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* "select LSQuarantineDataURLString from LSQuarantineEvent"'
