@@ -135,7 +135,7 @@ module.exports = {
     'hyper-search',
     // 'hyper-night-owl',
     'hyper-samewd',
-    'hyper-npm-theme'
+    // 'hyper-npm-theme'
   ],
 
   // in development, you can create a directory under
