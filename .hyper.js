@@ -130,11 +130,12 @@ module.exports = {
     // 'hyperterm-cobalt2-theme',
     // 'nova-hyperterm',
     // 'hyperterm-panda',
-    'hyper-website-theme',
+    // 'hyper-website-theme',
     // 'verminal',
     'hyper-search',
     // 'hyper-night-owl',
-    'hyper-samewd'
+    'hyper-samewd',
+    'hyper-npm-theme'
   ],
 
   // in development, you can create a directory under

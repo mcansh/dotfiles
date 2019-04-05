@@ -108,7 +108,7 @@
   "npm.enableScriptExplorer": true,
   "workbench.list.keyboardNavigation": "simple",
   "workbench.list.automaticKeyboardNavigation": false,
-  "workbench.colorTheme": "Deepdark Material Theme | Full Black Version",
+  "workbench.colorTheme": "Night Owl",
   "editor.suggestSelection": "first",
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   // starbucks - apparently i'm blind sometimes
