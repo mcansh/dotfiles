@@ -87,14 +87,6 @@
   "gitlens.advanced.messages": {
     "suppressShowKeyBindingsNotice": true
   },
-  "sync.gist": "29965be72fcd39acdded1c8e768d140d",
-  "sync.quietSync": false,
-  "sync.askGistName": false,
-  "sync.removeExtensions": true,
-  "sync.syncExtensions": true,
-  "sync.autoDownload": false,
-  "sync.autoUpload": false,
-  "sync.forceDownload": false,
   "gitlens.settings.mode": "advanced",
   "gitlens.codeLens.scopes": [
     "containers"
@@ -103,7 +95,6 @@
   "editor.minimap.enabled": false,
   "breadcrumbs.enabled": true,
   "workbench.editor.labelFormat": "short",
-  "workbench.iconTheme": "city-lights-icons-vsc",
   "git.autofetch": true,
   "npm.enableScriptExplorer": true,
   "workbench.list.keyboardNavigation": "simple",
