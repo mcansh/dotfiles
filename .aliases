@@ -109,7 +109,7 @@ alias update='softwareupdate -ia --verbose'
 
 # update everything
 function updateall {
-  arg=$1 
+  arg=$1
   echo '▲ [1/5] Running Homebrew update script'
   brewup
   echo '▲ [2/5] Updating Rubygems'
@@ -120,7 +120,7 @@ function updateall {
   echo '▲ [4/5] Updating Apps from MAS'
   mas outdated && mas upgrade
   if [[ $arg == "--restart" ]]
-  then 
+  then
     echo '▲ [5/5] Running macOS Upgrade with "--restart"'
     update --restart
   else
@@ -183,7 +183,7 @@ alias please='sudo $(fc -ln -1)'
 alias fix-zsh-permissions='sudo chown -R $whoami:staff .oh-my-zsh .zs .zsh*'
 
 alias yarn-upgrade='yarn upgrade-interactive --latest'
-alias yarn-global-upgrade='yarn global upgrade-interactive'
+alias yarn-global-upgrade='yarn global upgrade-interactive --latest'
 alias npm-list-global='npm list -g --depth=0'
 alias gimme_bash='exec bash --login'
 
