@@ -102,6 +102,15 @@
   "workbench.colorTheme": "Night Owl",
   "editor.suggestSelection": "first",
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "vscode_custom_css.imports": [
+    "file:///Users/loganmcansh/.vscode-insiders/extensions/robbowen.synthwave-vscode-0.0.7/synthwave84.css"
+  ],
+  // big - sometimes i like things bigger
+  // /*
+  "editor.fontSize": 14,
+  "terminal.integrated.fontSize": 14,
+  "editor.largeFileOptimizations": false,
+  /**/
   // starbucks - apparently i'm blind sometimes
   /*
   "window.zoomLevel": 0,
