@@ -7,8 +7,7 @@ thefuck --alias | source
 
 
 export PATH="$PATH:$HOME/.my_bin";
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-rvm default
+#rvm default
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
@@ -19,3 +18,6 @@ rvm default
 # tabtab source for slss package
 # uninstall by removing these lines or running `tabtab uninstall slss`
 [ -f /Users/loganmcansh/.config/yarn/global/node_modules/tabtab/.completions/slss.fish ]; and . /Users/loganmcansh/.config/yarn/global/node_modules/tabtab/.completions/slss.fish
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export N_PREFIX="$HOME/.config/n"
