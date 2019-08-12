@@ -20,4 +20,10 @@ export PATH="$PATH:$HOME/.my_bin";
 [ -f /Users/loganmcansh/.config/yarn/global/node_modules/tabtab/.completions/slss.fish ]; and . /Users/loganmcansh/.config/yarn/global/node_modules/tabtab/.completions/slss.fish
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-export N_PREFIX="$HOME/.config/n"
+export PATH="(yarn global bin):$PATH"
+
+export ANDROID_HOME=/Users/$USER/Library/Android/sdk
+export ANDROID_SDK_HOME=/Users/$USER/Library/Android/sdk
+export ANDROID_AVD_HOME=/Users/$USER/.android/avd
+
+alias ld='lazydocker'

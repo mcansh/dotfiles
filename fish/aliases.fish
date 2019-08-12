@@ -28,7 +28,7 @@ alias hidedesktop='defaults write com.apple.finder CreateDesktop -bool false && 
 alias showdesktop='defaults write com.apple.finder CreateDesktop -bool true && killall Finder'
 
 # re-run the last command as sudo
-alias please='sudo bash -c "(history -p !!)"'
+alias please='eval sudo $history[1]'
 
 # Clean up LaunchServices to remove duplicates in the “Open With” menu
 alias appflush='/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder'
