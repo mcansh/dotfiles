@@ -14,7 +14,7 @@
   "editor.fontWeight": "400",
   "editor.cursorBlinking": "solid",
   "editor.colorDecorators": false,
-  "workbench.activityBar.visible": false,
+  "workbench.activityBar.visible": true,
   "workbench.sideBar.location": "left",
   "workbench.startupEditor": "newUntitledFile",
   "extensions.ignoreRecommendations": false,
@@ -80,7 +80,6 @@
   "terminal.external.osxExec": "Hyper.app",
   "terminal.integrated.fontSize": 14,
   "workbench.statusBar.visible": true,
-  "workbench.statusBar.feedback.visible": false,
   "editor.fontLigatures": true,
   "terminal.integrated.rendererType": "dom",
   "terminal.integrated.shell.osx": "fish",
@@ -99,17 +98,54 @@
   "npm.enableScriptExplorer": true,
   "workbench.list.keyboardNavigation": "simple",
   "workbench.list.automaticKeyboardNavigation": false,
-  "workbench.colorTheme": "Night Owl",
+  "workbench.colorTheme": "SynthWave '84",
   "editor.suggestSelection": "first",
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "vscode_custom_css.imports": [
-    "file:///Users/loganmcansh/.vscode-insiders/extensions/robbowen.synthwave-vscode-0.0.7/synthwave84.css"
+    "https://raw.githubusercontent.com/robb0wen/synthwave-vscode/master/synthwave84.css"
   ],
-  // big - sometimes i like things bigger
-  // /*
-  "editor.fontSize": 14,
-  "terminal.integrated.fontSize": 14,
   "editor.largeFileOptimizations": false,
+  "keyboard.touchbar.enabled": false,
+  "cSpell.enabledLanguageIds": [
+    "asciidoc",
+    "c",
+    "cpp",
+    "csharp",
+    "css",
+    "git-commit",
+    "go",
+    "handlebars",
+    "html",
+    "jade",
+    "java",
+    "javascript",
+    "javascriptreact",
+    "json",
+    "jsonc",
+    "latex",
+    "less",
+    "markdown",
+    "php",
+    "plaintext",
+    "pug",
+    "python",
+    "restructuredtext",
+    "rust",
+    "scala",
+    "scss",
+    "text",
+    "typescript",
+    "typescriptreact",
+    "yaml",
+    "yml"
+  ],
+  "csharp.format.enable": false,
+  "csharp.suppressDotnetInstallWarning": true,
+  "csharp.suppressDotnetRestoreNotification": true,
+  // when working using an external monitor
+  /*
+  "editor.fontSize": 16,
+  "terminal.integrated.fontSize": 16,
   /**/
   // starbucks - apparently i'm blind sometimes
   /*
