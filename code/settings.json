@@ -83,13 +83,6 @@
   "editor.fontLigatures": true,
   "terminal.integrated.rendererType": "dom",
   "terminal.integrated.shell.osx": "fish",
-  "gitlens.advanced.messages": {
-    "suppressShowKeyBindingsNotice": true
-  },
-  "gitlens.settings.mode": "advanced",
-  "gitlens.codeLens.scopes": [
-    "containers"
-  ],
   "javascript.validate.enable": false,
   "editor.minimap.enabled": false,
   "breadcrumbs.enabled": true,
@@ -100,7 +93,6 @@
   "workbench.list.automaticKeyboardNavigation": false,
   "workbench.colorTheme": "SynthWave '84",
   "editor.suggestSelection": "first",
-  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "vscode_custom_css.imports": [
     "https://raw.githubusercontent.com/robb0wen/synthwave-vscode/master/synthwave84.css"
   ],
@@ -142,6 +134,8 @@
   "csharp.format.enable": false,
   "csharp.suppressDotnetInstallWarning": true,
   "csharp.suppressDotnetRestoreNotification": true,
+  "editor.cursorSurroundingLines": 3,
+  "editor.autoClosingBrackets": "languageDefined",
   // when working using an external monitor
   /*
   "editor.fontSize": 16,

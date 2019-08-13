@@ -17,11 +17,18 @@ If for whatever reason, these aren't copied over, you can run the following
 
 ```bash
 $ rm ~/Library/Application\ Support/Code\ -\ Insiders/User/settings.json
-$ makethisgohere $HOME/.code/settings.json ~/Library/Application\ Support/Code\ -\ Insiders/User
+$ makethisgohere $HOME/dotfiles/code/settings.json ~/Library/Application\ Support/Code\ -\ Insiders/User
 ```
 
-For my keybindings
+keybindings
 
 ```bash
-$ makethisgohere $HOME/.code/keybindings.json ~/Library/Application\ Support/Code\ -\ Insiders/User
+$ rm ~/Library/Application\ Support/Code\ -\ Insiders/User/keybindings.json
+$ makethisgohere $HOME/dotfiles/code/keybindings.json ~/Library/Application\ Support/Code\ -\ Insiders/User
+```
+
+Snippets
+
+```bash
+$ makethisgohere $HOME/dotfiles/code/snippets/typescriptreact.json ~/Library/Application\ Support/Code\ -\ Insiders/User/snippets
 ```
