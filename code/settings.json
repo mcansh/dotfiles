@@ -54,7 +54,9 @@
       ".js",
       ".jsx",
       "typescript",
-      "typescriptreact"
+      "typescriptreact",
+      "yaml",
+      "mdx"
     ]
   },
   "eslint.validate": [
@@ -67,6 +69,10 @@
     },
     {
       "language": "typescriptreact",
+      "autoFix": true
+    },
+    {
+      "language": "mdx",
       "autoFix": true
     }
   ],
@@ -136,6 +142,7 @@
   "csharp.suppressDotnetRestoreNotification": true,
   "editor.cursorSurroundingLines": 3,
   "editor.autoClosingBrackets": "languageDefined",
+  "workbench.iconTheme": "city-lights-icons-vsc-light",
   // when working using an external monitor
   /*
   "editor.fontSize": 16,
