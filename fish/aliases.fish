@@ -63,6 +63,7 @@ alias maintenance='sudo periodic daily weekly monthly'
 alias slackmoji='sips -Z 128 $1'
 
 alias yarn-upgrade='yarn upgrade-interactive --latest'
+alias yarnup='yarn-upgrade'
 alias yarn-global-upgrade='yarn global upgrade-interactive'
 alias npm-list-global='npm list -g --depth=0'
 

@@ -27,3 +27,5 @@ export ANDROID_SDK_HOME=/Users/$USER/Library/Android/sdk
 export ANDROID_AVD_HOME=/Users/$USER/.android/avd
 
 alias ld='lazydocker'
+
+#eval (starship init fish)

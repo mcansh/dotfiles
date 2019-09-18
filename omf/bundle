@@ -1,2 +1,3 @@
+package pisces
 theme default
 theme https://github.com/mcansh/zeit-fish-theme
