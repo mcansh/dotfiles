@@ -29,3 +29,4 @@ export ANDROID_AVD_HOME=/Users/$USER/.android/avd
 alias ld='lazydocker'
 
 #eval (starship init fish)
+set -g fish_user_paths "/usr/local/sbin" $fish_user_paths

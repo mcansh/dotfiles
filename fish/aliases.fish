@@ -72,7 +72,7 @@ alias list_downloads='sqlite3 ~/Library/Preferences/com.apple.LaunchServices.Qua
 alias clear_downloads='sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* "delete from LSQuarantineEvent"'
 
 
-# alias docker_list='docker ps -aq'
-# alias docker_stop-'docker stop (docker ps -aq)'
-# alias docker_remove_containers='docker rm (docker ps -aq)'
-# alias docker_remove_images='docker rmi (docker images -q)'
+alias docker_list='docker ps -aq'
+alias docker_stop='docker stop (docker ps -aq)'
+alias docker_remove_containers='docker rm (docker ps -aq)'
+alias docker_remove_images='docker rmi (docker images -q)'
