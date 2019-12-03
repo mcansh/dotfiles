@@ -2,6 +2,7 @@
   "window.zoomLevel": -1,
   "editor.fontFamily": "'Dank Mono', 'Operator Mono', 'SF Mono', Menlo, Monaco, 'Courier New', monospace",
   "editor.fontSize": 12,
+  "workbench.colorTheme": "Shades of Purple",
   "editor.letterSpacing": 0.5,
   "workbench.editor.tabSizing": "shrink",
   "html.format.enable": true,
@@ -31,7 +32,8 @@
   "emmet.includeLanguages": {
     "javascript": "javascriptreact"
   },
-  "editor.snippetSuggestions": "top",
+  "editor.acceptSuggestionOnEnter": "smart",
+  "editor.snippetSuggestions": "inline",
   "workbench.editor.enablePreviewFromQuickOpen": false,
   "window.title": "${dirty} ${activeEditorMedium}${separator}${rootName}",
   "atomKeymap.promptV3Features": true,
@@ -83,7 +85,6 @@
   "npm.enableScriptExplorer": true,
   "workbench.list.keyboardNavigation": "simple",
   "workbench.list.automaticKeyboardNavigation": false,
-  "workbench.colorTheme": "DVLPR",
   "editor.suggestSelection": "first",
   "vscode_custom_css.imports": [
     "https://raw.githubusercontent.com/robb0wen/synthwave-vscode/master/synthwave84.css"
@@ -139,6 +140,18 @@
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "files.associations": {
+    "*.svelte": "html"
+  },
   "peacock.favoriteColors": [
     {
       "name": "Angular Red",
@@ -193,11 +206,35 @@
       "value": "#42b883"
     }
   ],
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "yaml.schemas": {
+    "file:///Users/loganmcansh/.vscode-insiders/extensions/atlassian.atlascode-2.1.5/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
   },
+  "atlascode.jira.jqlList": [
+    {
+      "enabled": true,
+      "id": "19ff1678-a5ea-44c1-beb0-75fd4ed6b881",
+      "monitor": true,
+      "name": "My Powerley Issues",
+      "query": "project = WEB AND status in (\"Define\", \"In Development\", New, Ready, Reopened) AND resolution = Unresolved AND assignee in (currentUser()) ORDER BY priority DESC",
+      "siteId": "c479e5b7-f04e-4e7a-a02c-edec838ba0b1"
+    },
+    {
+      "enabled": true,
+      "id": "8a24bfda-1e53-4243-a70c-212b7ac02e6b",
+      "monitor": true,
+      "name": "All WEB Powerley issues",
+      "query": "project = \"WEB\" AND resolution = Unresolved ORDER BY priority DESC ",
+      "siteId": "c479e5b7-f04e-4e7a-a02c-edec838ba0b1"
+    }
+  ],
+  "atlascode.jira.statusbar.showUser": false,
+  "atlascode.jira.statusbar.showProduct": false,
+  "atlascode.jira.statusbar.showLogin": true,
+  "atlascode.configurationTarget": "user",
+  "atlascode.jira.explorer.enabled": true,
+  "diffEditor.ignoreTrimWhitespace": false,
   // when working using an external monitor
-  // /*
+  /*
   "editor.fontSize": 16,
   "terminal.integrated.fontSize": 16,
   /**/
