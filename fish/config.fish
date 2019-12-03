@@ -30,3 +30,6 @@ alias ld='lazydocker'
 
 #eval (starship init fish)
 set -g fish_user_paths "/usr/local/sbin" $fish_user_paths
+export PATH="$HOME/.cargo/bin:$PATH"
+export N_PREFIX="$HOME/.n"
+
