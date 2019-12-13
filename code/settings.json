@@ -2,7 +2,7 @@
   "window.zoomLevel": -1,
   "editor.fontFamily": "'Dank Mono', 'Operator Mono', 'SF Mono', Menlo, Monaco, 'Courier New', monospace",
   "editor.fontSize": 12,
-  "workbench.colorTheme": "Shades of Purple",
+  "workbench.colorTheme": "Night Owl",
   "editor.letterSpacing": 0.5,
   "workbench.editor.tabSizing": "shrink",
   "html.format.enable": true,
@@ -207,7 +207,7 @@
     }
   ],
   "yaml.schemas": {
-    "file:///Users/loganmcansh/.vscode-insiders/extensions/atlassian.atlascode-2.1.5/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    "file:///Users/loganmcansh/.vscode-insiders/extensions/atlassian.atlascode-2.2.0/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
   },
   "atlascode.jira.jqlList": [
     {
@@ -232,11 +232,11 @@
   "atlascode.jira.statusbar.showLogin": true,
   "atlascode.configurationTarget": "user",
   "atlascode.jira.explorer.enabled": true,
-  "diffEditor.ignoreTrimWhitespace": false,
+  "diffEditor.ignoreTrimWhitespace": false
   // when working using an external monitor
   /*
-  "editor.fontSize": 16,
-  "terminal.integrated.fontSize": 16,
+  "editor.fontSize": 14,
+  "terminal.integrated.fontSize": 14,
   /**/
   // starbucks - apparently i'm blind sometimes
   /*
