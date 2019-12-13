@@ -76,7 +76,6 @@
   "workbench.statusBar.visible": true,
   "editor.fontLigatures": true,
   "terminal.integrated.rendererType": "dom",
-  "terminal.integrated.shell.osx": "fish",
   "javascript.validate.enable": false,
   "editor.minimap.enabled": false,
   "breadcrumbs.enabled": true,
