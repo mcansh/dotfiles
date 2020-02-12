@@ -6,7 +6,7 @@
 [user]
 	name = Logan McAnsh
 	email = logan@mcan.sh
-	signingkey = ED732DE3
+	signingkey = 15525A9DFF93A7C6
 [push]
 	default = current
 [alias]
@@ -47,11 +47,12 @@
 	excludesfile = /Users/loganmcansh/.gitignore_global
 	editor = code-insiders --wait
 	ignorecase = false
+	pager = diff-so-fancy | less --tabs=4 -RFX
 [hub]
 	protocol = ssh
 [color]
   pager = true
-  ui = auto
+	ui = true
   status = auto
   diff = auto
   branch = auto
@@ -62,11 +63,23 @@
   autosquash = true
 
 # Enforce SSH
-[url "ssh://git@github.com/"]
-  insteadOf = https://github.com/
+#[url "ssh://git@github.com/"]
+#  insteadOf = https://github.com/
 [url "ssh://git@gitlab.com/"]
   insteadOf = https://gitlab.com/
 [url "ssh://git@bitbucket.org/"]
   insteadOf = https://bitbucket.org/
 [fetch]
 	prune = true
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = 11
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse

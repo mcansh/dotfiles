@@ -39,6 +39,9 @@ echo "brew installing stuff"
 brew install hub fish ccat thefuck mas gifify awscli postgres httpie ffmpeg youtube-dl n
 brew tap caskroom/cask caskroom/versions homebrew/bundle homebrew/core homebrew/dupes
 
+echo "installing oh my fish"
+curl -L https://get.oh-my.fish | fish
+
 # install yarn
 curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --rc
 
@@ -54,8 +57,8 @@ yarn global add release trash-cli fkill-cli
 echo "installing apps with brew cask"
 brew cask install 1password android-platform-tools backblaze codekit docker emojipedia firefox-nightly google-chrome-canary google-chrome-dev graphql-playground handbrake hyper iina now outline-manager postman rescuetime rocket sketch sketch-beta slack-beta spectacle transmit visual-studio-code-insiders zoomus
 
-echo "installing apps from the Mac App Storee"
-mas install 1254981365 913158085 1351639930 1294126402 439697913 408981434 453114608 409203825 1356178125 409201541 984968384 1152443474 1384080005 1385985095 497799835
+# echo "installing apps from the Mac App Storee"
+# mas install 1254981365 913158085 1351639930 1294126402 439697913 408981434 453114608 409203825 1356178125 409201541 984968384 1152443474 1384080005 1385985095 497799835
 
 echo "Generating an RSA token for GitHub"
 mkdir -p ~/.ssh
@@ -66,16 +69,16 @@ echo "run 'pbcopy < ~/.ssh/id_rsa.pub' and paste that into GitHub"
 
 
 echo "cloning dotfiles"
-git clone git@github.com:mcansh/dotfiles.git "${HOME}/dotfiles"
-ln -s "${HOME}/dotfiles/fish" "${HOME}/.config/fish"
-ln -s "${HOME}/dotfiles/omf" "$HOME/.config/omf"
-ln -s "${HOME}/dotfiles/.my_bin" "$HOME/.my_bin"
-ln -s "${HOME}/dotfiles/.gitignore_global" "${HOME}/.gitignore_global"
-ln -s "${HOME}/dotfiles/.hyper.js" "${HOME}/.hyper.js"
-ln -s "${HOME}/dotfiles/.gitconfig" "${HOME}/.gitconfig"
-ln -s "${HOME}/dotfiles/.yarnrc" "${HOME}/.yarnrc"
-ln -s "${HOME}/dotfiles/code/settings.json" "$HOME/Library/Application\ Support/Code\ -\ Insiders/User"
-ln -s "${HOME}/dotfiles/code/keybindings.json" "${HOME}/Library/Application\ Support/Code\ -\ Insiders/User"
+git clone git@github.com:mcansh/dotfiles.git "${HOME}/.dotfiles"
+ln -s "${HOME}/.dotfiles/fish" "${HOME}/.config/fish"
+ln -s "${HOME}/.dotfiles/omf" "${HOME}/.config/omf"
+ln -s "${HOME}/.dotfiles/.my_bin" "${HOME}/.my_bin"
+ln -s "${HOME}/.dotfiles/.gitignore_global" "${HOME}/.gitignore_global"
+ln -s "${HOME}/.dotfiles/.hyper.js" "${HOME}/.hyper.js"
+ln -s "${HOME}/.dotfiles/.gitconfig" "${HOME}/.gitconfig"
+ln -s "${HOME}/.dotfiles/.yarnrc" "${HOME}/.yarnrc"
+ln -s "${HOME}/.dotfiles/code/settings.json" "${HOME}/Library/Application Support/Code - Insiders/User"
+ln -s "${HOME}/.dotfiles/code/keybindings.json" "${HOME}/Library/Application Support/Code - Insiders/User"
 
 
 echo "making system modifications:"

@@ -6,7 +6,7 @@ module.exports = {
   config: {
     // Choose either "stable" for receiving highly polished,
     // or "canary" for less polished but more frequent updates
-    updateChannel: 'canary',
+    updateChannel: "canary",
 
     // default font size in pixels for all tabs
     fontSize: 13,
@@ -16,63 +16,63 @@ module.exports = {
       '"Dank Mono", "Operator Mono", SFMono-Medium, Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
-    cursorColor: 'rgba(248,28,229,0.8)',
+    cursorColor: "rgba(248,28,229,0.8)",
 
     // `BEAM` for |, `UNDERLINE` for _, `BLOCK` for █
-    cursorShape: 'BLOCK',
+    cursorShape: "BLOCK",
 
     // set to true for blinking cursor
     cursorBlink: false,
 
     // color of the text
-    foregroundColor: '#fff',
+    foregroundColor: "#fff",
 
     // terminal background color
-    backgroundColor: '#000',
+    backgroundColor: "#000",
 
     // border color (window, tabs)
-    borderColor: 'transparent',
+    borderColor: "transparent",
 
     // custom css to embed in the main window
-    css: '',
+    css: "",
 
     // custom css to embed in the terminal window
-    termCSS: '',
+    termCSS: "",
 
     // set to `true` (without backticks) if you're using a Linux setup that doesn't show native menus
     // default: `false` on Linux, `true` on Windows (ignored on macOS)
-    showHamburgerMenu: '',
+    showHamburgerMenu: "",
 
     // set to `false` if you want to hide the minimize, maximize and close buttons
     // additionally, set to `'left'` if you want them on the left, like in Ubuntu
     // default: `true` on windows and Linux (ignored on macOS)
-    showWindowControls: '',
+    showWindowControls: "",
 
     // custom padding (css format, i.e.: `top right bottom left`)
-    padding: '12px 14px',
+    padding: "12px 14px",
 
-    windowSize: [570, 366],
+    windowSize: [650, 436],
 
     // the full list. if you're going to provide the full color palette,
     // including the 6 x 6 color cubes and the grayscale map, just provide
     // an array here instead of a color map object
     colors: {
-      black: '#000000',
-      red: '#ff0000',
-      green: '#33ff00',
-      yellow: '#ffff00',
-      blue: '#0066ff',
-      magenta: '#cc00ff',
-      cyan: '#00ffff',
-      white: '#d0d0d0',
-      lightBlack: '#808080',
-      lightRed: '#ff0000',
-      lightGreen: '#33ff00',
-      lightYellow: '#ffff00',
-      lightBlue: '#0066ff',
-      lightMagenta: '#cc00ff',
-      lightCyan: '#00ffff',
-      lightWhite: '#ffffff',
+      black: "#000000",
+      red: "#ff0000",
+      green: "#33ff00",
+      yellow: "#ffff00",
+      blue: "#0066ff",
+      magenta: "#cc00ff",
+      cyan: "#00ffff",
+      white: "#d0d0d0",
+      lightBlack: "#808080",
+      lightRed: "#ff0000",
+      lightGreen: "#33ff00",
+      lightYellow: "#ffff00",
+      lightBlue: "#0066ff",
+      lightMagenta: "#cc00ff",
+      lightCyan: "#00ffff",
+      lightWhite: "#ffffff"
     },
 
     // the shell to run when spawning a new session (i.e. /usr/local/bin/fish)
@@ -87,11 +87,11 @@ module.exports = {
     //
     // Powershell on Windows
     // - Example: `C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe`
-    shell: '/usr/local/bin/fish',
+    shell: "/usr/local/bin/fish",
 
     // for setting shell arguments (i.e. for using interactive shellArgs: ['-i'])
     // by default ['--login'] will be used
-    shellArgs: ['--login'],
+    shellArgs: ["--login"],
 
     // for environment variables
     env: {},
@@ -111,9 +111,9 @@ module.exports = {
 
     // for advanced config flags please refer to https://hyper.is/#cfg
 
-    wickedBorderColor: '#ffc600',
+    wickedBorderColor: "#ffc600",
 
-    verminal: { minimal: true },
+    verminal: { minimal: true }
   },
 
   // a list of plugins to fetch and install from npm
@@ -123,18 +123,18 @@ module.exports = {
   //   `@company/project`
   //   `project#1.0.1`
   plugins: [
-    'hyperterm-close-on-left',
+    "hyperterm-close-on-left",
     // 'hypercwd',
-    'hyperterm-alternatescroll',
-    'hyperlinks',
+    "hyperterm-alternatescroll",
+    "hyperlinks",
     // 'hyperterm-cobalt2-theme',
     // 'nova-hyperterm',
     // 'hyperterm-panda',
     // 'hyper-website-theme',
     // 'verminal',
-    'hyper-search',
+    "hyper-search",
     // 'hyper-night-owl',
-    'hyper-samewd',
+    "hyper-samewd"
     // 'hyper-npm-theme'
   ],
 
@@ -148,5 +148,5 @@ module.exports = {
   keymaps: {
     // Example
     // 'window:devtools': 'cmd+alt+o',
-  },
+  }
 };
