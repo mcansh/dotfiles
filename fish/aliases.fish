@@ -20,7 +20,7 @@ alias gpu='git pull'
 alias gd='git diff'
 alias gdd='git diff --staged'
 alias gco='git checkout'
-alias gh='git browse'
+# alias gh='git browse'
 alias gt='git tag'
 
 # Hide/show all desktop icons (useful when presenting)
