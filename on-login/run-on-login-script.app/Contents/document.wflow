@@ -59,7 +59,7 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>COMMAND_STRING</key>
-					<string>source ~/.bash_profile
+					<string>source ~/.bashrc
 node ~/.dotfiles/on-login</string>
 					<key>CheckedForUserDefaultShell</key>
 					<true/>
