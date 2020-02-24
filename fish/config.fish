@@ -6,7 +6,6 @@ export EDITOR="/usr/local/bin/code-insiders"
 
 thefuck --alias | source
 
-
 export PATH="$PATH:$HOME/.my_bin"
 
 #rvm default
@@ -38,3 +37,4 @@ set -g fish_user_paths "/usr/local/sbin" $fish_user_paths
 export PATH="$HOME/.cargo/bin:$PATH"
 export N_PREFIX="$HOME/.n"
 export PATH="$N_PREFIX/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"

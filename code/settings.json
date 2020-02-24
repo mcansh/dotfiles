@@ -2,7 +2,7 @@
   "window.zoomLevel": -1,
   "editor.fontFamily": "'Dank Mono', 'Operator Mono', 'SF Mono', Menlo, Monaco, 'Courier New', monospace",
   "editor.fontSize": 12,
-  "workbench.colorTheme": "SynthWave '84",
+  "workbench.colorTheme": "Overnight Italics",
   "editor.letterSpacing": 0.5,
   "workbench.editor.tabSizing": "shrink",
   "html.format.enable": true,
@@ -253,7 +253,7 @@
     "menubar.selectionForeground": "#2979FF",
     "editor.findMatchBorder": "#2979FF",
     "selection.background": "#2979FF40"
-  },
+  }
   // when working using an external monitor
   /*
   "editor.fontSize": 14,
