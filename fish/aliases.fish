@@ -20,8 +20,11 @@ alias gpu='git pull'
 alias gd='git diff'
 alias gdd='git diff --staged'
 alias gco='git checkout'
-# alias gh='git browse'
 alias gt='git tag'
+
+alias yd='yarn dev'
+alias yb='yarn build'
+alias ys='yarn start'
 
 # Hide/show all desktop icons (useful when presenting)
 alias hidedesktop='defaults write com.apple.finder CreateDesktop -bool false && killall Finder'
