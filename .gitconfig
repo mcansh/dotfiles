@@ -1,8 +1,3 @@
-[filter "lfs"]
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
 [user]
 	name = Logan McAnsh
 	email = logan@mcan.sh
@@ -47,7 +42,7 @@
 	excludesfile = /Users/loganmcansh/.gitignore_global
 	editor = code-insiders --wait
 	ignorecase = false
-	pager = diff-so-fancy | less --tabs=4 -RFX
+	pager = delta --plus-color="#012800" --minus-color="#340001"
 [hub]
 	protocol = ssh
 [color]
@@ -61,6 +56,8 @@
   grep = auto
 [rebase]
   autosquash = true
+[interactive]
+  diffFilter = delta --color-only
 
 # Enforce SSH
 #[url "ssh://git@github.com/"]
@@ -83,3 +80,8 @@
 	old = red bold
 	new = green bold
 	whitespace = red reverse
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
