@@ -1,8 +1,8 @@
 {
   "window.zoomLevel": -1,
-  "editor.fontFamily": "'Dank Mono', 'Operator Mono', 'SF Mono', Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontFamily": "'MonoLisa', 'Dank Mono', 'Operator Mono', 'JetBrains Mono', 'SF Mono', Menlo, Monaco, 'Courier New', monospace",
   "editor.fontSize": 12,
-  "workbench.colorTheme": "Overnight Italics",
+  "workbench.colorTheme": "morgan.codes",
   "editor.letterSpacing": 0.5,
   "workbench.editor.tabSizing": "shrink",
   "html.format.enable": true,
@@ -25,7 +25,6 @@
     "**/.hg": true,
     "**/CVS": true,
     "**/.DS_Store": true,
-    "**/.next": true,
     "**/node_modules": true
   },
   "workbench.editor.tabCloseButton": "right",
@@ -62,7 +61,7 @@
     "typescript",
     "typescriptreact"
   ],
-  "color-highlight.markerType": "dot-after",
+  "color-highlight.markerType": "background",
   "color-highlight.matchWords": true,
   "files.insertFinalNewline": true,
   "git.enableCommitSigning": true,
@@ -88,7 +87,7 @@
   ],
   "editor.largeFileOptimizations": false,
   "keyboard.touchbar.enabled": false,
-  "cSpell.enabledLanguageIds": [
+  "cSpell.enableFiletypes": [
     "asciidoc",
     "c",
     "cpp",
@@ -121,12 +120,9 @@
     "yaml",
     "yml"
   ],
-  "csharp.format.enable": false,
-  "csharp.suppressDotnetInstallWarning": true,
-  "csharp.suppressDotnetRestoreNotification": true,
+  // "editor.suggest.insertMode": "replace",
   "editor.cursorSurroundingLines": 3,
   "editor.autoClosingBrackets": "languageDefined",
-  "workbench.iconTheme": "city-lights-icons-vsc-light",
   "editor.showUnused": true,
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -204,7 +200,7 @@
     }
   ],
   "yaml.schemas": {
-    "file:///Users/loganmcansh/.vscode-insiders/extensions/atlassian.atlascode-2.4.2/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    "file:///Users/loganmcansh/.vscode-insiders/extensions/atlassian.atlascode-2.5.1/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
   },
   "atlascode.jira.jqlList": [
     {
@@ -231,28 +227,20 @@
   "atlascode.jira.explorer.enabled": true,
   "diffEditor.ignoreTrimWhitespace": false,
   "workbench.colorCustomizations": {
-    "activityBarBadge.background": "#2979FF",
-    "activityBar.activeBorder": "#2979FF",
-    "list.activeSelectionForeground": "#2979FF",
-    "list.inactiveSelectionForeground": "#2979FF",
-    "list.highlightForeground": "#2979FF",
-    "scrollbarSlider.activeBackground": "#2979FF50",
-    "editorSuggestWidget.highlightForeground": "#2979FF",
-    "textLink.foreground": "#2979FF",
-    "progressBar.background": "#2979FF",
-    "pickerGroup.foreground": "#2979FF",
-    "tab.activeBorder": "#2979FF",
-    "notificationLink.foreground": "#2979FF",
-    "editorWidget.resizeBorder": "#2979FF",
-    "editorWidget.border": "#2979FF",
-    "settings.modifiedItemIndicator": "#2979FF",
-    "settings.headerForeground": "#2979FF",
-    "panelTitle.activeBorder": "#2979FF",
-    "breadcrumb.activeSelectionForeground": "#2979FF",
-    "menu.selectionForeground": "#2979FF",
-    "menubar.selectionForeground": "#2979FF",
-    "editor.findMatchBorder": "#2979FF",
-    "selection.background": "#2979FF40"
+    "[Community Material Theme High Contrast]": {
+      "editor.wordHighlightBackground": "#1f2d30",
+      "editor.wordHighlightBorder": "#1f2d30",
+      "editor.wordHighlightStrongBackground": "#1f2d30",
+      "editor.wordHighlightStrongBorder": "#1f2d30",
+      "editorBracketMatch.border": "#1f2d30",
+      "editorBracketMatch.background": "#1f2d30",
+      "scrollbarSlider.background": "#ffffff22",
+      "editorOverviewRuler.bracketMatchForeground": "#0000",
+      "editorOverviewRuler.errorForeground": "#0000",
+      "editorOverviewRuler.warningForeground": "#0000",
+      "editorOverviewRuler.infoForeground": "#0000",
+      "editor.background": "#141e20"
+    }
   }
   // when working using an external monitor
   /*
