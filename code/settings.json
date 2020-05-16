@@ -2,12 +2,17 @@
   "window.zoomLevel": -1,
   "editor.fontFamily": "'MonoLisa', 'Dank Mono', 'Operator Mono', 'JetBrains Mono', 'SF Mono', Menlo, Monaco, 'Courier New', monospace",
   "editor.fontSize": 12,
-  "workbench.colorTheme": "morgan.codes",
+  "window.autoDetectColorScheme": true,
+  "workbench.colorTheme": "GitHub Light",
+  "workbench.preferredDarkColorTheme": "GitHub Dark",
+  "workbench.preferredHighContrastColorTheme": "GitHub Light",
+  "workbench.preferredLightColorTheme": "GitHub Light",
   "editor.letterSpacing": 0.5,
   "workbench.editor.tabSizing": "shrink",
   "html.format.enable": true,
   "html.format.preserveNewLines": true,
   "files.trimTrailingWhitespace": true,
+  "explorer.compactFolders": false,
   "editor.tabSize": 2,
   "editor.cursorStyle": "line",
   "editor.wordWrap": "on",
@@ -200,7 +205,7 @@
     }
   ],
   "yaml.schemas": {
-    "file:///Users/loganmcansh/.vscode-insiders/extensions/atlassian.atlascode-2.5.1/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    "file:///Users/loganmcansh/.vscode-insiders/extensions/atlassian.atlascode-2.6.0/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
   },
   "atlascode.jira.jqlList": [
     {
@@ -241,7 +246,11 @@
       "editorOverviewRuler.infoForeground": "#0000",
       "editor.background": "#141e20"
     }
-  }
+  },
+  "workbench.iconTheme": "vscode-icons",
+  "vsonline.authentication.accountProvider": "Microsoft",
+  "vsonline.accountProvider": "Microsoft",
+  "kite.showWelcomeNotificationOnStartup": false,
   // when working using an external monitor
   /*
   "editor.fontSize": 14,
