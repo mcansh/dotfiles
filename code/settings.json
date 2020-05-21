@@ -205,7 +205,7 @@
     }
   ],
   "yaml.schemas": {
-    "file:///Users/loganmcansh/.vscode-insiders/extensions/atlassian.atlascode-2.6.0/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    "file:///Users/loganmcansh/.vscode-insiders/extensions/atlassian.atlascode-2.6.1/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
   },
   "atlascode.jira.jqlList": [
     {
@@ -251,6 +251,7 @@
   "vsonline.authentication.accountProvider": "Microsoft",
   "vsonline.accountProvider": "Microsoft",
   "kite.showWelcomeNotificationOnStartup": false,
+  "webhint.enableTelemetry": "enabled"
   // when working using an external monitor
   /*
   "editor.fontSize": 14,
