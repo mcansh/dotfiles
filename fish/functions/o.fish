@@ -1,8 +1,7 @@
-# Opens either the current directory or the one provided
-function o
-  if test "$argv"
-    open "$argv"
-  else
-    open .
-  end
+function o -d "opens either the current directory or the one provided"
+    if test "$argv"
+        open "$argv"
+    else
+        open .
+    end
 end

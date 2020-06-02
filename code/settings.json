@@ -3,10 +3,10 @@
   "editor.fontFamily": "'MonoLisa', 'Dank Mono', 'Operator Mono', 'JetBrains Mono', 'SF Mono', Menlo, Monaco, 'Courier New', monospace",
   "editor.fontSize": 12,
   "window.autoDetectColorScheme": true,
-  "workbench.colorTheme": "GitHub Light",
+  "workbench.colorTheme": "Retreon",
   "workbench.preferredDarkColorTheme": "GitHub Dark",
-  "workbench.preferredHighContrastColorTheme": "GitHub Light",
-  "workbench.preferredLightColorTheme": "GitHub Light",
+  "workbench.preferredHighContrastColorTheme": "Retreon",
+  "workbench.preferredLightColorTheme": "Retreon",
   "editor.letterSpacing": 0.5,
   "workbench.editor.tabSizing": "shrink",
   "html.format.enable": true,
@@ -209,20 +209,12 @@
   },
   "atlascode.jira.jqlList": [
     {
+      "id": "c2620545-ad72-4bac-9805-4f1b55cdcf58",
       "enabled": true,
-      "id": "19ff1678-a5ea-44c1-beb0-75fd4ed6b881",
-      "monitor": true,
-      "name": "My Powerley Issues",
-      "query": "project = WEB AND status in (\"Define\", \"In Development\", New, Ready, Reopened) AND resolution = Unresolved AND assignee in (currentUser()) ORDER BY priority DESC",
-      "siteId": "c479e5b7-f04e-4e7a-a02c-edec838ba0b1"
-    },
-    {
-      "enabled": true,
-      "id": "8a24bfda-1e53-4243-a70c-212b7ac02e6b",
-      "monitor": true,
-      "name": "All WEB Powerley issues",
-      "query": "project = \"WEB\" AND resolution = Unresolved ORDER BY priority DESC ",
-      "siteId": "c479e5b7-f04e-4e7a-a02c-edec838ba0b1"
+      "name": "My powerley Issues",
+      "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
+      "siteId": "c479e5b7-f04e-4e7a-a02c-edec838ba0b1",
+      "monitor": true
     }
   ],
   "atlascode.jira.statusbar.showUser": false,
@@ -230,6 +222,7 @@
   "atlascode.jira.statusbar.showLogin": true,
   "atlascode.configurationTarget": "user",
   "atlascode.jira.explorer.enabled": true,
+  "atlascode.jira.explorer.fetchAllQueryResults": true,
   "diffEditor.ignoreTrimWhitespace": false,
   "workbench.colorCustomizations": {
     "[Community Material Theme High Contrast]": {
@@ -251,7 +244,8 @@
   "vsonline.authentication.accountProvider": "Microsoft",
   "vsonline.accountProvider": "Microsoft",
   "kite.showWelcomeNotificationOnStartup": false,
-  "webhint.enableTelemetry": "enabled"
+  "webhint.enableTelemetry": "enabled",
+  "codespaces.accountProvider": "Microsoft"
   // when working using an external monitor
   /*
   "editor.fontSize": 14,
