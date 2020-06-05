@@ -3,7 +3,8 @@ function yup -d "update deps with yarn or npm"
         echo "yarn.lock file exists"
         yarnup
     else
-        echo "no yarn.lock"
+        tput setaf 1
+        echo "No yarn.lock"
         ncu -u
     end
 end
