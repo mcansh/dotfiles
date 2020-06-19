@@ -1,0 +1,2 @@
+mkdir -p "$(git config --path --get init.templateDir)"
+echo "ref: refs/heads/main" > "$(git config --path --get init.templateDir)/HEAD"

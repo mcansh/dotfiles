@@ -87,3 +87,5 @@
 	required = true
 [pull]
 	rebase = true
+[init]
+	templateDir = ~/.dotfiles/git/template
