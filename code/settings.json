@@ -245,9 +245,7 @@
   "vsonline.accountProvider": "Microsoft",
   "kite.showWelcomeNotificationOnStartup": false,
   "webhint.enableTelemetry": "enabled",
-  "codespaces.accountProvider": "Microsoft",
-  "vscode-home-assistant.hostUrl": "http://10.0.154.252:8123/",
-  "vscode-home-assistant.ignoreCertificates": true
+  "codespaces.accountProvider": "Microsoft"
   // when working using an external monitor
   /*
   "editor.fontSize": 14,

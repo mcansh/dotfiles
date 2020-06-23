@@ -39,3 +39,4 @@ export N_PREFIX="$HOME/.n"
 export PATH="$N_PREFIX/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export SSH_AUTH_SOCK="$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh"
+#source (brew --prefix asdf)/asdf.fish
