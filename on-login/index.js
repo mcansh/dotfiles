@@ -6,7 +6,8 @@ async function main() {
     macOSVersions["Big Sur"] > currentVersion &&
     currentVersion >= macOSVersions["Mojave"]
   ) {
-    require("./set-random-color");
+    const { setRandomColor } = require("./set-random-color");
+    await setRandomColor();
   }
 }
 

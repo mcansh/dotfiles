@@ -11,14 +11,14 @@ const colors = {
   yellow: { highlight: "1.000000 0.937255 0.690196 Yellow", accent: "2" },
   green: { highlight: "0.752941 0.964706 0.678431 Green", accent: "3" },
   purple: { highlight: "0.968627 0.831373 1.000000 Purple", accent: "5" },
-  pink: { highlight: "1.000000 0.749020 0.823529 Pink", accent: "6" }
+  pink: { highlight: "1.000000 0.749020 0.823529 Pink", accent: "6" },
 };
 
 function random(array) {
   return array[Math.floor(Math.random() * array.length)];
 }
 
-const go = async () => {
+const setRandomColor = async () => {
   const color = random(Object.keys(colors));
   const { accent, highlight } = colors[color];
 
@@ -52,8 +52,8 @@ const go = async () => {
   await Promise.all([
     exec(`sendevent AppleInterfaceThemeChangedNotification`),
     exec(`sendevent AppleAquaColorVariantChanged`),
-    exec(`sendevent AppleColorPreferencesChangedNotification`)
+    exec(`sendevent AppleColorPreferencesChangedNotification`),
   ]);
 };
 
-go();
+module.exports = { setRandomColor };
