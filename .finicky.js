@@ -7,22 +7,41 @@ module.exports = {
     hideIcon: true,
   },
   rewrite: [
+    // Replace domain of urls to amazon.com with smile.amazon.com
     {
       match: finicky.matchDomains(["www.amazon.com"]),
       url: ({ url }) => ({ ...url, host: "smile.amazon.com" }),
     },
+    // Remove all marketing/tracking information from urls
     {
-      match: ({ url }) => url.protocol === "http",
-      url: ({ url }) => ({
-        ...url,
-        protocol: "https",
-      }),
+      match: ({ url }) => url.search.includes("utm_"),
+      url({ url }) {
+        const search = url.search
+          .split("&")
+          .filter((part) => !part.startsWith("utm_"));
+        return {
+          ...url,
+          search: search.join("&"),
+        };
+      },
     },
   ],
   handlers: [
+    // Open Microsoft Teams links in the native app
+    {
+      match: finicky.matchHostnames(["teams.microsoft.com"]),
+      browser: "com.microsoft.teams",
+      url({ url }) {
+        return {
+          ...url,
+          protocol: "msteams",
+        };
+      },
+    },
+    // Open localhost links in Edge
     {
       match: /^https?:\/\/localhost:.*\/.*$/,
-      browser: "Edge Canary",
+      browser: "Microsoft Edge Canary",
     },
   ],
 };
