@@ -88,4 +88,4 @@
 [pull]
 	rebase = true
 [init]
-	templateDir = ~/.dotfiles/git/template
+	templateDir = /Users/loganmcansh/.dotfiles/git/template.git
