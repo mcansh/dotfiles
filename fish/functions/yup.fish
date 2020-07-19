@@ -6,6 +6,6 @@ function yup -d "update deps with yarn or npm"
         tput setaf 1
         echo "No yarn.lock"
         tput setaf 0
-        ncu -u
+        ncu -u && npm install
     end
 end
