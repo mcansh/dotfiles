@@ -148,7 +148,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "files.associations": {
-    "*.svelte": "html"
+    "*.svelte": "svelte"
   },
   "peacock.favoriteColors": [
     {

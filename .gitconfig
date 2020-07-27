@@ -88,4 +88,4 @@
 [pull]
 	rebase = true
 [init]
-	templateDir = /Users/loganmcansh/.dotfiles/git/template.git
+	defaultBranch = main
