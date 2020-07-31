@@ -42,7 +42,11 @@
 	excludesfile = /Users/loganmcansh/.gitignore_global
 	editor = code-insiders --wait
 	ignorecase = false
-	pager = delta --plus-color="#012800" --minus-color="#340001"
+	pager = delta
+[delta]
+	plus-color = "#012800"
+	minus-color = "#340001"
+	side-by-side = true
 [hub]
 	protocol = ssh
 [color]
