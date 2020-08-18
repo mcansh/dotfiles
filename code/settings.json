@@ -6,7 +6,7 @@
   "workbench.colorTheme": "GitHub Dark",
   "workbench.preferredDarkColorTheme": "GitHub Dark",
   "workbench.preferredHighContrastColorTheme": "GitHub Dark",
-  "workbench.preferredLightColorTheme": "GitHub Dark",
+  "workbench.preferredLightColorTheme": "GitHub Light",
   "editor.letterSpacing": 0.5,
   "workbench.editor.tabSizing": "shrink",
   "html.format.enable": true,
@@ -87,9 +87,6 @@
   "workbench.list.keyboardNavigation": "simple",
   "workbench.list.automaticKeyboardNavigation": false,
   "editor.suggestSelection": "first",
-  "vscode_custom_css.imports": [
-    "https://raw.githubusercontent.com/robb0wen/synthwave-vscode/master/synthwave84.css"
-  ],
   "editor.largeFileOptimizations": false,
   "keyboard.touchbar.enabled": false,
   "cSpell.enableFiletypes": [
@@ -205,7 +202,7 @@
     }
   ],
   "yaml.schemas": {
-    "file:///Users/loganmcansh/.vscode-insiders/extensions/atlassian.atlascode-2.6.6/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    "file:///Users/loganmcansh/.vscode-insiders/extensions/atlassian.atlascode-2.7.0/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
   },
   "atlascode.jira.jqlList": [
     {
@@ -245,7 +242,10 @@
   "vsonline.accountProvider": "Microsoft",
   "kite.showWelcomeNotificationOnStartup": false,
   "webhint.enableTelemetry": "enabled",
-  "codespaces.accountProvider": "Microsoft"
+  "codespaces.accountProvider": "Microsoft",
+  "vscode-home-assistant.hostUrl": "http://raspberrypi.local:8123",
+  "vscode-home-assistant.longLivedAccessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1ZDJjZGI0MDkzYzA0M2NjODQwMjY3NTYwYWU1MzYyYiIsImlhdCI6MTU5Mzg4MDA4MCwiZXhwIjoxOTA5MjQwMDgwfQ.MqKx8H0ZFuLjBUGaCRmDGTTwtoHkZsHCygEWcIpsqqc",
+  "go.formatTool": "goimports"
   // when working using an external monitor
   /*
   "editor.fontSize": 14,
