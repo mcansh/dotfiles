@@ -72,7 +72,7 @@ module.exports = {
       lightBlue: "#0066ff",
       lightMagenta: "#cc00ff",
       lightCyan: "#00ffff",
-      lightWhite: "#ffffff"
+      lightWhite: "#ffffff",
     },
 
     // the shell to run when spawning a new session (i.e. /usr/local/bin/fish)
@@ -111,9 +111,7 @@ module.exports = {
 
     // for advanced config flags please refer to https://hyper.is/#cfg
 
-    wickedBorderColor: "#ffc600",
-
-    verminal: { minimal: true }
+    hypest: { darkmode: true, borders: true },
   },
 
   // a list of plugins to fetch and install from npm
@@ -124,18 +122,11 @@ module.exports = {
   //   `project#1.0.1`
   plugins: [
     "hyperterm-close-on-left",
-    // 'hypercwd',
     "hyperterm-alternatescroll",
     "hyperlinks",
-    // 'hyperterm-cobalt2-theme',
-    // 'nova-hyperterm',
-    // 'hyperterm-panda',
-    // 'hyper-website-theme',
-    // 'verminal',
+    "hyper-hypest",
     "hyper-search",
-    // 'hyper-night-owl',
-    "hyper-samewd"
-    // 'hyper-npm-theme'
+    "hyper-samewd",
   ],
 
   // in development, you can create a directory under
@@ -148,5 +139,5 @@ module.exports = {
   keymaps: {
     // Example
     // 'window:devtools': 'cmd+alt+o',
-  }
+  },
 };
