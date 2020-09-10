@@ -3,10 +3,10 @@
   "editor.fontFamily": "'MonoLisa', 'Dank Mono', 'Operator Mono', 'JetBrains Mono', 'SF Mono', Menlo, Monaco, 'Courier New', monospace",
   "editor.fontSize": 12,
   "window.autoDetectColorScheme": true,
-  "workbench.colorTheme": "GitHub Dark",
-  "workbench.preferredDarkColorTheme": "GitHub Dark",
-  "workbench.preferredHighContrastColorTheme": "GitHub Dark",
-  "workbench.preferredLightColorTheme": "GitHub Light",
+  "workbench.colorTheme": "Community Material Theme High Contrast",
+  "workbench.preferredDarkColorTheme": "Community Material Theme High Contrast",
+  "workbench.preferredHighContrastColorTheme": "Community Material Theme High Contrast",
+  "workbench.preferredLightColorTheme": "Community Material Theme High Contrast",
   "editor.letterSpacing": 0.5,
   "workbench.editor.tabSizing": "shrink",
   "html.format.enable": true,
@@ -87,7 +87,7 @@
   "workbench.list.keyboardNavigation": "simple",
   "workbench.list.automaticKeyboardNavigation": false,
   "editor.suggestSelection": "first",
-  "editor.largeFileOptimizations": false,
+  "editor.largeFileOptimizations": true,
   "keyboard.touchbar.enabled": false,
   "cSpell.enableFiletypes": [
     "asciidoc",
@@ -145,7 +145,8 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "files.associations": {
-    "*.svelte": "svelte"
+    "*.svelte": "svelte",
+    "*.dockerignore": "ignore"
   },
   "peacock.favoriteColors": [
     {
@@ -202,7 +203,7 @@
     }
   ],
   "yaml.schemas": {
-    "file:///Users/loganmcansh/.vscode-insiders/extensions/atlassian.atlascode-2.7.0/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    "file:///Users/loganmcansh/.vscode-insiders/extensions/atlassian.atlascode-2.7.1/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
   },
   "atlascode.jira.jqlList": [
     {

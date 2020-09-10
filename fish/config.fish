@@ -39,4 +39,7 @@ export N_PREFIX="$HOME/.n"
 export PATH="$N_PREFIX/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export SSH_AUTH_SOCK="$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh"
-source (brew --prefix asdf)/asdf.fish
+
+# tabtab source for packages
+# uninstall by removing these lines
+[ -f ~/.config/tabtab/fish/__tabtab.fish ]; and . ~/.config/tabtab/fish/__tabtab.fish; or true
