@@ -13,7 +13,7 @@ module.exports = {
 
     // font family with optional fallbacks
     fontFamily:
-      '"Dank Mono", "Operator Mono", SFMono-Medium, Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+      "MonoLisa, 'Dank Mono', 'Operator Mono', 'JetBrains Mono', 'SF Mono', Menlo, Monaco, 'Courier New', monospace",
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
     cursorColor: "rgba(248,28,229,0.8)",
@@ -110,8 +110,6 @@ module.exports = {
     // bellSoundURL: 'http://example.com/bell.mp3',
 
     // for advanced config flags please refer to https://hyper.is/#cfg
-
-    hypest: { darkmode: true, borders: true },
   },
 
   // a list of plugins to fetch and install from npm
@@ -124,7 +122,6 @@ module.exports = {
     "hyperterm-close-on-left",
     "hyperterm-alternatescroll",
     "hyperlinks",
-    "hyper-hypest",
     "hyper-search",
     "hyper-samewd",
   ],
