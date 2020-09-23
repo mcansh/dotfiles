@@ -21,6 +21,7 @@ alias gd='git diff'
 alias gdd='git diff --staged'
 alias gco='git checkout'
 alias gt='git tag'
+alias gri='git ls-files --ignored --exclude-standard | xargs -0 git rm -r'
 
 alias yd='yarn dev'
 alias yb='yarn build'
