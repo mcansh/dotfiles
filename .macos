@@ -25,7 +25,7 @@ echo "installing homebrew"
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 echo "brew installing stuff"
-# hub: a github-specific version of git
+# gh: GitHub cli
 # fish: my preferred shell
 # ccat: cat with syntax highlighting
 # thefuck: will try to autocorrect your command upon error when you type 'fuck'
@@ -36,7 +36,7 @@ echo "brew installing stuff"
 # postgres: databases
 # httpie: easy api calls
 # n: a super easy way to install and update node
-brew install hub fish ccat thefuck mas gifify awscli postgres httpie ffmpeg youtube-dl n
+brew install gh fish ccat thefuck mas gifify awscli postgres httpie ffmpeg youtube-dl n
 brew tap caskroom/cask caskroom/versions homebrew/bundle homebrew/core homebrew/dupes
 
 echo "installing oh my fish"

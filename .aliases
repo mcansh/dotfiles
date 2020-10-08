@@ -22,13 +22,12 @@ alias gpu='git pull'
 alias gd='git diff'
 alias gdd='git diff --staged'
 alias gco='git checkout'
-alias gh='git browse'
 alias gt='git tag'
 
 function gitCompareRelease {
   branch=${1-master}
   version=$(node -p "require('./package.json').version")
-  hub compare $version...$branch
+  git compare $version...$branch
 }
 
 function gitNotPushed {

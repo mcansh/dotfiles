@@ -47,8 +47,6 @@
 	plus-color = "#012800"
 	minus-color = "#340001"
 	side-by-side = true
-[hub]
-	protocol = ssh
 [color]
   pager = true
 	ui = true

@@ -124,6 +124,7 @@ module.exports = {
     "hyperlinks",
     "hyper-search",
     "hyper-samewd",
+    "hyperborder"
   ],
 
   // in development, you can create a directory under

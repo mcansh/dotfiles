@@ -1,5 +1,4 @@
 # git shortcuts
-alias git='hub'
 alias g='git'
 alias gb='git branch'
 alias ga='git add'

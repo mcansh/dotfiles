@@ -3,7 +3,7 @@
   "editor.fontFamily": "MonoLisa, 'Dank Mono', 'Operator Mono', 'JetBrains Mono', 'SF Mono', Menlo, Monaco, 'Courier New', monospace",
   "editor.fontSize": 12,
   "window.autoDetectColorScheme": false,
-  "workbench.colorTheme": "Night Owl",
+  "workbench.colorTheme": "In Bed by 7pm",
   "workbench.preferredDarkColorTheme": "Community Material Theme High Contrast",
   "workbench.preferredHighContrastColorTheme": "Community Material Theme High Contrast",
   "workbench.preferredLightColorTheme": "Community Material Theme High Contrast",
@@ -203,7 +203,7 @@
     }
   ],
   "yaml.schemas": {
-    "file:///Users/loganmcansh/.vscode-insiders/extensions/atlassian.atlascode-2.8.2/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    "file:///Users/loganmcansh/.vscode-insiders/extensions/atlassian.atlascode-2.8.3/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
   },
   "atlascode.jira.jqlList": [
     {
