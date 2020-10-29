@@ -3,7 +3,7 @@
   "editor.fontFamily": "MonoLisa, 'Dank Mono', 'Operator Mono', 'JetBrains Mono', 'SF Mono', Menlo, Monaco, 'Courier New', monospace",
   "editor.fontSize": 12,
   "window.autoDetectColorScheme": false,
-  "workbench.colorTheme": "In Bed by 7pm",
+  "workbench.colorTheme": "Shades of Purple",
   "workbench.preferredDarkColorTheme": "Community Material Theme High Contrast",
   "workbench.preferredHighContrastColorTheme": "Community Material Theme High Contrast",
   "workbench.preferredLightColorTheme": "Community Material Theme High Contrast",
@@ -246,7 +246,9 @@
   "codespaces.accountProvider": "Microsoft",
   "vscode-home-assistant.hostUrl": "http://raspberrypi.local:8123",
   "vscode-home-assistant.longLivedAccessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1ZDJjZGI0MDkzYzA0M2NjODQwMjY3NTYwYWU1MzYyYiIsImlhdCI6MTU5Mzg4MDA4MCwiZXhwIjoxOTA5MjQwMDgwfQ.MqKx8H0ZFuLjBUGaCRmDGTTwtoHkZsHCygEWcIpsqqc",
-  "go.formatTool": "goimports"
+  "go.formatTool": "goimports",
+  "python.insidersChannel": "weekly",
+  "python.languageServer": "Pylance"
   // when working using an external monitor
   /*
   "editor.fontSize": 14,

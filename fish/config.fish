@@ -43,3 +43,6 @@ export SSH_AUTH_SOCK="$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAg
 # tabtab source for packages
 # uninstall by removing these lines
 [ -f ~/.config/tabtab/fish/__tabtab.fish ]; and . ~/.config/tabtab/fish/__tabtab.fish; or true
+
+# load env from env.ignored
+export (grep "^[^#]" $HOME/.dotfiles/env.ignored |xargs -L 1)
