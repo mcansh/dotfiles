@@ -1,6 +1,3 @@
-# Load aliases
-. ~/.config/fish/aliases.fish
-
 # Set my editor
 export EDITOR="/usr/local/bin/code-insiders"
 
