@@ -39,6 +39,9 @@ alias appflush='/System/Library/Frameworks/CoreServices.framework/Frameworks/Lau
 # maintenance scripts
 alias maintenance='sudo periodic daily weekly monthly'
 
+# Lock the screen (when going AFK)
+alias afk='/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend'
+
 # add space to dock
 alias space='defaults write com.apple.dock persistent-apps -array-add "{'tile-type'='spacer-tile';}"; killall Dock'
 

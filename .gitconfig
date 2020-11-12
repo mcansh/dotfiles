@@ -30,6 +30,8 @@
 
 	# shows every branch's last commit absolute date
 	b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
+	# lists files ignored using `git --assume-unchanged`
+	ignored = !git ls-files -v | grep "^[[:lower:]]"
 [help]
 	autocorrect = 0
 [credential]
