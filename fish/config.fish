@@ -1,6 +1,8 @@
 # Set my editor
 export EDITOR="/usr/local/bin/code-insiders"
 
+starship init fish | source
+
 thefuck --alias | source
 
 export PATH="$PATH:$HOME/.my_bin"
@@ -29,7 +31,6 @@ export ANDROID_AVD_HOME=/Users/$USER/.android/avd
 
 alias ld='lazydocker'
 
-#eval (starship init fish)
 set -g fish_user_paths "/usr/local/sbin" $fish_user_paths
 export PATH="$HOME/.cargo/bin:$PATH"
 export N_PREFIX="$HOME/.n"

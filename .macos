@@ -24,20 +24,22 @@ echo "Hello $(whoami)! Let's get you set up."
 echo "installing homebrew"
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-echo "brew installing stuff"
-# gh: GitHub cli
-# fish: my preferred shell
-# ccat: cat with syntax highlighting
-# thefuck: will try to autocorrect your command upon error when you type 'fuck'
-# mas: update/install apps from the mac app store
-# gifify: make gifs
-# ffmpeg: for gifify
+echo "installing things from your Brewfile"
 # awscli: self explanitory
-# postgres: databases
+# bat: clone of cat with syntax highlighting and Git integration
+# ccat: cat with syntax highlighting
+# ffmpeg: for gifify
+# fish: my preferred shell
+# gh: GitHub cli
+# gifify: make gifs
 # httpie: easy api calls
+# mas: update/install apps from the mac app store
 # n: a super easy way to install and update node
-brew install gh fish ccat thefuck mas gifify awscli postgres httpie ffmpeg youtube-dl n
+# postgres: databases
+# ripgrep: a better grep
+# thefuck: will try to autocorrect your command upon error when you type 'fuck'
 brew tap caskroom/cask caskroom/versions homebrew/bundle homebrew/core homebrew/dupes
+brew bundle --file ./Brewfile
 
 echo "installing oh my fish"
 curl -L https://get.oh-my.fish | fish
@@ -54,12 +56,6 @@ echo "npm --version: $(npm --version)"
 echo "installing a few global npm packages"
 yarn global add release trash-cli fkill-cli
 
-echo "installing apps with brew cask"
-brew cask install 1password android-platform-tools backblaze codekit docker emojipedia firefox-nightly google-chrome-canary google-chrome-dev graphql-playground handbrake hyper iina now outline-manager postman rescuetime rocket sketch sketch-beta slack-beta spectacle transmit visual-studio-code-insiders zoomus
-
-# echo "installing apps from the Mac App Storee"
-# mas install 1254981365 913158085 1351639930 1294126402 439697913 408981434 453114608 409203825 1356178125 409201541 984968384 1152443474 1384080005 1385985095 497799835
-
 echo "Generating an RSA token for GitHub"
 mkdir -p ~/.ssh
 ssh-keygen -t rsa -b 4096 -C "logan@mcan.sh"
@@ -72,6 +68,7 @@ echo "cloning dotfiles"
 git clone git@github.com:mcansh/dotfiles.git "${HOME}/.dotfiles"
 ln -s "${HOME}/.dotfiles/fish" "${HOME}/.config/fish"
 ln -s "${HOME}/.dotfiles/omf" "${HOME}/.config/omf"
+ln -s "${HOME}/.dotfiles/starship.toml" "${HOME}/.config/starship.toml"
 ln -s "${HOME}/.dotfiles/.my_bin" "${HOME}/.my_bin"
 ln -s "${HOME}/.dotfiles/.gitignore_global" "${HOME}/.gitignore_global"
 ln -s "${HOME}/.dotfiles/.hyper.js" "${HOME}/.hyper.js"
@@ -110,6 +107,7 @@ defaults write com.apple.dock autohide -bool true && defaults write com.apple.do
 defaults write com.apple.Dock orientation -string left
 
 # Enable the PowerChime
+# Enabled by default on the 2016+ MacBooks
 # defaults write com.apple.PowerChime ChimeOnAllHardware -bool true; open /System/Library/CoreServices/PowerChime.app
 
 # Autohide the menubar
