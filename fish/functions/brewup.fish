@@ -7,9 +7,9 @@ function brewup
     brew outdated
     echo '🍺 4/6 Upgrading packages 🚚'
     brew upgrade
-    echo '🍺 5/6 Cleaning up 🚮'
-    brew cleanup
-    echo '🍺 6/6 Updating Brew Casks'
+    echo '🍺 5/6 Updating Brew Casks'
     brew cask upgrade
+    echo '🍺 6/6 Cleaning up 🚮'
+    brew cleanup
     echo '🍺 Done. 🎉'
 end

@@ -7,8 +7,6 @@ thefuck --alias | source
 
 export PATH="$PATH:$HOME/.my_bin"
 
-#rvm default
-
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
 [ -f /Users/loganmcansh/.config/yarn/global/node_modules/tabtab/.completions/serverless.fish ]
@@ -29,8 +27,6 @@ export ANDROID_HOME=/Users/$USER/Library/Android/sdk
 export ANDROID_SDK_HOME=/Users/$USER/Library/Android/sdk
 export ANDROID_AVD_HOME=/Users/$USER/.android/avd
 
-alias ld='lazydocker'
-
 set -g fish_user_paths "/usr/local/sbin" $fish_user_paths
 export PATH="$HOME/.cargo/bin:$PATH"
 export N_PREFIX="$HOME/.n"
@@ -44,3 +40,6 @@ export SSH_AUTH_SOCK="$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAg
 
 # load env from env.ignored
 export (grep "^[^#]" $HOME/.dotfiles/env.ignored |xargs -L 1)
+
+# Don't change npm version when using n
+export N_PRESERVE_NPM=1
