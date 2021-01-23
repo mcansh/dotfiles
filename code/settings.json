@@ -1,12 +1,11 @@
 {
-  "window.zoomLevel": -1,
   "editor.fontFamily": "MonoLisa, 'Dank Mono', 'Operator Mono', 'JetBrains Mono', 'SF Mono', Menlo, Monaco, 'Courier New', monospace",
   "editor.fontSize": 12,
-  "window.autoDetectColorScheme": true,
+  "window.autoDetectColorScheme": false,
   "workbench.colorTheme": "GitHub Dark",
   "workbench.preferredDarkColorTheme": "GitHub Dark",
-  "workbench.preferredHighContrastColorTheme": "GitHub Light",
-  "workbench.preferredLightColorTheme": "GitHub Light",
+  "workbench.preferredHighContrastColorTheme": "GitHub Dark",
+  "workbench.preferredLightColorTheme": "GitHub Dark",
   "editor.letterSpacing": 0.5,
   "workbench.editor.tabSizing": "shrink",
   "html.format.enable": true,
@@ -20,8 +19,7 @@
   "editor.fontWeight": "400",
   "editor.cursorBlinking": "solid",
   "editor.colorDecorators": false,
-  "workbench.activityBar.visible": false,
-  "workbench.sideBar.location": "left",
+  "workbench.activityBar.visible": true,
   "workbench.startupEditor": "newUntitledFile",
   "extensions.ignoreRecommendations": false,
   "files.exclude": {
@@ -56,7 +54,8 @@
       ".jsx",
       "typescript",
       "typescriptreact",
-      "yaml"
+      "yaml",
+      "vue"
     ]
   },
   "eslint.validate": [
@@ -64,8 +63,10 @@
     "javascriptreact",
     "html",
     "typescript",
-    "typescriptreact"
+    "typescriptreact",
+    "vue"
   ],
+  "vetur.experimental.templateInterpolationService": true,
   "color-highlight.markerType": "background",
   "color-highlight.matchWords": true,
   "files.insertFinalNewline": true,
@@ -83,7 +84,6 @@
   "breadcrumbs.enabled": true,
   "workbench.editor.labelFormat": "short",
   "git.autofetch": true,
-  "npm.enableScriptExplorer": true,
   "workbench.list.keyboardNavigation": "simple",
   "workbench.list.automaticKeyboardNavigation": false,
   "editor.suggestSelection": "first",
@@ -120,12 +120,15 @@
     "typescript",
     "typescriptreact",
     "yaml",
-    "yml"
+    "yml",
+    "vue"
   ],
-  // "editor.suggest.insertMode": "replace",
   "editor.cursorSurroundingLines": 3,
   "editor.autoClosingBrackets": "languageDefined",
   "editor.showUnused": true,
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -203,7 +206,7 @@
     }
   ],
   "yaml.schemas": {
-    "file:///Users/loganmcansh/.vscode-insiders/extensions/atlassian.atlascode-2.8.4/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    "file:///Users/loganmcansh/.vscode-insiders/extensions/atlassian.atlascode-2.8.5/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
   },
   "atlascode.jira.jqlList": [
     {
@@ -238,7 +241,7 @@
       "editor.background": "#141e20"
     }
   },
-  "workbench.iconTheme": "vscode-icons",
+  "workbench.iconTheme": "city-lights-icons-vsc",
   "vsonline.authentication.accountProvider": "Microsoft",
   "vsonline.accountProvider": "Microsoft",
   "kite.showWelcomeNotificationOnStartup": false,
@@ -248,7 +251,14 @@
   "vscode-home-assistant.longLivedAccessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1ZDJjZGI0MDkzYzA0M2NjODQwMjY3NTYwYWU1MzYyYiIsImlhdCI6MTU5Mzg4MDA4MCwiZXhwIjoxOTA5MjQwMDgwfQ.MqKx8H0ZFuLjBUGaCRmDGTTwtoHkZsHCygEWcIpsqqc",
   "go.formatTool": "goimports",
   "python.insidersChannel": "weekly",
-  "python.languageServer": "Pylance"
+  "python.languageServer": "Pylance",
+  "editor.renderWhitespace": "trailing",
+  "cSpell.userWords": ["obsolete"],
+  "terminal.integrated.shell.osx": "/usr/local/bin/fish",
+  "workbench.sideBar.location": "right",
+  "window.zoomLevel": -1,
+  "editor.linkedEditing": true,
+  "window.newWindowDimensions": "default"
   // when working using an external monitor
   /*
   "editor.fontSize": 14,

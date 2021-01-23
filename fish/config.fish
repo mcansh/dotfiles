@@ -43,3 +43,5 @@ export (grep "^[^#]" $HOME/.dotfiles/env.ignored |xargs -L 1)
 
 # Don't change npm version when using n
 export N_PRESERVE_NPM=1
+
+set -g fish_user_paths "/usr/local/opt/openjdk/bin" $fish_user_paths
