@@ -2,7 +2,7 @@
   "editor.fontFamily": "MonoLisa, 'Dank Mono', 'Operator Mono', 'JetBrains Mono', 'SF Mono', Menlo, Monaco, 'Courier New', monospace",
   "editor.fontSize": 12,
   "window.autoDetectColorScheme": false,
-  "workbench.colorTheme": "GitHub Dark",
+  "workbench.colorTheme": "Night Owl",
   "workbench.preferredDarkColorTheme": "GitHub Dark",
   "workbench.preferredHighContrastColorTheme": "GitHub Dark",
   "workbench.preferredLightColorTheme": "GitHub Dark",
@@ -136,7 +136,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.json-language-features"
   },
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
