@@ -1,7 +1,7 @@
 [user]
 	name = Logan McAnsh
 	email = logan@mcan.sh
-	signingkey = 15525A9DFF93A7C6
+	signingkey = F30E3B21B054E368
 [push]
 	default = current
 [alias]
