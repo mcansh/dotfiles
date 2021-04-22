@@ -82,3 +82,6 @@ alias docker_list='docker ps -aq'
 alias docker_stop='docker stop (docker ps -aq)'
 alias docker_remove_containers='docker rm (docker ps -aq)'
 alias docker_remove_images='docker rmi (docker images -q)'
+
+# undo the last git commit
+alias gitnvm="git reset --soft HEAD~1"

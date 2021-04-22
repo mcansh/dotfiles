@@ -39,7 +39,7 @@
 [commit]
 	gpgsign = true
 [gpg]
-	program = gpg
+	program = /usr/local/bin/gpg
 [core]
 	excludesfile = /Users/loganmcansh/.gitignore_global
 	editor = code-insiders --wait
@@ -70,6 +70,7 @@
   insteadOf = https://gitlab.com/
 [url "ssh://git@bitbucket.org/"]
   insteadOf = https://bitbucket.org/
+
 [fetch]
 	prune = true
 [color "diff-highlight"]

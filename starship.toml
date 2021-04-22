@@ -1,14 +1,16 @@
 # Don't print a new line at the start of the prompt
 add_newline = false
 
-
 [character]
 success_symbol = "[▲](bold green)"
 error_symbol = "[▲](bold red)"
 
 [git_branch]
-# Remove the git branch symbol
-symbol = ""
+symbol = "🌱 "
+tag_symbol = "🔖 "
 
 [aws]
 disabled = true
+
+[nodejs]
+symbol = "⬢ "

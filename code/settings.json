@@ -2,7 +2,7 @@
   "editor.fontFamily": "MonoLisa, 'Dank Mono', 'Operator Mono', 'JetBrains Mono', 'SF Mono', Menlo, Monaco, 'Courier New', monospace",
   "editor.fontSize": 12,
   "window.autoDetectColorScheme": false,
-  "workbench.colorTheme": "Night Owl",
+  "workbench.colorTheme": "GitHub Dark Default",
   "workbench.preferredDarkColorTheme": "GitHub Dark",
   "workbench.preferredHighContrastColorTheme": "GitHub Dark",
   "workbench.preferredLightColorTheme": "GitHub Dark",
@@ -74,8 +74,8 @@
   "html.format.indentInnerHtml": true,
   "javascript.format.enable": false,
   "terminal.explorerKind": "integrated",
-  "terminal.external.osxExec": "Hyper.app",
-  "terminal.integrated.fontSize": 14,
+  "terminal.external.osxExec": "iTerm",
+  "terminal.integrated.fontSize": 12,
   "workbench.statusBar.visible": true,
   "editor.fontLigatures": true,
   "terminal.integrated.rendererType": "dom",
@@ -206,7 +206,7 @@
     }
   ],
   "yaml.schemas": {
-    "file:///Users/loganmcansh/.vscode-insiders/extensions/atlassian.atlascode-2.8.5/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    "file:///Users/loganmcansh/.vscode-insiders/extensions/atlassian.atlascode-2.8.6/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
   },
   "atlascode.jira.jqlList": [
     {
@@ -241,7 +241,7 @@
       "editor.background": "#141e20"
     }
   },
-  "workbench.iconTheme": "city-lights-icons-vsc",
+  "workbench.iconTheme": "quill-icons-minimal",
   "vsonline.authentication.accountProvider": "Microsoft",
   "vsonline.accountProvider": "Microsoft",
   "kite.showWelcomeNotificationOnStartup": false,
@@ -256,9 +256,24 @@
   "cSpell.userWords": ["obsolete"],
   "terminal.integrated.shell.osx": "/usr/local/bin/fish",
   "workbench.sideBar.location": "right",
-  "window.zoomLevel": -1,
   "editor.linkedEditing": true,
-  "window.newWindowDimensions": "default"
+  "window.newWindowDimensions": "default",
+  "codeQL.telemetry.enableTelemetry": true,
+  "dart.previewLsp": true,
+  "[dart]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.rulers": [80],
+    "editor.selectionHighlight": false,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggestSelection": "first",
+    "editor.tabCompletion": "onlySnippets",
+    "editor.wordBasedSuggestions": false
+  },
+  "aws.profile": "profile:personal",
+  "workbench.productIconTheme": "icons-carbon",
+  "window.zoomLevel": -1
+  // "typescript.tsserver.experimental.enableProjectDiagnostics": true
   // when working using an external monitor
   /*
   "editor.fontSize": 14,

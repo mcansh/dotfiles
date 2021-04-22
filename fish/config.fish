@@ -27,7 +27,7 @@ export ANDROID_HOME=/Users/$USER/Library/Android/sdk
 export ANDROID_SDK_HOME=/Users/$USER/Library/Android/sdk
 export ANDROID_AVD_HOME=/Users/$USER/.android/avd
 
-set -g fish_user_paths "/usr/local/sbin" $fish_user_paths
+set -g fish_user_paths /usr/local/sbin $fish_user_paths
 export PATH="$HOME/.cargo/bin:$PATH"
 export N_PREFIX="$HOME/.n"
 export PATH="$N_PREFIX/bin:$PATH"
@@ -39,9 +39,15 @@ export SSH_AUTH_SOCK="$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAg
 [ -f ~/.config/tabtab/fish/__tabtab.fish ]; and . ~/.config/tabtab/fish/__tabtab.fish; or true
 
 # load env from env.ignored
-export (grep "^[^#]" $HOME/.dotfiles/env.ignored |xargs -L 1)
+source $HOME/.dotfiles/env.ignored
 
 # Don't change npm version when using n
 export N_PRESERVE_NPM=1
 
-set -g fish_user_paths "/usr/local/opt/openjdk/bin" $fish_user_paths
+set -g fish_user_paths /usr/local/opt/openjdk/bin $fish_user_paths
+rvm default
+
+# Set GPG TTY
+set -gx GPG_TTY (tty)
+
+export PATH="./node_modules/.bin:$PATH"
