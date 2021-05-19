@@ -7,7 +7,7 @@ error_symbol = "[▲](bold red)"
 
 [git_branch]
 symbol = "🌱 "
-tag_symbol = "🔖 "
+# tag_symbol = "🔖 "
 
 [aws]
 disabled = true

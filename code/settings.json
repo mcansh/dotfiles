@@ -1,11 +1,11 @@
 {
   "editor.fontFamily": "MonoLisa, 'Dank Mono', 'Operator Mono', 'JetBrains Mono', 'SF Mono', Menlo, Monaco, 'Courier New', monospace",
-  "editor.fontSize": 12,
-  "window.autoDetectColorScheme": false,
+  "editor.fontSize": 14,
+  "window.autoDetectColorScheme": true,
   "workbench.colorTheme": "GitHub Dark Default",
-  "workbench.preferredDarkColorTheme": "GitHub Dark",
-  "workbench.preferredHighContrastColorTheme": "GitHub Dark",
-  "workbench.preferredLightColorTheme": "GitHub Dark",
+  "workbench.preferredDarkColorTheme": "GitHub Dark Default",
+  "workbench.preferredHighContrastColorTheme": "GitHub Dark Default",
+  "workbench.preferredLightColorTheme": "GitHub Light Default",
   "editor.letterSpacing": 0.5,
   "workbench.editor.tabSizing": "shrink",
   "html.format.enable": true,
@@ -272,7 +272,9 @@
   },
   "aws.profile": "profile:personal",
   "workbench.productIconTheme": "icons-carbon",
-  "window.zoomLevel": -1
+  "window.zoomLevel": -1,
+  "terminal.integrated.tabs.enabled": true,
+  "workbench.editor.showTabs": true
   // "typescript.tsserver.experimental.enableProjectDiagnostics": true
   // when working using an external monitor
   /*
