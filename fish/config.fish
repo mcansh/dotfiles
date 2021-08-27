@@ -51,3 +51,4 @@ rvm default
 set -gx GPG_TTY (tty)
 
 export PATH="./node_modules/.bin:$PATH"
+export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"

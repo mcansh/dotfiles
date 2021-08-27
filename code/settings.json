@@ -2,7 +2,7 @@
   "editor.fontFamily": "MonoLisa, 'Dank Mono', 'Operator Mono', 'JetBrains Mono', 'SF Mono', Menlo, Monaco, 'Courier New', monospace",
   "editor.fontSize": 14,
   "window.autoDetectColorScheme": true,
-  "workbench.colorTheme": "GitHub Dark Default",
+  "workbench.colorTheme": "GitHub Light Default",
   "workbench.preferredDarkColorTheme": "GitHub Dark Default",
   "workbench.preferredHighContrastColorTheme": "GitHub Dark Default",
   "workbench.preferredLightColorTheme": "GitHub Light Default",
@@ -46,7 +46,7 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-  "eslint.packageManager": "yarn",
+  "eslint.packageManager": "npm",
   "eslint.options": {
     "extensions": [
       ".html",
@@ -206,7 +206,7 @@
     }
   ],
   "yaml.schemas": {
-    "file:///Users/loganmcansh/.vscode-insiders/extensions/atlassian.atlascode-2.8.6/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    "file:///Users/loganmcansh/.vscode-insiders/extensions/atlassian.atlascode-2.9.1/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
   },
   "atlascode.jira.jqlList": [
     {
@@ -253,7 +253,6 @@
   "python.insidersChannel": "weekly",
   "python.languageServer": "Pylance",
   "editor.renderWhitespace": "trailing",
-  "cSpell.userWords": ["obsolete"],
   "terminal.integrated.shell.osx": "/usr/local/bin/fish",
   "workbench.sideBar.location": "right",
   "editor.linkedEditing": true,
@@ -272,9 +271,22 @@
   },
   "aws.profile": "profile:personal",
   "workbench.productIconTheme": "icons-carbon",
-  "window.zoomLevel": -1,
   "terminal.integrated.tabs.enabled": true,
-  "workbench.editor.showTabs": true
+  "workbench.editor.showTabs": true,
+  "redhat.telemetry.enabled": false,
+  "githubIssues.userCompletions.enabled": false,
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.inlineSuggest.enabled": true,
+  "github.copilot.enable": {
+    "*": true,
+    "yaml": true,
+    "plaintext": true,
+    "markdown": true
+  },
+  "editor.accessibilitySupport": "off",
+  "window.zoomLevel": -1
   // "typescript.tsserver.experimental.enableProjectDiagnostics": true
   // when working using an external monitor
   /*

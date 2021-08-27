@@ -26,22 +26,5 @@ module.exports = {
       },
     },
   ],
-  handlers: [
-    // Open Microsoft Teams links in the native app
-    {
-      match: finicky.matchHostnames(["teams.microsoft.com"]),
-      browser: "com.microsoft.teams",
-      url({ url }) {
-        return {
-          ...url,
-          protocol: "msteams",
-        };
-      },
-    },
-    // Open localhost links in Edge
-    {
-      match: /^https?:\/\/localhost:.*\/.*$/,
-      browser: "Microsoft Edge Canary",
-    },
-  ],
+  handlers: [],
 };
