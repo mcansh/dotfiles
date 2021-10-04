@@ -1,13 +1,15 @@
 {
   "editor.fontFamily": "MonoLisa, 'Dank Mono', 'Operator Mono', 'JetBrains Mono', 'SF Mono', Menlo, Monaco, 'Courier New', monospace",
   "editor.fontSize": 14,
+  "editor.lineHeight": 2,
   "window.autoDetectColorScheme": true,
-  "workbench.colorTheme": "GitHub Light Default",
+  "workbench.colorTheme": "Hack The Box",
   "workbench.preferredDarkColorTheme": "GitHub Dark Default",
   "workbench.preferredHighContrastColorTheme": "GitHub Dark Default",
   "workbench.preferredLightColorTheme": "GitHub Light Default",
   "editor.letterSpacing": 0.5,
   "workbench.editor.tabSizing": "shrink",
+  "editor.bracketPairColorization.enabled": true,
   "html.format.enable": true,
   "html.format.preserveNewLines": true,
   "files.trimTrailingWhitespace": true,
@@ -27,8 +29,7 @@
     "**/.svn": true,
     "**/.hg": true,
     "**/CVS": true,
-    "**/.DS_Store": true,
-    "**/node_modules": true
+    "**/.DS_Store": true
   },
   "workbench.editor.tabCloseButton": "right",
   "emmet.includeLanguages": {
@@ -286,7 +287,14 @@
     "markdown": true
   },
   "editor.accessibilitySupport": "off",
-  "window.zoomLevel": -1
+  "html.autoClosingTags": true,
+  "javascript.autoClosingTags": true,
+  "typescript.autoClosingTags": true,
+  "window.zoomLevel": -1,
+  "vscode-edge-devtools.mirrorEdits": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
   // "typescript.tsserver.experimental.enableProjectDiagnostics": true
   // when working using an external monitor
   /*
