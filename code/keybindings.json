@@ -56,5 +56,9 @@
   {
     "key": "ctrl+alt+v",
     "command": "editor.emmet.action.balanceIn"
+  },
+  {
+    "key": "cmd+p",
+    "command": "extension.fuzzySearch"
   }
 ]
