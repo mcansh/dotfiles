@@ -26,5 +26,14 @@ module.exports = {
       },
     },
   ],
-  handlers: [],
+  handlers: [
+    {
+      match: /^https:\/\/stackblitz\.com\/.*$/,
+      browser: "Microsoft Edge Canary",
+    },
+    {
+      match: /^https:\/\/vite\.new\/.*$/,
+      browser: "Microsoft Edge Canary",
+    },
+  ],
 };
