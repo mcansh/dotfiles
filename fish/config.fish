@@ -1,6 +1,9 @@
 # Set my editor
 export EDITOR="/usr/local/bin/code-insiders"
 
+# load env from env.ignored
+source $HOME/.dotfiles/env.ignored
+
 starship init fish | source
 
 thefuck --alias | source
@@ -38,14 +41,10 @@ export SSH_AUTH_SOCK="$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAg
 # uninstall by removing these lines
 [ -f ~/.config/tabtab/fish/__tabtab.fish ]; and . ~/.config/tabtab/fish/__tabtab.fish; or true
 
-# load env from env.ignored
-source $HOME/.dotfiles/env.ignored
-
 # Don't change npm version when using n
 export N_PRESERVE_NPM=1
 
 set -g fish_user_paths /usr/local/opt/openjdk/bin $fish_user_paths
-rvm default
 
 # Set GPG TTY
 set -gx GPG_TTY (tty)

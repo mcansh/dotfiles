@@ -4,6 +4,7 @@ const { promisify } = require("util");
 const exec = promisify(childProcess.exec);
 
 const macOSVersions = {
+  Monterey: 12.0,
   "Big Sur": 11.0,
   Catalina: 10.15,
   Mojave: 10.14,

@@ -7,8 +7,6 @@ alias gcl='git clone'
 alias gcp='git cherry-pick -x'
 alias gcc='git cherry-pick --continue'
 alias gca='git cherry-pick --abort'
-alias gcl-submodules='git clone --recursive' # clone a repo with submodules
-alias gimme-submodules='git submodule update --init --recursive' # when you already cloned the repo and need the submodules
 alias gs='git s'
 alias gp='git push'
 alias gpf='git push -f'
@@ -60,15 +58,7 @@ alias ls='ls -1a'
 
 # alias for making symlinks (alias)
 alias makethisgohere='ln -s'
-alias ...='cd ../../'
 
-# maintenance scripts
-alias maintenance='sudo periodic daily weekly monthly'
-
-# slack emoji magic
-alias slackmoji='sips -Z 128 $1'
-
-alias yarn-upgrade='yarn upgrade-interactive --latest'
 alias yarnup='yarn-upgrade'
 alias yarn-global-upgrade='yarn global upgrade-interactive'
 alias npm-list-global='npm list -g --depth=0'
@@ -76,12 +66,6 @@ alias npm-list-global='npm list -g --depth=0'
 # list and clear downloads table
 alias list_downloads='sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* "select LSQuarantineDataURLString from LSQuarantineEvent"'
 alias clear_downloads='sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* "delete from LSQuarantineEvent"'
-
-
-alias docker_list='docker ps -aq'
-alias docker_stop='docker stop (docker ps -aq)'
-alias docker_remove_containers='docker rm (docker ps -aq)'
-alias docker_remove_images='docker rmi (docker images -q)'
 
 # undo the last git commit
 alias gitnvm="git reset --soft HEAD~1"
