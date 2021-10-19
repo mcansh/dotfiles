@@ -1,1 +1,0 @@
-/Users/loganmcansh/.fig/shell/pre.fish

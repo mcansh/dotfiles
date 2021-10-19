@@ -4,24 +4,15 @@ export EDITOR="/usr/local/bin/code-insiders"
 # load env from env.ignored
 source $HOME/.dotfiles/env.ignored
 
+if status is-interactive
+    # Commands to run in interactive sessions can go here
+end
+
 starship init fish | source
 
 thefuck --alias | source
 
 export PATH="$PATH:$HOME/.my_bin"
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[ -f /Users/loganmcansh/.config/yarn/global/node_modules/tabtab/.completions/serverless.fish ]
-and . /Users/loganmcansh/.config/yarn/global/node_modules/tabtab/.completions/serverless.fish
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[ -f /Users/loganmcansh/.config/yarn/global/node_modules/tabtab/.completions/sls.fish ]
-and . /Users/loganmcansh/.config/yarn/global/node_modules/tabtab/.completions/sls.fish
-# tabtab source for slss package
-# uninstall by removing these lines or running `tabtab uninstall slss`
-[ -f /Users/loganmcansh/.config/yarn/global/node_modules/tabtab/.completions/slss.fish ]
-and . /Users/loganmcansh/.config/yarn/global/node_modules/tabtab/.completions/slss.fish
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="(yarn global bin):$PATH"
@@ -37,14 +28,8 @@ export PATH="$N_PREFIX/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export SSH_AUTH_SOCK="$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh"
 
-# tabtab source for packages
-# uninstall by removing these lines
-[ -f ~/.config/tabtab/fish/__tabtab.fish ]; and . ~/.config/tabtab/fish/__tabtab.fish; or true
-
 # Don't change npm version when using n
 export N_PRESERVE_NPM=1
-
-set -g fish_user_paths /usr/local/opt/openjdk/bin $fish_user_paths
 
 # Set GPG TTY
 set -gx GPG_TTY (tty)
