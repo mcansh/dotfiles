@@ -10,6 +10,9 @@
   "editor.letterSpacing": 0.5,
   "workbench.editor.tabSizing": "shrink",
   "editor.bracketPairColorization.enabled": true,
+  "typescript.inlayHints.parameterNames.enabled": "none",
+  "javascript.inlayHints.parameterNames.enabled": "none",
+  "editor.guides.bracketPairs": true,
   "html.format.enable": true,
   "html.format.preserveNewLines": true,
   "files.trimTrailingWhitespace": true,
@@ -50,13 +53,12 @@
   "eslint.packageManager": "npm",
   "eslint.options": {
     "extensions": [
-      ".html",
-      ".js",
-      ".jsx",
+      "html",
+      "javascript",
+      "javascriptreact",
       "typescript",
       "typescriptreact",
-      "yaml",
-      "vue"
+      "yaml"
     ]
   },
   "eslint.validate": [
@@ -64,10 +66,8 @@
     "javascriptreact",
     "html",
     "typescript",
-    "typescriptreact",
-    "vue"
+    "typescriptreact"
   ],
-  "vetur.experimental.templateInterpolationService": true,
   "color-highlight.markerType": "background",
   "color-highlight.matchWords": true,
   "files.insertFinalNewline": true,
@@ -121,13 +121,18 @@
     "typescript",
     "typescriptreact",
     "yaml",
-    "yml",
-    "vue"
+    "yml"
   ],
   "editor.cursorSurroundingLines": 3,
   "editor.autoClosingBrackets": "languageDefined",
   "editor.showUnused": true,
-  "[vue]": {
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[typescriptreact]": {
@@ -152,79 +157,6 @@
     "*.svelte": "svelte",
     "*.dockerignore": "ignore"
   },
-  "peacock.favoriteColors": [
-    {
-      "name": "Angular Red",
-      "value": "#b52e31"
-    },
-    {
-      "name": "Auth0 Orange",
-      "value": "#eb5424"
-    },
-    {
-      "name": "Azure Blue",
-      "value": "#007fff"
-    },
-    {
-      "name": "C# Purple",
-      "value": "#68217A"
-    },
-    {
-      "name": "Gatsby Purple",
-      "value": "#639"
-    },
-    {
-      "name": "Go Cyan",
-      "value": "#5dc9e2"
-    },
-    {
-      "name": "Java Blue-Gray",
-      "value": "#557c9b"
-    },
-    {
-      "name": "JavaScript Yellow",
-      "value": "#f9e64f"
-    },
-    {
-      "name": "Mandalorian Blue",
-      "value": "#1857a4"
-    },
-    {
-      "name": "Node Green",
-      "value": "#215732"
-    },
-    {
-      "name": "React Blue",
-      "value": "#00b3e6"
-    },
-    {
-      "name": "Something Different",
-      "value": "#832561"
-    },
-    {
-      "name": "Vue Green",
-      "value": "#42b883"
-    }
-  ],
-  "yaml.schemas": {
-    "file:///Users/loganmcansh/.vscode-insiders/extensions/atlassian.atlascode-2.9.1/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
-  },
-  "atlascode.jira.jqlList": [
-    {
-      "id": "c2620545-ad72-4bac-9805-4f1b55cdcf58",
-      "enabled": true,
-      "name": "My powerley Issues",
-      "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
-      "siteId": "c479e5b7-f04e-4e7a-a02c-edec838ba0b1",
-      "monitor": true
-    }
-  ],
-  "atlascode.jira.statusbar.showUser": false,
-  "atlascode.jira.statusbar.showProduct": false,
-  "atlascode.jira.statusbar.showLogin": true,
-  "atlascode.configurationTarget": "user",
-  "atlascode.jira.explorer.enabled": true,
-  "atlascode.jira.explorer.fetchAllQueryResults": true,
   "diffEditor.ignoreTrimWhitespace": false,
   "workbench.colorCustomizations": {
     "[Community Material Theme High Contrast]": {
@@ -276,9 +208,6 @@
   "workbench.editor.showTabs": true,
   "redhat.telemetry.enabled": false,
   "githubIssues.userCompletions.enabled": false,
-  "[markdown]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "editor.inlineSuggest.enabled": true,
   "github.copilot.enable": {
     "*": true,
@@ -290,11 +219,8 @@
   "html.autoClosingTags": true,
   "javascript.autoClosingTags": true,
   "typescript.autoClosingTags": true,
-  "window.zoomLevel": -1,
   "vscode-edge-devtools.mirrorEdits": true,
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  "window.zoomLevel": -1
   // "typescript.tsserver.experimental.enableProjectDiagnostics": true
   // when working using an external monitor
   /*
