@@ -5,8 +5,10 @@ end
 # Set my editor
 export EDITOR="/usr/local/bin/code-insiders"
 
-# load env from env.ignored
-source $HOME/.dotfiles/env.ignored
+# load env from env.ignored if it exists
+if test -f "$HOME/.dotfiles/env.ignored"
+    source "$HOME/.dotfiles/env.ignored"
+end
 
 # starship init fish | source
 

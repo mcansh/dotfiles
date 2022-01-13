@@ -8,7 +8,7 @@
 	# show last commit's sha
 	sha = rev-parse HEAD
 	co = checkout
-	cm = "commit -sm"
+	c = "commit -s"
 	p = push
 	# add and commit untracked files
 	a = "add -A"
