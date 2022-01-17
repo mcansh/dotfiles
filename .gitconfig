@@ -41,7 +41,7 @@
 [gpg]
 	program = /opt/homebrew/opt/gnupg@2.2/bin/gpg
 [core]
-	excludesfile = /Users/loganmcansh/.gitignore_global
+	excludesfile = /Users/loganmcansh/.dotfiles/.global_gitignore
 	editor = code-insiders --wait
 	ignorecase = false
 	pager = delta
