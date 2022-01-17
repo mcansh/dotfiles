@@ -46,9 +46,8 @@
 	ignorecase = false
 	pager = delta
 [delta]
-	plus-color = "#012800"
-	minus-color = "#340001"
 	side-by-side = true
+	syntax-theme = "GitHub"
 [color]
   pager = true
 	ui = true

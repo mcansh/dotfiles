@@ -16,6 +16,7 @@ alias gc="git commit -s"
 export N_PRESERVE_NPM=1
 export N_PREFIX="$HOME/.n"
 export PATH="$N_PREFIX/bin:$PATH"
+export NODE_PATH=(which node)
 
 # export SSH_AUTH_SOCK="$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh"
 
