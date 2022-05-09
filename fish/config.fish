@@ -25,7 +25,6 @@ set -gx GPG_TTY (tty)
 
 # make local npm binarys available without npx <name>
 export PATH="./node_modules/.bin:$PATH"
-fish_add_path /opt/homebrew/opt/gnupg@2.2/bin
 
 # composer / laravel
 export PATH="$HOME/.composer/vendor/bin:$PATH"

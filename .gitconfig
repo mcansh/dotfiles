@@ -39,7 +39,7 @@
 [commit]
 	gpgsign = true
 [gpg]
-	program = /opt/homebrew/opt/gnupg@2.2/bin/gpg
+	program = gpg
 [core]
 	excludesfile = /Users/loganmcansh/.dotfiles/.global_gitignore
 	editor = code-insiders --wait
