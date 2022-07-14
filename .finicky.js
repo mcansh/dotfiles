@@ -9,7 +9,7 @@ module.exports = {
   rewrite: [
     // Replace domain of urls to amazon.com with smile.amazon.com
     {
-      match: finicky.matchDomains(["www.amazon.com"]),
+      match: finicky.matchDomains(["www.amazon.com", "amazon.com"]),
       url: ({ url }) => ({ ...url, host: "smile.amazon.com" }),
     },
     // Remove all marketing/tracking information from urls
