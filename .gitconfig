@@ -42,7 +42,7 @@
 	program = gpg
 [core]
 	excludesfile = /Users/loganmcansh/.dotfiles/.global_gitignore
-	editor = code-insiders --wait
+	editor = code-exploration --wait
 	ignorecase = false
 	pager = delta
 [delta]

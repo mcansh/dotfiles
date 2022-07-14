@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
 
-# Run without downloading:
-# curl https://raw.githubusercontent.com/mcansh/dotfiles/master/.macos | bash
+# Usage: `curl https://raw.githubusercontent.com/mcansh/dotfiles/master/.macos | bash`
 
 # Set up logging environment
 LOG_FILE='/Users/($HOME)/Desktop/install-log.log'
 
-#exec &> >(tee -a "$LOG_FILE")
-#echo "Logging to" $LOG_FILE
+exec &> >(tee -a "$LOG_FILE")
+echo "Logging to" $LOG_FILE
 
 # Ask for the administrator password upfront
 sudo -v
@@ -32,20 +31,16 @@ echo "installing things from your Brewfile"
 # fish: my preferred shell
 # gh: GitHub cli
 # gifify: make gifs
+# gnupg: for gpg
 # httpie: easy api calls
-# mas: update/install apps from the mac app store
 # n: a super easy way to install and update node
-# postgres: databases
 # ripgrep: a better grep
 # thefuck: will try to autocorrect your command upon error when you type 'fuck'
 brew tap caskroom/cask caskroom/versions homebrew/bundle homebrew/core homebrew/dupes
-brew bundle --file ./Brewfile
+brew install awscli bat ccat ffmeg fish gh gifify gnupg httpie n ripgrep thefuck
 
 echo "installing oh my fish"
 curl -L https://get.oh-my.fish | fish
-
-# install yarn
-curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --rc
 
 echo "installing node (via n-install)"
 n latest
@@ -54,7 +49,12 @@ echo "node --version: $(node --version)"
 echo "npm --version: $(npm --version)"
 
 echo "installing a few global npm packages"
-yarn global add release trash-cli fkill-cli
+npm i -g trash-cli fkill-cli @antfu/ni corepack
+
+# install yarn v1
+corepack prepare yarn@1 --activate
+# install pnpm
+corepack prepare pnpm@latest --activate
 
 echo "Generating an RSA token for GitHub"
 mkdir -p ~/.ssh
@@ -77,19 +77,15 @@ ln -s "${HOME}/.dotfiles/.yarnrc" "${HOME}/.yarnrc"
 ln -s "${HOME}/.dotfiles/code/settings.json" "${HOME}/Library/Application Support/Code - Insiders/User"
 ln -s "${HOME}/.dotfiles/code/keybindings.json" "${HOME}/Library/Application Support/Code - Insiders/User"
 
-
 echo "making system modifications:"
 
 # Set HostName/ComputerName/LocalHostName
-scutil --set ComputerName "🚀😺"
+scutil --set ComputerName "💻"
 scutil --set LocalHostName "mcansh"
 scutil --set HostName "mcansh"
 
 # Computer sleeps after 2 minutes
 systemsetup -setcomputersleep 2
-
-# Force password entry after sleep
-defaults write com.apple.screensaver askForPassword 1
 
 # Add a message to the login screen
 defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText "This computer belongs to Logan McAnsh"
@@ -100,24 +96,23 @@ defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
 # Set sidebar icon size to small
 defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 1
 
-# Autohide dock and remove delay
-defaults write com.apple.dock autohide -bool true && defaults write com.apple.dock autohide-delay -float 0 && defaults write com.apple.dock autohide-time-modifier -float 0
+# Only show open apps in Dock
+defaults write com.apple.dock static-only -bool true
 
-# Position the dock on the left side
-defaults write com.apple.Dock orientation -string left
+# Remove Dock auto-hiding delay
+defaults write com.apple.dock autohide-delay -float 0
 
-# Enable the PowerChime
-# Enabled by default on the 2016+ MacBooks
-# defaults write com.apple.PowerChime ChimeOnAllHardware -bool true; open /System/Library/CoreServices/PowerChime.app
+# Remove Dock show delay
+defaults write com.apple.dock autohide-time-modifier -float 0
 
-# Autohide the menubar
-defaults write NSGlobalDomain _HIHideMenuBar -bool true
-
-# Set dark dock/menubar
-# defaults write NSGlobalDomain AppleInterfaceStyle Dark
+# Make hidden apps transparent
+defaults write com.apple.Dock showhidden -bool true
 
 # Remove shadow from screenshots
 defaults write com.apple.screencapture disable-shadow -bool true
+
+# Change screenshot format
+defaults write com.apple.screencapture type jpg
 
 # Expand save panel by default
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
@@ -126,6 +121,9 @@ defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
 # Expand print panel by default
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
+
+# Disable Annoying Disk Warning
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.DiskArbitration.diskarbitrationd.plist DADisableEjectNotification -bool YES && sudo pkill diskarbitrationd
 
 # Give NPM proper global install permissions
 sudo chown -R $USER /usr/local/lib/node_modules
