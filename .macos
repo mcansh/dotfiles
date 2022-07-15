@@ -56,7 +56,7 @@ ln -s "${HOME}/.dotfiles/code/settings.json" "${HOME}/Library/Application Suppor
 ln -s "${HOME}/.dotfiles/code/keybindings.json" "${HOME}/Library/Application Support/Code - Insiders/User"
 
 ###############################################################################
-# homebrew                                                                    #
+# homebrew (and related thing)                                                #
 ###############################################################################
 
 echo "installing homebrew"
@@ -64,6 +64,9 @@ echo "installing homebrew"
 
 echo "installing things from homebrew"
 brew bundle --file "${HOME}/.dotfiles/Brewfile"
+
+# Install latest version of Node.js
+n latest
 
 ###############################################################################
 # system modifications                                                        #
