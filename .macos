@@ -52,8 +52,6 @@ ln -s "${HOME}/.dotfiles/.gitignore_global" "${HOME}/.gitignore_global"
 ln -s "${HOME}/.dotfiles/.hyper.js" "${HOME}/.hyper.js"
 ln -s "${HOME}/.dotfiles/.gitconfig" "${HOME}/.gitconfig"
 ln -s "${HOME}/.dotfiles/.yarnrc" "${HOME}/.yarnrc"
-ln -s "${HOME}/.dotfiles/code/settings.json" "${HOME}/Library/Application Support/Code - Insiders/User"
-ln -s "${HOME}/.dotfiles/code/keybindings.json" "${HOME}/Library/Application Support/Code - Insiders/User"
 
 ###############################################################################
 # homebrew (and related thing)                                                #
