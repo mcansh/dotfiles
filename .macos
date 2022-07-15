@@ -16,51 +16,6 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 echo "Hello $(whoami)! Let's get you set up."
 
-###############################################################################
-# homebrew                                                                    #
-###############################################################################
-
-echo "installing homebrew"
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-
-echo "installing things from homebrew"
-# act: Run your GitHub Actions locally 🚀
-# asimov: Automatically exclude development dependencies from Time Machine backups
-# awscli: Official Amazon AWS command-line interface
-# bat: Clone of cat(1) with syntax highlighting and Git integration
-# caddy: Powerful, enterprise-ready, open source web server with automatic HTTPS
-# deno: Secure runtime for JavaScript and TypeScript
-# dog: Command-line DNS client
-# fish: User-friendly command-line shell for UNIX-like operating systems
-# gh: GitHub command-line tool
-# gifify: Turn movies into GIFs
-# git: Distributed revision control system
-# git-delta: Syntax-highlighting pager for git and diff output
-# gnupg: GNU Pretty Good Privacy (PGP) package
-# gnupg@2.2: GNU Pretty Good Privacy (PGP) package
-# httpie: User-friendly cURL replacement (command-line HTTP client)
-# jq: Lightweight and flexible command-line JSON processor
-# mysql-client: Open source relational database management system
-# n: Node version management
-# pinentry-mac: Pinentry for GPG on Mac
-# pscale: The PlanetScale CLI
-# railway: Develop and deploy code with zero configuration
-# nixpacks: App source + Nix packages + Docker = Image
-# ripgrep: Search tool like grep and The Silver Searcher
-# flyctl: CLI for Fly.io
-# thefuck: Programmatically correct mistyped console commands
-# tig: Text interface for Git repositories
-# wget: Internet file retriever
-# xcodegen: Generate your Xcode project from a spec file and your folder structure
-# xh: Friendly and fast tool for sending HTTP requests
-# youtube-dl: Download YouTube videos from the command-line
-brew install act asimov awscli bat caddy deno dog fish gh gifify git git-delta gnupg gnupg@2.2 httpie jq mysql-client n pinentry-mac pscale railway nixpacks ripgrep flyctl thefuck tig wget xcodegen xh youtube-dl
-
-# finicky: Utility for customizing which browser to start
-# backblaze: Data backup and storage service
-# ngrok: Reverse proxy, secure introspectable tunnels to localhost
-# rescuetime: Time optimising application
-brew install --cask finicky backblaze	ngrok rescuetime
 
 echo "installing oh my fish"
 curl -L https://get.oh-my.fish | fish
@@ -99,6 +54,20 @@ ln -s "${HOME}/.dotfiles/.gitconfig" "${HOME}/.gitconfig"
 ln -s "${HOME}/.dotfiles/.yarnrc" "${HOME}/.yarnrc"
 ln -s "${HOME}/.dotfiles/code/settings.json" "${HOME}/Library/Application Support/Code - Insiders/User"
 ln -s "${HOME}/.dotfiles/code/keybindings.json" "${HOME}/Library/Application Support/Code - Insiders/User"
+
+###############################################################################
+# homebrew                                                                    #
+###############################################################################
+
+echo "installing homebrew"
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+echo "installing things from homebrew"
+brew bundle --file "${HOME}/.dotfiles/Brewfile"
+
+###############################################################################
+# system modifications                                                        #
+###############################################################################
 
 echo "making system modifications:"
 
