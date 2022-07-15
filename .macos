@@ -41,17 +41,20 @@ echo "Host *\n AddKeysToAgent yes\n UseKeychain yes\n IdentityFile ~/.ssh/id_rsa
 eval "$(ssh-agent -s)"
 echo "run 'pbcopy < ~/.ssh/id_rsa.pub' and paste that into GitHub"
 
+###############################################################################
+# lets get down to business                                                   #
+###############################################################################
+
+DOTFILES="${HOME}/.dotfiles"
 
 echo "cloning dotfiles"
-git clone git@github.com:mcansh/dotfiles.git "${HOME}/.dotfiles"
-ln -s "${HOME}/.dotfiles/fish" "${HOME}/.config/fish"
-ln -s "${HOME}/.dotfiles/omf" "${HOME}/.config/omf"
-ln -s "${HOME}/.dotfiles/starship.toml" "${HOME}/.config/starship.toml"
-ln -s "${HOME}/.dotfiles/.my_bin" "${HOME}/.my_bin"
-ln -s "${HOME}/.dotfiles/.gitignore_global" "${HOME}/.gitignore_global"
-ln -s "${HOME}/.dotfiles/.hyper.js" "${HOME}/.hyper.js"
-ln -s "${HOME}/.dotfiles/.gitconfig" "${HOME}/.gitconfig"
-ln -s "${HOME}/.dotfiles/.yarnrc" "${HOME}/.yarnrc"
+git clone git@github.com:mcansh/dotfiles.git ${DOTFILES}
+ln -s "${DOTFILES}/fish" "${HOME}/.config/fish"
+ln -s "${DOTFILES}/omf" "${HOME}/.config/omf"
+ln -s "${DOTFILES}/.my_bin" "${HOME}/.my_bin"
+ln -s "${DOTFILES}/.gitignore_global" "${HOME}/.gitignore_global"
+ln -s "${DOTFILES}/.gitconfig" "${HOME}/.gitconfig"
+ln -s "${DOTFILES}/.yarnrc" "${HOME}/.yarnrc"
 
 ###############################################################################
 # homebrew (and related thing)                                                #
@@ -61,7 +64,7 @@ echo "installing homebrew"
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 echo "installing things from homebrew"
-brew bundle --file "${HOME}/.dotfiles/Brewfile"
+brew bundle --file "${DOTFILES}/Brewfile"
 
 # Install latest version of Node.js
 n latest
