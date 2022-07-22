@@ -5,7 +5,6 @@ module.exports = {
   defaultBrowser: "Safari",
   options: {
     hideIcon: true,
-    logRequests: true,
   },
   rewrite: [
     // Replace domain of urls to amazon.com with smile.amazon.com
@@ -13,32 +12,6 @@ module.exports = {
       match: finicky.matchDomains(["www.amazon.com", "amazon.com"]),
       url: ({ urlString }) => {
         return { ...url, host: "smile.amazon.com" };
-      },
-    },
-    {
-      // Remove all marketing/tracking information from urls
-      // Execute rewrite on all incoming urls to make this example easier to understand
-      match: () => true,
-      url: ({ url }) => {
-        const removeKeysStartingWith = ["utm_", "uta_"]; // Remove all query parameters beginning with these strings
-        const removeKeys = ["fbclid", "gclid"]; // Remove all query parameters matching these keys
-
-        const search = url.search
-          .split("&")
-          .map((parameter) => parameter.split("="))
-          .filter(([key]) => {
-            return !removeKeysStartingWith.some((startingWith) =>
-              key.startsWith(startingWith)
-            );
-          })
-          .filter(([key]) => {
-            return !removeKeys.some((removeKey) => key === removeKey);
-          });
-
-        return {
-          ...url,
-          search: search.map((parameter) => parameter.join("=")).join("&"),
-        };
       },
     },
   ],
