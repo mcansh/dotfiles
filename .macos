@@ -90,6 +90,9 @@ echo "installing things from homebrew"
 brew bundle --file "${DOTFILES}/Brewfile"
 
 # Install latest version of Node.js
+N_PRESERVE_NPM=1
+N_PREFIX="$HOME/.n"
+PATH="$N_PREFIX/bin:$PATH"
 n latest
 
 echo "node --version: $(node --version)"
