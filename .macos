@@ -141,7 +141,7 @@ elif [ "$(fdesetup status)" == "FileVault is Off." ]; then
 fi
 
 # Mac Software Update Check and install updates
-softwareupdate -ia --verbose --restart
+sudo softwareupdate -ia --verbose --restart
 
 # WE OUT
 echo "> Welcome to your newly configured MacBook"
