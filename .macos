@@ -31,12 +31,53 @@ DOTFILES="${HOME}/.dotfiles"
 
 echo "cloning dotfiles"
 git clone git@github.com:mcansh/dotfiles.git ${DOTFILES}
-ln -s "${DOTFILES}/fish" "${HOME}/.config/fish"
-ln -s "${DOTFILES}/omf" "${HOME}/.config/omf"
-ln -s "${DOTFILES}/.my_bin" "${HOME}/.my_bin"
-ln -s "${DOTFILES}/.gitignore_global" "${HOME}/.gitignore_global"
-ln -s "${DOTFILES}/.gitconfig" "${HOME}/.gitconfig"
-ln -s "${DOTFILES}/.yarnrc" "${HOME}/.yarnrc"
+
+# set up symlinks
+echo "setting up symlinks"
+
+if [ -d "${HOME}/.config/fish" ]
+then
+  echo ""~/.config/fish" already exists, please check and merge the contents."
+else
+  ln -s "${DOTFILES}/fish" "${HOME}/.config/fish"
+fi
+
+if [ -d "${HOME}/.config/omf" ]
+then
+  echo ""~/.config/omf" already exists, please check and merge the contents."
+else
+  ln -s "${DOTFILES}/omf" "${HOME}/.config/omf"
+fi
+
+if [ -d "${HOME}/.my_bin" ]
+then
+  echo ""~/.my_bin" already exists, please check and merge the contents."
+else
+  ln -s "${DOTFILES}/.my_bin" "${HOME}/.my_bin"
+fi
+
+
+if [ -f "${HOME}/.gitignore_global" ]
+then
+  echo ""~/.gitignore_global" already exists, please check and merge the contents."
+else
+  ln -s "${DOTFILES}/.gitignore_global" "${HOME}/.gitignore_global"
+fi
+
+if [ -f "${HOME}/.gitconfig" ]
+then
+  echo ""~/.gitconfig" already exists, please check and merge the contents."
+else
+  ln -s "${DOTFILES}/.gitconfig" "${HOME}/.gitconfig"
+fi
+
+if [ -f "${HOME}/.yarnrc" ]
+then
+  echo ""~/.yarnrc" already exists, please check and merge the contents."
+else
+  ln -s "${DOTFILES}/.yarnrc" "${HOME}/.yarnrc"
+fi
+
 
 ###############################################################################
 # homebrew (and related thing)                                                #
