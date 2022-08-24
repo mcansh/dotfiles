@@ -3,7 +3,7 @@
 # Usage: `curl https://raw.githubusercontent.com/mcansh/dotfiles/master/.macos | bash`
 
 # Set up logging environment
-LOG_FILE='/Users/($HOME)/Desktop/install-log.log'
+LOG_FILE=$HOME/Desktop/install-log.log
 
 exec &> >(tee -a "$LOG_FILE")
 echo "Logging to" $LOG_FILE
