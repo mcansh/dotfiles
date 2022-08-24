@@ -16,24 +16,6 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 echo "Hello $(whoami)! Let's get you set up."
 
-
-echo "installing oh my fish"
-curl -L https://get.oh-my.fish | fish
-
-echo "installing node (via n-install)"
-n latest
-
-echo "node --version: $(node --version)"
-echo "npm --version: $(npm --version)"
-
-echo "installing a few global npm packages"
-npm i -g trash-cli fkill-cli @antfu/ni corepack
-
-# install yarn v1
-corepack prepare yarn@1 --activate
-# install pnpm
-corepack prepare pnpm@latest --activate
-
 echo "Generating an RSA token for GitHub"
 mkdir -p ~/.ssh
 ssh-keygen -t rsa -b 4096 -C "logan@mcan.sh"
@@ -68,6 +50,17 @@ brew bundle --file "${DOTFILES}/Brewfile"
 
 # Install latest version of Node.js
 n latest
+
+echo "node --version: $(node --version)"
+echo "npm --version: $(npm --version)"
+
+echo "installing a few global npm packages"
+npm i -g trash-cli fkill-cli @antfu/ni corepack
+
+# install yarn v1
+corepack prepare yarn@1 --activate
+# install pnpm
+corepack prepare pnpm@latest --activate
 
 ###############################################################################
 # system modifications                                                        #
