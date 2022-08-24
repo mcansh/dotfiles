@@ -61,7 +61,7 @@ ln -s "${DOTFILES}/.yarnrc" "${HOME}/.yarnrc"
 ###############################################################################
 
 echo "installing homebrew"
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 echo "installing things from homebrew"
 brew bundle --file "${DOTFILES}/Brewfile"
