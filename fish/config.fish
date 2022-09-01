@@ -11,17 +11,21 @@ if test -f "$HOME/.dotfiles/env.ignored"
 end
 
 alias gc="git commit -s"
+alias gl="git ld"
+
+thefuck --alias | source
+
 
 # Don't change npm version when using n
 export N_PRESERVE_NPM=1
 export N_PREFIX="$HOME/.n"
 export PATH="$N_PREFIX/bin:$PATH"
-export NODE_PATH=(which node)
+export NODE_PATH="$N_PREFIX/lib/node_modules"
 
-# export SSH_AUTH_SOCK="$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh"
+export PATH="$HOME/.dotfiles/.my_bin:$PATH"
 
 # Set GPG TTY
-set -gx GPG_TTY (tty)
+# set -gx GPG_TTY (tty)
 
 # make local npm binarys available without npx <name>
 export PATH="./node_modules/.bin:$PATH"
@@ -29,8 +33,13 @@ export PATH="./node_modules/.bin:$PATH"
 # composer / laravel
 export PATH="$HOME/.composer/vendor/bin:$PATH"
 
+export PATH="$HOME/.deno/bin:$PATH"
+
+# Bun completions
+# [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
 # Bun
-export BUN_INSTALL="/Users/loganmcansh/.bun"
+export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 set -g __fish_git_prompt_show_informative_status 1
@@ -53,3 +62,10 @@ set -g __fish_git_prompt_color_stagedstate yellow
 set -g __fish_git_prompt_color_invalidstate red
 set -g __fish_git_prompt_color_untrackedfiles $fish_color_normal
 set -g __fish_git_prompt_color_cleanstate green --bold
+
+fish_add_path /opt/homebrew/sbin
+
+# pnpm
+set -gx PNPM_HOME "/Users/logan/Library/pnpm"
+set -gx PATH "$PNPM_HOME" $PATH
+# pnpm end
