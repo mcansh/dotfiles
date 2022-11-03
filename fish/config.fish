@@ -7,14 +7,13 @@ export EDITOR="/usr/local/bin/code-insiders"
 
 # load env from ./env.ignored
 if test -f "$HOME/.dotfiles/env.ignored"
-    export (grep "^[^#]" $HOME/.dotfiles/env.ignored |xargs -L 1)
+    export (grep "^[^#]" $HOME/.dotfiles/env.ignored | xargs -L 1)
 end
 
 alias gc="git commit -s"
 alias gl="git ld"
 
 thefuck --alias | source
-
 
 # Don't change npm version when using n
 export N_PRESERVE_NPM=1
@@ -24,8 +23,8 @@ export NODE_PATH="$N_PREFIX/lib/node_modules"
 
 export PATH="$HOME/.dotfiles/.my_bin:$PATH"
 
-# Set GPG TTY
-# set -gx GPG_TTY (tty)
+# tell GPG the current terminal.
+export GPG_TTY=(tty)
 
 # make local npm binarys available without npx <name>
 export PATH="./node_modules/.bin:$PATH"
@@ -41,6 +40,10 @@ export PATH="$HOME/.deno/bin:$PATH"
 # Bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Deno
+export DENO_INSTALL="$HOME/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
 
 set -g __fish_git_prompt_show_informative_status 1
 set -g __fish_git_prompt_hide_untrackedfiles 1
@@ -66,6 +69,6 @@ set -g __fish_git_prompt_color_cleanstate green --bold
 fish_add_path /opt/homebrew/sbin
 
 # pnpm
-set -gx PNPM_HOME "/Users/logan/Library/pnpm"
+set -gx PNPM_HOME "$HOME/Library/pnpm"
 set -gx PATH "$PNPM_HOME" $PATH
 # pnpm end
