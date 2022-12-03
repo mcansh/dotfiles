@@ -12,6 +12,16 @@ end
 
 alias gc="git commit -s"
 alias gl="git ld"
+alias gdd='git diff --staged'
+alias gcp='git cherry-pick -x'
+alias gitnvm="git reset --soft HEAD~1"
+
+alias code='code-insiders'
+alias c='code-insiders .'
+
+alias ls='ls -1a'
+
+alias makethisgohere='ln -s'
 
 thefuck --alias | source
 
@@ -72,7 +82,6 @@ fish_add_path /opt/homebrew/sbin
 set -gx PNPM_HOME "$HOME/Library/pnpm"
 set -gx PATH "$PNPM_HOME" $PATH
 # pnpm end
-
 
 if which rbenv > /dev/null
   eval "$(rbenv init -)"
