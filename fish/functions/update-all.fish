@@ -1,5 +1,5 @@
 # update everything
-function updateall
+function update-all
     echo '▲ [1/6] Running Homebrew update script 🍺'
     brewup
     echo "▲ [2/6] Updating Node ⬢"

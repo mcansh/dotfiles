@@ -1,4 +1,4 @@
-function gitNotPushed
+function git-not-pushed
     set current_branch (git rev-parse --abbrev-ref HEAD)
     set count (git rev-list origin/$current_branch...$current_branch --count)
     if test $count -gt 0

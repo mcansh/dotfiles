@@ -1,4 +1,4 @@
-function gitFixLastCommit
+function git-fix-last-commit
   set -l emoji (random choice '🌮' '🦄' '🍕' '📜' '📦')
   set -l gitDiffCount (git diff --staged --shortstat | awk '{print $1}')
   if test $gitDiffCount -gt 0

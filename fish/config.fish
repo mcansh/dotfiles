@@ -1,5 +1,5 @@
 if status is-interactive
-    # Commands to run in interactive sessions can go here
+  # Commands to run in interactive sessions can go here
 end
 
 # Set my editor
@@ -7,7 +7,7 @@ export EDITOR="/usr/local/bin/code-insiders"
 
 # load env from ./env.ignored
 if test -f "$HOME/.dotfiles/env.ignored"
-    export (grep "^[^#]" $HOME/.dotfiles/env.ignored | xargs -L 1)
+  export (grep "^[^#]" $HOME/.dotfiles/env.ignored | xargs -L 1)
 end
 
 alias gc="git commit -s"
@@ -75,5 +75,5 @@ set -gx PATH "$PNPM_HOME" $PATH
 
 
 if which rbenv > /dev/null
-    eval "$(rbenv init -)"
+  eval "$(rbenv init -)"
 end
