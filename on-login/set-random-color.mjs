@@ -1,5 +1,5 @@
-const childProcess = require("child_process");
-const { promisify } = require("util");
+import childProcess from "node:child_process"
+import { promisify } from "node:util"
 
 const exec = promisify(childProcess.exec);
 
@@ -18,7 +18,7 @@ function random(array) {
   return array[Math.floor(Math.random() * array.length)];
 }
 
-const setRandomColor = async () => {
+export async function setRandomColor() {
   const color = random(Object.keys(colors));
   const { accent, highlight } = colors[color];
 
@@ -55,5 +55,3 @@ const setRandomColor = async () => {
     exec(`sendevent AppleColorPreferencesChangedNotification`),
   ]);
 };
-
-module.exports = { setRandomColor };

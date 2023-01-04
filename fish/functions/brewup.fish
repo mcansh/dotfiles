@@ -1,15 +1,15 @@
 function brewup
-    echo '🍺 1/6 Updating Homebrew 📦'
+    echo '🍺Updating Homebrew 📦'
     brew update
-    echo '🍺 2/6 Checking Homebrew for issues ⛔️'
+    echo '🍺 Checking Homebrew for issues ⛔️'
     brew doctor
-    echo '🍺 3/6 Getting a list of oudated packages 📜'
+    echo '🍺 Getting a list of oudated packages 📜'
     brew outdated
-    echo '🍺 4/6 Upgrading packages 🚚'
+    echo '🍺 Upgrading packages 🚚'
     brew upgrade
-    echo '🍺 5/6 Updating Brew Casks'
+    echo '🍺 Updating Brew Casks'
     brew upgrade --cask
-    echo '🍺 6/6 Cleaning up 🚮'
+    echo '🍺 Cleaning up 🚮'
     brew cleanup
     echo '🍺 Done. 🎉'
 end
