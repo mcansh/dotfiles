@@ -18,15 +18,19 @@ module.exports = {
   handlers: [
     {
       match: /^https:\/\/stackblitz\.com\/.*$/,
-      browser: "Google Chrome Canary",
+      browser: "Arc",
     },
     {
       match: /^https:\/\/vite\.new\/.*$/,
-      browser: "Google Chrome Canary",
+      browser: "Arc",
+    },
+    {
+      match: /^https:\/\/github.com\/Shopify\/.*$/,
+      browser: "Arc",
     },
     {
       match: /^https:\/\/meet.google.com\/.*$/,
-      browser: "Google Chrome Canary",
+      browser: "Arc",
     },
   ],
 };
