@@ -1,5 +1,5 @@
 function brewup
-    echo '🍺Updating Homebrew 📦'
+    echo '🍺 Updating Homebrew 📦'
     brew update
     echo '🍺 Checking Homebrew for issues ⛔️'
     brew doctor

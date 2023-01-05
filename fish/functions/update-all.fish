@@ -21,7 +21,6 @@ function update-all
 
     echo '▲ Running macOS Upgrade 🍏'
     if test (count $argv) -eq 1 -a "$argv[1]" = "--restart"
-        update --restart
         softwareupdate --install --all --verbose --restart
     else
         softwareupdate --install --all --verbose
