@@ -55,6 +55,9 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 
+# Cargo
+export PATH="$HOME/.cargo/bin:$PATH"
+
 set -g __fish_git_prompt_show_informative_status 1
 set -g __fish_git_prompt_hide_untrackedfiles 1
 
@@ -86,3 +89,7 @@ set -gx PATH "$PNPM_HOME" $PATH
 if which rbenv > /dev/null
   eval "$(rbenv init -)"
 end
+
+
+# 1Password CLI
+op completion fish | source

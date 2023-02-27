@@ -32,5 +32,9 @@ module.exports = {
       match: /^https:\/\/meet.google.com\/.*$/,
       browser: "Arc",
     },
+    {
+      match: /^https:\/\/shopify.workplace.com\/.*$/,
+      browser: "Arc",
+    },
   ],
 };
