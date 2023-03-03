@@ -6,6 +6,13 @@ function update-all
     echo "▲ Updating Node ⬢"
     n latest
 
+    if type -q rustup
+        echo "▲ Updating Rust 🦀"
+        rustup update
+    else
+        echo "▲ Rust not installed, skipping"
+    end
+
     echo '▲ Updating Rubygems 💎'
     gem update
     gem update --system
