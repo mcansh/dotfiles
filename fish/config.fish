@@ -95,7 +95,7 @@ end
 
 
 # 1Password CLI
-op completion fish | source
+# op completion fish | source
 
 # tabtab source for packages
 # uninstall by removing these lines
