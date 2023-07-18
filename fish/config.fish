@@ -23,8 +23,6 @@ alias ls='ls -1a'
 
 alias makethisgohere='ln -s'
 
-thefuck --alias | source
-
 # Don't change npm version when using n
 export N_PRESERVE_NPM=1
 export N_PREFIX="$HOME/.n"
