@@ -1,7 +1,8 @@
 [user]
 	name = Logan McAnsh
 	email = logan@mcan.sh
-	signingkey = FE5D41659C3380A38D7D5F46D95FA9E238EBF95D
+	signingkey = D826A722D0D9BAC5
+	#signingkey = FE5D41659C3380A38D7D5F46D95FA9E238EBF95D
 [push]
 	default = current
 [alias]
@@ -41,7 +42,7 @@
 [gpg]
 	program = gpg
 [core]
-	excludesfile = /Users/logan/.gitignore_global
+	excludesfile = ~/.gitignore
 	editor = code-insiders --wait
 	ignorecase = false
 	pager = delta

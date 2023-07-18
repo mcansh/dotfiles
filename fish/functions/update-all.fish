@@ -35,4 +35,10 @@ function update-all
 
     echo "▲ Checking for npm global updates"
     ncu -g
+
+    echo "▲ Checking for pnpm update"
+    corepack prepare pnpm@latest --activate
+
+    echo "▲ Checking for pnpm global updates"
+    cd $PNPM_HOME && pnpm update --interactive --latest --recursive && cd -
 end

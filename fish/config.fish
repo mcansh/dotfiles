@@ -39,6 +39,9 @@ export GPG_TTY=(tty)
 # make local npm binarys available without npx <name>
 export PATH="./node_modules/.bin:$PATH"
 
+# sublime text cli
+export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
+
 # composer / laravel
 export PATH="$HOME/.composer/vendor/bin:$PATH"
 
@@ -93,3 +96,9 @@ end
 
 # 1Password CLI
 op completion fish | source
+
+# tabtab source for packages
+# uninstall by removing these lines
+[ -f ~/.config/tabtab/fish/__tabtab.fish ]; and . ~/.config/tabtab/fish/__tabtab.fish; or true
+
+set --global hydro_symbol_prompt ▲
