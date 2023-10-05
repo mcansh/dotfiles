@@ -64,12 +64,16 @@
   diffFilter = delta --color-only
 
 # Enforce SSH
-#[url "ssh://git@github.com/"]
-#  insteadOf = https://github.com/
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
 [url "ssh://git@gitlab.com/"]
   insteadOf = https://gitlab.com/
 [url "ssh://git@bitbucket.org/"]
   insteadOf = https://bitbucket.org/
+
+[diff "lockb"]
+    textconv = bun
+    binary = true
 
 [fetch]
 	prune = true
@@ -96,3 +100,4 @@
 	defaultBranch = main
 [tag]
 	gpgSign = true
+

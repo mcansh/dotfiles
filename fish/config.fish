@@ -23,6 +23,8 @@ alias ls='ls -1a'
 
 alias makethisgohere='ln -s'
 
+alias youtube-dl='yt-dlp'
+
 # Don't change npm version when using n
 export N_PRESERVE_NPM=1
 export N_PREFIX="$HOME/.n"
@@ -56,8 +58,9 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 
-# Cargo
-export PATH="$HOME/.cargo/bin:$PATH"
+# Herd injected PHP binary.
+export PATH="$HOME/Library/Application Support/Herd/bin:$PATH"
+export PHP_INI_SCAN_DIR="$HOME/Library/Application Support/Herd/config/php:$PHP_INI_SCAN_DIR"
 
 set -g __fish_git_prompt_show_informative_status 1
 set -g __fish_git_prompt_hide_untrackedfiles 1
@@ -86,6 +89,10 @@ fish_add_path /opt/homebrew/sbin
 set -gx PNPM_HOME "$HOME/Library/pnpm"
 set -gx PATH "$PNPM_HOME" $PATH
 # pnpm end
+
+# Cargo / Rust
+export PATH="$HOME/.cargo/bin:$PATH"
+# source $HOME/.cargo/env
 
 if which rbenv > /dev/null
   eval "$(rbenv init -)"
