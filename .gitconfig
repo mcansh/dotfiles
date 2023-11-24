@@ -1,10 +1,11 @@
 [user]
 	name = Logan McAnsh
 	email = logan@mcan.sh
-	signingkey = D826A722D0D9BAC5
-	#signingkey = FE5D41659C3380A38D7D5F46D95FA9E238EBF95D
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDofCoOQ1QeW6Tn4PXTLz0+vT14axGSIi9BXbaZZMTC+
+
 [push]
 	default = current
+	autoSetupRemote = true
 [alias]
 	# show last commit's sha
 	sha = rev-parse HEAD
@@ -40,7 +41,9 @@
 [commit]
 	gpgsign = true
 [gpg]
-	program = gpg
+  format = ssh
+[gpg "ssh"]
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
 [core]
 	excludesfile = ~/.gitignore
 	editor = code-insiders --wait
