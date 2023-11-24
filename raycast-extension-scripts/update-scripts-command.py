@@ -31,7 +31,7 @@ from dataclasses import dataclass
 # 🚨 SHOULD BE CHANGED ACCORDING TO YOUR NEEDS
 # This should be changed with the path to your root Raycast scripts folder.
 # eg: path_to_scripts = "/Users/quentin/Raycast Scripts"
-path_to_scripts = os.path.join(Path.home(), ".dotfiles/raycase-extension-scripts")
+path_to_scripts = os.path.join(Path.home(), ".dotfiles", "raycast-extension-scripts")
 
 # 🚨 SHOULD BE CHANGED ACCORDING TO YOUR NEEDS
 # Keep it unchanged if you don't want to ignore scripts.

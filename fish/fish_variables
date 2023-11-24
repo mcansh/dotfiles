@@ -6,7 +6,8 @@ SETUVAR _fisher_jorgebucaran_2F_fisher_files:\x7e/\x2econfig/fish/functions/fish
 SETUVAR _fisher_jorgebucaran_2F_hydro_files:\x7e/\x2econfig/fish/functions/fish_mode_prompt\x2efish\x1e\x7e/\x2econfig/fish/functions/fish_prompt\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/hydro\x2efish
 SETUVAR _fisher_plugins:jorgebucaran/fisher\x1ejorgebucaran/hydro\x1ejorgebucaran/autopair\x2efish
 SETUVAR _fisher_upgraded_to_4_4:\x1d
-SETUVAR _hydro_git_11297:main\u2022\x20\u21912\x20
+SETUVAR _hydro_git_13191:main\u2022\x20
+SETUVAR _hydro_git_13395:main\u2022\x20
 SETUVAR _hydro_git_14532:main\u2022\x20\u21937\x20
 SETUVAR _hydro_git_15336:main\u2022\x20\u21937\x20
 SETUVAR _hydro_git_15681:main\u2022\x20\u21937\x20
