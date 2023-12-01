@@ -103,8 +103,10 @@ npm i -g trash-cli fkill-cli @antfu/ni corepack
 
 # install yarn v1
 corepack prepare yarn@1 --activate
-# install pnpm
+# install latest pnpm
 corepack prepare pnpm@latest --activate
+# install latest npm
+corepack prepare npm@latest --activate
 
 ###############################################################################
 # system modifications                                                        #

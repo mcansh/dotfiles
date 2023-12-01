@@ -36,8 +36,10 @@ function update-all
     echo "▲ Checking for npm global updates"
     ncu -g
 
-    echo "▲ Checking for pnpm update"
+    echo "▲ Checking for pnpm, npm, and yarn updates"
     corepack prepare pnpm@latest --activate
+    corepack prepare npm@latest --activate
+    corepack prepare yarn@1 --activate
 
     echo "▲ Checking for pnpm global updates"
     pnpm update --interactive --latest --global
