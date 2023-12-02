@@ -1,5 +1,5 @@
-import childProcess from "node:child_process"
-import { promisify } from "node:util"
+import childProcess from "node:child_process";
+import { promisify } from "node:util";
 
 const exec = promisify(childProcess.exec);
 
@@ -54,4 +54,4 @@ export async function setRandomColor() {
     exec(`sendevent AppleAquaColorVariantChanged`),
     exec(`sendevent AppleColorPreferencesChangedNotification`),
   ]);
-};
+}
