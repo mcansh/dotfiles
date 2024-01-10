@@ -1,5 +1,7 @@
 # update everything
 function update-all
+    # ask for the administrator password upfront
+    sudo -v
     echo '▲ Running Homebrew update script 🍺'
     brewup
 
@@ -17,9 +19,6 @@ function update-all
     gem update
     gem update --system
 
-    echo '▲ Running Yarn Global Upgrade 🧶'
-    yarn global upgrade
-
     if type -q mas
         echo '▲ Updating Apps from MAS 🍎'
         mas outdated
@@ -33,8 +32,12 @@ function update-all
         softwareupdate --install --all --verbose
     end
 
-    echo "▲ Checking for npm global updates"
-    ncu -g
+    echo '▲ Running macOS Upgrade 🍏'
+    if test (count $argv) -eq 1 -a "$argv[1]" = "--restart"
+        softwareupdate --install --all --verbose --restart
+    else
+        softwareupdate --install --all --verbose
+    end
 
     echo "▲ Checking for pnpm, npm, and yarn updates"
     corepack prepare pnpm@latest --activate
@@ -43,4 +46,10 @@ function update-all
 
     echo "▲ Checking for pnpm global updates"
     pnpm update --interactive --latest --global
+
+    echo "▲ Checking for npm global updates"
+    ncu -g
+
+    echo '▲ Running Yarn Global Upgrade 🧶'
+    yarn global upgrade
 end
