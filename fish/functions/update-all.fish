@@ -26,18 +26,7 @@ function update-all
     end
 
     echo '▲ Running macOS Upgrade 🍏'
-    if test (count $argv) -eq 1 -a "$argv[1]" = "--restart"
-        softwareupdate --install --all --verbose --restart
-    else
-        softwareupdate --install --all --verbose
-    end
-
-    echo '▲ Running macOS Upgrade 🍏'
-    if test (count $argv) -eq 1 -a "$argv[1]" = "--restart"
-        softwareupdate --install --all --verbose --restart
-    else
-        softwareupdate --install --all --verbose
-    end
+    softwareupdate --install --all --verbose --restart
 
     echo "▲ Checking for pnpm, npm, and yarn updates"
     corepack prepare pnpm@latest --activate

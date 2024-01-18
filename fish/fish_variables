@@ -6,14 +6,11 @@ SETUVAR _fisher_jorgebucaran_2F_fisher_files:\x7e/\x2econfig/fish/functions/fish
 SETUVAR _fisher_jorgebucaran_2F_hydro_files:\x7e/\x2econfig/fish/functions/fish_mode_prompt\x2efish\x1e\x7e/\x2econfig/fish/functions/fish_prompt\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/hydro\x2efish
 SETUVAR _fisher_plugins:jorgebucaran/fisher\x1ejorgebucaran/hydro\x1ejorgebucaran/autopair\x2efish
 SETUVAR _fisher_upgraded_to_4_4:\x1d
-SETUVAR _hydro_git_1400:main\u2022\x20
 SETUVAR _hydro_git_14532:main\u2022\x20\u21937\x20
 SETUVAR _hydro_git_15336:main\u2022\x20\u21937\x20
 SETUVAR _hydro_git_15681:main\u2022\x20\u21937\x20
 SETUVAR _hydro_git_16846:logan/rename\x2dpackage\x20
 SETUVAR _hydro_git_16967:main\u2022\x20
-SETUVAR _hydro_git_16991:main\u2022\x20
-SETUVAR _hydro_git_18682:main\u2022\x20\u21911\x20
 SETUVAR _hydro_git_33889:main\u2022\x20
 SETUVAR _hydro_git_35548:main\u2022\x20
 SETUVAR _hydro_git_37582:main\u2022\x20
@@ -32,6 +29,7 @@ SETUVAR _hydro_git_80749:main\u2022\x20
 SETUVAR _hydro_git_81542:main\u2022\x20
 SETUVAR _hydro_git_8172:main\u2022\x20
 SETUVAR _hydro_git_87398:master\u2022\x20
+SETUVAR _hydro_git_89622:main\u2022\x20
 SETUVAR _hydro_git_92266:logan/accounts\u2022\x20
 SETUVAR _hydro_git_98890:shadcn\u2022\x20
 SETUVAR fish_color_autosuggestion:555\x1ebrblack
