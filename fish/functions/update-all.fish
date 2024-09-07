@@ -1,7 +1,8 @@
 # update everything
 function update-all
-    # ask for the administrator password upfront
-    sudo -v
+    # Ask for the administrator password upfront
+	sudo -v
+
     echo '▲ Running Homebrew update script 🍺'
     brewup
 
