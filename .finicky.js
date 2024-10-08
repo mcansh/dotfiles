@@ -2,39 +2,85 @@
 // Save as ~/.finicky.js
 
 module.exports = {
-  defaultBrowser: "Safari",
-  options: {
-    hideIcon: true,
-  },
-  rewrite: [
-    // Replace domain of urls to amazon.com with smile.amazon.com
-    {
-      match: finicky.matchDomains(["www.amazon.com", "amazon.com"]),
-      url: ({ urlString }) => {
-        return { ...url, host: "smile.amazon.com" };
-      },
-    },
-  ],
-  handlers: [
-    {
-      match: /^https:\/\/stackblitz\.com\/.*$/,
-      browser: "Arc",
-    },
-    {
-      match: /^https:\/\/vite\.new\/.*$/,
-      browser: "Arc",
-    },
-    {
-      match: /^https:\/\/github.com\/Shopify\/.*$/,
-      browser: "Arc",
-    },
-    {
-      match: /^https:\/\/meet.google.com\/.*$/,
-      browser: "Arc",
-    },
-    {
-      match: /^https:\/\/shopify.workplace.com\/.*$/,
-      browser: "Arc",
-    },
-  ],
+	defaultBrowser: "Safari",
+	options: {
+		hideIcon: true,
+		logRequests: true,
+		checkForUpdate: true,
+	},
+	rewrite: [
+		// Replace domain of urls to amazon.com with smile.amazon.com
+		{
+			match: finicky.matchDomains(["www.amazon.com", "amazon.com"]),
+			url: ({ url }) => {
+				return { ...url, host: "smile.amazon.com" };
+			},
+		},
+	],
+	handlers: [
+		{
+			// generic
+			match: [
+				createRegex("stackblitz.com"),
+				createRegex("vite.new"),
+				createRegex("meet.google"),
+			],
+			browser: "Arc",
+		},
+
+		// shopify
+		{
+			match: ({ urlString }) => {
+				let matches = [
+					"https://github.com/shopify",
+					"https://workplace.com/shopify",
+				];
+
+				return matches.some((match) => urlString.startsWith(match));
+			},
+			browser: "Arc",
+		},
+
+		// uwm
+		{
+			match: ({ opener, url }) => {
+				let hosts = ["uwm.com", "uwm.csod.com", "url.us.m.mimecastprotect.com"];
+				if (
+					opener.bundleId === "com.microsoft.teams2" ||
+					hosts.includes(url.host)
+				) {
+					return true;
+				}
+			},
+			browser: "Brave Browser Nightly",
+		},
+	],
 };
+
+/**
+ * create a regex that matches any subdomain of the given domain, including the domain itself, and any path
+ * @param {string} domain
+ * @returns {RegExp}
+ */
+function createRegex(domain, { subdomains, paths } = {}) {
+	subdomains ??= [];
+	paths ??= [];
+
+	// if no subdomains are provided, match any subdomain
+	if (subdomains.length === 0) {
+		subdomains = ["(?:[^.]+\\.)*"];
+	} else {
+		subdomains = subdomains.map((subdomain) => `${subdomain}\\.`);
+	}
+
+	// if no paths are provided, match any path
+	if (paths.length === 0) {
+		paths = ["(?:/.*)?"];
+	} else {
+		paths = paths.map((path) => `${path}`);
+	}
+
+	return new RegExp(
+		`^https?://${subdomains.join("")}${domain}${paths.join("|")}$`
+	);
+}

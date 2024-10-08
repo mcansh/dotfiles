@@ -1,7 +1,7 @@
 # update everything
 function update-all
-    # Ask for the administrator password upfront
-	sudo -v
+    # ask for the administrator password upfront
+    sudo -v || return $status
 
     echo '▲ Running Homebrew update script 🍺'
     brewup
@@ -9,9 +9,11 @@ function update-all
     echo "▲ Updating Node ⬢"
     n latest
 
+    # clean up old node version of the same major
+    node "~/.dotfiles/n-cleanup.mjs"
+
     if type -q rustup
         echo "▲ Updating Rust 🦀"
-        rustup update
     else
         echo "▲ Rust not installed, skipping"
     end

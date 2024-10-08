@@ -1,0 +1,49 @@
+#!/usr/bin/env node
+
+let fs = require("node:fs");
+let cp = require("node:child_process");
+
+let BRANCH = cp.execSync(`git branch | grep '*' | sed 's/* //'`, {
+  encoding: "utf8",
+});
+
+// skip rebasing
+if (/^\(no branch, .*/i.test(BRANCH)) {
+  process.exit(0);
+  return;
+}
+
+let commit_message_file = process.argv[2];
+let commit = fs.readFileSync(commit_message_file, "utf8");
+let lines = commit.split("\n");
+
+let user = {
+  email: cp
+    .execSync(`git config --get user.email`, { encoding: "utf8" })
+    .trim(),
+
+  name: cp.execSync(`git config --get user.name`, { encoding: "utf8" }).trim(),
+};
+
+let result = cp
+  .execSync(`git symbolic-ref --short HEAD`, { encoding: "utf8" })
+  .trim();
+
+let story = result
+  .match(/^.*\/(\w+-\d+).*$/)
+  ?.at(1)
+  ?.toUpperCase();
+
+if (story && !lines.includes(story)) {
+  let signature_index = lines.findIndex((line) =>
+    line.includes(`Signed-off-by: ${user.name} <${user.email}>`)
+  );
+
+  let new_content = [
+    ...lines.slice(0, signature_index),
+    story,
+    "\n",
+    ...lines.slice(signature_index),
+  ].join("\n");
+  fs.writeFileSync(commit_message_file, new_content);
+}

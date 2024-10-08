@@ -22,9 +22,6 @@ alias makethisgohere='ln -s'
 
 alias youtube-dl='yt-dlp'
 
-alias http='xh'
-alias httpie='xh'
-
 # Don't change npm version when using n
 export N_PRESERVE_NPM=1
 export N_PREFIX="$HOME/.n"
@@ -83,7 +80,17 @@ set -g __fish_git_prompt_color_invalidstate red
 set -g __fish_git_prompt_color_untrackedfiles $fish_color_normal
 set -g __fish_git_prompt_color_cleanstate green --bold
 
+# add brew to path and configure autocomplete
 fish_add_path /opt/homebrew/sbin
+
+if test -d (brew --prefix)"/share/fish/completions"
+    set -p fish_complete_path (brew --prefix)/share/fish/completions
+end
+
+if test -d (brew --prefix)"/share/fish/vendor_completions.d"
+    set -p fish_complete_path (brew --prefix)/share/fish/vendor_completions.d
+end
+
 
 # pnpm
 set -gx PNPM_HOME "$HOME/Library/pnpm"
@@ -98,7 +105,6 @@ if which rbenv > /dev/null
   eval "$(rbenv init -)"
 end
 
-export PATH="$HOME/Library/Application Support/edgedb/bin:$PATH"
 
 # 1Password CLI
 # op completion fish | source
@@ -112,5 +118,3 @@ set --global hydro_symbol_prompt ▲
 [ -f ~/.inshellisense/key-bindings.fish ] && source ~/.inshellisense/key-bindings.fish
 
 set --global SSH_AUTH_SOCK "~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-
-fish_add_path -a /Users/logan/.foundry/bin
