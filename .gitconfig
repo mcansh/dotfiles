@@ -1,8 +1,10 @@
 [user]
 	name = Logan McAnsh
 	email = logan@mcan.sh
-	# email = lmcansh@uwm.com
 	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDofCoOQ1QeW6Tn4PXTLz0+vT14axGSIi9BXbaZZMTC+
+
+[includeIf "gitdir:~/Developer/"]
+	path = ~/.dotfiles/.gitconfig-work
 
 [push]
 	default = current
@@ -20,7 +22,8 @@
 	remove = "rm -r --cached"
 	d = diff
 	fix = "commit --fixup"
-	unstage ="reset --"
+	unstage = "reset --"
+	authors = "shortlog --summary --numbered"
 
 	# show things ignored with `git update-index --assume-unchanged <file>`
 	ignored = !git ls-files -v | grep "^[[:lower:]]"

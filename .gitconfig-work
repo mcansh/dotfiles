@@ -1,0 +1,7 @@
+[user]
+	name = Logan McAnsh
+	email = lmcansh@uwm.com
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEuKzzUbZ2Hu7ar71ezU6X3SCNsNdipinMU6SdthQo9N
+
+[core]
+	hooksPath = ~/.dotfiles/.git_hooks

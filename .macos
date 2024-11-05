@@ -16,13 +16,6 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 echo "Hello $(whoami)! Let's get you set up."
 
-echo "Generating an RSA token for GitHub"
-mkdir -p ~/.ssh
-ssh-keygen -t rsa -b 4096 -C "logan@mcan.sh"
-echo "Host *\n AddKeysToAgent yes\n UseKeychain yes\n IdentityFile ~/.ssh/id_rsa" | tee ~/.ssh/config
-eval "$(ssh-agent -s)"
-echo "run 'pbcopy < ~/.ssh/id_rsa.pub' and paste that into GitHub"
-
 ###############################################################################
 # lets get down to business                                                   #
 ###############################################################################
@@ -31,6 +24,9 @@ DOTFILES="${HOME}/.dotfiles"
 
 echo "cloning dotfiles"
 git clone git@github.com:mcansh/dotfiles.git ${DOTFILES}
+
+echo "installing oh-my-fish"
+curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
 
 # set up symlinks
 echo "setting up symlinks"
