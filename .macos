@@ -75,6 +75,18 @@ else
 fi
 
 
+GHOSTTY_CONFIG="${HOME}/Library/Application Support/com.mitchellh.ghostty/config"
+
+if [ -f "${GHOSTTY_CONFIG}" ]
+then
+  echo "ghostty config already exists, please check and merge the contents."
+else
+  ln -s "${DOTFILES}/ghostty.config" "${GHOSTTY_CONFIG}"
+fi
+
+
+
+
 ###############################################################################
 # homebrew (and related thing)                                                #
 ###############################################################################
