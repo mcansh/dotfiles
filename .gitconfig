@@ -3,7 +3,7 @@
 	email = logan@mcan.sh
 	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDofCoOQ1QeW6Tn4PXTLz0+vT14axGSIi9BXbaZZMTC+
 
-[includeIf "gitdir:~/Developer/"]
+[includeIf "gitdir:~/Developer/uwm/"]
 	path = ~/.dotfiles/.gitconfig-work
 
 [push]

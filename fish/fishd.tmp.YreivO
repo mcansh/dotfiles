@@ -1,6 +1,6 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
-SETUVAR __fish_initialized:3800
+SETUVAR __fish_initialized:3400
 SETUVAR _fisher_jorgebucaran_2F_autopair_2E_fish_files:\x7e/\x2econfig/fish/functions/_autopair_backspace\x2efish\x1e\x7e/\x2econfig/fish/functions/_autopair_insert_left\x2efish\x1e\x7e/\x2econfig/fish/functions/_autopair_insert_right\x2efish\x1e\x7e/\x2econfig/fish/functions/_autopair_insert_same\x2efish\x1e\x7e/\x2econfig/fish/functions/_autopair_tab\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/autopair\x2efish
 SETUVAR _fisher_jorgebucaran_2F_fisher_files:\x7e/\x2econfig/fish/functions/fisher\x2efish\x1e\x7e/\x2econfig/fish/completions/fisher\x2efish
 SETUVAR _fisher_jorgebucaran_2F_hydro_files:\x7e/\x2econfig/fish/functions/fish_mode_prompt\x2efish\x1e\x7e/\x2econfig/fish/functions/fish_prompt\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/hydro\x2efish
@@ -25,13 +25,13 @@ SETUVAR _hydro_git_20134:feature/SOLIDGOLD\x2d1093\x2dhide\x2dlayout\x2dwhen\x2d
 SETUVAR _hydro_git_21115:logan/package\x2djson\x2dimports\u2022\x20
 SETUVAR _hydro_git_21116:logan/package\x2djson\x2dimports\u2022\x20
 SETUVAR _hydro_git_218:feature/miyagi\x2d20\x2dnav\x2dcomponent\x20
-SETUVAR _hydro_git_2210:feature/UWMCOM\x2d602\x2dremove\x2dold\x2dheader\x2dfooter\u2022\x20
 SETUVAR _hydro_git_24603:main\u2022\x20
 SETUVAR _hydro_git_26088:logan/package\x2djson\x2dimports\x20
 SETUVAR _hydro_git_26300:feature/miyagi\x2d221\x2dmiyagi\x2d222\x2dmiyagi\x2d223\x2dmiyagi\x2d224\u2022\x20
 SETUVAR _hydro_git_26518:feature/miyagi\x2d221\x2dmiyagi\x2d222\x2dmiyagi\x2d223\x2dmiyagi\x2d224\u2022\x20
 SETUVAR _hydro_git_27744:main\u2022\x20
 SETUVAR _hydro_git_27833:main\u2022\x20
+SETUVAR _hydro_git_28791:feature/MIYAGI\x2d271\x2dicons\u2022\x20
 SETUVAR _hydro_git_29816:main\u2022\x20
 SETUVAR _hydro_git_31765:feature/TALLADEGA\x2d5497\x2dHeaderComponent\x2dUnitTests\u2022\x20
 SETUVAR _hydro_git_31806:feature/TALLADEGA\x2d5497\x2dHeaderComponent\x2dUnitTests\u2022\x20
@@ -123,17 +123,13 @@ SETUVAR _hydro_git_69375:main\u2022\x20
 SETUVAR _hydro_git_69439:main\u2022\x20
 SETUVAR _hydro_git_69502:main\x20
 SETUVAR _hydro_git_69543:main\x20
-SETUVAR _hydro_git_69726:feature/UWMCOM\x2d413\x2dallow\x2dsearching\x2dfor\x2dloans\x2dby\x2dname\x20
 SETUVAR _hydro_git_70294:feature/miyagi\x2d20\x2dnav\x2dapi\u2022\x20
 SETUVAR _hydro_git_70361:feature/miyagi\x2d20\x2dnav\x2dapi\u2022\x20
 SETUVAR _hydro_git_70662:feature/MOMA\x2d201\x2denabling\x2dgoogle\x2dkey\x2dfrom\x2dclient\x2dv3\u2022\x20
 SETUVAR _hydro_git_71432:main\u2022\x20
 SETUVAR _hydro_git_71795:main\u2022\x20
 SETUVAR _hydro_git_71834:main\u2022\x20
-SETUVAR _hydro_git_72151:main\u2022\x20\u21912\x20
 SETUVAR _hydro_git_72519:feature/MIYAGI\x2d272\x2dadd\x2dsalesforce\x2dtoken\x2durl\x2dattribute\u2022\x20
-SETUVAR _hydro_git_72662:main\u2022\x20\u21912\x20
-SETUVAR _hydro_git_72869:main\u2022\x20\u21912\x20
 SETUVAR _hydro_git_72881:feature/miyagi\x2d56\x2dnav\x2dcomponent\u2022\x20
 SETUVAR _hydro_git_80749:main\u2022\x20
 SETUVAR _hydro_git_80798:main\u2022\x20
@@ -148,7 +144,6 @@ SETUVAR _hydro_git_89622:main\u2022\x20
 SETUVAR _hydro_git_92179:feature/miyagi\x2d21\x2dsso\u2022\x20
 SETUVAR _hydro_git_94708:feature/MOMA\x2d201\x2denabling\x2dgoogle\x2dkey\x2dfrom\x2dclient\x2dv3\u2022\x20
 SETUVAR _hydro_git_94758:feature/MOMA\x2d201\x2denabling\x2dgoogle\x2dkey\x2dfrom\x2dclient\x2dv3\u2022\x20
-SETUVAR _hydro_git_96977:feature/MIYAGI\x2d298\x2dMIYAGI\x2d299\x2dsalesforce\x2dand\x2dease\x2dstyles\x20
 SETUVAR _hydro_git_97259:feature/miyagi\x2d20\x2dnav\x2dcomponent\u2022\x20
 SETUVAR _hydro_git_98890:shadcn\u2022\x20
 SETUVAR _hydro_git_9904:main\u2022\x20
@@ -171,7 +166,7 @@ SETUVAR fish_color_operator:00a6b2
 SETUVAR fish_color_param:00afff
 SETUVAR fish_color_quote:999900
 SETUVAR fish_color_redirection:00afff
-SETUVAR fish_color_search_match:white\x1e\x2d\x2dbackground\x3dbrblack
+SETUVAR fish_color_search_match:bryellow\x1e\x2d\x2dbackground\x3dbrblack
 SETUVAR fish_color_selection:white\x1e\x2d\x2dbold\x1e\x2d\x2dbackground\x3dbrblack
 SETUVAR fish_color_status:red
 SETUVAR fish_color_user:brgreen
