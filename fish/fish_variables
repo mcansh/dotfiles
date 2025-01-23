@@ -4,7 +4,7 @@ SETUVAR __fish_initialized:3800
 SETUVAR _fisher_jorgebucaran_2F_autopair_2E_fish_files:\x7e/\x2econfig/fish/functions/_autopair_backspace\x2efish\x1e\x7e/\x2econfig/fish/functions/_autopair_insert_left\x2efish\x1e\x7e/\x2econfig/fish/functions/_autopair_insert_right\x2efish\x1e\x7e/\x2econfig/fish/functions/_autopair_insert_same\x2efish\x1e\x7e/\x2econfig/fish/functions/_autopair_tab\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/autopair\x2efish
 SETUVAR _fisher_jorgebucaran_2F_fisher_files:\x7e/\x2econfig/fish/functions/fisher\x2efish\x1e\x7e/\x2econfig/fish/completions/fisher\x2efish
 SETUVAR _fisher_jorgebucaran_2F_hydro_files:\x7e/\x2econfig/fish/functions/fish_mode_prompt\x2efish\x1e\x7e/\x2econfig/fish/functions/fish_prompt\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/hydro\x2efish
-SETUVAR _fisher_plugins:jorgebucaran/fisher\x1ejorgebucaran/hydro\x1ejorgebucaran/autopair\x2efish
+SETUVAR _fisher_plugins:jorgebucaran/fisher\x1ejorgebucaran/hydro\x1ejorgebucaran/autopair\x2efish\x1emcansh/vercel\x2dfish\x2dtheme
 SETUVAR _fisher_upgraded_to_4_4:\x1d
 SETUVAR _hydro_git_11360:bugfix/MOMA\x2d162\x2dalways\x2dshow\x2dsubmit\x2din\x2dreview\x20
 SETUVAR _hydro_git_11878:feature/miyagi\x2d21\x2dsso\x2dapi\x20
@@ -123,17 +123,13 @@ SETUVAR _hydro_git_69375:main\u2022\x20
 SETUVAR _hydro_git_69439:main\u2022\x20
 SETUVAR _hydro_git_69502:main\x20
 SETUVAR _hydro_git_69543:main\x20
-SETUVAR _hydro_git_69726:feature/UWMCOM\x2d413\x2dallow\x2dsearching\x2dfor\x2dloans\x2dby\x2dname\x20
 SETUVAR _hydro_git_70294:feature/miyagi\x2d20\x2dnav\x2dapi\u2022\x20
 SETUVAR _hydro_git_70361:feature/miyagi\x2d20\x2dnav\x2dapi\u2022\x20
 SETUVAR _hydro_git_70662:feature/MOMA\x2d201\x2denabling\x2dgoogle\x2dkey\x2dfrom\x2dclient\x2dv3\u2022\x20
 SETUVAR _hydro_git_71432:main\u2022\x20
 SETUVAR _hydro_git_71795:main\u2022\x20
 SETUVAR _hydro_git_71834:main\u2022\x20
-SETUVAR _hydro_git_72151:main\u2022\x20\u21912\x20
 SETUVAR _hydro_git_72519:feature/MIYAGI\x2d272\x2dadd\x2dsalesforce\x2dtoken\x2durl\x2dattribute\u2022\x20
-SETUVAR _hydro_git_72662:main\u2022\x20\u21912\x20
-SETUVAR _hydro_git_72869:main\u2022\x20\u21912\x20
 SETUVAR _hydro_git_72881:feature/miyagi\x2d56\x2dnav\x2dcomponent\u2022\x20
 SETUVAR _hydro_git_80749:main\u2022\x20
 SETUVAR _hydro_git_80798:main\u2022\x20
@@ -141,8 +137,10 @@ SETUVAR _hydro_git_81542:main\u2022\x20
 SETUVAR _hydro_git_8172:main\u2022\x20
 SETUVAR _hydro_git_85364:main\u2022\x20
 SETUVAR _hydro_git_85406:main\u2022\x20
+SETUVAR _hydro_git_86529:main\u2022\x20
 SETUVAR _hydro_git_87398:master\u2022\x20
 SETUVAR _hydro_git_87555:main\u2022\x20
+SETUVAR _hydro_git_88263:main\u2022\x20\u21911\x20\u21931\x20
 SETUVAR _hydro_git_88758:main\u2022\x20
 SETUVAR _hydro_git_89622:main\u2022\x20
 SETUVAR _hydro_git_92179:feature/miyagi\x2d21\x2dsso\u2022\x20
