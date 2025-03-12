@@ -118,3 +118,10 @@ set --global hydro_symbol_prompt ▲
 [ -f ~/.inshellisense/key-bindings.fish ] && source ~/.inshellisense/key-bindings.fish
 
 set --global SSH_AUTH_SOCK "~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+
+pay-respects fish --alias | source
+
+set UWM_CERT "$HOME/uwm-certs/uwm-ca-bundle.crt"
+if test -f $UWM_CERT
+  export NODE_EXTRA_CA_CERTS=$UWM_CERT
+end

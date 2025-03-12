@@ -4,6 +4,7 @@ import { promisify } from "node:util";
 const exec = promisify(childProcess.exec);
 
 export const macOSVersions = new Map([
+  ["Sequoia", "15.0"],
   ["Sonoma", "14.0"],
   ["Ventura", "13.0"],
   ["Monterey", "12.0"],
