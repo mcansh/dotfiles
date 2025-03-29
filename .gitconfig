@@ -112,3 +112,11 @@
   format = ssh
 [gpg "ssh"]
   program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+[merge]
+	tool = code-insiders
+[mergetool "code-insiders"]
+	cmd = code-insiders --new-window --wait --merge $REMOTE $LOCAL $BASE $MERGED
+[diff]
+	tool = code-insiders
+[difftool "code-insiders"]
+	cmd = code-insiders --new-window --wait --diff $LOCAL $REMOTE

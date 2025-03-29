@@ -14,6 +14,7 @@ function update-all
 
     if type -q rustup
         echo "▲ Updating Rust 🦀"
+        rustup
     else
         echo "▲ Rust not installed, skipping"
     end

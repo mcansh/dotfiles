@@ -20,7 +20,7 @@
     "version": "2"
   },
   "features": {
-    "edit_prediction_provider": "copilot"
+    "inline_completion_provider": "copilot"
   },
   "ui_font_size": 14,
   "buffer_font_size": 14,
@@ -105,12 +105,6 @@
           "arguments": ["--stdin-filepath", "{buffer_path}"]
         }
       }
-    }
-  },
-  "formatter": {
-    "external": {
-      "command": "prettier",
-      "arguments": ["--stdin-filepath", "{buffer_path}"]
     }
   }
 }

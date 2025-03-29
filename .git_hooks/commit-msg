@@ -45,5 +45,6 @@ if (story && !lines.includes(story)) {
     "\n",
     ...lines.slice(signature_index),
   ].join("\n");
+
   fs.writeFileSync(commit_message_file, new_content);
 }
