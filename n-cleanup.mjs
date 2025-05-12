@@ -20,7 +20,7 @@ function getNodeVersions() {
 
 	// sort by major then minor
 	return versions.sort((a, b) => {
-		return b.major - a.major || b.minor - a.minor;
+		return b.major - a.major || b.minor - a.minor || b.patch - a.patch;
 	});
 }
 
@@ -52,9 +52,8 @@ for (let [major, versions] of versionMap) {
 		console.log(`keeping latest Node v${major} version`);
 		continue;
 	}
-
-	for (let version of nonLatestVersions) {
-		console.log(`deleting ${version}`);
-		cp.execSync(`n rm ${version}`);
-	}
+	console.log(
+	  `removing Node v${major}.x versions: ${nonLatestVersions.join(", ")}`
+  );
+	cp.execSync(`n rm ${nonLatestVersions.join(' ')}`);
 }
