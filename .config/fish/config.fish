@@ -122,6 +122,12 @@ set --global SSH_AUTH_SOCK "~/Library/Group\ Containers/2BUA8C4S2C.com.1password
 pay-respects fish --alias | source
 
 set UWM_CERT "$HOME/uwm-certs/uwm-ca-bundle.crt"
+set UWM_CERT_PEM "$HOME/uwm-certs/uwm-ca-bundle.pem"
+
 if test -f $UWM_CERT
   export NODE_EXTRA_CA_CERTS=$UWM_CERT
+end
+
+if test -f $UWM_CERT_PEM
+    export NODE_EXTRA_CA_CERTS=$UWM_CERT_PEM
 end
