@@ -120,6 +120,7 @@ set --global hydro_symbol_prompt ▲
 set --global SSH_AUTH_SOCK "~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 
 pay-respects fish --alias | source
+atuin init fish | source
 
 set UWM_CERT "$HOME/uwm-certs/uwm-ca-bundle.crt"
 set UWM_CERT_PEM "$HOME/uwm-certs/uwm-ca-bundle.pem"
