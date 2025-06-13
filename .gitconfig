@@ -6,6 +6,9 @@
 [includeIf "gitdir:~/Developer/uwm/"]
 	path = ~/.dotfiles/.gitconfig-work
 
+[includeIf "gitdir:/workspaces/"]
+	path = ~/.dotfiles/.gitconfig-codespaces
+
 [push]
 	default = current
 	autoSetupRemote = true
