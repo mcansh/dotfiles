@@ -1,2 +1,6 @@
+[user]
+	name = Logan McAnsh
+	email = logan@mcan.sh
+
 [gpg "ssh"]
   program = /.codespaces/bin/gh-gpgsign
