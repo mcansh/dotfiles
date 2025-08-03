@@ -1,0 +1,11 @@
+Brewfile
+RectangleConfig.json
+\.finicky.js
+\.git
+\.gitignore
+\.macos
+n-cleanup.mjs
+raycast-backups
+on-login
+raycast-extension-scripts
+readme.markdown
