@@ -3,7 +3,6 @@
 
 Brewfile
 RectangleConfig.json
-\.finicky.js
 \.git
 \.gitignore
 \.macos
