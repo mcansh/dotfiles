@@ -3,6 +3,7 @@
 
 Brewfile
 RectangleConfig.json
+\.ds_store
 \.git
 \.gitignore
 \.macos
