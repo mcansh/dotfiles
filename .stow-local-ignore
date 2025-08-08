@@ -1,0 +1,14 @@
+# https://www.gnu.org/software/stow/manual/stow.html
+# https://www.gnu.org/software/stow/manual/html_node/Types-And-Syntax-Of-Ignore-Lists.html
+
+Brewfile
+RectangleConfig.json
+\.ds_store
+\.git
+\.gitignore
+\.macos
+n-cleanup.mjs
+raycast-backups
+on-login
+raycast-extension-scripts
+readme.markdown

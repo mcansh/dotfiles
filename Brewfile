@@ -11,6 +11,7 @@ tap "homebrew/services"
 # tap "railwayapp/tap"
 # tap "superfly/tap"
 
+brew "stow"
 # brew "act" # Run your GitHub Actions locally 🚀
 # brew "asimov", restart_service: true # Automatically exclude development dependencies from Time Machine backups
 # brew "awscli" # Universal Command Line Environment for AWS

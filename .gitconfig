@@ -4,10 +4,10 @@
 	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDofCoOQ1QeW6Tn4PXTLz0+vT14axGSIi9BXbaZZMTC+
 
 [includeIf "gitdir:~/Developer/uwm/"]
-	path = ~/.dotfiles/.gitconfig-work
+	path = ~/.gitconfig-work
 
 [includeIf "gitdir:/workspaces/"]
-	path = ~/.dotfiles/.gitconfig-codespaces
+	path = ~/.gitconfig-codespaces
 
 [push]
 	default = current

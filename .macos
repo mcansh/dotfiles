@@ -12,7 +12,11 @@ echo "Logging to" $LOG_FILE
 sudo -v
 
 # Keep-alive: update existing `sudo` time stamp until `.macos` has finished
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+while true; do
+	sudo -n true
+	sleep 60
+	kill -0 "$$" || exit
+done 2>/dev/null &
 
 echo "Hello $(whoami)! Let's get you set up."
 
@@ -28,70 +32,6 @@ git clone git@github.com:mcansh/dotfiles.git ${DOTFILES}
 echo "installing oh-my-fish"
 curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
 
-# set up symlinks
-echo "setting up symlinks"
-
-if [ -d "${HOME}/.config/fish" ]
-then
-  echo ""~/.config/fish" already exists, please check and merge the contents."
-else
-  ln -s "${DOTFILES}/fish" "${HOME}/.config/fish"
-fi
-
-if [ -d "${HOME}/.config/omf" ]
-then
-  echo ""~/.config/omf" already exists, please check and merge the contents."
-else
-  ln -s "${DOTFILES}/omf" "${HOME}/.config/omf"
-fi
-
-if [ -d "${HOME}/.config/zed" ]
-then
-  echo ""~/.config/zed" already exists, please check and merge the contents."
-else
-  ln -s "${DOTFILES}/zed" "${HOME}/.config/zed"
-fi
-
-if [ -d "${HOME}/.my_bin" ]
-then
-  echo ""~/.my_bin" already exists, please check and merge the contents."
-else
-  ln -s "${DOTFILES}/.my_bin" "${HOME}/.my_bin"
-fi
-
-
-if [ -f "${HOME}/.gitignore_global" ]
-then
-  echo ""~/.gitignore_global" already exists, please check and merge the contents."
-else
-  ln -s "${DOTFILES}/.gitignore_global" "${HOME}/.gitignore_global"
-fi
-
-if [ -f "${HOME}/.gitconfig" ]
-then
-  echo ""~/.gitconfig" already exists, please check and merge the contents."
-else
-  ln -s "${DOTFILES}/.gitconfig" "${HOME}/.gitconfig"
-fi
-
-if [ -f "${HOME}/.yarnrc" ]
-then
-  echo ""~/.yarnrc" already exists, please check and merge the contents."
-else
-  ln -s "${DOTFILES}/.yarnrc" "${HOME}/.yarnrc"
-fi
-
-
-GHOSTTY_CONFIG="${HOME}/Library/Application Support/com.mitchellh.ghostty/config"
-
-if [ -f "${GHOSTTY_CONFIG}" ]
-then
-  echo "ghostty config already exists, please check and merge the contents."
-else
-  ln -s "${DOTFILES}/ghostty.config" "${GHOSTTY_CONFIG}"
-fi
-
-
 ###############################################################################
 # homebrew (and related thing)                                                #
 ###############################################################################
@@ -101,6 +41,11 @@ echo "installing homebrew"
 
 echo "installing things from homebrew"
 brew bundle --file "${DOTFILES}/Brewfile"
+
+# set up symlinks
+echo "setting up symlinks"
+
+cd "${DOTFILES}" && stow .
 
 # Install latest version of Node.js
 export N_PRESERVE_NPM=1
@@ -186,10 +131,10 @@ killall -KILL SystemUIServer
 # Check if FileValut is on
 echo '> 3/4 Checking FileValue Status'
 if [ "$(fdesetup status)" == "FileVault is On." ]; then
-  echo "> Disk encryption is already enabled. 🔥"
+	echo "> Disk encryption is already enabled. 🔥"
 elif [ "$(fdesetup status)" == "FileVault is Off." ]; then
-  echo "> Disk encryption not enabled. Enabling now..."
-  fdesetup enable
+	echo "> Disk encryption not enabled. Enabling now..."
+	fdesetup enable
 fi
 
 # Mac Software Update Check and install updates
