@@ -11,16 +11,19 @@
     "dock": "right"
   },
   "restore_on_startup": "none",
-  "base_keymap": "VSCode",
-  "assistant": {
+  "base_keymap": "Atom",
+  "agent": {
     "default_model": {
       "provider": "zed.dev",
-      "model": "claude-3-7-sonnet-thinking-latest"
+      "model": "claude-sonnet-4"
     },
-    "version": "2"
+    "commit_message_model": {
+      "provider": "zed.dev",
+      "model": "claude-sonnet-4"
+    }
   },
   "features": {
-    "edit_prediction_provider": "copilot"
+    "edit_prediction_provider": "copilot",
   },
   "ui_font_size": 14,
   "buffer_font_size": 14,
@@ -41,11 +44,14 @@
   },
   "theme": {
     "mode": "system",
-    "light": "Github Light",
-    "dark": "Github Dark"
+    "light": "Tailwind CSS Light (Enhanced)",
+    "dark": "Tailwind CSS Dark (Enhanced)"
   },
   "project_panel": {
-    "dock": "right"
+    "dock": "right",
+    "folder_icons": false,
+    "file_icons": false,
+    "hide_root": true
   },
   "lsp": {
     "biome": {

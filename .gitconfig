@@ -55,7 +55,7 @@
 	editor = code-insiders --wait
 	ignorecase = false
 	pager = delta
-	hooksPath = ./git_hooks
+	hooksPath = /Users/lmcansh/.dotfiles/.git_hooks
 [delta]
 	side-by-side = true
 	syntax-theme = "GitHub"

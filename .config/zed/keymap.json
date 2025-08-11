@@ -22,15 +22,6 @@
     "bindings": {
       "cmd-\\": "workspace::ToggleRightDock",
       "cmd-shift-g": "git_panel::ToggleFocus",
-      "cmd-1": null,
-      "cmd-2": null,
-      "cmd-3": null,
-      "cmd-4": null,
-      "cmd-5": null,
-      "cmd-6": null,
-      "cmd-7": null,
-      "cmd-8": null,
-      "cmd-9": null,
     }
   }
 ]
