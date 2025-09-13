@@ -36,7 +36,7 @@ let story = result
 
 if (story && !lines.includes(story)) {
   let signature_index = lines.findIndex((line) =>
-    line.includes(`Signed-off-by: ${user.name} <${user.email}>`)
+    line.includes(`Signed-off-by: ${user.name} <${user.email}>`),
   );
 
   let new_content = [

@@ -11,6 +11,10 @@ if test -f "$HOME/.dotfiles/env.ignored"
   export (grep "^[^#]" $HOME/.dotfiles/env.ignored | xargs -L 1)
 end
 
+if test -f "./Dockerfile"
+    set -g DOCKER_TAG_NAME (slugify (basename $PWD)-(git branch --show-current))
+end
+
 alias gc="git commit -s"
 alias gl="git ld"
 alias gdd='git diff --staged'
@@ -121,6 +125,7 @@ set --global hydro_symbol_prompt ▲
 set --global SSH_AUTH_SOCK "~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 
 pay-respects fish --alias | source
+
 
 set UWM_CERT "$HOME/uwm-certs/uwm-ca-bundle.crt"
 set UWM_CERT_PEM "$HOME/uwm-certs/uwm-ca-bundle.pem"

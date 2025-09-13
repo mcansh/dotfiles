@@ -32,7 +32,7 @@ export async function setRandomColor() {
     }
   } else {
     await exec(
-      `defaults write NSGlobalDomain AppleAccentColor -integer ${accent}`
+      `defaults write NSGlobalDomain AppleAccentColor -integer ${accent}`,
     );
   }
 
@@ -44,7 +44,7 @@ export async function setRandomColor() {
     }
   } else {
     await exec(
-      `defaults write NSGlobalDomain AppleHighlightColor -string "${highlight}"`
+      `defaults write NSGlobalDomain AppleHighlightColor -string "${highlight}"`,
     );
   }
 

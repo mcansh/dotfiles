@@ -13,6 +13,10 @@
   "restore_on_startup": "none",
   "base_keymap": "Atom",
   "agent": {
+    "inline_assistant_model": {
+      "provider": "zed.dev",
+      "model": "claude-opus-4-1"
+    },
     "default_model": {
       "provider": "zed.dev",
       "model": "claude-sonnet-4"
@@ -23,7 +27,7 @@
     }
   },
   "features": {
-    "edit_prediction_provider": "copilot",
+    "edit_prediction_provider": "zed"
   },
   "ui_font_size": 14,
   "buffer_font_size": 14,

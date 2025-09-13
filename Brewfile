@@ -1,62 +1,175 @@
-tap "1password/tap"
-tap "brettferdosi/tap"
-tap "homebrew/bundle"
-tap "homebrew/cask"
-tap "homebrew/core"
-tap "homebrew/services"
-# tap "netlify/netlifyctl"
-# tap "ngrok/ngrok"
-# tap "planetscale/tap"
-# tap "railwayapp/railway"
-# tap "railwayapp/tap"
-# tap "superfly/tap"
-
-brew "stow"
-# brew "act" # Run your GitHub Actions locally 🚀
-# brew "asimov", restart_service: true # Automatically exclude development dependencies from Time Machine backups
-# brew "awscli" # Universal Command Line Environment for AWS
-brew "bat" # Clone of cat(1) with syntax highlighting and Git integration
-brew "broot" # A new way to see and navigate directory trees
-brew "caddy" # Powerful, enterprise-ready, open source web server with automatic HTTPS
-# brew "deno" # Secure runtime for JavaScript and TypeScript
-brew "dog" # Command-line DNS client
-brew "dotenv-linter" # A Cross-platform linter for .env files
-brew "duti" # Set default application for document types and URL schemes
-brew "exa" # Replacement for ls written in Rust
-brew "fd" # Simple, fast and user-friendly alternative to find
-brew "ffmpeg" # Play, record, convert, and stream audio and video
-brew "fish" # User-friendly command-line shell for UNIX-like operating systems
-brew "gh" # GitHub command-line tool
-# brew "gifify" # Turn movies into GIFs
-brew "git-delta" # Syntax-highlighting pager for git and diff output
-brew "git" # Distributed revision control system
-# brew "gnupg" # GNU Pretty Good Privacy (PGP) package
-# brew "gnupg@2.2" # GNU Pretty Good Privacy (PGP) package
-brew "hyperfine" # A command-line benchmarking tool
-brew "jq" # Lightweight and flexible command-line JSON processor
-# brew "mysql-client" # Open source relational database management system
-brew "n" # Node version management
-# brew "pinentry-mac" # Pinentry for GPG on Mac
-# brew "planetscale/tap/pscale" # pscale: The PlanetScale CLI
-# brew "postgresql@14"
-# brew "railwayapp/railway/railway" # Develop and deploy code with zero configuration
-# brew "railwayapp/tap/nixpacks" # App source + Nix packages + Docker = Image
-# brew "rbenv" # Ruby version management
-brew "ripgrep" # Search tool like grep and The Silver Searcher
-# brew "superfly/tap/flyctl" # CLI for Fly.io
-brew "thefuck" # Programmatically correct mistyped console commands
-brew "tig" # Text interface for Git repositories
-brew "tree" # Display directories as trees (with optional color/HTML output)
-# brew "wget" # Internet file retriever
-# brew "xcodegen" # Generate your Xcode project from a spec file and your folder structure
-brew "xh" # Friendly and fast tool for sending HTTP requests
-# brew "youtube-dl" # Download YouTube videos from the command-line
-
-cask "1password-cli" # 1Password command-line interface
-# cask "backblaze" # Data backup and storage service
-# cask "fig"
-cask "finicky" # Utility for customizing which browser to start
-# cask "latest" # Update your apps automatically
-# cask "ngrok" # Reverse proxy, secure introspectable tunnels to localhost
-# cask "rescuetime" # Time optimizing application
-# cask "xcodes" # Xcode manager
+tap "sxzz/brew"
+tap "timescam/tap"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.13"
+# Record and share terminal sessions
+brew "asciinema"
+# Improved shell history for zsh, bash, fish and nushell
+brew "atuin", restart_service: :changed
+# Powerful, enterprise-ready, open source web server with automatic HTTPS
+brew "caddy"
+# Manage your dotfiles across multiple diverse machines, securely
+brew "chezmoi"
+# Console Matrix
+brew "cmatrix"
+# Container runtimes on MacOS (and Linux) with minimal setup
+brew "colima"
+# Pack, ship and run any application as a lightweight container
+brew "docker"
+# Platform keystore credential helper for Docker
+brew "docker-credential-helper"
+# Tool for managing dock items
+brew "dockutil"
+# Select default apps for documents and URL schemes on macOS
+brew "duti"
+# Low-level cryptographic library
+brew "nettle"
+# Play, record, convert, and stream audio and video
+brew "ffmpeg"
+# User-friendly command-line shell for UNIX-like operating systems
+brew "fish"
+# GitHub command-line tool
+brew "gh"
+# Syntax-highlighting pager for git and diff output
+brew "git-delta"
+# Git blame for file trees
+brew "git-who"
+# GNU Pretty Good Privacy (PGP) package
+brew "gnupg"
+# GNU Pretty Good Privacy (PGP) package
+brew "gnupg@2.2"
+# Open source programming language to build simple/reliable/efficient software
+brew "go"
+# Command-line benchmarking tool
+brew "hyperfine"
+# Lightweight and flexible command-line JSON processor
+brew "jq"
+# Simple tool to make locally trusted development certificates
+brew "mkcert"
+# Node version management
+brew "n"
+# HTTP(S) server and reverse proxy, and IMAP/POP3 proxy server
+brew "nginx"
+# Pinentry for GPG on Mac
+brew "pinentry-mac"
+# Execute binaries from Python packages in isolated environments
+brew "pipx"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
+# Scans and monitors projects for security vulnerabilities
+brew "snyk-cli"
+# Best command-line tool to install and switch between multiple versions of Xcode
+brew "xcodes"
+# Friendly and fast tool for sending HTTP requests
+brew "xh"
+# Feature-rich command-line audio/video downloader
+brew "yt-dlp"
+# Pluggable terminal workspace, with terminal multiplexer as the base feature
+brew "zellij"
+# CLI tool to pay respects
+brew "timescam/tap/pay-respects"
+# Command-line interface for 1Password
+cask "1password-cli"
+# Application launcher and productivity software
+cask "alfred"
+# Application launcher and productivity software
+cask "alfred@4"
+# Open source IDE for exploring and testing APIs
+cask "bruno"
+# Utility for customizing which browser to start
+cask "finicky"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
+# Clipboard manager
+cask "maccy"
+# Utility to uninstall apps and remove leftover files from old/uninstalled apps
+cask "pearcleaner"
+# Control your tools with a few keystrokes
+cask "raycast"
+vscode "1password.op-vscode"
+vscode "aaron-bond.better-comments"
+vscode "achaq.vercel-theme"
+vscode "adamgirton.gloom"
+vscode "antfu.file-nesting"
+vscode "antfu.icons-carbon"
+vscode "antfu.pnpm-catalog-lens"
+vscode "antfu.theme-vitesse"
+vscode "antfu.treeshake-visualizer"
+vscode "architect.architect"
+vscode "atomiks.moonlight"
+vscode "bierner.markdown-preview-github-styles"
+vscode "bradlc.vscode-tailwindcss"
+vscode "britesnow.vscode-toggle-quotes"
+vscode "chaance.night-lights-color-theme"
+vscode "christian-kohler.path-intellisense"
+vscode "connor4312.esbuild-problem-matchers"
+vscode "csstools.postcss"
+vscode "daltonmenezes.aura-theme"
+vscode "dbaeumer.vscode-eslint"
+vscode "devsense.composer-php-vscode"
+vscode "devsense.intelli-php-vscode"
+vscode "devsense.phptools-vscode"
+vscode "devsense.profiler-php-vscode"
+vscode "dhedgecock.radical-vscode"
+vscode "docker.docker"
+vscode "dvlpr.dvlpr-theme"
+vscode "eamodio.gitlens"
+vscode "enkia.tokyo-night"
+vscode "esbenp.prettier-vscode"
+vscode "eshojaei.mbake-makefile-formatter"
+vscode "foxundermoon.shell-format"
+vscode "github.codespaces"
+vscode "github.copilot"
+vscode "github.copilot-chat"
+vscode "github.github-vscode-theme"
+vscode "github.vscode-github-actions"
+vscode "github.vscode-pull-request-github"
+vscode "graphql.vscode-graphql"
+vscode "graphql.vscode-graphql-syntax"
+vscode "hashicorp.terraform"
+vscode "hridoy.rails-snippets"
+vscode "jamiebradders.skye"
+vscode "jock.svg"
+vscode "kettanaito.nako"
+vscode "ldez.ignore-files"
+vscode "leeandher.unofficial-sentry-theme"
+vscode "lumaxis.snippet-copy"
+vscode "mattpocock.ts-error-translator"
+vscode "max-ss.cyberpunk"
+vscode "mikestead.dotenv"
+vscode "morgan-codes.morgan-codes-vscode-theme"
+vscode "motion.motion-vscode-extension"
+vscode "ms-azuretools.vscode-azureterraform"
+vscode "ms-azuretools.vscode-containers"
+vscode "ms-azuretools.vscode-docker"
+vscode "ms-vscode-remote.remote-containers"
+vscode "ms-vscode.atom-keybindings"
+vscode "ms-vscode.vscode-typescript-next"
+vscode "ms-vsliveshare.vsliveshare"
+vscode "naumovs.color-highlight"
+vscode "oderwat.indent-rainbow"
+vscode "orta.vscode-twoslash-queries"
+vscode "oven.bun-vscode"
+vscode "pmndrs.pmndrs"
+vscode "prisma.prisma"
+vscode "qwtel.sqlite-viewer"
+vscode "raunofreiberg.vesper"
+vscode "redhat.vscode-xml"
+vscode "redhat.vscode-yaml"
+vscode "sdras.inbedby7pm"
+vscode "sdras.night-owl"
+vscode "sleistner.vscode-fileutils"
+vscode "sonarsource.sonarlint-vscode"
+vscode "statelyai.stately-vscode"
+vscode "streetsidesoftware.code-spell-checker"
+vscode "tailwindlabs.tailwindcss-vscode-theme"
+vscode "tamasfe.even-better-toml"
+vscode "this-fifo.natty"
+vscode "typescriptteam.native-preview"
+vscode "usernamehw.errorlens"
+vscode "vitest.explorer"
+vscode "webben.browserslist"
+vscode "wesbos.theme-cobalt2"
+vscode "wicked-labs.sequoia"
+vscode "wix.vscode-import-cost"
+vscode "yoavbls.pretty-ts-errors"

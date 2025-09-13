@@ -10,7 +10,7 @@ export default {
     // Replace domain of urls to amazon.com with smile.amazon.com
     {
       match: finicky.matchHostnames(["www.amazon.com", "amazon.com"]),
-      url(url) {
+      url: (url) => {
         return { ...url, host: "smile.amazon.com" };
       },
     },
@@ -23,7 +23,7 @@ export default {
         createRegex("vite.new"),
         createRegex("meet.google"),
       ],
-      browser: "Arc",
+      browser: "Brave Browser Nightly",
     },
 
     // shopify
@@ -36,38 +36,28 @@ export default {
 
         return matches.some((match) => url.href.startsWith(match));
       },
-      browser: "Arc",
+      browser: "Brave Browser Nightly",
     },
 
     // uwm
     {
-      match(url, { opener }) {
+      match(url, {opener}) {
         let hosts = ["uwm.com", "uwm.csod.com", "url.us.m.mimecastprotect.com"];
         return (
           opener?.bundleId === "com.microsoft.teams2" ||
           hosts.includes(url.host)
-        );
+        )
       },
       browser: "Brave Browser Nightly",
     },
   ],
 } satisfies FinickyConfig;
 
-/**
- * create a regex that matches any subdomain of the given domain, including the domain itself, and any path
- * @param {string} domain
- * @param {Object} [options]
- * @param {string[]} [options.subdomains]
- * @param {string[]} [options.paths]
- * @returns {RegExp}
- */
-function createRegex(
-  domain: string,
-  {
-    subdomains,
-    paths,
-  }: Partial<{ subdomains: string[]; paths: string[] }> = {},
-): RegExp {
+/** create a regex that matches any subdomain of the given domain, including the domain itself, and any path*/
+function createRegex(domain: string, { subdomains, paths }: {
+  subdomains?: string[];
+  paths?: string[];
+} = {}) {
   subdomains ??= [];
   paths ??= [];
 

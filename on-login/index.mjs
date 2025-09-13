@@ -1,4 +1,4 @@
-import { getMacOSVersion, macOSVersions } from "./get-macos-version.mjs"
+import { getMacOSVersion, macOSVersions } from "./get-macos-version.mjs";
 
 async function main() {
   const { currentVersion, releaseName } = await getMacOSVersion();
