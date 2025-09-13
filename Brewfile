@@ -1,17 +1,9 @@
 tap "sxzz/brew"
 tap "timescam/tap"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.13"
-# Record and share terminal sessions
-brew "asciinema"
 # Improved shell history for zsh, bash, fish and nushell
 brew "atuin", restart_service: :changed
 # Powerful, enterprise-ready, open source web server with automatic HTTPS
 brew "caddy"
-# Manage your dotfiles across multiple diverse machines, securely
-brew "chezmoi"
-# Console Matrix
-brew "cmatrix"
 # Container runtimes on MacOS (and Linux) with minimal setup
 brew "colima"
 # Pack, ship and run any application as a lightweight container
@@ -52,36 +44,36 @@ brew "n"
 brew "nginx"
 # Pinentry for GPG on Mac
 brew "pinentry-mac"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.13"
 # Execute binaries from Python packages in isolated environments
 brew "pipx"
+# Modern API client that lives in your terminal
+brew "posting"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Scans and monitors projects for security vulnerabilities
 brew "snyk-cli"
+# Simple and fast anti-censorship tool written in Go
+brew "spoofdpi"
+# Organize software neatly under a single directory tree (e.g. /usr/local)
+brew "stow"
+# Domain Availability Research Tool
+brew "tldx"
 # Best command-line tool to install and switch between multiple versions of Xcode
 brew "xcodes"
 # Friendly and fast tool for sending HTTP requests
 brew "xh"
 # Feature-rich command-line audio/video downloader
 brew "yt-dlp"
-# Pluggable terminal workspace, with terminal multiplexer as the base feature
-brew "zellij"
 # CLI tool to pay respects
 brew "timescam/tap/pay-respects"
 # Command-line interface for 1Password
 cask "1password-cli"
-# Application launcher and productivity software
-cask "alfred"
-# Application launcher and productivity software
-cask "alfred@4"
-# Open source IDE for exploring and testing APIs
-cask "bruno"
 # Utility for customizing which browser to start
 cask "finicky"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
-# Clipboard manager
-cask "maccy"
 # Utility to uninstall apps and remove leftover files from old/uninstalled apps
 cask "pearcleaner"
 # Control your tools with a few keystrokes

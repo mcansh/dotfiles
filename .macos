@@ -59,8 +59,6 @@ echo "npm --version: $(npm --version)"
 echo "installing a few global npm packages"
 npm i -g trash-cli fkill-cli @antfu/ni corepack
 
-# install yarn v1
-corepack prepare yarn@1 --activate
 # install latest pnpm
 corepack prepare pnpm@latest --activate
 # install latest npm
