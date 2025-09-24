@@ -5,6 +5,8 @@ export default {
   options: {
     logRequests: true,
     checkForUpdates: true,
+    hideIcon: true,
+    keepRunning: true,
   },
   rewrite: [
     // Replace domain of urls to amazon.com with smile.amazon.com
