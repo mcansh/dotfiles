@@ -12,6 +12,7 @@
 [push]
 	default = current
 	autoSetupRemote = true
+
 [alias]
 	# show last commit's sha
 	sha = rev-parse HEAD
@@ -44,38 +45,46 @@
 	b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
 	# lists files ignored using `git --assume-unchanged`
 	ignored = !git ls-files -v | grep "^[[:lower:]]"
+
 [help]
 	autocorrect = 0
+
 [credential]
 	helper = store
+
 [commit]
 	gpgsign = true
+
 [core]
 	excludesfile = ~/.gitignore
 	editor = code-insiders --wait
 	ignorecase = false
 	pager = delta
-	hooksPath = /Users/lmcansh/.dotfiles/.git_hooks
+	hooksPath = ./git_hooks
+
 [delta]
 	side-by-side = true
 	syntax-theme = "GitHub"
+
 [color]
   pager = true
-	ui = true
+  ui = true
   status = auto
   diff = auto
   branch = auto
   showBranch = auto
   interactive = auto
   grep = auto
+
 [rebase]
   autosquash = true
+
 [interactive]
   diffFilter = delta --color-only
 
 # Enforce SSH
 [url "ssh://git@github.com/"]
-	insteadOf = https://github.com/
+  insteadOf = https://github.com/
 [url "ssh://git@gitlab.com/"]
   insteadOf = https://gitlab.com/
 [url "ssh://git@bitbucket.org/"]
@@ -87,11 +96,13 @@
 
 [fetch]
 	prune = true
+
 [color "diff-highlight"]
 	oldNormal = red bold
 	oldHighlight = red bold 52
 	newNormal = green bold
 	newHighlight = green bold 22
+
 [color "diff"]
 	meta = 11
 	frag = magenta bold
@@ -99,30 +110,40 @@
 	old = red bold
 	new = green bold
 	whitespace = red reverse
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+
 [pull]
 	rebase = true
+
 [init]
 	defaultBranch = main
+
 [tag]
 	gpgSign = true
 
 [gpg]
 	format = ssh
 	program = /usr/local/bin/gpg
+
 [gpg "ssh"]
 	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+
 [merge]
 	tool = code-insiders
+
 [mergetool "code-insiders"]
 	cmd = code-insiders --new-window --wait --merge $REMOTE $LOCAL $BASE $MERGED
+
 [diff]
 	tool = code-insiders
+
 [difftool "code-insiders"]
 	cmd = code-insiders --new-window --wait --diff $LOCAL $REMOTE
+
 [mergetool]
 	keepBackup = true
