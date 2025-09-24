@@ -2,3 +2,10 @@
 *.ignored/
 *.ignored.*
 *.ignored
+
+# plugin files
+.config/fish/functions/_autopair_backspace.fish
+.config/fish/functions/_autopair_insert_left.fish
+.config/fish/functions/_autopair_insert_right.fish
+.config/fish/functions/_autopair_insert_same.fish
+.config/fish/functions/_autopair_tab.fish

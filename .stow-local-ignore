@@ -3,7 +3,7 @@
 
 Brewfile
 RectangleConfig.json
-\.ds_store
+.DS_Store
 \.git
 \.gitignore
 \.macos
@@ -12,3 +12,4 @@ raycast-backups
 on-login
 raycast-extension-scripts
 readme.markdown
+.config/fish/fish_variables
