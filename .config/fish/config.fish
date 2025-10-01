@@ -33,6 +33,9 @@ export N_PREFIX="$HOME/.n"
 export PATH="$N_PREFIX/bin:$PATH"
 export NODE_PATH="$N_PREFIX/lib/node_modules"
 
+# dont save vscode extensions to Brewfile
+export HOMEBREW_BUNDLE_DUMP_NO_VSCODE=1
+
 export PATH="$HOME/.dotfiles/.my_bin:$PATH"
 
 # tell GPG the current terminal.
