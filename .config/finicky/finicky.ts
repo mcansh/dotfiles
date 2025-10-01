@@ -30,12 +30,11 @@ export default {
 
     // shopify
     {
-      match: (url) => {
+      match(url) {
         let matches = [
           "https://github.com/shopify",
           "https://workplace.com/shopify",
         ];
-
         return matches.some((match) => url.href.startsWith(match));
       },
       browser: "Brave Browser Nightly",
@@ -44,7 +43,7 @@ export default {
     // uwm
     {
       match(url, {opener}) {
-        let hosts = ["uwm.com", "uwm.csod.com", "url.us.m.mimecastprotect.com"];
+        let hosts = ["uwm.com", "uwm.csod.com", "url.us.m.mimecastprotect.com", "code.uwm.com"];
         return (
           opener?.bundleId === "com.microsoft.teams2" ||
           hosts.includes(url.host)
