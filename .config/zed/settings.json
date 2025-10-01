@@ -30,7 +30,8 @@
     "edit_prediction_provider": "zed"
   },
   "ui_font_size": 14,
-  "buffer_font_size": 14,
+  "buffer_font_size": 12,
+  "buffer_line_height": { "custom": 1.7 },
   "ui_font_family": "Berkeley Mono",
   "buffer_font_family": "Berkeley Mono",
   "buffer_font_features": {
