@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" class="uwm-dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UWM Dark Mode Test</title>
+  <link rel="stylesheet" href="brand-system.css">
+  <style>
+    .mode-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 100;
+      font-family: var(--uwm-font-headline);
+      font-size: var(--uwm-text-sm);
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--uwm-gray);
+      border-radius: 0.25rem;
+      cursor: pointer;
+      background: var(--uwm-off-white);
+      color: var(--uwm-dark-gray);
+    }
+  </style>
+</head>
+<body>
+  <button class="mode-toggle" onclick="document.documentElement.classList.toggle('uwm-dark'); this.textContent = document.documentElement.classList.contains('uwm-dark') ? 'Switch to Light' : 'Switch to Dark'">Switch to Light</button>
+
+  <div class="uwm-container" style="padding-top: 4rem; padding-bottom: 2rem;">
+
+    <!-- UWM Logo (text approximation) -->
+    <div style="margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--uwm-blue);">
+      <div style="font-family: var(--uwm-font-headline); color: var(--uwm-blue); font-weight: 800; letter-spacing: 0.05em; line-height: 1;">
+        <div style="font-size: var(--uwm-text-4xl);">UWM</div>
+        <div style="font-size: var(--uwm-text-sm); font-weight: 400; letter-spacing: 0.15em; color: var(--uwm-teal); margin-top: 0.25rem;">UNITED WHOLESALE MORTGAGE</div>
+      </div>
+    </div>
+
+    <h1>Dark Mode Test — UWM Brand System</h1>
+    <p>This page tests the unofficial dark mode variant. Toggle the button above to compare light and dark.</p>
+
+    <h2>Heading Hierarchy</h2>
+    <h3>Third Level Heading in Green</h3>
+    <h4>Fourth Level Heading in Orange</h4>
+    <p>Body text in the default text color. This paragraph should be readable in both modes. Links look like <a href="#">this styled link</a>.</p>
+    <p>Text with <span class="uwm-emphasis">orange emphasis</span> for highlights.</p>
+
+    <h2>Color Swatches</h2>
+    <div style="display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;">
+      <div class="uwm-bg-blue uwm-text-white" style="padding: 1.5rem; border-radius: 0.25rem; min-width: 8rem; text-align: center;">Blue</div>
+      <div class="uwm-bg-teal uwm-text-white" style="padding: 1.5rem; border-radius: 0.25rem; min-width: 8rem; text-align: center;">Teal</div>
+      <div class="uwm-bg-green" style="padding: 1.5rem; border-radius: 0.25rem; min-width: 8rem; text-align: center;">Green</div>
+      <div class="uwm-bg-orange uwm-text-white" style="padding: 1.5rem; border-radius: 0.25rem; min-width: 8rem; text-align: center;">Orange</div>
+    </div>
+
+    <h2>Table</h2>
+    <table>
+      <thead><tr><th>Feature</th><th>Light Mode</th><th>Dark Mode</th></tr></thead>
+      <tbody>
+        <tr><td>Blue</td><td>#005F9E</td><td>#4DA3D4 (lightened)</td></tr>
+        <tr><td>Teal</td><td>#00A39D</td><td>#00A39D (unchanged)</td></tr>
+        <tr><td>Green</td><td>#A1CE57</td><td>#A1CE57 (unchanged)</td></tr>
+        <tr><td>Body text</td><td>#575757</td><td>#D8DEE9 (reversed)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

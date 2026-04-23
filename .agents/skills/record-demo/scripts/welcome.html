@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 1920px;
+      height: 1080px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1a237e 0%, #0d47a1 50%, #01579b 100%);
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      color: #ffffff;
+      overflow: hidden;
+    }
+    .logo-area {
+      margin-bottom: 48px;
+      opacity: 0.9;
+    }
+    .logo-text {
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    h1 {
+      font-size: 64px;
+      font-weight: 300;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+    }
+    .subtitle {
+      font-size: 28px;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.75);
+      margin-bottom: 48px;
+    }
+    .divider {
+      width: 120px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.4);
+      margin-bottom: 48px;
+    }
+    .date {
+      font-size: 20px;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.6);
+      letter-spacing: 2px;
+    }
+    .confidential {
+      position: absolute;
+      bottom: 32px;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.35);
+    }
+  </style>
+</head>
+<body>
+  <div class="logo-area">
+    <span class="logo-text">United Wholesale Mortgage</span>
+  </div>
+  <h1 id="product-name">{{PRODUCT_NAME}}</h1>
+  <p class="subtitle" id="subtitle">Product Demo</p>
+  <div class="divider"></div>
+  <p class="date" id="date">{{DATE}}</p>
+  <p class="confidential">For Internal Use Only</p>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const productEl = document.getElementById('product-name');
+    const subtitleEl = document.getElementById('subtitle');
+    const dateEl = document.getElementById('date');
+    if (params.get('product')) productEl.textContent = params.get('product');
+    if (params.get('subtitle')) subtitleEl.textContent = params.get('subtitle');
+    if (params.get('date')) dateEl.textContent = params.get('date');
+  </script>
+</body>
+</html>

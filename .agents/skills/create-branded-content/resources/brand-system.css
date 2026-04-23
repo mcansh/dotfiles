@@ -1,0 +1,611 @@
+/*
+ * UWM Brand System CSS
+ * Source: UWM Brand Standards 2025
+ *
+ * Usage: Link or embed this file in any HTML content to apply UWM branding.
+ * All colors and fonts are defined as CSS custom properties on :root.
+ * Templates and custom content should reference var(--uwm-*) values.
+ */
+
+/* ============================================================
+   Google Fonts — Roboto (web fallback for Futura PT)
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+/* ============================================================
+   Local Futura PT — only loads if installed on user's machine
+   ============================================================ */
+@font-face {
+  font-family: 'Futura PT';
+  src: local('Futura PT Book'), local('FuturaPT-Book');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura PT';
+  src: local('Futura PT Light'), local('FuturaPT-Light');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura PT';
+  src: local('Futura PT Medium'), local('FuturaPT-Medium');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura PT';
+  src: local('Futura PT Demi'), local('FuturaPT-Demi');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura PT';
+  src: local('Futura PT Bold'), local('FuturaPT-Bold');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura PT';
+  src: local('Futura PT Heavy'), local('FuturaPT-Heavy'), local('Futura PT Extra Bold'), local('FuturaPT-ExtraBold');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ============================================================
+   CSS Custom Properties
+   ============================================================ */
+:root {
+  /* Prevent browser dark mode from altering colors */
+  color-scheme: light;
+
+  /* --- Brand Colors --- */
+  --uwm-blue: #005F9E;
+  --uwm-teal: #00A39D;
+  --uwm-green: #A1CE57;
+  --uwm-orange: #F68A33;
+  --uwm-gray: #B2B5B6;
+  --uwm-dark-gray: #575757;
+  --uwm-white: #FFFFFF;
+  --uwm-off-white: #F7F7F7;
+
+  /* --- Font Stacks --- */
+  --uwm-font-headline: 'Futura PT', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --uwm-font-body: 'Helvetica Neue LT Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --uwm-font-web: 'Roboto', sans-serif;
+
+  /* --- Typography Scale (rem-based, 16px base assumed) --- */
+  --uwm-text-xs: 0.75rem;
+  --uwm-text-sm: 0.875rem;
+  --uwm-text-base: 1rem;
+  --uwm-text-lg: 1.125rem;
+  --uwm-text-xl: 1.25rem;
+  --uwm-text-2xl: 1.5rem;
+  --uwm-text-3xl: 2rem;
+  --uwm-text-4xl: 2.5rem;
+  --uwm-text-5xl: 3rem;
+
+  /* --- Presentation Typography (30pt minimum for projection) ---
+     30pt ≈ 40px ≈ 2.5rem at 96 DPI.
+     Slides are 1280x720; these sizes ensure readability on large screens.
+     Footers and slide numbers are exempt (not audience-facing content). */
+  --uwm-slide-title-size: 3rem;        /* 48px ≈ 36pt */
+  --uwm-slide-title-hero-size: 4rem;   /* 64px ≈ 48pt */
+  --uwm-slide-subtitle-size: 2.5rem;   /* 40px = 30pt */
+  --uwm-slide-body-size: 2.5rem;       /* 40px = 30pt */
+  --uwm-slide-card-title-size: 2rem;   /* 32px ≈ 24pt — dense layout exception */
+  --uwm-slide-card-text-size: 1.5rem;  /* 24px ≈ 18pt — dense layout exception */
+
+  /* --- Spacing Scale --- */
+  --uwm-space-xs: 0.25rem;
+  --uwm-space-sm: 0.5rem;
+  --uwm-space-md: 1rem;
+  --uwm-space-lg: 1.5rem;
+  --uwm-space-xl: 2rem;
+  --uwm-space-2xl: 3rem;
+  --uwm-space-3xl: 4rem;
+
+  /* --- Slide Dimensions (16:9) --- */
+  --uwm-slide-width: 1280px;
+  --uwm-slide-height: 720px;
+  --uwm-slide-ratio: 16 / 9;
+}
+
+/* ============================================================
+   Base Typography
+   ============================================================ */
+body {
+  font-family: var(--uwm-font-body);
+  font-size: var(--uwm-text-base);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--uwm-dark-gray);
+  background-color: var(--uwm-white);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--uwm-font-headline);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 1.2;
+  margin-top: 0;
+  margin-bottom: var(--uwm-space-md);
+}
+
+h1 {
+  font-size: var(--uwm-text-3xl);
+  font-weight: 700;
+  color: var(--uwm-blue);
+}
+
+h2 {
+  font-size: var(--uwm-text-2xl);
+  font-weight: 700;
+  color: var(--uwm-teal);
+}
+
+h3 {
+  font-size: var(--uwm-text-xl);
+  font-weight: 500;
+  color: var(--uwm-green);
+}
+
+h4 {
+  font-size: var(--uwm-text-lg);
+  font-weight: 500;
+  color: var(--uwm-orange);
+}
+
+h5 {
+  font-size: var(--uwm-text-base);
+  font-weight: 700;
+  color: var(--uwm-dark-gray);
+}
+
+h6 {
+  font-size: var(--uwm-text-sm);
+  font-weight: 700;
+  color: var(--uwm-dark-gray);
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: var(--uwm-space-md);
+}
+
+a {
+  color: var(--uwm-blue);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+strong, b {
+  font-weight: 700;
+}
+
+/* ============================================================
+   Text Color Utilities
+   ============================================================ */
+.uwm-text-blue { color: var(--uwm-blue); }
+.uwm-text-teal { color: var(--uwm-teal); }
+.uwm-text-green { color: var(--uwm-green); }
+.uwm-text-orange { color: var(--uwm-orange); }
+.uwm-text-gray { color: var(--uwm-gray); }
+.uwm-text-dark-gray { color: var(--uwm-dark-gray); }
+.uwm-text-white { color: var(--uwm-white); }
+
+/* ============================================================
+   Background Color Utilities
+   ============================================================ */
+.uwm-bg-blue { background-color: var(--uwm-blue); }
+.uwm-bg-teal { background-color: var(--uwm-teal); }
+.uwm-bg-green { background-color: var(--uwm-green); }
+.uwm-bg-orange { background-color: var(--uwm-orange); }
+.uwm-bg-gray { background-color: var(--uwm-gray); }
+.uwm-bg-dark-gray { background-color: var(--uwm-dark-gray); }
+.uwm-bg-white { background-color: var(--uwm-white); }
+
+/* ============================================================
+   Layout Utilities
+   ============================================================ */
+.uwm-container {
+  max-width: 75rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--uwm-space-xl);
+  padding-right: var(--uwm-space-xl);
+}
+
+.uwm-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--uwm-space-lg) var(--uwm-space-xl);
+  border-bottom: 2px solid var(--uwm-blue);
+}
+
+.uwm-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--uwm-space-sm) var(--uwm-space-xl);
+  font-size: var(--uwm-text-xs);
+  color: var(--uwm-dark-gray);
+  border-top: 1px solid var(--uwm-gray);
+}
+
+.uwm-section {
+  padding: var(--uwm-space-2xl) 0;
+}
+
+/* ============================================================
+   Slide System (Presentation)
+   ============================================================ */
+.uwm-slides {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100vh;
+}
+
+.uwm-slide {
+  width: var(--uwm-slide-width);
+  height: var(--uwm-slide-height);
+  max-width: 100%;
+  aspect-ratio: var(--uwm-slide-ratio);
+  scroll-snap-align: start;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: var(--uwm-space-2xl);
+  box-sizing: border-box;
+  background-color: var(--uwm-white);
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.uwm-slide-title {
+  font-family: var(--uwm-font-headline);
+  font-size: var(--uwm-slide-title-size);
+  font-weight: 700;
+  color: var(--uwm-dark-gray);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--uwm-space-sm);
+}
+
+.uwm-slide-subtitle {
+  font-family: var(--uwm-font-headline);
+  font-size: var(--uwm-slide-subtitle-size);
+  font-weight: 500;
+  color: var(--uwm-dark-gray);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--uwm-space-lg);
+}
+
+.uwm-slide-body {
+  font-family: var(--uwm-font-headline);
+  font-size: var(--uwm-slide-body-size);
+  font-weight: 400;
+  color: var(--uwm-dark-gray);
+  line-height: 1.4;
+  flex: 1;
+}
+
+.uwm-slide-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: var(--uwm-space-sm) var(--uwm-space-xl);
+  font-family: var(--uwm-font-headline);
+  font-size: var(--uwm-text-xs);
+  color: var(--uwm-dark-gray);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Slide layout: Title slide */
+.uwm-slide--title {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.uwm-slide--title .uwm-slide-title {
+  font-size: var(--uwm-slide-title-hero-size);
+}
+
+/* Slide layout: Sidebar */
+.uwm-slide--sidebar {
+  padding-left: 0;
+  flex-direction: row;
+}
+
+.uwm-slide--sidebar .uwm-slide-sidebar {
+  width: 6rem;
+  min-height: 100%;
+  flex-shrink: 0;
+}
+
+.uwm-slide--sidebar .uwm-slide-content {
+  padding: var(--uwm-space-2xl);
+  flex: 1;
+}
+
+/* Slide layout: Split (image + text) */
+.uwm-slide--split {
+  flex-direction: row;
+  padding: 0;
+}
+
+.uwm-slide--split .uwm-slide-image {
+  width: 35%;
+  background-size: cover;
+  background-position: center;
+}
+
+.uwm-slide--split .uwm-slide-content {
+  width: 65%;
+  padding: var(--uwm-space-2xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Slide layout: Three cards */
+.uwm-slide--cards .uwm-slide-cards {
+  display: flex;
+  gap: var(--uwm-space-xl);
+  flex: 1;
+  align-items: stretch;
+}
+
+.uwm-slide-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.uwm-slide-card-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: var(--uwm-gray);
+  background-size: cover;
+  background-position: center;
+  border-radius: 0.25rem;
+}
+
+.uwm-slide-card-accent {
+  height: 3px;
+  margin: var(--uwm-space-sm) 0;
+}
+
+.uwm-slide-card-title {
+  font-family: var(--uwm-font-headline);
+  font-size: var(--uwm-slide-card-title-size);
+  font-weight: 700;
+  color: var(--uwm-dark-gray);
+  text-transform: uppercase;
+  margin-bottom: var(--uwm-space-xs);
+}
+
+.uwm-slide-card-subtitle {
+  font-family: var(--uwm-font-headline);
+  font-size: var(--uwm-slide-card-text-size);
+  font-weight: 500;
+  color: var(--uwm-dark-gray);
+  margin-bottom: var(--uwm-space-xs);
+}
+
+.uwm-slide-card-text {
+  font-family: var(--uwm-font-headline);
+  font-size: var(--uwm-slide-card-text-size);
+  font-weight: 400;
+  color: var(--uwm-dark-gray);
+  line-height: 1.4;
+}
+
+/* ============================================================
+   Emphasis
+   ============================================================ */
+.uwm-emphasis {
+  color: var(--uwm-orange);
+  font-weight: 700;
+}
+
+/* ============================================================
+   Lists
+   ============================================================ */
+ul, ol {
+  padding-left: var(--uwm-space-lg);
+  margin-top: 0;
+  margin-bottom: var(--uwm-space-md);
+}
+
+li {
+  margin-bottom: var(--uwm-space-xs);
+}
+
+/* ============================================================
+   Tables
+   ============================================================ */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: var(--uwm-space-lg);
+  font-size: var(--uwm-text-sm);
+}
+
+th {
+  background-color: var(--uwm-blue);
+  color: var(--uwm-white);
+  font-family: var(--uwm-font-headline);
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: left;
+  padding: var(--uwm-space-sm) var(--uwm-space-md);
+  letter-spacing: 0.03em;
+}
+
+td {
+  padding: var(--uwm-space-sm) var(--uwm-space-md);
+  border-bottom: 1px solid var(--uwm-gray);
+  color: var(--uwm-dark-gray);
+}
+
+tr:nth-child(even) td {
+  background-color: var(--uwm-off-white);
+}
+
+/* ============================================================
+   Dark Mode (UNOFFICIAL — Not approved by UWM Marketing)
+   Activate by adding class="uwm-dark" to <html> or <body>.
+   Opt-in only. Never applied automatically.
+   ============================================================ */
+.uwm-dark {
+  --uwm-blue: #4DA3D4;
+  /* Teal, Green, Orange pass WCAG AA on dark surfaces unchanged */
+  --uwm-gray: #4A5568;
+  --uwm-dark-gray: #D8DEE9;
+  --uwm-white: #1C2333;
+  --uwm-off-white: #252D3F;
+
+  color-scheme: dark;
+}
+
+.uwm-dark body,
+body.uwm-dark {
+  background-color: var(--uwm-white);
+  color: var(--uwm-dark-gray);
+}
+
+/* Reversed logo for dark backgrounds */
+.uwm-dark .uwm-logo-text-mark,
+.uwm-dark .uwm-doc-logo-mark,
+.uwm-dark .uwm-hero-logo-mark,
+.uwm-dark .uwm-onepager-footer-logo,
+.uwm-dark .uwm-slide-footer-logo {
+  color: var(--uwm-blue);
+}
+
+/* Tables: header stays blue, rows use dark surface */
+.uwm-dark th {
+  background-color: #005F9E;
+  color: #D8DEE9;
+}
+
+.uwm-dark td {
+  border-bottom-color: var(--uwm-gray);
+  color: var(--uwm-dark-gray);
+}
+
+.uwm-dark tr:nth-child(even) td {
+  background-color: var(--uwm-off-white);
+}
+
+/* Links */
+.uwm-dark a {
+  color: var(--uwm-blue);
+}
+
+/* Slide shadow adjustment */
+.uwm-dark .uwm-slide {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Slide footer border */
+.uwm-dark .uwm-slide-footer {
+  border-top-color: var(--uwm-gray);
+}
+
+/* Doc page shadow */
+.uwm-dark .uwm-doc {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Doc header border stays original blue */
+.uwm-dark .uwm-doc-header {
+  border-bottom-color: #005F9E;
+}
+
+/* One-pager hero — keep original blue for impact */
+.uwm-dark .uwm-hero {
+  background-color: #005F9E;
+}
+
+/* CTA bar keeps original teal */
+.uwm-dark .uwm-cta {
+  background-color: #00A39D;
+}
+
+.uwm-dark .uwm-cta-button {
+  color: #00A39D;
+  background-color: var(--uwm-white);
+}
+
+/* Emphasis stays orange (works on dark) */
+.uwm-dark .uwm-emphasis {
+  color: var(--uwm-orange);
+}
+
+/* ============================================================
+   Print Styles
+   ============================================================ */
+@media print {
+  body {
+    background-color: white;
+    color: black;
+  }
+
+  .uwm-slide {
+    page-break-after: always;
+    page-break-inside: avoid;
+    box-shadow: none;
+    border: none;
+  }
+
+  .uwm-slide-footer {
+    position: static;
+    margin-top: auto;
+  }
+
+  .uwm-bg-blue,
+  .uwm-bg-teal,
+  .uwm-bg-green,
+  .uwm-bg-orange,
+  .uwm-bg-dark-gray {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  a {
+    color: var(--uwm-blue);
+    text-decoration: underline;
+  }
+
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: var(--uwm-text-xs);
+    color: var(--uwm-dark-gray);
+  }
+}
