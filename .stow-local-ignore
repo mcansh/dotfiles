@@ -13,3 +13,4 @@ on-login
 raycast-extension-scripts
 readme.markdown
 .config/fish/fish_variables
+.ds_store

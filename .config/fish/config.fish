@@ -15,6 +15,7 @@ if test -f "./Dockerfile"
     set -g DOCKER_TAG_NAME (slugify (basename $PWD)-(git branch --show-current))
 end
 
+alias oc="opencode"
 alias gc="git commit -s"
 alias gl="git ld"
 alias gdd='git diff --staged'
@@ -89,7 +90,7 @@ set -g __fish_git_prompt_color_untrackedfiles $fish_color_normal
 set -g __fish_git_prompt_color_cleanstate green --bold
 
 # add brew to path and configure autocomplete
-fish_add_path /opt/homebrew/sbin
+fish_add_path /opt/homebrew/bin
 
 if test -d (brew --prefix)"/share/fish/completions"
     set -p fish_complete_path (brew --prefix)/share/fish/completions
@@ -113,6 +114,8 @@ if which rbenv > /dev/null
   eval "$(rbenv init -)"
 end
 
+eval "$(wut init)"
+
 
 # 1Password CLI
 # op completion fish | source
@@ -129,7 +132,6 @@ set --global SSH_AUTH_SOCK "~/Library/Group\ Containers/2BUA8C4S2C.com.1password
 
 pay-respects fish --alias | source
 
-
 set UWM_CERT "$HOME/uwm-certs/uwm-ca-bundle.crt"
 set UWM_CERT_PEM "$HOME/uwm-certs/uwm-ca-bundle.pem"
 
@@ -140,3 +142,13 @@ end
 if test -f $UWM_CERT_PEM
     export NODE_EXTRA_CA_CERTS=$UWM_CERT_PEM
 end
+
+if test -d "/opt/homebrew/opt/ruby/bin"
+  set -gx PATH "/opt/homebrew/opt/ruby/bin:$PATH"
+  set -gx PATH `gem environment gemdir`/bin:$PATH
+end
+
+eval (~/.local/try.rb init ~/Developer/tries | string collect)
+
+# tuitube
+fish_add_path /Users/lmcansh/.termcast/compiled/tuitube/bin

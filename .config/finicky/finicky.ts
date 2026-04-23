@@ -3,8 +3,8 @@ import type { FinickyConfig } from "/Applications/Finicky.app/Contents/Resources
 export default {
   defaultBrowser: "Safari",
   options: {
-    logRequests: true,
-    checkForUpdates: true,
+    logRequests: false,
+    checkForUpdates: false,
     hideIcon: true,
     keepRunning: true,
   },
@@ -42,14 +42,17 @@ export default {
 
     // uwm
     {
-      match(url, {opener}) {
+      match(url, { opener }) {
         let hosts = ["uwm.com", "uwm.csod.com", "url.us.m.mimecastprotect.com", "code.uwm.com"];
         return (
           opener?.bundleId === "com.microsoft.teams2" ||
           hosts.includes(url.host)
         )
       },
-      browser: "Brave Browser Nightly",
+      browser: {
+        appType: "path",
+        name: "/Applications/Brave Browser Nightly.app"
+      }
     },
   ],
 } satisfies FinickyConfig;

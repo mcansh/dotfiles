@@ -7,27 +7,50 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "cli_default_open_behavior": "new_window",
+  "git": {
+    "inline_blame": {
+      "show_commit_summary": false
+    }
+  },
+  "outline_panel": {
+    "dock": "left"
+  },
+  "collaboration_panel": {
+    "dock": "left"
+  },
+  "agent_servers": {
+    "opencode": {
+      "type": "registry"
+    }
+  },
+  "edit_predictions": {
+    "provider": "zed"
+  },
+  "context_servers": {
+
+  },
   "git_panel": {
+    "tree_view": false,
     "dock": "right"
   },
-  "restore_on_startup": "none",
+  "restore_on_startup": "empty_tab",
   "base_keymap": "Atom",
   "agent": {
+    "dock": "right",
+    "default_profile": "write",
     "inline_assistant_model": {
       "provider": "zed.dev",
       "model": "claude-opus-4-1"
     },
     "default_model": {
       "provider": "zed.dev",
-      "model": "claude-sonnet-4"
+      "model": "claude-opus-4-1"
     },
     "commit_message_model": {
       "provider": "zed.dev",
-      "model": "claude-sonnet-4"
+      "model": "gpt-4o-mini"
     }
-  },
-  "features": {
-    "edit_prediction_provider": "zed"
   },
   "ui_font_size": 14,
   "buffer_font_size": 12,
@@ -56,15 +79,39 @@
     "dock": "right",
     "folder_icons": false,
     "file_icons": false,
-    "hide_root": true
+    "hide_root": true,
+    "sort_mode": "mixed",
+    "indent_guides": {
+      "show": "always",
+    },
   },
   "lsp": {
+    "vtsls": {
+      "settings": {
+        "typescript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always"
+          }
+        },
+        "javascript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always"
+          }
+        }
+      },
+      "enable_lsp_tasks": true
+    },
     "biome": {
       "settings": {
         "require_config_file": true
       }
     },
     "prettier": {
+      "settings": {
+        "require_config_file": true
+      }
+    },
+    "oxc": {
       "settings": {
         "require_config_file": true
       }
@@ -78,7 +125,7 @@
   "preview_tabs": {
     "enabled": true,
     "enable_preview_from_file_finder": true,
-    "enable_preview_from_code_navigation": true
+    "enable_keep_preview_on_code_navigation": true
   },
   "languages": {
     "JavaScript": {
