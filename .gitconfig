@@ -28,6 +28,7 @@
 	fix = "commit --fixup"
 	unstage = "reset --"
 	authors = "shortlog --summary --numbered"
+	nvm = "reset --soft HEAD~1"
 
 	# show things ignored with `git update-index --assume-unchanged <file>`
 	ignored = !git ls-files -v | grep "^[[:lower:]]"
@@ -35,7 +36,7 @@
 	# list these aliases
 	la = "!git config -l | grep alias | cut -c 7-"
 
-	# shows files in current repo?
+	# display commits and their changed lines
 	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
 
 	# displays commits of current repo
@@ -60,7 +61,7 @@
 	editor = code-insiders --wait
 	ignorecase = false
 	pager = delta
-	hooksPath = ./git_hooks
+	hooksPath = .git_hooks
 
 [delta]
 	side-by-side = true
@@ -83,12 +84,12 @@
   diffFilter = delta --color-only
 
 # Enforce SSH
-[url "ssh://git@github.com/"]
-  insteadOf = https://github.com/
-[url "ssh://git@gitlab.com/"]
-  insteadOf = https://gitlab.com/
-[url "ssh://git@bitbucket.org/"]
-  insteadOf = https://bitbucket.org/
+; [url "ssh://git@github.com/"]
+;   insteadOf = https://github.com/
+; [url "ssh://git@gitlab.com/"]
+;   insteadOf = https://gitlab.com/
+; [url "ssh://git@bitbucket.org/"]
+;   insteadOf = https://bitbucket.org/
 
 [diff "lockb"]
     textconv = bun
@@ -147,3 +148,6 @@
 
 [mergetool]
 	keepBackup = true
+
+[format]
+	signoff = true
