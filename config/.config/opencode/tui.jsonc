@@ -1,0 +1,15 @@
+{
+  "$schema": "https://opencode.ai/tui.json",
+  "theme": "opencode",
+  "attention": {
+    "enabled": true,
+    "notifications": true,
+  },
+  "scroll_acceleration": {
+    "enabled": true
+  },
+  "mouse": true,
+  "plugin": [
+    "@slkiser/opencode-quota"
+  ]
+}

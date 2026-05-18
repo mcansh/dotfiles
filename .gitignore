@@ -9,3 +9,5 @@
 .config/fish/functions/_autopair_insert_right.fish
 .config/fish/functions/_autopair_insert_same.fish
 .config/fish/functions/_autopair_tab.fish
+
+node_modules/

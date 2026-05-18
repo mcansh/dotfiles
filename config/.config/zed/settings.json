@@ -7,6 +7,18 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "proxy": "",
+  "prettier": {
+    "allowed": true
+  },
+  "which_key": {
+    "enabled": false
+  },
+  "terminal": {
+    "dock": "left"
+  },
+  "code_lens": "on",
+  "diff_view_style": "split",
   "cli_default_open_behavior": "new_window",
   "git": {
     "inline_blame": {
@@ -31,6 +43,7 @@
 
   },
   "git_panel": {
+    "sort_by_path": true,
     "tree_view": false,
     "dock": "right"
   },

@@ -15,7 +15,6 @@ if test -f "./Dockerfile"
     set -g DOCKER_TAG_NAME (slugify (basename $PWD)-(git branch --show-current))
 end
 
-alias oc="opencode"
 alias gc="git commit -s"
 alias gl="git ld"
 alias gdd='git diff --staged'
@@ -114,8 +113,6 @@ if which rbenv > /dev/null
   eval "$(rbenv init -)"
 end
 
-eval "$(wut init)"
-
 
 # 1Password CLI
 # op completion fish | source
@@ -152,3 +149,4 @@ eval (~/.local/try.rb init ~/Developer/tries | string collect)
 
 # tuitube
 fish_add_path /Users/lmcansh/.termcast/compiled/tuitube/bin
+

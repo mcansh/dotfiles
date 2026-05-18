@@ -26,8 +26,13 @@ echo "Hello $(whoami)! Let's get you set up."
 
 DOTFILES="${HOME}/.dotfiles"
 
-echo "cloning dotfiles"
-git clone git@github.com:mcansh/dotfiles.git ${DOTFILES}
+if [ -d "${DOTFILES}/.git" ]; then
+	echo "dotfiles already exists, pulling latest"
+	git -C "${DOTFILES}" pull --ff-only
+else
+	echo "cloning dotfiles"
+	git clone https://github.com/mcansh/dotfiles.git "${DOTFILES}"
+fi
 
 echo "installing oh-my-fish"
 curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
@@ -45,7 +50,7 @@ brew bundle --file "${DOTFILES}/Brewfile"
 # set up symlinks
 echo "setting up symlinks"
 
-cd "${DOTFILES}" && stow .
+"${DOTFILES}/scripts/stow.sh" install
 
 # Install latest version of Node.js
 export N_PRESERVE_NPM=1
