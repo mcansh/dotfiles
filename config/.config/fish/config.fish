@@ -64,11 +64,7 @@ status is-interactive; or return
 atuin init fish | source
 set -gx GPG_TTY (tty)
 
-if test -f ./Dockerfile
-    set -g DOCKER_TAG_NAME (slugify (basename "$PWD")-(git branch --show-current))
-end
-
-alias gc='git commit -s'
+alias gc='git commit --signoff'
 alias gl='git ld'
 alias gdd='git diff --staged'
 alias gcp='git cherry-pick -x'
