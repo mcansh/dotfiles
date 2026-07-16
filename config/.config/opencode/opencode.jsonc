@@ -3,7 +3,7 @@
   "autoupdate": true,
   "plugin": [
     "@plannotator/opencode@latest",
-    "@slkiser/opencode-quota"
+    "@slkiser/opencode-quota@latest"
   ],
   "permission": {
     "external_directory": {
@@ -67,6 +67,14 @@
     "codesearch": "allow"
   },
   "mcp": {
+    "railway": {
+      "command": [
+        "railway",
+        "mcp"
+      ],
+      "enabled": true,
+      "type": "local"
+    },
     "cloudflare-docs": {
       "type": "remote",
       "url": "https://docs.mcp.cloudflare.com/mcp",
@@ -81,34 +89,13 @@
       ],
       "enabled": true
     },
-    "mortgage-matchup-dev": {
-      "type": "remote",
-      "url": "http://localhost:61473/mcp",
-      "oauth": {
-        "scope": "openid profile email address phone",
-      }
+    "google chrome": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "chrome-devtools-mcp@latest"
+      ]
     },
-    "mortgage-matchup-int": {
-      "type": "remote",
-      "url": "https://int.api.uwm.com/mcp/mortgagematchup/mcp",
-      "oauth": {
-        "scope": "openid profile email address phone",
-      }
-    },
-    "mortgage-matchup-staging": {
-      "type": "remote",
-      "url": "https://stg.api.uwm.com/mcp/mortgagematchup/mcp",
-      "oauth": {
-        "scope": "openid profile email address phone",
-      }
-    },
-    "mortgage-matchup-prod": {
-      "type": "remote",
-      "url": "https://api.uwm.com/mcp/mortgagematchup/mcp",
-      "oauth": {
-        "scope": "openid profile email address phone",
-      }
-    }
-
   }
 }
