@@ -1,158 +1,116 @@
-if status is-interactive
-  # Commands to run in interactive sessions can go here
-  atuin init fish | source
-end
+# Environment
+set -gx EDITOR /usr/local/bin/code-insiders
+set -gx HOMEBREW_BUNDLE_DUMP_NO_VSCODE 1
+set -gx N_PRESERVE_NPM 1
+set -gx N_PREFIX "$HOME/.n"
+set -gx NODE_PATH "$N_PREFIX/lib/node_modules"
+set -gx BUN_INSTALL "$HOME/.bun"
+set -gx DENO_INSTALL "$HOME/.deno"
+set -gx PNPM_HOME "$HOME/Library/pnpm"
+set -gx SSH_AUTH_SOCK "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+set -gx PHP_INI_SCAN_DIR "$HOME/Library/Application Support/Herd/config/php:$PHP_INI_SCAN_DIR"
 
-# Set my editor
-export EDITOR="/usr/local/bin/code-insiders"
-
-# load env from ./env.ignored
+# Load private environment variables without spawning grep and xargs.
 if test -f "$HOME/.dotfiles/env.ignored"
-  export (grep "^[^#]" $HOME/.dotfiles/env.ignored | xargs -L 1)
+    export (string match -rv '^\s*(#|$)' < "$HOME/.dotfiles/env.ignored")
 end
 
-if test -f "./Dockerfile"
-    set -g DOCKER_TAG_NAME (slugify (basename $PWD)-(git branch --show-current))
+# Remove duplicate and malformed entries inherited from older shell sessions.
+set -l clean_path
+for path_entry in $PATH
+    string match -qr '^(`gem|gemdir`/bin)$' -- "$path_entry"; and continue
+    contains -- "$path_entry" $clean_path; or set -a clean_path "$path_entry"
+end
+set -gx PATH $clean_path
+
+set -l managed_paths \
+    "$HOME/.nub/bin" \
+    "$HOME/.termcast/compiled/tuitube/bin"
+
+# Homebrew Ruby stores gem executables in versioned directories. Globbing keeps
+# this current across upgrades without invoking Ruby during shell startup.
+set -l ruby_gem_bins /opt/homebrew/lib/ruby/gems/*/bin
+set -a managed_paths $ruby_gem_bins[-1..1]
+
+set -a managed_paths \
+    /opt/homebrew/opt/ruby/bin \
+    "$HOME/.cargo/bin" \
+    "$PNPM_HOME/bin" \
+    /opt/homebrew/bin \
+    "$HOME/Library/Application Support/Herd/bin" \
+    "$DENO_INSTALL/bin" \
+    "$BUN_INSTALL/bin" \
+    "$HOME/.composer/vendor/bin" \
+    "/Applications/Sublime Text.app/Contents/SharedSupport/bin" \
+    "$HOME/.dotfiles/.my_bin" \
+    "$N_PREFIX/bin"
+
+fish_add_path --path --move $managed_paths
+contains -- ./node_modules/.bin $PATH; or set -p PATH ./node_modules/.bin
+
+# Prefer the PEM certificate when both local UWM bundles are available.
+set -l uwm_cert "$HOME/uwm-certs/uwm-ca-bundle.crt"
+set -l uwm_cert_pem "$HOME/uwm-certs/uwm-ca-bundle.pem"
+
+if test -f "$uwm_cert_pem"
+    set -gx NODE_EXTRA_CA_CERTS "$uwm_cert_pem"
+else if test -f "$uwm_cert"
+    set -gx NODE_EXTRA_CA_CERTS "$uwm_cert"
 end
 
-alias gc="git commit -s"
-alias gl="git ld"
+status is-interactive; or return
+
+# Interactive integrations
+atuin init fish | source
+set -gx GPG_TTY (tty)
+
+if test -f ./Dockerfile
+    set -g DOCKER_TAG_NAME (slugify (basename "$PWD")-(git branch --show-current))
+end
+
+alias gc='git commit -s'
+alias gl='git ld'
 alias gdd='git diff --staged'
 alias gcp='git cherry-pick -x'
-alias gitnvm="git reset --soft HEAD~1"
-
+alias gitnvm='git reset --soft HEAD~1'
 alias ls='ls -1a'
-
 alias makethisgohere='ln -s'
-
 alias youtube-dl='yt-dlp'
 
-# Don't change npm version when using n
-export N_PRESERVE_NPM=1
-export N_PREFIX="$HOME/.n"
-export PATH="$N_PREFIX/bin:$PATH"
-export NODE_PATH="$N_PREFIX/lib/node_modules"
+set -g hydro_symbol_prompt ▲
 
-# dont save vscode extensions to Brewfile
-export HOMEBREW_BUNDLE_DUMP_NO_VSCODE=1
+# Cache generated Pay Respects integration until its executable changes.
+if command -q pay-respects
+    set -l pay_respects_path (command -s pay-respects)
+    set -l pay_respects_cache "$HOME/.cache/fish/pay-respects.fish"
 
-export PATH="$HOME/.dotfiles/.my_bin:$PATH"
+    if not test -f "$pay_respects_cache"; or test "$pay_respects_path" -nt "$pay_respects_cache"
+        command mkdir -p (path dirname "$pay_respects_cache")
+        set -l pay_respects_temp "$pay_respects_cache.$fish_pid"
 
-# tell GPG the current terminal.
-export GPG_TTY=(tty)
+        if pay-respects fish --alias >"$pay_respects_temp"
+            command mv "$pay_respects_temp" "$pay_respects_cache"
+        else
+            command rm -f "$pay_respects_temp"
+        end
+    end
 
-# make local npm binarys available without npx <name>
-export PATH="./node_modules/.bin:$PATH"
-
-# sublime text cli
-export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
-
-# composer / laravel
-export PATH="$HOME/.composer/vendor/bin:$PATH"
-
-export PATH="$HOME/.deno/bin:$PATH"
-
-# Bun completions
-# [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-
-# Bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-# Deno
-export DENO_INSTALL="$HOME/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
-
-# Herd injected PHP binary.
-export PATH="$HOME/Library/Application Support/Herd/bin:$PATH"
-export PHP_INI_SCAN_DIR="$HOME/Library/Application Support/Herd/config/php:$PHP_INI_SCAN_DIR"
-
-set -g __fish_git_prompt_show_informative_status 1
-set -g __fish_git_prompt_hide_untrackedfiles 1
-
-set -g __fish_git_prompt_color_branch magenta --bold
-set -g __fish_git_prompt_showupstream informative
-set -g __fish_git_prompt_char_upstream_ahead "↑"
-set -g __fish_git_prompt_char_upstream_behind "↓"
-set -g __fish_git_prompt_char_upstream_prefix ""
-
-set -g __fish_git_prompt_char_stagedstate "●"
-set -g __fish_git_prompt_char_dirtystate "✚"
-set -g __fish_git_prompt_char_untrackedfiles "…"
-set -g __fish_git_prompt_char_conflictedstate "✖"
-set -g __fish_git_prompt_char_cleanstate "✔"
-
-set -g __fish_git_prompt_color_dirtystate blue
-set -g __fish_git_prompt_color_stagedstate yellow
-set -g __fish_git_prompt_color_invalidstate red
-set -g __fish_git_prompt_color_untrackedfiles $fish_color_normal
-set -g __fish_git_prompt_color_cleanstate green --bold
-
-# add brew to path and configure autocomplete
-fish_add_path /opt/homebrew/bin
-
-if test -d (brew --prefix)"/share/fish/completions"
-    set -p fish_complete_path (brew --prefix)/share/fish/completions
+    test -f "$pay_respects_cache"; and source "$pay_respects_cache"
 end
 
-if test -d (brew --prefix)"/share/fish/vendor_completions.d"
-    set -p fish_complete_path (brew --prefix)/share/fish/vendor_completions.d
+# Fish autoloads this cache only when Codex completions are requested.
+if command -q codex
+    set -l codex_path (command -s codex)
+    set -l codex_completions "$HOME/.cache/fish/generated_completions/codex.fish"
+
+    if not test -f "$codex_completions"; or test "$codex_path" -nt "$codex_completions"
+        command mkdir -p (path dirname "$codex_completions")
+        set -l codex_temp "$codex_completions.$fish_pid"
+
+        if codex completion fish >"$codex_temp"
+            command mv "$codex_temp" "$codex_completions"
+        else
+            command rm -f "$codex_temp"
+        end
+    end
 end
-
-
-# pnpm
-set -gx PNPM_HOME "/Users/lmcansh/Library/pnpm"
-if not string match -q -- "$PNPM_HOME/bin" $PATH
-  set -gx PATH "$PNPM_HOME/bin" $PATH
-end
-# pnpm end
-
-# Cargo / Rust
-export PATH="$HOME/.cargo/bin:$PATH"
-# source $HOME/.cargo/env
-
-if which rbenv > /dev/null
-  eval "$(rbenv init -)"
-end
-
-
-# 1Password CLI
-# op completion fish | source
-
-# tabtab source for packages
-# uninstall by removing these lines
-[ -f ~/.config/tabtab/fish/__tabtab.fish ]; and . ~/.config/tabtab/fish/__tabtab.fish; or true
-
-set --global hydro_symbol_prompt ▲
-
-[ -f ~/.inshellisense/key-bindings.fish ] && source ~/.inshellisense/key-bindings.fish
-
-set --global SSH_AUTH_SOCK "~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-
-pay-respects fish --alias | source
-
-set UWM_CERT "$HOME/uwm-certs/uwm-ca-bundle.crt"
-set UWM_CERT_PEM "$HOME/uwm-certs/uwm-ca-bundle.pem"
-
-if test -f $UWM_CERT
-  export NODE_EXTRA_CA_CERTS=$UWM_CERT
-end
-
-if test -f $UWM_CERT_PEM
-    export NODE_EXTRA_CA_CERTS=$UWM_CERT_PEM
-end
-
-if test -d "/opt/homebrew/opt/ruby/bin"
-  set -gx PATH "/opt/homebrew/opt/ruby/bin:$PATH"
-  set -gx PATH `gem environment gemdir`/bin:$PATH
-end
-
-eval (codex completion fish) | source
-eval (~/.local/try.rb init ~/Developer/tries | string collect)
-
-# tuitube
-fish_add_path /Users/lmcansh/.termcast/compiled/tuitube/bin
-
-
-# nub
-set -gx PATH $HOME/.nub/bin $PATH
