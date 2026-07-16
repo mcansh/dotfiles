@@ -47,16 +47,22 @@ dotfiles_dir = Path(sys.argv[1]).expanduser().resolve()
 target_dir = Path(sys.argv[2]).expanduser().resolve()
 packages = sys.argv[3:]
 
-skip_names = {".DS_Store", "fish_variables"}
-skip_contains = {"node_modules"}
+skip_names = {".DS_Store", ".stow-local-ignore", "fish_variables", "lock.mdb"}
+skip_paths = {Path(".config/opencode/node_modules")}
 
-def file_count(path: Path) -> int:
+def should_skip(path: Path, package_root: Path) -> bool:
+    relative_path = path.relative_to(package_root)
+    return path.name in skip_names or any(
+        relative_path == skipped or skipped in relative_path.parents
+        for skipped in skip_paths
+    )
+
+def file_count(path: Path, package_root: Path) -> int:
     return sum(
         1
         for p in path.rglob("*")
         if p.is_file()
-        and p.name not in skip_names
-        and not any(part in skip_contains for part in p.parts)
+        and not should_skip(p, package_root)
     )
 
 def check_file(src: Path, tgt: Path, report):
@@ -84,11 +90,12 @@ def check_file(src: Path, tgt: Path, report):
         if len(report["wrong_examples"]) < 8:
             report["wrong_examples"].append((tgt, tgt_resolved, src))
 
-def walk(src: Path, tgt: Path, report):
-    if src.name in skip_names:
+def walk(src: Path, tgt: Path, package_root: Path, report):
+    if should_skip(src, package_root):
         return
 
-    if any(part in skip_contains for part in src.parts):
+    if src.is_symlink():
+        check_file(src, tgt, report)
         return
 
     if src.is_file():
@@ -99,7 +106,7 @@ def walk(src: Path, tgt: Path, report):
         return
 
     if tgt.is_symlink():
-        subtree_files = file_count(src)
+        subtree_files = file_count(src, package_root)
         report["checked"] += subtree_files
 
         try:
@@ -116,7 +123,7 @@ def walk(src: Path, tgt: Path, report):
         return
 
     if not tgt.exists():
-        subtree_files = file_count(src)
+        subtree_files = file_count(src, package_root)
         report["checked"] += subtree_files
         report["missing"] += subtree_files
         if len(report["missing_examples"]) < 8:
@@ -124,7 +131,7 @@ def walk(src: Path, tgt: Path, report):
         return
 
     if not tgt.is_dir():
-        subtree_files = file_count(src)
+        subtree_files = file_count(src, package_root)
         report["checked"] += subtree_files
         report["wrong"] += subtree_files
         if len(report["wrong_examples"]) < 8:
@@ -132,7 +139,7 @@ def walk(src: Path, tgt: Path, report):
         return
 
     for child in src.iterdir():
-        walk(child, tgt / child.name, report)
+        walk(child, tgt / child.name, package_root, report)
 
 overall = {
     "checked": 0,
@@ -160,7 +167,7 @@ for package in packages:
         print(f"[{package}] package not found: {src_root}")
         continue
 
-    walk(src_root, target_dir, report)
+    walk(src_root, target_dir, src_root, report)
 
     overall["checked"] += report["checked"]
     overall["ok"] += report["ok"]

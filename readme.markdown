@@ -34,9 +34,6 @@ From the repo root:
 # create/update symlinks
 ./scripts/stow.sh install
 
-# include zed package when wanted
-./scripts/stow.sh install zed
-
 # recreate links after moving files around
 ./scripts/stow.sh restow
 

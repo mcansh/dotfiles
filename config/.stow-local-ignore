@@ -1,0 +1,4 @@
+\.DS_Store
+\.config/opencode/node_modules
+fish_variables
+lock\.mdb
