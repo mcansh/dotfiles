@@ -7,7 +7,8 @@ TARGET_DIR="${TARGET_DIR:-$HOME}"
 
 DEFAULT_PACKAGES=(
   config
-  .my_bin
+  bin
+  agents
 )
 
 usage() {
