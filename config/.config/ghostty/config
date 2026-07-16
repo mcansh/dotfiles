@@ -17,7 +17,7 @@ split-inherit-working-directory = true
 keybind = super+enter=ignore
 auto-update = check
 auto-update-channel = tip
-macos-icon-frame = beige
+macos-icon = blueprint
 
 background = #ffffff
 foreground = #1f2328
