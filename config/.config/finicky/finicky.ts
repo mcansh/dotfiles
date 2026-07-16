@@ -12,10 +12,18 @@ export default {
     // Replace domain of urls to amazon.com with smile.amazon.com
     {
       match: finicky.matchHostnames(["www.amazon.com", "amazon.com"]),
-      url: (url) => {
-        return { ...url, host: "smile.amazon.com" };
+      url(url) {
+        url.host = "smile.amazon.com";
+        return url;
       },
     },
+    {
+      match: finicky.matchHostnames(["int.www.uwm.com"]),
+      url(url) {
+        url.host = "www.int.uwm.com";
+        return url;
+      },
+    }
   ],
   handlers: [
     {
