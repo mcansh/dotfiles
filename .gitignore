@@ -10,4 +10,8 @@
 .config/fish/functions/_autopair_insert_same.fish
 .config/fish/functions/_autopair_tab.fish
 
+# machine-local application state
+config/.config/fish/fish_variables
+config/.config/zed/prompts/prompts-library-db.0.mdb/lock.mdb
+
 node_modules/
