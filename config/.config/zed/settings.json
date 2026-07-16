@@ -7,6 +7,7 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "minimum_split_diff_width": 0.0,
   "proxy": "",
   "prettier": {
     "allowed": true
@@ -26,13 +27,35 @@
     }
   },
   "outline_panel": {
-    "dock": "left"
+    "dock": "right"
   },
   "collaboration_panel": {
-    "dock": "left"
+    "dock": "right"
   },
   "agent_servers": {
+    "github-copilot-cli": {
+      "default_config_options": {
+        "mode": "https://agentclientprotocol.com/protocol/session-modes#agent",
+        "model": "auto"
+      },
+      "favorite_config_option_values": {
+        "model": [
+          "gpt-5.3-codex"
+        ]
+      },
+      "type": "registry"
+    },
+    "codex-acp": {
+      "type": "registry"
+    },
+    "claude-acp": {
+      "type": "registry"
+    },
     "opencode": {
+      "default_config_options": {
+        "effort": "max",
+        "model": "opencode/deepseek-v4-flash-free"
+      },
       "type": "registry"
     }
   },
@@ -50,15 +73,18 @@
   "restore_on_startup": "empty_tab",
   "base_keymap": "Atom",
   "agent": {
-    "dock": "right",
+    "flexible": true,
+    "dock": "left",
     "default_profile": "write",
     "inline_assistant_model": {
       "provider": "zed.dev",
       "model": "claude-opus-4-1"
     },
     "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-opus-4-1"
+      "effort": "high",
+      "enable_thinking": true,
+      "provider": "copilot_chat",
+      "model": "gpt-5.3-codex"
     },
     "commit_message_model": {
       "provider": "zed.dev",
@@ -100,6 +126,10 @@
   },
   "lsp": {
     "vtsls": {
+      "binary": {
+        "path": "node_modules/.bin/tsc",
+        "arguments": ["--lsp", "--stdio"]
+      },
       "settings": {
         "typescript": {
           "updateImportsOnFileMove": {
