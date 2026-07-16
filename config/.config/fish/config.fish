@@ -101,8 +101,10 @@ end
 
 
 # pnpm
-set -gx PNPM_HOME "$HOME/Library/pnpm"
-set -gx PATH "$PNPM_HOME" $PATH
+set -gx PNPM_HOME "/Users/lmcansh/Library/pnpm"
+if not string match -q -- "$PNPM_HOME/bin" $PATH
+  set -gx PATH "$PNPM_HOME/bin" $PATH
+end
 # pnpm end
 
 # Cargo / Rust
@@ -145,8 +147,12 @@ if test -d "/opt/homebrew/opt/ruby/bin"
   set -gx PATH `gem environment gemdir`/bin:$PATH
 end
 
+eval (codex completion fish) | source
 eval (~/.local/try.rb init ~/Developer/tries | string collect)
 
 # tuitube
 fish_add_path /Users/lmcansh/.termcast/compiled/tuitube/bin
 
+
+# nub
+set -gx PATH $HOME/.nub/bin $PATH
