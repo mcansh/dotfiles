@@ -6,6 +6,9 @@
 [includeIf "gitdir:~/Developer/uwm/"]
 	path = ~/.gitconfig-work
 
+[includeIf "gitdir:~/.vscode-insiders/agent-plugins/code.uwm.com"]
+	path = ~/.gitconfig-work
+
 [includeIf "gitdir:/workspaces/"]
 	path = ~/.gitconfig-codespaces
 
@@ -151,3 +154,6 @@
 
 [format]
 	signoff = true
+[pager]
+	# diff = diffnav
+	diff = delta
