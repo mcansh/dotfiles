@@ -58,10 +58,53 @@ else if test -f "$uwm_cert"
     set -gx NODE_EXTRA_CA_CERTS "$uwm_cert"
 end
 
+# Fish 4.8 can wait 10 seconds for terminal capability replies that some
+# terminals do not implement. Persist Fish's documented compatibility flag;
+# the guard keeps established shells and the universal-variable file untouched.
+contains -- no-query-term $fish_features; or set -Ua fish_features no-query-term
+
 status is-interactive; or return
 
 # Interactive integrations
-atuin init fish | source
+# Atuin's generated hook is stable between binary upgrades. Cache it so a cold
+# shell does not have to launch Atuin just to print the first prompt.
+if command -q atuin
+    set -l atuin_path (command -s atuin)
+    set -l atuin_resolved_path (path resolve "$atuin_path")
+    set -l atuin_cache "$HOME/.cache/fish/atuin-init.fish"
+    set -l atuin_cache_path "$atuin_cache.path"
+    set -l cached_atuin_path
+
+    test -r "$atuin_cache_path"; and set cached_atuin_path (string collect <"$atuin_cache_path")
+
+    if not test -s "$atuin_cache"; or test "$cached_atuin_path" != "$atuin_resolved_path"; or test "$atuin_path" -nt "$atuin_cache"
+        command mkdir -p (path dirname "$atuin_cache")
+        set -l atuin_temp "$atuin_cache.$fish_pid"
+        set -l atuin_path_temp "$atuin_cache_path.$fish_pid"
+
+        if atuin init fish >"$atuin_temp"
+            printf '%s\n' "$atuin_resolved_path" >"$atuin_path_temp"
+            command mv "$atuin_temp" "$atuin_cache"
+            command mv "$atuin_path_temp" "$atuin_cache_path"
+        else
+            command rm -f "$atuin_temp" "$atuin_path_temp"
+        end
+    end
+
+    # The generated hook otherwise launches `atuin uuid` on every new shell.
+    # A standards-shaped UUID made from Fish builtins is sufficient as Atuin's
+    # per-shell session identifier and avoids paging in the Atuin binary.
+    if not set -q ATUIN_SESSION; or test "$ATUIN_SHLVL" != "$SHLVL"
+        set -gx ATUIN_SESSION (printf '%04x%04x-%04x-4%03x-%x%03x-%04x%04x%04x' \
+            (random 0 65535) (random 0 65535) (random 0 65535) \
+            (random 0 4095) (random 8 11) (random 0 4095) \
+            (random 0 65535) (random 0 65535) (random 0 65535))
+        set -gx ATUIN_SHLVL $SHLVL
+    end
+
+    test -s "$atuin_cache"; and source "$atuin_cache"
+end
+
 set -gx GPG_TTY (tty)
 
 alias gc='git commit --signoff'
