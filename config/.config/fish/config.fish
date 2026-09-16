@@ -1,3 +1,7 @@
+# The following lines were added by Docker Desktop to add commands to your PATH.
+export PATH="$PATH:/Users/lmcansh/.docker/bin"
+# End of Docker Desktop section.
+
 # Environment
 set -gx EDITOR /usr/local/bin/code-insiders
 set -gx HOMEBREW_BUNDLE_DUMP_NO_VSCODE 1
@@ -156,3 +160,6 @@ end
 
 # opencode
 fish_add_path /Users/lmcansh/.opencode/bin
+
+# nub shims
+set -gx PATH $HOME/.nub/shims $PATH
