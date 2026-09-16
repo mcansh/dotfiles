@@ -153,3 +153,6 @@ if command -q codex
         end
     end
 end
+
+# opencode
+fish_add_path /Users/lmcansh/.opencode/bin
