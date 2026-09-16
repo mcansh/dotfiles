@@ -10,7 +10,7 @@ function update-all
     n latest
 
     # clean up old node version of the same major
-    node "~/.dotfiles/n-cleanup.mjs"
+    node "$HOME/.dotfiles/n-cleanup.mjs"
 
     if type -q rustup
         echo "▲ Updating Rust 🦀"
