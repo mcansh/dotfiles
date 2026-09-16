@@ -7,6 +7,11 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "markdown_preview_code_font_family": ".ZedMono",
+  "markdown_preview_font_family": ".ZedSans",
+  "debugger": {
+    "dock": "left"
+  },
   "minimum_split_diff_width": 0.0,
   "proxy": "",
   "prettier": {
@@ -22,6 +27,7 @@
   "diff_view_style": "split",
   "cli_default_open_behavior": "new_window",
   "git": {
+    "diff_base": "head",
     "inline_blame": {
       "show_commit_summary": false
     }
@@ -62,6 +68,10 @@
   },
   "context_servers": {},
   "git_panel": {
+    "show_count_badge": true,
+    "file_icons": false,
+    "status_style": "icon",
+    "group_by": "staging",
     "sort_by": "path",
     "tree_view": false,
     "dock": "right"
@@ -69,22 +79,33 @@
   "restore_on_startup": "empty_tab",
   "base_keymap": "Atom",
   "agent": {
+    "sidebar_side": "right",
+    "favorite_models": [
+      {
+        "provider": "openai-subscribed",
+        "model": "gpt-5.6-sol",
+        "enable_thinking": true,
+        "effort": "low",
+        "speed": "fast"
+      }
+    ],
     "flexible": true,
-    "dock": "left",
+    "dock": "right",
     "default_profile": "write",
     "inline_assistant_model": {
-      "provider": "zed.dev",
-      "model": "claude-opus-4-1"
+      "provider": "openai",
+      "model": "gpt-5.6-sol"
     },
     "default_model": {
-      "effort": "high",
+      "speed": "fast",
+      "effort": "low",
       "enable_thinking": true,
-      "provider": "copilot_chat",
-      "model": "gpt-5.3-codex"
+      "provider": "openai-subscribed",
+      "model": "gpt-5.6-sol"
     },
     "commit_message_model": {
-      "provider": "zed.dev",
-      "model": "gpt-4o-mini"
+      "provider": "openai",
+      "model": "gpt-5.6-sol"
     }
   },
   "ui_font_size": 14,
@@ -139,47 +160,9 @@
         }
       },
       "enable_lsp_tasks": true
-    },
-    "biome": {
-      "settings": {
-        "require_config_file": true
-      }
-    },
-    "prettier": {
-      "settings": {
-        "require_config_file": true
-      }
-    },
-    "oxc": {
-      "settings": {
-        "require_config_file": true
-      }
-    },
-    "oxlint": {
-      "initialization_options": {
-        "settings": {
-          "configPath": null,
-          "run": "onType",
-          "disableNestedConfig": false,
-          "fixKind": "safe_fix",
-          "unusedDisableDirectives": "deny"
-        }
-      }
-    },
-    "oxfmt": {
-      "initialization_options": {
-        "settings": {
-          "fmt.configPath": null,
-          "run": "onSave"
-        }
-      }
     }
   },
   "unnecessary_code_fade": 0.7,
-  "code_actions_on_format": {
-    "source.fixAll.biome": true,
-    "source.organizeImports.biome": true
-  },
   "preview_tabs": {
     "enabled": true,
     "enable_preview_from_file_finder": true,
