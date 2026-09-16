@@ -157,3 +157,5 @@
 [pager]
 	# diff = diffnav
 	diff = delta
+[safe]
+	directory = /Users/lmcansh/Developer/uwm/uwm
