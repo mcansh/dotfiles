@@ -4,7 +4,7 @@ export default {
   defaultBrowser: "Safari",
   options: {
     logRequests: false,
-    checkForUpdates: false,
+    checkForUpdates: true,
     hideIcon: true,
     keepRunning: true,
   },
@@ -51,16 +51,13 @@ export default {
     // uwm
     {
       match(url, { opener }) {
-        let hosts = ["uwm.com", "uwm.csod.com", "url.us.m.mimecastprotect.com", "code.uwm.com"];
+        let hosts = ["uwm.com", "uwm.csod.com", "url.us.m.mimecastprotect.com", "work.uwm.com", "code.uwm.com"];
         return (
           opener?.bundleId === "com.microsoft.teams2" ||
           hosts.includes(url.host)
         )
       },
-      browser: {
-        appType: "path",
-        name: "/Applications/Brave Browser Nightly.app"
-      }
+      browser: "Brave Browser Nightly"
     },
   ],
 } satisfies FinickyConfig;
