@@ -89,6 +89,9 @@ defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText "This 
 # Stop safari from opening downloaded files automatically
 defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
 
+# Disable font smoothing
+defaults -currentHost write -g AppleFontSmoothing -int 0
+
 # Set sidebar icon size to small
 defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 1
 
