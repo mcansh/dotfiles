@@ -1,7 +1,15 @@
 function oc -d "runs opencode"
     if command --search opencode2 > /dev/null
-        opencode2 "$argv"
+        if test "$argv"
+            opencode2 "$argv"
+        else
+            opencode2
+        end
     else
-        opencode "$argv"
+        if test "$argv"
+            opencode "$argv"
+        else
+            opencode
+        end
     end
 end
