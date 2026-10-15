@@ -68,7 +68,7 @@ end
 # the guard keeps established shells and the universal-variable file untouched.
 contains -- no-query-term $fish_features; or set -Ua fish_features no-query-term
 
-status is-interactive; or return
+status is-interactive; or return 0
 
 # Interactive integrations
 # Atuin's generated hook is stable between binary upgrades. Cache it so a cold
@@ -162,3 +162,11 @@ end
 # opencode
 fish_add_path /Users/lmcansh/.opencode/bin
 
+direnv hook fish | source
+
+# >>> grok installer >>>
+fish_add_path $HOME/.grok/bin
+# <<< grok installer <<<
+
+# An unchanged PATH is a successful config reload.
+return 0
