@@ -7,6 +7,7 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "icon_theme": null,
   "markdown_preview_code_font_family": ".ZedMono",
   "markdown_preview_font_family": ".ZedSans",
   "debugger": {
@@ -127,9 +128,9 @@
     "ss08": true
   },
   "theme": {
-    "mode": "system",
+    "mode": "light",
     "light": "Tailwind CSS Light (Enhanced)",
-    "dark": "Tailwind CSS Dark (Enhanced)"
+    "dark": "Hypersubatomic"
   },
   "project_panel": {
     "dock": "right",
