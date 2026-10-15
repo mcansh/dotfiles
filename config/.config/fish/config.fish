@@ -5,9 +5,6 @@ export PATH="$PATH:/Users/lmcansh/.docker/bin"
 # Environment
 set -gx EDITOR /usr/local/bin/code-insiders
 set -gx HOMEBREW_BUNDLE_DUMP_NO_VSCODE 1
-set -gx N_PRESERVE_NPM 1
-set -gx N_PREFIX "$HOME/.n"
-set -gx NODE_PATH "$N_PREFIX/lib/node_modules"
 set -gx BUN_INSTALL "$HOME/.bun"
 set -gx DENO_INSTALL "$HOME/.deno"
 set -gx PNPM_HOME "$HOME/Library/pnpm"
@@ -23,6 +20,7 @@ end
 set -l clean_path
 for path_entry in $PATH
     string match -qr '^(`gem|gemdir`/bin)$' -- "$path_entry"; and continue
+    string match -qr '/(\.n/bin|fnm|fnm_multishells)(/|$)' -- "$path_entry"; and continue
     contains -- "$path_entry" $clean_path; or set -a clean_path "$path_entry"
 end
 set -gx PATH $clean_path
@@ -47,9 +45,12 @@ set -a managed_paths \
     "$HOME/.composer/vendor/bin" \
     "/Applications/Sublime Text.app/Contents/SharedSupport/bin" \
     "$HOME/.dotfiles/.my_bin" \
-    "$N_PREFIX/bin"
+    "$HOME/.local/bin"
 
 fish_add_path --path --move $managed_paths
+set -l nub_data_home "$HOME/.local/share"
+set -q XDG_DATA_HOME[1]; and test -n "$XDG_DATA_HOME"; and set nub_data_home "$XDG_DATA_HOME"
+fish_add_path --path --move "$nub_data_home/nub/shims" "$nub_data_home/nub/node-shim"
 contains -- ./node_modules/.bin $PATH; or set -p PATH ./node_modules/.bin
 
 # Prefer the PEM certificate when both local UWM bundles are available.
@@ -161,5 +162,3 @@ end
 # opencode
 fish_add_path /Users/lmcansh/.opencode/bin
 
-# nub shims
-set -gx PATH $HOME/.nub/shims $PATH

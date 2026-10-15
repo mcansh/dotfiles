@@ -3,22 +3,22 @@ import { promisify } from "node:util";
 
 const execFile = promisify(cp.execFile);
 
-/** @returns {Array<{major: number, minor: number, patch: number}>} */
+/** @returns {Array<{major: number, minor: number, patch: number, active: boolean}>} */
 function getNodeVersions() {
   // get all the installed node versions
-  let nodeVersionString = cp.execFileSync("n", ["list"], { encoding: "utf-8" });
+  let nodeVersionString = cp.execFileSync("nub", ["node", "ls"], { encoding: "utf-8" });
 
   // split by new line and remove empty strings
   let lines = nodeVersionString
     .split("\n")
     .map((n) => n.trim())
-    .filter(Boolean);
+    .filter((line) => /^(?:→\s*)?\d+\.\d+\.\d+$/.test(line));
 
   let versions = lines.map((n) => {
-    let version = n.split("node/").at(1);
+    let version = n.replace(/^→\s*/, "");
     // split into major, minor, patch
     let [major, minor, patch] = version.split(".").map((p) => Number(p));
-    return { major, minor, patch };
+    return { major, minor, patch, active: n.startsWith("→") };
   });
 
   // sort by major then minor
@@ -35,7 +35,7 @@ const majorVersions = [...new Set(nodeVersions.map((version) => version.major))]
 const downloads = await Promise.allSettled(
   majorVersions.map(async (major) => {
     console.log(`downloading latest Node v${major}`);
-    await execFile("n", ["download", String(major)]);
+    await execFile("nub", ["node", "install", String(major)]);
     console.log(`downloaded latest Node v${major}`);
   }),
 );
@@ -61,12 +61,16 @@ for (const { major, minor, patch } of nodeVersions) {
 // keep the latest version
 // delete the rest
 for (let [major, versions] of versionMap) {
-  let nonLatestVersions = versions.slice(1);
+  let nonLatestVersions = versions.slice(1).filter((version) =>
+    !nodeVersions.some((node) => node.active && `${node.major}.${node.minor}.${node.patch}` === version),
+  );
 
   if (nonLatestVersions.length === 0) {
     console.log(`keeping latest Node v${major} version: ${versions.at(0)}`);
     continue;
   }
   console.log(`removing Node v${major}.x versions: ${nonLatestVersions.join(", ")}`);
-  cp.execFileSync("n", ["rm", ...nonLatestVersions], { stdio: "inherit" });
+  for (const version of nonLatestVersions) {
+    cp.execFileSync("nub", ["node", "uninstall", version], { stdio: "inherit" });
+  }
 }

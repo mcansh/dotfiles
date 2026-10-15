@@ -47,7 +47,7 @@ brew "mkcert"
 # Deep clean and optimize your Mac
 brew "mole"
 # Node version management
-brew "n"
+brew "nub"
 # HTTP(S) server and reverse proxy, and IMAP/POP3 proxy server
 brew "nginx"
 # Search tool like grep and The Silver Searcher

@@ -21,7 +21,7 @@ function __dotfiles_stow_packages
         switch "$entry"
             case '.git' '.agents' 'scripts' 'on-login' 'raycast-backups' 'raycast-extension-scripts'
                 continue
-            case 'Brewfile' 'RectangleConfig.json' 'readme.markdown' '.stowrc' '.stow-local-ignore' '.macos' 'env.ignored' 'n-cleanup.mjs'
+            case 'Brewfile' 'RectangleConfig.json' 'readme.markdown' '.stowrc' '.stow-local-ignore' '.macos' 'env.ignored' 'nub-node-cleanup.mjs'
                 continue
         end
 

@@ -52,22 +52,22 @@ echo "setting up symlinks"
 
 "${DOTFILES}/scripts/stow.sh" install
 
-# Install latest version of Node.js
-export N_PRESERVE_NPM=1
-export N_PREFIX="$HOME/.n"
-export PATH="$N_PREFIX/bin:$PATH"
-n latest
+# Use latest Node by default; project pins take precedence.
+if [ ! -f "$HOME/.node-version" ] && [ ! -f "$HOME/.nvmrc" ]; then
+    printf 'latest\n' > "$HOME/.node-version"
+fi
+nub node install latest
+SHELL="$(command -v fish)" nub node shim
+# Route Node and package-manager commands through Nub.
+SHELL="$(command -v fish)" nub pm shim
+export PATH="${XDG_DATA_HOME:-$HOME/.local/share}/nub/shims:${XDG_DATA_HOME:-$HOME/.local/share}/nub/node-shim:$HOME/.local/bin:$PATH"
 
 echo "node --version: $(node --version)"
 echo "npm --version: $(npm --version)"
 
 echo "installing a few global npm packages"
-npm i -g trash-cli fkill-cli @antfu/ni corepack
+npm i -g trash-cli fkill-cli @antfu/ni
 
-# install latest pnpm
-corepack prepare pnpm@latest --activate
-# install latest npm
-corepack prepare npm@latest --activate
 
 ###############################################################################
 # system modifications                                                        #
