@@ -1,7 +1,7 @@
 import type { FinickyConfig } from "/Applications/Finicky.app/Contents/Resources/finicky.d.ts";
 
 export default {
-  defaultBrowser: "Safari",
+  defaultBrowser: "Helium",
   options: {
     logRequests: false,
     checkForUpdates: true,
@@ -23,50 +23,52 @@ export default {
         url.host = "www.int.uwm.com";
         return url;
       },
-    }
+    },
   ],
   handlers: [
     {
       // generic
-      match: [
-        createRegex("stackblitz.com"),
-        createRegex("vite.new"),
-        createRegex("meet.google"),
-      ],
-      browser: "Brave Browser Nightly",
+      match: [createRegex("stackblitz.com"), createRegex("vite.new"), createRegex("meet.google")],
+      browser: "Helium",
     },
 
     // shopify
     {
       match(url) {
-        let matches = [
-          "https://github.com/shopify",
-          "https://workplace.com/shopify",
-        ];
+        let matches = ["https://github.com/shopify", "https://workplace.com/shopify"];
         return matches.some((match) => url.href.startsWith(match));
       },
-      browser: "Brave Browser Nightly",
+      browser: "Helium",
     },
 
     // uwm
     {
       match(url, { opener }) {
-        let hosts = ["uwm.com", "uwm.csod.com", "url.us.m.mimecastprotect.com", "work.uwm.com", "code.uwm.com"];
-        return (
-          opener?.bundleId === "com.microsoft.teams2" ||
-          hosts.includes(url.host)
-        )
+        let hosts = [
+          "uwm.com",
+          "uwm.csod.com",
+          "url.us.m.mimecastprotect.com",
+          "work.uwm.com",
+          "code.uwm.com",
+        ];
+        return opener?.bundleId === "com.microsoft.teams2" || hosts.includes(url.host);
       },
-      browser: "Brave Browser Nightly"
+      browser: "Helium",
     },
   ],
 } satisfies FinickyConfig;
 
 /** create a regex that matches any subdomain of the given domain, including the domain itself, and any path*/
-function createRegex(domain: string, { subdomains, paths }: {
-  subdomains?: string[];
-  paths?: string[];
-} = {}) {
+function createRegex(
+  domain: string,
+  {
+    subdomains,
+    paths,
+  }: {
+    subdomains?: string[];
+    paths?: string[];
+  } = {},
+) {
   subdomains ??= [];
   paths ??= [];
 
@@ -84,7 +86,5 @@ function createRegex(domain: string, { subdomains, paths }: {
     paths = paths.map((path) => `${path}`);
   }
 
-  return new RegExp(
-    `^https?://${subdomains.join("")}${domain}${paths.join("|")}$`,
-  );
+  return new RegExp(`^https?://${subdomains.join("")}${domain}${paths.join("|")}$`);
 }
