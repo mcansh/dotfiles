@@ -5,3 +5,6 @@
 
 [core]
 	hooksPath = ~/.git_hooks
+
+[remote "origin"]
+	tagOpt = --no-tags
