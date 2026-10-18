@@ -36,6 +36,7 @@
 	unstage = "reset --"
 	authors = "shortlog --summary --numbered"
 	nvm = "reset --soft HEAD~1"
+	last-branch = "rev-parse --abbrev-ref @{-1}"
 
 	# show things ignored with `git update-index --assume-unchanged <file>`
 	ignored = !git ls-files -v | grep "^[[:lower:]]"
@@ -136,10 +137,10 @@
 
 [gpg]
 	format = ssh
-	program = /usr/local/bin/gpg
+	program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
 
 [gpg "ssh"]
-	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+	program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
 
 [merge]
 	tool = code-insiders
