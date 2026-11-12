@@ -1,7 +1,20 @@
-import type { FinickyConfig } from "/Applications/Finicky.app/Contents/Resources/finicky.d.ts";
+import type {
+  BrowserSpecification,
+  FinickyConfig,
+} from "/Applications/Finicky.app/Contents/Resources/finicky.d.ts";
+
+const DEFAULT_BROWSER = {
+  name: "Helium",
+  profile: "You",
+} satisfies BrowserSpecification;
+
+const WORK_BROWSER = {
+  name: "Helium",
+  profile: "work",
+} satisfies BrowserSpecification;
 
 export default {
-  defaultBrowser: "Helium",
+  defaultBrowser: DEFAULT_BROWSER,
   options: {
     logRequests: false,
     checkForUpdates: true,
@@ -29,7 +42,7 @@ export default {
     {
       // generic
       match: [createRegex("stackblitz.com"), createRegex("vite.new"), createRegex("meet.google")],
-      browser: "Helium",
+      browser: DEFAULT_BROWSER,
     },
 
     // shopify
@@ -38,7 +51,7 @@ export default {
         let matches = ["https://github.com/shopify", "https://workplace.com/shopify"];
         return matches.some((match) => url.href.startsWith(match));
       },
-      browser: "Helium",
+      browser: DEFAULT_BROWSER,
     },
 
     // uwm
@@ -50,10 +63,15 @@ export default {
           "url.us.m.mimecastprotect.com",
           "work.uwm.com",
           "code.uwm.com",
+          "gitlab.uwm.com",
         ];
-        return opener?.bundleId === "com.microsoft.teams2" || hosts.includes(url.host);
+        return (
+          opener?.bundleId === "com.microsoft.teams2" ||
+          hosts.includes(url.host) ||
+          url.href.startsWith("https://github.com/Uwm-Cyborg")
+        );
       },
-      browser: "Helium",
+      browser: WORK_BROWSER,
     },
   ],
 } satisfies FinickyConfig;
