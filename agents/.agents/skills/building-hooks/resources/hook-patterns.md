@@ -394,33 +394,33 @@ Inject helpful context into Claude's prompt.
 ```javascript
 // UserPromptSubmit hook
 function injectContext(prompt) {
-    const context = [];
+  const context = [];
 
-    // Add relevant documentation
-    if (prompt.includes('API')) {
-        context.push('📖 API Documentation: https://docs.example.com/api');
-    }
+  // Add relevant documentation
+  if (prompt.includes("API")) {
+    context.push("📖 API Documentation: https://docs.example.com/api");
+  }
 
-    // Add recent changes
-    const recentFiles = getRecentlyEditedFiles();
-    if (recentFiles.length > 0) {
-        context.push(`📝 Recently edited: ${recentFiles.join(', ')}`);
-    }
+  // Add recent changes
+  const recentFiles = getRecentlyEditedFiles();
+  if (recentFiles.length > 0) {
+    context.push(`📝 Recently edited: ${recentFiles.join(", ")}`);
+  }
 
-    // Add project status
-    const buildStatus = getLastBuildStatus();
-    if (!buildStatus.passed) {
-        context.push(`⚠️  Current build has ${buildStatus.errorCount} errors`);
-    }
+  // Add project status
+  const buildStatus = getLastBuildStatus();
+  if (!buildStatus.passed) {
+    context.push(`⚠️  Current build has ${buildStatus.errorCount} errors`);
+  }
 
-    if (context.length === 0) {
-        return { decision: 'approve' };
-    }
+  if (context.length === 0) {
+    return { decision: "approve" };
+  }
 
-    return {
-        decision: 'approve',
-        additionalContext: `\n\n---\n${context.join('\n')}\n---\n`
-    };
+  return {
+    decision: "approve",
+    additionalContext: `\n\n---\n${context.join("\n")}\n---\n`,
+  };
 }
 ```
 

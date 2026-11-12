@@ -11,6 +11,7 @@ Empty email is accepted when it should be rejected.
 ### RED Phase: Write Failing Test
 
 **Swift:**
+
 ```swift
 func testRejectsEmptyEmail() async throws {
     let result = try await submitForm(FormData(email: ""))
@@ -26,6 +27,7 @@ FAIL: XCTAssertEqual failed: ("nil") is not equal to ("Optional("Email required"
 ```
 
 **Confirms:**
+
 - Test fails (not errors)
 - Failure message shows email not being validated
 - Fails because feature missing (not typos)
@@ -54,6 +56,7 @@ Test Case '-[FormTests testRejectsEmptyEmail]' passed
 ```
 
 **Confirms:**
+
 - Test passes
 - Other tests still pass
 - No errors or warnings
@@ -95,9 +98,10 @@ Calculate average of non-empty list.
 ### RED Phase: Write Failing Test
 
 **TypeScript:**
+
 ```typescript
-describe('average', () => {
-  it('calculates average of non-empty list', () => {
+describe("average", () => {
+  it("calculates average of non-empty list", () => {
     expect(average([1, 2, 3])).toBe(2);
   });
 });
@@ -111,6 +115,7 @@ FAIL: ReferenceError: average is not defined
 ```
 
 **Confirms:**
+
 - Function doesn't exist yet
 - Test would verify the behavior when function exists
 
@@ -133,19 +138,22 @@ PASS: calculates average of non-empty list
 ### Add Edge Case: Empty List
 
 **RED:**
+
 ```typescript
-it('returns 0 for empty list', () => {
+it("returns 0 for empty list", () => {
   expect(average([])).toBe(0);
 });
 ```
 
 **Verify RED:**
+
 ```bash
 $ npm test -- --testNamePattern="average.*empty"
 FAIL: Expected: 0, Received: NaN
 ```
 
 **GREEN:**
+
 ```typescript
 function average(numbers: number[]): number {
   if (numbers.length === 0) return 0;
@@ -155,6 +163,7 @@ function average(numbers: number[]): number {
 ```
 
 **Verify GREEN:**
+
 ```bash
 $ npm test -- --testNamePattern="average"
 PASS: 2 tests passed

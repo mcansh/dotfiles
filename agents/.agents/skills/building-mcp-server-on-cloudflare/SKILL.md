@@ -17,11 +17,11 @@ Your knowledge of the MCP SDK and Cloudflare Workers integration may be outdated
 
 ## Retrieval Sources
 
-| Source | How to retrieve | Use for |
-|--------|----------------|---------|
-| MCP docs | `https://developers.cloudflare.com/agents/mcp/` | Server setup, auth, deployment |
-| MCP spec | `https://modelcontextprotocol.io/` | Protocol spec, tool/resource definitions |
-| Workers docs | Search tool or `https://developers.cloudflare.com/workers/` | Runtime APIs, bindings, config |
+| Source       | How to retrieve                                             | Use for                                  |
+| ------------ | ----------------------------------------------------------- | ---------------------------------------- |
+| MCP docs     | `https://developers.cloudflare.com/agents/mcp/`             | Server setup, auth, deployment           |
+| MCP spec     | `https://modelcontextprotocol.io/`                          | Protocol spec, tool/resource definitions |
+| Workers docs | Search tool or `https://developers.cloudflare.com/workers/` | Runtime APIs, bindings, config           |
 
 ## When to Use
 
@@ -74,26 +74,18 @@ export class MyMCP extends McpAgent {
 
   async init() {
     // Simple tool with parameters
-    this.server.tool(
-      "add",
-      { a: z.number(), b: z.number() },
-      async ({ a, b }) => ({
-        content: [{ type: "text", text: String(a + b) }],
-      })
-    );
+    this.server.tool("add", { a: z.number(), b: z.number() }, async ({ a, b }) => ({
+      content: [{ type: "text", text: String(a + b) }],
+    }));
 
     // Tool that calls external API
-    this.server.tool(
-      "get_weather",
-      { city: z.string() },
-      async ({ city }) => {
-        const response = await fetch(`https://api.weather.com/${city}`);
-        const data = await response.json();
-        return {
-          content: [{ type: "text", text: JSON.stringify(data) }],
-        };
-      }
-    );
+    this.server.tool("get_weather", { city: z.string() }, async ({ city }) => {
+      const response = await fetch(`https://api.weather.com/${city}`);
+      const data = await response.json();
+      return {
+        content: [{ type: "text", text: JSON.stringify(data) }],
+      };
+    });
   }
 }
 ```
@@ -186,7 +178,7 @@ this.server.tool(
   },
   async (params) => {
     // params are fully typed and validated
-  }
+  },
 );
 ```
 
@@ -209,6 +201,7 @@ export class MyMCP extends McpAgent<Env> {
 For OAuth-protected servers, see [references/oauth-setup.md](references/oauth-setup.md).
 
 Supported providers:
+
 - GitHub
 - Google
 - Auth0

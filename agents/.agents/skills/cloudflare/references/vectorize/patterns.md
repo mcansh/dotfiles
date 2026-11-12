@@ -1,15 +1,15 @@
 # Vectorize pattern routes
 
-| Task | Current documentation |
-|------|-----------------------|
-| Generate and query Workers AI embeddings | [Vectorize and Workers AI](https://developers.cloudflare.com/vectorize/get-started/embeddings/) |
-| Query with embeddings from OpenAI | [OpenAI integration](https://developers.cloudflare.com/vectorize/best-practices/query-vectors/#openai) |
-| Choose embedding dimensions and distance metric | [Create indexes](https://developers.cloudflare.com/vectorize/best-practices/create-indexes/) |
-| Build a retrieval-augmented generation application | [Workers AI RAG tutorial](https://developers.cloudflare.com/workers-ai/guides/tutorials/build-a-retrieval-augmented-generation-ai/) |
-| Link search results to source documents | [Vector metadata](https://developers.cloudflare.com/vectorize/best-practices/insert-vectors/#metadata) |
-| Partition vectors by tenant | [Namespaces](https://developers.cloudflare.com/vectorize/best-practices/insert-vectors/#namespaces) and [namespace versus metadata filtering](https://developers.cloudflare.com/vectorize/reference/metadata-filtering/#namespace-versus-metadata-filtering) |
-| Combine similarity search with categorical or range filters | [Metadata filtering](https://developers.cloudflare.com/vectorize/reference/metadata-filtering/) |
-| Ingest or update vectors in batches | [Insert vectors](https://developers.cloudflare.com/vectorize/best-practices/insert-vectors/) and [limits](https://developers.cloudflare.com/vectorize/platform/limits/) |
+| Task                                                        | Current documentation                                                                                                                                                                                                                                        |
+| ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Generate and query Workers AI embeddings                    | [Vectorize and Workers AI](https://developers.cloudflare.com/vectorize/get-started/embeddings/)                                                                                                                                                              |
+| Query with embeddings from OpenAI                           | [OpenAI integration](https://developers.cloudflare.com/vectorize/best-practices/query-vectors/#openai)                                                                                                                                                       |
+| Choose embedding dimensions and distance metric             | [Create indexes](https://developers.cloudflare.com/vectorize/best-practices/create-indexes/)                                                                                                                                                                 |
+| Build a retrieval-augmented generation application          | [Workers AI RAG tutorial](https://developers.cloudflare.com/workers-ai/guides/tutorials/build-a-retrieval-augmented-generation-ai/)                                                                                                                          |
+| Link search results to source documents                     | [Vector metadata](https://developers.cloudflare.com/vectorize/best-practices/insert-vectors/#metadata)                                                                                                                                                       |
+| Partition vectors by tenant                                 | [Namespaces](https://developers.cloudflare.com/vectorize/best-practices/insert-vectors/#namespaces) and [namespace versus metadata filtering](https://developers.cloudflare.com/vectorize/reference/metadata-filtering/#namespace-versus-metadata-filtering) |
+| Combine similarity search with categorical or range filters | [Metadata filtering](https://developers.cloudflare.com/vectorize/reference/metadata-filtering/)                                                                                                                                                              |
+| Ingest or update vectors in batches                         | [Insert vectors](https://developers.cloudflare.com/vectorize/best-practices/insert-vectors/) and [limits](https://developers.cloudflare.com/vectorize/platform/limits/)                                                                                      |
 
 ## Embedding and retrieval decisions
 

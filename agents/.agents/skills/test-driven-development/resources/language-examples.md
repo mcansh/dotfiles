@@ -34,6 +34,7 @@ mod tests {
 ```
 
 **Running the test:**
+
 ```bash
 cargo test tests::retries_failed_operations_3_times
 ```
@@ -59,6 +60,7 @@ func testRetriesFailedOperations3Times() async throws {
 ```
 
 **Running the test:**
+
 ```bash
 swift test --filter RetryTests.testRetriesFailedOperations3Times
 ```
@@ -66,31 +68,33 @@ swift test --filter RetryTests.testRetriesFailedOperations3Times
 ### TypeScript
 
 ```typescript
-describe('retryOperation', () => {
-  it('retries failed operations 3 times', async () => {
+describe("retryOperation", () => {
+  it("retries failed operations 3 times", async () => {
     let attempts = 0;
     const operation = () => {
       attempts++;
       if (attempts < 3) {
-        throw new Error('fail');
+        throw new Error("fail");
       }
-      return 'success';
+      return "success";
     };
 
     const result = await retryOperation(operation);
 
-    expect(result).toBe('success');
+    expect(result).toBe("success");
     expect(attempts).toBe(3);
   });
 });
 ```
 
 **Running the test (Jest):**
+
 ```bash
 npm test -- --testNamePattern="retries failed operations"
 ```
 
 **Running the test (Vitest):**
+
 ```bash
 npm test -- -t "retries failed operations"
 ```
@@ -105,18 +109,19 @@ npm test -- -t "retries failed operations"
 ### Bad Example
 
 ```typescript
-test('retry', () => {
-    let mockCalls = 0;
-    const mock = () => {
-        mockCalls++;
-        return 'success';
-    };
-    retryOperation(mock);
-    expect(mockCalls).toBe(1); // Tests mock, not behavior
+test("retry", () => {
+  let mockCalls = 0;
+  const mock = () => {
+    mockCalls++;
+    return "success";
+  };
+  retryOperation(mock);
+  expect(mockCalls).toBe(1); // Tests mock, not behavior
 });
 ```
 
 **Why this is bad:**
+
 - Vague name
 - Tests mock behavior, not real retry logic
 
@@ -167,9 +172,7 @@ func retryOperation<T>(_ operation: () async throws -> T) async throws -> T {
 ### TypeScript
 
 ```typescript
-async function retryOperation<T>(
-  operation: () => Promise<T>
-): Promise<T> {
+async function retryOperation<T>(operation: () => Promise<T>): Promise<T> {
   let lastError: Error | undefined;
   for (let i = 0; i < 3; i++) {
     try {
@@ -192,16 +195,17 @@ async function retryOperation<T>(
   operation: () => Promise<T>,
   options: {
     maxRetries?: number;
-    backoff?: 'linear' | 'exponential';
+    backoff?: "linear" | "exponential";
     onRetry?: (attempt: number) => void;
     shouldRetry?: (error: Error) => boolean;
-  } = {}
+  } = {},
 ): Promise<T> {
   // Don't add features the test doesn't require!
 }
 ```
 
 **Why this is bad:** Test only requires 3 retries. Don't add:
+
 - Configurable retries
 - Backoff strategies
 - Callbacks
@@ -212,6 +216,7 @@ async function retryOperation<T>(
 ## Test Requirements
 
 **Every test should:**
+
 - Test one behavior
 - Have a clear name
 - Use real code (no mocks unless unavoidable)
@@ -219,6 +224,7 @@ async function retryOperation<T>(
 ## Verification Commands by Language
 
 ### Rust
+
 ```bash
 # Single test
 cargo test tests::test_name
@@ -231,6 +237,7 @@ cargo test -- --nocapture
 ```
 
 ### Swift
+
 ```bash
 # Single test
 swift test --filter TestClass.testName
@@ -243,6 +250,7 @@ swift test --verbose
 ```
 
 ### TypeScript (Jest)
+
 ```bash
 # Single test
 npm test -- --testNamePattern="test name"
@@ -255,6 +263,7 @@ npm test -- --coverage
 ```
 
 ### TypeScript (Vitest)
+
 ```bash
 # Single test
 npm test -- -t "test name"

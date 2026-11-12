@@ -15,21 +15,22 @@ LOW FREEDOM - The Keystone/ARCOM organizational process is rigid and must follow
 
 <quick_reference>
 
-| Step | Tool/System | Key Details |
-|------|-------------|-------------|
-| **1. Decision** | Team discussion | New service vs. extend existing. ARCOM required for new services. |
-| **2. Keystone Submit** | `https://keystone.uwm.com/` | Fill both pages: service info + starter kit features |
-| **3. ARCOM Review** | Jira ARCOM project | Auto-created by Keystone. Daily meetings 11AM-noon. |
-| **4. ARCOM Approval** | Enterprise Architecture | Approval triggers automated provisioning |
-| **5. Verify Provisioning** | Bitbucket, K8s, Vault | Confirm all 11 automated tasks completed |
-| **6. Clone & Verify** | Local dev | Verify starter kit, Dockerfile, project structure |
-| **7. Initial Config** | appsettings, Program.cs | Environment configs, Vault, GUP auth bootstrap |
+| Step                       | Tool/System                 | Key Details                                                       |
+| -------------------------- | --------------------------- | ----------------------------------------------------------------- |
+| **1. Decision**            | Team discussion             | New service vs. extend existing. ARCOM required for new services. |
+| **2. Keystone Submit**     | `https://keystone.uwm.com/` | Fill both pages: service info + starter kit features              |
+| **3. ARCOM Review**        | Jira ARCOM project          | Auto-created by Keystone. Daily meetings 11AM-noon.               |
+| **4. ARCOM Approval**      | Enterprise Architecture     | Approval triggers automated provisioning                          |
+| **5. Verify Provisioning** | Bitbucket, K8s, Vault       | Confirm all 11 automated tasks completed                          |
+| **6. Clone & Verify**      | Local dev                   | Verify starter kit, Dockerfile, project structure                 |
+| **7. Initial Config**      | appsettings, Program.cs     | Environment configs, Vault, GUP auth bootstrap                    |
 
 **Access required:** `GRP-S-IT-Keystone-Contributor` or `GRP-S-IT Keystone Approver` group membership.
 
 </quick_reference>
 
 <when_to_use>
+
 - Creating a brand new v3 business service (cell-biz-*)
 - Need guidance on the Keystone submission process
 - Need guidance on ARCOM approval requirements
@@ -37,11 +38,12 @@ LOW FREEDOM - The Keystone/ARCOM organizational process is rigid and must follow
 - Setting up the initial project structure and configuration
 
 **Do NOT use for:**
+
 - Adding features to existing services (use `implement-feature`)
 - Data services (cell-data-* pattern is deprecated, do not create new ones)
 - BFF services (cell-bff-* has different patterns)
 - UI/frontend services (cell-ui-*)
-</when_to_use>
+  </when_to_use>
 
 <the_process>
 
@@ -50,17 +52,20 @@ LOW FREEDOM - The Keystone/ARCOM organizational process is rigid and must follow
 Before submitting to Keystone, confirm that a new service is the right approach:
 
 **Create a new service when:**
+
 - The capability is a distinct business domain (e.g., loan conditions, broker preferences)
 - No existing service owns this domain
 - The capability needs independent deployment and scaling
 - ARCOM thresholds are met (new technology/pattern, multi-discipline coordination, or 3+ months effort)
 
 **Extend an existing service when:**
+
 - The feature belongs to an existing domain
 - An existing cell-biz-* service already handles related functionality
 - The work is an enhancement, not a new domain
 
 **ARCOM is required when ANY of these apply:**
+
 - Annual licensing purchases exceeding $50,000
 - One-time technology purchases exceeding $100,000
 - Effort requiring teams from multiple disciplines to coordinate
@@ -77,35 +82,36 @@ Navigate to `https://keystone.uwm.com/` and click "Create Application".
 
 ### Page 1: Service Information
 
-| Field | Guidance |
-|-------|----------|
-| **Name** | Friendly name (e.g., "Loan Conditions"). Auto-generates repo name: `cell-{name.trim().replace(' ', '-').toLowerCase()}` — e.g., "Loan Conditions" becomes `cell-loan-conditions` |
-| **Project Key** | Your team's Bitbucket project key (e.g., EH, BOLT, GGF) |
-| **Product(s)** | UWM products your service interacts with (multi-select) |
-| **Audience** | Internal (UWM employees) or External (brokers, loan officers). External services use Azure clusters. |
-| **Primary Stakeholder** | Person/team responsible for feedback and feature direction |
-| **DNS Entry** | Domain name without `.uwm.com` suffix (added automatically). Creates entries for int, stage, and prod environments. |
-| **Cluster Location** | Kubernetes clusters per environment. Select Azure clusters for External audience. |
-| **Needs Internal Ingress** | Yes if UWM team members need direct access (e.g., for Swagger page). Required for most business services. |
-| **Needs Vault** | Yes for business services (secrets management). UI apps never need Vault. |
-| **Needs Client ID/Secret** | Yes if service needs SSO configuration. Requires redirect URLs (1-10). |
+| Field                      | Guidance                                                                                                                                                                         |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Name**                   | Friendly name (e.g., "Loan Conditions"). Auto-generates repo name: `cell-{name.trim().replace(' ', '-').toLowerCase()}` — e.g., "Loan Conditions" becomes `cell-loan-conditions` |
+| **Project Key**            | Your team's Bitbucket project key (e.g., EH, BOLT, GGF)                                                                                                                          |
+| **Product(s)**             | UWM products your service interacts with (multi-select)                                                                                                                          |
+| **Audience**               | Internal (UWM employees) or External (brokers, loan officers). External services use Azure clusters.                                                                             |
+| **Primary Stakeholder**    | Person/team responsible for feedback and feature direction                                                                                                                       |
+| **DNS Entry**              | Domain name without `.uwm.com` suffix (added automatically). Creates entries for int, stage, and prod environments.                                                              |
+| **Cluster Location**       | Kubernetes clusters per environment. Select Azure clusters for External audience.                                                                                                |
+| **Needs Internal Ingress** | Yes if UWM team members need direct access (e.g., for Swagger page). Required for most business services.                                                                        |
+| **Needs Vault**            | Yes for business services (secrets management). UI apps never need Vault.                                                                                                        |
+| **Needs Client ID/Secret** | Yes if service needs SSO configuration. Requires redirect URLs (1-10).                                                                                                           |
 
 ### Page 2: Starter Kit Configuration
 
 Keystone optionally applies the `lib-csharp-starterkit` (NuGet: `UWMC.Starter.Kit.V3`) template to your new repo.
 
-| Feature | When to Enable |
-|---------|---------------|
-| **Use Starter Kit** | Recommended for all new services. Can also apply manually after provisioning. |
-| **Service Type** | Select "Business Service" (not "Data Service" — data service pattern is deprecated) |
-| **Azure SQL Database** | Enable if your service needs Azure SQL. Scaffolds EF Core setup + Terraform modules. |
-| **Kerberos** | Enable only if connecting to on-premises databases. Auto-enabled for Data Services. |
-| **REST API** | Enable for HTTP API endpoints (most business services). Requires DNS entry. |
-| **OAuth** | Enable for OAuth app-to-app communication (OAuth-Agent library). Requires DNS entry. |
-| **Orkes** | Enable if service will poll Orkes/Conductor for workflow tasks (worker service pattern). |
-| **Feature Flags** | Always enabled for Starter Kit apps. Uses Harness FME. |
+| Feature                | When to Enable                                                                           |
+| ---------------------- | ---------------------------------------------------------------------------------------- |
+| **Use Starter Kit**    | Recommended for all new services. Can also apply manually after provisioning.            |
+| **Service Type**       | Select "Business Service" (not "Data Service" — data service pattern is deprecated)      |
+| **Azure SQL Database** | Enable if your service needs Azure SQL. Scaffolds EF Core setup + Terraform modules.     |
+| **Kerberos**           | Enable only if connecting to on-premises databases. Auto-enabled for Data Services.      |
+| **REST API**           | Enable for HTTP API endpoints (most business services). Requires DNS entry.              |
+| **OAuth**              | Enable for OAuth app-to-app communication (OAuth-Agent library). Requires DNS entry.     |
+| **Orkes**              | Enable if service will poll Orkes/Conductor for workflow tasks (worker service pattern). |
+| **Feature Flags**      | Always enabled for Starter Kit apps. Uses Harness FME.                                   |
 
 **If not using the starter kit through Keystone UI**, apply it manually after provisioning:
+
 ```bash
 # Install the template
 dotnet new -i UWMC.Starter.Kit.V3 \
@@ -123,18 +129,18 @@ dotnet new uwmcstarterv3 \
 
 **Template parameters reference:**
 
-| Parameter | Type | Default | Purpose |
-|-----------|------|---------|---------|
-| `appName` | string | — | Keystone name (e.g., `cell-loan-conditions`) |
-| `dbcontext` | text | MyDbContext | Custom DbContext class name |
-| `enableFeatureFlags` | bool | false | Harness feature flag integration |
-| `enableKerberos` | bool | false | On-prem database Kerberos auth |
-| `enableAzureSqlDb` | bool | false | Azure SQL + EF Core + Terraform |
-| `withRestAuth` | bool | true | REST auth via GUP/Passport |
-| `webApplicationBuilder` | bool | false | Modern minimal API pattern (Program.cs only) |
-| `CommunicateWithOtherApps` | bool | false | OAuth app-to-app communication |
-| `TemplateType` | choice | None | `None` or `Rest` (REST endpoint infrastructure) |
-| `MicroserviceType` | choice | Business Service | `Business Service` or `Data Service` |
+| Parameter                  | Type   | Default          | Purpose                                         |
+| -------------------------- | ------ | ---------------- | ----------------------------------------------- |
+| `appName`                  | string | —                | Keystone name (e.g., `cell-loan-conditions`)    |
+| `dbcontext`                | text   | MyDbContext      | Custom DbContext class name                     |
+| `enableFeatureFlags`       | bool   | false            | Harness feature flag integration                |
+| `enableKerberos`           | bool   | false            | On-prem database Kerberos auth                  |
+| `enableAzureSqlDb`         | bool   | false            | Azure SQL + EF Core + Terraform                 |
+| `withRestAuth`             | bool   | true             | REST auth via GUP/Passport                      |
+| `webApplicationBuilder`    | bool   | false            | Modern minimal API pattern (Program.cs only)    |
+| `CommunicateWithOtherApps` | bool   | false            | OAuth app-to-app communication                  |
+| `TemplateType`             | choice | None             | `None` or `Rest` (REST endpoint infrastructure) |
+| `MicroserviceType`         | choice | Business Service | `Business Service` or `Data Service`            |
 
 ---
 
@@ -151,6 +157,7 @@ After Keystone submission, the following happens automatically:
 Enterprise Architecture will schedule your review at the daily ARCOM meeting (11:00 AM - noon, MS Teams, 15-minute blocks: 10 minutes discussion + 5 minutes feedback).
 
 **Your ARCOM proposal should document:**
+
 - Business justification (why a new service is needed)
 - Architecture overview (what the service does, key integrations)
 - Data flows (what data enters/exits the service)
@@ -160,14 +167,15 @@ Enterprise Architecture will schedule your review at the daily ARCOM meeting (11
 
 ### ARCOM Feedback Categories (MoSCoW)
 
-| Category | Meaning |
-|----------|---------|
-| **Must-have** | Architecture will not endorse until resolved. Feedback provider must offer direction. |
-| **Should-have** | Strong recommendation for additional considerations |
-| **Could-have** | Lower value recommendations |
-| **Will-not-have** | Excluded/deferred requirements |
+| Category          | Meaning                                                                               |
+| ----------------- | ------------------------------------------------------------------------------------- |
+| **Must-have**     | Architecture will not endorse until resolved. Feedback provider must offer direction. |
+| **Should-have**   | Strong recommendation for additional considerations                                   |
+| **Could-have**    | Lower value recommendations                                                           |
+| **Will-not-have** | Excluded/deferred requirements                                                        |
 
 ### Meeting Request Types
+
 - POC review, Production Ready review, Re-review, Change review, In-depth review, Ideation consultation
 
 ---
@@ -176,19 +184,19 @@ Enterprise Architecture will schedule your review at the daily ARCOM meeting (11
 
 When Enterprise Architecture marks the ARCOM Jira card as **Approved**, Keystone fires the `keystone_create_application_workflow` which orchestrates these automated tasks:
 
-| # | What Gets Provisioned | Workflow |
-|---|----------------------|----------|
-| 1 | **Bitbucket Repository** with starter kit code | git workflow |
-| 2 | **Harness Pipeline** for CI/CD | `git_create_harness_workflow` |
-| 3 | **Kubernetes Namespaces** (int, stg, prd) | `kubernetes_namespace_setup_workflow` |
-| 4 | **Vault Configuration** (4 service accounts: dev, int, stg, prd) | `keystone_setup_vault_workflow` |
-| 5 | **DNS and Certificates** for all environments | `keystone_create_dns_cert_workflow` |
-| 6 | **AD Groups** (`GRP-S-{ENV}-{REPO-NAME}`) with service accounts | AD automation |
-| 7 | **Redis ACLs** for default caching | `redisdb_acl_automation_workflow` |
-| 8 | **ServiceNow CMDB Record** (business application) | `servicenow_create_business_application_workflow` |
-| 9 | **PactFlow Pacticipant** for contract testing | `create_pactflow_pacticipants_workflow` |
-| 10 | **Client Credentials/SSO** (if selected) | `create_client_credentials_workflow` |
-| 11 | **Email Notifications** to requestor, EA group, Hot-N-Ready team | notification workflow |
+| #   | What Gets Provisioned                                            | Workflow                                          |
+| --- | ---------------------------------------------------------------- | ------------------------------------------------- |
+| 1   | **Bitbucket Repository** with starter kit code                   | git workflow                                      |
+| 2   | **Harness Pipeline** for CI/CD                                   | `git_create_harness_workflow`                     |
+| 3   | **Kubernetes Namespaces** (int, stg, prd)                        | `kubernetes_namespace_setup_workflow`             |
+| 4   | **Vault Configuration** (4 service accounts: dev, int, stg, prd) | `keystone_setup_vault_workflow`                   |
+| 5   | **DNS and Certificates** for all environments                    | `keystone_create_dns_cert_workflow`               |
+| 6   | **AD Groups** (`GRP-S-{ENV}-{REPO-NAME}`) with service accounts  | AD automation                                     |
+| 7   | **Redis ACLs** for default caching                               | `redisdb_acl_automation_workflow`                 |
+| 8   | **ServiceNow CMDB Record** (business application)                | `servicenow_create_business_application_workflow` |
+| 9   | **PactFlow Pacticipant** for contract testing                    | `create_pactflow_pacticipants_workflow`           |
+| 10  | **Client Credentials/SSO** (if selected)                         | `create_client_credentials_workflow`              |
+| 11  | **Email Notifications** to requestor, EA group, Hot-N-Ready team | notification workflow                             |
 
 **Expected timeline:** Automated provisioning completes in ~5 minutes. The Keystone application status transitions from **pending** → **approved** → **completed**.
 
@@ -269,11 +277,13 @@ ENTRYPOINT ["dotnet", "UWMC.YourService.dll"]
 ```
 
 **For .NET 10 projects**, the pattern is slightly different:
+
 - Build alias: `build` (not `build-kestrel-env`)
 - Image tags: `10.0-redhat` instead of `8.0-redhat`
 - May use `COPY . ./` instead of granular COPY statements
 
 **Required elements (both versions):**
+
 - Build: `artifacts.uwm.com/build-images/uwm-dotnet-sdk-sonar:{version}-redhat`
 - Runtime: `artifacts.uwm.com/build-images/uwm-aspnet-runtime:{version}-redhat`
 - Security hardening: `RUN /tmp/hardening.sh`
@@ -287,20 +297,25 @@ ENTRYPOINT ["dotnet", "UWMC.YourService.dll"]
 ## Step 6: Naming Conventions
 
 ### Repository Naming
+
 Keystone auto-generates the repo name: `cell-{name.trim().replace(' ', '-').toLowerCase()}`
 
 For services that need both HTTP API and Kafka consumer:
+
 - HTTP API: `cell-biz-your-service`
 - Kafka consumer: `cell-biz-your-service-consumer`
 - **These MUST be separate repositories** (v3 pattern: one container per repo)
 
 ### Namespace/Assembly Naming
+
 The starter kit generates namespaces following this pattern:
+
 - Source: `UWMC.Business.{ServiceName}` (e.g., `UWMC.Business.LoanConditions`)
 - Unit tests: `UWMC.Business.{ServiceName}.Tests`
 - Integration tests: `UWMC.Business.{ServiceName}.IntegrationTests`
 
 ### Solution File
+
 `UWMC.Business.{ServiceName}.sln`
 
 ---
@@ -310,6 +325,7 @@ The starter kit generates namespaces following this pattern:
 After verifying the generated project, complete these initial configuration steps:
 
 ### 1. Verify GUP Auth Bootstrap (Program.cs)
+
 ```csharp
 // Ensure Passport is configured (starter kit includes this if REST auth selected)
 builder.Services.AddPassport(builder.Configuration);  // AFTER other auth services
@@ -320,12 +336,15 @@ app.MapControllers().RequirePassport();  // Require auth on all controllers
 ```
 
 ### 2. Verify Vault Integration (Program.cs)
+
 ```csharp
 builder.Configuration.AddVaultSecrets();  // Load secrets from Vault
 ```
 
 ### 3. Configure appsettings for Each Environment
+
 Ensure each environment file has the correct `ApplicationEdgeUrl` for GUP:
+
 ```json
 // appsettings.Integration.json
 {
@@ -334,12 +353,14 @@ Ensure each environment file has the correct `ApplicationEdgeUrl` for GUP:
 ```
 
 ### 4. Set Up Local Development
+
 ```bash
 cd dockercompose
 docker-compose up -d
 ```
 
 The docker-compose typically includes:
+
 - Backend service on port 5000
 - SQL Server (if Azure SQL was selected) on port 1433 (or custom)
 - Additional services as needed
@@ -374,6 +395,7 @@ The docker-compose typically includes:
 7. ARCOM approves → Keystone provisions everything automatically
 8. Clone repo, verify structure, begin development
 </code>
+
 </example>
 
 <example>
@@ -387,6 +409,7 @@ dotnet new webapi -n UWMC.Business.LoanConditions
 </code>
 
 <why_it_fails>
+
 - No ARCOM approval = service cannot be deployed to production
 - No Vault configuration = secrets must be hardcoded (security violation)
 - No K8s namespaces = nowhere to deploy
@@ -395,7 +418,7 @@ dotnet new webapi -n UWMC.Business.LoanConditions
 - No CMDB record = service invisible to operations
 - No PactFlow = contract testing not set up
 - Keystone automates all of this in ~5 minutes after ARCOM approval
-</why_it_fails>
+  </why_it_fails>
 </example>
 
 <example>
@@ -407,11 +430,12 @@ Keystone Page 2 → Service Type: Data Service
 </code>
 
 <why_it_fails>
+
 - The cell-data-* pattern is deprecated
 - Business services should own their own data
 - Do NOT create new data services
 - Select "Business Service" and enable Azure SQL if you need a database
-</why_it_fails>
+  </why_it_fails>
 </example>
 
 <example>
@@ -429,10 +453,13 @@ Keystone Page 2 → Service Type: Data Service
    - Orkes: Yes (if using Conductor for orchestration)
 
 # WRONG: Single repo with both HTTP and Kafka
+
 cell-biz-loan-conditions/
-  src/UWMC.Business.LoanConditions/         # HTTP API
-  src/UWMC.Business.LoanConditions.Consumer/ # Kafka consumer
-  # V3 constraint: one container per repo. This won't deploy correctly.
+src/UWMC.Business.LoanConditions/ # HTTP API
+src/UWMC.Business.LoanConditions.Consumer/ # Kafka consumer
+
+# V3 constraint: one container per repo. This won't deploy correctly.
+
 </code>
 </example>
 
@@ -448,7 +475,7 @@ cell-biz-loan-conditions/
 
 3. **NEVER use non-UWM base Docker images** - The Dockerfile MUST use `artifacts.uwm.com/build-images/uwm-dotnet-sdk-sonar` (build) and `uwm-aspnet-runtime` (runtime). Custom images will fail deployment.
 
-4. **NEVER create data services (cell-data-*)** - The data service pattern is deprecated. Business services own their own data. Select "Business Service" in Keystone.
+4. **NEVER create data services (cell-data-\*)** - The data service pattern is deprecated. Business services own their own data. Select "Business Service" in Keystone.
 
 5. **ALWAYS set up Vault integration** - Secrets must never be hardcoded. Use `UWMC.Vault` package and `AddVaultSecrets()`.
 
@@ -474,6 +501,7 @@ cell-biz-loan-conditions/
 Before moving to Phase 2 (design-api), verify ALL of the following:
 
 ### Keystone and ARCOM
+
 - [ ] Keystone application submitted at `https://keystone.uwm.com/`
 - [ ] ARCOM Jira issue exists in ARCOM project (auto-created by Keystone)
 - [ ] ARCOM review meeting attended
@@ -481,6 +509,7 @@ Before moving to Phase 2 (design-api), verify ALL of the following:
 - [ ] Keystone application status: **completed** (all workflows succeeded)
 
 ### Repository and Infrastructure
+
 - [ ] Bitbucket repository exists with correct name (cell-biz-{name} pattern)
 - [ ] Harness pipeline created and visible
 - [ ] Kubernetes namespaces exist (integration, staging, production)
@@ -490,6 +519,7 @@ Before moving to Phase 2 (design-api), verify ALL of the following:
 - [ ] PactFlow pacticipant registered
 
 ### Project Structure
+
 - [ ] Starter kit applied (either via Keystone or manual `dotnet new uwmcstarterv3`)
 - [ ] .NET project targets net8.0 or net10.0
 - [ ] Solution structure follows cell-biz-* conventions
@@ -500,6 +530,7 @@ Before moving to Phase 2 (design-api), verify ALL of the following:
 - [ ] Port configured as 5000 (`ASPNETCORE_URLS=http://*:5000`)
 
 ### Initial Configuration
+
 - [ ] GUP auth configured in Program.cs (`AddPassport`, `UsePassport`)
 - [ ] Vault integration configured (`AddVaultSecrets`)
 - [ ] Environment-specific appsettings files exist (Development, Integration, Staging, Production)
@@ -510,14 +541,17 @@ Before moving to Phase 2 (design-api), verify ALL of the following:
 <integration>
 
 **This skill is called by:**
+
 - `develop-business-service` orchestrator (Phase 1)
 - Developers directly when creating a new service
 
 **After this skill, proceed to:**
+
 - `design-api` (Phase 2) - Design REST endpoints, DTOs, versioning
 - `implement-feature` (Phase 3) - TDD implementation of business logic
 
 **Prerequisites:**
+
 - Membership in `GRP-S-IT-Keystone-Contributor` or `GRP-S-IT Keystone Approver`
 - Access to `https://keystone.uwm.com/`
 - If no Keystone access, contact the Keystone team on Microsoft Teams
@@ -527,12 +561,14 @@ Before moving to Phase 2 (design-api), verify ALL of the following:
 <resources>
 
 **Systems:**
+
 - Keystone: `https://keystone.uwm.com/`
 - ARCOM Jira Project: `https://work.uwm.com` → ARCOM project
 - Bitbucket: `https://code.uwm.com/`
 - UWM Artifact Registry: `https://artifacts.uwm.com/`
 
 **Confluence Documentation:**
+
 - Keystone Create Application Process: https://kb.uwm.com/display/Keystone/Create+Application+Process
 - New Keystone Approval Process (Jan 2026): https://kb.uwm.com/display/Keystone/New+Keystone+Approval+Process
 - ARCOM FAQ: https://kb.uwm.com/display/ARCOM/ARCOM+Frequently+Asked+Questions
@@ -543,21 +579,25 @@ Before moving to Phase 2 (design-api), verify ALL of the following:
 - V3 Service SDLC UX: https://kb.uwm.com/display/EArch/V3+Service+SDLC+UX
 
 **Starter Kit:**
+
 - Repository: ATLAS/lib-csharp-starterkit on Bitbucket
 - NuGet package: `UWMC.Starter.Kit.V3`
 - Install source: `https://artifacts.uwm.com/artifactory/api/nuget/v3/nuget-production/index.json`
 
 **UWM Docker Base Images:**
+
 - Build: `artifacts.uwm.com/build-images/uwm-dotnet-sdk-sonar:{version}-redhat` (8.0 or 10.0)
 - Runtime: `artifacts.uwm.com/build-images/uwm-aspnet-runtime:{version}-redhat` (8.0 or 10.0)
 
 **Reference Services:**
+
 - `cell-keystone` (GGF project) - .NET 10.0, modern Keystone provisioning source
 - `cell-biz-broker-preferences` - .NET 8.0, mature business service pattern
 - `cell-biz-borrower` - .NET 8.0, data-owning business service
 - `cell-biz-condition` - .NET 8.0, business service with rules engine
 
 **When stuck:**
+
 - Keystone access issues → Contact Keystone team on Microsoft Teams
 - ARCOM questions → Enterprise Architecture team
 - Starter kit issues → Check ATLAS/lib-csharp-starterkit repo or Teams channels

@@ -11,6 +11,7 @@ Common errors and solutions for MCP servers on Cloudflare.
 **Causes & Solutions:**
 
 1. **Wrong URL path**
+
    ```
    # Wrong
    https://my-server.workers.dev/
@@ -20,6 +21,7 @@ Common errors and solutions for MCP servers on Cloudflare.
    ```
 
 2. **Worker not deployed**
+
    ```bash
    wrangler deployments list
    # If empty, deploy first:
@@ -152,6 +154,7 @@ OAuth token missing or expired.
 
 1. **Check client is handling OAuth flow**
 2. **Verify secrets are set:**
+
    ```bash
    wrangler secret list
    # Should show GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET
@@ -168,9 +171,11 @@ OAuth token missing or expired.
 OAuth callback URL doesn't match app configuration.
 
 **Local development:**
+
 - OAuth app callback: `http://localhost:8788/callback`
 
 **Production:**
+
 - OAuth app callback: `https://[worker-name].[account].workers.dev/callback`
 
 Must match EXACTLY (including trailing slash or lack thereof).
@@ -181,6 +186,7 @@ State parameter validation failed.
 
 1. **Clear browser cookies and retry**
 2. **Check KV is storing state:**
+
    ```typescript
    // In your auth handler
    console.log("Storing state:", state);
@@ -198,7 +204,7 @@ Binding not in `wrangler.toml` or not deployed.
 ```toml
 # wrangler.toml
 [[d1_databases]]
-binding = "DB"           # Must match env.DB in code
+binding = "DB" # Must match env.DB in code
 database_name = "mydb"
 database_id = "xxx-xxx"
 ```
@@ -232,7 +238,7 @@ new_classes = ["MyMCP"]
 And class must be exported:
 
 ```typescript
-export { MyMCP };  // Don't forget this!
+export { MyMCP }; // Don't forget this!
 ```
 
 ## Deployment Errors
@@ -254,7 +260,7 @@ New Durable Object class needs migration:
 ```toml
 # Add to wrangler.toml
 [[migrations]]
-tag = "v2"  # Increment version
+tag = "v2" # Increment version
 new_classes = ["NewClassName"]
 # Or for renames:
 # renamed_classes = [{ from = "OldName", to = "NewName" }]
@@ -290,6 +296,7 @@ export class MyMCP extends McpAgent {
 ```
 
 View logs:
+
 ```bash
 wrangler tail --format pretty
 ```

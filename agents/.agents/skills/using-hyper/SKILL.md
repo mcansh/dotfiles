@@ -12,20 +12,23 @@ HIGH FREEDOM - The meta-process is rigid: check for skills, read them from disk,
 </rigidity_level>
 
 <quick_reference>
+
 1. Check if any skill applies.
 2. Read the relevant `SKILL.md` from disk.
 3. Announce which skill you are using.
 4. For substantial work, create or resume a local `plans/active/<slug>/`.
 5. Keep `plan.md`, `context.md`, and `tasks.md` current.
-</quick_reference>
+   </quick_reference>
 
 <when_to_use>
+
 - At the start of every conversation
 - Before starting any non-trivial task
 - Before editing skills, hooks, docs, or code
-</when_to_use>
+  </when_to_use>
 
 <the_process>
+
 ## 1. Check for skills first
 
 - If a skill matches, use it.
@@ -35,11 +38,13 @@ HIGH FREEDOM - The meta-process is rigid: check for skills, read them from disk,
 ## 2. Ground large work in task docs
 
 For features, rewrites, and multi-step tasks:
+
 - `brainstorming` shapes the work
 - `writing-plans` distills it into task docs
 - `executing-plans` implements the current `Now` slice
 
 Use:
+
 - `plans/active/<slug>/plan.md`
 - `plans/active/<slug>/context.md`
 - `plans/active/<slug>/tasks.md`
@@ -62,10 +67,11 @@ Use `verification-before-completion` before any completion claim.
 <scenario>Developer jumps into implementation with no task directory</scenario>
 
 <why_it_fails>
+
 - The plan drifts out of memory
 - Implementation learns things that never get written down
 - Resumption after compaction becomes guesswork
-</why_it_fails>
+  </why_it_fails>
 
 <correction>
 Create or resume a local `plans/active/<slug>/` first, then keep `context.md` and `tasks.md` updated as reality changes.
@@ -76,10 +82,11 @@ Create or resume a local `plans/active/<slug>/` first, then keep `context.md` an
 <scenario>Developer finds a matching skill but works from memory</scenario>
 
 <why_it_fails>
+
 - Skills evolve
 - Important steps get skipped
 - The user cannot tell whether the workflow was actually followed
-</why_it_fails>
+  </why_it_fails>
 
 <correction>
 Read the current `SKILL.md`, announce it, then follow it.

@@ -31,7 +31,7 @@ const greeting = await agent.call("greet", ["World"]);
 
 // With timeout
 const result = await agent.call("processData", [data], {
-  timeout: 5000  // 5 second timeout
+  timeout: 5000, // 5 second timeout
 });
 ```
 
@@ -54,7 +54,7 @@ export class MyAgent extends Agent<Env, State> {
     try {
       // ... work
     } catch (error) {
-      stream.error(error.message);  // Signal error to client
+      stream.error(error.message); // Signal error to client
       return;
     }
     stream.close();
@@ -69,8 +69,8 @@ await agent.call("streamResults", ["search term"], {
   stream: {
     onChunk: (data) => console.log("Chunk:", data),
     onDone: () => console.log("Complete"),
-    onError: (error) => console.error("Error:", error)
-  }
+    onError: (error) => console.error("Error:", error),
+  },
 });
 ```
 
@@ -84,9 +84,9 @@ const methods = await agent.call("getCallableMethods", []);
 
 ## When to Use
 
-| Scenario | Use |
-|----------|-----|
-| Browser/mobile calling agent | `@callable()` |
-| External service calling agent | `@callable()` |
-| Worker calling agent (same codebase) | DO RPC directly |
-| Agent calling another agent | `getAgentByName()` + DO RPC |
+| Scenario                             | Use                         |
+| ------------------------------------ | --------------------------- |
+| Browser/mobile calling agent         | `@callable()`               |
+| External service calling agent       | `@callable()`               |
+| Worker calling agent (same codebase) | DO RPC directly             |
+| Agent calling another agent          | `getAgentByName()` + DO RPC |

@@ -4,13 +4,13 @@ Fetch the guide for the operation you are performing before writing configuratio
 
 ## Setup and management
 
-| Task | Documentation |
-|------|---------------|
-| Create a store and secret, then bind it through Wrangler or the dashboard | [Workers integration](https://developers.cloudflare.com/secrets-store/integrations/workers/) |
-| Create, edit, duplicate, or delete account secrets | [Manage secrets](https://developers.cloudflare.com/secrets-store/manage-secrets/how-to/) |
+| Task                                                                      | Documentation                                                                                                 |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Create a store and secret, then bind it through Wrangler or the dashboard | [Workers integration](https://developers.cloudflare.com/secrets-store/integrations/workers/)                  |
+| Create, edit, duplicate, or delete account secrets                        | [Manage secrets](https://developers.cloudflare.com/secrets-store/manage-secrets/how-to/)                      |
 | Look up current store/secret command syntax and local versus remote flags | [Wrangler Secrets Store commands](https://developers.cloudflare.com/workers/wrangler/commands/secrets-store/) |
-| Configure bindings for each deployment environment | [Wrangler environments](https://developers.cloudflare.com/workers/wrangler/environments/) |
-| Choose user roles, CI token permissions, and secret scopes | [Secrets Store access control](https://developers.cloudflare.com/secrets-store/access-control/) |
+| Configure bindings for each deployment environment                        | [Wrangler environments](https://developers.cloudflare.com/workers/wrangler/environments/)                     |
+| Choose user roles, CI token permissions, and secret scopes                | [Secrets Store access control](https://developers.cloudflare.com/secrets-store/access-control/)               |
 
 Treat the store ID, secret ID, secret name, and Worker binding name as different identifiers. Use the identifier required by the documented operation; do not infer update or delete flags from the create command.
 

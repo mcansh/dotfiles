@@ -12,22 +12,26 @@ HIGH FREEDOM - Apply deep scrutiny to the current spec and task docs, but keep t
 </rigidity_level>
 
 <quick_reference>
+
 1. Read `plan.md`, `context.md`, and `tasks.md`
 2. Identify ambiguity, missing edge cases, and weak acceptance checks
 3. Strengthen the spec and the next slices
 4. Verify no placeholders remain
-</quick_reference>
+   </quick_reference>
 
 <when_to_use>
+
 - A plan looks underspecified
 - The next slice has hidden edge cases
 - Acceptance checks are weak or unverifiable
-</when_to_use>
+  </when_to_use>
 
 <the_process>
+
 ## 1. Review the current docs line by line
 
 Look for:
+
 - vague goals
 - implicit assumptions
 - missing failure modes
@@ -36,6 +40,7 @@ Look for:
 ## 2. Strengthen the docs
 
 Update the relevant task docs with:
+
 - concrete edge cases
 - clearer acceptance checks
 - smaller, safer slices

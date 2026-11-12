@@ -213,191 +213,193 @@ This guide provides complete, production-ready code for implementing skills auto
 ```javascript
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
 // Configuration
 const CONFIG = {
-    rulesPath: process.env.SKILL_RULES || path.join(process.env.HOME, '.claude/skill-rules.json'),
-    maxSkills: 3,  // Limit to avoid context overload
-    debugMode: process.env.DEBUG === 'true'
+  rulesPath: process.env.SKILL_RULES || path.join(process.env.HOME, ".claude/skill-rules.json"),
+  maxSkills: 3, // Limit to avoid context overload
+  debugMode: process.env.DEBUG === "true",
 };
 
 // Load skill rules
 function loadRules() {
-    try {
-        const content = fs.readFileSync(CONFIG.rulesPath, 'utf8');
-        return JSON.parse(content);
-    } catch (error) {
-        if (CONFIG.debugMode) {
-            console.error('Failed to load skill rules:', error.message);
-        }
-        return {};
+  try {
+    const content = fs.readFileSync(CONFIG.rulesPath, "utf8");
+    return JSON.parse(content);
+  } catch (error) {
+    if (CONFIG.debugMode) {
+      console.error("Failed to load skill rules:", error.message);
     }
+    return {};
+  }
 }
 
 // Read prompt from stdin
 function readPrompt() {
-    return new Promise((resolve) => {
-        let data = '';
-        process.stdin.on('data', chunk => data += chunk);
-        process.stdin.on('end', () => {
-            try {
-                resolve(JSON.parse(data));
-            } catch (error) {
-                if (CONFIG.debugMode) {
-                    console.error('Failed to parse prompt:', error.message);
-                }
-                resolve({ text: '' });
-            }
-        });
+  return new Promise((resolve) => {
+    let data = "";
+    process.stdin.on("data", (chunk) => (data += chunk));
+    process.stdin.on("end", () => {
+      try {
+        resolve(JSON.parse(data));
+      } catch (error) {
+        if (CONFIG.debugMode) {
+          console.error("Failed to parse prompt:", error.message);
+        }
+        resolve({ text: "" });
+      }
     });
+  });
 }
 
 // Analyze prompt for skill matches
 function analyzePrompt(promptText, rules) {
-    const lowerText = promptText.toLowerCase();
-    const activated = [];
+  const lowerText = promptText.toLowerCase();
+  const activated = [];
 
-    for (const [skillName, config] of Object.entries(rules)) {
-        let matched = false;
-        let matchReason = '';
+  for (const [skillName, config] of Object.entries(rules)) {
+    let matched = false;
+    let matchReason = "";
 
-        // Check keyword triggers
-        if (config.promptTriggers?.keywords) {
-            for (const keyword of config.promptTriggers.keywords) {
-                if (lowerText.includes(keyword.toLowerCase())) {
-                    matched = true;
-                    matchReason = `keyword: "${keyword}"`;
-                    break;
-                }
-            }
+    // Check keyword triggers
+    if (config.promptTriggers?.keywords) {
+      for (const keyword of config.promptTriggers.keywords) {
+        if (lowerText.includes(keyword.toLowerCase())) {
+          matched = true;
+          matchReason = `keyword: "${keyword}"`;
+          break;
         }
-
-        // Check intent pattern triggers
-        if (!matched && config.promptTriggers?.intentPatterns) {
-            for (const pattern of config.promptTriggers.intentPatterns) {
-                try {
-                    if (new RegExp(pattern, 'i').test(promptText)) {
-                        matched = true;
-                        matchReason = `intent pattern: "${pattern}"`;
-                        break;
-                    }
-                } catch (error) {
-                    if (CONFIG.debugMode) {
-                        console.error(`Invalid pattern "${pattern}":`, error.message);
-                    }
-                }
-            }
-        }
-
-        if (matched) {
-            activated.push({
-                skill: skillName,
-                priority: config.priority || 'medium',
-                reason: matchReason,
-                type: config.type || 'general'
-            });
-        }
+      }
     }
 
-    // Sort by priority (high > medium > low)
-    const priorityOrder = { high: 0, medium: 1, low: 2 };
-    activated.sort((a, b) => {
-        const priorityDiff = priorityOrder[a.priority] - priorityOrder[b.priority];
-        if (priorityDiff !== 0) return priorityDiff;
-        // Secondary sort: process types before domain types
-        const typeOrder = { process: 0, domain: 1, general: 2 };
-        return (typeOrder[a.type] || 2) - (typeOrder[b.type] || 2);
-    });
+    // Check intent pattern triggers
+    if (!matched && config.promptTriggers?.intentPatterns) {
+      for (const pattern of config.promptTriggers.intentPatterns) {
+        try {
+          if (new RegExp(pattern, "i").test(promptText)) {
+            matched = true;
+            matchReason = `intent pattern: "${pattern}"`;
+            break;
+          }
+        } catch (error) {
+          if (CONFIG.debugMode) {
+            console.error(`Invalid pattern "${pattern}":`, error.message);
+          }
+        }
+      }
+    }
 
-    // Limit to max skills
-    return activated.slice(0, CONFIG.maxSkills);
+    if (matched) {
+      activated.push({
+        skill: skillName,
+        priority: config.priority || "medium",
+        reason: matchReason,
+        type: config.type || "general",
+      });
+    }
+  }
+
+  // Sort by priority (high > medium > low)
+  const priorityOrder = { high: 0, medium: 1, low: 2 };
+  activated.sort((a, b) => {
+    const priorityDiff = priorityOrder[a.priority] - priorityOrder[b.priority];
+    if (priorityDiff !== 0) return priorityDiff;
+    // Secondary sort: process types before domain types
+    const typeOrder = { process: 0, domain: 1, general: 2 };
+    return (typeOrder[a.type] || 2) - (typeOrder[b.type] || 2);
+  });
+
+  // Limit to max skills
+  return activated.slice(0, CONFIG.maxSkills);
 }
 
 // Generate activation context
 function generateContext(skills) {
-    if (skills.length === 0) {
-        return null;
+  if (skills.length === 0) {
+    return null;
+  }
+
+  const lines = [
+    "",
+    "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+    "🎯 SKILL ACTIVATION CHECK",
+    "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+    "",
+    "Relevant skills for this prompt:",
+    "",
+  ];
+
+  for (const skill of skills) {
+    const emoji = skill.priority === "high" ? "⭐" : skill.priority === "medium" ? "📌" : "💡";
+    lines.push(`${emoji} **${skill.skill}** (${skill.priority} priority)`);
+
+    if (CONFIG.debugMode) {
+      lines.push(`   Matched: ${skill.reason}`);
     }
+  }
 
-    const lines = [
-        '',
-        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
-        '🎯 SKILL ACTIVATION CHECK',
-        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
-        '',
-        'Relevant skills for this prompt:',
-        ''
-    ];
+  lines.push("");
+  lines.push("Before responding, check if any of these skills should be used.");
+  lines.push("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+  lines.push("");
 
-    for (const skill of skills) {
-        const emoji = skill.priority === 'high' ? '⭐' : skill.priority === 'medium' ? '📌' : '💡';
-        lines.push(`${emoji} **${skill.skill}** (${skill.priority} priority)`);
-
-        if (CONFIG.debugMode) {
-            lines.push(`   Matched: ${skill.reason}`);
-        }
-    }
-
-    lines.push('');
-    lines.push('Before responding, check if any of these skills should be used.');
-    lines.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-    lines.push('');
-
-    return lines.join('\n');
+  return lines.join("\n");
 }
 
 // Main execution
 async function main() {
-    try {
-        // Load rules
-        const rules = loadRules();
+  try {
+    // Load rules
+    const rules = loadRules();
 
-        if (Object.keys(rules).length === 0) {
-            if (CONFIG.debugMode) {
-                console.error('No rules loaded');
-            }
-            console.log(JSON.stringify({ decision: 'approve' }));
-            return;
-        }
-
-        // Read prompt
-        const prompt = await readPrompt();
-
-        if (!prompt.text || prompt.text.trim() === '') {
-            console.log(JSON.stringify({ decision: 'approve' }));
-            return;
-        }
-
-        // Analyze prompt
-        const activatedSkills = analyzePrompt(prompt.text, rules);
-
-        // Generate response
-        if (activatedSkills.length > 0) {
-            const context = generateContext(activatedSkills);
-
-            if (CONFIG.debugMode) {
-                console.error('Activated skills:', activatedSkills.map(s => s.skill).join(', '));
-            }
-
-            console.log(JSON.stringify({
-                decision: 'approve',
-                additionalContext: context
-            }));
-        } else {
-            if (CONFIG.debugMode) {
-                console.error('No skills activated');
-            }
-            console.log(JSON.stringify({ decision: 'approve' }));
-        }
-    } catch (error) {
-        if (CONFIG.debugMode) {
-            console.error('Hook error:', error.message, error.stack);
-        }
-        // Always approve on error
-        console.log(JSON.stringify({ decision: 'approve' }));
+    if (Object.keys(rules).length === 0) {
+      if (CONFIG.debugMode) {
+        console.error("No rules loaded");
+      }
+      console.log(JSON.stringify({ decision: "approve" }));
+      return;
     }
+
+    // Read prompt
+    const prompt = await readPrompt();
+
+    if (!prompt.text || prompt.text.trim() === "") {
+      console.log(JSON.stringify({ decision: "approve" }));
+      return;
+    }
+
+    // Analyze prompt
+    const activatedSkills = analyzePrompt(prompt.text, rules);
+
+    // Generate response
+    if (activatedSkills.length > 0) {
+      const context = generateContext(activatedSkills);
+
+      if (CONFIG.debugMode) {
+        console.error("Activated skills:", activatedSkills.map((s) => s.skill).join(", "));
+      }
+
+      console.log(
+        JSON.stringify({
+          decision: "approve",
+          additionalContext: context,
+        }),
+      );
+    } else {
+      if (CONFIG.debugMode) {
+        console.error("No skills activated");
+      }
+      console.log(JSON.stringify({ decision: "approve" }));
+    }
+  } catch (error) {
+    if (CONFIG.debugMode) {
+      console.error("Hook error:", error.message, error.stack);
+    }
+    // Always approve on error
+    console.log(JSON.stringify({ decision: "approve" }));
+  }
 }
 
 main();
@@ -438,6 +440,7 @@ echo '{"text": "How do I create a new API endpoint?"}' | \
 ```
 
 **Expected output:**
+
 ```json
 {
   "additionalContext": "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n🎯 SKILL ACTIVATION CHECK\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nRelevant skills for this prompt:\n\n⭐ **backend-dev-guidelines** (high priority)\n\nBefore responding, check if any of these skills should be used.\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
@@ -480,43 +483,43 @@ To add file-based triggers, extend the hook to check which files are being edite
 
 // Get recently edited files from Claude Code context
 function getRecentFiles(prompt) {
-    // Claude Code provides context about files being edited
-    // This would come from the prompt context or a separate tracking mechanism
-    return prompt.files || [];
+  // Claude Code provides context about files being edited
+  // This would come from the prompt context or a separate tracking mechanism
+  return prompt.files || [];
 }
 
 // Check file triggers
 function checkFileTriggers(files, config) {
-    if (!files || files.length === 0) return false;
-    if (!config.fileTriggers) return false;
+  if (!files || files.length === 0) return false;
+  if (!config.fileTriggers) return false;
 
-    // Check path patterns
-    if (config.fileTriggers.pathPatterns) {
-        for (const file of files) {
-            for (const pattern of config.fileTriggers.pathPatterns) {
-                // Convert glob pattern to regex
-                const regex = globToRegex(pattern);
-                if (regex.test(file)) {
-                    return true;
-                }
-            }
+  // Check path patterns
+  if (config.fileTriggers.pathPatterns) {
+    for (const file of files) {
+      for (const pattern of config.fileTriggers.pathPatterns) {
+        // Convert glob pattern to regex
+        const regex = globToRegex(pattern);
+        if (regex.test(file)) {
+          return true;
         }
+      }
     }
+  }
 
-    // Check content patterns (would require reading files)
-    // Omitted for performance - better to check in PostToolUse hook
+  // Check content patterns (would require reading files)
+  // Omitted for performance - better to check in PostToolUse hook
 
-    return false;
+  return false;
 }
 
 // Convert glob pattern to regex
 function globToRegex(glob) {
-    const regex = glob
-        .replace(/\*\*/g, '___DOUBLE_STAR___')
-        .replace(/\*/g, '[^/]*')
-        .replace(/___DOUBLE_STAR___/g, '.*')
-        .replace(/\?/g, '.');
-    return new RegExp(`^${regex}$`);
+  const regex = glob
+    .replace(/\*\*/g, "___DOUBLE_STAR___")
+    .replace(/\*/g, "[^/]*")
+    .replace(/___DOUBLE_STAR___/g, ".*")
+    .replace(/\?/g, ".");
+  return new RegExp(`^${regex}$`);
 }
 ```
 
@@ -525,6 +528,7 @@ function globToRegex(glob) {
 ### Hook Not Running
 
 **Check:**
+
 ```bash
 # Verify hook is configured
 cat ~/.claude/hooks.json
@@ -539,11 +543,13 @@ tail -f ~/.claude/logs/hooks.log
 ### No Skills Activating
 
 **Enable debug mode:**
+
 ```bash
 DEBUG=true node ~/.claude/hooks/user-prompt-submit/skill-activator.js < test-prompt.json
 ```
 
 **Common causes:**
+
 - skill-rules.json not found or invalid
 - Keywords don't match (check casing, spelling)
 - Patterns have regex errors
@@ -552,20 +558,22 @@ DEBUG=true node ~/.claude/hooks/user-prompt-submit/skill-activator.js < test-pro
 ### Too Many Skills Activating
 
 **Adjust maxSkills:**
+
 ```javascript
 const CONFIG = {
-    maxSkills: 2,  // Reduce from 3
-    // ...
+  maxSkills: 2, // Reduce from 3
+  // ...
 };
 ```
 
 **Or tighten triggers:**
+
 ```json
 {
   "backend-dev-guidelines": {
-    "priority": "high",  // Only high priority skills
+    "priority": "high", // Only high priority skills
     "promptTriggers": {
-      "keywords": ["controller", "service"],  // More specific keywords
+      "keywords": ["controller", "service"] // More specific keywords
       // ...
     }
   }
@@ -644,11 +652,13 @@ The skill activator can work alongside other hooks:
 ## Performance Benchmarks
 
 **Target performance:**
+
 - Keyword matching: <50ms
 - Intent pattern matching: <200ms
 - Total hook execution: <500ms
 
 **Actual performance (typical):**
+
 - 2-3 skills: ~100-300ms
 - 5+ skills: ~300-500ms
 

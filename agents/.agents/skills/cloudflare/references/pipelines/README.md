@@ -6,18 +6,18 @@ Streaming ingest: receive events over HTTP/Workers/Logpush, transform with SQL, 
 
 This reference is a fast-start with verified code and gotchas. For limits, settings, full SQL syntax, and pricing, **retrieve the live docs** — use the Cloudflare MCP `docs` tool if available, otherwise `webfetch` the URL. Docs are source of truth over this file.
 
-| Topic | URL |
-|-------|-----|
-| Overview / getting started | `https://developers.cloudflare.com/pipelines/getting-started/` |
-| Streams (write, manage, Logpush) | `https://developers.cloudflare.com/pipelines/streams/` |
-| Sinks | `https://developers.cloudflare.com/pipelines/sinks/` |
-| Pipelines & SQL transforms | `https://developers.cloudflare.com/pipelines/pipelines/` |
-| SQL reference (statements, types) | `https://developers.cloudflare.com/pipelines/sql-reference/` |
-| Wrangler commands | `https://developers.cloudflare.com/pipelines/reference/wrangler-commands/` |
-| Terraform | `https://developers.cloudflare.com/pipelines/reference/terraform/` |
-| Limits | `https://developers.cloudflare.com/pipelines/platform/limits/` |
-| Pricing | `https://developers.cloudflare.com/pipelines/platform/pricing/` |
-| Metrics (GraphQL) | `https://developers.cloudflare.com/pipelines/observability/metrics/` |
+| Topic                             | URL                                                                        |
+| --------------------------------- | -------------------------------------------------------------------------- |
+| Overview / getting started        | `https://developers.cloudflare.com/pipelines/getting-started/`             |
+| Streams (write, manage, Logpush)  | `https://developers.cloudflare.com/pipelines/streams/`                     |
+| Sinks                             | `https://developers.cloudflare.com/pipelines/sinks/`                       |
+| Pipelines & SQL transforms        | `https://developers.cloudflare.com/pipelines/pipelines/`                   |
+| SQL reference (statements, types) | `https://developers.cloudflare.com/pipelines/sql-reference/`               |
+| Wrangler commands                 | `https://developers.cloudflare.com/pipelines/reference/wrangler-commands/` |
+| Terraform                         | `https://developers.cloudflare.com/pipelines/reference/terraform/`         |
+| Limits                            | `https://developers.cloudflare.com/pipelines/platform/limits/`             |
+| Pricing                           | `https://developers.cloudflare.com/pipelines/platform/pricing/`            |
+| Metrics (GraphQL)                 | `https://developers.cloudflare.com/pipelines/observability/metrics/`       |
 
 ## Three Components
 
@@ -28,11 +28,11 @@ Sources → Stream → Pipeline (SQL) → Sink → R2
    Logpush          (row-level)   or Parquet/JSON files
 ```
 
-| Component | Purpose |
-|-----------|---------|
-| **Stream** | Receives events (HTTP endpoint, Worker binding, or Logpush). Structured (schema-validated) or unstructured. |
-| **Pipeline** | SQL connecting a stream to a sink. Row-level transforms only — no GROUP BY/aggregation. |
-| **Sink** | Writes to R2 — Iceberg via Data Catalog, or raw Parquet/JSON. |
+| Component    | Purpose                                                                                                     |
+| ------------ | ----------------------------------------------------------------------------------------------------------- |
+| **Stream**   | Receives events (HTTP endpoint, Worker binding, or Logpush). Structured (schema-validated) or unstructured. |
+| **Pipeline** | SQL connecting a stream to a sink. Row-level transforms only — no GROUP BY/aggregation.                     |
+| **Sink**     | Writes to R2 — Iceberg via Data Catalog, or raw Parquet/JSON.                                               |
 
 **Status:** Open beta (Workers Paid for production). Pricing announced; verify billing status in docs.
 
@@ -44,14 +44,17 @@ npx wrangler pipelines setup
 ```
 
 Minimal Worker producer:
+
 ```typescript
-interface Env { MY_STREAM: Pipeline; }
+interface Env {
+  MY_STREAM: Pipeline;
+}
 
 export default {
   async fetch(req: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     ctx.waitUntil(env.MY_STREAM.send([{ event_id: crypto.randomUUID(), amount: 29.99 }]));
     return new Response("OK");
-  }
+  },
 } satisfies ExportedHandler<Env>;
 ```
 

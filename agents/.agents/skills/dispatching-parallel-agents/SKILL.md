@@ -12,14 +12,15 @@ MEDIUM FREEDOM - Follow the 6-step process (identify, create tasks, dispatch, mo
 </rigidity_level>
 
 <quick_reference>
-| Step | Action | Critical Rule |
-|------|--------|---------------|
-| 1. Identify Domains | Test independence (fix A doesn't affect B) | 3+ independent domains required |
-| 2. Create Agent Tasks | Write focused prompts (scope, goal, constraints, output) | One prompt per domain |
-| 3. Dispatch Agents | Launch all agents in SINGLE message | Multiple Task() calls in parallel |
-| 4. Monitor Progress | Track completions, don't integrate until ALL done | Wait for all agents |
-| 5. Review Results | Read summaries, check conflicts | Manual conflict resolution |
-| 6. Verify Integration | Run full test suite | Use verification-before-completion |
+
+| Step                  | Action                                                   | Critical Rule                      |
+| --------------------- | -------------------------------------------------------- | ---------------------------------- |
+| 1. Identify Domains   | Test independence (fix A doesn't affect B)               | 3+ independent domains required    |
+| 2. Create Agent Tasks | Write focused prompts (scope, goal, constraints, output) | One prompt per domain              |
+| 3. Dispatch Agents    | Launch all agents in SINGLE message                      | Multiple Task() calls in parallel  |
+| 4. Monitor Progress   | Track completions, don't integrate until ALL done        | Wait for all agents                |
+| 5. Review Results     | Read summaries, check conflicts                          | Manual conflict resolution         |
+| 6. Verify Integration | Run full test suite                                      | Use verification-before-completion |
 
 **Why 3+?** With only 2 failures, coordination overhead often exceeds sequential time.
 
@@ -28,6 +29,7 @@ MEDIUM FREEDOM - Follow the 6-step process (identify, create tasks, dispatch, mo
 
 <when_to_use>
 Use when:
+
 - 3+ test files failing with different root causes
 - Multiple subsystems broken independently
 - Each problem can be understood without context from others
@@ -36,6 +38,7 @@ Use when:
 - Each domain has clear boundaries (different files, modules, features)
 
 Don't use when:
+
 - Failures are related (fix one might fix others)
 - Need to understand full system state first
 - Agents would interfere (editing same files)
@@ -43,14 +46,16 @@ Don't use when:
 - Failures share root cause (one bug, multiple symptoms)
 - Need to preserve investigation order (cascading failures)
 - Only 2 failures (overhead exceeds benefit)
-</when_to_use>
+  </when_to_use>
 
 <the_process>
+
 ## Step 1: Identify Independent Domains
 
 **Announce:** "I'm using hyperpowers:dispatching-parallel-agents to investigate these independent failures concurrently."
 
 **Create TodoWrite tracker:**
+
 ```
 - Identify independent domains (3+ domains identified)
 - Create agent tasks (one prompt per domain drafted)
@@ -75,6 +80,7 @@ Don't use when:
    - If YES → Might be same root cause
 
 **Example independence check:**
+
 ```
 Failure 1: Authentication tests failing (auth.test.ts)
 Failure 2: Database query tests failing (db.test.ts)
@@ -89,6 +95,7 @@ Result: 2 independent domains:
 ```
 
 **Group failures by what's broken:**
+
 - File A tests: Tool approval flow
 - File B tests: Batch completion behavior
 - File C tests: Abort functionality
@@ -105,6 +112,7 @@ Each agent prompt must have:
 4. **Expected output:** Summary of what you found and fixed
 
 **Good agent prompt example:**
+
 ```markdown
 Fix the 3 failing tests in src/agents/agent-tool-abort.test.ts:
 
@@ -127,6 +135,7 @@ Return: Summary of what you found and what you fixed.
 ```
 
 **What makes this good:**
+
 - Specific test failures listed
 - Context provided (timing/race conditions)
 - Clear methodology (read, identify, fix)
@@ -155,19 +164,20 @@ Return: Summary of what you found and what you fixed.
 
 ```typescript
 // ✅ CORRECT - Single message with multiple parallel tasks
-Task("Fix agent-tool-abort.test.ts failures", prompt1)
-Task("Fix batch-completion-behavior.test.ts failures", prompt2)
-Task("Fix tool-approval-race-conditions.test.ts failures", prompt3)
+Task("Fix agent-tool-abort.test.ts failures", prompt1);
+Task("Fix batch-completion-behavior.test.ts failures", prompt2);
+Task("Fix tool-approval-race-conditions.test.ts failures", prompt3);
 // All three run concurrently
 
 // ❌ WRONG - Sequential messages
-Task("Fix agent-tool-abort.test.ts failures", prompt1)
+Task("Fix agent-tool-abort.test.ts failures", prompt1);
 // Wait for response
-Task("Fix batch-completion-behavior.test.ts failures", prompt2)
+Task("Fix batch-completion-behavior.test.ts failures", prompt2);
 // This is sequential, not parallel!
 ```
 
 **After dispatch:**
+
 - Mark "Dispatch agents in parallel" as completed in TodoWrite
 - Mark "Monitor agent progress" as in_progress
 - Wait for all agents to complete before integration
@@ -177,6 +187,7 @@ Task("Fix batch-completion-behavior.test.ts failures", prompt2)
 ## Step 4: Monitor Progress
 
 As agents work:
+
 - Note which agents have completed
 - Note which are still running
 - Don't start integration until ALL agents done
@@ -219,11 +230,13 @@ As agents work:
 ## Step 6: Verify Integration
 
 **Run full test suite:**
+
 - Not just the fixed tests
 - Verify no regressions in other areas
 - Use hyperpowers:verification-before-completion skill
 
 **Before completing:**
+
 ```bash
 # Run all tests
 npm test  # or cargo test, pytest, etc.
@@ -232,6 +245,7 @@ npm test  # or cargo test, pytest, etc.
 # If all pass → Mark "Verify integration" complete
 # If failures → Identify which agent's change caused regression
 ```
+
 </the_process>
 
 <examples>
@@ -243,64 +257,83 @@ npm test  # or cargo test, pytest, etc.
 # Creates 3 agent prompts
 
 # Dispatches first agent
+
 Task("Fix agent-tool-abort.test.ts failures", prompt1)
+
 # Waits for response from agent 1
 
 # Then dispatches second agent
+
 Task("Fix batch-completion-behavior.test.ts failures", prompt2)
+
 # Waits for response from agent 2
 
 # Then dispatches third agent
+
 Task("Fix tool-approval-race-conditions.test.ts failures", prompt3)
 
 # Total time: Sum of all three agents (sequential)
+
 </code>
 
 <why_it_fails>
+
 - Agents run sequentially, not in parallel
 - No time savings from parallelization
 - Each agent waits for previous to complete
 - Defeats entire purpose of parallel dispatch
 - Same result as sequential investigation
 - Wasted overhead of creating separate agents
-</why_it_fails>
+  </why_it_fails>
 
 <correction>
 **Dispatch all agents in SINGLE message:**
 
 ```typescript
 // Single message with multiple Task() calls
-Task("Fix agent-tool-abort.test.ts failures", `
+Task(
+  "Fix agent-tool-abort.test.ts failures",
+  `
 Fix the 3 failing tests in src/agents/agent-tool-abort.test.ts:
 [prompt 1 content]
-`)
+`,
+);
 
-Task("Fix batch-completion-behavior.test.ts failures", `
+Task(
+  "Fix batch-completion-behavior.test.ts failures",
+  `
 Fix the 2 failing tests in src/agents/batch-completion-behavior.test.ts:
 [prompt 2 content]
-`)
+`,
+);
 
-Task("Fix tool-approval-race-conditions.test.ts failures", `
+Task(
+  "Fix tool-approval-race-conditions.test.ts failures",
+  `
 Fix the 1 failing test in src/agents/tool-approval-race-conditions.test.ts:
 [prompt 3 content]
-`)
+`,
+);
 
 // All three run concurrently - THIS IS THE KEY
 ```
 
 **What happens:**
+
 - All three agents start simultaneously
 - Each investigates independently
 - All complete in parallel
 - Total time: Max(agent1, agent2, agent3) instead of Sum
 
 **What you gain:**
+
 - True parallelization - 3 problems solved concurrently
 - Time saved: 3 investigations in time of 1
 - Each agent focused on narrow scope
 - No waiting for sequential completion
 - Proper use of parallel dispatch pattern
 </correction>
+
 </example>
 
 <example>
@@ -317,15 +350,21 @@ Fix the 1 failing test in src/agents/tool-approval-race-conditions.test.ts:
 # Dispatches 3 agents immediately without checking independence
 
 # Agent 1 finds: API failing because database schema changed
+
 # Agent 2 finds: Database queries need migration
+
 # Agent 3 finds: Cache keys based on old schema
 
 # All three failures caused by same root cause: schema change
+
 # Agents make conflicting fixes based on different assumptions
+
 # Integration fails because fixes contradict each other
+
 </code>
 
 <why_it_fails>
+
 - Skipped independence verification (Step 1)
 - Assumed independence based on surface appearance
 - All failures actually shared root cause (schema change)
@@ -334,7 +373,7 @@ Fix the 1 failing test in src/agents/tool-approval-race-conditions.test.ts:
 - Conflicting fixes can't be integrated
 - Wasted time on parallel work that should have been unified
 - Have to throw away agent work and start over
-</why_it_fails>
+  </why_it_fails>
 
 <correction>
 **Run independence check FIRST:**
@@ -380,6 +419,7 @@ Return: What changed in schema, how you fixed each subsystem."
 ```
 
 **What you gain:**
+
 - Caught shared root cause before wasting time
 - One agent sees full context
 - Consistent fix across all affected areas
@@ -388,6 +428,7 @@ Return: What changed in schema, how you fixed each subsystem."
 - Faster than 3 agents working at cross-purposes
 - Proper problem diagnosis before parallel dispatch
 </correction>
+
 </example>
 
 <example>
@@ -406,14 +447,21 @@ Agent 3: "Fixed timing issue by reducing wait time to 1000ms"
 # Applies all changes without checking conflicts
 
 # Result:
+
 # - Agent 1 and Agent 3 edited same file
+
 # - Agent 1 increased timeout, Agent 3 decreased it
+
 # - Final code has inconsistent timeouts
+
 # - Agent 2's mutex interacts badly with Agent 3's reduced timeout
+
 # - Tests still fail after integration
+
 </code>
 
 <why_it_fails>
+
 - Skipped conflict checking (Step 5)
 - Didn't carefully read what each agent changed
 - Agents made contradictory decisions
@@ -422,29 +470,33 @@ Agent 3: "Fixed timing issue by reducing wait time to 1000ms"
 - Blindly applying all fixes creates inconsistent state
 - Tests fail after "successful" integration
 - Have to manually untangle conflicting changes
-</why_it_fails>
+  </why_it_fails>
 
 <correction>
 **Review results carefully before integration:**
 
-```markdown
+````markdown
 ## Agent Summaries Review
 
 Agent 1: Fixed timeout issue by increasing wait time to 5000ms
+
 - File: src/agents/tool-executor.ts
 - Change: DEFAULT_TIMEOUT = 5000
 
 Agent 2: Fixed race condition by adding mutex lock
+
 - File: src/agents/tool-executor.ts
 - Change: Added mutex around tool execution
 
 Agent 3: Fixed timing issue by reducing wait time to 1000ms
+
 - File: src/agents/tool-executor.ts
 - Change: DEFAULT_TIMEOUT = 1000
 
 ## Conflict Analysis
 
 **CONFLICT DETECTED:**
+
 - Agents 1 and 3 edited same file (tool-executor.ts)
 - Agents 1 and 3 changed same constant (DEFAULT_TIMEOUT)
 - Agent 1: increase to 5000ms
@@ -452,6 +504,7 @@ Agent 3: Fixed timing issue by reducing wait time to 1000ms
 - Contradictory assumptions about correct timing
 
 **Why conflict occurred:**
+
 - Domains weren't actually independent (same timeout constant)
 - Both agents tested locally, didn't see interaction
 - Different problem spaces led to different timing needs
@@ -459,34 +512,41 @@ Agent 3: Fixed timing issue by reducing wait time to 1000ms
 ## Resolution
 
 **Option 1:** Different timeouts for different operations
+
 ```typescript
-const TOOL_EXECUTION_TIMEOUT = 5000  // Agent 1's need
-const TOOL_APPROVAL_TIMEOUT = 1000   // Agent 3's need
+const TOOL_EXECUTION_TIMEOUT = 5000; // Agent 1's need
+const TOOL_APPROVAL_TIMEOUT = 1000; // Agent 3's need
 ```
+````
 
 **Option 2:** Investigate why timing varies
+
 - Maybe Agent 1's tests are actually slow (fix slowness)
 - Maybe Agent 3's tests are correct (use 1000ms everywhere)
 
 **Choose Option 2 after investigation:**
+
 - Agent 1's tests were slow due to unrelated issue
 - Fix the slowness, use 1000ms timeout everywhere
 - Agent 2's mutex is compatible with 1000ms
 
 **Integration steps:**
+
 1. Apply Agent 2's mutex (no conflict)
 2. Apply Agent 3's 1000ms timeout
 3. Fix Agent 1's slow tests (root cause)
 4. Don't apply Agent 1's timeout increase (symptom fix)
-```
+
+````
 
 **Run full test suite:**
 ```bash
 npm test
 # All tests pass ✅
-```
+````
 
 **What you gain:**
+
 - Caught contradiction before breaking integration
 - Understood why agents made different decisions
 - Resolved conflict thoughtfully, not arbitrarily
@@ -495,20 +555,24 @@ npm test
 - Avoided shipping inconsistent code
 - Professional conflict resolution process
 </correction>
+
 </example>
 </examples>
 
 <failure_modes>
+
 ## Agent Gets Stuck
 
 **Symptoms:** No progress after 5+ minutes
 
 **Causes:**
+
 - Prompt too vague, agent exploring aimlessly
 - Domain not actually independent, needs context from other agents
 - Agent hit a blocker (missing file, unclear error)
 
 **Recovery:**
+
 1. Use AgentOutput tool to check what it's doing
 2. If stuck on wrong path: Cancel and retry with clearer prompt
 3. If needs context from other domain: Wait for other agent, then restart with context
@@ -521,11 +585,13 @@ npm test
 **Symptoms:** Agents edited same code differently, or made contradictory assumptions
 
 **Causes:**
+
 - Domains weren't actually independent
 - Shared code between domains
 - Agents made different assumptions about correct behavior
 
 **Recovery:**
+
 1. Don't apply either fix automatically
 2. Read both fixes carefully
 3. Identify the conflict point
@@ -539,11 +605,13 @@ npm test
 **Symptoms:** Fixed tests pass, but other tests now fail
 
 **Causes:**
+
 - Agent changed shared code
 - Agent's fix was too broad
 - Agent misunderstood requirements
 
 **Recovery:**
+
 1. Identify which agent's change caused the regression
 2. Read the agent's summary - did they mention this change?
 3. Evaluate if change is correct but tests need updating
@@ -557,12 +625,14 @@ npm test
 **Symptoms:** Fixing one domain revealed it affected another
 
 **Recovery:**
+
 1. Merge the domains
 2. Have one agent investigate both together
 3. Learn: Better independence test needed upfront
-</failure_modes>
+   </failure_modes>
 
 <critical_rules>
+
 ## Rules That Have No Exceptions
 
 1. **Verify independence first** → Test with questions before dispatching
@@ -584,7 +654,7 @@ All of these mean: **STOP. Follow the process.**
 - "Conflicts are minor, can ignore" (Resolve all conflicts explicitly)
 - "Don't need TodoWrite for just tracking agents" (Use TodoWrite, track properly)
 - "Can skip verification, agents ran tests" (Agents can make mistakes, YOU verify)
-</critical_rules>
+  </critical_rules>
 
 <verification_checklist>
 Before completing parallel agent work:
@@ -608,17 +678,20 @@ Before completing parallel agent work:
 **This skill covers:** Parallel investigation of independent failures
 
 **Related skills:**
+
 - hyperpowers:debugging-with-tools (how to investigate individual failures)
 - hyperpowers:fixing-bugs (complete bug workflow)
 - hyperpowers:verification-before-completion (verify integration)
 - hyperpowers:test-runner (run tests without context pollution)
 
 **This skill uses:**
+
 - Task tool (dispatch parallel agents)
 - AgentOutput tool (monitor stuck agents)
 - TodoWrite (track agent progress)
 
 **Workflow integration:**
+
 ```
 Multiple independent failures
     ↓
@@ -638,6 +711,7 @@ hyperpowers:verification-before-completion
 ```
 
 **Real example from session (2025-10-03):**
+
 - 6 failures across 3 files
 - 3 agents dispatched in parallel
 - All investigations completed concurrently
@@ -655,6 +729,7 @@ hyperpowers:verification-before-completion
 - Full verification catches agent mistakes
 
 **When stuck:**
+
 - Agent not making progress → Check AgentOutput, retry with clearer prompt
 - Conflicts after dispatch → Domains weren't independent, merge and retry
 - Integration fails tests → Identify which agent caused regression

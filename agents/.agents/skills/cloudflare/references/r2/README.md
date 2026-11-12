@@ -10,12 +10,12 @@ Use R2 for objects such as uploads, media, backups, and static assets. Fetch the
 
 ## Find the task
 
-| Task | Reference |
-|------|-----------|
-| Bindings, credentials, local development, bucket settings | [configuration.md](./configuration.md) |
-| Object operations, metadata, conditions, multipart, CLI | [api.md](./api.md) |
-| Uploads, streaming, caching, public delivery, event processing | [patterns.md](./patterns.md) |
-| Pagination, conditional responses, failed uploads, limits | [gotchas.md](./gotchas.md) |
+| Task                                                           | Reference                              |
+| -------------------------------------------------------------- | -------------------------------------- |
+| Bindings, credentials, local development, bucket settings      | [configuration.md](./configuration.md) |
+| Object operations, metadata, conditions, multipart, CLI        | [api.md](./api.md)                     |
+| Uploads, streaming, caching, public delivery, event processing | [patterns.md](./patterns.md)           |
+| Pagination, conditional responses, failed uploads, limits      | [gotchas.md](./gotchas.md)             |
 
 For other topics, discover pages through the [R2 documentation index](https://developers.cloudflare.com/r2/llms.txt). Check [pricing](https://developers.cloudflare.com/r2/pricing/) before estimating costs.
 

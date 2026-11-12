@@ -12,20 +12,22 @@ MEDIUM FREEDOM - Follow the backward tracing process strictly, but adapt instrum
 </rigidity_level>
 
 <quick_reference>
-| Step | Action | Question |
-|------|--------|----------|
-| 1 | Read error completely | What failed and where? |
-| 2 | Find immediate cause | What code directly threw this? |
-| 3 | Trace backward one level | What called this code? |
-| 4 | Keep tracing up stack | What called that? |
-| 5 | Find where bad data originated | Where was invalid value created? |
-| 6 | Fix at source | Address root cause |
-| 7 | Add defense at each layer | Validate assumptions as backup |
+
+| Step | Action                         | Question                         |
+| ---- | ------------------------------ | -------------------------------- |
+| 1    | Read error completely          | What failed and where?           |
+| 2    | Find immediate cause           | What code directly threw this?   |
+| 3    | Trace backward one level       | What called this code?           |
+| 4    | Keep tracing up stack          | What called that?                |
+| 5    | Find where bad data originated | Where was invalid value created? |
+| 6    | Fix at source                  | Address root cause               |
+| 7    | Add defense at each layer      | Validate assumptions as backup   |
 
 **Core rule:** Never fix just where error appears. Fix where problem originates.
 </quick_reference>
 
 <when_to_use>
+
 - Error happens deep in execution (not at entry point)
 - Stack trace shows long call chain
 - Unclear where invalid data originated
@@ -33,13 +35,15 @@ MEDIUM FREEDOM - Follow the backward tracing process strictly, but adapt instrum
 - Error message points to utility/library code
 
 **Example symptoms:**
+
 - "Database rejects empty string" ← Where did empty string come from?
 - "File not found: ''" ← Why is path empty?
 - "Invalid argument to function" ← Who passed invalid argument?
 - "Null pointer dereference" ← What should have been initialized?
-</when_to_use>
+  </when_to_use>
 
 <the_process>
+
 ## 1. Observe the Symptom
 
 Read the complete error:
@@ -112,6 +116,7 @@ async createUser(req: Request): Promise<Response> {
 ## 5. Identify the Pattern
 
 **Why empty string as default?**
+
 - Misguided "safety": Thought empty string better than undefined
 - Should reject invalid request at API boundary
 - Downstream code assumes data already validated
@@ -155,6 +160,7 @@ if (!email) throw new Error("invariant violated: email empty");
 </the_process>
 
 <debugging_approaches>
+
 ## Option 1: Guide User Through Debugger
 
 **IMPORTANT:** Claude cannot run interactive debuggers. Guide user through debugger commands.
@@ -211,12 +217,14 @@ cargo test 2>&1 | grep "DEBUG validate_email" -A 10
 ```
 
 Look for:
+
 - Test file names in backtraces
 - Line numbers triggering the call
 - Patterns (same test? same parameter?)
-</debugging_approaches>
+  </debugging_approaches>
 
 <finding_polluting_tests>
+
 ## Finding Which Test Pollutes
 
 When something appears during tests but you don't know which:
@@ -248,6 +256,7 @@ for test in tests/**/*.test.ts; do
   fi
 done
 ```
+
 </finding_polluting_tests>
 
 <examples>
@@ -266,21 +275,23 @@ fn git_init(directory: &str) {
 # Error: "Invalid argument: empty directory"
 
 # Developer adds validation at symptom:
+
 fn git_init(directory: &str) {
-    if directory.is_empty() {
-        panic!("Directory cannot be empty"); // Band-aid
-    }
-    Command::new("git").arg("init").current_dir(directory).run()
+if directory.is_empty() {
+panic!("Directory cannot be empty"); // Band-aid
+}
+Command::new("git").arg("init").current_dir(directory).run()
 }
 </code>
 
 <why_it_fails>
+
 - Fixes symptom, not source (where empty string created)
 - Same bug will appear elsewhere directory is used
 - Doesn't explain WHY directory was empty
 - Future code might make same mistake
 - Band-aid hides the real problem
-</why_it_fails>
+  </why_it_fails>
 
 <correction>
 **Trace backward:**
@@ -306,17 +317,19 @@ function setupTest() {
         throw new Error("tempDir accessed before beforeEach!");
       }
       return _tempDir;
-    }
+    },
   };
 }
 ```
 
 **What you gain:**
+
 - Fixes actual bug (test timing issue)
 - Prevents same mistake elsewhere
 - Clear error at source, not deep in stack
 - No empty strings propagating through system
 </correction>
+
 </example>
 
 <example>
@@ -333,20 +346,25 @@ async createUser(req: Request): Promise<Response> {
 }
 
 # Developer sees empty string default and "fixes" it:
+
 email: req.body.email || "noreply@example.com"
 
 # Ships to production
+
 # Bug: Users created without email input get noreply@example.com
+
 # Database has fake emails, can't distinguish missing from real
+
 </code>
 
 <why_it_fails>
+
 - Stopped at first suspicious code
 - Didn't question WHY empty string was default
 - "Fixed" by replacing with different wrong default
 - Root cause: shouldn't accept missing email at all
 - Validation should happen at API boundary
-</why_it_fails>
+  </why_it_fails>
 
 <correction>
 **Keep tracing to understand intent:**
@@ -357,6 +375,7 @@ email: req.body.email || "noreply@example.com"
 4. What does database schema say?
 
 **Findings:**
+
 - Email column is NOT NULL in database
 - API docs say email is required
 - Empty string was workaround, not design
@@ -379,12 +398,14 @@ async createUser(req: Request): Promise<Response> {
 ```
 
 **What you gain:**
+
 - Validates at correct layer (API boundary)
 - Clear error message to client
 - No invalid data propagates downstream
 - Database constraints enforced
 - Matches API specification
 </correction>
+
 </example>
 
 <example>
@@ -394,23 +415,27 @@ async createUser(req: Request): Promise<Response> {
 # Problem: .git directory appearing in source code directory during tests
 
 # Symptom location:
+
 Error: Cannot initialize git repo (repo already exists)
 Location: src/workspace/git.rs:45
 
 # Developer adds check:
+
 if Path::new(".git").exists() {
-    return Err("Git already initialized");
+return Err("Git already initialized");
 }
 
 # Doesn't help - still appears in wrong place!
+
 </code>
 
 <why_it_fails>
+
 - Detects symptom, doesn't prevent it
 - .git still created in wrong directory
 - Doesn't explain HOW it gets there
 - Pollution still happens, just detected
-</why_it_fails>
+  </why_it_fails>
 
 <correction>
 **Trace through multiple layers:**
@@ -454,7 +479,7 @@ function setupTest() {
         throw new Error("tempDir accessed before beforeEach!");
       }
       return _tempDir;
-    }
+    },
   };
 }
 ```
@@ -493,16 +518,19 @@ fn git_init(dir: &Path) -> Result<()> {
 ```
 
 **What you gain:**
+
 - Primary fix prevents early access (source)
 - Each layer validates assumptions (defense)
 - Clear error at source, not deep in stack
 - Environment guard prevents production pollution
 - Multi-layer defense catches future mistakes
 </correction>
+
 </example>
 </examples>
 
 <critical_rules>
+
 ## Rules That Have No Exceptions
 
 1. **Never fix just where error appears** → Trace backward to find source
@@ -520,7 +548,7 @@ All of these mean: **STOP. Trace backward to find source.**
 - "This code should handle empty values" (Why is value empty? Find source.)
 - "Too deep to trace, I'll add defensive check" (Defense without source fix = band-aid)
 - "Multiple places could cause this" (Trace to find which one actually does)
-</critical_rules>
+  </critical_rules>
 
 <verification_checklist>
 Before claiming root cause fixed:
@@ -543,11 +571,13 @@ Before claiming root cause fixed:
 - When unclear where invalid data originated
 
 **This skill requires:**
+
 - Stack traces or debugger access
 - Ability to add instrumentation (logging)
 - Understanding of call chain
 
 **This skill calls:**
+
 - hyperpowers:test-driven-development (write regression test after finding source)
 - hyperpowers:verification-before-completion (verify fix works)
 </integration>
@@ -559,6 +589,7 @@ Before claiming root cause fixed:
 - [Defense-in-depth examples](resources/defense-patterns.md)
 
 **When stuck:**
+
 - Can't find source → Add instrumentation at each layer, run test
 - Stack trace unclear → Use debugger to inspect variables at each frame
 - Multiple suspects → Add instrumentation to all, find which actually executes

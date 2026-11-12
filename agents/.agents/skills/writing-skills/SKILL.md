@@ -12,32 +12,36 @@ LOW FREEDOM - Follow the RED-GREEN-REFACTOR cycle exactly when creating skills. 
 </rigidity_level>
 
 <quick_reference>
-| Phase | Action | Verify |
-|-------|--------|--------|
-| **RED** | Create pressure scenarios | Document baseline failures |
-| **RED** | Run WITHOUT skill | Agent violates rule |
-| **GREEN** | Write minimal skill | Addresses baseline failures |
-| **GREEN** | Run WITH skill | Agent now complies |
-| **REFACTOR** | Find new rationalizations | Agent still complies |
-| **REFACTOR** | Add explicit counters | Bulletproof against excuses |
-| **DEPLOY** | Commit and optionally PR | Skill ready for use |
+
+| Phase        | Action                    | Verify                      |
+| ------------ | ------------------------- | --------------------------- |
+| **RED**      | Create pressure scenarios | Document baseline failures  |
+| **RED**      | Run WITHOUT skill         | Agent violates rule         |
+| **GREEN**    | Write minimal skill       | Addresses baseline failures |
+| **GREEN**    | Run WITH skill            | Agent now complies          |
+| **REFACTOR** | Find new rationalizations | Agent still complies        |
+| **REFACTOR** | Add explicit counters     | Bulletproof against excuses |
+| **DEPLOY**   | Commit and optionally PR  | Skill ready for use         |
 
 **Iron Law:** NO SKILL WITHOUT FAILING TEST FIRST (applies to new skills AND edits)
 </quick_reference>
 
 <when_to_use>
 **Create skill when:**
+
 - Technique wasn't intuitively obvious to you
 - You'd reference this again across projects
 - Pattern applies broadly (not project-specific)
 - Others would benefit from this knowledge
 
 **Never create for:**
+
 - One-off solutions
 - Standard practices well-documented elsewhere
 - Project-specific conventions (put in CLAUDE.md instead)
 
 **Edit existing skill when:**
+
 - Found new rationalization agents use
 - Discovered loophole in current guidance
 - Need to add clarifying examples
@@ -48,23 +52,24 @@ LOW FREEDOM - Follow the RED-GREEN-REFACTOR cycle exactly when creating skills. 
 <tdd_mapping>
 Skills use the exact same TDD cycle as code:
 
-| TDD Concept | Skill Creation |
-|-------------|----------------|
-| **Test case** | Pressure scenario with subagent |
-| **Production code** | Skill document (SKILL.md) |
-| **Test fails (RED)** | Agent violates rule without skill |
-| **Test passes (GREEN)** | Agent complies with skill present |
-| **Refactor** | Close loopholes while maintaining compliance |
-| **Write test first** | Run baseline scenario BEFORE writing skill |
-| **Watch it fail** | Document exact rationalizations agent uses |
-| **Minimal code** | Write skill addressing those specific violations |
-| **Watch it pass** | Verify agent now complies |
-| **Refactor cycle** | Find new rationalizations → plug → re-verify |
+| TDD Concept             | Skill Creation                                   |
+| ----------------------- | ------------------------------------------------ |
+| **Test case**           | Pressure scenario with subagent                  |
+| **Production code**     | Skill document (SKILL.md)                        |
+| **Test fails (RED)**    | Agent violates rule without skill                |
+| **Test passes (GREEN)** | Agent complies with skill present                |
+| **Refactor**            | Close loopholes while maintaining compliance     |
+| **Write test first**    | Run baseline scenario BEFORE writing skill       |
+| **Watch it fail**       | Document exact rationalizations agent uses       |
+| **Minimal code**        | Write skill addressing those specific violations |
+| **Watch it pass**       | Verify agent now complies                        |
+| **Refactor cycle**      | Find new rationalizations → plug → re-verify     |
 
 **REQUIRED BACKGROUND:** You MUST understand hyperpowers:test-driven-development before using this skill.
 </tdd_mapping>
 
 <the_process>
+
 ## 1. RED Phase - Create Failing Test
 
 **Create pressure scenarios for subagent:**
@@ -87,11 +92,13 @@ Implement this feature."
 **Run WITHOUT skill present.**
 
 **Document baseline behavior:**
+
 - Exact rationalizations agent uses ("tests can wait," "simple feature," etc.)
 - What agent skips (tests, verification, task-doc updates, etc.)
 - Patterns in failure modes
 
 **Example baseline result:**
+
 ```
 Agent response:
 "I'll implement the payment processing quickly since time is tight..."
@@ -128,11 +135,13 @@ LOW | MEDIUM | HIGH FREEDOM - [What this means]
 ```
 
 **Frontmatter rules:**
+
 - Only `name` and `description` fields (max 1024 chars total)
 - Name: letters, numbers, hyphens only (no parentheses/special chars)
 - Description: Start with "Use when...", third person, includes triggers
 
 **Description format:**
+
 ```yaml
 # ❌ BAD: Too abstract, first person
 description: I can help with async tests when they're flaky
@@ -142,6 +151,7 @@ description: Use when tests have race conditions or pass/fail inconsistently - r
 ```
 
 **Write skill addressing baseline failures:**
+
 - Add explicit counters for rationalizations ("tests can wait" → "NO EXCEPTIONS: tests first")
 - Create quick reference table for scanning
 - Add concrete examples showing failure modes
@@ -150,6 +160,7 @@ description: Use when tests have race conditions or pass/fail inconsistently - r
 **Run WITH skill present.**
 
 **Verify agent now complies:**
+
 - Same pressure scenario
 - Agent now follows workflow
 - No rationalizations from baseline appear
@@ -163,11 +174,13 @@ description: Use when tests have race conditions or pass/fail inconsistently - r
 **Find NEW rationalizations:**
 
 Run skill with DIFFERENT pressures:
+
 - Combine 3+ pressures (time + sunk cost + exhaustion)
 - Try meta-rationalizations ("this skill doesn't apply because...")
 - Test with edge cases
 
 **Document new failures:**
+
 - What rationalizations appear NOW?
 - What loopholes did agent find?
 - What explicit counters are needed?
@@ -176,17 +189,20 @@ Run skill with DIFFERENT pressures:
 
 ```markdown
 <critical_rules>
+
 ## Common Excuses
 
 All of these mean: [Action to take]
+
 - "Test can wait" (NO, test first always)
 - "Simple feature" (Simple breaks too, test first)
 - "Time pressure" (Broken code wastes more time)
-[Add ALL rationalizations found during testing]
-</critical_rules>
+  [Add ALL rationalizations found during testing]
+  </critical_rules>
 ```
 
 **Re-test until bulletproof:**
+
 - Run scenarios again
 - Verify new counters work
 - Agent complies even under combined pressures
@@ -206,6 +222,7 @@ Before deployment, verify:
 - [ ] Supporting files only for tools or heavy reference (>100 lines)
 
 **Token efficiency:**
+
 - Frequently-loaded skills: <200 words ideally
 - Other skills: <500 words
 - Move heavy content to resources/ files
@@ -249,41 +266,48 @@ description: Always write tests first
 Write tests first. No exceptions."
 
 # Then tries to deploy it
+
 </code>
 
 <why_it_fails>
+
 - No baseline behavior documented (don't know what agent does WITHOUT skill)
 - No verification skill actually works (might not address real rationalizations)
 - Generic guidance ("no exceptions") without specific counters
 - Will likely miss common excuses agents use
 - Violates Iron Law: no skill without failing test first
-</why_it_fails>
+  </why_it_fails>
 
 <correction>
 **Correct approach (RED-GREEN-REFACTOR):**
 
 **RED Phase:**
+
 1. Create pressure scenario (time + sunk cost)
 2. Run WITHOUT skill
 3. Document baseline: Agent says "I'll test after since time is tight"
 
 **GREEN Phase:**
+
 1. Write skill with explicit counter to that rationalization
 2. Add: "Common excuses: 'Time is tight' → Wrong. Broken code wastes more time. Write test first."
 3. Run WITH skill → agent now writes test first
 
 **REFACTOR Phase:**
+
 1. Try new pressure (exhaustion: "this is the 5th feature today")
 2. Agent finds loophole: "these are all similar, I can skip tests"
 3. Add counter: "Similar ≠ identical. Write test for each."
 4. Re-test → bulletproof
 
 **What you gain:**
+
 - Know skill addresses real failures (saw baseline)
 - Confident skill works (saw it fix behavior)
 - Closed all loopholes (tested multiple pressures)
 - Ready for production use
 </correction>
+
 </example>
 
 <example>
@@ -296,40 +320,47 @@ Write tests first. No exceptions."
 [Adds 50 lines to skill]
 
 # Commits without testing
+
 </code>
 
 <why_it_fails>
+
 - Don't know if new section actually helps (no baseline)
 - Might introduce contradictions with existing guidance
 - Could make skill less effective (more verbose, less clear)
 - Violates Iron Law: applies to edits too
 - Changes might not address actual rationalization patterns
-</why_it_fails>
+  </why_it_fails>
 
 <correction>
 **Correct approach:**
 
 **RED Phase (for edit):**
+
 1. Identify specific failure mode you want to address
 2. Create pressure scenario that triggers it
 3. Run WITH current skill → document how agent fails
 
 **GREEN Phase (edit):**
+
 1. Add ONLY content addressing that failure
 2. Keep changes minimal
 3. Run WITH edited skill → verify agent now complies
 
 **REFACTOR Phase:**
+
 1. Check edit didn't break existing scenarios
 2. Run previous test cases
 3. Verify all still pass
 
 **What you gain:**
+
 - Changes address real problems (saw failure)
 - Know edit helps (saw improvement)
 - Didn't break existing guidance (regression tested)
 - Skill stays bulletproof
 </correction>
+
 </example>
 
 <example>
@@ -342,15 +373,17 @@ description: For testing async code
 ---
 
 # Skill content...
+
 </code>
 
 <why_it_fails>
+
 - Future Claude won't find this when needed
 - "For testing async code" too abstract (when would Claude search this?)
 - Doesn't describe symptoms or triggers
 - Missing keywords like "flaky," "race condition," "timeout"
 - Won't show up when agent has the actual problem
-</why_it_fails>
+  </why_it_fails>
 
 <correction>
 **Better description:**
@@ -363,6 +396,7 @@ description: Use when tests have race conditions, timing dependencies, or pass/f
 ```
 
 **Why this works:**
+
 - Starts with "Use when" (triggers)
 - Lists symptoms: "race conditions," "pass/fail inconsistently"
 - Describes problem AND solution
@@ -370,16 +404,20 @@ description: Use when tests have race conditions, timing dependencies, or pass/f
 - Future Claude searching "why are my tests flaky" will find this
 
 **What you gain:**
+
 - Skill actually gets found when needed
 - Claude knows when to use it (clear triggers)
 - Search terms match real developer language
 - Description doubles as activation criteria
 </correction>
+
 </example>
 </examples>
 
 <skill_types>
+
 ## Technique
+
 Concrete method with steps to follow.
 
 **Examples:** condition-based-waiting, hyperpowers:root-cause-tracing
@@ -387,6 +425,7 @@ Concrete method with steps to follow.
 **Test approach:** Pressure scenarios with combined pressures
 
 ## Pattern
+
 Way of thinking about problems.
 
 **Examples:** flatten-with-flags, test-invariants
@@ -394,6 +433,7 @@ Way of thinking about problems.
 **Test approach:** Present problems the pattern solves, verify agent applies pattern
 
 ## Reference
+
 API docs, syntax guides, tool documentation.
 
 **Examples:** Office document manipulation, API reference guides
@@ -404,22 +444,28 @@ API docs, syntax guides, tool documentation.
 </skill_types>
 
 <file_organization>
+
 ## Self-Contained Skill
+
 ```
 defense-in-depth/
   SKILL.md    # Everything inline
 ```
+
 **When:** All content fits, no heavy reference needed
 
 ## Skill with Reusable Tool
+
 ```
 condition-based-waiting/
   SKILL.md    # Overview + patterns
   example.ts  # Working helpers to adapt
 ```
+
 **When:** Tool is reusable code, not just narrative
 
 ## Skill with Heavy Reference
+
 ```
 pptx/
   SKILL.md       # Overview + workflows
@@ -427,15 +473,18 @@ pptx/
   ooxml.md       # 500 lines XML structure
   scripts/       # Executable tools
 ```
+
 **When:** Reference material too large for inline (>100 lines)
 
 **Keep inline:**
+
 - Principles and concepts
 - Code patterns (<50 lines)
 - Everything that fits
-</file_organization>
+  </file_organization>
 
 <search_optimization>
+
 ## Claude Search Optimization (CSO)
 
 Future Claude needs to FIND your skill. Optimize for search.
@@ -458,6 +507,7 @@ description: Use when tests have race conditions or pass/fail inconsistently - r
 ### 2. Keyword Coverage
 
 Use words Claude would search for:
+
 - **Error messages:** "Hook timed out", "ENOTEMPTY", "race condition"
 - **Symptoms:** "flaky", "hanging", "zombie", "pollution"
 - **Synonyms:** "timeout/hang/freeze", "cleanup/teardown/afterEach"
@@ -468,16 +518,19 @@ Use words Claude would search for:
 **Problem:** Frequently-referenced skills load into EVERY conversation.
 
 **Target word counts:**
+
 - Frequently-loaded: <200 words
 - Other skills: <500 words
 
 **Techniques:**
+
 - Move details to tool --help
 - Use cross-references to other skills
 - Compress examples
 - Eliminate redundancy
 
 **Verification:**
+
 ```bash
 wc -w skills/skill-name/SKILL.md
 ```
@@ -485,6 +538,7 @@ wc -w skills/skill-name/SKILL.md
 ### 4. Cross-Referencing
 
 **Use skill name only, with explicit markers:**
+
 ```markdown
 **REQUIRED BACKGROUND:** You MUST understand hyperpowers:test-driven-development
 **REQUIRED SUB-SKILL:** Use hyperpowers:debugging-with-tools first
@@ -494,6 +548,7 @@ wc -w skills/skill-name/SKILL.md
 </search_optimization>
 
 <critical_rules>
+
 ## Rules That Have No Exceptions
 
 1. **NO SKILL WITHOUT FAILING TEST FIRST** → Applies to new skills AND edits
@@ -523,6 +578,7 @@ NO SKILL WITHOUT FAILING TEST FIRST
 ```
 
 **No exceptions for:**
+
 - "Simple additions"
 - "Just adding a section"
 - "Documentation updates"
@@ -535,12 +591,14 @@ NO SKILL WITHOUT FAILING TEST FIRST
 Before deploying ANY skill:
 
 **RED Phase:**
+
 - [ ] Created pressure scenarios (3+ combined pressures for discipline skills)
 - [ ] Ran WITHOUT skill present
 - [ ] Documented baseline behavior verbatim (exact rationalizations)
 - [ ] Identified patterns in failures
 
 **GREEN Phase:**
+
 - [ ] Name uses only letters, numbers, hyphens
 - [ ] YAML frontmatter: name + description only (max 1024 chars)
 - [ ] Description starts with "Use when..." and includes triggers
@@ -553,18 +611,21 @@ Before deploying ANY skill:
 - [ ] Verified agent now complies
 
 **REFACTOR Phase:**
+
 - [ ] Tested with different pressures
 - [ ] Found NEW rationalizations
 - [ ] Added explicit counters
 - [ ] Re-tested until bulletproof
 
 **Quality:**
+
 - [ ] Keywords throughout for search
 - [ ] One excellent code example (not multi-language)
 - [ ] Token-efficient (check word count)
 - [ ] Supporting files only if needed
 
 **Deploy:**
+
 - [ ] Committed to git with descriptive message
 - [ ] Pushed to plugin repository (if applicable)
 
@@ -577,11 +638,13 @@ Before deploying ANY skill:
 - Task tool (for running subagent tests)
 
 **This skill is called by:**
+
 - Anyone creating or editing skills
 - Plugin maintainers
 - Users with personal skill repositories
 
 **Agents used:**
+
 - general-purpose (for testing skills under pressure)
 </integration>
 
@@ -592,6 +655,7 @@ Before deploying ANY skill:
 - [Graphviz conventions](resources/graphviz-conventions.dot) - Flowchart style rules
 
 **When stuck:**
+
 - Skill seems too simple to test → If simple, testing is fast. Do it anyway.
 - Don't know what pressures to use → Time + sunk cost + authority always work
 - Agent still rationalizes → Add explicit counter for that exact excuse

@@ -13,40 +13,42 @@ MEDIUM FREEDOM - Test infrastructure patterns (TestContainers via UWMC.Library.T
 
 <quick_reference>
 
-| Test Type | Tool / Package | Purpose | Distribution |
-|-----------|---------------|---------|-------------|
-| Integration (hermetic) | `UWMC.Library.Testing.MsSql` + `WireMock` | Verify component interactions via real containers | 15% |
-| Contract | `UWMC.Library.Testing.PactFlow` | OAS-based bi-directional contract verification | Part of integration |
-| E2E Smoke | RestSharp / TestKube | Validate CUJs after deployment | 5% |
+| Test Type              | Tool / Package                            | Purpose                                           | Distribution        |
+| ---------------------- | ----------------------------------------- | ------------------------------------------------- | ------------------- |
+| Integration (hermetic) | `UWMC.Library.Testing.MsSql` + `WireMock` | Verify component interactions via real containers | 15%                 |
+| Contract               | `UWMC.Library.Testing.PactFlow`           | OAS-based bi-directional contract verification    | Part of integration |
+| E2E Smoke              | RestSharp / TestKube                      | Validate CUJs after deployment                    | 5%                  |
 
 **Integration test infrastructure mapping:**
 
-| Dependency | Test Double | Package |
-|-----------|-------------|---------|
-| SQL Database | TestContainers SQL Server | `UWMC.Library.Testing.MsSql` |
-| Cosmos DB | Azurite emulator | `UWMC.Library.Testing.CosmosDb` |
-| Redis | TestContainers Redis | `UWMC.Library.Testing.Redis` |
-| Kafka | TestContainers Kafka | `UWMC.Library.Testing.Kafka` |
-| External HTTP APIs | WireMock | `UWMC.Library.Testing.WireMock` |
-| GUP Auth | Mock IPolicyEvaluator | Hand-written (copy pattern below) |
-| Feature Flags | Mock IFeatureFlagManager | Moq (same as unit tests) |
+| Dependency         | Test Double               | Package                           |
+| ------------------ | ------------------------- | --------------------------------- |
+| SQL Database       | TestContainers SQL Server | `UWMC.Library.Testing.MsSql`      |
+| Cosmos DB          | Azurite emulator          | `UWMC.Library.Testing.CosmosDb`   |
+| Redis              | TestContainers Redis      | `UWMC.Library.Testing.Redis`      |
+| Kafka              | TestContainers Kafka      | `UWMC.Library.Testing.Kafka`      |
+| External HTTP APIs | WireMock                  | `UWMC.Library.Testing.WireMock`   |
+| GUP Auth           | Mock IPolicyEvaluator     | Hand-written (copy pattern below) |
+| Feature Flags      | Mock IFeatureFlagManager  | Moq (same as unit tests)          |
 
 </quick_reference>
 
 <when_to_use>
+
 - After functional code and unit tests are written and passing (Phase 3 complete)
 - Setting up hermetic integration test infrastructure for a v3 service
 - Adding OAS-based contract tests with PactFlow
 - Creating E2E smoke tests for critical user journeys
 - NOT for: Unit tests (use implement-feature), API design (use design-api)
 - NOT for: Stateless services with no infrastructure dependencies — use WebApplicationFactory with mocked services instead of full TestContainers
-</when_to_use>
+  </when_to_use>
 
 <the_process>
 
 ## 0. Prerequisites
 
 Before starting integration tests:
+
 - [ ] Functional code is implemented and unit tests pass (Phase 3)
 - [ ] Infrastructure is configured (Phase 4 — auth, database, Kafka)
 - [ ] `public partial class Program;` at end of Program.cs (required for WebApplicationFactory)
@@ -444,6 +446,7 @@ public class ConditionEndpointTests
 **Package:** `UWMC.Library.Testing.PactFlow` (3000.x / 3001.x)
 
 UWM uses **OAS-based bi-directional** contract testing. This means:
+
 1. Integration tests generate an OpenAPI spec from the running app
 2. A verifier file is generated alongside
 3. Both are published to PactFlow.io for cross-service contract verification
@@ -541,6 +544,7 @@ public class ConditionApiSmokeTests
 ```
 
 **E2E test rules:**
+
 - Test ONLY critical user journeys (happy path)
 - Do NOT test edge cases in E2E (that's what unit and integration tests are for)
 - Keep count minimal — each E2E test is expensive to maintain
@@ -555,20 +559,14 @@ Stryker.NET mutation testing runs ONLY on unit tests. Configure `stryker-config.
   "$schema": "https://raw.githubusercontent.com/stryker-mutator/stryker-net/master/src/Stryker.Core/Stryker.Core/stryker-config.schema.json",
   "stryker-config": {
     "project": "src/{ServiceName}/{ServiceName}.csproj",
-    "test-projects": [
-      "test/{ServiceName}.UnitTests/{ServiceName}.UnitTests.csproj"
-    ],
+    "test-projects": ["test/{ServiceName}.UnitTests/{ServiceName}.UnitTests.csproj"],
     "reporters": ["html", "json", "dots"],
     "thresholds": {
       "high": 90,
       "low": 80,
       "break": 80
     },
-    "ignore-methods": [
-      "AddUSFSLogging",
-      "AddUSFSHealthCheck",
-      "AddVaultSecrets"
-    ]
+    "ignore-methods": ["AddUSFSLogging", "AddUSFSHealthCheck", "AddVaultSecrets"]
   }
 }
 ```
@@ -589,17 +587,17 @@ Tests run in a specific order in CI/CD:
 
 The Test Automation team (TSTATO project on Bitbucket) maintains an extensive testing library ecosystem. Use the specific packages your service needs:
 
-| Package | Purpose | When to Use |
-|---------|---------|-------------|
-| `UWMC.Library.Testing.AspNetCore` | WebApplicationFactory, `MinimalWebApplicationFactory<T>`, logging helpers | Always — foundation for all integration tests |
-| `UWMC.Library.Testing.MsSql` | `DbFixture<T>` for SQL Server TestContainers | When service has SQL database |
-| `UWMC.Library.Testing.WireMock` | `UwmcWireMockServer` with post-processors | When service calls external HTTP APIs |
-| `UWMC.Library.Testing.PactFlow` | OAS contract generation, `PactFixture` | For contract testing (CD readiness requirement) |
-| `UWMC.Library.Testing.Kafka` | `KafkaFixtureV2`, `BaseTestConsumerV2` | When service produces/consumes Kafka events |
-| `UWMC.Library.Testing.Redis` | `RedisFixture` for Redis TestContainers | When service uses Redis cache |
-| `UWMC.Library.Testing.CosmosDb` | `CosmosDbFixture` for Cosmos emulator | When service uses Cosmos DB |
-| `UWMC.Library.Testing.EntityFrameworkCore` | In-memory DB for simpler tests | For unit-level EF Core tests (not integration) |
-| `UWMC.Library.Testing.RestSharp` | RestSharp extensions, Verify helpers | For enhanced RestSharp assertions |
+| Package                                    | Purpose                                                                   | When to Use                                     |
+| ------------------------------------------ | ------------------------------------------------------------------------- | ----------------------------------------------- |
+| `UWMC.Library.Testing.AspNetCore`          | WebApplicationFactory, `MinimalWebApplicationFactory<T>`, logging helpers | Always — foundation for all integration tests   |
+| `UWMC.Library.Testing.MsSql`               | `DbFixture<T>` for SQL Server TestContainers                              | When service has SQL database                   |
+| `UWMC.Library.Testing.WireMock`            | `UwmcWireMockServer` with post-processors                                 | When service calls external HTTP APIs           |
+| `UWMC.Library.Testing.PactFlow`            | OAS contract generation, `PactFixture`                                    | For contract testing (CD readiness requirement) |
+| `UWMC.Library.Testing.Kafka`               | `KafkaFixtureV2`, `BaseTestConsumerV2`                                    | When service produces/consumes Kafka events     |
+| `UWMC.Library.Testing.Redis`               | `RedisFixture` for Redis TestContainers                                   | When service uses Redis cache                   |
+| `UWMC.Library.Testing.CosmosDb`            | `CosmosDbFixture` for Cosmos emulator                                     | When service uses Cosmos DB                     |
+| `UWMC.Library.Testing.EntityFrameworkCore` | In-memory DB for simpler tests                                            | For unit-level EF Core tests (not integration)  |
+| `UWMC.Library.Testing.RestSharp`           | RestSharp extensions, Verify helpers                                      | For enhanced RestSharp assertions               |
 
 </the_process>
 
@@ -645,6 +643,7 @@ public class ConditionMockServer : IAsyncLifetime
 **Step 3: Create WebApplicationFixture** — Orchestrate all fixtures, start containers in parallel, configure services and configuration.
 
 **Step 4: Write tests**
+
 ```csharp
 [Collection(nameof(WebApplicationFixtureCollection))]
 public class ConditionEndpointTests
@@ -669,6 +668,7 @@ public class ConditionEndpointTests
     }
 }
 ```
+
 </example>
 
 <example>
@@ -803,16 +803,20 @@ Before completing test strategy:
 <integration>
 
 **This skill is called by:**
+
 - `develop-business-service` orchestrator (Phase 5)
 - Direct invocation via `/uwm-business-service-dev:test-strategy`
 
 **This skill should be used after:**
+
 - `integrate-infrastructure` (Phase 4) — infrastructure must be configured before testing it
 
 **This skill should be used before:**
+
 - `prepare-deployment` (Phase 6) — tests must pass before deployment
 
 **Related skills:**
+
 - `implement-feature` — writes the unit tests (Phase 3) that run before integration tests
 - `integrate-infrastructure` — configures the infrastructure these tests validate
 
@@ -821,6 +825,7 @@ Before completing test strategy:
 <resources>
 
 **UWM packages referenced:**
+
 - `UWMC.Library.Testing.AspNetCore` — WebApplicationFactory, MinimalWebApplicationFactory
 - `UWMC.Library.Testing.MsSql` — DbFixture for SQL Server TestContainers
 - `UWMC.Library.Testing.WireMock` — UwmcWireMockServer with post-processors
@@ -834,16 +839,19 @@ Before completing test strategy:
 - `CompareNETObjects` 4.x — Deep object comparison
 
 **Confluence references:**
+
 - "Test Pyramid" (TESTAUTO) — 80/15/5 distribution
 - "Hermetic Integration Testing Flow" (TESTAUTO) — Definitive integration test guide
 - "Continuous Deployment Readiness" (CICD) — CD certification requirements including PactFlow and smoke tests
 
 **Reference services:**
+
 - `cell-biz-borrower` (EH) — Full integration test suite with TestContainers, WireMock, PactFlow, Kafka
 - `cell-biz-condition` (EH) — Stateless service with WebApplicationFactory-only integration tests
 - `cell-biz-broker-preferences` (EH) — SQL + Cosmos + Kafka + WireMock integration tests
 
 **Testing library source:**
+
 - TSTATO project on Bitbucket — 25+ testing libraries maintained by Test Automation team
 
 </resources>

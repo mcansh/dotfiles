@@ -6,13 +6,13 @@ Fetch the linked documentation before choosing endpoints, authentication headers
 
 ## Choose a task
 
-| Task | Reference |
-|------|-----------|
-| Create a gateway or choose authentication and provider credentials | [Configuration](./configuration.md) |
-| Integrate an SDK, direct HTTP, or a Worker binding | [SDK integration](./sdk-integration.md) |
-| Configure caching, rate limits, security, billing, or logging | [Features](./features.md) |
-| Add fallbacks, conditional routing, or traffic splits | [Dynamic routing](./dynamic-routing.md) |
-| Diagnose failed requests, caching, or missing logs | [Troubleshooting](./troubleshooting.md) |
+| Task                                                               | Reference                               |
+| ------------------------------------------------------------------ | --------------------------------------- |
+| Create a gateway or choose authentication and provider credentials | [Configuration](./configuration.md)     |
+| Integrate an SDK, direct HTTP, or a Worker binding                 | [SDK integration](./sdk-integration.md) |
+| Configure caching, rate limits, security, billing, or logging      | [Features](./features.md)               |
+| Add fallbacks, conditional routing, or traffic splits              | [Dynamic routing](./dynamic-routing.md) |
+| Diagnose failed requests, caching, or missing logs                 | [Troubleshooting](./troubleshooting.md) |
 
 For new single-model calls, start with the [REST API](https://developers.cloudflare.com/ai-gateway/usage/rest-api/) or [Workers bindings](https://developers.cloudflare.com/ai-gateway/usage/worker-binding-methods/), depending on the runtime. Preserve provider-native integrations when their API shape is needed; use the corresponding [provider guide](https://developers.cloudflare.com/ai-gateway/usage/providers/).
 

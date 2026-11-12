@@ -10,54 +10,56 @@
 /* ============================================================
    Google Fonts — Roboto (web fallback for Futura PT)
    ============================================================ */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
 
 /* ============================================================
    Local Futura PT — only loads if installed on user's machine
    ============================================================ */
 @font-face {
-  font-family: 'Futura PT';
-  src: local('Futura PT Book'), local('FuturaPT-Book');
+  font-family: "Futura PT";
+  src: local("Futura PT Book"), local("FuturaPT-Book");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Futura PT';
-  src: local('Futura PT Light'), local('FuturaPT-Light');
+  font-family: "Futura PT";
+  src: local("Futura PT Light"), local("FuturaPT-Light");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Futura PT';
-  src: local('Futura PT Medium'), local('FuturaPT-Medium');
+  font-family: "Futura PT";
+  src: local("Futura PT Medium"), local("FuturaPT-Medium");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Futura PT';
-  src: local('Futura PT Demi'), local('FuturaPT-Demi');
+  font-family: "Futura PT";
+  src: local("Futura PT Demi"), local("FuturaPT-Demi");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Futura PT';
-  src: local('Futura PT Bold'), local('FuturaPT-Bold');
+  font-family: "Futura PT";
+  src: local("Futura PT Bold"), local("FuturaPT-Bold");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Futura PT';
-  src: local('Futura PT Heavy'), local('FuturaPT-Heavy'), local('Futura PT Extra Bold'), local('FuturaPT-ExtraBold');
+  font-family: "Futura PT";
+  src:
+    local("Futura PT Heavy"), local("FuturaPT-Heavy"), local("Futura PT Extra Bold"),
+    local("FuturaPT-ExtraBold");
   font-weight: 800;
   font-style: normal;
   font-display: swap;
@@ -71,19 +73,20 @@
   color-scheme: light;
 
   /* --- Brand Colors --- */
-  --uwm-blue: #005F9E;
-  --uwm-teal: #00A39D;
-  --uwm-green: #A1CE57;
-  --uwm-orange: #F68A33;
-  --uwm-gray: #B2B5B6;
+  --uwm-blue: #005f9e;
+  --uwm-teal: #00a39d;
+  --uwm-green: #a1ce57;
+  --uwm-orange: #f68a33;
+  --uwm-gray: #b2b5b6;
   --uwm-dark-gray: #575757;
-  --uwm-white: #FFFFFF;
-  --uwm-off-white: #F7F7F7;
+  --uwm-white: #ffffff;
+  --uwm-off-white: #f7f7f7;
 
   /* --- Font Stacks --- */
-  --uwm-font-headline: 'Futura PT', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --uwm-font-body: 'Helvetica Neue LT Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --uwm-font-web: 'Roboto', sans-serif;
+  --uwm-font-headline:
+    "Futura PT", "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --uwm-font-body: "Helvetica Neue LT Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --uwm-font-web: "Roboto", sans-serif;
 
   /* --- Typography Scale (rem-based, 16px base assumed) --- */
   --uwm-text-xs: 0.75rem;
@@ -100,12 +103,12 @@
      30pt ≈ 40px ≈ 2.5rem at 96 DPI.
      Slides are 1280x720; these sizes ensure readability on large screens.
      Footers and slide numbers are exempt (not audience-facing content). */
-  --uwm-slide-title-size: 3rem;        /* 48px ≈ 36pt */
-  --uwm-slide-title-hero-size: 4rem;   /* 64px ≈ 48pt */
-  --uwm-slide-subtitle-size: 2.5rem;   /* 40px = 30pt */
-  --uwm-slide-body-size: 2.5rem;       /* 40px = 30pt */
-  --uwm-slide-card-title-size: 2rem;   /* 32px ≈ 24pt — dense layout exception */
-  --uwm-slide-card-text-size: 1.5rem;  /* 24px ≈ 18pt — dense layout exception */
+  --uwm-slide-title-size: 3rem; /* 48px ≈ 36pt */
+  --uwm-slide-title-hero-size: 4rem; /* 64px ≈ 48pt */
+  --uwm-slide-subtitle-size: 2.5rem; /* 40px = 30pt */
+  --uwm-slide-body-size: 2.5rem; /* 40px = 30pt */
+  --uwm-slide-card-title-size: 2rem; /* 32px ≈ 24pt — dense layout exception */
+  --uwm-slide-card-text-size: 1.5rem; /* 24px ≈ 18pt — dense layout exception */
 
   /* --- Spacing Scale --- */
   --uwm-space-xs: 0.25rem;
@@ -138,7 +141,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--uwm-font-headline);
   text-transform: uppercase;
   letter-spacing: 0.03em;
@@ -197,31 +205,60 @@ a:hover {
   text-decoration: underline;
 }
 
-strong, b {
+strong,
+b {
   font-weight: 700;
 }
 
 /* ============================================================
    Text Color Utilities
    ============================================================ */
-.uwm-text-blue { color: var(--uwm-blue); }
-.uwm-text-teal { color: var(--uwm-teal); }
-.uwm-text-green { color: var(--uwm-green); }
-.uwm-text-orange { color: var(--uwm-orange); }
-.uwm-text-gray { color: var(--uwm-gray); }
-.uwm-text-dark-gray { color: var(--uwm-dark-gray); }
-.uwm-text-white { color: var(--uwm-white); }
+.uwm-text-blue {
+  color: var(--uwm-blue);
+}
+.uwm-text-teal {
+  color: var(--uwm-teal);
+}
+.uwm-text-green {
+  color: var(--uwm-green);
+}
+.uwm-text-orange {
+  color: var(--uwm-orange);
+}
+.uwm-text-gray {
+  color: var(--uwm-gray);
+}
+.uwm-text-dark-gray {
+  color: var(--uwm-dark-gray);
+}
+.uwm-text-white {
+  color: var(--uwm-white);
+}
 
 /* ============================================================
    Background Color Utilities
    ============================================================ */
-.uwm-bg-blue { background-color: var(--uwm-blue); }
-.uwm-bg-teal { background-color: var(--uwm-teal); }
-.uwm-bg-green { background-color: var(--uwm-green); }
-.uwm-bg-orange { background-color: var(--uwm-orange); }
-.uwm-bg-gray { background-color: var(--uwm-gray); }
-.uwm-bg-dark-gray { background-color: var(--uwm-dark-gray); }
-.uwm-bg-white { background-color: var(--uwm-white); }
+.uwm-bg-blue {
+  background-color: var(--uwm-blue);
+}
+.uwm-bg-teal {
+  background-color: var(--uwm-teal);
+}
+.uwm-bg-green {
+  background-color: var(--uwm-green);
+}
+.uwm-bg-orange {
+  background-color: var(--uwm-orange);
+}
+.uwm-bg-gray {
+  background-color: var(--uwm-gray);
+}
+.uwm-bg-dark-gray {
+  background-color: var(--uwm-dark-gray);
+}
+.uwm-bg-white {
+  background-color: var(--uwm-white);
+}
 
 /* ============================================================
    Layout Utilities
@@ -436,7 +473,8 @@ strong, b {
 /* ============================================================
    Lists
    ============================================================ */
-ul, ol {
+ul,
+ol {
   padding-left: var(--uwm-space-lg);
   margin-top: 0;
   margin-bottom: var(--uwm-space-md);
@@ -483,12 +521,12 @@ tr:nth-child(even) td {
    Opt-in only. Never applied automatically.
    ============================================================ */
 .uwm-dark {
-  --uwm-blue: #4DA3D4;
+  --uwm-blue: #4da3d4;
   /* Teal, Green, Orange pass WCAG AA on dark surfaces unchanged */
-  --uwm-gray: #4A5568;
-  --uwm-dark-gray: #D8DEE9;
-  --uwm-white: #1C2333;
-  --uwm-off-white: #252D3F;
+  --uwm-gray: #4a5568;
+  --uwm-dark-gray: #d8dee9;
+  --uwm-white: #1c2333;
+  --uwm-off-white: #252d3f;
 
   color-scheme: dark;
 }
@@ -510,8 +548,8 @@ body.uwm-dark {
 
 /* Tables: header stays blue, rows use dark surface */
 .uwm-dark th {
-  background-color: #005F9E;
-  color: #D8DEE9;
+  background-color: #005f9e;
+  color: #d8dee9;
 }
 
 .uwm-dark td {
@@ -545,21 +583,21 @@ body.uwm-dark {
 
 /* Doc header border stays original blue */
 .uwm-dark .uwm-doc-header {
-  border-bottom-color: #005F9E;
+  border-bottom-color: #005f9e;
 }
 
 /* One-pager hero — keep original blue for impact */
 .uwm-dark .uwm-hero {
-  background-color: #005F9E;
+  background-color: #005f9e;
 }
 
 /* CTA bar keeps original teal */
 .uwm-dark .uwm-cta {
-  background-color: #00A39D;
+  background-color: #00a39d;
 }
 
 .uwm-dark .uwm-cta-button {
-  color: #00A39D;
+  color: #00a39d;
   background-color: var(--uwm-white);
 }
 

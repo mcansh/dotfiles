@@ -1,14 +1,14 @@
 # Vectorize configuration routes
 
-| Task | Current documentation |
-|------|-----------------------|
-| Create an index, choose dimensions and metric | [Create indexes](https://developers.cloudflare.com/vectorize/best-practices/create-indexes/) |
-| Bind an index to a Worker, develop, deploy, and verify queries | [Introduction to Vectorize](https://developers.cloudflare.com/vectorize/get-started/intro/) |
-| Configure bindings and generate types | [Binding and TypeScript guidance](https://developers.cloudflare.com/vectorize/reference/client-api/#binding-to-a-worker) |
-| Create, list, or delete metadata indexes | [Metadata filtering](https://developers.cloudflare.com/vectorize/reference/metadata-filtering/) and [Wrangler commands](https://developers.cloudflare.com/vectorize/reference/wrangler-commands/) |
-| Manage indexes and vectors through the CLI | [Wrangler commands](https://developers.cloudflare.com/vectorize/reference/wrangler-commands/) |
-| Upload NDJSON and batch ingestion | [Insert vectors](https://developers.cloudflare.com/vectorize/best-practices/insert-vectors/) |
-| Check capacity, payload, namespace, or batch constraints | [Limits](https://developers.cloudflare.com/vectorize/platform/limits/) |
+| Task                                                           | Current documentation                                                                                                                                                                             |
+| -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Create an index, choose dimensions and metric                  | [Create indexes](https://developers.cloudflare.com/vectorize/best-practices/create-indexes/)                                                                                                      |
+| Bind an index to a Worker, develop, deploy, and verify queries | [Introduction to Vectorize](https://developers.cloudflare.com/vectorize/get-started/intro/)                                                                                                       |
+| Configure bindings and generate types                          | [Binding and TypeScript guidance](https://developers.cloudflare.com/vectorize/reference/client-api/#binding-to-a-worker)                                                                          |
+| Create, list, or delete metadata indexes                       | [Metadata filtering](https://developers.cloudflare.com/vectorize/reference/metadata-filtering/) and [Wrangler commands](https://developers.cloudflare.com/vectorize/reference/wrangler-commands/) |
+| Manage indexes and vectors through the CLI                     | [Wrangler commands](https://developers.cloudflare.com/vectorize/reference/wrangler-commands/)                                                                                                     |
+| Upload NDJSON and batch ingestion                              | [Insert vectors](https://developers.cloudflare.com/vectorize/best-practices/insert-vectors/)                                                                                                      |
+| Check capacity, payload, namespace, or batch constraints       | [Limits](https://developers.cloudflare.com/vectorize/platform/limits/)                                                                                                                            |
 
 ## Configuration decisions
 

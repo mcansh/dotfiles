@@ -10,9 +10,9 @@ Choose the integration by the work and runtime:
 
 Read only the reference needed for the task:
 
-| Task | Reference |
-|------|-----------|
-| Set up bindings, dependencies, or development | [configuration.md](configuration.md) |
-| Select an endpoint or browser client API | [api.md](api.md) |
-| Implement a workflow or manage reusable sessions | [patterns.md](patterns.md) |
-| Diagnose failures or plan capacity and cost | [gotchas.md](gotchas.md) |
+| Task                                             | Reference                            |
+| ------------------------------------------------ | ------------------------------------ |
+| Set up bindings, dependencies, or development    | [configuration.md](configuration.md) |
+| Select an endpoint or browser client API         | [api.md](api.md)                     |
+| Implement a workflow or manage reusable sessions | [patterns.md](patterns.md)           |
+| Diagnose failures or plan capacity and cost      | [gotchas.md](gotchas.md)             |

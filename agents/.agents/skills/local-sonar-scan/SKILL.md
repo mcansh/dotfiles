@@ -12,11 +12,12 @@ MEDIUM FREEDOM — The four-phase scanner workflow (begin, build, test, end) is 
 </rigidity_level>
 
 <when_to_use>
+
 - User says "local scan", "sonar scan", "scan locally", "run sonarscanner"
 - User wants SonarQube results before pushing
 - Project doesn't have CI-based SonarQube scanning yet
 - User wants to verify quality gate will pass before a PR
-</when_to_use>
+  </when_to_use>
 
 <the_process>
 
@@ -33,6 +34,7 @@ git rev-parse --abbrev-ref HEAD
 ```
 
 **Project key detection** — try these in order:
+
 1. Check for `sonar-project.properties` file → read `sonar.projectKey`
 2. Check the repo directory name (often matches the SonarQube key)
 3. Search SonarQube via `mcp__sonarqube__components` with the repo name
@@ -40,13 +42,13 @@ git rev-parse --abbrev-ref HEAD
 
 Known project key mappings:
 
-| Repo | SonarQube Key |
-|---|---|
-| brand360-gateway | `cell-biz-marketing-gateway` |
-| brand360-contact-validate | `cell-biz-contact-info-validate` |
-| lead-ingestion | `cell-biz-lead-profile` |
-| loa-text-messaging | `cell-text-messaging` |
-| cell-communications-emailer | `cell-communications-emailer` |
+| Repo                        | SonarQube Key                    |
+| --------------------------- | -------------------------------- |
+| brand360-gateway            | `cell-biz-marketing-gateway`     |
+| brand360-contact-validate   | `cell-biz-contact-info-validate` |
+| lead-ingestion              | `cell-biz-lead-profile`          |
+| loa-text-messaging          | `cell-text-messaging`            |
+| cell-communications-emailer | `cell-communications-emailer`    |
 
 ## 2. Verify Prerequisites
 
@@ -62,11 +64,13 @@ find . -path "*/test*/*.csproj" -exec grep -L "coverlet.collector" {} \;
 ```
 
 If sonarscanner is not installed:
+
 ```bash
 DOTNET_ROOT=/home/ycollins/.dotnet /home/ycollins/.dotnet/dotnet tool install --global dotnet-sonarscanner
 ```
 
 If any test project is missing `coverlet.collector`, add it:
+
 ```bash
 DOTNET_ROOT=/home/ycollins/.dotnet /home/ycollins/.dotnet/dotnet add <test-project.csproj> package coverlet.collector
 ```
@@ -162,6 +166,7 @@ After upload completes, query the SonarQube MCP tools — run these in parallel:
 ## 6. Fix Guidance
 
 If issues are found:
+
 - Read the flagged file and understand the issue
 - Offer a fix
 - After fixing, offer to re-run the local scan to verify
@@ -169,6 +174,7 @@ If issues are found:
 </the_process>
 
 <critical_rules>
+
 - ALWAYS use `DOTNET_ROOT=/home/ycollins/.dotnet /home/ycollins/.dotnet/dotnet` — the system dotnet at `/usr/bin/dotnet` only has .NET 10 and may not match the project's target framework
 - ALWAYS use `--no-incremental` on the build to ensure full analysis
 - ALWAYS run tests with `--collect:"XPlat Code Coverage"` between build and end — without this, SonarQube will report 0% coverage
@@ -178,4 +184,4 @@ If issues are found:
 - ALWAYS wait for "ANALYSIS SUCCESSFUL" or "Post-processing succeeded" before querying MCP results — the server needs time to process the uploaded report
 - If the scan creates a new project on SonarQube (first scan), note this to the user — they may need to configure the quality gate profile on the server
 - Local coverage may be lower than CI coverage if some tests require infrastructure not available locally (network shares, specific services). This is expected — note the difference to the user
-</critical_rules>
+  </critical_rules>

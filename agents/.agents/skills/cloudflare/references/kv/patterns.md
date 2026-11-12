@@ -2,13 +2,13 @@
 
 Read the guide for the pattern before implementing it, and confirm that [KV's consistency model](https://developers.cloudflare.com/kv/concepts/how-kv-works/) fits the application.
 
-| Task | Documentation and design decision |
-|------|-----------------------------------|
-| Cache application data or API results | [Cache data with KV](https://developers.cloudflare.com/kv/examples/cache-data-with-workers-kv/): decide acceptable staleness, expiration, and behavior when the origin fails. |
-| Cache eligible HTTP responses | [Workers Cache](https://developers.cloudflare.com/workers/cache/): choose the HTTP caching mechanism based on response semantics. |
-| Store configuration or feature flags | [Distributed configuration](https://developers.cloudflare.com/kv/examples/distributed-configuration-with-workers-kv/): choose defaults and rollout behavior that tolerate delayed updates. |
-| Coalesce related keys | [Read guidance](https://developers.cloudflare.com/kv/api/read-key-value-pairs/): fewer reads can improve cache reuse, but combined values couple updates and can introduce write races. |
-| Organize and enumerate keys by prefix | [List keys](https://developers.cloudflare.com/kv/api/list-keys/): use a consistent naming scheme and paginate every listing. |
+| Task                                     | Documentation and design decision                                                                                                                                                                                                                                                    |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Cache application data or API results    | [Cache data with KV](https://developers.cloudflare.com/kv/examples/cache-data-with-workers-kv/): decide acceptable staleness, expiration, and behavior when the origin fails.                                                                                                        |
+| Cache eligible HTTP responses            | [Workers Cache](https://developers.cloudflare.com/workers/cache/): choose the HTTP caching mechanism based on response semantics.                                                                                                                                                    |
+| Store configuration or feature flags     | [Distributed configuration](https://developers.cloudflare.com/kv/examples/distributed-configuration-with-workers-kv/): choose defaults and rollout behavior that tolerate delayed updates.                                                                                           |
+| Coalesce related keys                    | [Read guidance](https://developers.cloudflare.com/kv/api/read-key-value-pairs/): fewer reads can improve cache reuse, but combined values couple updates and can introduce write races.                                                                                              |
+| Organize and enumerate keys by prefix    | [List keys](https://developers.cloudflare.com/kv/api/list-keys/): use a consistent naming scheme and paginate every listing.                                                                                                                                                         |
 | Attach schema versions or other metadata | [Write metadata](https://developers.cloudflare.com/kv/api/write-key-value-pairs/) and [read metadata](https://developers.cloudflare.com/kv/api/read-key-value-pairs/): define compatibility and migration behavior for older records; migrations must account for concurrent writes. |
 
 ## Application-specific decisions

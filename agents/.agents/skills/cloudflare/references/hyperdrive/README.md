@@ -8,12 +8,12 @@ Fetch the relevant official page before implementing. Driver versions, compatibi
 
 ## Choose the next reference
 
-| Task | Reference |
-|------|-----------|
+| Task                                                                   | Reference                              |
+| ---------------------------------------------------------------------- | -------------------------------------- |
 | Create a configuration, bind it, connect privately, or develop locally | [configuration.md](./configuration.md) |
-| Choose a driver, use binding credentials, or integrate an ORM | [api.md](./api.md) |
-| Decide read freshness, connection lifetime, or query placement | [patterns.md](./patterns.md) |
-| Diagnose connection, cache, latency, or capacity problems | [gotchas.md](./gotchas.md) |
+| Choose a driver, use binding credentials, or integrate an ORM          | [api.md](./api.md)                     |
+| Decide read freshness, connection lifetime, or query placement         | [patterns.md](./patterns.md)           |
+| Diagnose connection, cache, latency, or capacity problems              | [gotchas.md](./gotchas.md)             |
 
 ## Decisions to preserve
 

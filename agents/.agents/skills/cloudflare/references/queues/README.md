@@ -14,11 +14,11 @@ See [How Queues works](https://developers.cloudflare.com/queues/reference/how-qu
 
 ## Read by task
 
-| Task | Reference |
-|------|-----------|
-| Create queues, bind producers, and configure consumers | [configuration.md](./configuration.md) |
-| Send messages and implement acknowledgement or retries | [api.md](./api.md) |
-| Buffer APIs, defer jobs, or integrate with storage and orchestration | [patterns.md](./patterns.md) |
-| Diagnose delivery failures, duplicates, or capacity issues | [gotchas.md](./gotchas.md) |
+| Task                                                                 | Reference                              |
+| -------------------------------------------------------------------- | -------------------------------------- |
+| Create queues, bind producers, and configure consumers               | [configuration.md](./configuration.md) |
+| Send messages and implement acknowledgement or retries               | [api.md](./api.md)                     |
+| Buffer APIs, defer jobs, or integrate with storage and orchestration | [patterns.md](./patterns.md)           |
+| Diagnose delivery failures, duplicates, or capacity issues           | [gotchas.md](./gotchas.md)             |
 
 For a first application, fetch [Getting started](https://developers.cloudflare.com/queues/get-started/). Retrieve [limits](https://developers.cloudflare.com/queues/platform/limits/) and [pricing](https://developers.cloudflare.com/queues/platform/pricing/) before sizing throughput, retention, or cost; plan-specific values are not maintained here.

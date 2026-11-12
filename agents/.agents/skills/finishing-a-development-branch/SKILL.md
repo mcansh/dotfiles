@@ -12,19 +12,22 @@ MEDIUM FREEDOM - Verify first, then present integration choices and execute the 
 </rigidity_level>
 
 <quick_reference>
+
 1. Re-read `plan.md`, `context.md`, and `tasks.md`
 2. Confirm acceptance checks and verification evidence
 3. Present integration options: merge/PR, keep branch, discard branch
 4. Delete the local task directory under `plans/active/`
-</quick_reference>
+   </quick_reference>
 
 <when_to_use>
+
 - Work is implemented and verified
 - The task directory is ready to close
 - The user needs a clean finish to the branch
-</when_to_use>
+  </when_to_use>
 
 <the_process>
+
 ## 1. Confirm the work is actually complete
 
 - `tasks.md` should have no active `Now` items
@@ -34,6 +37,7 @@ MEDIUM FREEDOM - Verify first, then present integration choices and execute the 
 ## 2. Present the integration choice
 
 Offer the user clear options:
+
 - merge or open PR
 - keep the branch for more work
 - discard the branch if the work should not land

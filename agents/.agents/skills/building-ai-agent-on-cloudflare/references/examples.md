@@ -20,6 +20,7 @@ npx create-cloudflare@latest --template cloudflare/agents-starter
 ```
 
 Includes:
+
 - Persistent data via `this.setState` and `this.sql`
 - WebSocket real-time connections
 - Workers AI bindings ready
@@ -49,6 +50,7 @@ my-agent/
 **Chat-focused:**
 
 Inherit from base `Agent` class, implement `onMessage` handler:
+
 - Manual conversation tracking
 - Full control over responses
 - Integrates with any AI provider
@@ -56,6 +58,7 @@ Inherit from base `Agent` class, implement `onMessage` handler:
 **Persistent data:**
 
 Use `this.setState()` for automatic persistence:
+
 - JSON-serializable data
 - Auto-syncs to connected clients
 - Survives instance eviction
@@ -63,6 +66,7 @@ Use `this.setState()` for automatic persistence:
 **Per-session isolation:**
 
 Route by unique identifier in URL path:
+
 - Each identifier gets dedicated instance
 - Isolated data storage
 - Horizontal scaling automatic
@@ -76,6 +80,7 @@ Route by unique identifier in URL path:
 - developers.cloudflare.com/agents/api-reference/
 
 **Source repositories:**
+
 - `github.com/cloudflare/agents-starter` (starter template)
 - `github.com/cloudflare/agents/tree/main/examples` (reference implementations)
 
@@ -91,17 +96,17 @@ Route by unique identifier in URL path:
 
 Located at `github.com/cloudflare/agents/tree/main/examples`:
 
-| Example | Description |
-|---------|-------------|
-| `resumable-stream-chat` | Chat with reconnection-safe streaming |
-| `email-agent` | Handle incoming emails via Email Routing |
-| `mcp-client` | Connect agents to external MCP servers |
-| `mcp-worker` | Expose agent capabilities via MCP protocol |
-| `cross-domain` | Multi-domain authentication patterns |
-| `tictactoe` | Multiplayer game with shared state |
-| `a2a` | Agent-to-agent communication |
-| `codemode` | Code transformation workflows |
-| `playground` | Interactive testing sandbox |
+| Example                 | Description                                |
+| ----------------------- | ------------------------------------------ |
+| `resumable-stream-chat` | Chat with reconnection-safe streaming      |
+| `email-agent`           | Handle incoming emails via Email Routing   |
+| `mcp-client`            | Connect agents to external MCP servers     |
+| `mcp-worker`            | Expose agent capabilities via MCP protocol |
+| `cross-domain`          | Multi-domain authentication patterns       |
+| `tictactoe`             | Multiplayer game with shared state         |
+| `a2a`                   | Agent-to-agent communication               |
+| `codemode`              | Code transformation workflows              |
+| `playground`            | Interactive testing sandbox                |
 
 Browse each folder for complete implementation code and wrangler configuration.
 
@@ -109,13 +114,13 @@ Browse each folder for complete implementation code and wrangler configuration.
 
 ## Selection Matrix
 
-| Goal | Approach |
-|------|----------|
-| Conversational bot | Agent + onMessage handler |
-| Custom data schema | Agent + setState() |
-| Knowledge retrieval | Agent + Vectorize |
-| Background jobs | Agent + schedule() |
-| External integrations | Agent + tool definitions |
+| Goal                  | Approach                  |
+| --------------------- | ------------------------- |
+| Conversational bot    | Agent + onMessage handler |
+| Custom data schema    | Agent + setState()        |
+| Knowledge retrieval   | Agent + Vectorize         |
+| Background jobs       | Agent + schedule()        |
+| External integrations | Agent + tool definitions  |
 
 ---
 
@@ -169,16 +174,16 @@ function Chat() {
 
 ## Key Methods (from Agent class)
 
-| Method | Purpose |
-|--------|---------|
-| `onStart()` | Runs on instance startup |
+| Method        | Purpose                           |
+| ------------- | --------------------------------- |
+| `onStart()`   | Runs on instance startup          |
 | `onConnect()` | Handles new WebSocket connections |
-| `onMessage()` | Processes incoming messages |
-| `onClose()` | Cleanup on disconnect |
-| `setState()` | Persist and broadcast data |
-| `this.sql` | Query embedded SQLite |
-| `schedule()` | Delayed/recurring tasks |
-| `broadcast()` | Message all connections |
+| `onMessage()` | Processes incoming messages       |
+| `onClose()`   | Cleanup on disconnect             |
+| `setState()`  | Persist and broadcast data        |
+| `this.sql`    | Query embedded SQLite             |
+| `schedule()`  | Delayed/recurring tasks           |
+| `broadcast()` | Message all connections           |
 
 ---
 

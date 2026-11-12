@@ -6,12 +6,12 @@ Fetch current documentation before implementing. Start with the [Vectorize docum
 
 ## Task routing
 
-| Task | Read |
-|------|------|
-| Create an index and connect a Worker | [Configuration](configuration.md) and [Introduction to Vectorize](https://developers.cloudflare.com/vectorize/get-started/intro/) |
-| Insert, update, query, retrieve, or delete vectors | [API routes](api.md) |
-| Generate embeddings, build RAG, or partition tenant data | [Patterns](patterns.md) |
-| Diagnose missing matches, metadata, or rejected requests | [Gotchas](gotchas.md) |
+| Task                                                     | Read                                                                                                                              |
+| -------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Create an index and connect a Worker                     | [Configuration](configuration.md) and [Introduction to Vectorize](https://developers.cloudflare.com/vectorize/get-started/intro/) |
+| Insert, update, query, retrieve, or delete vectors       | [API routes](api.md)                                                                                                              |
+| Generate embeddings, build RAG, or partition tenant data | [Patterns](patterns.md)                                                                                                           |
+| Diagnose missing matches, metadata, or rejected requests | [Gotchas](gotchas.md)                                                                                                             |
 
 ## Decisions to make first
 

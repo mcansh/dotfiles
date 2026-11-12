@@ -92,56 +92,56 @@ test_validate_file_path
 ```javascript
 // skill-activator.js
 function analyzePrompt(text, rules) {
-    const lowerText = text.toLowerCase();
-    const activated = [];
+  const lowerText = text.toLowerCase();
+  const activated = [];
 
-    for (const [skillName, config] of Object.entries(rules)) {
-        if (config.promptTriggers?.keywords) {
-            for (const keyword of config.promptTriggers.keywords) {
-                if (lowerText.includes(keyword.toLowerCase())) {
-                    activated.push({ skill: skillName, priority: config.priority || 'medium' });
-                    break;
-                }
-            }
+  for (const [skillName, config] of Object.entries(rules)) {
+    if (config.promptTriggers?.keywords) {
+      for (const keyword of config.promptTriggers.keywords) {
+        if (lowerText.includes(keyword.toLowerCase())) {
+          activated.push({ skill: skillName, priority: config.priority || "medium" });
+          break;
         }
+      }
     }
+  }
 
-    return activated;
+  return activated;
 }
 
 // test.js
-const assert = require('assert');
+const assert = require("assert");
 
 const testRules = {
-    'backend-dev': {
-        priority: 'high',
-        promptTriggers: {
-            keywords: ['backend', 'API', 'endpoint']
-        }
-    }
+  "backend-dev": {
+    priority: "high",
+    promptTriggers: {
+      keywords: ["backend", "API", "endpoint"],
+    },
+  },
 };
 
 // Test keyword matching
 function testKeywordMatching() {
-    const result = analyzePrompt('How do I create a backend endpoint?', testRules);
-    assert.equal(result.length, 1, 'Should find one skill');
-    assert.equal(result[0].skill, 'backend-dev', 'Should match backend-dev');
-    assert.equal(result[0].priority, 'high', 'Should have high priority');
-    console.log('✅ Keyword matching test passed');
+  const result = analyzePrompt("How do I create a backend endpoint?", testRules);
+  assert.equal(result.length, 1, "Should find one skill");
+  assert.equal(result[0].skill, "backend-dev", "Should match backend-dev");
+  assert.equal(result[0].priority, "high", "Should have high priority");
+  console.log("✅ Keyword matching test passed");
 }
 
 // Test no match
 function testNoMatch() {
-    const result = analyzePrompt('How do I write Python?', testRules);
-    assert.equal(result.length, 0, 'Should find no skills');
-    console.log('✅ No match test passed');
+  const result = analyzePrompt("How do I write Python?", testRules);
+  assert.equal(result.length, 0, "Should find no skills");
+  console.log("✅ No match test passed");
 }
 
 // Test case insensitivity
 function testCaseInsensitive() {
-    const result = analyzePrompt('BACKEND endpoint', testRules);
-    assert.equal(result.length, 1, 'Should match regardless of case');
-    console.log('✅ Case insensitive test passed');
+  const result = analyzePrompt("BACKEND endpoint", testRules);
+  assert.equal(result.length, 1, "Should match regardless of case");
+  console.log("✅ Case insensitive test passed");
 }
 
 // Run tests
@@ -155,6 +155,7 @@ testCaseInsensitive();
 ### Creating Mock Events
 
 **PostToolUse event:**
+
 ```json
 {
   "event": "PostToolUse",
@@ -173,6 +174,7 @@ testCaseInsensitive();
 ```
 
 **UserPromptSubmit event:**
+
 ```json
 {
   "event": "UserPromptSubmit",
@@ -182,6 +184,7 @@ testCaseInsensitive();
 ```
 
 **Stop event:**
+
 ```json
 {
   "event": "Stop",
@@ -239,38 +242,35 @@ test_edit_tracker
 
 ```javascript
 // test-skill-activator.js
-const { execSync } = require('child_process');
+const { execSync } = require("child_process");
 
 function testSkillActivator(prompt) {
-    const mockEvent = JSON.stringify({
-        text: prompt
-    });
+  const mockEvent = JSON.stringify({
+    text: prompt,
+  });
 
-    const result = execSync(
-        'node hooks/user-prompt-submit/skill-activator.js',
-        {
-            input: mockEvent,
-            encoding: 'utf8',
-            env: {
-                ...process.env,
-                SKILL_RULES: './test-skill-rules.json'
-            }
-        }
-    );
+  const result = execSync("node hooks/user-prompt-submit/skill-activator.js", {
+    input: mockEvent,
+    encoding: "utf8",
+    env: {
+      ...process.env,
+      SKILL_RULES: "./test-skill-rules.json",
+    },
+  });
 
-    return JSON.parse(result);
+  return JSON.parse(result);
 }
 
 // Test activation
 function testBackendActivation() {
-    const result = testSkillActivator('How do I create a backend endpoint?');
+  const result = testSkillActivator("How do I create a backend endpoint?");
 
-    if (result.additionalContext && result.additionalContext.includes('backend')) {
-        console.log('✅ Backend activation test passed');
-    } else {
-        console.log('❌ Backend activation test failed');
-        process.exit(1);
-    }
+  if (result.additionalContext && result.additionalContext.includes("backend")) {
+    console.log("✅ Backend activation test passed");
+  } else {
+    console.log("❌ Backend activation test failed");
+    process.exit(1);
+  }
 }
 
 testBackendActivation();
@@ -281,6 +281,7 @@ testBackendActivation();
 ### Testing Checklist
 
 **Before deployment:**
+
 - [ ] Hook executes without errors
 - [ ] Hook completes within timeout (default 10s)
 - [ ] Output is helpful and not overwhelming
@@ -292,6 +293,7 @@ testBackendActivation();
 ### Manual Test Procedure
 
 **1. Enable debug mode:**
+
 ```bash
 # Add to top of hook
 set -x
@@ -299,22 +301,26 @@ exec 2>>~/.claude/hooks/debug-$(date +%Y%m%d).log
 ```
 
 **2. Test with minimal prompt:**
+
 ```
 Create a simple test file
 ```
 
 **3. Observe hook execution:**
+
 ```bash
 # Watch debug log
 tail -f ~/.claude/hooks/debug-*.log
 ```
 
 **4. Verify output:**
+
 - Check that hook completes
 - Verify no errors in debug log
 - Confirm expected behavior
 
 **5. Test edge cases:**
+
 - Empty file paths
 - Non-existent files
 - Files outside project
@@ -322,6 +328,7 @@ tail -f ~/.claude/hooks/debug-*.log
 - Missing dependencies
 
 **6. Test performance:**
+
 ```bash
 # Time hook execution
 time bash hooks/stop/build-checker.sh
@@ -524,7 +531,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '18'
+          node-version: "18"
 
       - name: Install dependencies
         run: npm install
@@ -541,6 +548,7 @@ jobs:
 ### Mistake 1: Not Testing Error Paths
 
 ❌ **Wrong:**
+
 ```bash
 # Only test success path
 npx tsc --noEmit
@@ -548,6 +556,7 @@ echo "✅ Build passed"
 ```
 
 ✅ **Right:**
+
 ```bash
 # Test both success and failure
 if npx tsc --noEmit 2>&1; then
@@ -561,6 +570,7 @@ fi
 ### Mistake 2: Hardcoding Paths
 
 ❌ **Wrong:**
+
 ```bash
 # Hardcoded path
 cd /Users/myname/projects/myproject
@@ -568,6 +578,7 @@ npm run build
 ```
 
 ✅ **Right:**
+
 ```bash
 # Dynamic path
 project_root=$(find_project_root "$file_path")
@@ -580,6 +591,7 @@ fi
 ### Mistake 3: Not Cleaning Up
 
 ❌ **Wrong:**
+
 ```bash
 # Leaves test files behind
 echo "test" > /tmp/test-file.txt
@@ -588,6 +600,7 @@ run_test
 ```
 
 ✅ **Right:**
+
 ```bash
 # Always cleanup
 trap 'rm -f /tmp/test-file.txt' EXIT
@@ -598,12 +611,14 @@ run_test
 ### Mistake 4: Silent Failures
 
 ❌ **Wrong:**
+
 ```bash
 # Errors disappear
 npx tsc --noEmit 2>/dev/null
 ```
 
 ✅ **Right:**
+
 ```bash
 # Capture errors
 output=$(npx tsc --noEmit 2>&1)

@@ -7,6 +7,7 @@ Different skill types need different test approaches:
 **Examples:** TDD, hyperpowers:verification-before-completion, hyperpowers:designing-before-coding
 
 **Test with:**
+
 - Academic questions: Do they understand the rules?
 - Pressure scenarios: Do they comply under stress?
 - Multiple pressures combined: time + sunk cost + exhaustion
@@ -19,6 +20,7 @@ Different skill types need different test approaches:
 **Examples:** condition-based-waiting, hyperpowers:root-cause-tracing, defensive-programming
 
 **Test with:**
+
 - Application scenarios: Can they apply the technique correctly?
 - Variation scenarios: Do they handle edge cases?
 - Missing information tests: Do instructions have gaps?
@@ -30,6 +32,7 @@ Different skill types need different test approaches:
 **Examples:** reducing-complexity, information-hiding concepts
 
 **Test with:**
+
 - Recognition scenarios: Do they recognize when pattern applies?
 - Application scenarios: Can they use the mental model?
 - Counter-examples: Do they know when NOT to apply?
@@ -41,6 +44,7 @@ Different skill types need different test approaches:
 **Examples:** API documentation, command references, library guides
 
 **Test with:**
+
 - Retrieval scenarios: Can they find the right information?
 - Application scenarios: Can they use what they found correctly?
 - Gap testing: Are common use cases covered?
@@ -49,16 +53,16 @@ Different skill types need different test approaches:
 
 ## Common Rationalizations for Skipping Testing
 
-| Excuse | Reality |
-|--------|---------|
-| "Skill is obviously clear" | Clear to you ≠ clear to other agents. Test it. |
-| "It's just a reference" | References can have gaps, unclear sections. Test retrieval. |
-| "Testing is overkill" | Untested skills have issues. Always. 15 min testing saves hours. |
-| "I'll test if problems emerge" | Problems = agents can't use skill. Test BEFORE deploying. |
-| "Too tedious to test" | Testing is less tedious than debugging bad skill in production. |
-| "I'm confident it's good" | Overconfidence guarantees issues. Test anyway. |
-| "Academic review is enough" | Reading ≠ using. Test application scenarios. |
-| "No time to test" | Deploying untested skill wastes more time fixing it later. |
+| Excuse                         | Reality                                                          |
+| ------------------------------ | ---------------------------------------------------------------- |
+| "Skill is obviously clear"     | Clear to you ≠ clear to other agents. Test it.                   |
+| "It's just a reference"        | References can have gaps, unclear sections. Test retrieval.      |
+| "Testing is overkill"          | Untested skills have issues. Always. 15 min testing saves hours. |
+| "I'll test if problems emerge" | Problems = agents can't use skill. Test BEFORE deploying.        |
+| "Too tedious to test"          | Testing is less tedious than debugging bad skill in production.  |
+| "I'm confident it's good"      | Overconfidence guarantees issues. Test anyway.                   |
+| "Academic review is enough"    | Reading ≠ using. Test application scenarios.                     |
+| "No time to test"              | Deploying untested skill wastes more time fixing it later.       |
 
 **All of these mean: Test before deploying. No exceptions.**
 
@@ -83,11 +87,13 @@ Write code before test? Delete it.
 Write code before test? Delete it. Start over.
 
 **No exceptions:**
+
 - Don't keep it as "reference"
 - Don't "adapt" it while writing tests
 - Don't look at it
 - Delete means delete
-```
+
+````
 </Good>
 
 ### Address "Spirit vs Letter" Arguments
@@ -96,7 +102,7 @@ Add foundational principle early:
 
 ```markdown
 **Violating the letter of the rules is violating the spirit of the rules.**
-```
+````
 
 This cuts off entire class of "I'm following the spirit" rationalizations.
 
@@ -105,10 +111,10 @@ This cuts off entire class of "I'm following the spirit" rationalizations.
 Capture rationalizations from baseline testing (see Testing section below). Every excuse agents make goes in the table:
 
 ```markdown
-| Excuse | Reality |
-|--------|---------|
-| "Too simple to test" | Simple code breaks. Test takes 30 seconds. |
-| "I'll test after" | Tests passing immediately prove nothing. |
+| Excuse                           | Reality                                                                 |
+| -------------------------------- | ----------------------------------------------------------------------- |
+| "Too simple to test"             | Simple code breaks. Test takes 30 seconds.                              |
+| "I'll test after"                | Tests passing immediately prove nothing.                                |
 | "Tests after achieve same goals" | Tests-after = "what does this do?" Tests-first = "what should this do?" |
 ```
 
@@ -143,6 +149,7 @@ Follow the TDD cycle:
 ### RED: Write Failing Test (Baseline)
 
 Run pressure scenario with subagent WITHOUT the skill. Document exact behavior:
+
 - What choices did they make?
 - What rationalizations did they use (verbatim)?
 - Which pressures triggered violations?
@@ -160,8 +167,8 @@ Run same scenarios WITH skill. Agent should now comply.
 Agent found new rationalization? Add explicit counter. Re-test until bulletproof.
 
 **REQUIRED SUB-SKILL:** Use superpowers:testing-skills-with-subagents for the complete testing methodology:
+
 - How to write pressure scenarios
 - Pressure types (time, sunk cost, authority, exhaustion)
 - Plugging holes systematically
 - Meta-testing techniques
-

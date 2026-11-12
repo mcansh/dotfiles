@@ -15,6 +15,7 @@ This is the **reviewer's workflow** — the complement to `create-pr` (author cr
 HIGH FREEDOM — The 5-phase process and finding format are rigid. Aspect selection and agent dispatch adapt to context.
 
 **Rigid (no exceptions):**
+
 - Always parse PR identifier as PROJECT/REPO/NUMBER
 - Always create a git worktree for isolated checkout
 - Always clean up worktree in Phase 5 (even on failure)
@@ -22,34 +23,38 @@ HIGH FREEDOM — The 5-phase process and finding format are rigid. Aspect select
 - Always post summary comment after inline comments
 
 **Flexible (adapt to context):**
+
 - Aspect selection (default all, user can specify subset)
 - Skip `types` aspect if no typed language files changed
 - Truncate diff for large PRs (agents read files directly)
 - Skip `requirements` aspect if no Jira key found in branch name, title, or description
-</rigidity_level>
+  </rigidity_level>
 
 <quick_reference>
-| Aspect     | Agent                  | Analyzes                                    |
-|------------|------------------------|---------------------------------------------|
-| `code`     | code-reviewer          | Project guidelines, bugs, code quality      |
-| `tests`    | pr-test-analyzer       | Test coverage, quality, critical gaps        |
-| `comments` | comment-analyzer       | Comment accuracy, rot, documentation         |
-| `errors`   | silent-failure-hunter  | Silent failures, catch blocks, error logging |
-| `types`    | type-design-analyzer   | Type encapsulation, invariants, design       |
-| `simplify` | code-simplifier        | Code clarity, readability, standards         |
-| `requirements` | requirements-validator | AC compliance, requirement coverage, epic context |
-</quick_reference>
+
+| Aspect             | Agent                  | Analyzes                                          |
+| ------------------ | ---------------------- | ------------------------------------------------- |
+| `code`             | code-reviewer          | Project guidelines, bugs, code quality            |
+| `tests`            | pr-test-analyzer       | Test coverage, quality, critical gaps             |
+| `comments`         | comment-analyzer       | Comment accuracy, rot, documentation              |
+| `errors`           | silent-failure-hunter  | Silent failures, catch blocks, error logging      |
+| `types`            | type-design-analyzer   | Type encapsulation, invariants, design            |
+| `simplify`         | code-simplifier        | Code clarity, readability, standards              |
+| `requirements`     | requirements-validator | AC compliance, requirement coverage, epic context |
+| </quick_reference> |
 
 <when_to_use>
 **Use when:**
+
 - You are reviewing someone else's PR
 - User provides a PR identifier and asks for a code review
 - User says "review this PR", "check this PR", "analyze PR"
 
 **Do NOT use when:**
+
 - You authored the PR and are responding to feedback (use `address-pr-feedback`)
 - You are creating a new PR (use `create-pr`)
-</when_to_use>
+  </when_to_use>
 
 <the_process>
 
@@ -138,6 +143,7 @@ HIGH FREEDOM — The 5-phase process and finding format are rigid. Aspect select
 2. **Determine the clone path** from the ensure_repository_access response. Look for the local filesystem path where the repo was cloned.
 
 3. **Fetch the source branch** so it is available locally:
+
    ```bash
    git -C <clone-path> fetch origin <source-branch>
    ```
@@ -168,16 +174,15 @@ HIGH FREEDOM — The 5-phase process and finding format are rigid. Aspect select
 
 1. **Map aspects to agent types.** Each aspect corresponds to a pr-review-toolkit agent:
 
-   | Aspect     | Agent subagent_type                        |
-   |------------|--------------------------------------------|
-   | `code`     | `pr-review-toolkit:code-reviewer`          |
-   | `tests`    | `pr-review-toolkit:pr-test-analyzer`       |
-   | `comments` | `pr-review-toolkit:comment-analyzer`       |
-   | `errors`   | `pr-review-toolkit:silent-failure-hunter`  |
-   | `types`    | `pr-review-toolkit:type-design-analyzer`   |
-   | `simplify`      | `pr-review-toolkit:code-simplifier`        |
-   | `requirements`  | `pr-review-toolkit:requirements-validator`  |
-
+   | Aspect         | Agent subagent_type                        |
+   | -------------- | ------------------------------------------ |
+   | `code`         | `pr-review-toolkit:code-reviewer`          |
+   | `tests`        | `pr-review-toolkit:pr-test-analyzer`       |
+   | `comments`     | `pr-review-toolkit:comment-analyzer`       |
+   | `errors`       | `pr-review-toolkit:silent-failure-hunter`  |
+   | `types`        | `pr-review-toolkit:type-design-analyzer`   |
+   | `simplify`     | `pr-review-toolkit:code-simplifier`        |
+   | `requirements` | `pr-review-toolkit:requirements-validator` |
    - For `types`: only include this agent if the changed files contain likely type definition files (`.ts`, `.tsx`, `.cs`, `.java`, `.go`, `.rs` extensions). Skip if changes are only config, markdown, or similar.
    - For `requirements`: only include this agent if `jiraIssue` was successfully fetched in Phase 1 step 5. Skip if `jiraIssue` is null.
 
@@ -257,6 +262,7 @@ HIGH FREEDOM — The 5-phase process and finding format are rigid. Aspect select
 ## Phase 4: Post Bitbucket Comments
 
 1. **Parse agent output.** For each agent's result, extract findings by scanning for lines matching the pattern:
+
    ```
    [SEVERITY] file/path:LINE - description
    ```
@@ -286,33 +292,48 @@ HIGH FREEDOM — The 5-phase process and finding format are rigid. Aspect select
    **Reviewed by**: {comma-separated list of agent short names that ran}
 
    ### Critical Issues ({count})
+
    {for each CRITICAL finding:}
+
    - **[{agent-short-name}]** {description} — `{file}:{line}`
 
    ### Important Issues ({count})
+
    {for each IMPORTANT finding:}
+
    - **[{agent-short-name}]** {description} — `{file}:{line}`
 
    ### Suggestions ({count})
+
    {for each SUGGESTION finding:}
+
    - **[{agent-short-name}]** {description} — `{file}:{line}`
 
    ### Strengths
+
    {for each STRENGTH:}
+
    - {description}
 
    {if any agents failed:}
+
    ### Agent Errors
+
    {for each failed agent:}
+
    - **{agent-short-name}**: {error description}
 
    {if any inline comments failed to post:}
+
    ### Findings Not Posted Inline
+
    {for each failed inline comment:}
+
    - **[{agent-short-name}] [{SEVERITY}]** {description} — `{file}:{line}` (reason: {error})
 
    ---
-   *Automated review by Claude Code — uwm-classic-sdlc plugin*
+
+   _Automated review by Claude Code — uwm-classic-sdlc plugin_
    ```
 
    - If a severity category has 0 findings, still include the heading with "(0)" to show it was checked.
@@ -330,6 +351,7 @@ HIGH FREEDOM — The 5-phase process and finding format are rigid. Aspect select
 This phase MUST always run, even if previous phases failed or were skipped.
 
 1. **Remove the git worktree:**
+
    ```bash
    git -C <clone-path> worktree remove <worktree-path> --force 2>&1 || true
    ```
@@ -366,11 +388,13 @@ This phase MUST always run, even if previous phases failed or were skipped.
 ## Usage Examples
 
 **Full review (default — all aspects, parallel):**
+
 ```
 /uwm-classic-sdlc:review-bitbucket-pr EH/allin-ui/123
 ```
 
 **Specific aspects:**
+
 ```
 /uwm-classic-sdlc:review-bitbucket-pr EH/allin-ui/123 code tests
 /uwm-classic-sdlc:review-bitbucket-pr EH/allin-ui/123 errors types
@@ -378,11 +402,13 @@ This phase MUST always run, even if previous phases failed or were skipped.
 ```
 
 **Requirements validation only:**
+
 ```
 /uwm-classic-sdlc:review-bitbucket-pr EH/allin-ui/123 requirements
 ```
 
 **Code + requirements validation:**
+
 ```
 /uwm-classic-sdlc:review-bitbucket-pr EH/allin-ui/123 code requirements
 ```
@@ -392,9 +418,11 @@ This phase MUST always run, even if previous phases failed or were skipped.
 <integration>
 
 **This skill is called by:**
+
 - Direct user invocation via `/uwm-classic-sdlc:review-bitbucket-pr` or `/review-bitbucket-pr`
 
 **This skill uses these MCP tools (from uwm-enterprise-mcp plugin):**
+
 - `mcp__plugin_uwm-enterprise-mcp_bitbucket__get_pull_request_details` — Get PR metadata
 - `mcp__plugin_uwm-enterprise-mcp_bitbucket__get_pull_request_diff` — Get code diff
 - `mcp__plugin_uwm-enterprise-mcp_bitbucket__add_pull_request_comment` — Post inline and summary comments
@@ -404,6 +432,7 @@ This phase MUST always run, even if previous phases failed or were skipped.
 - `mcp__plugin_uwm-enterprise-mcp_jira__get_epic` — Fetch parent epic for context (sibling subtasks)
 
 **This skill dispatches these agents:**
+
 - `pr-review-toolkit:code-reviewer` — Code quality analysis
 - `pr-review-toolkit:pr-test-analyzer` — Test coverage analysis
 - `pr-review-toolkit:comment-analyzer` — Comment quality analysis
@@ -413,10 +442,12 @@ This phase MUST always run, even if previous phases failed or were skipped.
 - `pr-review-toolkit:requirements-validator` — Requirements/AC compliance analysis
 
 **Prerequisites:**
+
 - The `uwm-enterprise-mcp` plugin must be installed (provides Bitbucket MCP tools)
 - A valid `BITBUCKET_TOKEN` must be configured in `~/.uwm-mcp-shared/config.json`
 
 **Related skills:**
+
 - `uwm-classic-sdlc:create-pr` — Creates the PR (upstream in lifecycle)
 - `uwm-classic-sdlc:address-pr-feedback` — Author responds to review comments (downstream in lifecycle)
 

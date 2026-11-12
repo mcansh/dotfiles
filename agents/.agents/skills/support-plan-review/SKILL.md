@@ -14,22 +14,24 @@ HIGH FREEDOM in conversation style and how questions are asked — adapt to the 
 </rigidity_level>
 
 <quick_reference>
-| Step | Action |
-|------|--------|
-| 0 | Check for existing `support-plan.md` — resume if found |
-| 1 | Collect project context (name, type, timeline) |
-| 2 | Walk through Tier 1: Mandatory requirements |
-| 3 | Walk through Tier 2: Strongly recommended |
-| 4 | Walk through Tier 3: Ideal state |
-| 5 | Generate gap summary with tasks |
-</quick_reference>
+
+| Step               | Action                                                 |
+| ------------------ | ------------------------------------------------------ |
+| 0                  | Check for existing `support-plan.md` — resume if found |
+| 1                  | Collect project context (name, type, timeline)         |
+| 2                  | Walk through Tier 1: Mandatory requirements            |
+| 3                  | Walk through Tier 2: Strongly recommended              |
+| 4                  | Walk through Tier 3: Ideal state                       |
+| 5                  | Generate gap summary with tasks                        |
+| </quick_reference> |
 
 <when_to_use>
+
 - User says "support plan", "support review", "support checklist", or "launch readiness"
 - User asks about what's needed before going to production
 - User mentions preparing for a rollout or launch
 - User references Support Planning or the Support Practice Council
-</when_to_use>
+  </when_to_use>
 
 <the_process>
 
@@ -62,25 +64,33 @@ These items **must** be answered before go-live. No exceptions.
 Walk through each category below. For each item, ask the user for their answer, then record the status: DONE, IN PROGRESS, NOT STARTED, or N/A.
 
 ### 1.1 Solution Identity
+
 Carry forward from Step 1 — confirm the answers already collected and record them:
+
 - Name & description of the solution
 - Is this new / an addition to an existing solution?
 - Is this replacing a current solution/feature? If yes, which one?
 
 ### 1.2 Users & User Groups
+
 Who uses this? Check all that apply and capture specifics:
+
 - Borrower
 - Broker / LO
 - Internal UWM Teams/TMs
 - Permission-based groups — if yes, provide specific access permission rules
 
 ### 1.3 Access Points
+
 Where/how is the solution accessed? (Ask the user to provide or describe a screenshot of the access point)
+
 - Within an existing application — provide specific navigation and access points per user/group
 - Stand-alone solution / access point — provide specific site and access points per user/group
 
 ### 1.4 Issue & Question Paths
+
 What path should users follow for both issues and/or questions?
+
 - Contact Sales/AE (or other relevant business team)
 - Submit CR (provide any specific direction on field selections)
 - Submit YouSupport ticket
@@ -91,7 +101,9 @@ What path should users follow for both issues and/or questions?
 At least one path must be defined. Ask which paths apply and capture specifics for each.
 
 ### 1.5 Incident Escalation
+
 If an incident arises, what is the escalation path beyond normal process of posting in Performance? Who should be notified for investigating?
+
 - Owning Team
 - PdM / PO
 - Leadership
@@ -104,13 +116,16 @@ All four must be identified with names/roles. (See Rule 11 in Critical Rules.)
 These items should be provided before launch. If they won't be ready by launch, capture the **expected delivery date**.
 
 ### 2.1 Product Documentation
+
 Note: These will eventually become mandatory requirements.
+
 - User Guide — exists? Planned?
 - Training Materials — exists? Planned?
 - System Documentation (Runbook, SDD, etc.) — exists? Planned?
 - Internal/External Announcements — planned? Timing?
 
 ### 2.2 CR / YouSupport Configuration
+
 - Category / Subcategory defined?
 - Routing path for tickets and escalation beyond original intake?
 - Incident/RCA assignment process defined?
@@ -120,7 +135,9 @@ Note: These will eventually become mandatory requirements.
 These items represent mature support readiness. Teams should aspire to these but they're not blockers for launch.
 
 ### 3.1 Built-in Help
+
 Is there a "Help" option built into the solution?
+
 - Borrowers directed to Broker?
 - Broker directed to AE only, or Tech Pros as well?
 - AE contacts Service Desk — then what?
@@ -130,21 +147,26 @@ Is there a "Help" option built into the solution?
 - Automated Help Option (e.g., "click here to submit ticket")?
 
 ### 3.2 ChatUWM Integration
+
 - Is feature information or help option searchable with ChatUWM?
 
 ### 3.3 System / Performance Monitoring
+
 - Dynatrace, Logging, or other observability in place?
 - PagerDuty configured?
 - Tagging (Teams, etc.) — who should be included in a tag group?
 - System Priority Tier assigned?
 
 ### 3.4 Post-Launch Ownership
+
 If different than initial roll-out team:
+
 - Team(s) responsible long-term
 - Team Member SMEs
 - PdM/PO
 
 ### 3.5 Usage Data & Analytics
+
 - Location & access to usage data, permissions to access
 - Troubleshooting documentation
 - System performance reporting
@@ -205,6 +227,7 @@ Write to `support-plan.md` in the project root (or a path the user specifies).
 ### Task Creation (Jira)
 
 After presenting the summary, ask the user if they want to **create Jira issues** for the gaps. If the Jira MCP is available, use the project the team specifies. Default issue type is **Task** (confirm with the user if their project uses a different scheme). Set priority based on tier:
+
 - Tier 1 gaps → High priority, labeled `support-plan-mandatory`
 - Tier 2 gaps → Medium priority, labeled `support-plan-recommended`
 - Tier 3 gaps → Low priority, labeled `support-plan-ideal`
@@ -246,6 +269,7 @@ User: "support plan for the new Loan Calculator feature"
 Assistant: "Starting a Support Plan Review for Loan Calculator.
 
 A few things to confirm before we walk through the checklist:
+
 - Is this a brand new feature, or replacing/enhancing something existing?
 - What's the target launch date?
 - Who's the PdM/PO and tech lead?"
@@ -255,6 +279,7 @@ Assistant: "Got it. Let's start with the mandatory requirements.
 
 **Users & Access:**
 Who uses Loan Calculator? Check all that apply:
+
 - Borrower
 - Broker / LO
 - Internal UWM Teams/TMs

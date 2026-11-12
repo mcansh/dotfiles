@@ -12,11 +12,12 @@ MEDIUM FREEDOM — The scan sequence and reporting format are rigid. How you pre
 </rigidity_level>
 
 <when_to_use>
+
 - User says "quality scan", "quality gate", "run quality check", "pre-push check"
 - User is about to push code and wants to verify quality
 - User wants to check SonarQube or Snyk status for their branch
 - Before pushing to remote (if quality gate is part of the workflow)
-</when_to_use>
+  </when_to_use>
 
 <the_process>
 
@@ -34,12 +35,12 @@ git diff --name-only develop...HEAD 2>/dev/null || git diff --name-only main...H
 
 Identify the SonarQube project key. Known mappings:
 
-| Repo directory | SonarQube Key |
-|---|---|
-| brand360-gateway | `cell-biz-marketing-gateway` |
+| Repo directory            | SonarQube Key                    |
+| ------------------------- | -------------------------------- |
+| brand360-gateway          | `cell-biz-marketing-gateway`     |
 | brand360-contact-validate | `cell-biz-contact-info-validate` |
-| lead-ingestion | `cell-biz-lead-profile` |
-| loa-text-messaging | `cell-text-messaging` |
+| lead-ingestion            | `cell-biz-lead-profile`          |
+| loa-text-messaging        | `cell-text-messaging`            |
 
 If the project key is not in this table, check `sonar-project.properties` or ask the user.
 
@@ -90,6 +91,7 @@ Present a consolidated quality gate report:
 ## 5. Fix Guidance
 
 If the quality gate FAILS:
+
 - For SonarQube issues: read the flagged file, understand the issue, and offer a fix
 - For Snyk vulnerabilities: suggest dependency updates or code changes
 - After fixes, offer to re-scan
@@ -97,8 +99,9 @@ If the quality gate FAILS:
 </the_process>
 
 <critical_rules>
+
 - ALWAYS check both SonarQube AND Snyk — a partial scan is not a quality gate
 - NEVER report "passed" if either tool reports blocking issues
 - Present the SonarQube project key used so the user can verify it
 - If MCP tools are unavailable (missing config), tell the user and suggest running `/setup-quality-tools`
-</critical_rules>
+  </critical_rules>

@@ -12,14 +12,14 @@ Read [Rules of Workflows](https://developers.cloudflare.com/workflows/build/rule
 
 ## Examples and Orchestration
 
-| Task | Documentation |
-| --- | --- |
+| Task                                                                    | Documentation                                                                                           |
+| ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
 | Process images with human approval; handle approval events and timeouts | [Human-in-the-loop image tagging](https://developers.cloudflare.com/workflows/examples/wait-for-event/) |
-| Implement a payment and notification sequence | [Pay cart and send invoice](https://developers.cloudflare.com/workflows/examples/send-invoices/) |
-| Export data to object storage | [Export and save D1 database](https://developers.cloudflare.com/workflows/examples/backup-d1/) |
-| Delay lifecycle follow-ups or retry transient failures | [Sleeping and retrying](https://developers.cloudflare.com/workflows/build/sleeping-and-retrying/) |
-| Schedule jobs or start child Workflows | [Trigger Workflows](https://developers.cloudflare.com/workflows/build/trigger-workflows/) |
-| Design parallel work, races, conditional steps, and batch creation | [Rules of Workflows](https://developers.cloudflare.com/workflows/build/rules-of-workflows/) |
+| Implement a payment and notification sequence                           | [Pay cart and send invoice](https://developers.cloudflare.com/workflows/examples/send-invoices/)        |
+| Export data to object storage                                           | [Export and save D1 database](https://developers.cloudflare.com/workflows/examples/backup-d1/)          |
+| Delay lifecycle follow-ups or retry transient failures                  | [Sleeping and retrying](https://developers.cloudflare.com/workflows/build/sleeping-and-retrying/)       |
+| Schedule jobs or start child Workflows                                  | [Trigger Workflows](https://developers.cloudflare.com/workflows/build/trigger-workflows/)               |
+| Design parallel work, races, conditional steps, and batch creation      | [Rules of Workflows](https://developers.cloudflare.com/workflows/build/rules-of-workflows/)             |
 
 ## Testing Workflows
 

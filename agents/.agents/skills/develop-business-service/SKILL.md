@@ -38,16 +38,17 @@ MEDIUM FREEDOM - Phase ordering is rigid: create → design → implement → in
 
 <quick_reference>
 
-| Phase | Skill | When | Key Standards Enforced |
-|-------|-------|------|----------------------|
-| 1. Create | `create-v3-service` | New service needed | Keystone/ARCOM, UWM base Dockerfile, StarterKit |
-| 2. Design | `design-api` | Planning endpoints/capabilities | REST kebab-case, v{integer} versioning, API security |
-| 3. Implement | `implement-feature` | Writing business logic | Strict TDD, .feature specs, Stryker ≥80, coverage ≥80% |
-| 4. Integrate | `integrate-infrastructure` | Connecting to external systems | GUP auth, Kafka, Vault, EF Core, feature flags |
-| 5. Test | `test-strategy` | Adding non-unit tests | TestContainers, WireMock, PactFlow, E2E smoke |
-| 6. Deploy | `prepare-deployment` | Preparing for CI/CD | Dockerfile, Helm, Jenkinsfile, health checks |
+| Phase        | Skill                      | When                            | Key Standards Enforced                                 |
+| ------------ | -------------------------- | ------------------------------- | ------------------------------------------------------ |
+| 1. Create    | `create-v3-service`        | New service needed              | Keystone/ARCOM, UWM base Dockerfile, StarterKit        |
+| 2. Design    | `design-api`               | Planning endpoints/capabilities | REST kebab-case, v{integer} versioning, API security   |
+| 3. Implement | `implement-feature`        | Writing business logic          | Strict TDD, .feature specs, Stryker ≥80, coverage ≥80% |
+| 4. Integrate | `integrate-infrastructure` | Connecting to external systems  | GUP auth, Kafka, Vault, EF Core, feature flags         |
+| 5. Test      | `test-strategy`            | Adding non-unit tests           | TestContainers, WireMock, PactFlow, E2E smoke          |
+| 6. Deploy    | `prepare-deployment`       | Preparing for CI/CD             | Dockerfile, Helm, Jenkinsfile, health checks           |
 
 **Continuous enforcement at ALL phases:**
+
 - PII/NPI masking via `[PersonallyIdentifiableInformation]` / `[NonpublicPersonalInformation]` from UWMC.Library.Logging
 - GUP auth via UWMC.Library.User.Passport (no custom auth)
 - One service per database
@@ -58,6 +59,7 @@ MEDIUM FREEDOM - Phase ordering is rigid: create → design → implement → in
 
 <when_to_use>
 Use this skill when:
+
 - Creating a brand new v3 business service (cell-biz-*)
 - Adding a new capability or feature to an existing v3 service
 - Setting up infrastructure integrations (GUP, Kafka, database) for a v3 service
@@ -65,11 +67,12 @@ Use this skill when:
 - Onboarding to v3 service development at UWM
 
 Do NOT use this skill for:
+
 - BFF development (cell-bff-*) - different patterns apply
 - UI/frontend development (cell-ui-*) - separate concern
 - Data service development (cell-data-*) - deprecated pattern, not creating new ones
 - Non-.NET projects - this skill is specific to C#/.NET v3 microservices
-</when_to_use>
+  </when_to_use>
 
 <the_process>
 
@@ -148,6 +151,7 @@ For each applicable phase, follow this pattern:
 Skip phases only when context detection confirms they are already complete.
 
 **For existing services adding a feature**, the typical flow is:
+
 - Skip to Phase 2 (design-api) to plan the new endpoints
 - Phase 3 (implement-feature) for TDD implementation
 - Phase 5 (test-strategy) to add/update integration and contract tests
@@ -160,6 +164,7 @@ Skip phases only when context detection confirms they are already complete.
 After completing each phase, verify these criteria before proceeding:
 
 ### After Phase 1 (create-v3-service):
+
 - [ ] Bitbucket repository exists (or Keystone submission started)
 - [ ] StarterKitFeatures.json is present and configured
 - [ ] Dockerfile uses UWM base images:
@@ -169,6 +174,7 @@ After completing each phase, verify these criteria before proceeding:
 - [ ] Solution structure follows cell-biz-* conventions
 
 ### After Phase 2 (design-api):
+
 - [ ] REST endpoints use kebab-case for resource names
 - [ ] API versioning follows `v{integer}` pattern (e.g., `/v1/resource`)
 - [ ] Request/response DTOs are defined
@@ -177,6 +183,7 @@ After completing each phase, verify these criteria before proceeding:
 - [ ] Long-running operations use async pattern (Kafka preferred, or HTTP 202)
 
 ### After Phase 3 (implement-feature):
+
 - [ ] .feature files exist as specification documents (NOT configured as executable tests)
 - [ ] xUnit unit tests exist at component boundary
 - [ ] Unit tests mock ONLY infrastructure layer (repositories, HTTP clients, message handlers)
@@ -188,6 +195,7 @@ After completing each phase, verify these criteria before proceeding:
 - [ ] No PII/NPI logged without masking attributes
 
 ### After Phase 4 (integrate-infrastructure):
+
 - [ ] GUP authentication configured:
   - `UWMC.Library.User.Passport` NuGet package installed
   - `AddPassport(Configuration)` called AFTER other auth services
@@ -208,6 +216,7 @@ After completing each phase, verify these criteria before proceeding:
 - [ ] Database access follows one-service-per-database rule
 
 ### After Phase 5 (test-strategy):
+
 - [ ] Hermetic integration tests using TestContainers:
   - DbFixture class for SQL/Cosmos containers
   - xUnit CollectionDefinitions to manage container lifecycle
@@ -224,6 +233,7 @@ After completing each phase, verify these criteria before proceeding:
 - [ ] All test projects exclude integration/E2E from Stryker mutation testing
 
 ### After Phase 6 (prepare-deployment):
+
 - [ ] Multi-stage Dockerfile:
   - Build stage: `artifacts.uwm.com/build-images/uwm-dotnet-sdk-sonar:{version}-redhat`
   - Runtime stage: `artifacts.uwm.com/build-images/uwm-aspnet-runtime:{version}-redhat`
@@ -249,6 +259,7 @@ After completing each phase, verify these criteria before proceeding:
 These rules are ALWAYS active, regardless of current phase:
 
 ### PII/NPI Masking (UWMC.Library.Logging)
+
 ```csharp
 // CORRECT: Use masking attributes on model properties
 public class LoanApplication
@@ -270,6 +281,7 @@ _logger.LogInformation("Processing for {BorrowerName}", borrower.Name);  // VIOL
 ```
 
 ### Authentication (UWMC.Library.User.Passport)
+
 ```csharp
 // CORRECT: GUP auth setup in Program.cs
 builder.Services.AddPassport(builder.Configuration);  // AFTER other auth
@@ -288,6 +300,7 @@ app.UseMiddleware<CustomJwtMiddleware>();  // VIOLATION - use GUP
 ```
 
 ### Testing Boundaries
+
 ```csharp
 // CORRECT: Mock only infrastructure layer
 var mockRepository = new Mock<ILoanRepository>();  // Infrastructure - OK to mock
@@ -302,6 +315,7 @@ var mockOrchestrator = new Mock<ILoanOrchestrator>();  // Business logic - DO NO
 ```
 
 ### .feature Files as Specifications
+
 ```gherkin
 # This is a SPECIFICATION DOCUMENT, not an executable test.
 # Use this to derive xUnit test cases.
@@ -351,13 +365,16 @@ public class LoanConditionServiceTests
 ```
 
 ### HTTP/Kafka Split Repository Pattern
+
 When a business capability requires both HTTP API endpoints and Kafka message consumers:
+
 - Create **separate repositories**: `cell-biz-your-service` (HTTP API) and `cell-biz-your-service-consumer` (Kafka consumer)
 - Both repos share the same business domain but are independently deployable
 - Each repo produces its own Docker container (v3 constraint: one container per repo)
 - Shared domain models can be published as a NuGet package if needed
 
 ### REST API Conventions
+
 ```
 CORRECT:
   GET    /v1/loan-conditions/{id}          (kebab-case, versioned)
@@ -378,52 +395,64 @@ WRONG:
 ## Edge Case Handling
 
 ### Non-v3 Project Detected
+
 If no .csproj/.sln files are found AND the user hasn't indicated they want to create a new service:
 
 "This directory doesn't contain a .NET project. This skill is designed for v3 (.NET) business services (cell-biz-*).
 
 Options:
+
 1. If you want to **create a new service**, I'll start from Phase 1 (create-v3-service)
 2. If this is the **wrong directory**, navigate to your v3 service directory first
 3. If this is a **different type of project** (BFF, UI, data), this skill doesn't apply"
 
 ### Mid-Project Entry
+
 When context detection shows the project is partially configured:
 
 "I detected an existing v3 service with the following state:
 [detection results]
 
 You appear to be at Phase [N]. Options:
+
 1. **Start from Phase [N]** - continue where the project left off
 2. **Review earlier phases** - verify previous phases meet current standards
 3. **Jump to a specific phase** - if you know what you need"
 
 ### No Keystone Access
+
 If the user indicates they can't access Keystone or ARCOM:
 
 "Keystone provisioning requires ARCOM approval. Options:
+
 1. If your service is **already provisioned**, we can skip to Phase 2 (design-api)
 2. If you need Keystone access, contact the **Keystone team** on Microsoft Teams
 3. If you need ARCOM guidance, the documentation is at https://kb.uwm.com/display/Keystone/"
 
 ### Legacy Patterns Detected
+
 If the project uses patterns that don't match current standards (e.g., .NET 6, old Startup.cs pattern without modern minimal API, missing GUP):
 
 "This service uses some legacy patterns:
+
 - [specific legacy pattern detected]
 
 The current v3 standard is:
+
 - [current standard]
 
 Options:
+
 1. **Modernize** - update to current patterns as part of this work
 2. **Work within existing patterns** - maintain consistency with what's here
 3. **Selective modernization** - update specific areas while keeping others"
 
 ### Stub Sub-Skill Loaded
+
 If a sub-skill's SKILL.md is still a stub (contains "To be expanded"):
 
 Do NOT fail silently. Instead:
+
 1. Read the stub's `the_process` section for the high-level steps
 2. Provide guidance based on those steps and the standards in this orchestrator
 3. Note to the user: "The detailed [skill-name] skill is being developed. I'm providing guidance based on the current process outline and UWM standards."
@@ -444,12 +473,13 @@ Claude without golden path:
 </code>
 
 <why_it_fails>
+
 - Skipped Keystone provisioning (service can't deploy without ARCOM approval)
 - No GUP auth (custom auth violates standards)
 - No testing strategy (will fail SonarQube 80% coverage gate)
 - No PII masking considerations (compliance violation)
 - Dockerfile won't use UWM base images (deployment will fail)
-</why_it_fails>
+  </why_it_fails>
 
 <correction>
 Claude with golden path:
@@ -457,6 +487,7 @@ Claude with golden path:
 "I'm using uwm-business-service-dev:develop-business-service to guide this development.
 
 **Context Detection Results:**
+
 - Project type: New service (no .csproj found)
 - Starting from Phase 1: create-v3-service
 
@@ -464,6 +495,7 @@ Claude with golden path:
 Loading uwm-business-service-dev:create-v3-service...
 
 Before writing any code, you need to go through Keystone provisioning:
+
 1. Prepare your ARCOM proposal documenting the service's purpose
 2. Submit via Keystone UI with:
    - Service name: cell-biz-loan-conditions
@@ -478,6 +510,7 @@ Before writing any code, you need to go through Keystone provisioning:
    - ServiceNow CMDB record
 
 **Standards Checkpoint (Phase 1):**
+
 - [ ] ARCOM proposal submitted
 - [ ] Keystone provisioning complete
 - [ ] StarterKitFeatures.json configured (withRest: true)
@@ -487,10 +520,11 @@ Before writing any code, you need to go through Keystone provisioning:
 Loading uwm-business-service-dev:design-api...
 
 Let's design the REST API for loan condition tracking:
-- GET    /v1/loan-conditions/{loanNumber}     - List conditions for a loan
-- POST   /v1/loan-conditions                  - Add a new condition
-- PATCH  /v1/loan-conditions/{id}/satisfy     - Mark condition as satisfied
-- DELETE /v1/loan-conditions/{id}             - Remove a condition
+
+- GET /v1/loan-conditions/{loanNumber} - List conditions for a loan
+- POST /v1/loan-conditions - Add a new condition
+- PATCH /v1/loan-conditions/{id}/satisfy - Mark condition as satisfied
+- DELETE /v1/loan-conditions/{id} - Remove a condition
 
 [Continues through all phases with standards enforcement...]"
 </correction>
@@ -508,12 +542,13 @@ Claude without golden path:
 </code>
 
 <why_it_fails>
+
 - No TDD workflow (code written before tests)
 - No mutation testing (test quality unknown)
 - No integration test updates (new endpoint untested hermetically)
 - May not follow REST conventions for bulk operations
 - No PII consideration for bulk payloads
-</why_it_fails>
+  </why_it_fails>
 
 <correction>
 Claude with golden path:
@@ -521,6 +556,7 @@ Claude with golden path:
 "I'm using uwm-business-service-dev:develop-business-service.
 
 **Context Detection Results:**
+
 - Project type: Existing v3 service
 - .NET version: net8.0
 - Starter kit: Applied (StarterKitFeatures.json found)
@@ -535,7 +571,8 @@ Starting from Phase 2: design-api (service already provisioned and configured)
 Loading uwm-business-service-dev:design-api...
 
 For bulk operations, the REST standard says:
-- PATCH /v1/loan-conditions/bulk    (partial update multiple resources)
+
+- PATCH /v1/loan-conditions/bulk (partial update multiple resources)
 - Request body: array of condition updates
 - Response: 200 with results array (success/failure per item)
 - Consider: maximum batch size to prevent timeout
@@ -561,6 +598,7 @@ Loading uwm-business-service-dev:test-strategy...
 4. Add smoke test for bulk endpoint
 
 **Standards Checkpoint Summary:**
+
 - [ ] Endpoint uses kebab-case: /v1/loan-conditions/bulk
 - [ ] Stryker mutation score >= 80
 - [ ] Coverage >= 80%
@@ -568,11 +606,13 @@ Loading uwm-business-service-dev:test-strategy...
 - [ ] Integration test added
 - [ ] Contract updated"
 </correction>
+
 </example>
 
 </examples>
 
 <critical_rules>
+
 ## Rules That Have No Exceptions
 
 1. **ALWAYS detect context before starting** - Never assume new or existing service
@@ -598,12 +638,13 @@ Loading uwm-business-service-dev:test-strategy...
 - "ARCOM approval is slow, let me just create the repo" → Keystone handles this. Follow the process.
 - "This field isn't really PII" → If in doubt, mask it. Check Data Masking Standard.
 - "The .feature file runner is set up, let me just execute it" → .feature files are SPECS. Write xUnit tests.
-</critical_rules>
+  </critical_rules>
 
 <verification_checklist>
 Before claiming any unit of work complete:
 
 ### Code Quality
+
 - [ ] All new code has unit tests written FIRST (TDD)
 - [ ] Stryker.NET mutation score >= 80 on unit tests
 - [ ] Code coverage >= 80% on new code (SonarQube gate)
@@ -611,40 +652,46 @@ Before claiming any unit of work complete:
 - [ ] Unit tests mock ONLY infrastructure layer
 
 ### Standards Compliance
+
 - [ ] PII/NPI fields have masking attributes from UWMC.Library.Logging
 - [ ] Structured logging uses < 50 user-defined properties
 - [ ] No PII/NPI logged without masking
 - [ ] Security logging events captured (login, logout, access attempts)
 
 ### API Standards
+
 - [ ] REST endpoints use kebab-case resource names
 - [ ] API versioning follows v{integer} pattern
 - [ ] Error responses don't expose system details
 - [ ] Proper HTTP status codes (client vs server errors)
 
 ### Authentication
+
 - [ ] GUP auth configured via UWMC.Library.User.Passport
 - [ ] No custom auth implementations
 - [ ] Health check endpoint allows anonymous access
 - [ ] HttpClientFactory used for service-to-service calls (header propagation)
 
 ### Infrastructure
+
 - [ ] Dockerfile uses UWM base images from artifacts.uwm.com
 - [ ] One service per database rule followed
 - [ ] HTTP API and Kafka consumer in separate repos (if both needed)
 - [ ] Vault integration for secrets (no hardcoded credentials)
 
 ### Testing
+
 - [ ] Integration tests use TestContainers (not mocked databases)
 - [ ] WireMock used for external HTTP service isolation
 - [ ] Contract tests defined in PactFlow (if API has consumers)
 - [ ] E2E smoke tests exist for critical user journeys (minimal count)
 
 ### Pre-Commit
+
 - [ ] Pre-commit hooks pass
 - [ ] No TODO comments without issue numbers
 - [ ] All changes committed on feature branch
-</verification_checklist>
+      </verification_checklist>
 
 <integration>
 **This skill calls (in order):**
@@ -656,15 +703,18 @@ Before claiming any unit of work complete:
 6. `uwm-business-service-dev:prepare-deployment` - Phase 6: CI/CD preparation
 
 **This skill works with:**
+
 - `hyperpowers:brainstorming` - For refining requirements before starting development
 - `hyperpowers:test-driven-development` - During Phase 3 implementation
 - `hyperpowers:verification-before-completion` - Before claiming work is done
 
 **This skill is called by:**
+
 - Developers directly (primary entry point for all v3 backend work)
 - The orchestrator is invoked via `uwm-business-service-dev:develop-business-service`
 
 **Prerequisites:**
+
 - `uwm-enterprise-mcp` plugin must be installed (provides Bitbucket, Confluence, Jira, Dynatrace tooling)
 </integration>
 
@@ -681,6 +731,7 @@ Before claiming any unit of work complete:
 - Keystone: https://kb.uwm.com/display/Keystone/Keystone+System+Design
 
 **Verified UWM Package Names:**
+
 - `UWMC.Library.User.Passport` - GUP authentication
 - `UWMC.Library.Logging` - Structured logging with PII/NPI masking attributes
 - `UWMC.Library.Messaging.Kafka` - Kafka producer/consumer integration
@@ -691,16 +742,19 @@ Before claiming any unit of work complete:
 - `Microsoft.EntityFrameworkCore.SqlServer` - EF Core for SQL Server
 
 **UWM Docker Base Images:**
+
 - Build: `artifacts.uwm.com/build-images/uwm-dotnet-sdk-sonar:{version}-redhat`
 - Runtime: `artifacts.uwm.com/build-images/uwm-aspnet-runtime:{version}-redhat`
 
 **Reference Services (on Bitbucket):**
+
 - `cell-keystone` (GGF project) - .NET 10.0, modern Program.cs pattern
 - `cell-biz-broker-preferences` (Bitbucket) - .NET 8.0, Kafka + Hangfire + CosmosDB
 - `cell-biz-borrower` - Data service pattern
 - `cell-biz-condition` - Business service with rules engine
 
 **When stuck:**
+
 - Keystone issues → Contact Keystone team on Microsoft Teams
 - GUP integration → Check GUP Confluence space or Teams channel
 - Testing questions → Testing Support channels on Microsoft Teams

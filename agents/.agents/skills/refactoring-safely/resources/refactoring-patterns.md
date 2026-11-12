@@ -25,6 +25,7 @@ fn square(x: &i32) -> i32 {
 ```
 
 **Steps:**
+
 1. Extract square() function
 2. Run tests
 3. Commit
@@ -82,6 +83,7 @@ struct UserValidator {
 ```
 
 **Steps:**
+
 1. Create empty UserValidator struct
 2. Test, commit
 3. Move email_validator field
@@ -112,10 +114,10 @@ fn process() {
 ```
 
 **Steps:**
+
 1. Replace one call site with direct access
 2. Test, commit
 3. Replace next call site
 4. Test, commit
 5. Remove wrapper function
 6. Test, commit
-

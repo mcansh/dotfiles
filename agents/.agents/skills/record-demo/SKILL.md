@@ -13,30 +13,33 @@ MEDIUM - The 5-phase pipeline sequence is fixed (validate -> script -> audio -> 
 </rigidity_level>
 
 <quick_reference>
-| Phase | Action | Output |
-|-------|--------|--------|
-| 0. Validate Readiness | Run pre-flight checks | Confirmed prerequisites |
-| 1. Generate Script | Parse DEMO-GUIDE.md, confirm C-suite scenarios | `recording/DEMO-RECORDING-SCRIPT.json` |
-| 2. Generate Audio | `say -o` for each narration segment | `recording/audio/step-NNN.aiff` |
-| 3. Record Video | Playwright drives UI with timed waits | `recording/video/session.webm` |
-| 4. Assemble | FFmpeg merges audio onto video | `recording/output/demo-{mode}.mp4` |
+
+| Phase                 | Action                                         | Output                                 |
+| --------------------- | ---------------------------------------------- | -------------------------------------- |
+| 0. Validate Readiness | Run pre-flight checks                          | Confirmed prerequisites                |
+| 1. Generate Script    | Parse DEMO-GUIDE.md, confirm C-suite scenarios | `recording/DEMO-RECORDING-SCRIPT.json` |
+| 2. Generate Audio     | `say -o` for each narration segment            | `recording/audio/step-NNN.aiff`        |
+| 3. Record Video       | Playwright drives UI with timed waits          | `recording/video/session.webm`         |
+| 4. Assemble           | FFmpeg merges audio onto video                 | `recording/output/demo-{mode}.mp4`     |
 
 **Key:** Audio is pre-generated so durations are known before video recording. Playwright waits match audio durations for precise sync.
 </quick_reference>
 
 <when_to_use>
 Use when:
+
 - generate-demo has already produced a DEMO-GUIDE.md with docker-compose environment
 - You want a narrated video recording of the demo
 - Preparing a C-suite pitch or stakeholder presentation
 - You want a repeatable, automated demo recording
 
 Do NOT use when:
+
 - No DEMO-GUIDE.md exists yet (run generate-demo first)
 - Demo environment is not running (start docker compose first)
 - You want a live, unscripted demo (just follow DEMO-GUIDE.md manually)
 - You need to edit or trim the video (use a video editor after recording)
-</when_to_use>
+  </when_to_use>
 
 <the_process>
 
@@ -61,6 +64,7 @@ Run the pre-flight validation script:
 Where `<demo-directory>` is the path to the demo folder (e.g., `./demo/2026-03-05-checkout-flow`).
 
 The script checks:
+
 1. **ffmpeg** - Installed and functional (`ffmpeg -version`)
 2. **ffprobe** - Available (ships with ffmpeg)
 3. **ffmpeg codecs** - libx264 and aac codecs present
@@ -74,6 +78,7 @@ The script checks:
 **If all checks pass:** The script outputs JSON with detected versions and demo directory.
 
 **Validate-readiness output (JSON on stdout):**
+
 ```json
 {
   "success": true,
@@ -152,6 +157,7 @@ Check if the demo requires login or navigation to a starting state:
 **Step 1d-2: Set authCheck selector**
 
 Set the `authCheck` field in the JSON root. This selector tells the recording script how to verify the app loaded successfully after authentication. Pick a UI element that:
+
 - Is **unique on the page** (use Playwright role selectors to avoid strict-mode violations)
 - Is **visible only when authenticated** (e.g., a sidebar navigation link, a user menu, a dashboard header)
 - Appears **after the app finishes loading** (not a loading spinner)
@@ -159,6 +165,7 @@ Set the `authCheck` field in the JSON root. This selector tells the recording sc
 Format: `{ "role": "<role>", "name": "<accessible name>" }` — maps to `page.getByRole(role, { name })`.
 
 Examples:
+
 - `{ "role": "link", "name": "Dashboard" }` — sidebar nav link
 - `{ "role": "banner", "name": "Welcome" }` — header banner
 - `{ "role": "navigation", "name": "Main" }` — main navigation
@@ -216,12 +223,14 @@ For each selected scenario, for each numbered step, generate:
 **Step 1f: Add transition narration between scenarios**
 
 Between scenarios, add an `observe` step with transition narration:
+
 - C-suite: "Now let's look at [next scenario goal]..."
 - General: "Moving on to our next scenario. [Persona name], a [role], needs to [goal]..."
 
 **Step 1g: Add intro and outro steps**
 
 **Intro** (first step, before all scenarios):
+
 - `welcome` action with intro narration: "Welcome to [product name]. [Brief summary of what's being demonstrated]."
 - Set `product`, `subtitle`, and `date` fields on the action
 - C-suite: Keep intro to 1-2 sentences
@@ -230,12 +239,14 @@ Between scenarios, add an `observe` step with transition narration:
 - Follow with a silent `navigate` step to the app URL (the app loads after the welcome slide, avoiding white screen flicker)
 
 **Outro** (last two steps, after all scenarios):
+
 - `observe` step with closing narration: "That concludes our demonstration of [feature]. [1 sentence summary of what was shown]."
 - `thankYou` step with narration "Thank you for watching." — displays a branded UWM closing card with product name and date
 
 **Step 1h: Write DEMO-RECORDING-SCRIPT.json**
 
 Create `recording/` directory if it doesn't exist:
+
 ```bash
 mkdir -p <demo-dir>/recording
 ```
@@ -302,6 +313,7 @@ jq . <demo-dir>/recording/DEMO-RECORDING-SCRIPT.json > /dev/null
 If jq validation fails, fix the JSON and re-validate.
 
 Confirm to the user:
+
 ```
 Recording script generated:
   Mode: [csuite/general]
@@ -326,6 +338,7 @@ Run the audio generation script:
 ```
 
 The script will:
+
 1. **Validate** the recording script JSON
 2. **Verify** the `say` command is functional
 3. **Clear** any previous audio files in `recording/audio/`
@@ -339,6 +352,7 @@ The script will:
 8. **Report** progress and summary
 
 **After the script completes, verify:**
+
 - Audio files exist in `recording/audio/`
 - JSON has been updated with duration data
 - Total narration time is reasonable for the mode (~3-5 min for csuite, longer for general)
@@ -365,6 +379,7 @@ Generate and run a Playwright script that drives the demo UI while recording vid
 The `--dry-run` flag generates the script without running it. This lets you review the generated `playwright-demo.js` before recording.
 
 The script:
+
 1. **Validates** that `audioDuration` fields exist (errors if generate-audio.sh wasn't run)
 2. **Calculates** estimated video duration and warns if >15 minutes
 3. **Generates** `recording/playwright-demo.js` — a self-contained Node.js script (no playwright.config.ts needed)
@@ -380,6 +395,7 @@ cat <demo-dir>/recording/playwright-demo.js
 ```
 
 Key characteristics of the generated script:
+
 - **Finds playwright automatically** — searches `require('playwright')`, npx cache (`~/.npm/_npx/`), and ancestor `node_modules/` directories. No per-directory install needed.
 - **Persistent auth** — runs `ensureAuthenticated()` before recording. On first run, launches a headed persistent context (supports SSO/NTLM/Kerberos WIA) and saves `storageState` to `~/.cache/demo-recording-auth/auth-state.json`. Subsequent runs reuse the saved session.
 - **Always records in headed mode** — headless Chromium skips CSS animations, producing slideshow-like video. The script always passes `--headed`.
@@ -438,6 +454,7 @@ Merge audio segments onto the video at correct timestamps to produce the final M
 ```
 
 The script will:
+
 1. **Validate** that `session.webm` exists and verify each referenced audio file
 2. **Calculate** timestamp offsets for each audio segment using integer milliseconds:
    - Processes setupSteps first, then main steps, in timeline order
@@ -494,15 +511,17 @@ Final output: `<demo-dir>/recording/output/demo-{mode}-{date}.mp4`
 </the_process>
 
 <anti_patterns>
+
 - NO skipping validate-readiness — missing tools cause cryptic errors downstream; the pre-flight check exists to catch problems early with clear instructions
 - NO live audio playback during recording — pre-generate audio for precise timing control; live playback requires audio loopback hardware and introduces sync issues
 - NO hardcoded Playwright selectors in the skill — selectors must be generated from DEMO-GUIDE.md steps, not baked into this file
 - NO modifying the existing generate-demo skill — record-demo consumes generate-demo output (DEMO-GUIDE.md) without changing how it's produced
 - NO requiring paid services or API keys — macOS say is free, ffmpeg is free, Playwright is free
 - NO single monolithic script — separate concerns into pipeline stages (validate, script-gen, audio, video, assembly)
-</anti_patterns>
+  </anti_patterns>
 
 <critical_rules>
+
 1. Validate-readiness MUST pass before any recording work begins — no exceptions, no overrides
 2. All failures are collected and shown at once — never fail-fast on the first issue
 3. Audio uses system default voice (no `-v` flag) — for best quality, set Siri Voice 2 as system default
@@ -514,10 +533,11 @@ Final output: `<demo-dir>/recording/output/demo-{mode}-{date}.mp4`
 9. C-suite scenario selection MUST be confirmed by the user before generating the script
 10. Recording script JSON MUST be validated with jq before proceeding to Phase 2
 11. Parse DEMO-GUIDE.md flexibly — look for markers like `### Scenario` and `**Steps:**`, not rigid line offsets
-</critical_rules>
+    </critical_rules>
 
 <verification_checklist>
 **Phase 0 (Validate Readiness):**
+
 - [ ] Script runs without errors when all prerequisites are met
 - [ ] Script detects missing ffmpeg and provides install command
 - [ ] Script detects missing ffprobe and provides install command
@@ -533,6 +553,7 @@ Final output: `<demo-dir>/recording/output/demo-{mode}-{date}.mp4`
 - [ ] JSON output includes voice field
 
 **Phase 1 (Generate Script):**
+
 - [ ] DEMO-GUIDE.md parsed using flexible markers (not rigid offsets)
 - [ ] App URL extracted from Setup section
 - [ ] All scenarios extracted with persona, goal, context, steps, what-to-observe
@@ -553,6 +574,7 @@ Final output: `<demo-dir>/recording/output/demo-{mode}-{date}.mp4`
 - [ ] Summary shown to user (mode, scenario count, step count, estimated time)
 
 **Phase 2 (Generate Audio):**
+
 - [ ] Audio file generated for each step with non-null narration
 - [ ] Narration piped through stdin (not shell argument)
 - [ ] Audio files are valid AIFF format
@@ -568,6 +590,7 @@ Final output: `<demo-dir>/recording/output/demo-{mode}-{date}.mp4`
 - [ ] Special characters handled (quotes, apostrophes, dollar signs)
 
 **Phase 3 (Record Video):**
+
 - [ ] Playwright script generated from DEMO-RECORDING-SCRIPT.json
 - [ ] audioDuration fields validated before generation
 - [ ] Self-contained script (no playwright.config.ts)
@@ -583,6 +606,7 @@ Final output: `<demo-dir>/recording/output/demo-{mode}-{date}.mp4`
 - [ ] Generated JS passes syntax check (node --check)
 
 **Phase 4 (Assemble Video):**
+
 - [ ] Audio segments placed at correct timestamps via adelay
 - [ ] Timestamps use integer milliseconds (no float accumulation)
 - [ ] setupSteps included in timeline before main steps
@@ -596,7 +620,7 @@ Final output: `<demo-dir>/recording/output/demo-{mode}-{date}.mp4`
 - [ ] Output verified with ffprobe
 - [ ] Previous output cleared before assembly
 - [ ] File size and duration reported
-</verification_checklist>
+      </verification_checklist>
 
 <integration>
 Called by: using-hyper (when user asks to record a demo, create a demo video, or prepare a video presentation)
@@ -610,54 +634,67 @@ Related skills: generate-demo (produces the input this skill consumes)
 <edge_cases>
 
 ## Edge Case: Low quality voice output
+
 - Signal: Generated audio sounds robotic or synthetic
 - Action: Recommend setting Siri Voice 2 as system default: System Settings > Accessibility > Spoken Content > System Voice. The `say` command uses the system default when no `-v` flag is passed. Siri voices produce natural speech but cannot be selected via `-v` (they don't appear in `say -v '?'` output).
 
 ## Edge Case: Docker daemon starting but not ready
+
 - Signal: `docker info` succeeds but `docker compose ps` shows containers in non-running state
 - Action: Report unhealthy containers with their states. Suggest waiting or restarting.
 
 ## Edge Case: Demo directory has compose file but no DEMO-GUIDE.md
+
 - Signal: docker-compose.yml exists but DEMO-GUIDE.md does not
 - Action: Fail with message to run generate-demo first.
 
 ## Edge Case: say command hangs
+
 - Signal: `say -v ?` does not return within 5 seconds
 - Action: Timeout and report failure. Suggest checking Speech Synthesis in System Settings.
 
 ## Edge Case: Playwright installed but no browser
+
 - Signal: `npx --no-install playwright --version` succeeds but Chromium directory missing
 - Action: Fail with specific install command: `npx playwright install chromium`
 
 ## Edge Case: ffmpeg present but missing codecs
+
 - Signal: `ffmpeg -codecs` output lacks libx264 or aac
 - Action: Fail with reinstall command: `brew install ffmpeg`
 
 ## Edge Case: DEMO-GUIDE.md has no Scenarios section
+
 - Signal: No `### Scenario` headers found after parsing
 - Action: STOP. Tell user: "No scenarios found in DEMO-GUIDE.md. The file may not match the expected format from generate-demo."
 
 ## Edge Case: Step text is observation-only (no UI action)
+
 - Signal: Step says "Observe", "Notice", "Verify", "See" with no clickable/typeable action
 - Action: Use `observe` action type. Playwright does nothing; narration plays over the current screen state.
 
 ## Edge Case: Step references API endpoint instead of UI
+
 - Signal: Step mentions curl, API call, or endpoint without a UI equivalent
 - Action: Skip for video recording. Add narration: "Behind the scenes, the API handles [X]." Use `observe` action type.
 
 ## Edge Case: DEMO-GUIDE.md references login credentials
+
 - Signal: Setup or Prerequisites section mentions username/password, login, or authentication
 - Action: Generate setupSteps for login. Narration says "using demo credentials" — never reads actual credential values aloud.
 
 ## Edge Case: User deselects all C-suite scenarios
+
 - Signal: AskUserQuestion returns with no scenarios selected
 - Action: Offer to switch to general mode. If user declines, STOP.
 
 ## Edge Case: Very long narration generated (>50 words for a step)
+
 - Signal: Word count of generated narration exceeds 50
 - Action: Flag to user: "Step N narration is [X] words (recommended: <50). Shorten?" Continue if user approves.
 
 ## Edge Case: Multiple app URLs in Setup section
+
 - Signal: DEMO-GUIDE.md lists both Web UI and API URLs
 - Action: Use the Web UI URL as appUrl. Note API URL in a comment in the JSON but don't navigate to it.
 

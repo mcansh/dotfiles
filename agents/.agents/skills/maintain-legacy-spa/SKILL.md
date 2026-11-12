@@ -15,35 +15,37 @@ HIGH FREEDOM - This is a reference document, not a workflow. Teams adapt these g
 
 <quick_reference>
 
-| Standard | Still Applies? | Notes |
-|----------|---------------|-------|
-| React | Yes | UWM standard — all frontends must be React |
-| DREAM design system | Yes (where available) | Use lib-node-dream-ui for new components |
-| GUP auth | Yes | Must use lib-node-user-passport-component |
-| TDD | Yes | Write tests first, use .feature specs |
-| Coverage ≥80% | Yes | Measured per project |
-| Mutation testing ≥80 | Yes | Stryker with vitest-runner or jest-runner |
-| No business logic | Yes | Frontends = UX only |
-| No TypeScript `any` | Yes | Ever |
-| catalog: protocol | No | Legacy SPAs use npm/yarn with direct versions |
-| turbo boundaries | No | Not applicable to standalone repos |
-| uwm-manifest.json | No | No app shell integration |
-| Module federation | No | Legacy SPAs are standalone |
-| Playwright E2E/soak/perf | Recommended | Follow allin-ui patterns if adding new tests |
+| Standard                 | Still Applies?        | Notes                                         |
+| ------------------------ | --------------------- | --------------------------------------------- |
+| React                    | Yes                   | UWM standard — all frontends must be React    |
+| DREAM design system      | Yes (where available) | Use lib-node-dream-ui for new components      |
+| GUP auth                 | Yes                   | Must use lib-node-user-passport-component     |
+| TDD                      | Yes                   | Write tests first, use .feature specs         |
+| Coverage ≥80%            | Yes                   | Measured per project                          |
+| Mutation testing ≥80     | Yes                   | Stryker with vitest-runner or jest-runner     |
+| No business logic        | Yes                   | Frontends = UX only                           |
+| No TypeScript `any`      | Yes                   | Ever                                          |
+| catalog: protocol        | No                    | Legacy SPAs use npm/yarn with direct versions |
+| turbo boundaries         | No                    | Not applicable to standalone repos            |
+| uwm-manifest.json        | No                    | No app shell integration                      |
+| Module federation        | No                    | Legacy SPAs are standalone                    |
+| Playwright E2E/soak/perf | Recommended           | Follow allin-ui patterns if adding new tests  |
 
 </quick_reference>
 
 <when_to_use>
+
 - Maintaining a cell-ui-xxx SPA with no immediate migration plan
 - Adding features to a legacy SPA approved to remain standalone
 - Need to understand which UWM standards apply to legacy frontends
 - Evaluating whether a legacy SPA should be migrated
 
 **Do NOT use for:**
+
 - New frontend development (use `develop-frontend` — targets allin-ui)
 - Migrating a legacy SPA to allin-ui (use `migrate-spa-to-allin`)
 - Backend or BFF development (use `uwm-business-service-dev`)
-</when_to_use>
+  </when_to_use>
 
 <the_process>
 
@@ -59,7 +61,7 @@ All frontend code at UWM must be React. If a legacy SPA uses a different framewo
 
 - New components should use `lib-node-dream-ui` where available
 - Existing MUI components don't need to be replaced immediately (that's a migration concern)
-- Theme variables should be used for new styles (theme.palette.*, theme.spacing(), theme.typography.*)
+- Theme variables should be used for new styles (theme.palette._, theme.spacing(), theme.typography._)
 - Check https://dream.uwm.com for available components
 
 ### GUP Authentication (Mandatory)
@@ -140,6 +142,7 @@ Consider migrating to allin-ui when any of these conditions apply:
 **How to start migration:** Use the `migrate-spa-to-allin` skill.
 
 **Success criteria for migration** (from Confluence page 1443991649):
+
 - Dev team can do local development after setup
 - Deployed UFA works as specified
 - Kill criteria: Local dev setup takes >2 weeks or deploy lead time >1 week
@@ -153,6 +156,7 @@ Consider migrating to allin-ui when any of these conditions apply:
 **Context:** Team needs to add a new page to cell-ui-lending. No migration planned.
 
 **Approach:**
+
 1. Write .feature spec for the new page behavior
 2. Create DREAM components (not raw MUI) for new UI elements
 3. Use existing auth patterns (GUP if integrated, or plan GUP adoption)
@@ -161,6 +165,7 @@ Consider migrating to allin-ui when any of these conditions apply:
 6. Keep business logic in the BFF — frontend handles only UX
 
 **What NOT to do:**
+
 - Don't add new MUI components when DREAM has equivalents
 - Don't put calculations in the frontend
 - Don't skip testing
@@ -183,6 +188,7 @@ Consider migrating to allin-ui when any of these conditions apply:
 ## Legacy SPA Without GUP
 
 If the legacy SPA uses custom authentication:
+
 1. Adopt GUP as the first step before adding new features
 2. Install lib-node-user-passport-component
 3. Replace custom auth with PassportAuth + usePassport
@@ -191,6 +197,7 @@ If the legacy SPA uses custom authentication:
 ## Legacy SPA With Enzyme Tests
 
 If the legacy SPA uses Enzyme:
+
 1. Do NOT add new Enzyme tests
 2. New tests must use @testing-library/react
 3. Migrate existing Enzyme tests to RTL when touching those files
@@ -199,6 +206,7 @@ If the legacy SPA uses Enzyme:
 ## Very Old React Version
 
 If the legacy SPA uses React <18:
+
 1. Upgrade to React 18 before adding new features
 2. React 18 is the UWM standard minimum version
 3. DREAM components require React 18+
@@ -208,6 +216,7 @@ If the legacy SPA uses React <18:
 <verification_checklist>
 
 **For any work on a legacy SPA:**
+
 - [ ] New components use DREAM (not raw MUI)
 - [ ] GUP auth used (or adoption planned as first step)
 - [ ] No business logic added to frontend
@@ -222,12 +231,15 @@ If the legacy SPA uses React <18:
 <integration>
 
 **This skill is called by:**
+
 - `develop-frontend` (orchestrator) — when legacy SPA detected and user chooses to maintain
 
 **When ready to migrate, use:**
+
 - `migrate-spa-to-allin` — formalized migration process
 
 **Related skills:**
+
 - `develop-frontend` — for allin-ui development (recommended path)
 - `uwm-business-service-dev` — for BFF or service changes
 
@@ -236,15 +248,18 @@ If the legacy SPA uses React <18:
 <resources>
 
 **Confluence:**
+
 - V3 Architectural Baselines (page ID: 944046789) — Legacy naming: cell-ui-{context}
 - Trade-offs Analysis (page ID: 1455929059) — Advantages of joining allin-ui
 - UFA Onboarding Experiment (page ID: 1443991649) — Migration success criteria
 
 **Design System:**
+
 - https://dream.uwm.com — DREAM Storybook documentation
 - `UCP/lib-node-dream-ui` on Bitbucket — DREAM source
 
 **Auth:**
+
 - `lib-node-user-passport-component` — GUP auth library
 - GUP UI Onboarding Guide on Confluence — Integration walkthrough
 

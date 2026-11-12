@@ -7,6 +7,7 @@ description: Use when implementing a UI feature in allin-ui — enforces strict 
 Guides developers through implementing UI features in allin-ui packages using strict TDD (Test-Driven Development). The workflow starts with writing `.feature` specification files, deriving Vitest unit tests from those specs, implementing the minimum code to pass, then verifying with Stryker mutation testing.
 
 **This skill enforces three critical boundaries:**
+
 1. **Spec-first development:** `.feature` files in `{package}/spec/` serve as human-readable specifications (NOT executable BDD tests). Every Vitest test traces back to a `.feature` scenario.
 2. **Business logic boundary:** Frontend code handles ONLY user experience — rendering, navigation, form UX, loading states. Business calculations, orchestration, and validation rules belong in backend services.
 3. **Mock boundary:** Tests mock ONLY infrastructure (API clients, browser APIs, module federation). Never mock business logic, data transformers, or component rendering.
@@ -20,23 +21,25 @@ LOW FREEDOM - The TDD cycle (spec → RED → GREEN → REFACTOR → mutate) is 
 
 <quick_reference>
 
-| Step | Action | Deliverable |
-|------|--------|-------------|
-| **1. Write Spec** | Create `.feature` file in `{package}/spec/` | Human-readable Gherkin scenarios |
-| **2. Derive Tests (RED)** | Map scenarios → Vitest `it()` blocks | Failing tests in `__tests__/` |
-| **3. Implement (GREEN)** | Minimal code to pass tests | Component + hooks + services |
-| **4. Refactor** | Improve structure, tests stay green | Clean code, no behavior changes |
-| **5. Auth** | Integrate GUP via `lib-node-user-passport-component` | Role checks, MockPassport tests |
-| **6. Boundary Check** | Verify no business logic in frontend | UX-only code |
-| **7. Mutation Test** | Run `npx stryker run` | Score ≥80 |
-| **8. Verify** | Coverage ≥80%, all tests pass | Ready for review |
+| Step                      | Action                                               | Deliverable                      |
+| ------------------------- | ---------------------------------------------------- | -------------------------------- |
+| **1. Write Spec**         | Create `.feature` file in `{package}/spec/`          | Human-readable Gherkin scenarios |
+| **2. Derive Tests (RED)** | Map scenarios → Vitest `it()` blocks                 | Failing tests in `__tests__/`    |
+| **3. Implement (GREEN)**  | Minimal code to pass tests                           | Component + hooks + services     |
+| **4. Refactor**           | Improve structure, tests stay green                  | Clean code, no behavior changes  |
+| **5. Auth**               | Integrate GUP via `lib-node-user-passport-component` | Role checks, MockPassport tests  |
+| **6. Boundary Check**     | Verify no business logic in frontend                 | UX-only code                     |
+| **7. Mutation Test**      | Run `npx stryker run`                                | Score ≥80                        |
+| **8. Verify**             | Coverage ≥80%, all tests pass                        | Ready for review                 |
 
 **TDD Cycle:**
+
 ```
 .feature spec → Vitest test (RED) → implement (GREEN) → refactor → Stryker (≥80)
 ```
 
 **Business Logic Boundary:**
+
 ```
 Frontend (YES): rendering, navigation, form UX, loading states, display formatting
 Backend (NO):  calculations, orchestration, business validation, shared state for capabilities
@@ -45,6 +48,7 @@ Backend (NO):  calculations, orchestration, business validation, shared state fo
 </quick_reference>
 
 <when_to_use>
+
 - Implementing a new feature in an existing allin-ui package (UFA, SCL, or IAP)
 - Adding components, pages, hooks, or services to an allin-ui package
 - Need to write tests for UI components following TDD
@@ -52,12 +56,13 @@ Backend (NO):  calculations, orchestration, business validation, shared state fo
 - Need guidance on what logic belongs in frontend vs backend
 
 **Do NOT use for:**
+
 - Creating a new allin-ui package (use `create-allin-package`)
 - Designing component structure and DREAM compliance (use `design-ui-component`)
 - Setting up comprehensive test strategy, Playwright E2E, or pipeline config (use `test-frontend`)
 - Implementing backend business services (use `develop-business-service` from uwm-business-service-dev)
 - Contributing components TO the DREAM library (see dream-buddy.md)
-</when_to_use>
+  </when_to_use>
 
 <the_process>
 
@@ -126,18 +131,18 @@ Feature: Loan Summary Card
 
 ### .feature Syntax Rules
 
-| Gherkin Element | Purpose | Example |
-|----------------|---------|---------|
-| `Feature:` | Component or capability name | `Feature: Loan Summary Card` |
-| `As a / I want / So that` | User story context (optional but recommended) | Business justification |
-| `Background:` | Shared preconditions for all scenarios | Common setup (auth, data) |
-| `Scenario:` | One specific user interaction or state | Maps to one `it()` block |
-| `Scenario Outline:` | Parameterized scenario with examples | Maps to `it.each()` |
-| `Given` | Initial state / preconditions | Props, mock data, API state |
-| `When` | User action or trigger | Click, render, navigate |
-| `Then` | Expected outcome | Visible text, state change, API call |
-| `And` | Additional Given/When/Then | Continuation of previous step type |
-| `Examples:` | Data table for Scenario Outline | Parameterized test values |
+| Gherkin Element           | Purpose                                       | Example                              |
+| ------------------------- | --------------------------------------------- | ------------------------------------ |
+| `Feature:`                | Component or capability name                  | `Feature: Loan Summary Card`         |
+| `As a / I want / So that` | User story context (optional but recommended) | Business justification               |
+| `Background:`             | Shared preconditions for all scenarios        | Common setup (auth, data)            |
+| `Scenario:`               | One specific user interaction or state        | Maps to one `it()` block             |
+| `Scenario Outline:`       | Parameterized scenario with examples          | Maps to `it.each()`                  |
+| `Given`                   | Initial state / preconditions                 | Props, mock data, API state          |
+| `When`                    | User action or trigger                        | Click, render, navigate              |
+| `Then`                    | Expected outcome                              | Visible text, state change, API call |
+| `And`                     | Additional Given/When/Then                    | Continuation of previous step type   |
+| `Examples:`               | Data table for Scenario Outline               | Parameterized test values            |
 
 ---
 
@@ -147,111 +152,109 @@ Transform each `.feature` scenario into a Vitest test case. The mapping rules ar
 
 ### Derivation Rules
 
-| .feature Element | Vitest Equivalent |
-|-----------------|-------------------|
-| `Feature: Loan Summary Card` | `describe('LoanSummaryCard', () => { ... })` |
-| `Background:` steps | `beforeEach(() => { ... })` |
-| `Scenario: Display borrower name` | `it('displays borrower name and loan number', () => { ... })` |
-| `Scenario Outline:` + `Examples:` | `it.each([...])('displays %s as %s', ...)` |
-| `Given` steps | Test setup: render with props, configure mocks |
-| `When` steps | User action: `fireEvent.click()`, `await waitFor()` |
-| `Then` steps | Assertions: `expect(screen.getByText(...)).toBeInTheDocument()` |
+| .feature Element                  | Vitest Equivalent                                               |
+| --------------------------------- | --------------------------------------------------------------- |
+| `Feature: Loan Summary Card`      | `describe('LoanSummaryCard', () => { ... })`                    |
+| `Background:` steps               | `beforeEach(() => { ... })`                                     |
+| `Scenario: Display borrower name` | `it('displays borrower name and loan number', () => { ... })`   |
+| `Scenario Outline:` + `Examples:` | `it.each([...])('displays %s as %s', ...)`                      |
+| `Given` steps                     | Test setup: render with props, configure mocks                  |
+| `When` steps                      | User action: `fireEvent.click()`, `await waitFor()`             |
+| `Then` steps                      | Assertions: `expect(screen.getByText(...)).toBeInTheDocument()` |
 
 ### Derived Test File
 
 From the `.feature` above, derive this test file at `src/components/LoanSummaryCard/__tests__/LoanSummaryCard.test.tsx`:
 
 ```tsx
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { screen, waitFor, cleanup } from '@testing-library/react';
-import { render } from '../../testUtils/testUtils'; // custom render with providers
-import { LoanSummaryCard } from '../LoanSummaryCard';
-import * as loanService from '../../services/loanService';
+import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
+import { screen, waitFor, cleanup } from "@testing-library/react";
+import { render } from "../../testUtils/testUtils"; // custom render with providers
+import { LoanSummaryCard } from "../LoanSummaryCard";
+import * as loanService from "../../services/loanService";
 
 // Mock infrastructure only — the API client
-vi.mock('../../services/loanService');
+vi.mock("../../services/loanService");
 
-describe('LoanSummaryCard', () => {
-    // Background: shared preconditions
-    beforeEach(() => {
-        // "Given the user is authenticated" → handled by MockPassport in AllProviders
-        // "And the loan data API returns valid data" → mock service response
-        vi.mocked(loanService.getLoanSummary).mockResolvedValue({
-            borrowerName: 'Jane Smith',
-            loanNumber: '789012',
-            loanAmount: 350000,
-            monthlyPI: 2145.67,
-            interestRate: 0.0675,
-        });
+describe("LoanSummaryCard", () => {
+  // Background: shared preconditions
+  beforeEach(() => {
+    // "Given the user is authenticated" → handled by MockPassport in AllProviders
+    // "And the loan data API returns valid data" → mock service response
+    vi.mocked(loanService.getLoanSummary).mockResolvedValue({
+      borrowerName: "Jane Smith",
+      loanNumber: "789012",
+      loanAmount: 350000,
+      monthlyPI: 2145.67,
+      interestRate: 0.0675,
     });
+  });
 
-    afterEach(() => {
-        vi.restoreAllMocks();
-        cleanup();
+  afterEach(() => {
+    vi.restoreAllMocks();
+    cleanup();
+  });
+
+  // Scenario: Display borrower name and loan number
+  it("displays borrower name and loan number", async () => {
+    // Given a loan with borrower "Jane Smith" and loan number "789012"
+    // (covered by beforeEach mock)
+
+    // When the component renders
+    render(<LoanSummaryCard loanId="test-loan-1" />);
+
+    // Then I should see "Jane Smith" displayed
+    await waitFor(() => {
+      expect(screen.getByText("Jane Smith")).toBeInTheDocument();
     });
+    // And I should see loan number "789012" displayed
+    expect(screen.getByText("789012")).toBeInTheDocument();
+  });
 
-    // Scenario: Display borrower name and loan number
-    it('displays borrower name and loan number', async () => {
-        // Given a loan with borrower "Jane Smith" and loan number "789012"
-        // (covered by beforeEach mock)
+  // Scenario: Show loading state while data is fetching
+  it("shows loading spinner while data is fetching", () => {
+    // Given the loan data API has not responded yet
+    vi.mocked(loanService.getLoanSummary).mockReturnValue(
+      new Promise(() => {}), // never resolves
+    );
 
-        // When the component renders
-        render(<LoanSummaryCard loanId="test-loan-1" />);
+    // When the component renders
+    render(<LoanSummaryCard loanId="test-loan-1" />);
 
-        // Then I should see "Jane Smith" displayed
-        await waitFor(() => {
-            expect(screen.getByText('Jane Smith')).toBeInTheDocument();
-        });
-        // And I should see loan number "789012" displayed
-        expect(screen.getByText('789012')).toBeInTheDocument();
+    // Then I should see a loading spinner
+    expect(screen.getByRole("progressbar")).toBeInTheDocument();
+    // And I should NOT see any loan details
+    expect(screen.queryByText("Jane Smith")).not.toBeInTheDocument();
+  });
+
+  // Scenario: Show error state when API fails
+  it("shows error message and retry button when API fails", async () => {
+    // Given the loan data API returns an error
+    vi.mocked(loanService.getLoanSummary).mockRejectedValue(new Error("Network error"));
+
+    // When the component renders
+    render(<LoanSummaryCard loanId="test-loan-1" />);
+
+    // Then I should see an error message
+    await waitFor(() => {
+      expect(screen.getByText(/error/i)).toBeInTheDocument();
     });
+    // And I should see a "Retry" button
+    expect(screen.getByRole("button", { name: /retry/i })).toBeInTheDocument();
+  });
 
-    // Scenario: Show loading state while data is fetching
-    it('shows loading spinner while data is fetching', () => {
-        // Given the loan data API has not responded yet
-        vi.mocked(loanService.getLoanSummary).mockReturnValue(
-            new Promise(() => {}) // never resolves
-        );
+  // Scenario Outline: Display formatted currency values
+  it.each([
+    ["Loan Amount", 350000, "$350,000.00"],
+    ["Monthly P&I", 2145.67, "$2,145.67"],
+    ["Interest Rate", 0.0675, "6.750%"],
+  ])("displays %s formatted as %s", async (field, rawValue, formattedValue) => {
+    render(<LoanSummaryCard loanId="test-loan-1" />);
 
-        // When the component renders
-        render(<LoanSummaryCard loanId="test-loan-1" />);
-
-        // Then I should see a loading spinner
-        expect(screen.getByRole('progressbar')).toBeInTheDocument();
-        // And I should NOT see any loan details
-        expect(screen.queryByText('Jane Smith')).not.toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText(formattedValue)).toBeInTheDocument();
     });
-
-    // Scenario: Show error state when API fails
-    it('shows error message and retry button when API fails', async () => {
-        // Given the loan data API returns an error
-        vi.mocked(loanService.getLoanSummary).mockRejectedValue(
-            new Error('Network error')
-        );
-
-        // When the component renders
-        render(<LoanSummaryCard loanId="test-loan-1" />);
-
-        // Then I should see an error message
-        await waitFor(() => {
-            expect(screen.getByText(/error/i)).toBeInTheDocument();
-        });
-        // And I should see a "Retry" button
-        expect(screen.getByRole('button', { name: /retry/i })).toBeInTheDocument();
-    });
-
-    // Scenario Outline: Display formatted currency values
-    it.each([
-        ['Loan Amount', 350000, '$350,000.00'],
-        ['Monthly P&I', 2145.67, '$2,145.67'],
-        ['Interest Rate', 0.0675, '6.750%'],
-    ])('displays %s formatted as %s', async (field, rawValue, formattedValue) => {
-        render(<LoanSummaryCard loanId="test-loan-1" />);
-
-        await waitFor(() => {
-            expect(screen.getByText(formattedValue)).toBeInTheDocument();
-        });
-    });
+  });
 });
 ```
 
@@ -323,11 +326,11 @@ Already provided by the app-shell `GlobalLayout.tsx`. **Do NOT add PassportAuth 
 
 // Your component just uses the hooks — auth is already set up
 // ✅
-import { usePassport } from 'lib-node-user-passport-component';
+import { usePassport } from "lib-node-user-passport-component";
 
 export function YourComponent() {
-    const { user, isLoggedIn } = usePassport();
-    // ... use user data
+  const { user, isLoggedIn } = usePassport();
+  // ... use user data
 }
 ```
 
@@ -335,14 +338,12 @@ export function YourComponent() {
 
 ```tsx
 // Only for local development outside app-shell
-import { PassportAuth } from 'lib-node-user-passport-component';
+import { PassportAuth } from "lib-node-user-passport-component";
 
 export const RunLevelOneProviders = ({ children }: { children: ReactNode }) => (
-    <DreamThemeProvider family="external" mode="light">
-        <PassportAuth backendUrl={`http://localhost:${port}`}>
-            {children}
-        </PassportAuth>
-    </DreamThemeProvider>
+  <DreamThemeProvider family="external" mode="light">
+    <PassportAuth backendUrl={`http://localhost:${port}`}>{children}</PassportAuth>
+  </DreamThemeProvider>
 );
 ```
 
@@ -351,22 +352,24 @@ export const RunLevelOneProviders = ({ children }: { children: ReactNode }) => (
 Returns the current authenticated user and auth state.
 
 ```tsx
-import { usePassport } from 'lib-node-user-passport-component';
+import { usePassport } from "lib-node-user-passport-component";
 
 export function UserGreeting() {
-    const { user, isLoggedIn, logout, error, isLoading } = usePassport();
+  const { user, isLoggedIn, logout, error, isLoading } = usePassport();
 
-    if (isLoading) return <Loading />;
-    if (error) return <SectionMessage appearance="error">{error.message}</SectionMessage>;
-    if (!isLoggedIn || !user) return <Typography>Please log in</Typography>;
+  if (isLoading) return <Loading />;
+  if (error) return <SectionMessage appearance="error">{error.message}</SectionMessage>;
+  if (!isLoggedIn || !user) return <Typography>Please log in</Typography>;
 
-    return (
-        <Box>
-            <Typography>Welcome, {user.firstName} {user.lastName}</Typography>
-            <Typography variant="body2">{user.email}</Typography>
-            <Button onClick={logout}>Logout</Button>
-        </Box>
-    );
+  return (
+    <Box>
+      <Typography>
+        Welcome, {user.firstName} {user.lastName}
+      </Typography>
+      <Typography variant="body2">{user.email}</Typography>
+      <Button onClick={logout}>Logout</Button>
+    </Box>
+  );
 }
 ```
 
@@ -374,21 +377,21 @@ export function UserGreeting() {
 
 ```tsx
 interface User {
-    userIdentifier: string;
-    firstName: string;
-    lastName: string;
-    displayName: string;
-    email: string;
-    organizations: Array<{
-        type: string;
-        value: string;
-        roles: string[];
-        isCorrespondent: boolean;
-        isSuperCorrespondent: boolean;
-        contactId: string;
-    }>;
+  userIdentifier: string;
+  firstName: string;
+  lastName: string;
+  displayName: string;
+  email: string;
+  organizations: Array<{
+    type: string;
+    value: string;
     roles: string[];
-    actualIdentity: User | null; // non-null during impersonation
+    isCorrespondent: boolean;
+    isSuperCorrespondent: boolean;
+    contactId: string;
+  }>;
+  roles: string[];
+  actualIdentity: User | null; // non-null during impersonation
 }
 ```
 
@@ -397,19 +400,19 @@ interface User {
 Call at the top level of a UFA's `App.tsx` when the UFA runs standalone (outside app-shell):
 
 ```tsx
-import { usePassport, useSinglePageAuth } from 'lib-node-user-passport-component';
+import { usePassport, useSinglePageAuth } from "lib-node-user-passport-component";
 
 function App() {
-    const { user } = usePassport();
-    useSinglePageAuth(); // initializes auth flow — call with no arguments
+  const { user } = usePassport();
+  useSinglePageAuth(); // initializes auth flow — call with no arguments
 
-    return (
-        <DreamThemeProvider>
-            <BrowserRouter basename="/your-ufa">
-                <Router user={user!} />
-            </BrowserRouter>
-        </DreamThemeProvider>
-    );
+  return (
+    <DreamThemeProvider>
+      <BrowserRouter basename="/your-ufa">
+        <Router user={user!} />
+      </BrowserRouter>
+    </DreamThemeProvider>
+  );
 }
 ```
 
@@ -418,12 +421,12 @@ function App() {
 Call in components that should render without requiring authentication:
 
 ```tsx
-import { useAuthExclusion } from 'lib-node-user-passport-component';
+import { useAuthExclusion } from "lib-node-user-passport-component";
 
 export function PublicLandingPage() {
-    useAuthExclusion(); // this page does NOT require login
+  useAuthExclusion(); // this page does NOT require login
 
-    return <Typography>Welcome to our public page</Typography>;
+  return <Typography>Welcome to our public page</Typography>;
 }
 ```
 
@@ -432,30 +435,30 @@ export function PublicLandingPage() {
 Replaces `PassportAuth` in tests. Provides a mock user context:
 
 ```tsx
-import { MockPassport, type User } from 'lib-node-user-passport-component';
+import { MockPassport, type User } from "lib-node-user-passport-component";
 
 const mockUser: User = {
-    userIdentifier: '123-456-abc',
-    firstName: 'John',
-    lastName: 'Doe',
-    displayName: 'John Doe',
-    email: 'jdoe@uwm.com',
-    organizations: [{
-        type: 'Broker',
-        value: '1234567',
-        roles: [],
-        isCorrespondent: true,
-        isSuperCorrespondent: false,
-        contactId: '7654321',
-    }],
-    roles: ['IT Department'],
-    actualIdentity: null,
+  userIdentifier: "123-456-abc",
+  firstName: "John",
+  lastName: "Doe",
+  displayName: "John Doe",
+  email: "jdoe@uwm.com",
+  organizations: [
+    {
+      type: "Broker",
+      value: "1234567",
+      roles: [],
+      isCorrespondent: true,
+      isSuperCorrespondent: false,
+      contactId: "7654321",
+    },
+  ],
+  roles: ["IT Department"],
+  actualIdentity: null,
 };
 
 // In AllProviders for tests:
-<MockPassport mockUser={mockUser}>
-    {children}
-</MockPassport>
+<MockPassport mockUser={mockUser}>{children}</MockPassport>;
 ```
 
 ### Platform API Auth Wrappers (`@uwm/platform-api`)
@@ -467,20 +470,20 @@ These hooks build on top of `lib-node-user-passport-component` for app-shell int
 Maps logical role names to AD group names, scoped by module:
 
 ```tsx
-import { useAppShellRoleMatrix } from '@uwm/platform-api';
+import { useAppShellRoleMatrix } from "@uwm/platform-api";
 
 export function MyUfaRoot() {
-    // Register role matrix for this UFA
-    useAppShellRoleMatrix(
-        {
-            admin: ['IT Department', 'UFA Admin Group'],
-            viewer: ['All Employees'],
-            approver: ['Loan Approvers'],
-        },
-        'my-ufa', // module name for scoping
-    );
+  // Register role matrix for this UFA
+  useAppShellRoleMatrix(
+    {
+      admin: ["IT Department", "UFA Admin Group"],
+      viewer: ["All Employees"],
+      approver: ["Loan Approvers"],
+    },
+    "my-ufa", // module name for scoping
+  );
 
-    return <MyUfaRoutes />;
+  return <MyUfaRoutes />;
 }
 ```
 
@@ -492,13 +495,13 @@ Each UFA defines its role mappings in a dedicated file:
 
 ```tsx
 // src/RequiredRoles.ts
-import type { RoleMatrix } from 'lib-node-user-passport-component';
+import type { RoleMatrix } from "lib-node-user-passport-component";
 
 export const roleMatrix: RoleMatrix = {
-    admin: ['IT Department'],
-    approver: ['CES-Exemption-Approvers'],
-    requester: ['CES-Exemption-Requesters'],
-    creator: ['CES-Policy-Creators'],
+  admin: ["IT Department"],
+  approver: ["CES-Exemption-Approvers"],
+  requester: ["CES-Exemption-Requesters"],
+  creator: ["CES-Policy-Creators"],
 };
 ```
 
@@ -507,19 +510,16 @@ export const roleMatrix: RoleMatrix = {
 Check if the current user has required roles (scoped by module name):
 
 ```tsx
-import { useAppShellRoles } from '@uwm/platform-api';
+import { useAppShellRoles } from "@uwm/platform-api";
 
 export function AdminPanel() {
-    const isAuthorized = useAppShellRoles(
-        { requiredRoles: ['admin'], requireAll: false },
-        'my-ufa',
-    );
+  const isAuthorized = useAppShellRoles({ requiredRoles: ["admin"], requireAll: false }, "my-ufa");
 
-    if (!isAuthorized) {
-        return <SectionMessage appearance="warning">Access denied</SectionMessage>;
-    }
+  if (!isAuthorized) {
+    return <SectionMessage appearance="warning">Access denied</SectionMessage>;
+  }
 
-    return <AdminContent />;
+  return <AdminContent />;
 }
 ```
 
@@ -528,15 +528,15 @@ export function AdminPanel() {
 Evaluate authorization policies that combine email, organization, group, and role matrix conditions:
 
 ```tsx
-import { usePolicy } from '@uwm/platform-api';
+import { usePolicy } from "@uwm/platform-api";
 
 export function ChatWidget() {
-    const canAccessChat = usePolicy('chatUwm');
+  const canAccessChat = usePolicy("chatUwm");
 
-    if (canAccessChat === undefined) return <Loading />; // still evaluating
-    if (!canAccessChat) return null; // not authorized
+  if (canAccessChat === undefined) return <Loading />; // still evaluating
+  if (!canAccessChat) return null; // not authorized
 
-    return <ChatInterface />;
+  return <ChatInterface />;
 }
 ```
 
@@ -546,18 +546,18 @@ export function ChatWidget() {
 
 ### What Belongs Where
 
-| Logic Type | Frontend (YES) | Backend (NO) |
-|-----------|---------------|-------------|
-| **Rendering** | Display data, conditional visibility, layout | - |
-| **Navigation** | Route changes, breadcrumbs, menu highlighting | - |
-| **Form UX** | Field masking, character limits, focus management | - |
-| **Loading states** | Spinners, skeletons, progress indicators | - |
-| **Display formatting** | Currency formatting, date formatting, truncation | - |
-| **UI validation** | Required field, email format, max length | - |
-| **Business calculations** | - | LTV ratios, pricing, eligibility scoring |
-| **Business validation** | - | Minimum amounts, rate limits, policy rules |
-| **Orchestration** | - | Multi-service coordination, saga patterns |
-| **Shared capability state** | - | Cross-UFA business data |
+| Logic Type                  | Frontend (YES)                                    | Backend (NO)                               |
+| --------------------------- | ------------------------------------------------- | ------------------------------------------ |
+| **Rendering**               | Display data, conditional visibility, layout      | -                                          |
+| **Navigation**              | Route changes, breadcrumbs, menu highlighting     | -                                          |
+| **Form UX**                 | Field masking, character limits, focus management | -                                          |
+| **Loading states**          | Spinners, skeletons, progress indicators          | -                                          |
+| **Display formatting**      | Currency formatting, date formatting, truncation  | -                                          |
+| **UI validation**           | Required field, email format, max length          | -                                          |
+| **Business calculations**   | -                                                 | LTV ratios, pricing, eligibility scoring   |
+| **Business validation**     | -                                                 | Minimum amounts, rate limits, policy rules |
+| **Orchestration**           | -                                                 | Multi-service coordination, saga patterns  |
+| **Shared capability state** | -                                                 | Cross-UFA business data                    |
 
 ### Architecture Layers
 
@@ -588,20 +588,17 @@ Service functions are pure — no React dependencies, no hooks, no state:
 
 ```tsx
 // src/services/loanService.ts
-import { createGateway } from '@uwm/platform-api';
+import { createGateway } from "@uwm/platform-api";
 
-const loanApi = createGateway('loan-service/api', 'v1');
+const loanApi = createGateway("loan-service/api", "v1");
 
 export async function getLoanSummary(loanId: string): Promise<LoanSummary> {
-    const { data } = await loanApi.get<LoanSummaryResponse>(`/loans/${loanId}/summary`);
-    return data;
+  const { data } = await loanApi.get<LoanSummaryResponse>(`/loans/${loanId}/summary`);
+  return data;
 }
 
-export async function updateLoanStatus(
-    loanId: string,
-    status: LoanStatus,
-): Promise<void> {
-    await loanApi.put(`/loans/${loanId}/status`, { status });
+export async function updateLoanStatus(loanId: string, status: LoanStatus): Promise<void> {
+  await loanApi.put(`/loans/${loanId}/status`, { status });
 }
 ```
 
@@ -611,15 +608,15 @@ Hooks wrap services for caching and React state management:
 
 ```tsx
 // src/hooks/useLoanSummary.ts
-import { useQuery } from '@tanstack/react-query';
-import { getLoanSummary } from '../services/loanService';
+import { useQuery } from "@tanstack/react-query";
+import { getLoanSummary } from "../services/loanService";
 
 export function useLoanSummary(loanId: string) {
-    return useQuery({
-        queryKey: ['loanSummary', loanId],
-        queryFn: () => getLoanSummary(loanId),
-        enabled: Boolean(loanId),
-    });
+  return useQuery({
+    queryKey: ["loanSummary", loanId],
+    queryFn: () => getLoanSummary(loanId),
+    enabled: Boolean(loanId),
+  });
 }
 ```
 
@@ -630,24 +627,24 @@ Mappers transform API data to UI display models:
 ```tsx
 // src/utils/loanMapper.ts
 export function formatCurrency(value: number): string {
-    return new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-    }).format(value);
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }).format(value);
 }
 
 export function formatRate(value: number): string {
-    return `${(value * 100).toFixed(3)}%`;
+  return `${(value * 100).toFixed(3)}%`;
 }
 
 export function mapLoanToDisplayModel(loan: LoanSummary): LoanDisplayModel {
-    return {
-        borrowerName: loan.borrowerName,
-        loanNumber: loan.loanNumber,
-        formattedAmount: formatCurrency(loan.loanAmount),
-        formattedRate: formatRate(loan.interestRate),
-        formattedMonthlyPayment: formatCurrency(loan.monthlyPI),
-    };
+  return {
+    borrowerName: loan.borrowerName,
+    loanNumber: loan.loanNumber,
+    formattedAmount: formatCurrency(loan.loanAmount),
+    formattedRate: formatRate(loan.interestRate),
+    formattedMonthlyPayment: formatCurrency(loan.monthlyPI),
+  };
 }
 ```
 
@@ -663,25 +660,18 @@ Every package needs a test utilities setup. Follow the established patterns:
 
 ```tsx
 // src/testUtils/testUtils.ts
-import {
-    type RenderOptions,
-    type RenderResult,
-    render,
-} from '@testing-library/react';
-import React from 'react';
+import { type RenderOptions, type RenderResult, render } from "@testing-library/react";
+import React from "react";
 
-import { AllProviders } from './TestProviders';
+import { AllProviders } from "./TestProviders";
 
-type CustomRender = (
-    component: React.ReactElement,
-    options?: RenderOptions,
-) => RenderResult;
+type CustomRender = (component: React.ReactElement, options?: RenderOptions) => RenderResult;
 
 const customRender: CustomRender = (component, options) =>
-    render(component, { wrapper: AllProviders, ...options });
+  render(component, { wrapper: AllProviders, ...options });
 
 // re-export everything from testing-library
-export * from '@testing-library/react';
+export * from "@testing-library/react";
 
 // override render method with custom wrapper
 export { customRender as render };
@@ -695,30 +685,28 @@ Compose all required providers for tests. The exact providers depend on your pac
 
 ```tsx
 // src/testUtils/TestProviders.tsx
-import { DreamThemeProvider } from 'lib-node-dream-ui-latest';
-import { MockPassport, type User } from 'lib-node-user-passport-component';
-import { type ReactNode } from 'react';
-import { BrowserRouter } from 'react-router';
+import { DreamThemeProvider } from "lib-node-dream-ui-latest";
+import { MockPassport, type User } from "lib-node-user-passport-component";
+import { type ReactNode } from "react";
+import { BrowserRouter } from "react-router";
 
 const mockUser: User = {
-    userIdentifier: '123-456-abc',
-    firstName: 'John',
-    lastName: 'Doe',
-    displayName: 'John Doe',
-    email: 'jdoe@uwm.com',
-    organizations: [],
-    roles: ['IT Department'],
-    actualIdentity: null,
+  userIdentifier: "123-456-abc",
+  firstName: "John",
+  lastName: "Doe",
+  displayName: "John Doe",
+  email: "jdoe@uwm.com",
+  organizations: [],
+  roles: ["IT Department"],
+  actualIdentity: null,
 };
 
 export const AllProviders = ({ children }: { children: ReactNode }) => (
-    <BrowserRouter>
-        <DreamThemeProvider family="external" mode="light">
-            <MockPassport mockUser={mockUser}>
-                {children}
-            </MockPassport>
-        </DreamThemeProvider>
-    </BrowserRouter>
+  <BrowserRouter>
+    <DreamThemeProvider family="external" mode="light">
+      <MockPassport mockUser={mockUser}>{children}</MockPassport>
+    </DreamThemeProvider>
+  </BrowserRouter>
 );
 ```
 
@@ -726,39 +714,37 @@ export const AllProviders = ({ children }: { children: ReactNode }) => (
 
 ```tsx
 // src/testUtils/TestProviders.tsx
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { DreamThemeProvider } from 'lib-node-dream-ui-latest';
-import { MockPassport, type User } from 'lib-node-user-passport-component';
-import { type ReactNode } from 'react';
-import { BrowserRouter } from 'react-router';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { DreamThemeProvider } from "lib-node-dream-ui-latest";
+import { MockPassport, type User } from "lib-node-user-passport-component";
+import { type ReactNode } from "react";
+import { BrowserRouter } from "react-router";
 
 const queryClient = new QueryClient({
-    defaultOptions: {
-        queries: { retry: false },
-    },
+  defaultOptions: {
+    queries: { retry: false },
+  },
 });
 
 const mockUser: User = {
-    userIdentifier: '123-456-abc',
-    firstName: 'John',
-    lastName: 'Doe',
-    displayName: 'John Doe',
-    email: 'jdoe@uwm.com',
-    organizations: [],
-    roles: ['IT Department'],
-    actualIdentity: null,
+  userIdentifier: "123-456-abc",
+  firstName: "John",
+  lastName: "Doe",
+  displayName: "John Doe",
+  email: "jdoe@uwm.com",
+  organizations: [],
+  roles: ["IT Department"],
+  actualIdentity: null,
 };
 
 export const AllProviders = ({ children }: { children: ReactNode }) => (
-    <BrowserRouter>
-        <QueryClientProvider client={queryClient}>
-            <DreamThemeProvider family="external" mode="light">
-                <MockPassport mockUser={mockUser}>
-                    {children}
-                </MockPassport>
-            </DreamThemeProvider>
-        </QueryClientProvider>
-    </BrowserRouter>
+  <BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <DreamThemeProvider family="external" mode="light">
+        <MockPassport mockUser={mockUser}>{children}</MockPassport>
+      </DreamThemeProvider>
+    </QueryClientProvider>
+  </BrowserRouter>
 );
 ```
 
@@ -768,49 +754,53 @@ For tests that need different user configurations:
 
 ```tsx
 // src/testUtils/userFactory.ts
-import type { User } from 'lib-node-user-passport-component';
+import type { User } from "lib-node-user-passport-component";
 
 export function createUser(overrides?: Partial<User>): User {
-    return {
-        userIdentifier: '',
-        firstName: 'Test',
-        lastName: 'User',
-        displayName: 'Test User',
-        email: 'test@uwm.com',
-        organizations: [{
-            type: 'test',
-            value: 'test',
-            roles: [],
-            isCorrespondent: false,
-            isSuperCorrespondent: false,
-            contactId: '',
-        }],
+  return {
+    userIdentifier: "",
+    firstName: "Test",
+    lastName: "User",
+    displayName: "Test User",
+    email: "test@uwm.com",
+    organizations: [
+      {
+        type: "test",
+        value: "test",
         roles: [],
-        actualIdentity: null,
-        ...overrides,
-    };
+        isCorrespondent: false,
+        isSuperCorrespondent: false,
+        contactId: "",
+      },
+    ],
+    roles: [],
+    actualIdentity: null,
+    ...overrides,
+  };
 }
 
 export const adminUser = createUser({
-    roles: ['IT Department', 'Admin'],
-    firstName: 'Admin',
-    lastName: 'User',
-    displayName: 'Admin User',
+  roles: ["IT Department", "Admin"],
+  firstName: "Admin",
+  lastName: "User",
+  displayName: "Admin User",
 });
 
 export const brokerUser = createUser({
-    roles: ['External Broker Admin'],
-    firstName: 'Broker',
-    lastName: 'User',
-    displayName: 'Broker User',
-    organizations: [{
-        type: 'Broker',
-        value: '1234567',
-        roles: [],
-        isCorrespondent: true,
-        isSuperCorrespondent: false,
-        contactId: '7654321',
-    }],
+  roles: ["External Broker Admin"],
+  firstName: "Broker",
+  lastName: "User",
+  displayName: "Broker User",
+  organizations: [
+    {
+      type: "Broker",
+      value: "1234567",
+      roles: [],
+      isCorrespondent: true,
+      isSuperCorrespondent: false,
+      contactId: "7654321",
+    },
+  ],
 });
 ```
 
@@ -818,20 +808,20 @@ export const brokerUser = createUser({
 
 ```tsx
 // src/testUtils/setupTests.ts
-import '@testing-library/jest-dom/vitest';
-import { vi } from 'vitest';
+import "@testing-library/jest-dom/vitest";
+import { vi } from "vitest";
 
 // Mock browser APIs not available in jsdom
-Object.defineProperty(window, 'matchMedia', {
-    writable: true,
-    value: vi.fn().mockImplementation((query) => ({
-        matches: false,
-        media: query,
-        onchange: null,
-        addEventListener: vi.fn(),
-        removeEventListener: vi.fn(),
-        dispatchEvent: vi.fn(),
-    })),
+Object.defineProperty(window, "matchMedia", {
+  writable: true,
+  value: vi.fn().mockImplementation((query) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
+  })),
 });
 ```
 
@@ -839,23 +829,23 @@ Object.defineProperty(window, 'matchMedia', {
 
 **Mock ONLY infrastructure — never business logic:**
 
-| Category | What to Mock | How |
-|----------|-------------|-----|
-| **API clients** | Service functions that call APIs | `vi.mock('../../services/loanService')` |
-| **Auth (most tests)** | User context | `MockPassport` with `mockUser` prop in AllProviders |
+| Category               | What to Mock                      | How                                                                       |
+| ---------------------- | --------------------------------- | ------------------------------------------------------------------------- |
+| **API clients**        | Service functions that call APIs  | `vi.mock('../../services/loanService')`                                   |
+| **Auth (most tests)**  | User context                      | `MockPassport` with `mockUser` prop in AllProviders                       |
 | **Auth (conditional)** | isLoggedIn toggle between renders | `vi.mock('lib-node-user-passport-component')` with `usePassport: vi.fn()` |
-| **Module federation** | Remote loading | `vi.mock('virtual:__federation__', ...)` |
-| **Browser APIs** | matchMedia, fetch, dtrum | `vi.stubGlobal(...)` or `Object.defineProperty(window, ...)` |
-| **Platform API** | Gateway, feature flags | `vi.mock('@uwm/platform-api', ...)` |
+| **Module federation**  | Remote loading                    | `vi.mock('virtual:__federation__', ...)`                                  |
+| **Browser APIs**       | matchMedia, fetch, dtrum          | `vi.stubGlobal(...)` or `Object.defineProperty(window, ...)`              |
+| **Platform API**       | Gateway, feature flags            | `vi.mock('@uwm/platform-api', ...)`                                       |
 
 **NEVER mock these:**
 
-| Category | Why Not |
-|----------|---------|
-| Data mappers/transformers | They contain display logic — test them with real inputs |
-| Component rendering | You're testing the component — mocking it defeats the purpose |
-| React hooks (internal) | Mock the service they call, not the hook itself |
-| Business logic functions | If you find business logic in frontend, move it to backend |
+| Category                  | Why Not                                                       |
+| ------------------------- | ------------------------------------------------------------- |
+| Data mappers/transformers | They contain display logic — test them with real inputs       |
+| Component rendering       | You're testing the component — mocking it defeats the purpose |
+| React hooks (internal)    | Mock the service they call, not the hook itself               |
+| Business logic functions  | If you find business logic in frontend, move it to backend    |
 
 ### Auth Testing with MockPassport vs vi.mock
 
@@ -865,9 +855,9 @@ Object.defineProperty(window, 'matchMedia', {
 // Testing that a component renders user info
 // MockPassport in AllProviders provides the user
 
-it('displays user name', () => {
-    render(<UserGreeting />);
-    expect(screen.getByText('John Doe')).toBeInTheDocument();
+it("displays user name", () => {
+  render(<UserGreeting />);
+  expect(screen.getByText("John Doe")).toBeInTheDocument();
 });
 ```
 
@@ -875,39 +865,39 @@ it('displays user name', () => {
 
 ```tsx
 // Testing logged-in vs logged-out rendering within same test file
-import { usePassport } from 'lib-node-user-passport-component';
+import { usePassport } from "lib-node-user-passport-component";
 
-vi.mock('lib-node-user-passport-component', async () => {
-    const actual = await vi.importActual('lib-node-user-passport-component');
-    return {
-        ...actual,
-        usePassport: vi.fn(() => ({
-            user: null,
-            isLoggedIn: false,
-            isLoading: false,
-            error: null,
-            logout: vi.fn(),
-        })),
-        useSinglePageAuth: vi.fn(),
-    };
+vi.mock("lib-node-user-passport-component", async () => {
+  const actual = await vi.importActual("lib-node-user-passport-component");
+  return {
+    ...actual,
+    usePassport: vi.fn(() => ({
+      user: null,
+      isLoggedIn: false,
+      isLoading: false,
+      error: null,
+      logout: vi.fn(),
+    })),
+    useSinglePageAuth: vi.fn(),
+  };
 });
 
-it('shows login prompt when not authenticated', () => {
-    render(<ProtectedPage />);
-    expect(screen.getByText('Please log in')).toBeInTheDocument();
+it("shows login prompt when not authenticated", () => {
+  render(<ProtectedPage />);
+  expect(screen.getByText("Please log in")).toBeInTheDocument();
 });
 
-it('shows content when authenticated', () => {
-    vi.mocked(usePassport).mockReturnValue({
-        user: createUser({ roles: ['IT Department'] }),
-        isLoggedIn: true,
-        isLoading: false,
-        error: null,
-        logout: vi.fn(),
-    });
+it("shows content when authenticated", () => {
+  vi.mocked(usePassport).mockReturnValue({
+    user: createUser({ roles: ["IT Department"] }),
+    isLoggedIn: true,
+    isLoading: false,
+    error: null,
+    logout: vi.fn(),
+  });
 
-    render(<ProtectedPage />);
-    expect(screen.getByText('Welcome')).toBeInTheDocument();
+  render(<ProtectedPage />);
+  expect(screen.getByText("Welcome")).toBeInTheDocument();
 });
 ```
 
@@ -932,23 +922,20 @@ pnpm add -D @stryker-mutator/core @stryker-mutator/vitest-runner @stryker-mutato
 
 ```json
 {
-    "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
-    "mutate": ["src/**/*.tsx", "src/**/*.ts", "!src/**/*.test.*", "!src/**/*.config.*"],
-    "testRunner": "vitest",
-    "checkers": ["typescript"],
-    "tsconfigFile": "tsconfig.json",
-    "vitest": {
-        "configFile": "vitest.config.ts"
-    },
-    "thresholds": {
-        "high": 90,
-        "low": 80,
-        "break": 79.999999999
-    },
-    "plugins": [
-        "@stryker-mutator/vitest-runner",
-        "@stryker-mutator/typescript-checker"
-    ]
+  "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+  "mutate": ["src/**/*.tsx", "src/**/*.ts", "!src/**/*.test.*", "!src/**/*.config.*"],
+  "testRunner": "vitest",
+  "checkers": ["typescript"],
+  "tsconfigFile": "tsconfig.json",
+  "vitest": {
+    "configFile": "vitest.config.ts"
+  },
+  "thresholds": {
+    "high": 90,
+    "low": 80,
+    "break": 79.999999999
+  },
+  "plugins": ["@stryker-mutator/vitest-runner", "@stryker-mutator/typescript-checker"]
 }
 ```
 
@@ -956,9 +943,9 @@ pnpm add -D @stryker-mutator/core @stryker-mutator/vitest-runner @stryker-mutato
 
 ```json
 {
-    "scripts": {
-        "test:mutation": "npx stryker run"
-    }
+  "scripts": {
+    "test:mutation": "npx stryker run"
+  }
 }
 ```
 
@@ -998,15 +985,15 @@ Beyond auth, `@uwm/platform-api` provides these capabilities you'll commonly use
 Primary pattern for calling backend services:
 
 ```tsx
-import { createGateway } from '@uwm/platform-api';
+import { createGateway } from "@uwm/platform-api";
 
-const api = createGateway('my-service/api', 'v1');
+const api = createGateway("my-service/api", "v1");
 
 // GET request
-const { data } = await api.get<ResponseType>('/endpoint');
+const { data } = await api.get<ResponseType>("/endpoint");
 
 // POST request
-const { data } = await api.post<ResponseType>('/endpoint', payload);
+const { data } = await api.post<ResponseType>("/endpoint", payload);
 ```
 
 ### Feature Flags
@@ -1014,13 +1001,13 @@ const { data } = await api.post<ResponseType>('/endpoint', payload);
 Conditionally enable features:
 
 ```tsx
-import { useFeatureFlag } from '@uwm/platform-api';
+import { useFeatureFlag } from "@uwm/platform-api";
 
 export function NewFeature() {
-    const isEnabled = useFeatureFlag('my-feature-flag');
-    if (!isEnabled) return null;
+  const isEnabled = useFeatureFlag("my-feature-flag");
+  if (!isEnabled) return null;
 
-    return <NewFeatureContent />;
+  return <NewFeatureContent />;
 }
 ```
 
@@ -1029,16 +1016,16 @@ export function NewFeature() {
 For features requiring live data:
 
 ```tsx
-import { useSignalRConnection, useSignalRListener } from '@uwm/platform-api';
+import { useSignalRConnection, useSignalRListener } from "@uwm/platform-api";
 
 export function LiveUpdates() {
-    const connection = useSignalRConnection('notification-hub');
+  const connection = useSignalRConnection("notification-hub");
 
-    useSignalRListener(connection, 'NewNotification', (data) => {
-        // handle real-time notification
-    });
+  useSignalRListener(connection, "NewNotification", (data) => {
+    // handle real-time notification
+  });
 
-    return <NotificationList />;
+  return <NotificationList />;
 }
 ```
 
@@ -1063,13 +1050,13 @@ export function handleSubmit() {
 
 ### State Management Decision Guide
 
-| State Type | Tool | When to Use |
-|-----------|------|-------------|
-| **Server state** (API data) | React Query (`useQuery`, `useMutation`) | Fetching, caching, syncing backend data |
-| **App-wide state** (cross-component) | Zustand stores (from `@uwm/platform-api`) | UFA info, navigation, manifest, policies |
-| **Feature state** (local to feature) | React Context + `useReducer` | Complex state within a feature boundary |
-| **Form state** | `react-hook-form` (`useForm`, `useFormContext`) | Form inputs, validation, submission |
-| **Redux** (legacy) | `react-redux` + Redux Toolkit | **Only in existing packages that already use Redux.** Do not introduce Redux in new packages. |
+| State Type                           | Tool                                            | When to Use                                                                                   |
+| ------------------------------------ | ----------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| **Server state** (API data)          | React Query (`useQuery`, `useMutation`)         | Fetching, caching, syncing backend data                                                       |
+| **App-wide state** (cross-component) | Zustand stores (from `@uwm/platform-api`)       | UFA info, navigation, manifest, policies                                                      |
+| **Feature state** (local to feature) | React Context + `useReducer`                    | Complex state within a feature boundary                                                       |
+| **Form state**                       | `react-hook-form` (`useForm`, `useFormContext`) | Form inputs, validation, submission                                                           |
+| **Redux** (legacy)                   | `react-redux` + Redux Toolkit                   | **Only in existing packages that already use Redux.** Do not introduce Redux in new packages. |
 
 </the_process>
 
@@ -1105,38 +1092,31 @@ Feature: Borrower Info Card
 ### Step 2: Derived test (`src/components/BorrowerInfoCard/__tests__/BorrowerInfoCard.test.tsx`)
 
 ```tsx
-import { describe, it, expect, afterEach, vi } from 'vitest';
-import { screen, cleanup } from '@testing-library/react';
-import { render } from '../../../testUtils/testUtils';
-import { BorrowerInfoCard } from '../BorrowerInfoCard';
+import { describe, it, expect, afterEach, vi } from "vitest";
+import { screen, cleanup } from "@testing-library/react";
+import { render } from "../../../testUtils/testUtils";
+import { BorrowerInfoCard } from "../BorrowerInfoCard";
 
-describe('BorrowerInfoCard', () => {
-    afterEach(() => {
-        vi.restoreAllMocks();
-        cleanup();
-    });
+describe("BorrowerInfoCard", () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+    cleanup();
+  });
 
-    // Scenario: Display borrower name and loan number
-    it('displays borrower name and loan number', () => {
-        render(
-            <BorrowerInfoCard
-                borrowerName="Alice Johnson"
-                loanNumber="456789"
-            />
-        );
+  // Scenario: Display borrower name and loan number
+  it("displays borrower name and loan number", () => {
+    render(<BorrowerInfoCard borrowerName="Alice Johnson" loanNumber="456789" />);
 
-        expect(screen.getByText('Alice Johnson')).toBeInTheDocument();
-        expect(screen.getByText('456789')).toBeInTheDocument();
-    });
+    expect(screen.getByText("Alice Johnson")).toBeInTheDocument();
+    expect(screen.getByText("456789")).toBeInTheDocument();
+  });
 
-    // Scenario: Show placeholder when no borrower data provided
-    it('shows placeholder when no borrower data provided', () => {
-        render(<BorrowerInfoCard />);
+  // Scenario: Show placeholder when no borrower data provided
+  it("shows placeholder when no borrower data provided", () => {
+    render(<BorrowerInfoCard />);
 
-        expect(
-            screen.getByText('No borrower information available')
-        ).toBeInTheDocument();
-    });
+    expect(screen.getByText("No borrower information available")).toBeInTheDocument();
+  });
 });
 ```
 
@@ -1151,37 +1131,37 @@ FAIL  src/components/BorrowerInfoCard/__tests__/BorrowerInfoCard.test.tsx
 ### Step 4: Implement (`src/components/BorrowerInfoCard/BorrowerInfoCard.tsx`)
 
 ```tsx
-import { Card, Typography } from 'lib-node-dream-ui-latest';
-import { useDreamTheme } from 'lib-node-dream-ui-latest';
+import { Card, Typography } from "lib-node-dream-ui-latest";
+import { useDreamTheme } from "lib-node-dream-ui-latest";
 
 interface BorrowerInfoCardProps {
-    /** Borrower's full name */
-    borrowerName?: string;
-    /** Loan identification number */
-    loanNumber?: string;
+  /** Borrower's full name */
+  borrowerName?: string;
+  /** Loan identification number */
+  loanNumber?: string;
 }
 
 export function BorrowerInfoCard({ borrowerName, loanNumber }: BorrowerInfoCardProps) {
-    const theme = useDreamTheme();
+  const theme = useDreamTheme();
 
-    if (!borrowerName || !loanNumber) {
-        return (
-            <Card sx={{ padding: theme.spacing(2) }}>
-                <Typography variant="body1" color="text.secondary">
-                    No borrower information available
-                </Typography>
-            </Card>
-        );
-    }
-
+  if (!borrowerName || !loanNumber) {
     return (
-        <Card sx={{ padding: theme.spacing(2) }}>
-            <Typography variant="h6">{borrowerName}</Typography>
-            <Typography variant="body2" color="text.secondary">
-                Loan #{loanNumber}
-            </Typography>
-        </Card>
+      <Card sx={{ padding: theme.spacing(2) }}>
+        <Typography variant="body1" color="text.secondary">
+          No borrower information available
+        </Typography>
+      </Card>
     );
+  }
+
+  return (
+    <Card sx={{ padding: theme.spacing(2) }}>
+      <Typography variant="h6">{borrowerName}</Typography>
+      <Typography variant="body2" color="text.secondary">
+        Loan #{loanNumber}
+      </Typography>
+    </Card>
+  );
 }
 ```
 
@@ -1231,80 +1211,85 @@ Feature: Actions Menu
 ### Test (`src/components/ActionsMenu/__tests__/ActionsMenu.test.tsx`)
 
 ```tsx
-import { describe, it, expect, afterEach, vi } from 'vitest';
-import { screen, cleanup, render } from '@testing-library/react';
-import { DreamThemeProvider } from 'lib-node-dream-ui-latest';
-import { MockPassport } from 'lib-node-user-passport-component';
-import { BrowserRouter } from 'react-router';
-import { ActionsMenu } from '../ActionsMenu';
-import { createUser } from '../../../testUtils/userFactory';
+import { describe, it, expect, afterEach, vi } from "vitest";
+import { screen, cleanup, render } from "@testing-library/react";
+import { DreamThemeProvider } from "lib-node-dream-ui-latest";
+import { MockPassport } from "lib-node-user-passport-component";
+import { BrowserRouter } from "react-router";
+import { ActionsMenu } from "../ActionsMenu";
+import { createUser } from "../../../testUtils/userFactory";
 
 // Custom renders for different user roles (NOT using shared AllProviders
 // because we need different mockUser per test)
 function renderWithUser(user: ReturnType<typeof createUser>) {
-    return render(
-        <BrowserRouter>
-            <DreamThemeProvider family="external" mode="light">
-                <MockPassport mockUser={user}>
-                    <ActionsMenu />
-                </MockPassport>
-            </DreamThemeProvider>
-        </BrowserRouter>
-    );
+  return render(
+    <BrowserRouter>
+      <DreamThemeProvider family="external" mode="light">
+        <MockPassport mockUser={user}>
+          <ActionsMenu />
+        </MockPassport>
+      </DreamThemeProvider>
+    </BrowserRouter>,
+  );
 }
 
-describe('ActionsMenu', () => {
-    afterEach(() => {
-        vi.restoreAllMocks();
-        cleanup();
-    });
+describe("ActionsMenu", () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+    cleanup();
+  });
 
-    // Scenario: Show create option for policy creators
-    it('shows Create Policy for users with CES-Policy-Creators role', () => {
-        const creator = createUser({ roles: ['CES-Policy-Creators'] });
-        renderWithUser(creator);
+  // Scenario: Show create option for policy creators
+  it("shows Create Policy for users with CES-Policy-Creators role", () => {
+    const creator = createUser({ roles: ["CES-Policy-Creators"] });
+    renderWithUser(creator);
 
-        expect(screen.getByText('Create Policy')).toBeInTheDocument();
-    });
+    expect(screen.getByText("Create Policy")).toBeInTheDocument();
+  });
 
-    // Scenario: Hide create option for non-creators
-    it('hides Create Policy for users without creator role', () => {
-        const viewer = createUser({ roles: ['IT Department'] });
-        renderWithUser(viewer);
+  // Scenario: Hide create option for non-creators
+  it("hides Create Policy for users without creator role", () => {
+    const viewer = createUser({ roles: ["IT Department"] });
+    renderWithUser(viewer);
 
-        expect(screen.queryByText('Create Policy')).not.toBeInTheDocument();
-        expect(screen.getByText('No available actions')).toBeInTheDocument();
-    });
+    expect(screen.queryByText("Create Policy")).not.toBeInTheDocument();
+    expect(screen.getByText("No available actions")).toBeInTheDocument();
+  });
 });
 ```
 
 ### Implementation (`src/components/ActionsMenu/ActionsMenu.tsx`)
 
 ```tsx
-import { Box, Typography, Button } from 'lib-node-dream-ui-latest';
-import { usePassport } from 'lib-node-user-passport-component';
-import { useDreamTheme } from 'lib-node-dream-ui-latest';
+import { Box, Typography, Button } from "lib-node-dream-ui-latest";
+import { usePassport } from "lib-node-user-passport-component";
+import { useDreamTheme } from "lib-node-dream-ui-latest";
 
 export function ActionsMenu() {
-    const { user } = usePassport();
-    const theme = useDreamTheme();
-    const canCreate = user?.roles.includes('CES-Policy-Creators') ?? false;
+  const { user } = usePassport();
+  const theme = useDreamTheme();
+  const canCreate = user?.roles.includes("CES-Policy-Creators") ?? false;
 
-    if (!canCreate) {
-        return (
-            <Box sx={{ padding: theme.spacing(2) }}>
-                <Typography color="text.secondary">No available actions</Typography>
-            </Box>
-        );
-    }
-
+  if (!canCreate) {
     return (
-        <Box sx={{ padding: theme.spacing(2) }}>
-            <Button variant="contained" onClick={() => { /* navigate to create */ }}>
-                Create Policy
-            </Button>
-        </Box>
+      <Box sx={{ padding: theme.spacing(2) }}>
+        <Typography color="text.secondary">No available actions</Typography>
+      </Box>
     );
+  }
+
+  return (
+    <Box sx={{ padding: theme.spacing(2) }}>
+      <Button
+        variant="contained"
+        onClick={() => {
+          /* navigate to create */
+        }}
+      >
+        Create Policy
+      </Button>
+    </Box>
+  );
 }
 ```
 
@@ -1321,30 +1306,31 @@ export function ActionsMenu() {
 // src/utils/fieldTypeUtils.ts
 
 export function calculateLoanToValue(
-    loanAmount: number,
-    salesPrice: number,
-    appraisedValue: number,
-    propertyState: string,
+  loanAmount: number,
+  salesPrice: number,
+  appraisedValue: number,
+  propertyState: string,
 ): number {
-    // This is a BUSINESS RULE — it varies by state
-    const isNewYork = propertyState === 'NY' || propertyState === 'New York';
+  // This is a BUSINESS RULE — it varies by state
+  const isNewYork = propertyState === "NY" || propertyState === "New York";
 
-    let calculationPrice: number;
-    if (isNewYork && appraisedValue > 0) {
-        // New York: always use appraised value only
-        calculationPrice = appraisedValue;
-    } else if (salesPrice === 0 && appraisedValue > 0) {
-        calculationPrice = appraisedValue;
-    } else {
-        // Lesser of sales price or appraised value
-        calculationPrice = Math.min(salesPrice, appraisedValue);
-    }
+  let calculationPrice: number;
+  if (isNewYork && appraisedValue > 0) {
+    // New York: always use appraised value only
+    calculationPrice = appraisedValue;
+  } else if (salesPrice === 0 && appraisedValue > 0) {
+    calculationPrice = appraisedValue;
+  } else {
+    // Lesser of sales price or appraised value
+    calculationPrice = Math.min(salesPrice, appraisedValue);
+  }
 
-    return loanAmount / calculationPrice;
+  return loanAmount / calculationPrice;
 }
 ```
 
 **Why this is wrong:**
+
 - State-specific LTV rules are business logic that belongs in the backend service
 - If the rule changes (e.g., new state exception), both frontend and backend need updating
 - The frontend should call the backend API for the calculated LTV value
@@ -1355,31 +1341,32 @@ export function calculateLoanToValue(
 ```tsx
 // ✅ RIGHT — service calls backend for LTV
 // src/services/loanService.ts
-import { createGateway } from '@uwm/platform-api';
+import { createGateway } from "@uwm/platform-api";
 
-const loanApi = createGateway('loan-calculation-service/api', 'v1');
+const loanApi = createGateway("loan-calculation-service/api", "v1");
 
 export async function getLoanToValue(loanId: string): Promise<LtvResult> {
-    const { data } = await loanApi.get<LtvResult>(`/loans/${loanId}/ltv`);
-    return data;
+  const { data } = await loanApi.get<LtvResult>(`/loans/${loanId}/ltv`);
+  return data;
 }
 
 // ✅ RIGHT — component only displays the result
 // src/components/LtvDisplay/LtvDisplay.tsx
-import { Typography } from 'lib-node-dream-ui-latest';
-import { useLoanToValue } from '../../hooks/useLoanToValue';
+import { Typography } from "lib-node-dream-ui-latest";
+import { useLoanToValue } from "../../hooks/useLoanToValue";
 
 export function LtvDisplay({ loanId }: { loanId: string }) {
-    const { data: ltv, isLoading, error } = useLoanToValue(loanId);
+  const { data: ltv, isLoading, error } = useLoanToValue(loanId);
 
-    if (isLoading) return <Typography>Calculating...</Typography>;
-    if (error) return <Typography color="error">Failed to calculate LTV</Typography>;
+  if (isLoading) return <Typography>Calculating...</Typography>;
+  if (error) return <Typography color="error">Failed to calculate LTV</Typography>;
 
-    return <Typography>{(ltv.ratio * 100).toFixed(2)}% LTV</Typography>;
+  return <Typography>{(ltv.ratio * 100).toFixed(2)}% LTV</Typography>;
 }
 ```
 
 **Why this is correct:**
+
 - Business rule lives in one place (backend)
 - Frontend only formats and displays
 - Rule changes require only backend updates
@@ -1393,25 +1380,25 @@ export function LtvDisplay({ loanId }: { loanId: string }) {
 
 ```tsx
 // ❌ WRONG — mocking a mapper function means you're testing the mock, not production code
-import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '../testUtils/testUtils';
-import { LoanCard } from '../LoanCard';
-import * as loanMapper from '../../utils/loanMapper';
+import { describe, it, expect, vi } from "vitest";
+import { render, screen } from "../testUtils/testUtils";
+import { LoanCard } from "../LoanCard";
+import * as loanMapper from "../../utils/loanMapper";
 
 // ❌ Don't mock mappers — they contain display logic you need to test
-vi.mock('../../utils/loanMapper', () => ({
-    formatCurrency: vi.fn(() => '$100,000.00'),
-    mapLoanToDisplayModel: vi.fn(() => ({
-        borrowerName: 'Test User',
-        formattedAmount: '$100,000.00',
-    })),
+vi.mock("../../utils/loanMapper", () => ({
+  formatCurrency: vi.fn(() => "$100,000.00"),
+  mapLoanToDisplayModel: vi.fn(() => ({
+    borrowerName: "Test User",
+    formattedAmount: "$100,000.00",
+  })),
 }));
 
-it('displays formatted loan amount', () => {
-    render(<LoanCard loan={rawLoan} />);
-    // ❌ This always passes because the mock returns '$100,000.00'
-    // ❌ If formatCurrency has a bug, this test won't catch it
-    expect(screen.getByText('$100,000.00')).toBeInTheDocument();
+it("displays formatted loan amount", () => {
+  render(<LoanCard loan={rawLoan} />);
+  // ❌ This always passes because the mock returns '$100,000.00'
+  // ❌ If formatCurrency has a bug, this test won't catch it
+  expect(screen.getByText("$100,000.00")).toBeInTheDocument();
 });
 ```
 
@@ -1419,47 +1406,47 @@ it('displays formatted loan amount', () => {
 
 ```tsx
 // ✅ RIGHT — mock infrastructure (API), let mapper run with real logic
-import { describe, it, expect, vi, afterEach } from 'vitest';
-import { render, screen, waitFor, cleanup } from '../testUtils/testUtils';
-import { LoanCard } from '../LoanCard';
-import * as loanService from '../../services/loanService';
+import { describe, it, expect, vi, afterEach } from "vitest";
+import { render, screen, waitFor, cleanup } from "../testUtils/testUtils";
+import { LoanCard } from "../LoanCard";
+import * as loanService from "../../services/loanService";
 
 // ✅ Mock only the infrastructure layer (API call)
-vi.mock('../../services/loanService');
+vi.mock("../../services/loanService");
 
-describe('LoanCard', () => {
-    afterEach(() => {
-        vi.restoreAllMocks();
-        cleanup();
+describe("LoanCard", () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+    cleanup();
+  });
+
+  it("displays formatted loan amount from API data", async () => {
+    // ✅ Mock the API response with raw data
+    vi.mocked(loanService.getLoanDetails).mockResolvedValue({
+      borrowerName: "Test User",
+      loanAmount: 100000, // raw number from API
     });
 
-    it('displays formatted loan amount from API data', async () => {
-        // ✅ Mock the API response with raw data
-        vi.mocked(loanService.getLoanDetails).mockResolvedValue({
-            borrowerName: 'Test User',
-            loanAmount: 100000,  // raw number from API
-        });
+    render(<LoanCard loanId="test-1" />);
 
-        render(<LoanCard loanId="test-1" />);
+    // ✅ Assert the FORMATTED output — this tests the real mapper
+    await waitFor(() => {
+      expect(screen.getByText("$100,000.00")).toBeInTheDocument();
+    });
+  });
 
-        // ✅ Assert the FORMATTED output — this tests the real mapper
-        await waitFor(() => {
-            expect(screen.getByText('$100,000.00')).toBeInTheDocument();
-        });
+  it("handles zero loan amount correctly", async () => {
+    vi.mocked(loanService.getLoanDetails).mockResolvedValue({
+      borrowerName: "Test User",
+      loanAmount: 0,
     });
 
-    it('handles zero loan amount correctly', async () => {
-        vi.mocked(loanService.getLoanDetails).mockResolvedValue({
-            borrowerName: 'Test User',
-            loanAmount: 0,
-        });
+    render(<LoanCard loanId="test-2" />);
 
-        render(<LoanCard loanId="test-2" />);
-
-        await waitFor(() => {
-            expect(screen.getByText('$0.00')).toBeInTheDocument();
-        });
+    await waitFor(() => {
+      expect(screen.getByText("$0.00")).toBeInTheDocument();
     });
+  });
 });
 ```
 
@@ -1467,19 +1454,19 @@ describe('LoanCard', () => {
 
 ```tsx
 // ❌ WRONG — unnecessarily mocking the auth library in every file
-vi.mock('lib-node-user-passport-component', () => ({
-    usePassport: vi.fn(() => ({
-        user: { firstName: 'Test', roles: [] },
-        isLoggedIn: true,
-    })),
-    useSinglePageAuth: vi.fn(),
-    MockPassport: ({ children }) => children,
+vi.mock("lib-node-user-passport-component", () => ({
+  usePassport: vi.fn(() => ({
+    user: { firstName: "Test", roles: [] },
+    isLoggedIn: true,
+  })),
+  useSinglePageAuth: vi.fn(),
+  MockPassport: ({ children }) => children,
 }));
 
-it('renders component', () => {
-    render(<MyComponent />);
-    // ❌ MockPassport in AllProviders already handles auth
-    // ❌ vi.mock adds complexity and can mask auth integration bugs
+it("renders component", () => {
+  render(<MyComponent />);
+  // ❌ MockPassport in AllProviders already handles auth
+  // ❌ vi.mock adds complexity and can mask auth integration bugs
 });
 ```
 
@@ -1488,12 +1475,12 @@ it('renders component', () => {
 ```tsx
 // ✅ RIGHT — AllProviders includes MockPassport with a default mockUser
 // No vi.mock needed for auth — just render
-import { render, screen } from '../testUtils/testUtils'; // custom render
+import { render, screen } from "../testUtils/testUtils"; // custom render
 
-it('renders component with authenticated user', () => {
-    // ✅ MockPassport in AllProviders provides a default authenticated user
-    render(<MyComponent />);
-    expect(screen.getByText('Welcome')).toBeInTheDocument();
+it("renders component with authenticated user", () => {
+  // ✅ MockPassport in AllProviders provides a default authenticated user
+  render(<MyComponent />);
+  expect(screen.getByText("Welcome")).toBeInTheDocument();
 });
 ```
 
@@ -1553,15 +1540,16 @@ The epic requirements reference `@uwm/passport-ui` — this name is **incorrect*
 
 ```tsx
 // ✅ Correct
-import { usePassport, MockPassport } from 'lib-node-user-passport-component';
+import { usePassport, MockPassport } from "lib-node-user-passport-component";
 
 // ❌ Wrong — this package name does not exist
-import { usePassport } from '@uwm/passport-ui';
+import { usePassport } from "@uwm/passport-ui";
 ```
 
 Platform API auth wrappers come from a separate package:
+
 ```tsx
-import { useAppShellRoleMatrix, useAppShellRoles, usePolicy } from '@uwm/platform-api';
+import { useAppShellRoleMatrix, useAppShellRoles, usePolicy } from "@uwm/platform-api";
 ```
 
 ## Stryker Config in Some Packages But Not All
@@ -1577,6 +1565,7 @@ Stryker mutation testing is configured in `configs/platform-api/stryker.config.j
 ## Redux in Legacy UFAs
 
 Some existing UFAs use Redux (react-redux, Redux Toolkit):
+
 - `ufas/BrokerDrive` — ReduxProvider in TestProviders
 - `ufas/currencyenforcement` — Redux store with slices
 - `ufas/exluded-ufas/referralroyalties` — Redux store
@@ -1590,17 +1579,19 @@ Some existing UFAs use Redux (react-redux, Redux Toolkit):
 The codebase has two competing patterns for auth in tests:
 
 **Pattern A — MockPassport (preferred):**
+
 ```tsx
 // BrokerDrive, currencyenforcement style
 <MockPassport mockUser={mockUser}>{children}</MockPassport>
 ```
 
 **Pattern B — vi.mock (legacy):**
+
 ```tsx
 // action-iq, example style
-vi.mock('lib-node-user-passport-component', async () => ({
-    ...actual,
-    usePassport: vi.fn(() => testPassportContext),
+vi.mock("lib-node-user-passport-component", async () => ({
+  ...actual,
+  usePassport: vi.fn(() => testPassportContext),
 }));
 ```
 
@@ -1609,6 +1600,7 @@ vi.mock('lib-node-user-passport-component', async () => ({
 ## DREAM Version in TestProviders
 
 TestProviders may use either DREAM v2 or v3:
+
 - `lib-node-dream-ui` (v2): `import { theme as dreamTheme } from 'lib-node-dream-ui'` + `ThemeProvider`
 - `lib-node-dream-ui-latest` (v3): `import { DreamThemeProvider } from 'lib-node-dream-ui-latest'`
 
@@ -1619,23 +1611,26 @@ Match the version your package uses. Never mix versions within a package. Check 
 For form-heavy features, use `react-hook-form` with the provider pattern:
 
 ```tsx
-import { FormProvider, useForm } from 'react-hook-form';
+import { FormProvider, useForm } from "react-hook-form";
 
 // In parent:
 const methods = useForm<FormData>({ defaultValues });
-<FormProvider {...methods}><FormContent /></FormProvider>
+<FormProvider {...methods}>
+  <FormContent />
+</FormProvider>;
 
 // In child:
 const { watch, setValue, control } = useFormContext<FormData>();
 ```
 
 In tests, wrap with `FormProvider`:
+
 ```tsx
 const methods = useForm({ defaultValues: testData });
 render(
-    <FormProvider {...methods}>
-        <FormContent />
-    </FormProvider>
+  <FormProvider {...methods}>
+    <FormContent />
+  </FormProvider>,
 );
 ```
 
@@ -1646,11 +1641,13 @@ render(
 Before considering a feature implementation complete:
 
 **Spec Coverage:**
+
 - [ ] `.feature` file exists in `{package}/spec/` for every component/feature
 - [ ] Every `it()` block in tests traces back to a `.feature` scenario
 - [ ] No "orphan" tests without corresponding `.feature` scenarios
 
 **TDD Cycle:**
+
 - [ ] Tests were written BEFORE implementation (RED phase verified)
 - [ ] Tests failed before implementation was written
 - [ ] Implementation is minimal — only enough code to pass tests
@@ -1658,6 +1655,7 @@ Before considering a feature implementation complete:
 - [ ] Code was refactored with tests staying green
 
 **Test Quality:**
+
 - [ ] afterEach includes `vi.restoreAllMocks()` + `cleanup()`
 - [ ] Explicit vitest imports: `import { describe, it, expect, vi } from 'vitest'`
 - [ ] Only infrastructure is mocked (API clients, browser APIs, module federation)
@@ -1666,6 +1664,7 @@ Before considering a feature implementation complete:
 - [ ] createUser() factory used for different user configurations
 
 **Business Logic Boundary:**
+
 - [ ] No business calculations in frontend code
 - [ ] No business validation rules in frontend code
 - [ ] No orchestration logic in frontend code
@@ -1673,12 +1672,14 @@ Before considering a feature implementation complete:
 - [ ] Mappers handle only display formatting (currency, dates, truncation)
 
 **Auth Integration:**
+
 - [ ] Using `lib-node-user-passport-component` (correct package name)
 - [ ] NOT adding PassportAuth (already in app-shell)
 - [ ] Role checks use `usePassport().user.roles` or `useAppShellRoles()`
 - [ ] roleMatrix defined in `RequiredRoles.ts` for UFA
 
 **Coverage:**
+
 - [ ] Unit test coverage ≥80%
 - [ ] Stryker mutation score ≥80
 - [ ] Unit tests + build complete in under 1 minute
@@ -1688,23 +1689,28 @@ Before considering a feature implementation complete:
 <integration>
 
 **This skill is called by:**
+
 - `develop-frontend` (orchestrator) — Phase 3 in the golden path
 - Directly when adding features to an existing allin-ui package
 
 **This skill calls:**
+
 - `design-ui-component` — for DREAM component standards during implementation
 - `test-frontend` — for comprehensive test strategy beyond unit tests (Playwright E2E, soak, perf)
 
 **Skill chain for new features:**
+
 ```
 create-allin-package → design-ui-component → implement-ui-feature → test-frontend
 ```
 
 **Scope boundary with test-frontend:**
+
 - `implement-ui-feature` covers: TDD cycle with Vitest, running Stryker as verification
 - `test-frontend` covers: Stryker config optimization, Playwright E2E/soak/perf tests, coverage reports, pipeline integration, TestKube configuration
 
 **Dependencies:**
+
 - Package must exist (created by `create-allin-package` or already existing)
 - Component design decisions made (guided by `design-ui-component`)
 - Backend service APIs available (or documented for mocking)
@@ -1714,6 +1720,7 @@ create-allin-package → design-ui-component → implement-ui-feature → test-f
 <resources>
 
 **Packages:**
+
 - `lib-node-user-passport-component` — GUP auth: PassportAuth, usePassport, MockPassport, RoleMatrix, useRoles
 - `@uwm/platform-api` — App-shell integration: createGateway, useAppShellRoles, usePolicy, featureFlag, signalR, observability, Zustand stores
 - `lib-node-dream-ui` / `lib-node-dream-ui-latest` — DREAM design system components
@@ -1721,6 +1728,7 @@ create-allin-package → design-ui-component → implement-ui-feature → test-f
 - `@stryker-mutator/core` + `@stryker-mutator/vitest-runner` — Mutation testing
 
 **Reference implementations in allin-ui:**
+
 - `ufas/BrokerDrive/testUtils/testUtils.tsx` — MockPassport + custom render + multiple user fixtures
 - `ufas/action-iq/src/testUtils.ts` — createUser() factory + symulateLogin/symulateLogout
 - `ufas/currencyenforcement/src/TestProviders.tsx` — FunctionalProviders + AllProviders + UnauthProviders
@@ -1729,16 +1737,19 @@ create-allin-package → design-ui-component → implement-ui-feature → test-f
 - `configs/platform-api/stryker.config.json` — Reference Stryker configuration
 
 **Confluence:**
+
 - allin-ui Policies and Standards — Testing policy, time limits, coverage thresholds
 - GUP UI Onboarding Guide — Auth integration walkthrough
 - Component Taxonomy (page 1514786638) — UFA/IAP/SCL definitions
 
 **Bitbucket:**
+
 - `EH/allin-ui` — Monorepo MFE
 - `UCP/lib-node-dream-ui` — DREAM component library source + Storybook
 - `SOLAR/cell-user-passport` — GUP backend service ecosystem
 
 **Storybook:**
+
 - https://dream.uwm.com — DREAM component documentation and live examples
 
 </resources>

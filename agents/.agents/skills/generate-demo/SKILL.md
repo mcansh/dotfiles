@@ -12,19 +12,21 @@ MEDIUM — The 5-phase sequence (scope → spec review → data generation → d
 </rigidity_level>
 
 <quick_reference>
-| Phase | Action | Output |
-|-------|--------|--------|
-| 1. Identify Scope | `git diff main...HEAD -- spec/` | List of changed capabilities |
-| 2. Review Spec | Read changed spec files | Change manifest with ubiquitous language |
-| 3. Generate Data | Create realistic JSON data | `demo/{date}-{slug}/data/*.json` |
-| 4. Docker-Compose | Layered codebase discovery | `demo/{date}-{slug}/docker-compose.yml` |
-| 5. Write Guide | Scenario-based walkthrough | `demo/{date}-{slug}/DEMO-GUIDE.md` |
+
+| Phase             | Action                          | Output                                   |
+| ----------------- | ------------------------------- | ---------------------------------------- |
+| 1. Identify Scope | `git diff main...HEAD -- spec/` | List of changed capabilities             |
+| 2. Review Spec    | Read changed spec files         | Change manifest with ubiquitous language |
+| 3. Generate Data  | Create realistic JSON data      | `demo/{date}-{slug}/data/*.json`         |
+| 4. Docker-Compose | Layered codebase discovery      | `demo/{date}-{slug}/docker-compose.yml`  |
+| 5. Write Guide    | Scenario-based walkthrough      | `demo/{date}-{slug}/DEMO-GUIDE.md`       |
 
 **Key:** Spec is the source of truth for WHAT was built. Codebase analysis is only for HOW to run the app.
 </quick_reference>
 
 <when_to_use>
 Use when:
+
 - A feature branch has been implemented and needs to be demonstrated
 - Stakeholders need to see new functionality running in a real environment
 - You want to create a repeatable demo with realistic data
@@ -32,12 +34,13 @@ Use when:
 - You need to document what was built and how to show it
 
 Do NOT use when:
+
 - No spec exists yet (use spec-develop first to write the spec)
 - Implementation is not yet complete (demo runs the real app — it must work)
 - You want a pre-implementation visual mockup (use spec-mockup instead)
 - The project does not use spec-driven-development (no spec/ directory)
 - You want to run automated tests (use spec-implement + integration tests)
-</when_to_use>
+  </when_to_use>
 
 <the_process>
 
@@ -83,12 +86,14 @@ ls spec/ 2>/dev/null
 **Step 1d: Categorize changes**
 
 Parse the diff output to identify changed capabilities. The spec directory supports two structures:
+
 - `spec/{domain}/{capability}/features/*.feature`
 - `spec/capabilities/{capability}/features/*.feature`
 
 Use `git diff main...HEAD -- spec/ --stat` to count changed lines per capability.
 
 Categorize each capability:
+
 - **NEW** — Capability directory only exists on the current branch
 - **MODIFIED** — Capability exists on both branches but has changes
 - **REMOVED** — Capability was deleted (exists on base, not on HEAD)
@@ -96,6 +101,7 @@ Categorize each capability:
 **Step 1e: Handle removals**
 
 If changes are only deletions (capabilities removed, no additions):
+
 - Note which capabilities were removed
 - Tell the user: "Only removals detected — [capability names] were removed. The demo will document what was removed but cannot demonstrate deleted functionality. Proceeding with any remaining modified capabilities."
 - If ALL changes are removals and nothing remains to demo, ask the user if they still want a demo documenting the removals.
@@ -126,6 +132,7 @@ During this phase, you MUST NOT read implementation code (controllers, services,
 **Step 2a: Read changed spec files**
 
 For each changed capability, read:
+
 1. `spec/{path}/README.md` — value statement, ubiquitous language, invariants, domain events
 2. All `spec/{path}/features/*.feature` — scenarios with Given/When/Then steps
 3. `spec/{path}/personas.md` — if it exists, persona definitions
@@ -134,6 +141,7 @@ For each changed capability, read:
 **Step 2b: Extract ubiquitous language**
 
 From the README and feature files, extract:
+
 - Domain entity names (these MUST be used in demo data, not generic names)
 - Persona names and roles
 - Business process names
@@ -177,6 +185,7 @@ mkdir -p ./demo/{YYYY-MM-DD}-{slug}/data
 **Step 3b: Design data relationships**
 
 Before writing any JSON, plan the data:
+
 - Which personas need user accounts?
 - What entities do the scenarios reference?
 - How do entities relate to each other?
@@ -205,6 +214,7 @@ Create one JSON file per entity type in `./demo/{YYYY-MM-DD}-{slug}/data/`:
 ```
 
 **Data quality rules:**
+
 - Use realistic names, not "User1" or "John Doe"
 - Use the exact ubiquitous language from the spec (e.g., "qualificationRequest" not "application")
 - Include plausible domain-appropriate values (realistic dollar amounts, dates, addresses)
@@ -231,18 +241,19 @@ If found: Use the existing compose file as the base. Copy it into the demo folde
 
 Examine the codebase for infrastructure requirements:
 
-| File/Pattern | What it reveals |
-|-------------|-----------------|
-| `Dockerfile` | App runtime (node, dotnet, python, java, go) |
-| `appsettings.json`, `appsettings.*.json` | .NET connection strings, service URLs |
-| `.env`, `.env.example` | Environment variables, service endpoints |
-| `package.json` | Node dependencies (pg, mysql2, redis, amqplib) |
-| `*.csproj` | .NET packages (Npgsql, StackExchange.Redis) |
-| `requirements.txt`, `Pipfile` | Python packages (psycopg2, pymongo) |
-| `go.mod` | Go modules (pgx, mongo-driver) |
-| `application.yml`, `application.properties` | Spring Boot config |
+| File/Pattern                                | What it reveals                                |
+| ------------------------------------------- | ---------------------------------------------- |
+| `Dockerfile`                                | App runtime (node, dotnet, python, java, go)   |
+| `appsettings.json`, `appsettings.*.json`    | .NET connection strings, service URLs          |
+| `.env`, `.env.example`                      | Environment variables, service endpoints       |
+| `package.json`                              | Node dependencies (pg, mysql2, redis, amqplib) |
+| `*.csproj`                                  | .NET packages (Npgsql, StackExchange.Redis)    |
+| `requirements.txt`, `Pipfile`               | Python packages (psycopg2, pymongo)            |
+| `go.mod`                                    | Go modules (pgx, mongo-driver)                 |
+| `application.yml`, `application.properties` | Spring Boot config                             |
 
 **Database detection by driver/package:**
+
 - `npgsql`, `pg`, `psycopg2`, `pgx` → PostgreSQL
 - `mysql2`, `MySql.Data`, `pymysql` → MySQL
 - `mongodb`, `mongoose`, `mongo-driver` → MongoDB
@@ -258,10 +269,10 @@ Write to `./demo/{YYYY-MM-DD}-{slug}/docker-compose.yml`:
 services:
   app:
     build:
-      context: ../..    # Points to project root
+      context: ../.. # Points to project root
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"     # Adjust based on app config
+      - "8080:8080" # Adjust based on app config
     environment:
       - DATABASE_URL=postgres://demo:demo@db:5432/demo
     depends_on:
@@ -302,6 +313,7 @@ Create `./demo/{YYYY-MM-DD}-{slug}/seed/` with appropriate seeding mechanism:
 
 **PostgreSQL:**
 Create `seed/seed.sh`:
+
 ```bash
 #!/bin/bash
 set -e
@@ -314,6 +326,7 @@ done
 
 **MongoDB:**
 Create `seed/seed.sh`:
+
 ```bash
 #!/bin/bash
 set -e
@@ -325,6 +338,7 @@ done
 
 **SQL Server:**
 Create `seed/seed.sh`:
+
 ```bash
 #!/bin/bash
 set -e
@@ -345,7 +359,7 @@ Create `./demo/{YYYY-MM-DD}-{slug}/DEMO-GUIDE.md`.
 
 **Required sections:**
 
-```markdown
+````markdown
 # Demo: [What Was Built] — {YYYY-MM-DD}
 
 ## What's New
@@ -365,22 +379,28 @@ List new capabilities and modified features in business terms.]
    ```bash
    cd demo/{YYYY-MM-DD}-{slug}
    ```
+````
 
 2. Start the environment:
+
    ```bash
    docker compose up -d
    ```
 
 3. Wait for services to be healthy:
+
    ```bash
    docker compose ps
    ```
+
    All services should show "healthy" or "running".
 
 4. Verify seed data loaded:
+
    ```bash
    docker compose logs seed
    ```
+
    Look for "Seeding complete" message.
 
 5. Open the application:
@@ -396,6 +416,7 @@ List new capabilities and modified features in business terms.]
 **Context:** [1-2 sentences of business context explaining why this matters]
 
 **Steps:**
+
 1. [Specific action — reference UI elements or API endpoints]
 2. [Next action — be specific about what to click, enter, or observe]
 3. [Continue until scenario complete]
@@ -404,17 +425,18 @@ List new capabilities and modified features in business terms.]
 **What to observe:** [Key thing to point out to stakeholders]
 
 ### Scenario 2: [Next Persona] — [Next Goal]
+
 [Same format as above]
 
 ## Troubleshooting
 
-| Issue | Solution |
-|-------|----------|
-| Port [X] already in use | Stop conflicting service or change port in docker-compose.yml |
+| Issue                       | Solution                                                            |
+| --------------------------- | ------------------------------------------------------------------- |
+| Port [X] already in use     | Stop conflicting service or change port in docker-compose.yml       |
 | Database connection refused | Wait for health check: `docker compose ps` — db should be "healthy" |
-| Seed data not loaded | Check logs: `docker compose logs seed` — look for errors |
-| Application won't start | Check logs: `docker compose logs app` — look for missing env vars |
-| Docker not running | Start Docker Desktop or `systemctl start docker` |
+| Seed data not loaded        | Check logs: `docker compose logs seed` — look for errors            |
+| Application won't start     | Check logs: `docker compose logs app` — look for missing env vars   |
+| Docker not running          | Start Docker Desktop or `systemctl start docker`                    |
 
 ## Additional Tools
 
@@ -423,6 +445,7 @@ List new capabilities and modified features in business terms.]
 - **Logs:** `docker compose logs -f [service]` to follow logs in real-time
 - **Restart:** `docker compose restart [service]` to restart a single service
 - **Clean up:** `docker compose down -v` to stop all services and remove data
+
 ```
 
 **Tone:** Written for someone presenting to stakeholders — specific enough to follow without improvising, but not overly technical.
@@ -435,33 +458,37 @@ After writing all files:
 
 1. Verify the demo folder structure:
 ```
+
 ./demo/{YYYY-MM-DD}-{slug}/
 ├── docker-compose.yml
 ├── DEMO-GUIDE.md
 ├── data/
-│   ├── [entity1].json
-│   ├── [entity2].json
-│   └── ...
+│ ├── [entity1].json
+│ ├── [entity2].json
+│ └── ...
 └── seed/
-    ├── seed.sh (or seed script)
-    └── Dockerfile (if needed)
+├── seed.sh (or seed script)
+└── Dockerfile (if needed)
+
 ```
 
 2. Confirm deliverables:
 ```
+
 Created demo at: ./demo/{YYYY-MM-DD}-{slug}/
 
 Files:
-  DEMO-GUIDE.md          — Step-by-step presentation guide
-  docker-compose.yml     — Environment with [N] services
-  data/                  — [N] JSON files with realistic demo data
-  seed/                  — Database seeding scripts
+DEMO-GUIDE.md — Step-by-step presentation guide
+docker-compose.yml — Environment with [N] services
+data/ — [N] JSON files with realistic demo data
+seed/ — Database seeding scripts
 
 To run the demo:
-  cd demo/{YYYY-MM-DD}-{slug}
-  docker compose up -d
+cd demo/{YYYY-MM-DD}-{slug}
+docker compose up -d
 
 Scenarios: [N] scenarios covering [capabilities]
+
 ```
 
 </the_process>
@@ -560,3 +587,4 @@ Related skills: spec-mockup (creates pre-implementation HTML visualizations — 
 - Action: STOP. Tell the user: "Changed spec files for [capability] have 0 scenarios. There is nothing to demonstrate. Are the feature files still being written?"
 
 </edge_cases>
+```

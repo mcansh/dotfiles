@@ -17,8 +17,8 @@ Set `compatibility_date` to today on new projects. Update periodically on existi
 ```jsonc
 // wrangler.jsonc
 {
-  "compatibility_date": "$today",  // Replace with today's date (YYYY-MM-DD)
-  "compatibility_flags": ["nodejs_compat"]
+  "compatibility_date": "$today", // Replace with today's date (YYYY-MM-DD)
+  "compatibility_flags": ["nodejs_compat"],
 }
 ```
 
@@ -32,7 +32,7 @@ The `nodejs_compat` flag enables Node.js built-in modules (`node:crypto`, `node:
 
 ```jsonc
 {
-  "compatibility_flags": ["nodejs_compat"]
+  "compatibility_flags": ["nodejs_compat"],
 }
 ```
 
@@ -53,10 +53,11 @@ export default {
 ```
 
 Anti-pattern:
+
 ```ts
 // Hand-written Env that drifts from actual bindings
 interface Env {
-  MY_KV: KVNamespace;  // What if the binding name changed?
+  MY_KV: KVNamespace; // What if the binding name changed?
 }
 ```
 
@@ -69,18 +70,19 @@ Secrets must never appear in wrangler config or source code. Use `wrangler secre
 ```jsonc
 {
   "vars": {
-    "API_BASE_URL": "https://api.example.com"  // Non-secret: OK in config
-  }
+    "API_BASE_URL": "https://api.example.com", // Non-secret: OK in config
+  },
   // Secrets set via: wrangler secret put API_KEY
 }
 ```
 
 Anti-pattern:
+
 ```jsonc
 {
   "vars": {
-    "API_KEY": "sk-live-abc123..."  // Secret in version control
-  }
+    "API_KEY": "sk-live-abc123...", // Secret in version control
+  },
 }
 ```
 
@@ -101,6 +103,7 @@ Workers have a 128 MB memory limit. Buffering entire bodies with `await response
 **Check**: any `await response.text()`, `await response.json()`, or `await response.arrayBuffer()` on data that could be large or unbounded. Small, bounded payloads (known-size JSON, config files) are fine to buffer.
 
 Correct — stream through:
+
 ```ts
 async fetch(request: Request, env: Env): Promise<Response> {
   const response = await fetch("https://api.example.com/large-dataset");
@@ -109,6 +112,7 @@ async fetch(request: Request, env: Env): Promise<Response> {
 ```
 
 Correct — concatenate multiple streams:
+
 ```ts
 async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
   const urls = ["https://api.example.com/part-1", "https://api.example.com/part-2"];
@@ -132,6 +136,7 @@ async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response
 ```
 
 Anti-pattern:
+
 ```ts
 // Buffers entire body — crashes on large payloads
 const response = await fetch("https://api.example.com/large-dataset");
@@ -159,9 +164,10 @@ async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response
 ```
 
 Anti-pattern:
+
 ```ts
 // Destructuring ctx loses the this binding
-const { waitUntil } = ctx;  // "Illegal invocation" at runtime
+const { waitUntil } = ctx; // "Illegal invocation" at runtime
 waitUntil(somePromise);
 ```
 
@@ -181,11 +187,12 @@ const object = await env.MY_BUCKET.get("my-file");
 ```
 
 Anti-pattern:
+
 ```ts
 // REST API from inside a Worker — unnecessary overhead
 const response = await fetch(
   "https://api.cloudflare.com/client/v4/accounts/.../r2/buckets/.../objects/my-file",
-  { headers: { Authorization: `Bearer ${env.CF_API_TOKEN}` } }
+  { headers: { Authorization: `Bearer ${env.CF_API_TOKEN}` } },
 );
 ```
 
@@ -244,7 +251,7 @@ Hyperdrive maintains a regional connection pool, eliminating per-request TCP + T
 
 ```jsonc
 {
-  "hyperdrive": [{ "binding": "HYPERDRIVE", "id": "<YOUR_HYPERDRIVE_ID>" }]
+  "hyperdrive": [{ "binding": "HYPERDRIVE", "id": "<YOUR_HYPERDRIVE_ID>" }],
 }
 ```
 
@@ -276,20 +283,25 @@ Enable `observability` in wrangler config before deploying to production. Use `h
   "observability": {
     "enabled": true,
     "logs": { "head_sampling_rate": 1 },
-    "traces": { "enabled": true, "head_sampling_rate": 0.01 }
-  }
+    "traces": { "enabled": true, "head_sampling_rate": 0.01 },
+  },
 }
 ```
 
 ```ts
 // Structured JSON — searchable and filterable
-console.log(JSON.stringify({ message: "incoming request", method: request.method, path: url.pathname }));
+console.log(
+  JSON.stringify({ message: "incoming request", method: request.method, path: url.pathname }),
+);
 
 // Error severity
-console.error(JSON.stringify({ message: "request failed", error: e instanceof Error ? e.message : String(e) }));
+console.error(
+  JSON.stringify({ message: "request failed", error: e instanceof Error ? e.message : String(e) }),
+);
 ```
 
 Anti-pattern:
+
 ```ts
 // Unstructured string logs — hard to query
 console.log("Got a request to " + url.pathname);
@@ -318,13 +330,14 @@ export default {
 ```
 
 Anti-pattern:
+
 ```ts
 // Module-level mutable state — leaks between requests
 let currentUser: string | null = null;
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
-    currentUser = request.headers.get("X-User-Id");  // Visible to next request
+    currentUser = request.headers.get("X-User-Id"); // Visible to next request
     // ...
   },
 };
@@ -346,13 +359,19 @@ npx oxlint --deny typescript/no-floating-promises src/
 
 ```ts
 // Correct: await when you need the result
-const response = await fetch("https://api.example.com/process", { method: "POST", body: JSON.stringify(data) });
+const response = await fetch("https://api.example.com/process", {
+  method: "POST",
+  body: JSON.stringify(data),
+});
 
 // Correct: waitUntil when you don't need the result before responding
-ctx.waitUntil(fetch("https://api.example.com/webhook", { method: "POST", body: JSON.stringify(data) }));
+ctx.waitUntil(
+  fetch("https://api.example.com/webhook", { method: "POST", body: JSON.stringify(data) }),
+);
 ```
 
 Anti-pattern:
+
 ```ts
 // Floating promise — result dropped, error swallowed
 fetch("https://api.example.com/webhook", { method: "POST", body: JSON.stringify(data) });
@@ -385,7 +404,9 @@ const sessionId = crypto.randomUUID();
 // Secure random bytes
 const tokenBytes = new Uint8Array(32);
 crypto.getRandomValues(tokenBytes);
-const token = Array.from(tokenBytes).map((b) => b.toString(16).padStart(2, "0")).join("");
+const token = Array.from(tokenBytes)
+  .map((b) => b.toString(16).padStart(2, "0"))
+  .join("");
 ```
 
 ```ts
@@ -401,6 +422,7 @@ async function verifyToken(provided: string, expected: string): Promise<boolean>
 ```
 
 Anti-pattern:
+
 ```ts
 // Predictable — not cryptographically secure
 const token = Math.random().toString(36).substring(2);

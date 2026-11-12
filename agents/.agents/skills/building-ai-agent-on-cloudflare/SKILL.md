@@ -17,11 +17,11 @@ Your knowledge of the Agents SDK may be outdated. **Prefer retrieval over pre-tr
 
 ## Retrieval Sources
 
-| Source | How to retrieve | Use for |
-|--------|----------------|---------|
-| Agents SDK docs | `https://github.com/cloudflare/agents/tree/main/docs` | SDK API, state, routing, scheduling |
-| Cloudflare Agents docs | `https://developers.cloudflare.com/agents/` | Platform integration, deployment |
-| Workers docs | Search tool or `https://developers.cloudflare.com/workers/` | Runtime APIs, bindings, config |
+| Source                 | How to retrieve                                             | Use for                             |
+| ---------------------- | ----------------------------------------------------------- | ----------------------------------- |
+| Agents SDK docs        | `https://github.com/cloudflare/agents/tree/main/docs`       | SDK API, state, routing, scheduling |
+| Cloudflare Agents docs | `https://developers.cloudflare.com/agents/`                 | Platform integration, deployment    |
+| Workers docs           | Search tool or `https://developers.cloudflare.com/workers/` | Runtime APIs, bindings, config      |
 
 ## When to Use
 
@@ -52,6 +52,7 @@ Agent runs at `http://localhost:8787`
 ### What is an Agent?
 
 An Agent is a stateful, persistent AI service that:
+
 - Maintains state across requests and reconnections
 - Communicates via WebSockets or HTTP
 - Runs on Cloudflare's edge via Durable Objects
@@ -73,7 +74,7 @@ Client disconnects → State persists → Client reconnects → State restored
 import { Agent, Connection } from "agents";
 
 interface Env {
-  AI: Ai;  // Workers AI binding
+  AI: Ai; // Workers AI binding
 }
 
 interface State {
@@ -95,10 +96,12 @@ export class MyAgent extends Agent<Env, State> {
 
   // Handle WebSocket connections
   async onConnect(connection: Connection) {
-    connection.send(JSON.stringify({
-      type: "welcome",
-      history: this.state.messages,
-    }));
+    connection.send(
+      JSON.stringify({
+        type: "welcome",
+        history: this.state.messages,
+      }),
+    );
   }
 
   // Handle incoming messages
@@ -122,10 +125,7 @@ export class MyAgent extends Agent<Env, State> {
 
   private async handleChat(connection: Connection, userMessage: string) {
     // Add user message to history
-    const messages = [
-      ...this.state.messages,
-      { role: "user", content: userMessage },
-    ];
+    const messages = [...this.state.messages, { role: "user", content: userMessage }];
 
     // Call AI
     const response = await this.env.AI.run("@cf/meta/llama-3-8b-instruct", {
@@ -135,17 +135,16 @@ export class MyAgent extends Agent<Env, State> {
     // Update state (persists and syncs to all clients)
     this.setState({
       ...this.state,
-      messages: [
-        ...messages,
-        { role: "assistant", content: response.response },
-      ],
+      messages: [...messages, { role: "assistant", content: response.response }],
     });
 
     // Send response
-    connection.send(JSON.stringify({
-      type: "response",
-      content: response.response,
-    }));
+    connection.send(
+      JSON.stringify({
+        type: "response",
+        content: response.response,
+      }),
+    );
   }
 }
 ```
@@ -160,10 +159,7 @@ import { MyAgent } from "./agent";
 export default {
   async fetch(request: Request, env: Env) {
     // routeAgentRequest handles routing to /agents/:class/:name
-    return (
-      (await routeAgentRequest(request, env)) ||
-      new Response("Not found", { status: 404 })
-    );
+    return (await routeAgentRequest(request, env)) || new Response("Not found", { status: 404 });
   },
 };
 
@@ -181,9 +177,9 @@ Clients connect via: `wss://my-agent.workers.dev/agents/MyAgent/session-id`
   "compatibility_date": "2024-12-01",
   "ai": { "binding": "AI" },
   "durable_objects": {
-    "bindings": [{ "name": "MyAgent", "class_name": "MyAgent" }]
+    "bindings": [{ "name": "MyAgent", "class_name": "MyAgent" }],
   },
-  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["MyAgent"] }]
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["MyAgent"] }],
 }
 ```
 
@@ -281,8 +277,8 @@ await this.schedule(60, "taskMethod", { data });
 await this.schedule(new Date("2025-01-01T00:00:00Z"), "taskMethod", { data });
 
 // Cron expression (recurring)
-await this.schedule("0 9 * * *", "dailyTask", {});  // 9 AM daily
-await this.schedule("*/5 * * * *", "everyFiveMinutes", {});  // Every 5 min
+await this.schedule("0 9 * * *", "dailyTask", {}); // 9 AM daily
+await this.schedule("*/5 * * * *", "everyFiveMinutes", {}); // Every 5 min
 
 // Manage schedules
 const schedules = await this.getSchedules();
@@ -302,7 +298,7 @@ export class ChatBot extends AIChatAgent<Env> {
     const response = await this.env.AI.run("@cf/meta/llama-3-8b-instruct", {
       messages: [
         { role: "system", content: "You are a helpful assistant." },
-        ...this.messages,  // Automatic history management
+        ...this.messages, // Automatic history management
         { role: "user", content: message },
       ],
       stream: true,
@@ -315,6 +311,7 @@ export class ChatBot extends AIChatAgent<Env> {
 ```
 
 Features included:
+
 - Automatic message history
 - Resumable streaming (survives disconnects)
 - Built-in `saveMessages()` for persistence
@@ -329,7 +326,7 @@ import { useAgent } from "agents/react";
 function Chat() {
   const { state, send, connected } = useAgent({
     agent: "my-agent",
-    name: userId,  // Agent instance ID
+    name: userId, // Agent instance ID
   });
 
   const sendMessage = (text: string) => {
@@ -339,7 +336,9 @@ function Chat() {
   return (
     <div>
       {state.messages.map((msg, i) => (
-        <div key={i}>{msg.role}: {msg.content}</div>
+        <div key={i}>
+          {msg.role}: {msg.content}
+        </div>
       ))}
       <input onKeyDown={(e) => e.key === "Enter" && sendMessage(e.target.value)} />
     </div>
@@ -367,6 +366,7 @@ ws.send(JSON.stringify({ type: "chat", content: "Hello!" }));
 ## Common Patterns
 
 See [references/agent-patterns.md](references/agent-patterns.md) for:
+
 - Tool calling and function execution
 - Multi-agent orchestration
 - RAG (Retrieval Augmented Generation)

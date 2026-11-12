@@ -7,6 +7,7 @@ description: Use when designing or implementing UI components in allin-ui — en
 Guides developers through designing and implementing UI components that comply with DREAM design system standards when building in the allin-ui monorepo. This skill ensures components use DREAM components first, follow strict TypeScript and styling conventions, and maintain accessibility standards.
 
 **This skill covers two distinct workflows:**
+
 1. **Primary (80%):** USING DREAM components in your allin-ui package — importing from `lib-node-dream-ui` / `lib-node-dream-ui-latest`, styling with `useDreamTheme()`, following props and TypeScript conventions.
 2. **Secondary (20%):** CONTRIBUTING new components TO the DREAM library — the contribute-commit model with Storybook, index.ts barrel exports, and PR checklist.
 
@@ -19,18 +20,19 @@ MEDIUM FREEDOM - Props standards (nullable id, required name for inputs), TypeSc
 
 <quick_reference>
 
-| Step | Action | Key Rule |
-|------|--------|----------|
-| **1. Check DREAM** | Search dream.uwm.com Storybook | If DREAM has it → use DREAM. Never duplicate. |
-| **2. File Structure** | `Component.tsx` + `Component.test.tsx` | allin-ui uses flat structure. No index.ts per component. |
-| **3. Props** | `id?: string \| number`, `name: string` (inputs) | JSDoc all props. No `any`. No prop spreading. |
-| **4. TypeScript** | Strict types everywhere | No `any` ever. No `@ts-ignore`. No `console.*`. |
-| **5. Styles** | `useDreamTheme()` + `sx` prop | No magic numbers. No shorthand. No inline `style`. |
-| **6. DREAM Priority** | DREAM → MUI → custom | MUI OK for: Grid, useMediaQuery, CssBaseline, SxProps, Popover, styled |
-| **7. Version** | v2 or v3, never mix | `lib-node-dream-ui` (v2) or `lib-node-dream-ui-latest` (v3) |
-| **8. Accessibility** | DREAM inherits MUI a11y | Custom components: add ARIA, keyboard nav, WCAG AA yourself |
+| Step                  | Action                                           | Key Rule                                                               |
+| --------------------- | ------------------------------------------------ | ---------------------------------------------------------------------- |
+| **1. Check DREAM**    | Search dream.uwm.com Storybook                   | If DREAM has it → use DREAM. Never duplicate.                          |
+| **2. File Structure** | `Component.tsx` + `Component.test.tsx`           | allin-ui uses flat structure. No index.ts per component.               |
+| **3. Props**          | `id?: string \| number`, `name: string` (inputs) | JSDoc all props. No `any`. No prop spreading.                          |
+| **4. TypeScript**     | Strict types everywhere                          | No `any` ever. No `@ts-ignore`. No `console.*`.                        |
+| **5. Styles**         | `useDreamTheme()` + `sx` prop                    | No magic numbers. No shorthand. No inline `style`.                     |
+| **6. DREAM Priority** | DREAM → MUI → custom                             | MUI OK for: Grid, useMediaQuery, CssBaseline, SxProps, Popover, styled |
+| **7. Version**        | v2 or v3, never mix                              | `lib-node-dream-ui` (v2) or `lib-node-dream-ui-latest` (v3)            |
+| **8. Accessibility**  | DREAM inherits MUI a11y                          | Custom components: add ARIA, keyboard nav, WCAG AA yourself            |
 
 **Import Priority Decision:**
+
 ```
 Does DREAM have this component?
   YES → import from lib-node-dream-ui / lib-node-dream-ui-latest
@@ -42,6 +44,7 @@ Does DREAM have this component?
 </quick_reference>
 
 <when_to_use>
+
 - Creating a new React component in an allin-ui package (UFA, SCL, or IAP)
 - Reviewing or auditing existing components for DREAM compliance
 - Deciding whether to use DREAM, MUI, or create a custom component
@@ -49,11 +52,12 @@ Does DREAM have this component?
 - Contributing a new component to the DREAM library (contribute-commit model)
 
 **Do NOT use for:**
+
 - Creating a new allin-ui package (use `create-allin-package`)
 - Writing tests for components (use `test-frontend`)
 - Implementing business logic (this belongs in services, NOT frontend)
 - Modifying the DREAM library's build system or infrastructure
-</when_to_use>
+  </when_to_use>
 
 <the_process>
 
@@ -63,14 +67,15 @@ Before creating ANY component, check if DREAM already provides it.
 
 **Search:** https://dream.uwm.com (DREAM Storybook — live component documentation)
 
-| DREAM Has It? | Action |
-|---------------|--------|
-| **Yes, exact match** | Import from `lib-node-dream-ui` or `lib-node-dream-ui-latest`. DO NOT create a custom version. |
-| **Yes, but missing variant** | Use the DREAM component with `sx` prop + `useDreamTheme()` to customize. Do NOT create a custom wrapper. If the variant is genuinely reusable, consider contributing it to DREAM. |
-| **No, but MUI has it** | Check if the MUI component is a layout/utility (Grid, useMediaQuery, Popover, etc.). If yes, import from `@mui/material` directly — this is legitimate. If it's a UI component (Button, TextField, etc.), extend MUI with DREAM theming. |
-| **Neither has it** | Create a custom component following ALL DREAM style standards below. |
+| DREAM Has It?                | Action                                                                                                                                                                                                                                   |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Yes, exact match**         | Import from `lib-node-dream-ui` or `lib-node-dream-ui-latest`. DO NOT create a custom version.                                                                                                                                           |
+| **Yes, but missing variant** | Use the DREAM component with `sx` prop + `useDreamTheme()` to customize. Do NOT create a custom wrapper. If the variant is genuinely reusable, consider contributing it to DREAM.                                                        |
+| **No, but MUI has it**       | Check if the MUI component is a layout/utility (Grid, useMediaQuery, Popover, etc.). If yes, import from `@mui/material` directly — this is legitimate. If it's a UI component (Button, TextField, etc.), extend MUI with DREAM theming. |
+| **Neither has it**           | Create a custom component following ALL DREAM style standards below.                                                                                                                                                                     |
 
 **Common DREAM components** (check Storybook for full list):
+
 - Layout: `Box`, `Stack`, `Card`, `CardText`
 - Typography: `Typography`, `Link`
 - Navigation: `Breadcrumb`, `Tabs`
@@ -81,15 +86,15 @@ Before creating ANY component, check if DREAM already provides it.
 
 **Legitimate MUI-only imports** (DREAM doesn't provide these):
 
-| MUI Import | Purpose | Why Not DREAM |
-|------------|---------|---------------|
-| `Grid` | Responsive layout grid system | DREAM uses Box/Stack, not Grid |
-| `useMediaQuery` | Responsive breakpoint hook | Utility, not a component |
-| `CssBaseline` | CSS reset / normalization | App-level concern |
-| `SxProps` | TypeScript type for sx prop | Type only, not a component |
-| `Popover` | Overlay positioning | DREAM may not have equivalent |
-| `styled` | CSS-in-JS for complex dynamic styles | Utility, not a component |
-| `useTheme` | MUI theme hook (fallback) | Use `useDreamTheme()` when possible |
+| MUI Import      | Purpose                              | Why Not DREAM                       |
+| --------------- | ------------------------------------ | ----------------------------------- |
+| `Grid`          | Responsive layout grid system        | DREAM uses Box/Stack, not Grid      |
+| `useMediaQuery` | Responsive breakpoint hook           | Utility, not a component            |
+| `CssBaseline`   | CSS reset / normalization            | App-level concern                   |
+| `SxProps`       | TypeScript type for sx prop          | Type only, not a component          |
+| `Popover`       | Overlay positioning                  | DREAM may not have equivalent       |
+| `styled`        | CSS-in-JS for complex dynamic styles | Utility, not a component            |
+| `useTheme`      | MUI theme hook (fallback)            | Use `useDreamTheme()` when possible |
 
 ---
 
@@ -107,6 +112,7 @@ src/components/<ComponentName>/
 ```
 
 For complex components with multiple tests or sub-components:
+
 ```
 src/components/<ComponentName>/
 ├── <ComponentName>.tsx         # Main component
@@ -121,18 +127,20 @@ src/components/<ComponentName>/
 ```
 
 **Key differences from dream-buddy.md's structure:**
+
 - **No `index.ts` per component** — allin-ui does not use per-component barrel exports
 - **No `.stories.tsx`** — allin-ui packages do not use Storybook (Storybook is only in the DREAM library)
 - **Barrel exports** for SCL packages go in `src/index.ts` at the package root:
   ```typescript
   // packages/{scl-name}/src/index.ts
-  export { LoanSummaryCard } from './components/LoanSummaryCard/LoanSummaryCard';
-  export type { LoanSummaryCardProps } from './components/LoanSummaryCard/LoanSummaryCard';
+  export { LoanSummaryCard } from "./components/LoanSummaryCard/LoanSummaryCard";
+  export type { LoanSummaryCardProps } from "./components/LoanSummaryCard/LoanSummaryCard";
   ```
 
 ### DREAM Library Pattern (Secondary — only for contributions to lib-node-dream-ui)
 
 When contributing a component TO the DREAM library (not to allin-ui), use this structure:
+
 ```
 src/components/<ComponentName>/
 ├── index.ts                        # Export component and types
@@ -152,6 +160,7 @@ These standards apply to ALL components — whether using DREAM, extending MUI, 
 ### Required Props
 
 **Every component MUST have a nullable `id` prop:**
+
 ```typescript
 export interface MyComponentProps {
   /** Unique identifier for testing and accessibility. */
@@ -161,6 +170,7 @@ export interface MyComponentProps {
 ```
 
 **Input components MUST have a required `name` prop:**
+
 ```typescript
 export interface InputFieldProps {
   /** Unique identifier for the input field. */
@@ -174,16 +184,17 @@ export interface InputFieldProps {
 ### Props Documentation
 
 All props MUST have JSDoc comments:
+
 ```typescript
 export interface StatusBadgeProps {
   /** Unique identifier for testing and accessibility. */
   id?: string | number;
   /** The current status to display. */
-  status: 'pending' | 'approved' | 'rejected';
+  status: "pending" | "approved" | "rejected";
   /** Optional label override. Defaults to status name. */
   label?: string;
   /** Controls the visual size of the badge. */
-  size?: 'small' | 'medium' | 'large';
+  size?: "small" | "medium" | "large";
   /** Callback fired when the badge is clicked. */
   onClick?: (status: string) => void;
 }
@@ -191,12 +202,12 @@ export interface StatusBadgeProps {
 
 ### Props Rules
 
-| Rule | Correct | Wrong |
-|------|---------|-------|
-| No implicit prop spreading | `<Button label={label} size={size} />` | `<Button {...props} />` without type definition |
-| Discriminated unions for variants | `type: 'primary' \| 'secondary'` with different prop shapes | Boolean flags: `isPrimary`, `isSecondary` |
-| No `any` in props | `onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void` | `onClick?: (event: any) => void` |
-| Default values in destructuring | `({ size = 'medium' }: Props)` | `props.size \|\| 'medium'` |
+| Rule                              | Correct                                                          | Wrong                                           |
+| --------------------------------- | ---------------------------------------------------------------- | ----------------------------------------------- |
+| No implicit prop spreading        | `<Button label={label} size={size} />`                           | `<Button {...props} />` without type definition |
+| Discriminated unions for variants | `type: 'primary' \| 'secondary'` with different prop shapes      | Boolean flags: `isPrimary`, `isSecondary`       |
+| No `any` in props                 | `onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void` | `onClick?: (event: any) => void`                |
+| Default values in destructuring   | `({ size = 'medium' }: Props)`                                   | `props.size \|\| 'medium'`                      |
 
 ---
 
@@ -205,6 +216,7 @@ export interface StatusBadgeProps {
 ### Strict Requirements (No Exceptions)
 
 **1. NO `any` types — ever:**
+
 ```typescript
 // WRONG
 const handleClick = (event: any) => { ... }
@@ -217,17 +229,18 @@ const data: LoanData = fetchData();
 
 **2. Proper event handler types:**
 
-| Event | Type |
-|-------|------|
-| Click (button) | `React.MouseEvent<HTMLButtonElement>` |
-| Click (div) | `React.MouseEvent<HTMLDivElement>` |
-| Change (input) | `React.ChangeEvent<HTMLInputElement>` |
+| Event           | Type                                   |
+| --------------- | -------------------------------------- |
+| Click (button)  | `React.MouseEvent<HTMLButtonElement>`  |
+| Click (div)     | `React.MouseEvent<HTMLDivElement>`     |
+| Change (input)  | `React.ChangeEvent<HTMLInputElement>`  |
 | Change (select) | `React.ChangeEvent<HTMLSelectElement>` |
-| Submit (form) | `React.FormEvent<HTMLFormElement>` |
-| Key press | `React.KeyboardEvent<HTMLElement>` |
-| Focus | `React.FocusEvent<HTMLElement>` |
+| Submit (form)   | `React.FormEvent<HTMLFormElement>`     |
+| Key press       | `React.KeyboardEvent<HTMLElement>`     |
+| Focus           | `React.FocusEvent<HTMLElement>`        |
 
 **3. No `@ts-ignore` without justification:**
+
 ```typescript
 // WRONG
 // @ts-ignore
@@ -241,11 +254,12 @@ const internalProp = theme.__internal;
 **4. No linting errors or warnings** — fix all ESLint and TypeScript compiler warnings before committing.
 
 **5. No console statements in committed code:**
+
 ```typescript
 // WRONG
-console.log('debug:', data);
-console.warn('deprecated usage');
-console.error('something failed');
+console.log("debug:", data);
+console.warn("deprecated usage");
+console.error("something failed");
 
 // CORRECT — remove before committing, or use proper error boundaries
 ```
@@ -327,12 +341,12 @@ sx={{
 
 ### CSS Unit Guidelines
 
-| CSS Unit | When to Use | Example |
-|----------|-------------|---------|
-| Unitless number | `lineHeight` only | `lineHeight: 1.5` |
-| `rem` | `fontSize`, vertical margins for text | `fontSize: '1rem'` |
-| `px` | `margin`, `padding`, `minWidth`, `maxWidth` | `padding: '16px'` |
-| Theme spacing | padding, margin via theme | `padding: theme.spacing(2)` |
+| CSS Unit        | When to Use                                 | Example                     |
+| --------------- | ------------------------------------------- | --------------------------- |
+| Unitless number | `lineHeight` only                           | `lineHeight: 1.5`           |
+| `rem`           | `fontSize`, vertical margins for text       | `fontSize: '1rem'`          |
+| `px`            | `margin`, `padding`, `minWidth`, `maxWidth` | `padding: '16px'`           |
+| Theme spacing   | padding, margin via theme                   | `padding: theme.spacing(2)` |
 
 ```typescript
 sx={{
@@ -346,14 +360,15 @@ sx={{
 
 ### Styling Rules
 
-| Rule | Correct | Wrong |
-|------|---------|-------|
-| Use `sx` prop | `<Box sx={{ padding: 2 }}>` | `<Box style={{ padding: 16 }}>` |
-| Theme variables | `color: theme.palette.error.main` | `color: '#f44336'` |
-| Responsive | Container queries (MUI pattern) | Media queries for component-level |
-| No inline `style` | `sx={{ ... }}` | `style={{ ... }}` |
+| Rule              | Correct                           | Wrong                             |
+| ----------------- | --------------------------------- | --------------------------------- |
+| Use `sx` prop     | `<Box sx={{ padding: 2 }}>`       | `<Box style={{ padding: 16 }}>`   |
+| Theme variables   | `color: theme.palette.error.main` | `color: '#f44336'`                |
+| Responsive        | Container queries (MUI pattern)   | Media queries for component-level |
+| No inline `style` | `sx={{ ... }}`                    | `style={{ ... }}`                 |
 
 **Container Queries** — for responsive components, use MUI's container query pattern:
+
 - Reference: https://mui.com/material-ui/customization/container-queries/
 - Prefer container queries over media queries for component-level responsiveness
 
@@ -364,23 +379,26 @@ sx={{
 When writing a component, follow this import priority:
 
 ### Priority 1: DREAM Components
+
 ```typescript
 // CORRECT — DREAM has Button, Typography, Box, Stack, etc.
-import { Button, Typography, Box, Stack, useDreamTheme } from 'lib-node-dream-ui-latest';
+import { Button, Typography, Box, Stack, useDreamTheme } from "lib-node-dream-ui-latest";
 ```
 
 ### Priority 2: MUI for Components DREAM Doesn't Provide
+
 ```typescript
 // CORRECT — Grid and useMediaQuery are not in DREAM
-import { Grid, useMediaQuery } from '@mui/material';
-import { Button, Box, useDreamTheme } from 'lib-node-dream-ui-latest';
+import { Grid, useMediaQuery } from "@mui/material";
+import { Button, Box, useDreamTheme } from "lib-node-dream-ui-latest";
 ```
 
 ### Priority 3: Custom Components Following DREAM Standards
+
 ```typescript
 // CORRECT — when neither DREAM nor MUI has what you need
 // Follow ALL standards: id prop, JSDoc, theme variables, no any, no shorthand
-import { useDreamTheme } from 'lib-node-dream-ui-latest';
+import { useDreamTheme } from "lib-node-dream-ui-latest";
 
 export interface LoanProgressProps {
   /** Unique identifier for testing and accessibility. */
@@ -398,6 +416,7 @@ export const LoanProgress = ({ id, progress, label }: LoanProgressProps) => {
 ```
 
 ### What NOT to Do
+
 ```typescript
 // WRONG — MUI Button when DREAM Button exists
 import { Button } from '@mui/material';
@@ -415,10 +434,10 @@ import { Button } from 'lib-node-dream-ui/dist/components/Button';
 
 Two DREAM versions are in active use in allin-ui:
 
-| Package | Version | Catalog Entry | Status |
-|---------|---------|---------------|--------|
-| `lib-node-dream-ui` | v2 | `^2.9.1` | Stable, used by older UFAs |
-| `lib-node-dream-ui-latest` | v3 | `npm:lib-node-dream-ui@^3.1.2` | Newer, used by recent UFAs |
+| Package                    | Version | Catalog Entry                  | Status                     |
+| -------------------------- | ------- | ------------------------------ | -------------------------- |
+| `lib-node-dream-ui`        | v2      | `^2.9.1`                       | Stable, used by older UFAs |
+| `lib-node-dream-ui-latest` | v3      | `npm:lib-node-dream-ui@^3.1.2` | Newer, used by recent UFAs |
 
 ### Selection Rules
 
@@ -434,14 +453,15 @@ grep -r "lib-node-dream-ui" ufas/{your-ufa}/src/ | head -5
 ```
 
 **Examples of v2 vs v3 imports:**
+
 ```typescript
 // v2 (lib-node-dream-ui)
-import { Button, useDreamTheme } from 'lib-node-dream-ui';
-import { DreamThemeProvider } from 'lib-node-dream-ui/DreamThemeProvider';
+import { Button, useDreamTheme } from "lib-node-dream-ui";
+import { DreamThemeProvider } from "lib-node-dream-ui/DreamThemeProvider";
 
 // v3 (lib-node-dream-ui-latest)
-import { Button, useDreamTheme } from 'lib-node-dream-ui-latest';
-import { DreamThemeProvider } from 'lib-node-dream-ui-latest';
+import { Button, useDreamTheme } from "lib-node-dream-ui-latest";
+import { DreamThemeProvider } from "lib-node-dream-ui-latest";
 ```
 
 **Component APIs may differ between versions.** Always check the Storybook at dream.uwm.com for the correct API for your version.
@@ -453,6 +473,7 @@ import { DreamThemeProvider } from 'lib-node-dream-ui-latest';
 ### DREAM/MUI Components — Accessibility Inherited
 
 When using DREAM or MUI components, you inherit extensive accessibility from MUI's built-in support:
+
 - ARIA attributes on interactive elements
 - Keyboard navigation (Tab, Enter, Space, Escape)
 - Focus management and visible focus indicators
@@ -460,6 +481,7 @@ When using DREAM or MUI components, you inherit extensive accessibility from MUI
 - Role attributes
 
 **You still must:**
+
 - Provide meaningful labels: `<Button aria-label="Submit loan application">Submit</Button>`
 - Ensure custom content inside DREAM components is accessible
 - Test keyboard navigation in your composed views
@@ -468,15 +490,15 @@ When using DREAM or MUI components, you inherit extensive accessibility from MUI
 
 When creating components that do NOT extend DREAM or MUI, YOU must implement:
 
-| Requirement | Implementation |
-|-------------|---------------|
-| ARIA roles | `role="button"`, `role="dialog"`, etc. |
-| ARIA labels | `aria-label`, `aria-labelledby`, `aria-describedby` |
+| Requirement         | Implementation                                            |
+| ------------------- | --------------------------------------------------------- |
+| ARIA roles          | `role="button"`, `role="dialog"`, etc.                    |
+| ARIA labels         | `aria-label`, `aria-labelledby`, `aria-describedby`       |
 | Keyboard navigation | `onKeyDown` handlers for Enter, Space, Escape, Arrow keys |
-| Focus management | `tabIndex`, `autoFocus`, focus trapping for modals |
-| Focus indicators | Visible outline on `:focus-visible` via theme |
-| Color contrast | WCAG AA minimum (4.5:1 for text, 3:1 for large text) |
-| Screen reader | Meaningful text content, `aria-live` for dynamic updates |
+| Focus management    | `tabIndex`, `autoFocus`, focus trapping for modals        |
+| Focus indicators    | Visible outline on `:focus-visible` via theme             |
+| Color contrast      | WCAG AA minimum (4.5:1 for text, 3:1 for large text)      |
+| Screen reader       | Meaningful text content, `aria-live` for dynamic updates  |
 
 ```typescript
 // Custom accessible component example
@@ -520,26 +542,29 @@ Use this checklist to audit existing allin-ui components for DREAM compliance.
 ### Audit Checklist
 
 **1. Component Selection**
+
 - [ ] Uses DREAM components from `lib-node-dream-ui` / `lib-node-dream-ui-latest`
 - [ ] Direct MUI imports only for components DREAM doesn't provide (Grid, useMediaQuery, etc.)
 - [ ] No custom components that duplicate DREAM functionality
 
 **2. Import Patterns**
+
 ```typescript
 // CORRECT
-import { Button, TextField, useDreamTheme } from 'lib-node-dream-ui-latest';
+import { Button, TextField, useDreamTheme } from "lib-node-dream-ui-latest";
 
 // ACCEPTABLE — MUI for what DREAM doesn't have
-import { Grid, useMediaQuery } from '@mui/material';
+import { Grid, useMediaQuery } from "@mui/material";
 
 // REVIEW — should these be DREAM components?
-import { Button } from '@mui/material';
+import { Button } from "@mui/material";
 
 // WRONG — importing from DREAM internals
-import { Button } from 'lib-node-dream-ui/dist/components/Button';
+import { Button } from "lib-node-dream-ui/dist/components/Button";
 ```
 
 **3. Props Compliance**
+
 - [ ] `id` prop available (nullable) on all components
 - [ ] `name` prop required on all form inputs
 - [ ] All props have JSDoc comments
@@ -547,6 +572,7 @@ import { Button } from 'lib-node-dream-ui/dist/components/Button';
 - [ ] No implicit prop spreading without type definition
 
 **4. Style Patterns**
+
 ```typescript
 // CORRECT — theme variables via useDreamTheme()
 const theme = useDreamTheme();
@@ -566,6 +592,7 @@ const theme = useDreamTheme();
 ```
 
 **5. Accessibility**
+
 - [ ] Interactive elements have ARIA labels
 - [ ] Keyboard navigation works (Tab, Enter, Space, Escape)
 - [ ] Focus indicators visible
@@ -574,6 +601,7 @@ const theme = useDreamTheme();
 - [ ] Buttons have accessible names
 
 **6. TypeScript Usage**
+
 - [ ] No `any` types anywhere
 - [ ] Event handlers properly typed
 - [ ] No `@ts-ignore` without justification
@@ -591,13 +619,16 @@ const theme = useDreamTheme();
 ### Compliance Score: X/10
 
 ### Compliant
+
 - [What's done correctly]
 
 ### Needs Review
+
 - Line XX: Direct MUI import — should this be a DREAM component?
 - Line YY: Style override — is there a DREAM variant?
 
 ### Non-Compliant
+
 - Line XX: Missing id prop (required on all components)
 - Line YY: Using `any` type for event handler
 - Line ZZ: Inline `style` prop — use `sx` with theme variables
@@ -645,30 +676,31 @@ src/components/<ComponentName>/
 ```
 
 **index.ts:**
+
 ```typescript
-export { MyComponent, type MyComponentProps } from './MyComponent';
+export { MyComponent, type MyComponentProps } from "./MyComponent";
 ```
 
 ### Storybook Requirements
 
 ```typescript
-import type { Meta, StoryObj } from '@storybook/react';
-import { MyComponent } from './MyComponent';
+import type { Meta, StoryObj } from "@storybook/react";
+import { MyComponent } from "./MyComponent";
 
 const meta: Meta<typeof MyComponent> = {
-  title: 'Components/MyComponent',
+  title: "Components/MyComponent",
   component: MyComponent,
-  tags: ['autodocs'],          // REQUIRED — generates documentation
+  tags: ["autodocs"], // REQUIRED — generates documentation
   argTypes: {
     size: {
-      control: 'select',
-      options: ['small', 'medium', 'large'],
-      description: 'Controls the size of the component',
+      control: "select",
+      options: ["small", "medium", "large"],
+      description: "Controls the size of the component",
     },
     variant: {
-      control: 'select',
-      options: ['primary', 'secondary'],
-      description: 'Visual style variant',
+      control: "select",
+      options: ["primary", "secondary"],
+      description: "Visual style variant",
     },
   },
 };
@@ -678,19 +710,20 @@ type Story = StoryObj<typeof MyComponent>;
 
 // REQUIRED: Story for each meaningful prop variation
 export const Default: Story = {
-  args: { label: 'Default', size: 'medium' },
+  args: { label: "Default", size: "medium" },
 };
 
 export const Small: Story = {
-  args: { label: 'Small', size: 'small' },
+  args: { label: "Small", size: "small" },
 };
 
 export const Large: Story = {
-  args: { label: 'Large', size: 'large' },
+  args: { label: "Large", size: "large" },
 };
 ```
 
 **Storybook rules:**
+
 - `tags: ['autodocs']` is required — generates props table from JSDoc
 - Create a story for each meaningful prop variation
 - No stories needed for common props (id, name)
@@ -745,55 +778,55 @@ npm run test:mutate  # Run mutation tests (Stryker)
 import { Box, Typography, Icon, Stack, useDreamTheme } from 'lib-node-dream-ui-latest';
 
 export interface LoanStatusCardProps {
-  /** Unique identifier for testing and accessibility. */
-  id?: string | number;
-  /** The loan number to display. */
-  loanNumber: string;
-  /** Current status of the loan. */
-  status: 'pending' | 'approved' | 'rejected' | 'in-review';
-  /** Borrower's full name. */
-  borrowerName: string;
-  /** Callback fired when the card is clicked. */
-  onClick?: (loanNumber: string) => void;
+/** Unique identifier for testing and accessibility. _/
+id?: string | number;
+/_* The loan number to display. _/
+loanNumber: string;
+/_* Current status of the loan. _/
+status: 'pending' | 'approved' | 'rejected' | 'in-review';
+/_* Borrower's full name. _/
+borrowerName: string;
+/_* Callback fired when the card is clicked. */
+onClick?: (loanNumber: string) => void;
 }
 
 const STATUS_ICONS: Record<LoanStatusCardProps['status'], string> = {
-  pending: 'clock',
-  approved: 'check-circle',
-  rejected: 'x-circle',
-  'in-review': 'eye',
+pending: 'clock',
+approved: 'check-circle',
+rejected: 'x-circle',
+'in-review': 'eye',
 };
 
 export const LoanStatusCard = ({
-  id,
-  loanNumber,
-  status,
-  borrowerName,
-  onClick,
+id,
+loanNumber,
+status,
+borrowerName,
+onClick,
 }: LoanStatusCardProps) => {
-  const theme = useDreamTheme();
+const theme = useDreamTheme();
 
-  const statusColor = {
-    pending: theme.palette.warning.main,
-    approved: theme.palette.success.main,
-    rejected: theme.palette.error.main,
-    'in-review': theme.palette.info.main,
-  }[status];
+const statusColor = {
+pending: theme.palette.warning.main,
+approved: theme.palette.success.main,
+rejected: theme.palette.error.main,
+'in-review': theme.palette.info.main,
+}[status];
 
-  return (
-    <Box
-      id={id?.toString()}
-      role="button"
-      tabIndex={0}
-      aria-label={`Loan ${loanNumber} for ${borrowerName}, status: ${status}`}
-      onClick={() => onClick?.(loanNumber)}
-      onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          onClick?.(loanNumber);
-        }
-      }}
-      sx={{
+return (
+<Box
+id={id?.toString()}
+role="button"
+tabIndex={0}
+aria-label={`Loan ${loanNumber} for ${borrowerName}, status: ${status}`}
+onClick={() => onClick?.(loanNumber)}
+onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
+if (e.key === 'Enter' || e.key === ' ') {
+e.preventDefault();
+onClick?.(loanNumber);
+}
+}}
+sx={{
         padding: theme.spacing(2),
         borderRadius: theme.shape.borderRadius,
         backgroundColor: theme.palette.background.paper,
@@ -806,23 +839,23 @@ export const LoanStatusCard = ({
           boxShadow: `0 0 0 2px ${theme.palette.primary.main}`,
           outline: 'none',
         },
-      }}
-    >
-      <Stack direction="row" spacing={theme.spacing(1)} alignItems="center">
-        <Icon name={STATUS_ICONS[status]} sx={{ color: statusColor }} />
-        <Stack>
-          <Typography variant="subtitle1">{loanNumber}</Typography>
-          <Typography variant="body2" sx={{ color: theme.palette.text.secondary }}>
-            {borrowerName}
-          </Typography>
-        </Stack>
-      </Stack>
-    </Box>
-  );
+      }} >
+<Stack direction="row" spacing={theme.spacing(1)} alignItems="center">
+<Icon name={STATUS_ICONS[status]} sx={{ color: statusColor }} />
+<Stack>
+<Typography variant="subtitle1">{loanNumber}</Typography>
+<Typography variant="body2" sx={{ color: theme.palette.text.secondary }}>
+{borrowerName}
+</Typography>
+</Stack>
+</Stack>
+</Box>
+);
 };
 </code>
 
 <why_it_works>
+
 - Uses DREAM components (Box, Typography, Icon, Stack) not MUI
 - useDreamTheme() for all style values — zero magic numbers
 - Nullable id prop present
@@ -832,7 +865,7 @@ export const LoanStatusCard = ({
 - sx prop for styling, no inline style
 - Accessibility: role="button", tabIndex, aria-label, keyboard handler, focus-visible
 - Status mapped to theme palette colors, not hardcoded hex
-</why_it_works>
+  </why_it_works>
 </example>
 
 <example>
@@ -846,41 +879,42 @@ import { Grid, useMediaQuery } from '@mui/material';
 import { Box, Typography, useDreamTheme } from 'lib-node-dream-ui-latest';
 
 export interface LoanGridProps {
-  /** Unique identifier for the grid container. */
-  id?: string | number;
-  /** Array of loan data to display in the grid. */
-  loans: LoanSummary[];
+/** Unique identifier for the grid container. _/
+id?: string | number;
+/_* Array of loan data to display in the grid. */
+loans: LoanSummary[];
 }
 
 export const LoanGrid = ({ id, loans }: LoanGridProps) => {
-  const theme = useDreamTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+const theme = useDreamTheme();
+const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  return (
-    <Box id={id?.toString()} sx={{ padding: theme.spacing(2) }}>
-      <Grid container spacing={isMobile ? 1 : 2}>
-        {loans.map((loan) => (
-          <Grid item xs={12} sm={6} md={4} key={loan.id}>
-            <LoanStatusCard
+return (
+<Box id={id?.toString()} sx={{ padding: theme.spacing(2) }}>
+<Grid container spacing={isMobile ? 1 : 2}>
+{loans.map((loan) => (
+<Grid item xs={12} sm={6} md={4} key={loan.id}>
+<LoanStatusCard
               loanNumber={loan.number}
               status={loan.status}
               borrowerName={loan.borrowerName}
             />
-          </Grid>
-        ))}
-      </Grid>
-    </Box>
-  );
+</Grid>
+))}
+</Grid>
+</Box>
+);
 };
 </code>
 
 <why_it_works>
+
 - Grid imported from @mui/material — DREAM doesn't provide a grid system
 - useMediaQuery imported from @mui/material — DREAM doesn't provide this utility
 - DREAM components (Box, Typography) used for everything else
 - useDreamTheme() for spacing and breakpoints
 - Both DREAM and MUI coexist correctly
-</why_it_works>
+  </why_it_works>
 </example>
 
 <example>
@@ -892,34 +926,35 @@ import { Button } from '@mui/material';
 import { Box } from 'lib-node-dream-ui-latest';
 
 export const SubmitSection = () => {
-  return (
-    <Box>
-      <Button variant="contained" color="primary">
-        Submit
-      </Button>
-    </Box>
-  );
+return (
+<Box>
+<Button variant="contained" color="primary">
+Submit
+</Button>
+</Box>
+);
 };
 </code>
 
 <why_it_fails>
+
 - DREAM has a Button component — check dream.uwm.com
 - Importing MUI Button bypasses DREAM theming and styling
 - The DREAM Button may have UWM-specific variants, accessibility, and styling
 - This will look inconsistent with other components using DREAM Button
-</why_it_fails>
+  </why_it_fails>
 
 <correction>
 import { Button, Box } from 'lib-node-dream-ui-latest';
 
 export const SubmitSection = () => {
-  return (
-    <Box>
-      <Button variant="contained" color="primary">
-        Submit
-      </Button>
-    </Box>
-  );
+return (
+<Box>
+<Button variant="contained" color="primary">
+Submit
+</Button>
+</Box>
+);
 };
 </correction>
 </example>
@@ -932,62 +967,60 @@ export const SubmitSection = () => {
 import { Box } from 'lib-node-dream-ui-latest';
 
 export const StatusBar = (props: any) => {
-  return (
-    <Box
-      style={{ backgroundColor: '#1976d2', padding: '16px' }}
-      sx={{ px: 2, mt: 1 }}
-    >
-      <span style={{ color: '#fff', fontSize: '14px' }}>
-        {props.message}
-      </span>
-    </Box>
-  );
+return (
+<Box
+style={{ backgroundColor: '#1976d2', padding: '16px' }}
+sx={{ px: 2, mt: 1 }} >
+<span style={{ color: '#fff', fontSize: '14px' }}>
+{props.message}
+</span>
+</Box>
+);
 };
 </code>
 
 <why_it_fails>
+
 - `any` type for props — NO any ever
 - `style` prop — NEVER use inline style, use sx
 - Magic numbers: '#1976d2', '16px', '#fff', '14px'
 - CSS shorthand: px, mt
 - No id prop, no JSDoc, no proper TypeScript interface
 - Missing accessibility (no semantic HTML or ARIA)
-</why_it_fails>
+  </why_it_fails>
 
 <correction>
 import { Box, Typography, useDreamTheme } from 'lib-node-dream-ui-latest';
 
 export interface StatusBarProps {
-  /** Unique identifier for testing. */
-  id?: string | number;
-  /** The status message to display. */
-  message: string;
+/** Unique identifier for testing. _/
+id?: string | number;
+/_* The status message to display. */
+message: string;
 }
 
 export const StatusBar = ({ id, message }: StatusBarProps) => {
-  const theme = useDreamTheme();
+const theme = useDreamTheme();
 
-  return (
-    <Box
-      id={id?.toString()}
-      role="status"
-      aria-live="polite"
-      sx={{
+return (
+<Box
+id={id?.toString()}
+role="status"
+aria-live="polite"
+sx={{
         backgroundColor: theme.palette.primary.main,
         padding: theme.spacing(2),
         marginTop: theme.spacing(1),
-      }}
-    >
-      <Typography
-        variant="body2"
-        sx={{
+      }} >
+<Typography
+variant="body2"
+sx={{
           color: theme.palette.primary.contrastText,
-        }}
-      >
-        {message}
-      </Typography>
-    </Box>
-  );
+        }} >
+{message}
+</Typography>
+</Box>
+);
 };
 </correction>
 </example>
@@ -1005,12 +1038,13 @@ import { Typography } from 'lib-node-dream-ui-latest'; // v3
 </code>
 
 <why_it_fails>
+
 - Two DREAM instances loaded at runtime — theme conflicts
 - Component APIs may differ between v2 and v3
 - Duplicate bundle size
 - Theme provider may apply to one version but not the other
 - Will cause unpredictable visual and behavioral inconsistencies
-</why_it_fails>
+  </why_it_fails>
 
 <correction>
 // Pick ONE version for the entire package
@@ -1032,19 +1066,19 @@ import { Typography } from 'lib-node-dream-ui-latest';
 import { Card } from '@mui/material';
 
 const UserCard = (props: any) => {
-  return (
-    <Card style={{ padding: 16, margin: 8, backgroundColor: '#f5f5f5' }}>
-      <h3 style={{ color: '#333', fontSize: 18 }}>{props.name}</h3>
-      <p>{props.email}</p>
-      <button onClick={props.onClick}>View Profile</button>
-    </Card>
-  );
+return (
+<Card style={{ padding: 16, margin: 8, backgroundColor: '#f5f5f5' }}>
+    <h3 style={{ color: '#333', fontSize: 18 }}>{props.name}</h3> <p>{props.email}</p>
+<button onClick={props.onClick}>View Profile</button>
+</Card>
+);
 };
 
 export default UserCard;
 </code>
 
 <audit_result>
+
 ## DREAM Compliance Audit: UserCard
 
 **File**: ufas/example-ufa/src/components/UserCard/UserCard.tsx
@@ -1072,7 +1106,7 @@ export default UserCard;
 1. **High Priority**: Replace all inline styles with sx + useDreamTheme(). Remove `any` type.
 2. **Medium Priority**: Replace raw HTML (h3, p, button) with DREAM components (Typography, Button).
 3. **Low Priority**: Add JSDoc to props, add id prop.
-</audit_result>
+   </audit_result>
 </example>
 
 </examples>
@@ -1119,6 +1153,7 @@ export default UserCard;
 When DREAM has a Button but not the specific variant you need:
 
 **DO:** Extend with `sx` prop and `useDreamTheme()`:
+
 ```typescript
 import { Button, useDreamTheme } from 'lib-node-dream-ui-latest';
 
@@ -1139,6 +1174,7 @@ If the variant is genuinely reusable across multiple teams, consider contributin
 ### Product Theming (Internal vs External)
 
 DREAM supports different theme families set via `themeFamily` in `uwm-manifest.json`:
+
 - `"external"` — broker-facing apps (lighter theme)
 - `"internal"` — internal tools (darker/corporate theme)
 
@@ -1149,6 +1185,7 @@ DREAM supports different theme families set via `themeFamily` in `uwm-manifest.j
 ### MUI Components That Look Like They Should Be DREAM
 
 Some MUI components exist in DREAM under different names or APIs. Always check Storybook before assuming DREAM doesn't have it:
+
 - MUI `Alert` → DREAM may have `SectionMessage`
 - MUI `Snackbar` → Check DREAM for notification components
 - MUI `Stepper` → DREAM has `Stepper` with potentially different API
@@ -1156,6 +1193,7 @@ Some MUI components exist in DREAM under different names or APIs. Always check S
 ### Accessibility for Composed Views
 
 When composing multiple DREAM components into a view (e.g., a form with multiple fields):
+
 - DREAM handles individual component accessibility
 - YOU handle the composition-level accessibility:
   - Form-level aria attributes: `aria-labelledby`, `aria-describedby`
@@ -1167,6 +1205,7 @@ When composing multiple DREAM components into a view (e.g., a form with multiple
 ### Components with External Data
 
 When a component fetches or receives business data:
+
 - The component should NOT fetch data directly (that's business logic — belongs in a hook or service)
 - The component receives data via props (props-driven, stateless)
 - Loading states should use DREAM components (Skeleton, CircularProgress if available)
@@ -1176,6 +1215,7 @@ When a component fetches or receives business data:
 ### No Automated DREAM Enforcement
 
 There are NO ESLint rules in allin-ui that enforce DREAM-over-MUI imports. The standard is:
+
 - Cultural — enforced by team conventions and code review
 - Documented in this skill — developers must self-enforce
 - Consider recommending custom ESLint rules for teams that want automation:
@@ -1196,11 +1236,13 @@ There are NO ESLint rules in allin-ui that enforce DREAM-over-MUI imports. The s
 Before moving to the next phase (implement-ui-feature), verify ALL of the following:
 
 ### Component Structure
+
 - [ ] Component files follow allin-ui flat pattern: `Component.tsx` + `Component.test.tsx`
 - [ ] No `index.ts` per component directory (barrel exports at package root for SCLs)
 - [ ] No `.stories.tsx` files (Storybook is DREAM library only)
 
 ### Props
+
 - [ ] Every component has `id?: string | number` prop
 - [ ] All form input components have `name: string` (required) prop
 - [ ] All props have JSDoc comments
@@ -1208,6 +1250,7 @@ Before moving to the next phase (implement-ui-feature), verify ALL of the follow
 - [ ] No `any` types in any prop interface
 
 ### TypeScript
+
 - [ ] Zero `any` types in the entire component
 - [ ] All event handlers properly typed (`React.MouseEvent<HTMLButtonElement>`, etc.)
 - [ ] No `@ts-ignore` without written justification
@@ -1215,6 +1258,7 @@ Before moving to the next phase (implement-ui-feature), verify ALL of the follow
 - [ ] No console.log/warn/error
 
 ### Styles
+
 - [ ] All colors from `theme.palette.*` (no hex codes, no named colors)
 - [ ] All spacing from `theme.spacing()` (no hardcoded pixel values)
 - [ ] All font sizes from `theme.typography.*` (no hardcoded font sizes)
@@ -1223,12 +1267,14 @@ Before moving to the next phase (implement-ui-feature), verify ALL of the follow
 - [ ] CSS units correct: `rem` for font-size, unitless for line-height, `px` for spacing
 
 ### DREAM Usage
+
 - [ ] DREAM components used for all available UI elements (checked dream.uwm.com)
 - [ ] Direct MUI imports only for Grid, useMediaQuery, CssBaseline, SxProps, Popover, styled
 - [ ] Using correct DREAM version (same as rest of package, never mixed)
 - [ ] Theme accessed via `useDreamTheme()` hook
 
 ### Accessibility
+
 - [ ] DREAM/MUI components: meaningful labels provided
 - [ ] Custom components: ARIA roles, keyboard nav, focus management, WCAG AA contrast
 - [ ] Interactive elements have accessible names
@@ -1239,22 +1285,27 @@ Before moving to the next phase (implement-ui-feature), verify ALL of the follow
 <integration>
 
 **This skill is called by:**
+
 - `develop-frontend` orchestrator (Phase 2)
 - Developers directly when designing new components
 
 **After this skill, proceed to:**
+
 - `implement-ui-feature` (Phase 3) — TDD implementation with .feature specs → Vitest tests
 - `test-frontend` (Phase 4) — Testing strategy (Stryker mutation, Playwright E2E)
 
 **Before this skill, complete:**
+
 - `create-allin-package` (Phase 1) — Package must exist before designing components
 
 **Related skills:**
+
 - `create-allin-package` — For the 3-layer decomposition pattern and SCL architecture
 - `test-frontend` — For testing the components designed with this skill
 - `implement-ui-feature` — For TDD implementation using .feature specs
 
 **Related documents:**
+
 - `dream-buddy.md` — Full DREAM standards reference (for DREAM library contributions)
 - Component taxonomy (Confluence page 1514786638) — UFA/IAP/SCL component architecture
 
@@ -1263,6 +1314,7 @@ Before moving to the next phase (implement-ui-feature), verify ALL of the follow
 <resources>
 
 **DREAM Design System:**
+
 - Storybook: https://dream.uwm.com (live component documentation — check here first)
 - Repository: https://code.uwm.com/projects/UCP/repos/lib-node-dream-ui
 - Figma Guidelines: https://www.figma.com/design/zRsKww4xBqzzRVbTM7wAye/Dream-Component-Guidelines
@@ -1272,15 +1324,18 @@ Before moving to the next phase (implement-ui-feature), verify ALL of the follow
 - Feedback Form: https://airtable.com/appXMaBIvjbE6Aw09/pag3T8vNQADLW4PMc/form
 
 **UWM Standards:**
+
 - Enterprise UX/UI Strategy: https://kb.uwm.com/pages/viewpage.action?pageId=1479753831
 - UXPC Charter: https://kb.uwm.com/pages/viewpage.action?pageId=1453025032
 - Component Taxonomy: https://kb.uwm.com/pages/viewpage.action?pageId=1514786638
 
 **MUI Reference:**
+
 - Container Queries: https://mui.com/material-ui/customization/container-queries/
 - Theming: https://mui.com/material-ui/customization/theming/
 
 **Reference Components in allin-ui:**
+
 - DREAM v3 patterns: `ufas/income-calculator/src/components/` — modern usage with `lib-node-dream-ui-latest`
 - SCL patterns: `packages/shared-components/src/components/` — shared components with barrel exports
 - DREAM v2 patterns: `ufas/data-dashboard/src/components/` — older `lib-node-dream-ui` usage
@@ -1288,6 +1343,7 @@ Before moving to the next phase (implement-ui-feature), verify ALL of the follow
 - Theme for tests: `ufas/income-calculator/src/testUtils.tsx` — ExternalThemeLight import pattern
 
 **When stuck:**
+
 - "Does DREAM have X?" → Search dream.uwm.com Storybook
 - "Which DREAM version?" → Check existing imports in your package
 - "Can I use MUI directly?" → Only for Grid, useMediaQuery, CssBaseline, SxProps, Popover, styled

@@ -2,11 +2,11 @@
 
 Read the current Cloudflare documentation for queue management, retry options, defaults, and callback examples.
 
-| Task | Documentation |
-|------|---------------|
-| Enqueue, inspect, and remove background work; understand sequential processing and failure handling | [Queue tasks](https://developers.cloudflare.com/agents/runtime/execution/queue-tasks/) |
-| Retry an operation or configure retries for queued and scheduled callbacks | [Retries](https://developers.cloudflare.com/agents/runtime/execution/retries/) |
-| Delay recovery or run work on a recurring schedule | [Schedule tasks](https://developers.cloudflare.com/agents/runtime/execution/schedule-tasks/) |
+| Task                                                                                                | Documentation                                                                                |
+| --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Enqueue, inspect, and remove background work; understand sequential processing and failure handling | [Queue tasks](https://developers.cloudflare.com/agents/runtime/execution/queue-tasks/)       |
+| Retry an operation or configure retries for queued and scheduled callbacks                          | [Retries](https://developers.cloudflare.com/agents/runtime/execution/retries/)               |
+| Delay recovery or run work on a recurring schedule                                                  | [Schedule tasks](https://developers.cloudflare.com/agents/runtime/execution/schedule-tasks/) |
 
 Keep these execution choices in mind when using the linked guides:
 

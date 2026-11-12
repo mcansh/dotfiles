@@ -12,12 +12,12 @@ Containers are controlled through [Durable Objects](https://developers.cloudflar
 
 Read the linked page before writing code or configuration; use its current API, examples, and constraints rather than reconstructing them from memory.
 
-| Task | Start here |
-| --- | --- |
-| Create a project and deploy the first container | [Get started](https://developers.cloudflare.com/containers/get-started/) |
-| Configure images, bindings, instance sizes, and deployments | [Configuration](configuration.md) |
-| Control startup, requests, lifecycle, and scheduling | [API](api.md) |
-| Choose routing or connect other services | [Patterns](patterns.md) |
-| Diagnose startup, persistence, capacity, or rollout issues | [Gotchas](gotchas.md) |
+| Task                                                        | Start here                                                               |
+| ----------------------------------------------------------- | ------------------------------------------------------------------------ |
+| Create a project and deploy the first container             | [Get started](https://developers.cloudflare.com/containers/get-started/) |
+| Configure images, bindings, instance sizes, and deployments | [Configuration](configuration.md)                                        |
+| Control startup, requests, lifecycle, and scheduling        | [API](api.md)                                                            |
+| Choose routing or connect other services                    | [Patterns](patterns.md)                                                  |
+| Diagnose startup, persistence, capacity, or rollout issues  | [Gotchas](gotchas.md)                                                    |
 
 For additional topics, consult the [Containers documentation index](https://developers.cloudflare.com/containers/llms.txt).

@@ -14,23 +14,23 @@ The internal voice ID is `com.apple.siri.natural.Simone` (stored in `com.apple.A
 
 ### macOS `say` voice tiers (from `say -v '?'`)
 
-| Tier | Example | Quality |
-|------|---------|---------|
-| Standard | Samantha, Fred, Kathy | Robotic |
-| Enhanced | Tom (Enhanced) | Better, still synthetic |
-| Premium | Ava (Premium) | Good, but not Siri-level |
-| Siri (system default only) | Siri Voice 2 | Natural, best quality |
+| Tier                       | Example               | Quality                  |
+| -------------------------- | --------------------- | ------------------------ |
+| Standard                   | Samantha, Fred, Kathy | Robotic                  |
+| Enhanced                   | Tom (Enhanced)        | Better, still synthetic  |
+| Premium                    | Ava (Premium)         | Good, but not Siri-level |
+| Siri (system default only) | Siri Voice 2          | Natural, best quality    |
 
 ## FOSS TTS alternatives evaluated
 
-| Engine | Quality vs Siri | macOS Support | License | Key Risk |
-|--------|----------------|---------------|---------|----------|
-| Kokoro TTS (hexgrad) | ~85-92% | Good (Apple Silicon via MLX-Audio) | Apache 2.0 | Single anonymous maintainer; PyTorch pickle format can execute arbitrary code on model load |
-| Piper TTS (rhasspy/OHF) | ~75-80% | Native ARM64 binary | GPL-3.0 (new fork) | Original repo archived Oct 2025; GPL license incompatible with closed-source |
-| F5-TTS | Excellent | Poor (known audio issues on macOS) | - | Requires reference audio; macOS-specific bugs |
-| StyleTTS2 | Excellent | Moderate | - | Complex setup |
-| Bark (Suno) | Very natural | Poor | - | Requires 12GB VRAM |
-| XTTS-v2 (Coqui) | Great | Moderate | - | Coqui shutdown Jan 2024; fragmented forks |
+| Engine                  | Quality vs Siri | macOS Support                      | License            | Key Risk                                                                                    |
+| ----------------------- | --------------- | ---------------------------------- | ------------------ | ------------------------------------------------------------------------------------------- |
+| Kokoro TTS (hexgrad)    | ~85-92%         | Good (Apple Silicon via MLX-Audio) | Apache 2.0         | Single anonymous maintainer; PyTorch pickle format can execute arbitrary code on model load |
+| Piper TTS (rhasspy/OHF) | ~75-80%         | Native ARM64 binary                | GPL-3.0 (new fork) | Original repo archived Oct 2025; GPL license incompatible with closed-source                |
+| F5-TTS                  | Excellent       | Poor (known audio issues on macOS) | -                  | Requires reference audio; macOS-specific bugs                                               |
+| StyleTTS2               | Excellent       | Moderate                           | -                  | Complex setup                                                                               |
+| Bark (Suno)             | Very natural    | Poor                               | -                  | Requires 12GB VRAM                                                                          |
+| XTTS-v2 (Coqui)         | Great           | Moderate                           | -                  | Coqui shutdown Jan 2024; fragmented forks                                                   |
 
 ## Enterprise/commercial TTS options
 

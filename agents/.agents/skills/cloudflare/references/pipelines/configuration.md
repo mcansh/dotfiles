@@ -91,18 +91,18 @@ curl -X POST "$BASE_URL/pipelines" -H "Authorization: Bearer $API_TOKEN" \
 
 **REST field names ≠ CLI flags** (common failure — not obvious from docs):
 
-| REST (config body) | CLI flag | Gotcha |
-|--------------------|----------|--------|
-| `"type": "r2_data_catalog"` | `--type r2-data-catalog` | underscores vs hyphens |
-| `"table_name"` | `--table` | different key |
-| `"token"` | `--catalog-token` | different key |
-| `"format": {"type": "parquet"}` | (implied) | required in REST, omitted in CLI |
+| REST (config body)              | CLI flag                 | Gotcha                           |
+| ------------------------------- | ------------------------ | -------------------------------- |
+| `"type": "r2_data_catalog"`     | `--type r2-data-catalog` | underscores vs hyphens           |
+| `"table_name"`                  | `--table`                | different key                    |
+| `"token"`                       | `--catalog-token`        | different key                    |
+| `"format": {"type": "parquet"}` | (implied)                | required in REST, omitted in CLI |
 
 ## Worker Binding
 
 ```jsonc
 // wrangler.jsonc
-{ "pipelines": [ { "stream": "<STREAM_ID>", "binding": "MY_STREAM" } ] }
+{ "pipelines": [{ "stream": "<STREAM_ID>", "binding": "MY_STREAM" }] }
 ```
 
 > Binding field is `"stream"` as of June 2026 (was `"pipeline"`, still accepted). Use the **stream ID** (`wrangler pipelines streams list`), not the pipeline ID. Redeploy after adding. Generate typed bindings with `npx wrangler types` → `Pipeline<Cloudflare.MyStreamRecord>` from `cloudflare:pipelines`.
@@ -144,11 +144,11 @@ resource "cloudflare_pipeline" "my_pipeline" {
 
 ## Credentials
 
-| Type | Permission |
-|------|------------|
-| Catalog token (Iceberg sink) | R2 Storage Admin R&W + R2 Data Catalog R&W |
-| R2 credentials (raw sink) | Object Read & Write |
-| HTTP ingest token | Workers Pipelines Send (only if stream auth enabled) |
+| Type                         | Permission                                           |
+| ---------------------------- | ---------------------------------------------------- |
+| Catalog token (Iceberg sink) | R2 Storage Admin R&W + R2 Data Catalog R&W           |
+| R2 credentials (raw sink)    | Object Read & Write                                  |
+| HTTP ingest token            | Workers Pipelines Send (only if stream auth enabled) |
 
 ## See Also
 

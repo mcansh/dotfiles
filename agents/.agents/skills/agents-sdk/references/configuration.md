@@ -13,19 +13,17 @@ Fetch https://developers.cloudflare.com/agents/api-reference/configuration/ for 
   "durable_objects": {
     "bindings": [
       { "name": "MyAgent", "class_name": "MyAgent" },
-      { "name": "ChatAgent", "class_name": "ChatAgent" }
-    ]
+      { "name": "ChatAgent", "class_name": "ChatAgent" },
+    ],
   },
-  "migrations": [
-    { "tag": "v1", "new_sqlite_classes": ["MyAgent", "ChatAgent"] }
-  ],
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["MyAgent", "ChatAgent"] }],
   "ai": { "binding": "AI" },
   "assets": {
     "directory": "./dist/client",
     "binding": "ASSETS",
     "not_found_handling": "single-page-application",
-    "run_worker_first": true
-  }
+    "run_worker_first": true,
+  },
 }
 ```
 
@@ -47,7 +45,7 @@ import { cloudflare } from "@cloudflare/vite-plugin";
 import { agents } from "agents/vite";
 
 export default defineConfig({
-  plugins: [react(), cloudflare(), agents()]
+  plugins: [react(), cloudflare(), agents()],
 });
 ```
 
@@ -67,6 +65,6 @@ Extend the agents tsconfig for correct settings:
 {
   "extends": ["agents/tsconfig"],
   "include": ["src/**/*.ts", "src/**/*.tsx"],
-  "compilerOptions": { "paths": { "~/*": ["./src/*"] } }
+  "compilerOptions": { "paths": { "~/*": ["./src/*"] } },
 }
 ```

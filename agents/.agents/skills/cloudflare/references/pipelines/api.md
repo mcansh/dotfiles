@@ -6,15 +6,19 @@ Code templates and verified behavior. For the full SQL function set and HTTP sta
 
 ```typescript
 // from cloudflare:pipelines / @cloudflare/workers-types
-interface Pipeline<T = any> { send(records: T[]): Promise<void>; }
+interface Pipeline<T = any> {
+  send(records: T[]): Promise<void>;
+}
 
-interface Env { MY_STREAM: Pipeline; }
+interface Env {
+  MY_STREAM: Pipeline;
+}
 
 export default {
   async fetch(req: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     await env.MY_STREAM.send([{ event_id: crypto.randomUUID(), amount: 29.99 }]);
     return new Response("OK");
-  }
+  },
 } satisfies ExportedHandler<Env>;
 ```
 
@@ -69,11 +73,11 @@ curl -X DELETE "$BASE_URL/streams/{id}"   -H "Authorization: Bearer $API_TOKEN"
 
 ### Pipeline Lifecycle States
 
-| Status | Meaning |
-|--------|---------|
-| `running` | Active, processing events |
-| `initializing` | Starting up (minutes after creation or recovery) |
-| `failed` | Stopped on error — check `failure_reason` (expired token, deleted bucket, disabled catalog) |
+| Status         | Meaning                                                                                     |
+| -------------- | ------------------------------------------------------------------------------------------- |
+| `running`      | Active, processing events                                                                   |
+| `initializing` | Starting up (minutes after creation or recovery)                                            |
+| `failed`       | Stopped on error — check `failure_reason` (expired token, deleted bucket, disabled catalog) |
 
 > A `GET` on a sink shows `schema.fields: []` — expected. The sink inherits schema from the stream via the pipeline SQL.
 

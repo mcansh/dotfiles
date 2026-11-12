@@ -11,6 +11,7 @@ Merge an entire PR stack in a single operation. PR stacks with rebase+squash mer
 MEDIUM FREEDOM — The merge-master-then-merge-PR cycle is rigid. Stack detection and conflict resolution adapt to context.
 
 **Rigid (no exceptions):**
+
 - Always merge master with `--no-ff` (merge commits preserve PR approvals)
 - Always re-fetch master after each PR merge (master changes after each squash)
 - Always check PR approval status before merging
@@ -20,25 +21,28 @@ MEDIUM FREEDOM — The merge-master-then-merge-PR cycle is rigid. Stack detectio
 - Never use blind `--ours` conflict resolution
 
 **Flexible (adapt to context):**
+
 - Stack detection method (auto-detect from open PRs, or user provides PR numbers)
 - Conflict resolution approach (Claude reads and resolves intelligently, flags surprises)
 - Merge strategy passed to API (default: squash)
-</rigidity_level>
+  </rigidity_level>
 
 <when_to_use>
 **Manual invocation:** User calls `/uwm-classic-sdlc:merge-pr-stack` or asks to "merge the PR stack" or "merge approved PRs".
 
 **Use when ALL of these are true:**
+
 1. A repository has multiple open PRs forming a stack (each PR targets the previous PR's source branch, with the bottom PR targeting master)
 2. PRs in the stack are approved and ready to merge
 3. The repo uses a rebase+squash merge strategy (or any strategy where merging changes commit hashes)
 
 **Do NOT use when:**
+
 - There is only a single PR to merge (just merge it directly)
 - PRs are independent (not stacked — they all target master independently)
 - PRs are not yet approved
 - The user wants to merge a specific single PR (use the merge tool directly)
-</when_to_use>
+  </when_to_use>
 
 <the_process>
 
@@ -51,12 +55,14 @@ git remote get-url origin
 ```
 
 **SSH format:** `ssh://git@code.uwm.com:7999/{projectKey}/{repoSlug}.git`
+
 - Extract the path after `:7999/`
 - Split on `/` to get projectKey and repoSlug
 - Strip `.git` suffix from repoSlug
 - Personal repos: `ssh://git@code.uwm.com:7999/~ykopstein/cy-claude-mcp.git` -> projectKey=`~ykopstein`, repoSlug=`cy-claude-mcp`
 
 **HTTPS format:** `https://code.uwm.com/scm/{projectKey}/{repoSlug}.git`
+
 - Extract the path after `/scm/`
 - Split on `/` to get projectKey and repoSlug
 - Strip `.git` suffix from repoSlug
@@ -91,6 +97,7 @@ If this fails (e.g., `origin/HEAD` is not set), fall back to `master`. Store the
 3. The longest chain starting from master is the stack.
 
 **Example:** Given these open PRs:
+
 - PR #1: `feature/A` -> `master`
 - PR #2: `feature/B` -> `feature/A`
 - PR #3: `feature/C` -> `feature/B`
@@ -107,6 +114,7 @@ The stack is: [PR #1, PR #2, PR #3] (bottom to top).
 ## Step 3: Check Approval Status
 
 For each PR in the stack (bottom to top), use `get_pull_request_details` to check:
+
 - PR state is OPEN
 - PR has at least one APPROVED reviewer
 - PR has no open tasks/blockers (check the activities or task count if available)
@@ -181,6 +189,7 @@ git merge origin/master --no-ff -m "Merge origin/master into {sourceBranch}"
 **DO NOT use blind `git checkout --ours` or `--theirs`.**
 
 Instead:
+
 1. List conflicting files: `git diff --name-only --diff-filter=U`
 2. For each conflicting file, read the conflict markers
 3. Understand the intent of both sides:
@@ -201,24 +210,31 @@ UNEXPECTED CONFLICT in {file}:
 After resolving all conflicts:
 
 1. Verify no conflict markers remain in the resolved files:
+
 ```bash
 git diff --check
 ```
+
 If this reports conflict markers, resolution is incomplete — go back and fix.
 
 2. Stage only the resolved files (not all files in the worktree):
+
 ```bash
 git add {resolved_file_1} {resolved_file_2} ...
 ```
+
 Use the file paths from step 4d.1 (the conflict list). Do **not** use `git add -A` — it stages untracked files, editor swap files, IDE metadata, and build artifacts.
 
 3. Verify no unmerged files remain:
+
 ```bash
 git ls-files -u
 ```
+
 If this returns any output, there are still unresolved conflicts — go back and fix.
 
 4. Complete the merge commit:
+
 ```bash
 git commit --no-edit
 ```
@@ -244,6 +260,7 @@ strategyId: {mergeStrategy}  # Default: squash. Adapt to the repo's configured m
 **If merge fails:** Stop immediately. Report the error and which PR failed. Do not continue with the remaining stack.
 
 **If merge succeeds:** Report progress:
+
 ```
 Merged PR #{id}: {title} ({current}/{total})
 ```
@@ -270,6 +287,7 @@ PR Stack Merge Complete:
 ```
 
 If all PRs merged successfully:
+
 ```
 PR Stack Merge Complete: All {N} PRs merged successfully.
 ```
@@ -294,11 +312,11 @@ PR Stack Merge Complete: All {N} PRs merged successfully.
 
 The skill must handle these URL formats:
 
-| Format | Pattern | Example |
-|--------|---------|---------|
-| SSH | `ssh://git@code.uwm.com:7999/{key}/{slug}.git` | `ssh://git@code.uwm.com:7999/EH/allin-ui.git` |
+| Format         | Pattern                                          | Example                                                    |
+| -------------- | ------------------------------------------------ | ---------------------------------------------------------- |
+| SSH            | `ssh://git@code.uwm.com:7999/{key}/{slug}.git`   | `ssh://git@code.uwm.com:7999/EH/allin-ui.git`              |
 | SSH (personal) | `ssh://git@code.uwm.com:7999/~{user}/{slug}.git` | `ssh://git@code.uwm.com:7999/~ykopstein/cy-claude-mcp.git` |
-| HTTPS | `https://code.uwm.com/scm/{key}/{slug}.git` | `https://code.uwm.com/scm/EH/allin-ui.git` |
+| HTTPS          | `https://code.uwm.com/scm/{key}/{slug}.git`      | `https://code.uwm.com/scm/EH/allin-ui.git`                 |
 
 Always strip `.git` suffix from the slug. Personal repo project keys start with `~`.
 
@@ -307,21 +325,25 @@ Always strip `.git` suffix from the slug. Personal repo project keys start with 
 <integration>
 
 **This skill is called by:**
+
 - Direct user invocation via `/uwm-classic-sdlc:merge-pr-stack`
 - User requests like "merge the PR stack", "merge approved PRs in the stack"
 
 **This skill uses these MCP tools (from uwm-enterprise-mcp plugin):**
+
 - `mcp__plugin_uwm-enterprise-mcp_bitbucket__list_pull_requests` — Discover all open PRs in the repository
 - `mcp__plugin_uwm-enterprise-mcp_bitbucket__get_pull_request_details` — Check approval status and get branch info for each PR
 - `mcp__plugin_uwm-enterprise-mcp_bitbucket__merge_pull_request` — Merge each PR via Bitbucket API with squash strategy
 
 **Prerequisites:**
+
 - The `uwm-enterprise-mcp` plugin must be installed (provides Bitbucket MCP tools)
 - A valid `BITBUCKET_TOKEN` must be configured in `~/.uwm-mcp-shared/config.json`
 - The token must have merge permissions on the target repository
 - Git must be configured with push access to the repository
 
 **This skill replaces:**
+
 - The old `.claude/commands/merge-from-master.md` workspace command (which only merged master into a single PR's branch without merging the PR itself)
 
 </integration>

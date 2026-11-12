@@ -77,6 +77,7 @@ echo '{}'
 ```
 
 **Configuration (`hooks.json`):**
+
 ```json
 {
   "hooks": [
@@ -290,75 +291,78 @@ echo '{}'
 ```javascript
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
 // Load skill rules
-const rulesPath = process.env.SKILL_RULES || path.join(process.env.HOME, '.claude/skill-rules.json');
-const rules = JSON.parse(fs.readFileSync(rulesPath, 'utf8'));
+const rulesPath =
+  process.env.SKILL_RULES || path.join(process.env.HOME, ".claude/skill-rules.json");
+const rules = JSON.parse(fs.readFileSync(rulesPath, "utf8"));
 
 // Read prompt from stdin
-let promptData = '';
-process.stdin.on('data', chunk => {
-    promptData += chunk;
+let promptData = "";
+process.stdin.on("data", (chunk) => {
+  promptData += chunk;
 });
 
-process.stdin.on('end', () => {
-    const prompt = JSON.parse(promptData);
-    const activatedSkills = analyzePrompt(prompt.text);
+process.stdin.on("end", () => {
+  const prompt = JSON.parse(promptData);
+  const activatedSkills = analyzePrompt(prompt.text);
 
-    if (activatedSkills.length > 0) {
-        const context = generateContext(activatedSkills);
-        console.log(JSON.stringify({
-            decision: 'approve',
-            additionalContext: context
-        }));
-    } else {
-        console.log(JSON.stringify({ decision: 'approve' }));
-    }
+  if (activatedSkills.length > 0) {
+    const context = generateContext(activatedSkills);
+    console.log(
+      JSON.stringify({
+        decision: "approve",
+        additionalContext: context,
+      }),
+    );
+  } else {
+    console.log(JSON.stringify({ decision: "approve" }));
+  }
 });
 
 function analyzePrompt(text) {
-    const lowerText = text.toLowerCase();
-    const activated = [];
+  const lowerText = text.toLowerCase();
+  const activated = [];
 
-    for (const [skillName, config] of Object.entries(rules)) {
-        // Check keywords
-        if (config.promptTriggers?.keywords) {
-            for (const keyword of config.promptTriggers.keywords) {
-                if (lowerText.includes(keyword.toLowerCase())) {
-                    activated.push({ skill: skillName, priority: config.priority || 'medium' });
-                    break;
-                }
-            }
+  for (const [skillName, config] of Object.entries(rules)) {
+    // Check keywords
+    if (config.promptTriggers?.keywords) {
+      for (const keyword of config.promptTriggers.keywords) {
+        if (lowerText.includes(keyword.toLowerCase())) {
+          activated.push({ skill: skillName, priority: config.priority || "medium" });
+          break;
         }
-
-        // Check intent patterns
-        if (config.promptTriggers?.intentPatterns) {
-            for (const pattern of config.promptTriggers.intentPatterns) {
-                if (new RegExp(pattern, 'i').test(text)) {
-                    activated.push({ skill: skillName, priority: config.priority || 'medium' });
-                    break;
-                }
-            }
-        }
+      }
     }
 
-    // Sort by priority
-    return activated.sort((a, b) => {
-        const priorityOrder = { high: 0, medium: 1, low: 2 };
-        return priorityOrder[a.priority] - priorityOrder[b.priority];
-    });
+    // Check intent patterns
+    if (config.promptTriggers?.intentPatterns) {
+      for (const pattern of config.promptTriggers.intentPatterns) {
+        if (new RegExp(pattern, "i").test(text)) {
+          activated.push({ skill: skillName, priority: config.priority || "medium" });
+          break;
+        }
+      }
+    }
+  }
+
+  // Sort by priority
+  return activated.sort((a, b) => {
+    const priorityOrder = { high: 0, medium: 1, low: 2 };
+    return priorityOrder[a.priority] - priorityOrder[b.priority];
+  });
 }
 
 function generateContext(skills) {
-    const skillList = skills.map(s => s.skill).join(', ');
+  const skillList = skills.map((s) => s.skill).join(", ");
 
-    return `
+  return `
 🎯 SKILL ACTIVATION CHECK
 
 The following skills may be relevant to this prompt:
-${skills.map(s => `- **${s.skill}** (${s.priority} priority)`).join('\n')}
+${skills.map((s) => `- **${s.skill}** (${s.priority} priority)`).join("\n")}
 
 Before responding, check if any of these skills should be used.
 `;
@@ -366,6 +370,7 @@ Before responding, check if any of these skills should be used.
 ```
 
 **Configuration (`skill-rules.json`):**
+
 ```json
 {
   "backend-dev-guidelines": {
@@ -531,6 +536,7 @@ echo '{"decision": "allow"}'
 ## Testing These Examples
 
 ### Test Edit Tracker
+
 ```bash
 # Create test log entry
 echo "2025-01-15 10:30:00 | frontend | /path/to/file.ts" > ~/.claude/edit-log.txt
@@ -540,6 +546,7 @@ bash ~/.claude/hooks/stop/30-format-code.sh
 ```
 
 ### Test Build Checker
+
 ```bash
 # Add some edits to log
 echo "2025-01-15 10:30:00 | backend | /path/to/backend/file.ts" >> ~/.claude/edit-log.txt
@@ -549,6 +556,7 @@ bash ~/.claude/hooks/stop/20-build-checker.sh
 ```
 
 ### Test Skill Activator
+
 ```bash
 # Test with mock prompt
 echo '{"text": "How do I create a new API endpoint?"}' | node ~/.claude/hooks/user-prompt-submit/skill-activator.js
@@ -557,6 +565,7 @@ echo '{"text": "How do I create a new API endpoint?"}' | node ~/.claude/hooks/us
 ## Debugging Tips
 
 **Enable debug mode:**
+
 ```bash
 # Add to top of any bash script
 set -x
@@ -564,12 +573,14 @@ exec 2>>~/.claude/hooks/debug.log
 ```
 
 **Check hook execution:**
+
 ```bash
 # Watch hooks run in real-time
 tail -f ~/.claude/logs/hooks.log
 ```
 
 **Test hook output:**
+
 ```bash
 # Capture output
 bash ~/.claude/hooks/stop/20-build-checker.sh > /tmp/hook-test.log 2>&1

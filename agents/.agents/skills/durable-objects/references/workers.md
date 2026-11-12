@@ -17,33 +17,25 @@ High-level guidance for Workers that invoke Durable Objects.
   "durable_objects": {
     "bindings": [
       { "name": "CHAT_ROOM", "class_name": "ChatRoom" },
-      { "name": "USER_SESSION", "class_name": "UserSession" }
-    ]
+      { "name": "USER_SESSION", "class_name": "UserSession" },
+    ],
   },
 
-  "migrations": [
-    { "tag": "v1", "new_sqlite_classes": ["ChatRoom", "UserSession"] }
-  ],
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["ChatRoom", "UserSession"] }],
 
   // Environment variables
   "vars": {
-    "ENVIRONMENT": "production"
+    "ENVIRONMENT": "production",
   },
 
   // KV namespaces
-  "kv_namespaces": [
-    { "binding": "CONFIG", "id": "abc123" }
-  ],
+  "kv_namespaces": [{ "binding": "CONFIG", "id": "abc123" }],
 
   // R2 buckets
-  "r2_buckets": [
-    { "binding": "UPLOADS", "bucket_name": "my-uploads" }
-  ],
+  "r2_buckets": [{ "binding": "UPLOADS", "bucket_name": "my-uploads" }],
 
   // D1 databases
-  "d1_databases": [
-    { "binding": "DB", "database_id": "xyz789" }
-  ]
+  "d1_databases": [{ "binding": "DB", "database_id": "xyz789" }],
 }
 ```
 
@@ -172,7 +164,7 @@ async function handleSendMessage(request: Request, env: Env): Promise<Response> 
   if (!result.success) {
     return Response.json(
       { error: "Validation failed", details: result.error.issues },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -188,12 +180,14 @@ async function handleSendMessage(request: Request, env: Env): Promise<Response> 
 
 ```typescript
 function log(level: "info" | "warn" | "error", message: string, data?: Record<string, unknown>) {
-  console.log(JSON.stringify({
-    level,
-    message,
-    timestamp: new Date().toISOString(),
-    ...data,
-  }));
+  console.log(
+    JSON.stringify({
+      level,
+      message,
+      timestamp: new Date().toISOString(),
+      ...data,
+    }),
+  );
 }
 
 // Usage
@@ -236,9 +230,7 @@ For production logging, use Tail Workers to forward logs:
 ```jsonc
 // wrangler.jsonc
 {
-  "tail_consumers": [
-    { "service": "log-collector" }
-  ]
+  "tail_consumers": [{ "service": "log-collector" }],
 }
 ```
 
@@ -255,10 +247,7 @@ async function callDO(stub: DurableObjectStub<ChatRoom>, method: string): Promis
     if (error instanceof Error) {
       // DO threw an error
       log("error", "DO operation failed", { error: error.message });
-      return Response.json(
-        { error: "Service temporarily unavailable" },
-        { status: 503 }
-      );
+      return Response.json({ error: "Service temporarily unavailable" }, { status: 503 });
     }
     throw error;
   }
@@ -270,7 +259,7 @@ async function callDO(stub: DurableObjectStub<ChatRoom>, method: string): Promis
 ```typescript
 async function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
   const timeout = new Promise<never>((_, reject) =>
-    setTimeout(() => reject(new Error("Timeout")), ms)
+    setTimeout(() => reject(new Error("Timeout")), ms),
   );
   return Promise.race([promise, timeout]);
 }
@@ -297,11 +286,11 @@ export default {
     }
 
     const response = await handleRequest(request, env);
-    
+
     // Add CORS headers to response
     const newHeaders = new Headers(response.headers);
     Object.entries(corsHeaders()).forEach(([k, v]) => newHeaders.set(k, v));
-    
+
     return new Response(response.body, {
       status: response.status,
       headers: newHeaders,
@@ -320,6 +309,7 @@ wrangler secret put DATABASE_URL
 ```
 
 Access in code:
+
 ```typescript
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {

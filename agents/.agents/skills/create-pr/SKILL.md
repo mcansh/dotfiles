@@ -107,7 +107,7 @@ Adds ChatUWM-facing API support for retrieving CMS page data and rendering CMS e
 - Added `/api/chatuwm-data` POST endpoint for Contentstack update/create/delete webhook events.
 - Added `/api/md/[[...slug]]` route that returns sanitized `text/plain` Markdown for pages, dashboard content, and trending entries.
 - Added `utilities/json-to-markdown.ts` for rendering CMS JSON, rich text, tables, media, timelines, dashboard sections, broker rankings,
-tabs, and trending cards.
+  tabs, and trending cards.
 - Moved `createEntryUrl` into shared utilities.
 - Converted Vitest setup/config files to TypeScript.
 - Corrected cookie header formatting expectations.

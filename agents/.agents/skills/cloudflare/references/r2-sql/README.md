@@ -6,25 +6,25 @@ Serverless, distributed, **read-only** query engine (Apache DataFusion) for Apac
 
 For full function lists, data types, and pricing, **retrieve the live docs** — use the Cloudflare MCP `docs` tool if available, otherwise `webfetch`.
 
-| Topic | URL |
-|-------|-----|
-| Overview / get started | `https://developers.cloudflare.com/r2-sql/get-started/` |
-| Query data | `https://developers.cloudflare.com/r2-sql/query-data/` |
-| SQL reference | `https://developers.cloudflare.com/r2-sql/sql-reference/` |
-| Aggregate functions | `https://developers.cloudflare.com/r2-sql/sql-reference/aggregate-functions/` |
-| Scalar functions | `https://developers.cloudflare.com/r2-sql/sql-reference/scalar-functions/` |
-| Complex types | `https://developers.cloudflare.com/r2-sql/sql-reference/complex-types/` |
+| Topic                        | URL                                                                              |
+| ---------------------------- | -------------------------------------------------------------------------------- |
+| Overview / get started       | `https://developers.cloudflare.com/r2-sql/get-started/`                          |
+| Query data                   | `https://developers.cloudflare.com/r2-sql/query-data/`                           |
+| SQL reference                | `https://developers.cloudflare.com/r2-sql/sql-reference/`                        |
+| Aggregate functions          | `https://developers.cloudflare.com/r2-sql/sql-reference/aggregate-functions/`    |
+| Scalar functions             | `https://developers.cloudflare.com/r2-sql/sql-reference/scalar-functions/`       |
+| Complex types                | `https://developers.cloudflare.com/r2-sql/sql-reference/complex-types/`          |
 | Limitations & best practices | `https://developers.cloudflare.com/r2-sql/reference/limitations-best-practices/` |
-| Wrangler commands | `https://developers.cloudflare.com/r2-sql/reference/wrangler-commands/` |
-| Pricing | `https://developers.cloudflare.com/r2-sql/platform/pricing/` |
+| Wrangler commands            | `https://developers.cloudflare.com/r2-sql/reference/wrangler-commands/`          |
+| Pricing                      | `https://developers.cloudflare.com/r2-sql/platform/pricing/`                     |
 
 ## Connection Values
 
-| Value | Format |
-|-------|--------|
+| Value         | Format                                                                                     |
+| ------------- | ------------------------------------------------------------------------------------------ |
 | REST endpoint | `https://api.sql.cloudflarestorage.com/api/v1/accounts/{ACCOUNT_ID}/r2-sql/query/{BUCKET}` |
-| Wrangler | `npx wrangler r2 sql query "{WAREHOUSE}" "<SQL>"` with `WRANGLER_R2_SQL_AUTH_TOKEN` set |
-| Warehouse | `{ACCOUNT_ID}_{BUCKET}` |
+| Wrangler      | `npx wrangler r2 sql query "{WAREHOUSE}" "<SQL>"` with `WRANGLER_R2_SQL_AUTH_TOKEN` set    |
+| Warehouse     | `{ACCOUNT_ID}_{BUCKET}`                                                                    |
 
 > The REST endpoint is `api.sql.cloudflarestorage.com` — **not** `api.cloudflare.com/.../r2/sql`.
 

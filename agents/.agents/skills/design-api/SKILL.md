@@ -13,29 +13,30 @@ MEDIUM FREEDOM - REST conventions (kebab-case, v{integer} versioning) and API se
 
 <quick_reference>
 
-| Aspect | Standard | Example |
-|--------|----------|---------|
-| Resource naming | kebab-case, plural nouns | `/v1/loan-conditions` |
-| Versioning | `v{integer}` URL path prefix | `/v1/`, `/v2/` |
-| Versioning package | `Asp.Versioning.Mvc.ApiExplorer` 8.1.0 | `[ApiVersion("1")]` |
-| HTTP verbs | GET=read, POST=create, PUT=replace, PATCH=update, DELETE=remove | Standard REST |
-| Query params | camelCase | `?pageSize=25&sortBy=createdDate` |
-| Error responses | RFC 7807 ProblemDetails | `new ProblemDetails { Title = "...", Status = 400 }` |
-| Long-running ops | Prefer Kafka async; HTTP 202 if must be HTTP | POST returns 202 |
-| Request validation | `FluentValidation.AspNetCore` 11.3.x | `RuleFor(x => x.Name).NotEmpty()` |
-| API docs | `Swashbuckle.AspNetCore` 6.6.x+ | Auto-generated Swagger UI |
-| Controller base | `ControllerBase` with `[ApiController]` | Enables auto model validation |
+| Aspect             | Standard                                                        | Example                                              |
+| ------------------ | --------------------------------------------------------------- | ---------------------------------------------------- |
+| Resource naming    | kebab-case, plural nouns                                        | `/v1/loan-conditions`                                |
+| Versioning         | `v{integer}` URL path prefix                                    | `/v1/`, `/v2/`                                       |
+| Versioning package | `Asp.Versioning.Mvc.ApiExplorer` 8.1.0                          | `[ApiVersion("1")]`                                  |
+| HTTP verbs         | GET=read, POST=create, PUT=replace, PATCH=update, DELETE=remove | Standard REST                                        |
+| Query params       | camelCase                                                       | `?pageSize=25&sortBy=createdDate`                    |
+| Error responses    | RFC 7807 ProblemDetails                                         | `new ProblemDetails { Title = "...", Status = 400 }` |
+| Long-running ops   | Prefer Kafka async; HTTP 202 if must be HTTP                    | POST returns 202                                     |
+| Request validation | `FluentValidation.AspNetCore` 11.3.x                            | `RuleFor(x => x.Name).NotEmpty()`                    |
+| API docs           | `Swashbuckle.AspNetCore` 6.6.x+                                 | Auto-generated Swagger UI                            |
+| Controller base    | `ControllerBase` with `[ApiController]`                         | Enables auto model validation                        |
 
 </quick_reference>
 
 <when_to_use>
+
 - Planning new endpoints for a v3 business service
 - Designing request/response DTOs
 - Deciding between synchronous HTTP and asynchronous (Kafka) communication
 - Reviewing existing API design against UWM standards
 - Planning bulk or long-running operations
 - NOT for: Implementation (use implement-feature), infrastructure setup (use integrate-infrastructure)
-</when_to_use>
+  </when_to_use>
 
 <the_process>
 
@@ -44,6 +45,7 @@ MEDIUM FREEDOM - REST conventions (kebab-case, v{integer} versioning) and API se
 Map business capabilities to REST resources. Use plural nouns (not verbs).
 
 **Standard (Confluence ITSTD):**
+
 - Resources SHOULD be nouns: `/v1/loan-conditions`, `/v1/borrowers`
 - For API Gateway: MUST use kebab-case
 - For internal services: SHOULD use kebab-case
@@ -106,6 +108,7 @@ public class LoanConditionsController : ControllerBase
 ```
 
 **Versioning rules:**
+
 - Version at beginning of path: `/v1/resource` (not `/resource/v1`)
 - Integer only: `v1`, `v2`, `v3` (no `v1.1` or `v1-beta`)
 - New version only for breaking changes (response shape changes, removed fields)
@@ -164,6 +167,7 @@ public class LoanConditionsController : ControllerBase
 ```
 
 **Key `[ApiController]` behaviors:**
+
 - Automatic model validation (returns 400 for invalid models)
 - Automatic `[FromBody]` inference for complex types
 - Automatic `[FromRoute]` / `[FromQuery]` inference for simple types
@@ -172,6 +176,7 @@ public class LoanConditionsController : ControllerBase
 ### Action Return Types
 
 Prefer `Task<IActionResult>` over direct DTO returns. This allows:
+
 - Returning different status codes
 - Using `[ProducesResponseType]` for Swagger documentation
 - Consistent error handling
@@ -279,6 +284,7 @@ public class ConditionProfile : Profile
 ```
 
 Register via assembly scanning:
+
 ```csharp
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 ```
@@ -424,12 +430,12 @@ public static WebApplication UseGlobalExceptionHandler(this WebApplication app)
 
 For each operation, decide the communication pattern:
 
-| Operation Type | Pattern | Example |
-|---------------|---------|---------|
-| Queries (< 1 sec) | Synchronous GET | `GET /v1/conditions/{loanNumber}` |
-| Fast mutations (< 1 sec) | Synchronous POST/PUT/PATCH | `POST /v1/conditions` |
-| Long-running (> 1 sec) | Kafka event | Publish event, consumer processes |
-| Must be HTTP but slow | HTTP 202 Accepted | POST returns 202, poll status endpoint |
+| Operation Type           | Pattern                    | Example                                |
+| ------------------------ | -------------------------- | -------------------------------------- |
+| Queries (< 1 sec)        | Synchronous GET            | `GET /v1/conditions/{loanNumber}`      |
+| Fast mutations (< 1 sec) | Synchronous POST/PUT/PATCH | `POST /v1/conditions`                  |
+| Long-running (> 1 sec)   | Kafka event                | Publish event, consumer processes      |
+| Must be HTTP but slow    | HTTP 202 Accepted          | POST returns 202, poll status endpoint |
 
 ### HTTP 202 Pattern (when Kafka not feasible)
 
@@ -592,10 +598,12 @@ public async Task<IActionResult> GetAll(
 <scenario>Designing a new conditions management API for cell-biz-conditions</scenario>
 
 **Step 1: Identify resources**
+
 - Primary resource: `loan-conditions`
 - Operations: CRUD + bulk update + rule evaluation
 
 **Step 2: Design endpoints**
+
 ```
 GET    /v1/loan-conditions/{loanNumber}           → Get all conditions for a loan
 GET    /v1/loan-conditions/{loanNumber}/{id}       → Get specific condition
@@ -607,6 +615,7 @@ POST   /v1/loan-conditions/bulk-update              → Bulk update (returns 202
 ```
 
 **Step 3: Design DTOs**
+
 ```csharp
 // Dto/V1/Conditions/CreateConditionRequest.cs
 public class CreateConditionRequest
@@ -632,6 +641,7 @@ public class ConditionResponse
 ```
 
 **Step 4: Add validation**
+
 ```csharp
 public class CreateConditionRequestValidator : AbstractValidator<CreateConditionRequest>
 {
@@ -644,6 +654,7 @@ public class CreateConditionRequestValidator : AbstractValidator<CreateCondition
     }
 }
 ```
+
 </example>
 
 <example>
@@ -749,16 +760,20 @@ Before completing API design:
 <integration>
 
 **This skill is called by:**
+
 - `develop-business-service` orchestrator (Phase 2)
 - Direct invocation via `/uwm-business-service-dev:design-api`
 
 **This skill should be used after:**
+
 - `create-v3-service` (Phase 1) — project exists and is provisioned
 
 **This skill should be used before:**
+
 - `implement-feature` (Phase 3) — API contract guides TDD implementation
 
 **Related skills:**
+
 - `integrate-infrastructure` — configures auth, database, Kafka that this skill designs against
 - `implement-feature` — implements the API contract designed here with TDD
 - `test-strategy` — tests the API through public endpoints
@@ -768,6 +783,7 @@ Before completing API design:
 <resources>
 
 **UWM packages referenced:**
+
 - `Asp.Versioning.Mvc.ApiExplorer` 8.1.0 — API versioning
 - `FluentValidation.AspNetCore` 11.3.x — Request validation
 - `Swashbuckle.AspNetCore` 6.6.2+ — Swagger/OpenAPI
@@ -775,11 +791,13 @@ Before completing API design:
 - `UWMC.Library.Logging` — PII/NPI masking attributes
 
 **Confluence references:**
+
 - "HTTP API Must Follow ReST" (ITSTD) — REST naming and versioning standards
 - "API Governance Strategy" (EArch) — Security requirements, RFC 7807, API-First design
 - Microsoft Azure REST API Guidelines — Default for anything not specified by UWM
 
 **Reference services:**
+
 - `cell-biz-borrower` (EH) — FluentValidation, versioned controllers, ProblemDetails
 - `cell-biz-condition` (EH) — DataAnnotations validation, stateless service
 - `cell-keystone` (GGF) — FluentValidation with rule sets, global exception handler

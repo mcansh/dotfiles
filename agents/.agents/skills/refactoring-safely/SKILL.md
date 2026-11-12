@@ -12,23 +12,27 @@ MEDIUM FREEDOM - Keep the change→test→document loop strict, but adapt the ex
 </rigidity_level>
 
 <quick_reference>
+
 1. Create or resume a refactor task directory
 2. Capture invariants and risks in `plan.md`
 3. Make one small change at a time
 4. Run tests between steps
 5. Update `context.md` and `tasks.md`
-</quick_reference>
+   </quick_reference>
 
 <when_to_use>
+
 - Behavior should stay the same
 - The current design is painful to change
 - You need a deliberate, reversible refactor path
-</when_to_use>
+  </when_to_use>
 
 <the_process>
+
 ## 1. Track the refactor
 
 Use task docs to capture:
+
 - invariants that must not change
 - risks
 - target design

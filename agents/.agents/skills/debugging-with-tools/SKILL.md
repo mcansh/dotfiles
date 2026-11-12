@@ -15,17 +15,18 @@ Can adapt tool choice to language/context. Never skip investigation or guess at 
 
 <quick_reference>
 
-| Phase | Tools to Use | Output |
-|-------|--------------|--------|
-| **1. Investigate** | Error messages, internet-researcher agent, debugger, codebase-investigator | Root cause understanding |
-| **2. Hypothesize** | Form theory based on evidence (not guesses) | Testable hypothesis |
-| **3. Test** | Validate hypothesis with minimal change | Confirms or rejects theory |
-| **4. Fix** | Implement proper fix for root cause | Problem solved permanently |
+| Phase              | Tools to Use                                                               | Output                     |
+| ------------------ | -------------------------------------------------------------------------- | -------------------------- |
+| **1. Investigate** | Error messages, internet-researcher agent, debugger, codebase-investigator | Root cause understanding   |
+| **2. Hypothesize** | Form theory based on evidence (not guesses)                                | Testable hypothesis        |
+| **3. Test**        | Validate hypothesis with minimal change                                    | Confirms or rejects theory |
+| **4. Fix**         | Implement proper fix for root cause                                        | Problem solved permanently |
 
 **FORBIDDEN:** Skip investigation → guess at fix → hope it works
 **REQUIRED:** Tools → evidence → hypothesis → test → fix
 
 **Key agents:**
+
 - `internet-researcher` - Search error messages, known bugs, solutions
 - `codebase-investigator` - Understand code structure, find related code
 - `test-runner` - Run tests without output pollution
@@ -34,6 +35,7 @@ Can adapt tool choice to language/context. Never skip investigation or guess at 
 
 <when_to_use>
 **Use for ANY technical issue:**
+
 - Test failures
 - Bugs in production or development
 - Unexpected behavior
@@ -42,11 +44,12 @@ Can adapt tool choice to language/context. Never skip investigation or guess at 
 - Performance problems
 
 **ESPECIALLY when:**
+
 - "Just one quick fix" seems obvious
 - Under time pressure (emergencies make guessing tempting)
 - Error message is unclear
 - Previous fix didn't work
-</when_to_use>
+  </when_to_use>
 
 <the_process>
 
@@ -64,6 +67,7 @@ Can adapt tool choice to language/context. Never skip investigation or guess at 
 ### 2. Search Internet FIRST (Use internet-researcher Agent)
 
 **Dispatch internet-researcher with:**
+
 ```
 "Search for error: [exact error message]
 - Check Stack Overflow solutions
@@ -73,6 +77,7 @@ Can adapt tool choice to language/context. Never skip investigation or guess at 
 ```
 
 **What agent should find:**
+
 - Exact matches to your error
 - Similar symptoms and solutions
 - Known bugs in your dependency versions
@@ -83,6 +88,7 @@ Can adapt tool choice to language/context. Never skip investigation or guess at 
 **Claude cannot run debuggers directly. Instead:**
 
 **Option A - Recommend debugger to user:**
+
 ```
 "Let's use lldb/gdb/DevTools to inspect state at error location.
 Please run: [specific commands]
@@ -91,6 +97,7 @@ Share output with me."
 ```
 
 **Option B - Add instrumentation Claude can add:**
+
 ```rust
 // Add logging
 println!("DEBUG: var = {:?}, state = {:?}", var, state);
@@ -102,6 +109,7 @@ assert!(condition, "Expected X but got {:?}", actual);
 ### 4. Investigate Codebase (Use codebase-investigator Agent)
 
 **Dispatch codebase-investigator with:**
+
 ```
 "Error occurs in function X at line Y.
 Find:
@@ -120,6 +128,7 @@ Find:
 3. **Make prediction** that tests the theory
 
 **Example:**
+
 ```
 Known: Error "null pointer" at auth.rs:45 when email is empty
 Theory: Empty email bypasses validation, passes null to login()
@@ -128,6 +137,7 @@ Test: Add validation, verify error doesn't occur with empty email
 ```
 
 **NEVER:**
+
 - Guess without evidence
 - Propose fix without hypothesis
 - Skip to "try this and see"
@@ -154,6 +164,7 @@ Test: Add validation, verify error doesn't occur with empty email
 5. Commit fix
 
 **The fix should:**
+
 - Address root cause (not symptom)
 - Be minimal and focused
 - Include test preventing regression
@@ -175,6 +186,7 @@ AssertionError: Expected Err(TokenExpired), got Ok(User)
 Developer thinks: "Obviously the token expiration check is wrong"
 
 Makes change without investigation:
+
 ```rust
 // "Fix" - just check if token is expired
 if token.expires_at < now() {
@@ -187,6 +199,7 @@ Commits without testing other cases.
 
 <why_it_fails>
 **No investigation:**
+
 - Didn't read error completely
 - Didn't check what `expires_at` contains
 - Didn't debug to see token state
@@ -209,6 +222,7 @@ Token: { expires_at: "2099-01-01", ... }
 ```
 
 **Dispatch internet-researcher:**
+
 ```
 "Search for: token expiration always showing future date
 - Check date parsing bugs
@@ -217,12 +231,14 @@ Token: { expires_at: "2099-01-01", ... }
 ```
 
 **Add instrumentation:**
+
 ```rust
 println!("DEBUG: expires_at = {:?}, now = {:?}, expired = {:?}",
          token.expires_at, now(), token.expires_at < now());
 ```
 
 **Run test again:**
+
 ```
 DEBUG: expires_at = 2099-01-01T00:00:00Z, now = 2024-01-15T10:30:00Z, expired = false
 ```
@@ -232,6 +248,7 @@ DEBUG: expires_at = 2099-01-01T00:00:00Z, now = 2024-01-15T10:30:00Z, expired = 
 
 **Phase 3 - Test:**
 Check token creation code:
+
 ```rust
 // Found the bug!
 fn create_token() -> Token {
@@ -243,6 +260,7 @@ fn create_token() -> Token {
 ```
 
 **Phase 4 - Fix root cause:**
+
 ```rust
 fn create_token(duration: Duration) -> Token {
     Token {
@@ -269,15 +287,18 @@ ld: symbol(s) not found for architecture arm64
 Developer thinks: "Must be a linking issue, I'll add flags"
 
 Spends 2 hours trying different linker flags:
+
 ```toml
 [target.aarch64-apple-darwin]
 rustflags = ["-C", "link-arg=-undefined dynamic_lookup"]
 # Doesn't work, tries more flags...
 ```
+
 </code>
 
 <why_it_fails>
 **Skipped internet search:**
+
 - This is a common error with known solutions
 - Stack Overflow has exact fix
 - Official docs explain the issue
@@ -297,6 +318,7 @@ rustflags = ["-C", "link-arg=-undefined dynamic_lookup"]
 ```
 
 **Agent returns (30 seconds):**
+
 ```
 Found on Stack Overflow (2.4k upvotes):
 This occurs when Xcode Command Line Tools aren't installed or outdated.
@@ -309,6 +331,7 @@ softwareupdate --all --install --force
 ```
 
 **Apply solution:**
+
 ```bash
 xcode-select --install
 # Wait for installation
@@ -329,6 +352,7 @@ Bug: Users can delete other users' posts
 Developer notices: DELETE /posts/:id doesn't check ownership
 
 "Fix":
+
 ```python
 @app.delete("/posts/{post_id}")
 def delete_post(post_id: int, user: User):
@@ -343,6 +367,7 @@ Bug "fixed"... but bug report comes back: "Users can edit other users' posts"
 
 <why_it_fails>
 **Symptom fix:**
+
 - Fixed DELETE endpoint
 - Didn't investigate root cause
 - Didn't check other endpoints
@@ -364,6 +389,7 @@ Bug "fixed"... but bug report comes back: "Users can edit other users' posts"
 ```
 
 **Agent reports:**
+
 ```
 Found:
 - DELETE /posts/:id - NO ownership check
@@ -377,6 +403,7 @@ Found:
 "Missing authorization layer. Need middleware checking resource ownership across ALL endpoints."
 
 **Phase 4 - Fix root cause:**
+
 ```python
 # Add authorization middleware
 class OwnershipMiddleware:
@@ -429,6 +456,7 @@ def update_post(...):
 ## Common Excuses
 
 All of these mean: Stop, use tools to investigate:
+
 - "The fix is obvious"
 - "I know what this is"
 - "Just a quick try"
@@ -441,6 +469,7 @@ All of these mean: Stop, use tools to investigate:
 <verification_checklist>
 
 Before proposing any fix:
+
 - [ ] Read complete error message (not just first line)
 - [ ] Dispatched internet-researcher for unclear errors
 - [ ] Used debugger or added instrumentation to inspect state
@@ -450,6 +479,7 @@ Before proposing any fix:
 - [ ] Verified hypothesis confirmed before fixing
 
 Before committing fix:
+
 - [ ] Written test reproducing bug (RED phase)
 - [ ] Verified test fails before fix
 - [ ] Implemented fix addressing root cause
@@ -461,17 +491,20 @@ Before committing fix:
 <integration>
 
 **This skill calls:**
+
 - internet-researcher (search errors, known bugs, solutions)
 - codebase-investigator (understand code structure, find related code)
 - test-driven-development (write test for bug, implement fix)
 - test-runner (run tests without output pollution)
 
 **This skill is called by:**
+
 - fixing-bugs (complete bug fix workflow)
 - root-cause-tracing (deep debugging for complex issues)
 - Any skill when encountering unexpected behavior
 
 **Agents used:**
+
 - hyperpowers:internet-researcher (search for error solutions)
 - hyperpowers:codebase-investigator (understand codebase context)
 - hyperpowers:test-runner (run tests, return summary only)
@@ -481,10 +514,12 @@ Before committing fix:
 <resources>
 
 **Detailed guides:**
+
 - [Debugger reference](resources/debugger-reference.md) - LLDB, GDB, DevTools commands
 - [Debugging session example](resources/debugging-session-example.md) - Complete walkthrough
 
 **When stuck:**
+
 - Error unclear → Dispatch internet-researcher with exact error text
 - Don't understand code flow → Dispatch codebase-investigator
 - Need to inspect runtime state → Recommend debugger to user or add instrumentation

@@ -13,18 +13,19 @@ LOW FREEDOM - The TDD cycle (RED-GREEN-REFACTOR) is rigid and must not be skippe
 
 <quick_reference>
 
-| Step | Action | Output | Key Rule |
-|------|--------|--------|----------|
-| 1. Understand | Read Jira story, identify business rules | List of rules to encode | Know what you're building |
-| 2. Specify | Write .feature file with scenarios | Specification document | NOT executable - spec only |
-| 3. Test (RED) | Derive xUnit tests from .feature | All new tests FAIL | If tests pass, they're tautological |
-| 4. Implement (GREEN) | Write minimum code to pass | All tests PASS | Fix implementation, not tests |
-| 5. Mutate | Run Stryker.NET on unit tests | Score >= 80 | Never run Stryker on integration tests |
-| 6. Refactor | Improve code, tests stay green | Clean code, tests pass | Re-run Stryker after significant changes |
-| 7. Coverage | Check via dotnet test --collect | >= 80% on new code | SonarQube enforces this gate |
-| 8. PII/NPI | Verify masking attributes | All sensitive fields masked | Use UWMC.Library.Logging attributes |
+| Step                 | Action                                   | Output                      | Key Rule                                 |
+| -------------------- | ---------------------------------------- | --------------------------- | ---------------------------------------- |
+| 1. Understand        | Read Jira story, identify business rules | List of rules to encode     | Know what you're building                |
+| 2. Specify           | Write .feature file with scenarios       | Specification document      | NOT executable - spec only               |
+| 3. Test (RED)        | Derive xUnit tests from .feature         | All new tests FAIL          | If tests pass, they're tautological      |
+| 4. Implement (GREEN) | Write minimum code to pass               | All tests PASS              | Fix implementation, not tests            |
+| 5. Mutate            | Run Stryker.NET on unit tests            | Score >= 80                 | Never run Stryker on integration tests   |
+| 6. Refactor          | Improve code, tests stay green           | Clean code, tests pass      | Re-run Stryker after significant changes |
+| 7. Coverage          | Check via dotnet test --collect          | >= 80% on new code          | SonarQube enforces this gate             |
+| 8. PII/NPI           | Verify masking attributes                | All sensitive fields masked | Use UWMC.Library.Logging attributes      |
 
 **Mock boundaries:**
+
 - OK to mock: `IRepository`, `IHttpClient`, `IMessageProducer`, `IFeatureFlagService` (infrastructure)
 - DO NOT mock: `IService`, `IOrchestrator`, `IValidator` (business logic)
 - Use REAL AutoMapper: `new MapperConfiguration(cfg => cfg.AddMaps(typeof(YourProfile))).CreateMapper()`
@@ -32,13 +33,14 @@ LOW FREEDOM - The TDD cycle (RED-GREEN-REFACTOR) is rigid and must not be skippe
 </quick_reference>
 
 <when_to_use>
+
 - Implementing new business logic in a v3 service
 - Adding new endpoints with business rules
 - Modifying existing business logic (requires tests first)
 - Any code that processes, transforms, or validates business data
 - Adding business rules to existing capabilities
 - NOT for: API design (use design-api), infrastructure setup (use integrate-infrastructure), integration/contract/E2E tests (use test-strategy), deployment (use prepare-deployment)
-</when_to_use>
+  </when_to_use>
 
 <the_process>
 
@@ -62,6 +64,7 @@ Create a .feature file in the test project's `Specifications/` directory. If the
 **CRITICAL: .feature files are SPECIFICATION DOCUMENTS. They are NOT executable tests. Do NOT install SpecFlow, Cucumber, Reqnroll, or any BDD test runner.**
 
 The .feature file serves as:
+
 - A human-readable description of business behavior
 - The source from which xUnit test cases are derived
 - Living documentation of what the service does
@@ -112,6 +115,7 @@ Feature: Add Loan Condition
 ```
 
 **Guidelines for .feature files:**
+
 - Include happy path, validation failures, edge cases, and error scenarios
 - Use realistic UWM business data (loan numbers, condition types, borrower scenarios)
 - Each scenario should map to one or more xUnit test methods
@@ -212,6 +216,7 @@ public class LoanConditionServiceTests
 ```
 
 **Key UWM test patterns:**
+
 - `MockBehavior.Strict` for repositories and key dependencies; Loose for loggers
 - REAL AutoMapper: `new MapperConfiguration(cfg => cfg.AddMaps(typeof(Profile))).CreateMapper()`
 - `[Fact]` for single cases, `[Theory]` + `[InlineData]` for parameterized
@@ -221,6 +226,7 @@ public class LoanConditionServiceTests
 - Verify calls: `_mock.Verify(r => r.Method(...), Times.Once)`
 
 **Run tests - ALL must FAIL (RED):**
+
 ```bash
 dotnet test test/UWMC.Business.[Name].Tests/UWMC.Business.[Name].Tests.csproj
 ```
@@ -278,6 +284,7 @@ public class LoanConditionService : ILoanConditionService
 ```
 
 **Implementation guidelines:**
+
 - Constructor DI, repository pattern, follow existing service patterns
 - Use AutoMapper if already configured; otherwise manual mapping (don't add AutoMapper for one feature)
 - Apply PII/NPI masking attributes on DTOs immediately (Step 8)
@@ -301,6 +308,7 @@ dotnet test test/UWMC.Business.[Name].Tests/UWMC.Business.[Name].Tests.csproj
 Run Stryker.NET on the **unit test project only**. Never run Stryker on integration or E2E tests.
 
 **If stryker-config.json exists** at the solution or test project level, use it:
+
 ```bash
 dotnet stryker
 ```
@@ -318,28 +326,32 @@ dotnet stryker
     "threshold-break": 50,
     "ignore-mutations": ["block"],
     "ignore-methods": [
-      "*Log", "*LogInformation", "*LogWarning", "*LogError",
-      "*LogTrace", "*LogDebug", "*LogCritical",
-      "ConfigureAwait", "Console.Write*",
-      "*Exception.ctor", "*BeginScope"
+      "*Log",
+      "*LogInformation",
+      "*LogWarning",
+      "*LogError",
+      "*LogTrace",
+      "*LogDebug",
+      "*LogCritical",
+      "ConfigureAwait",
+      "Console.Write*",
+      "*Exception.ctor",
+      "*BeginScope"
     ],
-    "mutate": [
-      "!**/Generated/**",
-      "!**/*.g.cs",
-      "!**/Program.cs",
-      "!**/Startup.cs"
-    ]
+    "mutate": ["!**/Generated/**", "!**/*.g.cs", "!**/Program.cs", "!**/Startup.cs"]
   }
 }
 ```
 
 **Run Stryker:**
+
 ```bash
 cd test/UWMC.Business.[Name].Tests
 dotnet stryker --open-report
 ```
 
 **For large test suites**, use incremental mutation testing:
+
 ```bash
 dotnet stryker --since:main
 ```
@@ -351,6 +363,7 @@ dotnet stryker --since:main
 Stryker replaces parts of your code with mutations (e.g., changing `==` to `!=`, `>` to `>=`, removing statements) and checks if your tests catch the change. A "surviving mutant" means your tests did NOT detect the mutation - your tests are weak for that code path.
 
 Example Stryker output:
+
 ```
 Mutation testing:  100% (345/345)    Killed: 290    Survived: 42    Timeout: 13
 Score: 83.8%
@@ -370,11 +383,13 @@ Surviving mutants:
 ```
 
 **Fixing surviving mutants:**
+
 1. For mutant #1: Add a test that specifically asserts active loans are accepted (not just that inactive ones are rejected)
 2. For mutant #2: Add `_mockRepository.Verify(r => r.ExistsAsync(...), Times.Once)` to the duplicate test
 3. For mutant #3: Add `Assert.Equal(ConditionStatus.Pending, result.Value.Status)` in the happy path test
 
 **Acceptable non-testable surviving mutants:**
+
 - Logging method call mutations (covered by `ignore-methods` config)
 - Exception constructor mutations
 - `ConfigureAwait` mutations
@@ -669,6 +684,7 @@ All 7 original tests must still pass alongside the 2 new tests.
 **Called by:** `develop-business-service` orchestrator (Phase 3: Implement)
 
 **Works with:**
+
 - `hyperpowers:test-driven-development` - TDD workflow aligns (RED-GREEN-REFACTOR cycle)
 - `hyperpowers:sre-task-refinement` - Validates test quality in task specs
 
@@ -683,16 +699,19 @@ All 7 original tests must still pass alongside the 2 new tests.
 <resources>
 
 **UWM Standards:**
+
 - Testing Bible: https://kb.uwm.com/display/TESTAUTO/Test+Automation
 - PII/NPI Masking: UWMC.Library.Logging documentation on Confluence
 
 **Tools:**
+
 - Stryker.NET: https://stryker-mutator.io/docs/stryker-net/introduction/
 - xUnit: https://xunit.net/docs/getting-started/netcore/cmdline
 - Moq: https://github.com/devlooped/moq
 - CompareNETObjects: https://github.com/GregFinzer/Compare-Net-Objects
 
 **UWM NuGet Packages (Unit Tests):**
+
 - `xunit` - Test framework
 - `xunit.runner.visualstudio` - VS test runner
 - `Moq` (4.x, pinned below 5.0) - Mocking framework
@@ -700,6 +719,7 @@ All 7 original tests must still pass alongside the 2 new tests.
 - `CompareNETObjects` - Deep object comparison for complex assertions
 
 **UWM NuGet Packages (Integration Tests - used in test-strategy phase):**
+
 - `UWMC.Library.Testing.AspNetCore` - WebApplicationFactory helpers
 - `UWMC.Library.Testing.MsSql` - SQL Server TestContainers
 - `UWMC.Library.Testing.WireMock` - WireMock HTTP mock server
@@ -710,6 +730,7 @@ All 7 original tests must still pass alongside the 2 new tests.
 **Gherkin Reference:** https://cucumber.io/docs/gherkin/reference/ (for .feature file syntax only - NOT for test execution)
 
 **Existing Service Examples:**
+
 - cell-biz-broker-preferences: Mature service with orchestrator-per-method test organization
 - cell-biz-condition: NRules-based business rules with JSON test data fixtures
 - cell-biz-borrower: Repository pattern with ComparisonHelper deep assertions

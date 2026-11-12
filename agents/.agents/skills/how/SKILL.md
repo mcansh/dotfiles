@@ -49,6 +49,7 @@ Spawn all explorers in a single message:
 - `readonly`: `true`
 
 Each explorer gets the same base prompt from `references/explorer-prompt.md`, plus a specific exploration angle telling it which slice to focus on. Each explorer should:
+
 - Start broad: Glob for relevant directories, Grep for key types/interfaces/class names
 - Follow the thread: once you find an entry point, trace the call chain — callers, callees, data flow, type definitions
 - Read the actual code, don't guess from file names
@@ -111,18 +112,20 @@ Run the full explain flow above (Steps 1-4). You need to understand the architec
 
 After the explanation is complete, spawn architectural critics. Launch all in a single message:
 
-| Subagent | Model |
-|----------|-------|
+| Subagent | Model             |
+| -------- | ----------------- |
 | Critic A | `claude-opus-4.6` |
-| Critic B | `composer-2` |
-| Critic C | `gpt-5.4` |
+| Critic B | `composer-2`      |
+| Critic C | `gpt-5.4`         |
 
 For each critic:
+
 - `subagent_type`: `generalPurpose`
 - `model`: the model from the table. These are starting suggestions — escalate to a higher reasoning tier of the same model family when the architecture warrants deeper analysis.
 - `readonly`: `true`
 
 Read `references/critic-prompt.md` for the prompt template. Each critic gets:
+
 1. The explanation from Step 1 (so they don't waste time re-exploring)
 2. The relevant file paths (so they can read the actual code)
 3. The architectural critique rubric from `references/critique-rubric.md`
@@ -132,6 +135,7 @@ Read `references/critic-prompt.md` for the prompt template. Each critic gets:
 You're a pragmatic lead, not an aggregator.
 
 Categorize findings:
+
 - **Act on** — Architectural problems worth fixing now
 - **Consider** — Real concerns, but the cost/benefit is unclear
 - **Noted** — Valid observations, low priority

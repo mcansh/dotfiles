@@ -12,11 +12,11 @@ Fetch the relevant documentation before implementing. Current Cloudflare docs ar
 
 ## Read by task
 
-| Task | Reference |
-|------|-----------|
+| Task                                                             | Reference                              |
+| ---------------------------------------------------------------- | -------------------------------------- |
 | Create secrets, configure bindings, or prepare local development | [configuration.md](./configuration.md) |
-| Read a secret in a Worker or automate management | [api.md](./api.md) |
-| Plan rotation, migration, encryption, or auditing | [patterns.md](./patterns.md) |
-| Diagnose access, deployment, or quota failures | [gotchas.md](./gotchas.md) |
+| Read a secret in a Worker or automate management                 | [api.md](./api.md)                     |
+| Plan rotation, migration, encryption, or auditing                | [patterns.md](./patterns.md)           |
+| Diagnose access, deployment, or quota failures                   | [gotchas.md](./gotchas.md)             |
 
 Fetch the [product overview](https://developers.cloudflare.com/secrets-store/) for current availability and supported integrations. For AI Gateway provider credentials, use [Bring your own keys](https://developers.cloudflare.com/ai-gateway/configuration/bring-your-own-keys/).

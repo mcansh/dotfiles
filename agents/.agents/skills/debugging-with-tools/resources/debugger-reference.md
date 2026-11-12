@@ -110,4 +110,3 @@ gdb ./myapp
 (gdb) continue
 (gdb) step / next
 ```
-

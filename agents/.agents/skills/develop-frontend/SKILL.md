@@ -7,19 +7,21 @@ description: Golden path orchestrator for frontend development at UWM — auto-d
 Orchestrates the complete frontend development workflow at UWM. This skill auto-detects the development context — are you in the allin-ui monorepo or a legacy SPA? Is this a new package or an existing one? Is it a UFA, SCL, or IAP? — then chains through the appropriate phase skills with standards checkpoints between each phase.
 
 **Phase skills (chained sequentially):**
+
 1. `create-allin-package` — Scaffold a new package (skipped if package exists)
 2. `design-ui-component` — Design DREAM-compliant components
 3. `implement-ui-feature` — TDD implementation with .feature specs
 4. `test-frontend` — Comprehensive test strategy (Stryker, Playwright, coverage)
 
 **This skill enforces UWM frontend standards continuously:**
+
 - Frontends contain ONLY user experience logic — zero business service logic
 - DREAM design system mandatory (lib-node-dream-ui)
 - GUP auth mandatory (lib-node-user-passport-component, already integrated in allin-ui)
 - Component taxonomy enforced (UFA/SCL/IAP with dependency rules)
 - Strict TDD with .feature specs as specifications
 - Coverage ≥80%, mutation score ≥80, build + tests under 1 minute per package
-</skill_overview>
+  </skill_overview>
 
 <rigidity_level>
 MEDIUM FREEDOM - Context detection checks and phase ordering are rigid. Standards checkpoints are non-negotiable. The specific content within each phase adapts to the detected context and the developer's needs. Phase skills define their own rigidity internally.
@@ -27,15 +29,16 @@ MEDIUM FREEDOM - Context detection checks and phase ordering are rigid. Standard
 
 <quick_reference>
 
-| Phase | Skill | When Skipped | Checkpoint |
-|-------|-------|-------------|------------|
-| **0. Detect** | (this skill) | Never | Context identified |
-| **1. Scaffold** | `create-allin-package` | Package already exists | Package structure valid |
-| **2. Design** | `design-ui-component` | N/A (always runs) | DREAM compliance |
-| **3. Implement** | `implement-ui-feature` | N/A (always runs) | TDD + business logic boundary |
-| **4. Test** | `test-frontend` | N/A (always runs) | Coverage + pipeline compliance |
+| Phase            | Skill                  | When Skipped           | Checkpoint                     |
+| ---------------- | ---------------------- | ---------------------- | ------------------------------ |
+| **0. Detect**    | (this skill)           | Never                  | Context identified             |
+| **1. Scaffold**  | `create-allin-package` | Package already exists | Package structure valid        |
+| **2. Design**    | `design-ui-component`  | N/A (always runs)      | DREAM compliance               |
+| **3. Implement** | `implement-ui-feature` | N/A (always runs)      | TDD + business logic boundary  |
+| **4. Test**      | `test-frontend`        | N/A (always runs)      | Coverage + pipeline compliance |
 
 **Context detection signals:**
+
 ```
 pnpm-workspace.yaml exists?      → allin-ui monorepo
 ufas/{name}/ directory?           → UFA
@@ -47,6 +50,7 @@ cell-ui-* naming?                 → legacy SPA (redirect)
 ```
 
 **Standards enforced continuously:**
+
 - No business logic in frontend
 - DREAM components (not raw MUI when DREAM exists)
 - GUP auth (not custom auth)
@@ -57,6 +61,7 @@ cell-ui-* naming?                 → legacy SPA (redirect)
 </quick_reference>
 
 <when_to_use>
+
 - Starting any new frontend work at UWM (default entry point)
 - Creating a new UFA, SCL, or IAP in allin-ui
 - Adding features to an existing allin-ui package
@@ -64,6 +69,7 @@ cell-ui-* naming?                 → legacy SPA (redirect)
 - Need to ensure frontend standards compliance throughout development
 
 **Do NOT use for:**
+
 - Migrating a legacy SPA to allin-ui (use `migrate-spa-to-allin`)
 - Maintaining a legacy SPA with no plans to migrate (use `maintain-legacy-spa`)
 - Contributing components TO the DREAM library itself (see dream-buddy.md)
@@ -71,9 +77,10 @@ cell-ui-* naming?                 → legacy SPA (redirect)
 - Developing BFF services (cell-bff-xxx — different concern)
 
 **Redirects:**
+
 - Legacy SPA detected → Offer `migrate-spa-to-allin` or `maintain-legacy-spa`
 - Backend work detected → Redirect to `uwm-business-service-dev:develop-business-service`
-</when_to_use>
+  </when_to_use>
 
 <the_process>
 
@@ -92,12 +99,14 @@ Grep: "catalogMode" in pnpm-workspace.yaml
 **If ALL exist:** allin-ui monorepo detected. Proceed to Check 2.
 
 **If NONE exist:** Not in allin-ui. Check for legacy SPA:
+
 - Check directory name: Does it match `cell-ui-*` pattern?
 - Check for `webpack.config.js` or `react-scripts` in package.json?
 
 **If legacy SPA detected:**
 
 Present to user:
+
 ```
 This appears to be a legacy SPA (cell-ui-* pattern). The current standard is allin-ui monorepo.
 
@@ -121,6 +130,7 @@ Glob: packages/*/package.json  → List existing SCLs/IAPs
 ```
 
 **If user specified a package name:** Check if it exists:
+
 ```
 Glob: ufas/{name}/package.json
 Glob: packages/{name}/package.json
@@ -139,12 +149,12 @@ Grep: "@uwm/vite-plugin-appshell" in {package-path}/vite.config.ts  → UFA conf
 Glob: {package-path}/*/package.json                        → IAP indicator (nested packages)
 ```
 
-| Signal | Component Type |
-|--------|---------------|
-| `uwm-manifest.json` exists | **UFA** |
-| `@uwm/vite-plugin-appshell` in vite.config.ts | **UFA** (confirmed) |
-| Nested directories with package.json (core/, lib-*, shell-*) | **IAP** |
-| None of the above (flat package in `packages/`) | **SCL** |
+| Signal                                                       | Component Type      |
+| ------------------------------------------------------------ | ------------------- |
+| `uwm-manifest.json` exists                                   | **UFA**             |
+| `@uwm/vite-plugin-appshell` in vite.config.ts                | **UFA** (confirmed) |
+| Nested directories with package.json (core/, lib-_, shell-_) | **IAP**             |
+| None of the above (flat package in `packages/`)              | **SCL**             |
 
 ### Check 4: Current Development State
 
@@ -162,13 +172,13 @@ Glob: {package-path}/sonar-project.properties        → SonarQube configured?
 
 Use these signals to determine which phase to start from:
 
-| Signals Present | Start From |
-|----------------|------------|
-| No package.json | Phase 1 (create) |
-| Package exists, no src/ files | Phase 2 (design) |
-| Source exists, no spec/ or __tests__/ | Phase 3 (implement with TDD) |
-| Tests exist, no vitest.config.ts or E2E | Phase 4 (test setup) |
-| Everything present | Standards review only |
+| Signals Present                         | Start From                   |
+| --------------------------------------- | ---------------------------- |
+| No package.json                         | Phase 1 (create)             |
+| Package exists, no src/ files           | Phase 2 (design)             |
+| Source exists, no spec/ or **tests**/   | Phase 3 (implement with TDD) |
+| Tests exist, no vitest.config.ts or E2E | Phase 4 (test setup)         |
+| Everything present                      | Standards review only        |
 
 ### Present Context Summary
 
@@ -203,6 +213,7 @@ Skill: uwm-frontend-dev:create-allin-package
 ```
 
 This skill will:
+
 - Walk through the component taxonomy decision tree (UFA/SCL/IAP)
 - Run `turbo gen ufa` or `turbo gen lib` to scaffold
 - Configure dependencies with catalog: protocol
@@ -248,6 +259,7 @@ Skill: uwm-frontend-dev:design-ui-component
 ```
 
 This skill will:
+
 - Guide DREAM component selection (DREAM → MUI fallback → custom)
 - Enforce DREAM styling standards (theme variables, sx prop, no magic numbers)
 - Set up component structure following allin-ui patterns
@@ -291,6 +303,7 @@ Skill: uwm-frontend-dev:implement-ui-feature
 ```
 
 This skill will:
+
 - Write .feature specifications in {package}/spec/
 - Derive Vitest unit tests from specs (RED → GREEN → REFACTOR)
 - Integrate GUP auth patterns (MockPassport, usePassport, role-based rendering)
@@ -349,6 +362,7 @@ Skill: uwm-frontend-dev:test-frontend
 ```
 
 This skill will:
+
 - Configure vitest.config.ts with correct coverage settings
 - Set up Stryker mutation testing config (if not already done)
 - Write Playwright E2E smoke test (minimum requirement)
@@ -394,6 +408,7 @@ These standards apply at ALL phases, not just specific checkpoints. Verify conti
 ### Business Logic Boundary
 
 **Frontend code handles ONLY:**
+
 - Rendering and display formatting
 - Navigation and routing
 - Form UX (field state, validation display, submission UX)
@@ -401,6 +416,7 @@ These standards apply at ALL phases, not just specific checkpoints. Verify conti
 - User interaction feedback
 
 **Frontend code NEVER handles:**
+
 - Business calculations (LTV ratios, payment amounts, interest rates)
 - Business validation rules (eligibility checks, compliance rules)
 - Orchestration (coordinating multiple services)
@@ -449,6 +465,7 @@ These standards apply at ALL phases, not just specific checkpoints. Verify conti
 **User:** "I need to build a new loan status dashboard"
 
 **Context Detection:**
+
 ```
 CHECK 1: pnpm-workspace.yaml → YES (allin-ui monorepo)
 CHECK 2: ufas/loan-status/ → does NOT exist
@@ -456,6 +473,7 @@ RESULT: New package needed in allin-ui
 ```
 
 **Orchestrator output:**
+
 ```
 Context detected:
 - Environment: allin-ui monorepo
@@ -472,6 +490,7 @@ I'll chain through all 4 phases:
 ```
 
 **Phase execution:**
+
 1. Phase 1: `create-allin-package` → runs `turbo gen ufa`, creates uwm-manifest.json, sets up catalog deps
 2. Checkpoint 1: Verify ufas/loan-status/ exists, uwm-manifest.json valid, catalog deps
 3. Phase 2: `design-ui-component` → identify DREAM components, create component tree
@@ -488,6 +507,7 @@ I'll chain through all 4 phases:
 **User:** "Add a filter feature to the action-iq UFA"
 
 **Context Detection:**
+
 ```
 CHECK 1: pnpm-workspace.yaml → YES (allin-ui monorepo)
 CHECK 2: ufas/action-iq/package.json → EXISTS
@@ -497,6 +517,7 @@ RESULT: Existing UFA, has source and tests, no .feature specs yet
 ```
 
 **Orchestrator output:**
+
 ```
 Context detected:
 - Environment: allin-ui monorepo
@@ -519,6 +540,7 @@ I'll chain through phases 2-4:
 **User:** "Create a reusable loan card component that BrokerDrive and action-iq both need"
 
 **Context Detection:**
+
 ```
 CHECK 1: pnpm-workspace.yaml → YES (allin-ui monorepo)
 CHECK 2: packages/loan-card/ → does NOT exist
@@ -526,6 +548,7 @@ RESULT: New package needed, shared between 2+ UFAs → SCL
 ```
 
 **Orchestrator output:**
+
 ```
 Context detected:
 - Environment: allin-ui monorepo
@@ -548,12 +571,14 @@ I'll chain through all 4 phases:
 **User:** "I need to add a feature to cell-ui-lending"
 
 **Context Detection:**
+
 ```
 CHECK 1: pnpm-workspace.yaml → NO
 CHECK: directory name matches cell-ui-* → YES → Legacy SPA
 ```
 
 **Orchestrator output:**
+
 ```
 This appears to be a legacy SPA (cell-ui-lending). The current UWM standard
 is the allin-ui monorepo.
@@ -621,6 +646,7 @@ When context detection finds a partially-completed package:
 If context detection can't determine UFA vs SCL vs IAP:
 
 Use AskUserQuestion:
+
 ```
 I found a package at {path} but can't determine the component type.
 
@@ -635,6 +661,7 @@ C. Provide a cross-UFA product with its own deployment lifecycle? → IAP
 If the developer is working inside a specific package directory (e.g., `ufas/action-iq/`) rather than the repo root:
 
 Navigate up to find the monorepo root:
+
 ```
 Glob: ../../pnpm-workspace.yaml
 Glob: ../../../pnpm-workspace.yaml
@@ -679,6 +706,7 @@ When adding features to packages that have source code but no tests:
 Before considering development complete, verify all standards:
 
 **Package Structure:**
+
 - [ ] Package in correct directory (ufas/ for UFA, packages/ for SCL/IAP)
 - [ ] package.json uses @uwm/ scope
 - [ ] Dependencies use catalog: protocol for shared libs
@@ -686,6 +714,7 @@ Before considering development complete, verify all standards:
 - [ ] (UFA) uwm-manifest.json exists with moduleName, route, port, themeFamily
 
 **DREAM Compliance:**
+
 - [ ] Components import from lib-node-dream-ui where available
 - [ ] MUI imports only for components DREAM doesn't provide
 - [ ] No magic numbers in styles (theme.spacing, theme.palette, theme.typography)
@@ -693,8 +722,9 @@ Before considering development complete, verify all standards:
 - [ ] No CSS shorthand in sx props
 
 **TDD and Business Logic:**
+
 - [ ] .feature specs exist in {package}/spec/
-- [ ] Unit tests exist in __tests__/ directories
+- [ ] Unit tests exist in **tests**/ directories
 - [ ] Coverage ≥80% lines
 - [ ] Stryker mutation score ≥80
 - [ ] No business logic in frontend (calculations, validation rules, orchestration)
@@ -702,10 +732,12 @@ Before considering development complete, verify all standards:
 - [ ] Mock boundary: only infrastructure mocked in tests
 
 **Auth:**
+
 - [ ] GUP via lib-node-user-passport-component (not custom auth)
 - [ ] MockPassport used in tests (not manual auth mocking)
 
 **Test Infrastructure:**
+
 - [ ] vitest.config.ts with jsdom, globals: true, v8 coverage
 - [ ] setupTests.ts with @testing-library/jest-dom and matchMedia mock
 - [ ] E2E smoke test at tests/e2e/smoke.ts
@@ -714,6 +746,7 @@ Before considering development complete, verify all standards:
 - [ ] Build + tests under 1 minute
 
 **Code Quality:**
+
 - [ ] No TypeScript `any` types
 - [ ] afterEach cleanup in all test files
 - [ ] No TODO without issue reference
@@ -723,21 +756,25 @@ Before considering development complete, verify all standards:
 <integration>
 
 **This skill chains through:**
+
 1. `create-allin-package` — Phase 1: scaffold new package
 2. `design-ui-component` — Phase 2: DREAM component design
 3. `implement-ui-feature` — Phase 3: TDD implementation
 4. `test-frontend` — Phase 4: comprehensive test strategy
 
 **This skill redirects to:**
+
 - `migrate-spa-to-allin` — when legacy SPA (cell-ui-*) detected and user wants to migrate
 - `maintain-legacy-spa` — when legacy SPA detected and user wants to maintain as-is
 - `uwm-business-service-dev:develop-business-service` — when backend service work detected
 
 **This skill is the default entry point for:**
+
 - Any frontend development request at UWM
 - Any request involving allin-ui, DREAM, or GUP auth in a frontend context
 
 **Phase skill chain:**
+
 ```
 develop-frontend (orchestrator)
   ├── Phase 1: create-allin-package (skip if exists)
@@ -755,6 +792,7 @@ develop-frontend (orchestrator)
 <resources>
 
 **allin-ui codebase:**
+
 - `EH/allin-ui` on Bitbucket — monorepo MFE
 - `turbo.json` — task definitions, boundary tags
 - `pnpm-workspace.yaml` — workspace config with `catalogMode: strict` and catalog versions
@@ -764,15 +802,18 @@ develop-frontend (orchestrator)
 - `packages/actioniq/` — reference IAP (multi-package)
 
 **Design system:**
+
 - `UCP/lib-node-dream-ui` on Bitbucket — DREAM component library
 - https://dream.uwm.com — DREAM Storybook documentation
 
 **Auth:**
+
 - `lib-node-user-passport-component` — GUP auth (PassportAuth, usePassport, MockPassport)
 - `@uwm/platform-api` — App-shell integration (useAppShellRoles, usePolicy, createGateway)
 - `SOLAR/cell-user-passport` on Bitbucket — GUP backend ecosystem
 
 **Confluence:**
+
 - Component Taxonomy (page ID: 1514786638) — UFA/IAP/SCL definitions and decision tree
 - Policies and Standards (page ID: 1479759939) — Testing policy, thresholds, time limits
 - CD Pipeline Design (page ID: 1467250722) — Pipeline stages and test execution
@@ -780,6 +821,7 @@ develop-frontend (orchestrator)
 - DREAM Design System docs — Figma workflow, design tokens, product theming
 
 **Other plugins:**
+
 - `uwm-business-service-dev:develop-business-service` — Backend service orchestrator (reference pattern)
 - `spec-driven-development` — Spec-driven development skills
 

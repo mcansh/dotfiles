@@ -15,16 +15,17 @@ LOW FREEDOM - The component taxonomy decision tree is rigid and must follow pres
 
 <quick_reference>
 
-| Step | Action | Key Details |
-|------|--------|-------------|
-| **1. Decide Type** | Component taxonomy | UFA (app with routes), SCL (shared components), IAP (advanced cross-UFA product) |
-| **2. Scaffold** | `turbo gen ufa` or `turbo gen lib` | Generator prompts for name, publish dest, and type-specific fields |
-| **3. Configure Deps** | Add DREAM, GUP, internal packages | Use `catalog:` for shared deps, `workspace:*` for local packages |
-| **4. Configure Manifest** | `uwm-manifest.json` (UFAs only) | moduleName, route, port, themeFamily, roleMatrix |
-| **5. Create Spec Dir** | `{package}/spec/` | Feature specs for TDD workflow |
-| **6. Verify** | `pnpm install && pnpm build` | Also run `turbo boundaries` to check architectural compliance |
+| Step                      | Action                             | Key Details                                                                      |
+| ------------------------- | ---------------------------------- | -------------------------------------------------------------------------------- |
+| **1. Decide Type**        | Component taxonomy                 | UFA (app with routes), SCL (shared components), IAP (advanced cross-UFA product) |
+| **2. Scaffold**           | `turbo gen ufa` or `turbo gen lib` | Generator prompts for name, publish dest, and type-specific fields               |
+| **3. Configure Deps**     | Add DREAM, GUP, internal packages  | Use `catalog:` for shared deps, `workspace:*` for local packages                 |
+| **4. Configure Manifest** | `uwm-manifest.json` (UFAs only)    | moduleName, route, port, themeFamily, roleMatrix                                 |
+| **5. Create Spec Dir**    | `{package}/spec/`                  | Feature specs for TDD workflow                                                   |
+| **6. Verify**             | `pnpm install && pnpm build`       | Also run `turbo boundaries` to check architectural compliance                    |
 
 **Component Type Decision:**
+
 - Owns routes and layout? → **UFA** (in `ufas/`)
 - Shared between 2+ UFAs? → **SCL** (in `packages/`)
 - Cross-UFA product with independent SDLC? → **IAP** (in `packages/`, advanced)
@@ -32,6 +33,7 @@ LOW FREEDOM - The component taxonomy decision tree is rigid and must follow pres
 </quick_reference>
 
 <when_to_use>
+
 - Creating a brand new User Facing Application (UFA) in allin-ui
 - Creating a shared component library (SCL) for use across multiple UFAs
 - Creating an In App Product (IAP) for cross-UFA functionality with independent lifecycle
@@ -39,12 +41,13 @@ LOW FREEDOM - The component taxonomy decision tree is rigid and must follow pres
 - Need guidance on allin-ui dependency protocols and configuration
 
 **Do NOT use for:**
+
 - Adding features to an existing package (use `implement-ui-feature`)
 - Creating a dedicated SPA (cell-ui-*) — legacy pattern, consider migration to allin-ui instead
 - Creating a BFF service (cell-bff-*) — use `create-v3-service` from uwm-business-service-dev
 - Contributing components TO the DREAM library itself — see dream-buddy.md
 - Modifying app-shell or navigation platform — managed by the app shell team
-</when_to_use>
+  </when_to_use>
 
 <the_process>
 
@@ -58,49 +61,50 @@ Use AskUserQuestion to walk through this decision:
 
 **Question 1: Does this component own its own routes and serve as a standalone application?**
 
-| Answer | Result |
-|--------|--------|
-| **Yes** — It has its own URL path, layout, and page composition | → **UFA** (User Facing Application) |
-| **No** — It's a reusable component or service used inside other apps | → Continue to Question 2 |
+| Answer                                                               | Result                              |
+| -------------------------------------------------------------------- | ----------------------------------- |
+| **Yes** — It has its own URL path, layout, and page composition      | → **UFA** (User Facing Application) |
+| **No** — It's a reusable component or service used inside other apps | → Continue to Question 2            |
 
 **Question 2: Will 2+ UFAs use this component?**
 
-| Answer | Result |
-|--------|--------|
-| **No** — Only one UFA uses it | → Keep it inside that UFA's `src/` directory. Do NOT create a separate package. |
-| **Yes** — Multiple UFAs need it | → Continue to Question 3 |
+| Answer                          | Result                                                                          |
+| ------------------------------- | ------------------------------------------------------------------------------- |
+| **No** — Only one UFA uses it   | → Keep it inside that UFA's `src/` directory. Do NOT create a separate package. |
+| **Yes** — Multiple UFAs need it | → Continue to Question 3                                                        |
 
 **Question 3: Does a separate team need to control this component's deployment lifecycle independently across multiple UFAs?**
 
-| Answer | Result |
-|--------|--------|
-| **No** — One team owns the component, consumers just import it | → **SCL** (Shared Component Library) |
+| Answer                                                                                                | Result                                                                             |
+| ----------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| **No** — One team owns the component, consumers just import it                                        | → **SCL** (Shared Component Library)                                               |
 | **Yes** — The component has its own release cycle, state management across UFAs, and a dedicated team | → **IAP** (In App Product) — **Use sparingly. Discuss with app shell team first.** |
 
 ### Component Type Reference
 
-| Type | Definition | Directory | Build Tool | Generator | Examples |
-|------|-----------|-----------|------------|-----------|---------|
-| **UFA** | Self-contained application with dedicated UX. Owns routes, layout, orchestration. | `ufas/{name}/` | Vite | `turbo gen ufa` | income-calculator, loan-import, scenario-center |
-| **SCL** | Reusable components shared between 2+ UFAs/IAPs. Config-driven with clear contracts. | `packages/{name}/` | tsup | `turbo gen lib` | shared-components, 1003-application |
-| **IAP** | Product component running alongside UFAs with independent SDLC. Multi-directory structure. | `packages/{name}/` | tsup | Manual (no generator) | actioniq, chat-assist, onav |
+| Type    | Definition                                                                                 | Directory          | Build Tool | Generator             | Examples                                        |
+| ------- | ------------------------------------------------------------------------------------------ | ------------------ | ---------- | --------------------- | ----------------------------------------------- |
+| **UFA** | Self-contained application with dedicated UX. Owns routes, layout, orchestration.          | `ufas/{name}/`     | Vite       | `turbo gen ufa`       | income-calculator, loan-import, scenario-center |
+| **SCL** | Reusable components shared between 2+ UFAs/IAPs. Config-driven with clear contracts.       | `packages/{name}/` | tsup       | `turbo gen lib`       | shared-components, 1003-application             |
+| **IAP** | Product component running alongside UFAs with independent SDLC. Multi-directory structure. | `packages/{name}/` | tsup       | Manual (no generator) | actioniq, chat-assist, onav                     |
 
 ### Module Dependency Rules
 
 These rules are enforced by `turbo boundaries` via tags in `turbo.json`:
 
-| Dependency | Allowed? | Reason |
-|-----------|----------|--------|
-| UFA → SCL (public packages) | YES | UFAs consume shared components |
-| IAP → SCL (public packages) | YES | IAPs consume shared components |
-| SCL → SCL (public packages) | YES | Libraries can compose other libraries |
-| UFA → UFA | **FORBIDDEN** | Violates module federation isolation |
-| UFA → IAP | **FORBIDDEN** | UFAs cannot directly depend on IAPs |
-| IAP → IAP | **FORBIDDEN** | Creates circular dependency risk |
-| UFA → app-shell / internal | **FORBIDDEN** | App shell is not a consumable dependency |
-| Any → private packages | **FORBIDDEN** | Private packages are isolated |
+| Dependency                  | Allowed?      | Reason                                   |
+| --------------------------- | ------------- | ---------------------------------------- |
+| UFA → SCL (public packages) | YES           | UFAs consume shared components           |
+| IAP → SCL (public packages) | YES           | IAPs consume shared components           |
+| SCL → SCL (public packages) | YES           | Libraries can compose other libraries    |
+| UFA → UFA                   | **FORBIDDEN** | Violates module federation isolation     |
+| UFA → IAP                   | **FORBIDDEN** | UFAs cannot directly depend on IAPs      |
+| IAP → IAP                   | **FORBIDDEN** | Creates circular dependency risk         |
+| UFA → app-shell / internal  | **FORBIDDEN** | App shell is not a consumable dependency |
+| Any → private packages      | **FORBIDDEN** | Private packages are isolated            |
 
 **Boundary tag mapping:**
+
 - UFAs get the `ufas` tag — can only depend on `public` packages
 - SCLs get the `public` tag — can be depended on by UFAs, IAPs, other SCLs
 - IAPs use granular tags (`core-*`, `lib-*`, `shell-*`) — fine-grained dependency control
@@ -122,17 +126,18 @@ turbo gen ufa
 
 The generator prompts for:
 
-| Field | Description | Guidance |
-|-------|-------------|----------|
-| **packageName** | Package name (lowercase, hyphens only) | e.g., `loan-center`, `broker-dashboard`. Becomes `@uwm/{name}` in package.json and `ufas/{name}/` directory. |
-| **publishToArtifactory** | Publish destination | Choose "Artifactory" if other projects outside allin-ui consume this. Choose "Local" for allin-ui-only. |
-| **title** | Human-readable application title | Displayed in navigation. e.g., "Loan Center", "Broker Dashboard". |
-| **route** | Base URL path | e.g., `/loan-center`. Must be unique across all UFAs. |
-| **themeFamily** | DREAM theme | `external` for broker-facing apps, `internal` for internal tools. |
-| **port** | Dev server port | Press Enter for auto-generated unused port. Generator checks all existing `uwm-manifest.json` files to avoid conflicts. Avoids reserved ports: 3000, 5000, 5001, 9000. |
-| **maintainers** | Package maintainers | Team members responsible for this UFA. |
+| Field                    | Description                            | Guidance                                                                                                                                                               |
+| ------------------------ | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **packageName**          | Package name (lowercase, hyphens only) | e.g., `loan-center`, `broker-dashboard`. Becomes `@uwm/{name}` in package.json and `ufas/{name}/` directory.                                                           |
+| **publishToArtifactory** | Publish destination                    | Choose "Artifactory" if other projects outside allin-ui consume this. Choose "Local" for allin-ui-only.                                                                |
+| **title**                | Human-readable application title       | Displayed in navigation. e.g., "Loan Center", "Broker Dashboard".                                                                                                      |
+| **route**                | Base URL path                          | e.g., `/loan-center`. Must be unique across all UFAs.                                                                                                                  |
+| **themeFamily**          | DREAM theme                            | `external` for broker-facing apps, `internal` for internal tools.                                                                                                      |
+| **port**                 | Dev server port                        | Press Enter for auto-generated unused port. Generator checks all existing `uwm-manifest.json` files to avoid conflicts. Avoids reserved ports: 3000, 5000, 5001, 9000. |
+| **maintainers**          | Package maintainers                    | Team members responsible for this UFA.                                                                                                                                 |
 
 **Generated structure:**
+
 ```
 ufas/{name}/
   package.json          # @uwm/{name}, private, vite scripts
@@ -155,12 +160,13 @@ turbo gen lib
 
 The generator prompts for:
 
-| Field | Description | Guidance |
-|-------|-------------|----------|
-| **packageName** | Package name (lowercase, hyphens only) | e.g., `shared-widgets`, `loan-components`. Becomes `@uwm/{name}`. |
-| **publishToArtifactory** | Publish destination | "Artifactory" if consumed outside allin-ui, "Local" for internal only. |
+| Field                    | Description                            | Guidance                                                               |
+| ------------------------ | -------------------------------------- | ---------------------------------------------------------------------- |
+| **packageName**          | Package name (lowercase, hyphens only) | e.g., `shared-widgets`, `loan-components`. Becomes `@uwm/{name}`.      |
+| **publishToArtifactory** | Publish destination                    | "Artifactory" if consumed outside allin-ui, "Local" for internal only. |
 
 **Generated structure:**
+
 ```
 packages/{name}/
   package.json          # @uwm/{name}, tsup build, dual CJS/ESM exports
@@ -205,11 +211,11 @@ After scaffolding, add the dependencies your package needs. allin-ui uses three 
 
 ### Dependency Protocol System
 
-| Protocol | Syntax | Meaning | When to Use |
-|----------|--------|---------|-------------|
-| **catalog:** | `"react": "catalog:"` | Version resolved from the `catalog` section in `pnpm-workspace.yaml` | Shared external packages managed centrally. **Required for all packages listed in the catalog.** |
-| **workspace:*** | `"@uwm/shared-components": "workspace:*"` | Local monorepo package, always uses latest local version | Cross-package references within allin-ui |
-| **semver** | `"axios": "^1.9.0"` | Standard npm version range | Package-specific deps NOT in the catalog |
+| Protocol        | Syntax                                    | Meaning                                                              | When to Use                                                                                      |
+| --------------- | ----------------------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| **catalog:**    | `"react": "catalog:"`                     | Version resolved from the `catalog` section in `pnpm-workspace.yaml` | Shared external packages managed centrally. **Required for all packages listed in the catalog.** |
+| **workspace:*** | `"@uwm/shared-components": "workspace:*"` | Local monorepo package, always uses latest local version             | Cross-package references within allin-ui                                                         |
+| **semver**      | `"axios": "^1.9.0"`                       | Standard npm version range                                           | Package-specific deps NOT in the catalog                                                         |
 
 **CRITICAL: `catalogMode: strict`** — If a package exists in the catalog section of `pnpm-workspace.yaml`, you MUST use `"catalog:"` as the version. Using a direct semver version for a catalog package will cause `pnpm install` to fail. If your package needs a different version of a catalog entry, escalate to the app shell team — do not work around it.
 
@@ -218,6 +224,7 @@ After scaffolding, add the dependencies your package needs. allin-ui uses three 
 The Turbo generator does NOT add DREAM to UFA dependencies by default. You must add it manually.
 
 For **UFAs** — add to `peerDependencies` (provided by module federation at runtime):
+
 ```json
 {
   "peerDependencies": {
@@ -227,6 +234,7 @@ For **UFAs** — add to `peerDependencies` (provided by module federation at run
 ```
 
 For **SCLs** — already included in the lib template's `peerDependencies`:
+
 ```json
 {
   "peerDependencies": {
@@ -236,6 +244,7 @@ For **SCLs** — already included in the lib template's `peerDependencies`:
 ```
 
 **DREAM version note:**
+
 - `lib-node-dream-ui` — DREAM v2 (current stable, `^2.9.1` in catalog)
 - `lib-node-dream-ui-latest` — npm alias for DREAM v3 (`npm:lib-node-dream-ui@^3.1.2` in catalog)
 - Check which version your team should use. New projects may prefer v3 (`lib-node-dream-ui-latest`).
@@ -255,6 +264,7 @@ To use GUP features in your package, add `lib-node-user-passport-component` as a
 ```
 
 This gives you access to:
+
 - `PassportAuth` — wrapper component for auth-protected routes
 - `usePassport()` — hook to access user info, roles, tokens
 - `useSinglePageAuth()` — hook for SPA-style auth flow
@@ -265,6 +275,7 @@ This gives you access to:
 ### Adding Internal Packages
 
 For dependencies on other allin-ui packages:
+
 ```json
 {
   "peerDependencies": {
@@ -278,14 +289,14 @@ For dependencies on other allin-ui packages:
 
 These are provided by the app shell at runtime via module federation. They MUST be `peerDependencies`, NOT direct `dependencies`:
 
-| Package | Protocol | Purpose |
-|---------|----------|---------|
-| `react` | `catalog:` | React core |
-| `react-dom` | `catalog:` | React DOM |
-| `lib-node-dream-ui` | `catalog:` | DREAM design system |
-| `lib-node-user-passport-component` | `catalog:` | GUP auth |
-| `@uwm/platform-api` | `workspace:*` | App shell platform API |
-| `@uwm/shared-components` | `workspace:*` | Shared component library |
+| Package                            | Protocol      | Purpose                  |
+| ---------------------------------- | ------------- | ------------------------ |
+| `react`                            | `catalog:`    | React core               |
+| `react-dom`                        | `catalog:`    | React DOM                |
+| `lib-node-dream-ui`                | `catalog:`    | DREAM design system      |
+| `lib-node-user-passport-component` | `catalog:`    | GUP auth                 |
+| `@uwm/platform-api`                | `workspace:*` | App shell platform API   |
+| `@uwm/shared-components`           | `workspace:*` | Shared component library |
 
 **Why peerDependencies?** Module federation shares a single instance of these libraries across all UFAs at runtime. Bundling them as direct dependencies would create duplicate instances, causing React context errors, DREAM theme mismatches, and auth session splits.
 
@@ -315,19 +326,19 @@ Every UFA requires a `uwm-manifest.json` in its root directory. The Turbo genera
 }
 ```
 
-| Field | Required | Description |
-|-------|----------|-------------|
-| `moduleName` | Yes | Must match the directory name in `ufas/`. Used for module federation registration. |
-| `title` | Yes | Human-readable name shown in navigation sidebar. |
-| `route` | Yes | URL path this UFA owns. Must be unique across all UFAs. |
-| `rootComponent` | Yes | Entry point component, typically `./src/App.tsx`. |
-| `port` | Yes | Dev server port. Auto-generated by Turbo to avoid conflicts. |
-| `excludeFromSideNav` | No | Set `true` to hide from navigation (e.g., utility UFAs). Default: `false`. |
-| `themeFamily` | Yes | DREAM theme to apply: `"external"` (broker-facing) or `"internal"` (internal tools). |
-| `policies` | No | GUP policy conditions for access control. Empty `[]` = unrestricted. |
-| `roleMatrix` | No | GUP role groups for RBAC. Empty `{}` = no role restrictions. |
-| `subRoutes` | Yes | Array of routes this UFA handles. Minimum: `[{ "id": "home", "path": "" }]`. |
-| `menus` | No | Navigation menu items to display for this UFA. |
+| Field                | Required | Description                                                                          |
+| -------------------- | -------- | ------------------------------------------------------------------------------------ |
+| `moduleName`         | Yes      | Must match the directory name in `ufas/`. Used for module federation registration.   |
+| `title`              | Yes      | Human-readable name shown in navigation sidebar.                                     |
+| `route`              | Yes      | URL path this UFA owns. Must be unique across all UFAs.                              |
+| `rootComponent`      | Yes      | Entry point component, typically `./src/App.tsx`.                                    |
+| `port`               | Yes      | Dev server port. Auto-generated by Turbo to avoid conflicts.                         |
+| `excludeFromSideNav` | No       | Set `true` to hide from navigation (e.g., utility UFAs). Default: `false`.           |
+| `themeFamily`        | Yes      | DREAM theme to apply: `"external"` (broker-facing) or `"internal"` (internal tools). |
+| `policies`           | No       | GUP policy conditions for access control. Empty `[]` = unrestricted.                 |
+| `roleMatrix`         | No       | GUP role groups for RBAC. Empty `{}` = no role restrictions.                         |
+| `subRoutes`          | Yes      | Array of routes this UFA handles. Minimum: `[{ "id": "home", "path": "" }]`.         |
+| `menus`              | No       | Navigation menu items to display for this UFA.                                       |
 
 ### Role-Based Access Control Example
 
@@ -372,6 +383,7 @@ Specs drive TDD implementation. Create the spec directory inside your package:
 **The `.feature` files are specifications, NOT executable BDD tests.** They describe expected behavior in Gherkin syntax and are used to derive Vitest unit tests. Do NOT attempt to execute them with Cucumber or similar tools.
 
 Example spec structure for a UFA:
+
 ```
 ufas/loan-center/
   spec/
@@ -424,10 +436,12 @@ Layer 1: Core Component (stateless, props-driven)
 **Both Layer 1 and Layer 2 live in the same SCL package** (e.g., `packages/shared-components/`). Layer 3 lives in each consuming UFA.
 
 **When to use this pattern:**
+
 - Income Calculator exists as standalone UFA, but income display also needed inside Loan Center
 - Credit component exists as standalone UFA, but credit summary needed inside AUS
 
 **When NOT to use this pattern:**
+
 - Component only used in one UFA — keep it in that UFA's `src/`
 - Component shared but always used the same way — simple SCL export is sufficient
 
@@ -476,36 +490,50 @@ pnpm validate
 # - Has its own layout and pages? YES → UFA confirmed
 
 # Step 2: Scaffold
+
 turbo gen ufa
+
 # Prompts:
-#   packageName: loan-center
-#   publishToArtifactory: Local (Scoped inside repo)
-#   title: Loan Center
-#   route: /loan-center
-#   themeFamily: external (broker-facing)
-#   port: [Enter for auto-generated]
-#   maintainers: [team members]
+
+# packageName: loan-center
+
+# publishToArtifactory: Local (Scoped inside repo)
+
+# title: Loan Center
+
+# route: /loan-center
+
+# themeFamily: external (broker-facing)
+
+# port: [Enter for auto-generated]
+
+# maintainers: [team members]
 
 # Step 3: Add DREAM and GUP to peerDependencies
+
 # Edit ufas/loan-center/package.json:
+
 {
-  "peerDependencies": {
-    "react": "catalog:",
-    "react-dom": "catalog:",
-    "lib-node-dream-ui": "catalog:",
-    "lib-node-user-passport-component": "catalog:",
-    "@uwm/platform-api": "workspace:*",
-    "@uwm/shared-components": "workspace:*"
-  }
+"peerDependencies": {
+"react": "catalog:",
+"react-dom": "catalog:",
+"lib-node-dream-ui": "catalog:",
+"lib-node-user-passport-component": "catalog:",
+"@uwm/platform-api": "workspace:_",
+"@uwm/shared-components": "workspace:_"
+}
 }
 
 # Step 4: Review uwm-manifest.json (auto-generated)
+
 # Customize roleMatrix if access restrictions needed
 
 # Step 5: Create spec directory
+
 mkdir -p ufas/loan-center/spec/capabilities/loan-overview/features
 
 # Step 6: Verify
+
 pnpm install
 pnpm build --filter=@uwm/loan-center
 pnpm test --filter=@uwm/loan-center
@@ -523,36 +551,48 @@ pnpm lint:architecture
 # - Needs independent SDLC? NO → SCL (not IAP)
 
 # Step 2: Scaffold
+
 turbo gen lib
+
 # Prompts:
-#   packageName: loan-components
-#   publishToArtifactory: Local (Scoped inside repo)
+
+# packageName: loan-components
+
+# publishToArtifactory: Local (Scoped inside repo)
 
 # Step 3: Verify dependencies
+
 # The lib template already includes lib-node-dream-ui in peerDependencies.
+
 # Add any additional internal packages needed:
+
 # Edit packages/loan-components/package.json:
+
 {
-  "peerDependencies": {
-    "lib-node-dream-ui": "catalog:",
-    "@emotion/react": "catalog:",
-    "@emotion/styled": "catalog:",
-    "react": "catalog:",
-    "react-dom": "catalog:"
-  }
+"peerDependencies": {
+"lib-node-dream-ui": "catalog:",
+"@emotion/react": "catalog:",
+"@emotion/styled": "catalog:",
+"react": "catalog:",
+"react-dom": "catalog:"
+}
 }
 
 # Step 4: No uwm-manifest.json needed (SCLs don't have manifests)
 
 # Step 5: Create spec directory
+
 mkdir -p packages/loan-components/spec/capabilities/loan-display/features
 
 # Step 6: Set up barrel export
+
 # Edit packages/loan-components/src/index.ts:
+
 export { LoanSummaryCard } from './components/LoanSummaryCard';
 export { ConditionBadge } from './components/ConditionBadge';
 
 # Step 7: Verify
+
 pnpm install
 pnpm build --filter=@uwm/loan-components
 pnpm test --filter=@uwm/loan-components
@@ -570,12 +610,13 @@ import { IncomeDisplay } from '@uwm/income-calculator';  // FORBIDDEN
 </code>
 
 <why_it_fails>
+
 - UFA → UFA dependency violates module federation architecture
 - `turbo boundaries` will reject this with a tag violation error
 - Each UFA is independently deployed — importing creates a build-time coupling
   that breaks when the other UFA is deployed independently
 - Solution: Extract shared components into an SCL in packages/
-</why_it_fails>
+  </why_it_fails>
 
 <correction>
 # CORRECT: Extract shared component to SCL
@@ -584,10 +625,10 @@ import { IncomeDisplay } from '@uwm/income-calculator';  // FORBIDDEN
 # 3. Import via SCL in both UFAs:
 
 // In ufas/loan-center/src/pages/OverviewPage.tsx
-import { IncomeDisplay } from '@uwm/shared-components';  // SCL import — allowed
+import { IncomeDisplay } from '@uwm/shared-components'; // SCL import — allowed
 
 // In ufas/income-calculator/src/pages/CalculatorPage.tsx
-import { IncomeDisplay } from '@uwm/shared-components';  // Same SCL — allowed
+import { IncomeDisplay } from '@uwm/shared-components'; // Same SCL — allowed
 </correction>
 </example>
 
@@ -605,11 +646,12 @@ import { IncomeDisplay } from '@uwm/shared-components';  // Same SCL — allowed
 </code>
 
 <why_it_fails>
+
 - pnpm-workspace.yaml has `catalogMode: strict`
 - react and @mui/material are both in the catalog
 - `pnpm install` will fail with a catalog violation error
 - Even if the version matches the catalog entry, the protocol must be "catalog:"
-</why_it_fails>
+  </why_it_fails>
 
 <correction>
 # CORRECT: Use catalog protocol
@@ -634,10 +676,12 @@ turbo gen lib  # Using lib generator for a UFA
 # Creates packages/loan-center/ with tsup build
 
 # Or manually creating:
+
 mkdir -p packages/loan-center
 </code>
 
 <why_it_fails>
+
 - packages/ is for libraries (SCLs/IAPs) built with tsup
 - UFAs need Vite for dev server, module federation, and HMR
 - The turbo boundary tags are assigned based on directory location:
@@ -645,7 +689,7 @@ mkdir -p packages/loan-center
   - packages/* → tagged as "public" or specific IAP tags
 - Wrong directory = wrong build pipeline, wrong boundary tags, wrong behavior
 - The UFA won't be discovered by the app shell's module federation system
-</why_it_fails>
+  </why_it_fails>
 
 <correction>
 # CORRECT: Use the right generator for the right directory
@@ -663,16 +707,19 @@ turbo gen lib
 # packageName: my-cross-ufa-widget
 
 # Then trying to mount it in multiple UFAs with shared state,
+
 # custom lifecycle management, independent releases...
+
 </code>
 
 <why_it_fails>
-- IAPs require multi-directory structure (core/, lib-node-*, shell-*)
+
+- IAPs require multi-directory structure (core/, lib-node-_, shell-_)
 - IAPs need custom boundary tags added to turbo.json
 - IAPs have complex lifecycle management (mounting, unmounting, state isolation)
 - The app shell team needs to integrate the IAP's shell component
 - Without proper setup, the IAP won't participate in module federation correctly
-</why_it_fails>
+  </why_it_fails>
 
 <correction>
 # CORRECT: IAP creation workflow
@@ -745,6 +792,7 @@ Reserved ports (never use): 3000, 5000, 5001, 9000.
 ### Catalog Strictness Edge Cases
 
 If your package genuinely needs a different version of a catalog entry (rare), you cannot work around `catalogMode: strict` locally. Options:
+
 1. Request an update to the catalog version in `pnpm-workspace.yaml` (preferred)
 2. Request a named catalog override for your package (advanced, discuss with app shell team)
 3. Use an alternative package that isn't in the catalog
@@ -753,18 +801,19 @@ If your package genuinely needs a different version of a catalog entry (rare), y
 
 Sometimes it's unclear whether a component should be an IAP or SCL. Key differentiator:
 
-| Characteristic | SCL | IAP |
-|---------------|-----|-----|
-| Has its own team? | No — owned by consumers | Yes — dedicated team |
-| Independent release cycle? | No — released with allin-ui | Yes — can release independently |
-| Manages cross-UFA state? | No — stateless/props-driven | Yes — owns state across UFAs |
-| Needs lifecycle management? | No — just import and use | Yes — mount/unmount/suspend |
+| Characteristic              | SCL                         | IAP                             |
+| --------------------------- | --------------------------- | ------------------------------- |
+| Has its own team?           | No — owned by consumers     | Yes — dedicated team            |
+| Independent release cycle?  | No — released with allin-ui | Yes — can release independently |
+| Manages cross-UFA state?    | No — stateless/props-driven | Yes — owns state across UFAs    |
+| Needs lifecycle management? | No — just import and use    | Yes — mount/unmount/suspend     |
 
 **When in doubt, start with SCL.** You can always promote to IAP later if the complexity is justified.
 
 ### Testing Setup for New Packages
 
 Both UFA and lib templates include a `vitest.config.ts`. For test utilities:
+
 - Use `@testing-library/react` and `@testing-library/jest-dom` (both in catalog)
 - Use `MockPassport` from `lib-node-user-passport-component` for auth-dependent tests
 - Use test doubles from `@uwm/platform-api` for platform API mocking
@@ -773,6 +822,7 @@ Both UFA and lib templates include a `vitest.config.ts`. For test utilities:
 ### Package with Both Publishable and Local Concerns
 
 If your SCL needs to be published to Artifactory (consumed outside allin-ui) AND used locally:
+
 - Choose "Artifactory" during `turbo gen lib`
 - The generator adds `allin-publish` and `allin-release-candidate` scripts
 - Local consumers use `workspace:*`, external consumers use the published version
@@ -785,6 +835,7 @@ If your SCL needs to be published to Artifactory (consumed outside allin-ui) AND
 Before moving to the next phase (design-ui-component), verify ALL of the following:
 
 ### Package Structure
+
 - [ ] Package created via Turbo generator (`turbo gen ufa` or `turbo gen lib`)
 - [ ] Package is in the correct directory: UFAs in `ufas/`, libraries in `packages/`
 - [ ] `package.json` has `@uwm/` scope prefix
@@ -794,6 +845,7 @@ Before moving to the next phase (design-ui-component), verify ALL of the followi
 - [ ] No direct MUI dependency when using DREAM (import from `lib-node-dream-ui`)
 
 ### UFA-Specific (skip for SCLs)
+
 - [ ] `uwm-manifest.json` exists with all required fields
 - [ ] `moduleName` matches directory name
 - [ ] `route` is unique across all UFAs
@@ -802,11 +854,13 @@ Before moving to the next phase (design-ui-component), verify ALL of the followi
 - [ ] `roleMatrix` and `policies` configured if access restrictions needed
 
 ### Spec Directory
+
 - [ ] `spec/capabilities/` directory created inside the package
 - [ ] At least one capability directory with `README.md` and `features/` subdirectory
 - [ ] `.feature` files are specs (Gherkin syntax), NOT executable tests
 
 ### Verification Commands
+
 - [ ] `pnpm install` succeeds (no catalog violations)
 - [ ] `pnpm build --filter=@uwm/{name}` succeeds
 - [ ] `pnpm test --filter=@uwm/{name}` succeeds (boilerplate tests pass)
@@ -818,19 +872,23 @@ Before moving to the next phase (design-ui-component), verify ALL of the followi
 <integration>
 
 **This skill is called by:**
+
 - `develop-frontend` orchestrator (Phase 1)
 - Developers directly when creating a new allin-ui package
 
 **After this skill, proceed to:**
+
 - `design-ui-component` (Phase 2) — Design components using DREAM design system
 - `implement-ui-feature` (Phase 3) — TDD implementation of features
 
 **Prerequisites:**
+
 - Access to the allin-ui repository (EH/allin-ui on Bitbucket)
 - Node.js and pnpm installed (pnpm@10.0.0 — see `packageManager` in root `package.json`)
 - For IAPs: approval from app shell team
 
 **Related skills:**
+
 - `implement-ui-feature` — For adding features to an existing package
 - `test-frontend` — For testing strategy (Vitest, Stryker, Playwright)
 - `migrate-spa-to-allin` — For moving legacy cell-ui-* into allin-ui
@@ -840,10 +898,12 @@ Before moving to the next phase (design-ui-component), verify ALL of the followi
 <resources>
 
 **Repositories:**
+
 - allin-ui: `https://code.uwm.com/projects/EH/repos/allin-ui/browse`
 - DREAM library: `https://code.uwm.com/projects/UCP/repos/lib-node-dream-ui/browse`
 
 **Confluence Documentation:**
+
 - Component Taxonomy (UFA/IAP/SCL): `https://kb.uwm.com/pages/viewpage.action?pageId=1514786638`
 - allin-ui Operational Runbook: `https://kb.uwm.com/pages/viewpage.action?pageId=1424495810`
 - allin-ui Policies and Standards: `https://kb.uwm.com/pages/viewpage.action?pageId=1479759939`
@@ -851,9 +911,11 @@ Before moving to the next phase (design-ui-component), verify ALL of the followi
 - GUP UI Onboarding: Search kb for "Global User Passport System Design"
 
 **Storybook:**
+
 - DREAM Storybook: `https://dream.uwm.com/`
 
 **Reference Packages in allin-ui:**
+
 - UFA example: `ufas/income-calculator/` — clean UFA with standard deps
 - UFA with RBAC: `ufas/example/` — comprehensive roleMatrix and policies
 - SCL example: `packages/shared-components/` — shared component library with 80% coverage enforcement
@@ -861,12 +923,14 @@ Before moving to the next phase (design-ui-component), verify ALL of the followi
 - IAP example: `packages/onav/` — another IAP with core/lib/shell structure
 
 **Turbo Generators:**
+
 - UFA generator: `turbo/generators/generator/ufa.ts`
 - Lib generator: `turbo/generators/generator/lib.ts`
 - UFA template: `turbo/generators/templates/ufa/`
 - Lib template: `turbo/generators/templates/lib/`
 
 **When stuck:**
+
 - `pnpm install` fails → Check for catalog violations (direct versions instead of `catalog:`)
 - `turbo boundaries` fails → Check import paths, verify you're not importing across forbidden boundaries
 - IAP questions → Contact app shell team

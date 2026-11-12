@@ -1,3 +1,8 @@
+---
+name: tailwindcss
+description: tailwindcss
+---
+
 # Tailwind CSS Rules and Best Practices
 
 ## Core Principles
@@ -193,12 +198,8 @@ Be precise with font sizes - know the actual pixel values:
 ```html
 <!-- ✅ Use the new gradient utilities -->
 <div class="h-14 bg-linear-to-br from-violet-500 to-fuchsia-500"></div>
-<div
-  class="size-18 bg-radial-[at_50%_75%] from-sky-200 via-blue-400 to-indigo-900 to-90%"
-></div>
-<div
-  class="size-24 bg-conic-180 from-indigo-600 via-indigo-50 to-indigo-600"
-></div>
+<div class="size-18 bg-radial-[at_50%_75%] from-sky-200 via-blue-400 to-indigo-900 to-90%"></div>
+<div class="size-24 bg-conic-180 from-indigo-600 via-indigo-50 to-indigo-600"></div>
 
 <!-- ❌ Do not use bg-gradient-* utilities -->
 <div class="h-14 bg-gradient-to-br from-violet-500 to-fuchsia-500"></div>
@@ -291,14 +292,10 @@ Use the new composable mask utilities for image and gradient masks:
 <!-- ✅ Linear gradient masks on specific sides -->
 <div class="mask-t-from-50%">Top fade</div>
 <div class="mask-b-from-20% mask-b-to-80%">Bottom gradient</div>
-<div class="mask-linear-from-white mask-linear-to-black/60">
-  Fade from white to black
-</div>
+<div class="mask-linear-from-white mask-linear-to-black/60">Fade from white to black</div>
 
 <!-- ✅ Radial gradient masks -->
-<div class="mask-radial-[100%_100%] mask-radial-from-75% mask-radial-at-left">
-  Radial mask
-</div>
+<div class="mask-radial-[100%_100%] mask-radial-from-75% mask-radial-at-left">Radial mask</div>
 ```
 
 ## Component Patterns

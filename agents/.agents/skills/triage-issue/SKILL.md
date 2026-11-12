@@ -25,6 +25,7 @@ Use the Agent tool with subagent_type=Explore to deeply investigate the codebase
 - **What** related code exists (similar patterns, tests, adjacent modules)
 
 Look at:
+
 - Related source files and their dependencies
 - Existing tests (what's tested, what's missing)
 - Recent changes to affected files (`git log` on relevant files)
@@ -48,6 +49,7 @@ Create a concrete, ordered list of RED-GREEN cycles. Each cycle is one vertical 
 - **GREEN**: Describe the minimal code change to make that test pass
 
 Rules:
+
 - Tests verify behavior through public interfaces, not implementation details
 - One test at a time, vertical slices (NOT all tests first, then all code)
 - Each test should survive internal refactors
@@ -63,6 +65,7 @@ Create a GitHub issue using `gh issue create` with the template below. Do NOT as
 ## Problem
 
 A clear description of the bug or issue, including:
+
 - What happens (actual behavior)
 - What should happen (expected behavior)
 - How to reproduce (if applicable)
@@ -70,6 +73,7 @@ A clear description of the bug or issue, including:
 ## Root Cause Analysis
 
 Describe what you found during investigation:
+
 - The code path involved
 - Why the current code fails
 - Any contributing factors

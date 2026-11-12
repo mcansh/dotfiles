@@ -9,6 +9,7 @@ Guides developers through the complete test strategy for an allin-ui package bey
 **This skill establishes Playwright test patterns from scratch.** Zero Playwright tests exist in allin-ui today. The patterns documented here are derived from the official allin-ui Policies and Standards, CD Pipeline Design, and TestKube standards on Confluence.
 
 **Key context:** Tests in allin-ui run in two places:
+
 1. **Jenkins** (build time): Unit tests + architecture checks — must complete in under 1 minute per package
 2. **TestKube** (post-build): E2E, soak, perf, mutation tests — run in Kubernetes containers using Playwright
 
@@ -21,17 +22,18 @@ MEDIUM FREEDOM - Test file locations, naming conventions, coverage thresholds, a
 
 <quick_reference>
 
-| Area | Tool | Threshold | File Location | Time Limit |
-|------|------|-----------|---------------|------------|
-| **Unit tests** | Vitest | >80% coverage | `src/**/__tests__/*.test.ts(x)` | 1 min/package |
-| **Mount smoke** | Playwright | N/A | Managed by platform | N/A |
-| **Mutation** | Stryker | >80 score (merge gate) | Managed by platform (optional local config) | N/A |
-| **E2E** | Playwright | N/A | `{package}/tests/e2e/{testName}.ts` | N/A |
-| **Soak** | Playwright | N/A | `{package}/tests/soak/{testName}.ts` | 60min int, 180min stage/prod |
-| **Perf** | Playwright | N/A | `{package}/tests/perf/{testName}.ts` | N/A |
-| **Build** | Turbo | N/A | N/A | 1 min/package |
+| Area            | Tool       | Threshold              | File Location                               | Time Limit                   |
+| --------------- | ---------- | ---------------------- | ------------------------------------------- | ---------------------------- |
+| **Unit tests**  | Vitest     | >80% coverage          | `src/**/__tests__/*.test.ts(x)`             | 1 min/package                |
+| **Mount smoke** | Playwright | N/A                    | Managed by platform                         | N/A                          |
+| **Mutation**    | Stryker    | >80 score (merge gate) | Managed by platform (optional local config) | N/A                          |
+| **E2E**         | Playwright | N/A                    | `{package}/tests/e2e/{testName}.ts`         | N/A                          |
+| **Soak**        | Playwright | N/A                    | `{package}/tests/soak/{testName}.ts`        | 60min int, 180min stage/prod |
+| **Perf**        | Playwright | N/A                    | `{package}/tests/perf/{testName}.ts`        | N/A                          |
+| **Build**       | Turbo      | N/A                    | N/A                                         | 1 min/package                |
 
 **Pipeline stages:**
+
 ```
 PR:     unit + mount smoke
 Merge:  unit + mount smoke + mutation gate
@@ -41,6 +43,7 @@ Prod:   E2E + soak (180 min) + UAT
 ```
 
 **Critical rules:**
+
 - Soak tests detect side effects ONLY — never assert behaviors or outputs
 - Perf tests time UI code ONLY — never wrap upstream dependency calls
 - All Playwright tests must be TypeScript, browser-agnostic
@@ -49,6 +52,7 @@ Prod:   E2E + soak (180 min) + UAT
 </quick_reference>
 
 <when_to_use>
+
 - Setting up vitest.config.ts and setupTests.ts for a new or existing package
 - Configuring Stryker mutation testing locally for a package
 - Fixing surviving mutants to raise mutation score above 80
@@ -60,13 +64,14 @@ Prod:   E2E + soak (180 min) + UAT
 - Understanding which tests run at which pipeline stage
 
 **Do NOT use for:**
+
 - Writing unit tests via TDD cycle (use `implement-ui-feature`)
 - Creating test utilities like TestProviders, custom render, createUser factory (use `implement-ui-feature`)
 - Writing .feature spec files (use `implement-ui-feature`)
 - Running `npx stryker run` as part of the TDD cycle (use `implement-ui-feature`)
 - Creating a new allin-ui package (use `create-allin-package`)
 - Designing component structure (use `design-ui-component`)
-</when_to_use>
+  </when_to_use>
 
 <the_process>
 
@@ -79,42 +84,38 @@ Every allin-ui package needs a `vitest.config.ts` and a `setupTests.ts`. If your
 ```typescript
 /// <reference types="vitest" />
 /// <vitest-environment jsdom>
-import { defineConfig } from 'vitest/config';
+import { defineConfig } from "vitest/config";
 
 export default defineConfig({
-    test: {
-        environment: 'jsdom',
-        globals: true,
-        setupFiles: './src/setupTests.ts',
-        coverage: {
-            reporter: ['text', 'lcov'],
-            include: [
-                'src/components/**',
-                'src/pages/**',
-                'src/hooks/**',
-                'src/services/**',
-                'src/utils/**',
-            ],
-            exclude: [
-                'src/testUtils.ts',
-                'src/setupTests.ts',
-                'src/TestProviders.tsx',
-                'src/**/__tests__/**',
-            ],
-            provider: 'v8',
-            reportsDirectory: './coverage',
-        },
-        exclude: [
-            '**/node_modules/**',
-            '**/dist/**',
-            'src/testUtils.ts',
-            'src/setupTests.ts',
-        ],
+  test: {
+    environment: "jsdom",
+    globals: true,
+    setupFiles: "./src/setupTests.ts",
+    coverage: {
+      reporter: ["text", "lcov"],
+      include: [
+        "src/components/**",
+        "src/pages/**",
+        "src/hooks/**",
+        "src/services/**",
+        "src/utils/**",
+      ],
+      exclude: [
+        "src/testUtils.ts",
+        "src/setupTests.ts",
+        "src/TestProviders.tsx",
+        "src/**/__tests__/**",
+      ],
+      provider: "v8",
+      reportsDirectory: "./coverage",
     },
+    exclude: ["**/node_modules/**", "**/dist/**", "src/testUtils.ts", "src/setupTests.ts"],
+  },
 });
 ```
 
 **Configuration notes:**
+
 - `environment: 'jsdom'` — Required for React component testing. All packages use jsdom.
 - `globals: true` — Makes `describe`, `it`, `expect` available without imports. Standard across allin-ui.
 - `provider: 'v8'` — Required coverage provider. Do NOT use `istanbul`.
@@ -128,16 +129,16 @@ For packages with many tests that approach the 1-minute time limit, enable threa
 
 ```typescript
 export default defineConfig({
-    test: {
-        // ...base config above...
-        pool: 'threads',
-        poolOptions: {
-            threads: {
-                maxThreads: 9,
-                minThreads: 3,
-            },
-        },
+  test: {
+    // ...base config above...
+    pool: "threads",
+    poolOptions: {
+      threads: {
+        maxThreads: 9,
+        minThreads: 3,
+      },
     },
+  },
 });
 ```
 
@@ -146,32 +147,32 @@ This is used in `packages/shared-components/vitest.config.ts` and helps keep lar
 ### setupTests.ts Template
 
 ```typescript
-import '@testing-library/jest-dom';
-import { vi } from 'vitest';
+import "@testing-library/jest-dom";
+import { vi } from "vitest";
 
 // Mock window.matchMedia — required for DREAM components that use responsive design
-Object.defineProperty(window, 'matchMedia', {
-    writable: true,
-    value: vi.fn().mockImplementation((query) => ({
-        matches: false,
-        media: query,
-        onchange: null,
-        addListener: vi.fn(),
-        removeListener: vi.fn(),
-        addEventListener: vi.fn(),
-        removeEventListener: vi.fn(),
-        dispatchEvent: vi.fn(),
-    })),
+Object.defineProperty(window, "matchMedia", {
+  writable: true,
+  value: vi.fn().mockImplementation((query) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: vi.fn(),
+    removeListener: vi.fn(),
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
+  })),
 });
 ```
 
 **Optional: Accessibility testing** — Add vitest-axe for accessibility assertions:
 
 ```typescript
-import '@testing-library/jest-dom';
-import 'vitest-axe/extend-expect';
-import { vi, expect } from 'vitest';
-import * as matchers from 'vitest-axe/matchers';
+import "@testing-library/jest-dom";
+import "vitest-axe/extend-expect";
+import { vi, expect } from "vitest";
+import * as matchers from "vitest-axe/matchers";
 
 expect.extend(matchers);
 
@@ -181,7 +182,7 @@ expect.extend(matchers);
 **Optional: MUI X License** — If your package uses MUI X components (DataGrid, DatePicker Pro):
 
 ```typescript
-import { LicenseInfo } from '@mui/x-license';
+import { LicenseInfo } from "@mui/x-license";
 LicenseInfo.setLicenseKey(import.meta.env.VITE_REACT_APP_MUI_X_KEY);
 
 // ...rest of setup...
@@ -219,11 +220,11 @@ Add this as a `test:ci` script in your package.json:
 
 ```json
 {
-    "scripts": {
-        "test": "vitest run",
-        "test:coverage": "vitest run --coverage",
-        "test:ci": "vitest run --coverage --coverage.thresholds.lines=80"
-    }
+  "scripts": {
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:ci": "vitest run --coverage --coverage.thresholds.lines=80"
+  }
 }
 ```
 
@@ -236,6 +237,7 @@ npx vitest run --test-timeout=60000 --hook-timeout=60000 --reporter junit --outp
 ```
 
 This produces:
+
 - `junit-vitest-output.xml` — JUnit test report for Jenkins
 - `coverage/lcov.info` — Coverage report for SonarQube
 
@@ -264,12 +266,12 @@ SonarQube picks up coverage from `coverage/lcov.info` and ESLint issues from `es
 
 Your package's tests are orchestrated by turbo.json tasks:
 
-| Turbo Task | Dependencies | Outputs | When Used |
-|------------|-------------|---------|-----------|
-| `allin-test` | `^build`, `platform-api#build`, `shared-components#build` | `junit-vitest-output.xml` | PR and merge builds |
-| `test` | None | `coverage/**` | Local development |
-| `test:ci` | `^build`, `^test:ci` | `coverage/**`, `junit-vitest-output.xml` | CI pipeline |
-| `allin-sonar-scan` | `allin-test` | N/A | Post-test SonarQube scan |
+| Turbo Task         | Dependencies                                              | Outputs                                  | When Used                |
+| ------------------ | --------------------------------------------------------- | ---------------------------------------- | ------------------------ |
+| `allin-test`       | `^build`, `platform-api#build`, `shared-components#build` | `junit-vitest-output.xml`                | PR and merge builds      |
+| `test`             | None                                                      | `coverage/**`                            | Local development        |
+| `test:ci`          | `^build`, `^test:ci`                                      | `coverage/**`, `junit-vitest-output.xml` | CI pipeline              |
+| `allin-sonar-scan` | `allin-test`                                              | N/A                                      | Post-test SonarQube scan |
 
 ---
 
@@ -278,6 +280,7 @@ Your package's tests are orchestrated by turbo.json tasks:
 ### How Mutation Testing Works in allin-ui
 
 Mutation testing is **managed at the repo level** by the platform team:
+
 - Runs **daily** on the `develop` branch in TestKube
 - Can be **manually triggered** in Port (https://app.us.port.io)
 - Merge gate: **mutation score < 80 blocks the merge**
@@ -300,23 +303,20 @@ pnpm add -D @stryker-mutator/core @stryker-mutator/vitest-runner @stryker-mutato
 
 ```json
 {
-    "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
-    "mutate": ["src/**/*.tsx", "src/**/*.ts", "!src/**/*.test.*", "!src/**/*.config.*"],
-    "testRunner": "vitest",
-    "checkers": ["typescript"],
-    "tsconfigFile": "tsconfig.json",
-    "vitest": {
-        "configFile": "vitest.config.ts"
-    },
-    "thresholds": {
-        "high": 90,
-        "low": 80,
-        "break": 79.999999999
-    },
-    "plugins": [
-        "@stryker-mutator/vitest-runner",
-        "@stryker-mutator/typescript-checker"
-    ]
+  "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+  "mutate": ["src/**/*.tsx", "src/**/*.ts", "!src/**/*.test.*", "!src/**/*.config.*"],
+  "testRunner": "vitest",
+  "checkers": ["typescript"],
+  "tsconfigFile": "tsconfig.json",
+  "vitest": {
+    "configFile": "vitest.config.ts"
+  },
+  "thresholds": {
+    "high": 90,
+    "low": 80,
+    "break": 79.999999999
+  },
+  "plugins": ["@stryker-mutator/vitest-runner", "@stryker-mutator/typescript-checker"]
 }
 ```
 
@@ -324,9 +324,9 @@ pnpm add -D @stryker-mutator/core @stryker-mutator/vitest-runner @stryker-mutato
 
 ```json
 {
-    "scripts": {
-        "test:mutation": "npx stryker run"
-    }
+  "scripts": {
+    "test:mutation": "npx stryker run"
+  }
 }
 ```
 
@@ -348,8 +348,8 @@ Mutant #42: ConditionalExpression
 **Step 3: Add a test that kills the mutant:**
 
 ```typescript
-it('returns empty string when amount is exactly zero', () => {
-    expect(formatCurrency(0)).toBe('');
+it("returns empty string when amount is exactly zero", () => {
+  expect(formatCurrency(0)).toBe("");
 });
 ```
 
@@ -357,36 +357,38 @@ it('returns empty string when amount is exactly zero', () => {
 
 ### Common Surviving Mutant Patterns
 
-| Mutation Type | Example | Fix |
-|---|---|---|
-| **Boundary** | `>` → `>=` | Add boundary value test (exact threshold) |
-| **Negation** | `!isValid` → `isValid` | Add test for both valid and invalid states |
-| **String** | `"Error"` → `""` | Assert exact error message, not just presence |
-| **Arithmetic** | `a + b` → `a - b` | Test with values where +/- produce different results |
-| **Conditional removal** | `if (x)` → `if (true)` | Test the false branch explicitly |
-| **Return value** | `return result` → `return ""` | Assert specific return value, not truthiness |
+| Mutation Type           | Example                       | Fix                                                  |
+| ----------------------- | ----------------------------- | ---------------------------------------------------- |
+| **Boundary**            | `>` → `>=`                    | Add boundary value test (exact threshold)            |
+| **Negation**            | `!isValid` → `isValid`        | Add test for both valid and invalid states           |
+| **String**              | `"Error"` → `""`              | Assert exact error message, not just presence        |
+| **Arithmetic**          | `a + b` → `a - b`             | Test with values where +/- produce different results |
+| **Conditional removal** | `if (x)` → `if (true)`        | Test the false branch explicitly                     |
+| **Return value**        | `return result` → `return ""` | Assert specific return value, not truthiness         |
 
 ### Stryker Performance Tips
 
 If Stryker is slow (common with large packages):
 
 1. **Limit mutated files:** Narrow the `mutate` glob to only changed files during development:
+
    ```bash
    npx stryker run --mutate "src/components/NewFeature/**/*.ts"
    ```
 
 2. **Use `incremental` mode:** Stryker caches results between runs:
+
    ```json
    {
-       "incremental": true,
-       "incrementalFile": ".stryker-tmp/incremental.json"
+     "incremental": true,
+     "incrementalFile": ".stryker-tmp/incremental.json"
    }
    ```
 
 3. **Exclude stable code:** If utility files haven't changed, exclude them from mutation:
    ```json
    {
-       "mutate": ["src/**/*.ts", "!src/utils/stable/**"]
+     "mutate": ["src/**/*.ts", "!src/utils/stable/**"]
    }
    ```
 
@@ -426,32 +428,32 @@ E2E tests verify Critical User Journeys (CUJs) in a real browser. They run in Te
 Every package MUST have at least this basic smoke test:
 
 ```typescript
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
 
-test.describe('{PackageName} Smoke', () => {
-    test('loads the package in the app shell', async ({ page }) => {
-        // Navigate to the package's route in the app shell
-        await page.goto('/{package-route}');
+test.describe("{PackageName} Smoke", () => {
+  test("loads the package in the app shell", async ({ page }) => {
+    // Navigate to the package's route in the app shell
+    await page.goto("/{package-route}");
 
-        // Verify the page loaded without errors
-        await expect(page).toHaveTitle(/.+/);
+    // Verify the page loaded without errors
+    await expect(page).toHaveTitle(/.+/);
 
-        // Verify a key element from your package rendered
-        await expect(page.getByRole('heading', { name: /expected heading/i })).toBeVisible();
+    // Verify a key element from your package rendered
+    await expect(page.getByRole("heading", { name: /expected heading/i })).toBeVisible();
 
-        // Verify no console errors during load
-        const errors: string[] = [];
-        page.on('console', (msg) => {
-            if (msg.type() === 'error') {
-                errors.push(msg.text());
-            }
-        });
-
-        // Allow time for async rendering
-        await page.waitForLoadState('networkidle');
-
-        expect(errors).toHaveLength(0);
+    // Verify no console errors during load
+    const errors: string[] = [];
+    page.on("console", (msg) => {
+      if (msg.type() === "error") {
+        errors.push(msg.text());
+      }
     });
+
+    // Allow time for async rendering
+    await page.waitForLoadState("networkidle");
+
+    expect(errors).toHaveLength(0);
+  });
 });
 ```
 
@@ -460,40 +462,40 @@ test.describe('{PackageName} Smoke', () => {
 For tests beyond the smoke test, write tests that verify complete user journeys:
 
 ```typescript
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
 
-test.describe('{PackageName} - Loan Application CUJ', () => {
-    test.beforeEach(async ({ page }) => {
-        // Navigate to the package
-        await page.goto('/{package-route}');
-        await page.waitForLoadState('networkidle');
-    });
+test.describe("{PackageName} - Loan Application CUJ", () => {
+  test.beforeEach(async ({ page }) => {
+    // Navigate to the package
+    await page.goto("/{package-route}");
+    await page.waitForLoadState("networkidle");
+  });
 
-    test('user completes a loan application form', async ({ page }) => {
-        // Step 1: Fill in borrower information
-        await page.getByLabel('First Name').fill('Jane');
-        await page.getByLabel('Last Name').fill('Smith');
-        await page.getByLabel('Email').fill('jane.smith@example.com');
+  test("user completes a loan application form", async ({ page }) => {
+    // Step 1: Fill in borrower information
+    await page.getByLabel("First Name").fill("Jane");
+    await page.getByLabel("Last Name").fill("Smith");
+    await page.getByLabel("Email").fill("jane.smith@example.com");
 
-        // Step 2: Select loan type
-        await page.getByRole('combobox', { name: 'Loan Type' }).click();
-        await page.getByRole('option', { name: 'Conventional' }).click();
+    // Step 2: Select loan type
+    await page.getByRole("combobox", { name: "Loan Type" }).click();
+    await page.getByRole("option", { name: "Conventional" }).click();
 
-        // Step 3: Submit
-        await page.getByRole('button', { name: 'Submit' }).click();
+    // Step 3: Submit
+    await page.getByRole("button", { name: "Submit" }).click();
 
-        // Step 4: Verify success
-        await expect(page.getByText('Application submitted successfully')).toBeVisible();
-    });
+    // Step 4: Verify success
+    await expect(page.getByText("Application submitted successfully")).toBeVisible();
+  });
 
-    test('user sees validation errors for missing required fields', async ({ page }) => {
-        // Submit without filling required fields
-        await page.getByRole('button', { name: 'Submit' }).click();
+  test("user sees validation errors for missing required fields", async ({ page }) => {
+    // Submit without filling required fields
+    await page.getByRole("button", { name: "Submit" }).click();
 
-        // Verify validation errors appear
-        await expect(page.getByText('First Name is required')).toBeVisible();
-        await expect(page.getByText('Last Name is required')).toBeVisible();
-    });
+    // Verify validation errors appear
+    await expect(page.getByText("First Name is required")).toBeVisible();
+    await expect(page.getByText("Last Name is required")).toBeVisible();
+  });
 });
 ```
 
@@ -519,10 +521,10 @@ Soak tests simulate typical user activity over an extended period to detect **si
 
 ### Soak Durations
 
-| Environment | Duration |
-|---|---|
-| Integration (int) | 60 minutes |
-| Staging (stage) | 180 minutes |
+| Environment       | Duration    |
+| ----------------- | ----------- |
+| Integration (int) | 60 minutes  |
+| Staging (stage)   | 180 minutes |
 | Production (prod) | 180 minutes |
 
 ### File Location
@@ -537,63 +539,66 @@ Soak tests simulate typical user activity over an extended period to detect **si
 ### Soak Test Template
 
 ```typescript
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
 
 // Soak test durations (overridden by TestKube in pipeline)
 const SOAK_DURATION_MS = 60 * 60 * 1000; // 60 minutes default
 const CYCLE_PAUSE_MS = 5000; // 5 seconds between cycles
 
-test.describe('{PackageName} Soak Test', () => {
-    test('sustained typical usage produces no browser errors', async ({ page }) => {
-        // Collect browser errors throughout the soak period
-        const browserErrors: string[] = [];
-        page.on('console', (msg) => {
-            if (msg.type() === 'error') {
-                browserErrors.push(`[${new Date().toISOString()}] ${msg.text()}`);
-            }
-        });
-
-        page.on('pageerror', (error) => {
-            browserErrors.push(`[${new Date().toISOString()}] PAGE ERROR: ${error.message}`);
-        });
-
-        // Navigate to the package
-        await page.goto('/{package-route}');
-        await page.waitForLoadState('networkidle');
-
-        const startTime = Date.now();
-
-        // Loop CUJ actions for the soak duration
-        while (Date.now() - startTime < SOAK_DURATION_MS) {
-            // --- CUJ Cycle: Define typical user actions ---
-
-            // Example: Navigate to a page
-            await page.getByRole('link', { name: /dashboard/i }).click();
-            await page.waitForLoadState('networkidle');
-
-            // Example: Open and close a details panel
-            await page.getByRole('button', { name: /view details/i }).first().click();
-            await page.waitForTimeout(1000);
-            await page.getByRole('button', { name: /close/i }).click();
-
-            // Example: Navigate back
-            await page.getByRole('link', { name: /home/i }).click();
-            await page.waitForLoadState('networkidle');
-
-            // --- End CUJ Cycle ---
-
-            // Pause between cycles
-            await page.waitForTimeout(CYCLE_PAUSE_MS);
-        }
-
-        // After soak period: check for browser errors
-        // Filter out known benign errors if needed
-        const unexpectedErrors = browserErrors.filter(
-            (error) => !error.includes('ResizeObserver loop') // Known benign
-        );
-
-        expect(unexpectedErrors).toHaveLength(0);
+test.describe("{PackageName} Soak Test", () => {
+  test("sustained typical usage produces no browser errors", async ({ page }) => {
+    // Collect browser errors throughout the soak period
+    const browserErrors: string[] = [];
+    page.on("console", (msg) => {
+      if (msg.type() === "error") {
+        browserErrors.push(`[${new Date().toISOString()}] ${msg.text()}`);
+      }
     });
+
+    page.on("pageerror", (error) => {
+      browserErrors.push(`[${new Date().toISOString()}] PAGE ERROR: ${error.message}`);
+    });
+
+    // Navigate to the package
+    await page.goto("/{package-route}");
+    await page.waitForLoadState("networkidle");
+
+    const startTime = Date.now();
+
+    // Loop CUJ actions for the soak duration
+    while (Date.now() - startTime < SOAK_DURATION_MS) {
+      // --- CUJ Cycle: Define typical user actions ---
+
+      // Example: Navigate to a page
+      await page.getByRole("link", { name: /dashboard/i }).click();
+      await page.waitForLoadState("networkidle");
+
+      // Example: Open and close a details panel
+      await page
+        .getByRole("button", { name: /view details/i })
+        .first()
+        .click();
+      await page.waitForTimeout(1000);
+      await page.getByRole("button", { name: /close/i }).click();
+
+      // Example: Navigate back
+      await page.getByRole("link", { name: /home/i }).click();
+      await page.waitForLoadState("networkidle");
+
+      // --- End CUJ Cycle ---
+
+      // Pause between cycles
+      await page.waitForTimeout(CYCLE_PAUSE_MS);
+    }
+
+    // After soak period: check for browser errors
+    // Filter out known benign errors if needed
+    const unexpectedErrors = browserErrors.filter(
+      (error) => !error.includes("ResizeObserver loop"), // Known benign
+    );
+
+    expect(unexpectedErrors).toHaveLength(0);
+  });
 });
 ```
 
@@ -631,35 +636,35 @@ Performance tests measure the speed of processor-intense UI code. They are optio
 ### Performance Test Template
 
 ```typescript
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
 
-test.describe('{PackageName} Performance', () => {
-    test('filters 1000 records in under 500ms', async ({ page }) => {
-        // Navigate to the page with the large dataset
-        await page.goto('/{package-route}/data-view');
-        await page.waitForLoadState('networkidle');
+test.describe("{PackageName} Performance", () => {
+  test("filters 1000 records in under 500ms", async ({ page }) => {
+    // Navigate to the page with the large dataset
+    await page.goto("/{package-route}/data-view");
+    await page.waitForLoadState("networkidle");
 
-        // Wait for data to load (upstream dependency — do NOT time this)
-        await expect(page.getByRole('table')).toBeVisible();
+    // Wait for data to load (upstream dependency — do NOT time this)
+    await expect(page.getByRole("table")).toBeVisible();
 
-        // Start timing ONLY the UI filter operation
-        const startTime = await page.evaluate(() => performance.now());
+    // Start timing ONLY the UI filter operation
+    const startTime = await page.evaluate(() => performance.now());
 
-        // Trigger the UI filter (this is what we're measuring)
-        await page.getByPlaceholder('Search...').fill('specific-term');
+    // Trigger the UI filter (this is what we're measuring)
+    await page.getByPlaceholder("Search...").fill("specific-term");
 
-        // Wait for filtered results to render
-        await page.waitForFunction(() => {
-            const rows = document.querySelectorAll('table tbody tr');
-            return rows.length < 1000; // Filtered result count is less than full set
-        });
-
-        const endTime = await page.evaluate(() => performance.now());
-        const duration = endTime - startTime;
-
-        // Assert UI operation completed within threshold
-        expect(duration).toBeLessThan(500);
+    // Wait for filtered results to render
+    await page.waitForFunction(() => {
+      const rows = document.querySelectorAll("table tbody tr");
+      return rows.length < 1000; // Filtered result count is less than full set
     });
+
+    const endTime = await page.evaluate(() => performance.now());
+    const duration = endTime - startTime;
+
+    // Assert UI operation completed within threshold
+    expect(duration).toBeLessThan(500);
+  });
 });
 ```
 
@@ -704,21 +709,21 @@ Playwright tests that run in TestKube need test user credentials to authenticate
 3. **Access in Playwright tests:**
 
 ```typescript
-import { test } from '@playwright/test';
+import { test } from "@playwright/test";
 
-test.describe('Authenticated tests', () => {
-    test.beforeEach(async ({ page }) => {
-        // Credentials are injected by TestKube from Vault
-        const username = process.env.TEST_USER_ID;
-        const password = process.env.TEST_USER_PASSWORD;
+test.describe("Authenticated tests", () => {
+  test.beforeEach(async ({ page }) => {
+    // Credentials are injected by TestKube from Vault
+    const username = process.env.TEST_USER_ID;
+    const password = process.env.TEST_USER_PASSWORD;
 
-        // Authenticate via GUP login flow
-        await page.goto('/login');
-        await page.getByLabel('Username').fill(username!);
-        await page.getByLabel('Password').fill(password!);
-        await page.getByRole('button', { name: 'Sign In' }).click();
-        await page.waitForLoadState('networkidle');
-    });
+    // Authenticate via GUP login flow
+    await page.goto("/login");
+    await page.getByLabel("Username").fill(username!);
+    await page.getByLabel("Password").fill(password!);
+    await page.getByRole("button", { name: "Sign In" }).click();
+    await page.waitForLoadState("networkidle");
+  });
 });
 ```
 
@@ -730,9 +735,9 @@ test.describe('Authenticated tests', () => {
 
 ### Build and Test Time Limits
 
-| Operation | Time Limit |
-|---|---|
-| Build | 1 minute per package |
+| Operation  | Time Limit           |
+| ---------- | -------------------- |
+| Build      | 1 minute per package |
 | Unit tests | 1 minute per package |
 
 Time is measured per package overall, not per individual test. You can parallelize tests within the package.
@@ -742,6 +747,7 @@ Time is measured per package overall, not per individual test. You can paralleli
 **1. Enable thread pooling** in vitest.config.ts (see Step 1).
 
 **2. Reduce test setup overhead:**
+
 ```typescript
 // BAD: Heavy setup in each test
 it('renders loan card', () => {
@@ -756,6 +762,7 @@ it('renders loan card', () => {
 ```
 
 **3. Avoid unnecessary re-renders:**
+
 ```typescript
 // BAD: Rendering full page when testing one component
 render(<FullDashboardPage />);
@@ -767,9 +774,10 @@ render(<LoanSummaryCard loan={mockLoan} />);
 **4. Split large packages:** If a UFA has too many tests, consider extracting shared components into an SCL package. Each package gets its own 1-minute window.
 
 **5. Avoid real timers:**
+
 ```typescript
 // BAD: Waiting for real time to pass
-await new Promise(resolve => setTimeout(resolve, 3000));
+await new Promise((resolve) => setTimeout(resolve, 3000));
 
 // GOOD: Use fake timers
 vi.useFakeTimers();
@@ -778,14 +786,17 @@ vi.useRealTimers();
 ```
 
 **6. Monitor test duration locally:**
+
 ```bash
 npx vitest run --reporter verbose
 ```
+
 Review the output for slow tests. Any single test taking >5 seconds is a candidate for optimization.
 
 ### Pipeline Timeout Behavior
 
 If tests exceed 1 minute, the pipeline fails with a timeout. The `testPackage.js` script uses:
+
 - `--test-timeout=60000` (60 seconds per individual test)
 - `--hook-timeout=60000` (60 seconds per hook execution)
 
@@ -797,14 +808,14 @@ Note: These are per-test timeouts, but the overall pipeline stage also has a tim
 
 ### Pipeline Stages and Test Execution
 
-| Stage | Tests Run | Runner | What It Catches |
-|---|---|---|---|
-| **Local dev** | Unit (vitest watch) | Local terminal | Immediate feedback during development |
-| **PR** | Unit + mount smoke | Jenkins | Regressions from your changes |
-| **Merge to develop** | Unit + mount smoke + mutation gate | Jenkins + TestKube | Weak tests (mutation score < 80) |
-| **Int deploy (CD)** | E2E + soak (60 min) | TestKube | Integration issues, memory leaks in int |
-| **Stage deploy (CD)** | E2E + soak (180 min) + perf | TestKube | Long-duration side effects, performance |
-| **Prod deploy (CD)** | E2E + soak (180 min) + UAT | TestKube + Manual | Production readiness, user acceptance |
+| Stage                 | Tests Run                          | Runner             | What It Catches                         |
+| --------------------- | ---------------------------------- | ------------------ | --------------------------------------- |
+| **Local dev**         | Unit (vitest watch)                | Local terminal     | Immediate feedback during development   |
+| **PR**                | Unit + mount smoke                 | Jenkins            | Regressions from your changes           |
+| **Merge to develop**  | Unit + mount smoke + mutation gate | Jenkins + TestKube | Weak tests (mutation score < 80)        |
+| **Int deploy (CD)**   | E2E + soak (60 min)                | TestKube           | Integration issues, memory leaks in int |
+| **Stage deploy (CD)** | E2E + soak (180 min) + perf        | TestKube           | Long-duration side effects, performance |
+| **Prod deploy (CD)**  | E2E + soak (180 min) + UAT         | TestKube + Manual  | Production readiness, user acceptance   |
 
 ### Incremental Testing
 
@@ -815,6 +826,7 @@ The pipeline uses **incremental testing** — tests only run on packages that ha
 ### Fallback Tests
 
 If your package does not define E2E, soak, or perf tests, the pipeline uses a fallback:
+
 - **E2E fallback:** Basic load test (verifies the package loads in the app shell)
 - **Soak fallback:** Loads the package and leaves it open for 5 minutes
 
@@ -822,14 +834,14 @@ If your package does not define E2E, soak, or perf tests, the pipeline uses a fa
 
 ### Responsibility Division
 
-| Activity | Package Team | Platform Team |
-|---|---|---|
-| Unit tests | Write and maintain | Run in Jenkins, enforce 1-min timeout |
-| Mutation | Monitor score in Dynatrace, fix surviving mutants | Run Stryker in TestKube, enforce merge gate (< 80 blocks) |
-| Mount smoke | N/A | Create and maintain mount smoke test |
-| E2E | Write browser-agnostic Playwright tests | Run in TestKube for all browsers |
-| Soak | Write CUJ soak tests | Run in TestKube, manage durations |
-| Perf | Write UI perf tests (optional) | Run in TestKube |
+| Activity    | Package Team                                      | Platform Team                                             |
+| ----------- | ------------------------------------------------- | --------------------------------------------------------- |
+| Unit tests  | Write and maintain                                | Run in Jenkins, enforce 1-min timeout                     |
+| Mutation    | Monitor score in Dynatrace, fix surviving mutants | Run Stryker in TestKube, enforce merge gate (< 80 blocks) |
+| Mount smoke | N/A                                               | Create and maintain mount smoke test                      |
+| E2E         | Write browser-agnostic Playwright tests           | Run in TestKube for all browsers                          |
+| Soak        | Write CUJ soak tests                              | Run in TestKube, manage durations                         |
+| Perf        | Write UI perf tests (optional)                    | Run in TestKube                                           |
 
 </the_process>
 
@@ -870,13 +882,13 @@ If your package does not define E2E, soak, or perf tests, the pipeline uses a fa
 
 ```json
 {
-    "scripts": {
-        "test": "vitest run",
-        "test:watch": "vitest watch",
-        "test:coverage": "vitest run --coverage",
-        "test:ci": "vitest run --coverage --coverage.thresholds.lines=80",
-        "test:mutation": "npx stryker run"
-    }
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest watch",
+    "test:coverage": "vitest run --coverage",
+    "test:ci": "vitest run --coverage --coverage.thresholds.lines=80",
+    "test:mutation": "npx stryker run"
+  }
 }
 ```
 
@@ -888,19 +900,19 @@ If your package does not define E2E, soak, or perf tests, the pipeline uses a fa
 
 ```typescript
 // BAD: This is an E2E test disguised as a soak test
-test('soak: user can create loans repeatedly', async ({ page }) => {
-    for (let i = 0; i < 100; i++) {
-        await page.goto('/loan-tracker/new');
-        await page.getByLabel('Borrower Name').fill('Test User');
-        await page.getByRole('button', { name: 'Create' }).click();
+test("soak: user can create loans repeatedly", async ({ page }) => {
+  for (let i = 0; i < 100; i++) {
+    await page.goto("/loan-tracker/new");
+    await page.getByLabel("Borrower Name").fill("Test User");
+    await page.getByRole("button", { name: "Create" }).click();
 
-        // BAD: Asserting on behavior outcome
-        await expect(page.getByText('Loan created successfully')).toBeVisible();
+    // BAD: Asserting on behavior outcome
+    await expect(page.getByText("Loan created successfully")).toBeVisible();
 
-        // BAD: Verifying specific state after each action
-        const loanCount = await page.getByTestId('loan-count').textContent();
-        expect(Number(loanCount)).toBe(i + 1);
-    }
+    // BAD: Verifying specific state after each action
+    const loanCount = await page.getByTestId("loan-count").textContent();
+    expect(Number(loanCount)).toBe(i + 1);
+  }
 });
 ```
 
@@ -908,43 +920,41 @@ test('soak: user can create loans repeatedly', async ({ page }) => {
 
 ```typescript
 // GOOD: Simulates activity, detects side effects
-test('sustained loan creation produces no browser errors', async ({ page }) => {
-    const browserErrors: string[] = [];
-    page.on('console', (msg) => {
-        if (msg.type() === 'error') {
-            browserErrors.push(`[${new Date().toISOString()}] ${msg.text()}`);
-        }
-    });
-    page.on('pageerror', (error) => {
-        browserErrors.push(`[${new Date().toISOString()}] PAGE ERROR: ${error.message}`);
-    });
-
-    await page.goto('/loan-tracker');
-    await page.waitForLoadState('networkidle');
-
-    const startTime = Date.now();
-
-    while (Date.now() - startTime < SOAK_DURATION_MS) {
-        // Perform typical actions without asserting on outcomes
-        await page.getByRole('link', { name: /new loan/i }).click();
-        await page.waitForLoadState('networkidle');
-
-        await page.getByLabel('Borrower Name').fill('Test User');
-        await page.getByRole('button', { name: 'Create' }).click();
-        await page.waitForLoadState('networkidle');
-
-        // Navigate back (no assertion on success)
-        await page.getByRole('link', { name: /dashboard/i }).click();
-        await page.waitForLoadState('networkidle');
-
-        await page.waitForTimeout(CYCLE_PAUSE_MS);
+test("sustained loan creation produces no browser errors", async ({ page }) => {
+  const browserErrors: string[] = [];
+  page.on("console", (msg) => {
+    if (msg.type() === "error") {
+      browserErrors.push(`[${new Date().toISOString()}] ${msg.text()}`);
     }
+  });
+  page.on("pageerror", (error) => {
+    browserErrors.push(`[${new Date().toISOString()}] PAGE ERROR: ${error.message}`);
+  });
 
-    // Only check for browser-level errors after the soak period
-    const unexpectedErrors = browserErrors.filter(
-        (error) => !error.includes('ResizeObserver loop')
-    );
-    expect(unexpectedErrors).toHaveLength(0);
+  await page.goto("/loan-tracker");
+  await page.waitForLoadState("networkidle");
+
+  const startTime = Date.now();
+
+  while (Date.now() - startTime < SOAK_DURATION_MS) {
+    // Perform typical actions without asserting on outcomes
+    await page.getByRole("link", { name: /new loan/i }).click();
+    await page.waitForLoadState("networkidle");
+
+    await page.getByLabel("Borrower Name").fill("Test User");
+    await page.getByRole("button", { name: "Create" }).click();
+    await page.waitForLoadState("networkidle");
+
+    // Navigate back (no assertion on success)
+    await page.getByRole("link", { name: /dashboard/i }).click();
+    await page.waitForLoadState("networkidle");
+
+    await page.waitForTimeout(CYCLE_PAUSE_MS);
+  }
+
+  // Only check for browser-level errors after the soak period
+  const unexpectedErrors = browserErrors.filter((error) => !error.includes("ResizeObserver loop"));
+  expect(unexpectedErrors).toHaveLength(0);
 });
 ```
 
@@ -956,16 +966,16 @@ test('sustained loan creation produces no browser errors', async ({ page }) => {
 
 ```typescript
 // BAD: Timing includes API call — testing network, not UI
-test('loads loan data in under 1 second', async ({ page }) => {
-    const startTime = await page.evaluate(() => performance.now());
+test("loads loan data in under 1 second", async ({ page }) => {
+  const startTime = await page.evaluate(() => performance.now());
 
-    // BAD: This includes API fetch time
-    await page.goto('/loan-tracker/dashboard');
-    await page.waitForLoadState('networkidle');
-    await expect(page.getByRole('table')).toBeVisible();
+  // BAD: This includes API fetch time
+  await page.goto("/loan-tracker/dashboard");
+  await page.waitForLoadState("networkidle");
+  await expect(page.getByRole("table")).toBeVisible();
 
-    const endTime = await page.evaluate(() => performance.now());
-    expect(endTime - startTime).toBeLessThan(1000);
+  const endTime = await page.evaluate(() => performance.now());
+  expect(endTime - startTime).toBeLessThan(1000);
 });
 ```
 
@@ -973,29 +983,25 @@ test('loads loan data in under 1 second', async ({ page }) => {
 
 ```typescript
 // GOOD: Times only the UI filter operation, not data loading
-test('filters 500 loans in under 300ms', async ({ page }) => {
-    await page.goto('/loan-tracker/dashboard');
-    await page.waitForLoadState('networkidle');
+test("filters 500 loans in under 300ms", async ({ page }) => {
+  await page.goto("/loan-tracker/dashboard");
+  await page.waitForLoadState("networkidle");
 
-    // Wait for data to load (DO NOT time this — it's upstream)
-    await expect(page.getByRole('table')).toBeVisible();
-    await page.waitForFunction(
-        () => document.querySelectorAll('table tbody tr').length >= 500
-    );
+  // Wait for data to load (DO NOT time this — it's upstream)
+  await expect(page.getByRole("table")).toBeVisible();
+  await page.waitForFunction(() => document.querySelectorAll("table tbody tr").length >= 500);
 
-    // NOW start timing the UI filter
-    const startTime = await page.evaluate(() => performance.now());
+  // NOW start timing the UI filter
+  const startTime = await page.evaluate(() => performance.now());
 
-    await page.getByPlaceholder('Filter loans...').fill('conventional');
+  await page.getByPlaceholder("Filter loans...").fill("conventional");
 
-    await page.waitForFunction(
-        () => document.querySelectorAll('table tbody tr').length < 500
-    );
+  await page.waitForFunction(() => document.querySelectorAll("table tbody tr").length < 500);
 
-    const endTime = await page.evaluate(() => performance.now());
-    const filterDuration = endTime - startTime;
+  const endTime = await page.evaluate(() => performance.now());
+  const filterDuration = endTime - startTime;
 
-    expect(filterDuration).toBeLessThan(300);
+  expect(filterDuration).toBeLessThan(300);
 });
 ```
 
@@ -1027,39 +1033,39 @@ Mutant #3: ArrowFunction
 **Before (tests that let mutants survive):**
 
 ```typescript
-it('formats loan type', () => {
-    const result = formatLoanType('CONV');
-    expect(result).toBeTruthy(); // BAD: "" is falsy but so is undefined
+it("formats loan type", () => {
+  const result = formatLoanType("CONV");
+  expect(result).toBeTruthy(); // BAD: "" is falsy but so is undefined
 });
 
-it('formats positive amounts', () => {
-    expect(formatAmount(100)).toBe('$100.00');
-    // Missing: no test for amount = 0
+it("formats positive amounts", () => {
+  expect(formatAmount(100)).toBe("$100.00");
+  // Missing: no test for amount = 0
 });
 
-it('formats date', () => {
-    const result = formatDate('2024-01-15');
-    expect(result).toBeDefined(); // BAD: "" is defined
+it("formats date", () => {
+  const result = formatDate("2024-01-15");
+  expect(result).toBeDefined(); // BAD: "" is defined
 });
 ```
 
 **After (tests that kill the mutants):**
 
 ```typescript
-it('formats loan type to display name', () => {
-    expect(formatLoanType('CONV')).toBe('Conventional'); // Kills mutant #1: asserts exact string
+it("formats loan type to display name", () => {
+  expect(formatLoanType("CONV")).toBe("Conventional"); // Kills mutant #1: asserts exact string
 });
 
-it('formats positive amounts with currency symbol', () => {
-    expect(formatAmount(100)).toBe('$100.00');
+it("formats positive amounts with currency symbol", () => {
+  expect(formatAmount(100)).toBe("$100.00");
 });
 
-it('returns empty string when amount is exactly zero', () => {
-    expect(formatAmount(0)).toBe(''); // Kills mutant #2: tests boundary at 0
+it("returns empty string when amount is exactly zero", () => {
+  expect(formatAmount(0)).toBe(""); // Kills mutant #2: tests boundary at 0
 });
 
-it('formats date to readable string', () => {
-    expect(formatDate('2024-01-15')).toBe('January 15, 2024'); // Kills mutant #3: asserts exact value
+it("formats date to readable string", () => {
+  expect(formatDate("2024-01-15")).toBe("January 15, 2024"); // Kills mutant #3: asserts exact value
 });
 ```
 
@@ -1109,6 +1115,7 @@ All of these mean: **STOP. Follow the rules.**
 ## No Tests Defined — Fallback Behavior
 
 If your package has no E2E, soak, or perf tests, the pipeline uses fallbacks:
+
 - **E2E fallback:** Loads the package in the app shell and verifies it doesn't crash
 - **Soak fallback:** Loads the package and leaves it open for 5 minutes
 
@@ -1119,6 +1126,7 @@ These are extremely basic and catch almost nothing. Always write real tests.
 The incremental testing system only detects explicit dependencies (workspace references). If your UFA depends on a shared component via module federation (runtime), changes to that component won't trigger your tests.
 
 **Mitigation:** If you know a shared component changed, manually trigger your package's tests:
+
 ```bash
 cd {package}
 pnpm test
@@ -1134,6 +1142,7 @@ Mutation testing is managed centrally — the platform runs Stryker on all packa
 ## Coverage Exclusions
 
 Be careful with `sonar.coverage.exclusions` in `sonar-project.properties`. Over-excluding files inflates your coverage percentage artificially. Only exclude:
+
 - Test files and utilities (`**/__tests__/**`, `**/*.test.*`, `**/testUtils.*`)
 - Generated files (`**/__generated__/**`)
 - Build scripts (`**/scripts/**`)
@@ -1143,6 +1152,7 @@ Do NOT exclude production code to boost coverage numbers.
 ## Thread Pool Configuration
 
 If you enable thread pooling for performance, be aware:
+
 - CI environments may have different CPU counts than your local machine
 - `maxThreads: 9` works well locally but may cause contention in CI
 - Start with `minThreads: 2, maxThreads: 4` for CI compatibility and increase if needed
@@ -1150,6 +1160,7 @@ If you enable thread pooling for performance, be aware:
 ## Soak Test Duration in Local Development
 
 Soak tests are designed for 60-180 minute durations in the pipeline. When running locally for development:
+
 - Override the duration: `SOAK_DURATION_MS = 5 * 60 * 1000` (5 minutes)
 - Or use Playwright's `--timeout` flag
 - Never commit a shortened duration — use environment variables
@@ -1157,6 +1168,7 @@ Soak tests are designed for 60-180 minute durations in the pipeline. When runnin
 ## MUI X License in Tests
 
 Some DREAM components use MUI X (DataGrid, DatePicker Pro). If your tests render these components and you see license warnings:
+
 - Add `LicenseInfo.setLicenseKey(import.meta.env.VITE_REACT_APP_MUI_X_KEY)` to `setupTests.ts`
 - The key comes from the `.env` file (do NOT hardcode the actual key)
 
@@ -1167,6 +1179,7 @@ Some DREAM components use MUI X (DataGrid, DatePicker Pro). If your tests render
 Before considering test setup complete:
 
 **Vitest Configuration:**
+
 - [ ] `vitest.config.ts` exists with jsdom environment, globals: true, v8 coverage provider
 - [ ] `setupTests.ts` exists with @testing-library/jest-dom and matchMedia mock
 - [ ] Coverage reporters include `text` and `lcov`
@@ -1174,37 +1187,44 @@ Before considering test setup complete:
 - [ ] Package added to `vitest.workspace.ts` at repo root
 
 **Coverage:**
+
 - [ ] Unit test coverage ≥80% lines
 - [ ] `test:ci` script uses `--coverage.thresholds.lines=80`
 
 **Stryker (if local config added):**
+
 - [ ] `stryker.config.json` matches platform-api pattern
 - [ ] Thresholds: high=90, low=80, break=79.999999999
 - [ ] `test:mutation` script in package.json
 - [ ] Mutation score ≥80 locally
 
 **Playwright E2E:**
+
 - [ ] At least one smoke test at `tests/e2e/smoke.ts`
 - [ ] Smoke test verifies package loads in app shell
 - [ ] All tests are TypeScript
 - [ ] No hardcoded credentials
 
 **Playwright Soak (if applicable):**
+
 - [ ] Soak tests at `tests/soak/{testName}.ts`
 - [ ] NO behavior assertions — only browser error detection
 - [ ] CUJ cycles defined for typical user activity
 - [ ] Benign errors filtered (e.g., ResizeObserver loop)
 
 **Playwright Perf (if applicable):**
+
 - [ ] Perf tests at `tests/perf/{testName}.ts`
 - [ ] Diagnostic timer wraps UI code ONLY, not upstream dependencies
 - [ ] Clear threshold defined for what "fast enough" means
 
 **SonarQube:**
+
 - [ ] `sonar-project.properties` exists with correct exclusions
 - [ ] Coverage report generated at `coverage/lcov.info`
 
 **Pipeline Compliance:**
+
 - [ ] Unit tests + build complete in under 1 minute
 - [ ] JUnit output compatible (testPackage.js handles this)
 
@@ -1213,22 +1233,27 @@ Before considering test setup complete:
 <integration>
 
 **This skill is called by:**
+
 - `develop-frontend` (orchestrator) — Phase 4 in the golden path
 - Directly when setting up or improving test infrastructure for an existing package
 
 **This skill builds on:**
+
 - `implement-ui-feature` — TDD cycle, unit test writing, basic Stryker setup, test utilities (TestProviders, createUser, custom render)
 
 **Skill chain for new features:**
+
 ```
 create-allin-package → design-ui-component → implement-ui-feature → test-frontend
 ```
 
 **Scope boundary with implement-ui-feature:**
+
 - `implement-ui-feature` covers: .feature specs, TDD cycle (RED → GREEN → REFACTOR), running Stryker as verification, test utilities setup, GUP auth patterns in tests, business logic boundary
 - `test-frontend` covers: Vitest config optimization, Stryker config optimization and mutant fixing, Playwright E2E/soak/perf tests, coverage reporting and SonarQube, pipeline integration, TestKube, time limit enforcement
 
 **Dependencies:**
+
 - Package must exist (created by `create-allin-package`)
 - Unit tests should be written first via TDD (guided by `implement-ui-feature`)
 - Component design decisions made (guided by `design-ui-component`)
@@ -1238,6 +1263,7 @@ create-allin-package → design-ui-component → implement-ui-feature → test-f
 <resources>
 
 **Reference files in allin-ui:**
+
 - `configs/platform-api/stryker.config.json` — Reference Stryker configuration
 - `configs/platform-api/vitest.config.ts` — Minimal vitest config example
 - `ufas/action-iq/vitest.config.ts` — UFA vitest config with coverage
@@ -1249,6 +1275,7 @@ create-allin-package → design-ui-component → implement-ui-feature → test-f
 - `turbo/generators/templates/lib/setupTests.ts` — Generator template for setupTests
 
 **Confluence pages:**
+
 - Policies and Standards (page ID: 1479759939) — Testing policy table, thresholds, file locations, time limits
 - CD Pipeline Design (page ID: 1467250722) — Pipeline stages, test execution, responsibility division
 - Test Coverage Overview (page ID: 1484946496) — SonarQube coverage, 80% minimum
@@ -1259,9 +1286,11 @@ create-allin-package → design-ui-component → implement-ui-feature → test-f
 - Performance Testing NFR (page ID: 1492161254) — Infrastructure specs, response time expectations
 
 **Bitbucket:**
+
 - `EH/allin-ui` — Monorepo MFE with all test infrastructure
 
 **Tools:**
+
 - Vitest — Unit testing framework (jsdom environment)
 - Playwright — E2E, soak, performance testing
 - Stryker — Mutation testing (@stryker-mutator/vitest-runner)

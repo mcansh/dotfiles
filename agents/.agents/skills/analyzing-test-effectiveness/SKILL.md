@@ -12,22 +12,26 @@ MEDIUM FREEDOM - Follow the audit flow strictly, but adapt the exact categories 
 </rigidity_level>
 
 <quick_reference>
+
 1. Inventory the tests
 2. Classify them as strong, weak, or misleading
 3. Identify missing edge cases
 4. Create or update a task directory for test-quality improvements
-</quick_reference>
+   </quick_reference>
 
 <when_to_use>
+
 - Coverage looks good but bugs still escape
 - A test suite feels noisy or low-signal
 - You want a quality-improvement backlog for tests
-</when_to_use>
+  </when_to_use>
 
 <the_process>
+
 ## 1. Audit the suite
 
 Look for:
+
 - tautological tests
 - mock-heavy tests that prove little
 - weak assertions
@@ -40,6 +44,7 @@ For every weak area, say what real bug it would or would not catch.
 ## 3. Turn findings into tracked work
 
 Create or update a task directory that captures:
+
 - which tests to remove
 - which tests to strengthen
 - which missing scenarios to add

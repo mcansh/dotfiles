@@ -12,17 +12,19 @@ MEDIUM FREEDOM — The scan types and reporting are rigid. Fix suggestions are f
 </rigidity_level>
 
 <when_to_use>
+
 - User says "security scan", "snyk scan", "check for vulnerabilities"
 - User wants to audit dependencies for known CVEs
 - User has added new dependencies and wants to verify safety
 - As part of the pre-push quality gate (called by `quality-scan` skill)
-</when_to_use>
+  </when_to_use>
 
 <the_process>
 
 ## 1. Run Code Scan (SAST) — via MCP
 
 Use `mcp__Snyk__snyk_code_scan` to analyze first-party code for security issues:
+
 - SQL injection, XSS, command injection, path traversal
 - Hardcoded secrets, insecure crypto, weak randomness
 - OWASP Top 10 patterns
@@ -40,11 +42,13 @@ npx snyk test <absolute-path-to-project> --all-projects
 **Why Bash instead of MCP?** The `mcp__Snyk__snyk_sca_scan` MCP tool times out on .NET projects with large dependency trees (hundreds of transitive dependencies). The CLI via Bash produces identical results reliably.
 
 The SCA scan checks:
+
 - Known CVEs in direct and transitive dependencies
 - License compliance issues
 - Available upgrade paths
 
 **Trust requirement:** If the folder hasn't been trusted yet, run first:
+
 ```bash
 npx snyk config set trusted-folders=<absolute-path-to-project>
 ```
@@ -76,19 +80,22 @@ Distinguish between:
 ## 4. Fix Guidance
 
 For code issues:
+
 - Read the flagged file and understand the vulnerability
 - Offer a secure alternative (parameterized queries, output encoding, etc.)
 - After fixing, re-scan to confirm resolution
 
 For dependency issues:
+
 - Suggest specific version upgrades
 - If no fix available, suggest alternative packages or mitigations
 
 </the_process>
 
 <critical_rules>
+
 - ALWAYS run both SAST and SCA — code vulnerabilities and dependency vulnerabilities are different threat vectors
 - NEVER dismiss HIGH or CRITICAL severity findings — they must be addressed or explicitly acknowledged
 - After fixing issues, ALWAYS re-scan to verify the fix and check for newly introduced issues
 - If Snyk auth is not configured, tell the user to run `npx snyk auth` or use `/setup-quality-tools`
-</critical_rules>
+  </critical_rules>

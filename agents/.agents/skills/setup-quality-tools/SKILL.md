@@ -12,11 +12,12 @@ LOW FREEDOM — Follow the diagnostic steps exactly, then adapt guidance to what
 </rigidity_level>
 
 <when_to_use>
+
 - User says "setup quality tools", "configure sonarqube", "configure snyk"
 - SessionStart hook reported missing configuration
 - Quality scan failed due to authentication errors
 - New team member onboarding
-</when_to_use>
+  </when_to_use>
 
 <the_process>
 
@@ -59,6 +60,7 @@ ls -la ~/.config/uwm-mcp/config.env 2>/dev/null || echo "NOT FOUND"
 ## 3. Guide Setup for Missing Components
 
 ### Node.js (if missing)
+
 ```bash
 # Install Node.js 18+ via nvm (recommended)
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
@@ -66,40 +68,50 @@ nvm install 18
 ```
 
 ### SonarQube Token (if missing)
+
 1. Go to https://sonarqube.uwm.com/account/security
 2. Click "Generate Token"
 3. Select type "User Token", give it a name
 4. Copy the token value
 5. Add to config:
+
 ```bash
 mkdir -p ~/.config/uwm-mcp
 echo 'export SONARQUBE_TOKEN="squ_your_token_here"' >> ~/.config/uwm-mcp/config.env
 ```
 
 ### Snyk Authentication (if missing)
+
 Option A — Browser login (recommended):
+
 ```bash
 npx snyk auth
 ```
 
 Option B — Manual token:
+
 1. Go to https://app.snyk.io/account
 2. Copy your API token
 3. Add to config:
+
 ```bash
 echo 'export SNYK_TOKEN="your_token_here"' >> ~/.config/uwm-mcp/config.env
 ```
 
 ### Snyk Org ID (if missing)
+
 1. Go to https://app.snyk.io/org → Settings → General
 2. Copy the Organization ID (UUID format)
 3. Add to config:
+
 ```bash
 echo 'export SNYK_CFG_ORG="your-org-uuid-here"' >> ~/.config/uwm-mcp/config.env
 ```
 
 ### Source the config file
+
 Add to `~/.bashrc` or `~/.zshrc`:
+
 ```bash
 [ -f ~/.config/uwm-mcp/config.env ] && source ~/.config/uwm-mcp/config.env
 ```
@@ -124,8 +136,9 @@ Tell the user to restart their Claude Code session for the MCP servers to pick u
 </the_process>
 
 <critical_rules>
+
 - NEVER display or echo actual token values — only check if they are SET or NOT SET
 - Always create the config directory before writing to it
 - Always remind the user to source config.env in their shell profile
 - Always remind the user to restart Claude Code after configuration changes
-</critical_rules>
+  </critical_rules>

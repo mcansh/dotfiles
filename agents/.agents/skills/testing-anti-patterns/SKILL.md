@@ -12,6 +12,7 @@ LOW FREEDOM - The 3 Iron Laws are absolute (never test mocks, never add test-onl
 </rigidity_level>
 
 <quick_reference>
+
 ## The 3 Iron Laws
 
 1. **NEVER test mock behavior** → Test real component behavior
@@ -21,20 +22,24 @@ LOW FREEDOM - The 3 Iron Laws are absolute (never test mocks, never add test-onl
 ## Gate Functions (Use Before Action)
 
 **Before asserting on any mock:**
+
 - Ask: "Am I testing real behavior or mock existence?"
 - If mock existence → STOP, delete assertion
 
 **Before adding method to production:**
+
 - Ask: "Is this only used by tests?"
 - If yes → STOP, put in test utilities
 
 **Before mocking:**
+
 - Ask: "What side effects does real method have?"
 - Ask: "Does test depend on those side effects?"
 - If depends → Mock lower level, not this method
-</quick_reference>
+  </quick_reference>
 
 <when_to_use>
+
 - Writing new tests
 - Adding mocks to tests
 - Tempted to add method only tests will use
@@ -46,9 +51,11 @@ LOW FREEDOM - The 3 Iron Laws are absolute (never test mocks, never add test-onl
 </when_to_use>
 
 <the_iron_laws>
+
 ## Law 1: Never Test Mock Behavior
 
 **Anti-pattern:**
+
 ```rust
 // ❌ BAD: Testing that mock exists
 #[test]
@@ -64,6 +71,7 @@ fn test_processes_request() {
 **Why wrong:** Verifies mock works, not that code works.
 
 **Fix:**
+
 ```rust
 // ✅ GOOD: Test real behavior
 #[test]
@@ -81,6 +89,7 @@ fn test_processes_request() {
 ## Law 2: Never Add Test-Only Methods to Production
 
 **Anti-pattern:**
+
 ```rust
 // ❌ BAD: reset() only used in tests
 pub struct Connection {
@@ -102,11 +111,13 @@ fn test_something() {
 ```
 
 **Why wrong:**
+
 - Production code polluted with test-only methods
 - Dangerous if accidentally called in production
 - Confuses object lifecycle with entity lifecycle
 
 **Fix:**
+
 ```rust
 // ✅ GOOD: Test utilities handle cleanup
 // Connection has no reset()
@@ -131,6 +142,7 @@ fn test_something() {
 ## Law 3: Never Mock Without Understanding
 
 **Anti-pattern:**
+
 ```rust
 // ❌ BAD: Mock breaks test logic
 #[test]
@@ -148,6 +160,7 @@ fn test_detects_duplicate_server() {
 **Why wrong:** Mocked method had side effect test depended on (writing config).
 
 **Fix:**
+
 ```rust
 // ✅ GOOD: Mock at correct level
 #[test]
@@ -161,9 +174,11 @@ fn test_detects_duplicate_server() {
     assert!(result.is_err());
 }
 ```
+
 </the_iron_laws>
 
 <gate_functions>
+
 ## Gate Function 1: Before Asserting on Mock
 
 ```
@@ -178,6 +193,7 @@ BEFORE any assertion that checks mock elements:
 ```
 
 **Examples of mock existence testing (all wrong):**
+
 - `assert!(handler.service().is_mock())`
 - `XCTAssertTrue(manager.delegate is MockDelegate)`
 - `expect(component.database).toBe(mockDb)`
@@ -202,6 +218,7 @@ BEFORE adding any method to production class:
 ```
 
 **Red flags:**
+
 - Method named `reset()`, `clear()`, `cleanup()` in production class
 - Method only has `#[cfg(test)]` callers
 - Method added "for testing purposes"
@@ -231,10 +248,11 @@ If unsure what test depends on:
 ```
 
 **Red flags:**
+
 - "I'll mock this to be safe"
 - "This might be slow, better mock it"
 - Mocking without understanding dependency chain
-</gate_functions>
+  </gate_functions>
 
 <examples>
 <example>
@@ -249,16 +267,18 @@ fn test_user_service_initialized() {
     // Testing that mock exists
     assert_eq!(service.database().connection_string(), "mock://test");
     assert!(service.database().is_test_mode());
+
 }
 </code>
 
 <why_it_fails>
+
 - Assertions check mock properties, not service behavior
 - Test passes when mock is correct, fails when mock is wrong
 - Tells you nothing about whether UserService works
 - Would pass even if UserService.new() does nothing
 - False confidence - mock works, but does service work?
-</why_it_fails>
+  </why_it_fails>
 
 <correction>
 **Apply Gate Function 1:**
@@ -286,11 +306,13 @@ fn test_user_service_creates_user() {
 ```
 
 **What you gain:**
+
 - Tests actual UserService behavior
 - Validates create and retrieve work
 - Would fail if service broken (even with working mock)
 - Confidence service actually works
 </correction>
+
 </example>
 
 <example>
@@ -303,38 +325,40 @@ pub struct Database {
 }
 
 impl Database {
-    pub fn new() -> Self { /* ... */ }
+pub fn new() -> Self { /* ... */ }
 
     // Added "for testing"
     pub fn reset(&mut self) {
         self.pool.clear();
         self.pool.reinitialize();
     }
+
 }
 
 // Tests
 #[test]
 fn test_user_creation() {
-    let mut db = Database::new();
-    // ... test logic ...
-    db.reset();  // Clean up
+let mut db = Database::new();
+// ... test logic ...
+db.reset(); // Clean up
 }
 
 #[test]
 fn test_user_deletion() {
-    let mut db = Database::new();
-    // ... test logic ...
-    db.reset();  // Clean up
+let mut db = Database::new();
+// ... test logic ...
+db.reset(); // Clean up
 }
 </code>
 
 <why_it_fails>
+
 - Production Database polluted with test-only reset()
 - reset() looks like legitimate API to other developers
 - Dangerous if accidentally called in production (clears all data!)
 - Violates single responsibility (Database manages connections, not test lifecycle)
 - Every test class now needs reset() added
-</why_it_fails>
+  </why_it_fails>
 
 <correction>
 **Apply Gate Function 2:**
@@ -377,11 +401,13 @@ fn test_user_creation() {
 ```
 
 **What you gain:**
+
 - Production code has no test pollution
 - No risk of accidental production calls
 - Clear separation: Database manages connections, test utils manage test lifecycle
 - Test utilities can evolve without changing production code
 </correction>
+
 </example>
 
 <example>
@@ -402,16 +428,18 @@ fn test_detects_duplicate_server() {
 
     // Assertion fails! Mock always returns Ok, no duplicate detection
     assert!(result.is_err());  // FAILS
+
 }
 </code>
 
 <why_it_fails>
+
 - Mocked add_server() without understanding it writes config
 - Mock returns Ok() both times (no duplicate detection)
 - Test depends on ConfigManager's internal state tracking
 - Mock eliminates the behavior test needs to verify
 - "Speeding up" by mocking broke the test
-</why_it_fails>
+  </why_it_fails>
 
 <correction>
 **Apply Gate Function 3:**
@@ -439,15 +467,18 @@ fn test_detects_duplicate_server() {
 ```
 
 **What you gain:**
+
 - Test verifies real duplicate detection logic
 - Only mocked the actual slow part (file I/O)
 - ConfigManager's internal tracking works normally
 - Test actually validates the feature
 </correction>
+
 </example>
 </examples>
 
 <additional_anti_patterns>
+
 ## Anti-Pattern 4: Incomplete Mocks
 
 **Problem:** Mock only fields you think you need, omit others.
@@ -479,6 +510,7 @@ struct MockResponse {
 ```
 
 **Gate function:**
+
 ```
 BEFORE creating mock responses:
   1. Examine actual API response structure
@@ -491,6 +523,7 @@ BEFORE creating mock responses:
 ## Anti-Pattern 5: Over-Complex Mocks
 
 **Warning signs:**
+
 - Mock setup longer than test logic
 - Mocking everything to make test pass
 - Test breaks when mock changes
@@ -499,6 +532,7 @@ BEFORE creating mock responses:
 </additional_anti_patterns>
 
 <tdd_prevention>
+
 ## TDD Prevents These Anti-Patterns
 
 **Why TDD helps:**
@@ -514,6 +548,7 @@ BEFORE creating mock responses:
 </tdd_prevention>
 
 <critical_rules>
+
 ## Rules That Have No Exceptions
 
 1. **Never test mock behavior** → Test real component behavior always
@@ -531,7 +566,7 @@ All of these mean: **STOP. Apply the gate function.**
 - "I'll mock this to be safe" (Don't understand dependencies)
 - "Mock setup is complex but necessary" (Probably over-mocking)
 - "This will speed up tests" (Might break test logic)
-</critical_rules>
+  </critical_rules>
 
 <verification_checklist>
 Before claiming tests are correct:
@@ -554,12 +589,14 @@ Before claiming tests are correct:
 - Understanding of mocking vs. faking vs. stubbing
 
 **This skill is called by:**
+
 - When writing tests
 - When adding mocks
 - When test setup becoming complex
 - hyperpowers:test-driven-development (use gate functions during RED phase)
 
 **Red flags triggering this skill:**
+
 - Assertion checks for `*-mock` test IDs
 - Methods only called in test files
 - Mock setup >50% of test
@@ -574,6 +611,7 @@ Before claiming tests are correct:
 - [When to use integration tests](resources/integration-vs-unit.md)
 
 **When stuck:**
+
 - Mock too complex → Consider integration test with real components
 - Unsure what to mock → Run with real implementation first, observe
 - Test failing mysteriously → Check if mock breaks test logic (use Gate Function 3)

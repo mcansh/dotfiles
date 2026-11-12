@@ -33,14 +33,14 @@ export class MyAgent extends Agent<Env, State> {
 
 ## Key APIs
 
-| API | Purpose |
-|-----|---------|
-| `this.runFiber(name, fn)` | Start a named fiber |
-| `ctx.stash` / `this.stash` | Read latest checkpoint |
-| `ctx.stash = data` | Write checkpoint (JSON-serializable) |
-| `onFiberRecovered(ctx)` | Called on DO restart if fiber was in-flight |
-| `keepAlive()` | Prevent hibernation while fiber runs |
-| `keepAliveWhile(fn)` | Keep alive for duration of async function |
+| API                        | Purpose                                     |
+| -------------------------- | ------------------------------------------- |
+| `this.runFiber(name, fn)`  | Start a named fiber                         |
+| `ctx.stash` / `this.stash` | Read latest checkpoint                      |
+| `ctx.stash = data`         | Write checkpoint (JSON-serializable)        |
+| `onFiberRecovered(ctx)`    | Called on DO restart if fiber was in-flight |
+| `keepAlive()`              | Prevent hibernation while fiber runs        |
+| `keepAliveWhile(fn)`       | Keep alive for duration of async function   |
 
 ## Important
 

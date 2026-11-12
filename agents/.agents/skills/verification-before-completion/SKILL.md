@@ -12,24 +12,27 @@ LOW FREEDOM - No exceptions. Run the command, read the output, then make the cla
 </rigidity_level>
 
 <quick_reference>
-| Claim | Required evidence |
-|------|-------------------|
-| Tests pass | Fresh test output with no failures |
-| Build succeeds | Fresh build output with exit 0 |
-| Task slice complete | Updated `tasks.md` plus verification evidence |
-| Feature complete | Acceptance checks in `plan.md` satisfied with evidence |
+
+| Claim               | Required evidence                                      |
+| ------------------- | ------------------------------------------------------ |
+| Tests pass          | Fresh test output with no failures                     |
+| Build succeeds      | Fresh build output with exit 0                         |
+| Task slice complete | Updated `tasks.md` plus verification evidence          |
+| Feature complete    | Acceptance checks in `plan.md` satisfied with evidence |
 
 **Not sufficient:** “should work”, “looks done”, or stale output.
 </quick_reference>
 
 <when_to_use>
+
 - Before any completion claim
 - Before moving work to `Done`
 - Before deleting a finished local task directory
 - Before committing or opening a PR
-</when_to_use>
+  </when_to_use>
 
 <the_process>
+
 ## 1. Identify the claim
 
 What exact statement are you about to make?
@@ -45,10 +48,12 @@ Confirm the output actually supports the claim.
 ## 4. Update the docs
 
 If the work is complete:
+
 - move the task to `Done`
 - note the verification in `context.md` if it matters
 
 ## 5. Only then state completion
+
 </the_process>
 
 <examples>
@@ -56,9 +61,10 @@ If the work is complete:
 <scenario>Developer says the slice is done because the code looks right</scenario>
 
 <why_it_fails>
+
 - No proof the behavior works
 - No proof the spec was met
-</why_it_fails>
+  </why_it_fails>
 
 <correction>
 Run the relevant verification, update `tasks.md`, then claim completion with evidence.

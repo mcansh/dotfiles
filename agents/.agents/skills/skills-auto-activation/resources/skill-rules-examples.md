@@ -13,9 +13,17 @@ Example configurations for common skill types and scenarios.
     "priority": "high",
     "promptTriggers": {
       "keywords": [
-        "backend", "server", "API", "endpoint", "route",
-        "controller", "service", "repository",
-        "middleware", "authentication", "authorization"
+        "backend",
+        "server",
+        "API",
+        "endpoint",
+        "route",
+        "controller",
+        "service",
+        "repository",
+        "middleware",
+        "authentication",
+        "authorization"
       ],
       "intentPatterns": [
         "(create|build|implement|add).*?(API|endpoint|route|controller)",
@@ -25,11 +33,7 @@ Example configurations for common skill types and scenarios.
       ]
     },
     "fileTriggers": {
-      "pathPatterns": [
-        "backend/**/*.ts",
-        "server/**/*.ts",
-        "src/api/**"
-      ]
+      "pathPatterns": ["backend/**/*.ts", "server/**/*.ts", "src/api/**"]
     }
   }
 }
@@ -44,8 +48,17 @@ Example configurations for common skill types and scenarios.
     "priority": "high",
     "promptTriggers": {
       "keywords": [
-        "frontend", "UI", "component", "react", "vue", "angular",
-        "page", "layout", "view", "hooks", "state"
+        "frontend",
+        "UI",
+        "component",
+        "react",
+        "vue",
+        "angular",
+        "page",
+        "layout",
+        "view",
+        "hooks",
+        "state"
       ],
       "intentPatterns": [
         "(create|build).*?(component|page|layout)",
@@ -54,10 +67,7 @@ Example configurations for common skill types and scenarios.
       ]
     },
     "fileTriggers": {
-      "pathPatterns": [
-        "src/components/**/*.tsx",
-        "src/pages/**/*.tsx"
-      ]
+      "pathPatterns": ["src/components/**/*.tsx", "src/pages/**/*.tsx"]
     }
   }
 }
@@ -74,18 +84,10 @@ Example configurations for common skill types and scenarios.
     "priority": "high",
     "promptTriggers": {
       "keywords": ["test", "TDD", "testing", "spec", "jest", "vitest"],
-      "intentPatterns": [
-        "(write|create|add).*?test",
-        "test.*first",
-        "reproduce.*(bug|error)"
-      ]
+      "intentPatterns": ["(write|create|add).*?test", "test.*first", "reproduce.*(bug|error)"]
     },
     "fileTriggers": {
-      "pathPatterns": [
-        "**/*.test.ts",
-        "**/*.spec.ts",
-        "**/__tests__/**"
-      ]
+      "pathPatterns": ["**/*.test.ts", "**/*.spec.ts", "**/__tests__/**"]
     }
   }
 }
@@ -119,20 +121,14 @@ Example configurations for common skill types and scenarios.
     "type": "technology",
     "priority": "high",
     "promptTriggers": {
-      "keywords": [
-        "database", "prisma", "schema", "migration",
-        "query", "orm", "model"
-      ],
+      "keywords": ["database", "prisma", "schema", "migration", "query", "orm", "model"],
       "intentPatterns": [
         "(create|update|modify).*?(schema|model|migration)",
         "(query|fetch|get).*?database"
       ]
     },
     "fileTriggers": {
-      "pathPatterns": [
-        "**/prisma/**",
-        "**/*.prisma"
-      ]
+      "pathPatterns": ["**/prisma/**", "**/*.prisma"]
     }
   }
 }
@@ -146,21 +142,14 @@ Example configurations for common skill types and scenarios.
     "type": "technology",
     "priority": "medium",
     "promptTriggers": {
-      "keywords": [
-        "docker", "dockerfile", "container",
-        "deployment", "CI/CD", "kubernetes"
-      ],
+      "keywords": ["docker", "dockerfile", "container", "deployment", "CI/CD", "kubernetes"],
       "intentPatterns": [
         "(create|build|configure).*?(docker|container)",
         "(deploy|release|publish)"
       ]
     },
     "fileTriggers": {
-      "pathPatterns": [
-        "**/Dockerfile",
-        "**/.github/workflows/**",
-        "**/docker-compose.yml"
-      ]
+      "pathPatterns": ["**/Dockerfile", "**/.github/workflows/**", "**/docker-compose.yml"]
     }
   }
 }
@@ -176,20 +165,11 @@ Example configurations for common skill types and scenarios.
     "type": "feature",
     "priority": "medium",
     "promptTriggers": {
-      "keywords": [
-        "cart", "shopping cart", "basket",
-        "add to cart", "checkout"
-      ],
-      "intentPatterns": [
-        "(implement|create|modify).*?cart",
-        "cart.*(functionality|feature|logic)"
-      ]
+      "keywords": ["cart", "shopping cart", "basket", "add to cart", "checkout"],
+      "intentPatterns": ["(implement|create|modify).*?cart", "cart.*(functionality|feature|logic)"]
     },
     "fileTriggers": {
-      "pathPatterns": [
-        "src/features/cart/**",
-        "backend/cart-service/**"
-      ]
+      "pathPatterns": ["src/features/cart/**", "backend/cart-service/**"]
     }
   }
 }
@@ -207,8 +187,15 @@ Example configurations for common skill types and scenarios.
     "enforcement": "suggest",
     "promptTriggers": {
       "keywords": [
-        "security", "vulnerability", "authentication", "authorization",
-        "SQL injection", "XSS", "CSRF", "password", "token"
+        "security",
+        "vulnerability",
+        "authentication",
+        "authorization",
+        "SQL injection",
+        "XSS",
+        "CSRF",
+        "password",
+        "token"
       ],
       "intentPatterns": [
         "secur(e|ity)",
@@ -228,10 +215,7 @@ Example configurations for common skill types and scenarios.
     "type": "optimization",
     "priority": "medium",
     "promptTriggers": {
-      "keywords": [
-        "performance", "optimize", "slow", "cache",
-        "memory", "speed", "latency"
-      ],
+      "keywords": ["performance", "optimize", "slow", "cache", "memory", "speed", "latency"],
       "intentPatterns": [
         "(improve|optimize).*(performance|speed)",
         "(reduce|minimize).*(latency|memory|time)"
@@ -249,10 +233,7 @@ Example configurations for common skill types and scenarios.
     "type": "documentation",
     "priority": "low",
     "promptTriggers": {
-      "keywords": [
-        "documentation", "docs", "comments", "readme",
-        "docstring", "jsdoc"
-      ],
+      "keywords": ["documentation", "docs", "comments", "readme", "docstring", "jsdoc"],
       "intentPatterns": [
         "(write|update|create).*?(documentation|docs)",
         "document.*(API|function|component)"
@@ -304,7 +285,7 @@ For projects with multiple repositories:
       "keywords": ["backend"],
       "intentPatterns": [
         "backend",
-        "(?!.*test).*backend"  // Match "backend" but not if "test" appears
+        "(?!.*test).*backend" // Match "backend" but not if "test" appears
       ]
     }
   }
@@ -333,10 +314,7 @@ For projects with multiple repositories:
   "error-handling": {
     "promptTriggers": {
       "keywords": ["error", "exception", "try", "catch"],
-      "intentPatterns": [
-        "(handle|catch|throw).*(error|exception)",
-        "error.*handling"
-      ]
+      "intentPatterns": ["(handle|catch|throw).*(error|exception)", "error.*handling"]
     }
   }
 }
@@ -347,11 +325,11 @@ For projects with multiple repositories:
 ```json
 {
   "critical-skill": {
-    "enforcement": "block",    // Block if not used (future feature)
+    "enforcement": "block", // Block if not used (future feature)
     "priority": "high"
   },
   "recommended-skill": {
-    "enforcement": "suggest",  // Suggest usage
+    "enforcement": "suggest", // Suggest usage
     "priority": "medium"
   },
   "optional-skill": {

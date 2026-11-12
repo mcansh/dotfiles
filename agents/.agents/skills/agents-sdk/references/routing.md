@@ -10,16 +10,15 @@ Fetch https://developers.cloudflare.com/agents/api-reference/routing/ for comple
 import { routeAgentRequest } from "agents";
 
 export default {
-  fetch: (req, env) =>
-    routeAgentRequest(req, env) ?? new Response("Not found", { status: 404 })
+  fetch: (req, env) => routeAgentRequest(req, env) ?? new Response("Not found", { status: 404 }),
 };
 ```
 
-| Class | URL |
-|-------|-----|
-| `Counter` | `/agents/counter/user-123` |
-| `ChatRoom` | `/agents/chat-room/lobby` |
-| `MyAgent` | `/agents/my-agent/default` |
+| Class      | URL                        |
+| ---------- | -------------------------- |
+| `Counter`  | `/agents/counter/user-123` |
+| `ChatRoom` | `/agents/chat-room/lobby`  |
+| `MyAgent`  | `/agents/my-agent/default` |
 
 Subpaths after the instance name (e.g. `/agents/my-agent/default/api/data`) route to `onRequest`.
 
@@ -36,7 +35,7 @@ export default {
       return agent.fetch(req);
     }
     return routeAgentRequest(req, env);
-  }
+  },
 };
 ```
 
@@ -49,8 +48,12 @@ routeAgentRequest(req, env, {
   locationHint: "enam",
   jurisdiction: "eu",
   props: { userId: "123" },
-  onBeforeConnect: async (req) => { /* auth check */ },
-  onBeforeRequest: async (req) => { /* auth check */ }
+  onBeforeConnect: async (req) => {
+    /* auth check */
+  },
+  onBeforeRequest: async (req) => {
+    /* auth check */
+  },
 });
 ```
 
@@ -64,7 +67,7 @@ useAgent({
   name: "instance-1",
   host: "https://my-worker.workers.dev",
   basePath: "/api/agents",
-  path: "/custom-subpath"
+  path: "/custom-subpath",
 });
 ```
 

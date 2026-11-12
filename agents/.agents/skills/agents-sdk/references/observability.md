@@ -20,16 +20,16 @@ subscribe("agents:state", (event) => {
 
 ## Available Channels
 
-| Channel | Events |
-|---------|--------|
-| `agents:state` | State changes |
-| `agents:rpc` | `@callable` invocations |
-| `agents:message` | WebSocket messages |
-| `agents:schedule` | Schedule triggers |
-| `agents:lifecycle` | Agent start, connect, disconnect |
-| `agents:workflow` | Workflow progress, completion, errors |
-| `agents:mcp` | MCP server connections, tool calls |
-| `agents:email` | Email received |
+| Channel            | Events                                |
+| ------------------ | ------------------------------------- |
+| `agents:state`     | State changes                         |
+| `agents:rpc`       | `@callable` invocations               |
+| `agents:message`   | WebSocket messages                    |
+| `agents:schedule`  | Schedule triggers                     |
+| `agents:lifecycle` | Agent start, connect, disconnect      |
+| `agents:workflow`  | Workflow progress, completion, errors |
+| `agents:mcp`       | MCP server connections, tool calls    |
+| `agents:email`     | Email received                        |
 
 ## Per-Agent Override
 

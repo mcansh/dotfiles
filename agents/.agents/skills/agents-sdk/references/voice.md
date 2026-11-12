@@ -24,8 +24,8 @@ export class VoiceAgent extends withVoice(Agent)<Env> {
       messages: [
         { role: "system", content: "You are a voice assistant." },
         ...context.conversationHistory,
-        { role: "user", content: transcript }
-      ]
+        { role: "user", content: transcript },
+      ],
     });
 
     for await (const chunk of result.textStream) {
@@ -38,13 +38,13 @@ export class VoiceAgent extends withVoice(Agent)<Env> {
 
 ## Lifecycle Hooks
 
-| Hook | Purpose |
-|------|---------|
+| Hook                      | Purpose                              |
+| ------------------------- | ------------------------------------ |
 | `onTurn(transcript, ctx)` | Handle transcribed speech (required) |
-| `beforeCallStart(conn)` | Auth/validation before call starts |
-| `onCallStart(conn)` | Call connected |
-| `onCallEnd(conn)` | Call disconnected |
-| `onInterrupt()` | User interrupted agent speech |
+| `beforeCallStart(conn)`   | Auth/validation before call starts   |
+| `onCallStart(conn)`       | Call connected                       |
+| `onCallEnd(conn)`         | Call disconnected                    |
+| `onInterrupt()`           | User interrupted agent speech        |
 
 ## Client (React)
 
@@ -54,12 +54,14 @@ import { useVoiceAgent } from "@cloudflare/voice/react";
 function VoiceUI() {
   const { isConnected, isSpeaking, connect, disconnect } = useVoiceAgent({
     agent: "VoiceAgent",
-    name: "session-1"
+    name: "session-1",
   });
 
-  return <button onClick={isConnected ? disconnect : connect}>
-    {isConnected ? "End Call" : "Start Call"}
-  </button>;
+  return (
+    <button onClick={isConnected ? disconnect : connect}>
+      {isConnected ? "End Call" : "Start Call"}
+    </button>
+  );
 }
 ```
 

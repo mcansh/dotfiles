@@ -12,20 +12,22 @@ HIGH FREEDOM — Templates are starting points, not constraints. Claude can crea
 </rigidity_level>
 
 <quick_reference>
-| Content Type | Template | Key Layout |
-|-------------|----------|------------|
-| Presentation / pitch deck | template-presentation.html | 16:9 slides with scroll-snap (title, content, sidebar, three-card, split, closing) |
-| Memo | template-document.html | .uwm-doc--memo with TO/FROM/DATE/RE table |
-| Agenda | template-document.html | .uwm-doc--agenda with time/topic/presenter table |
-| Letterhead | template-document.html | .uwm-doc--letterhead with address and signature |
-| Training / Job Aid | template-document.html | .uwm-doc--jobaid with color-coded heading hierarchy |
-| Marketing one-pager | template-one-pager.html | Hero, stats bar, two-column content, CTA |
-| Spreadsheet / data report | template-spreadsheet.html | Header with logo, branded data table, summary row |
-| Custom / other | Start from brand-system.css | Use CSS variables and brand-reference.md rules |
-</quick_reference>
+
+| Content Type              | Template                    | Key Layout                                                                         |
+| ------------------------- | --------------------------- | ---------------------------------------------------------------------------------- |
+| Presentation / pitch deck | template-presentation.html  | 16:9 slides with scroll-snap (title, content, sidebar, three-card, split, closing) |
+| Memo                      | template-document.html      | .uwm-doc--memo with TO/FROM/DATE/RE table                                          |
+| Agenda                    | template-document.html      | .uwm-doc--agenda with time/topic/presenter table                                   |
+| Letterhead                | template-document.html      | .uwm-doc--letterhead with address and signature                                    |
+| Training / Job Aid        | template-document.html      | .uwm-doc--jobaid with color-coded heading hierarchy                                |
+| Marketing one-pager       | template-one-pager.html     | Hero, stats bar, two-column content, CTA                                           |
+| Spreadsheet / data report | template-spreadsheet.html   | Header with logo, branded data table, summary row                                  |
+| Custom / other            | Start from brand-system.css | Use CSS variables and brand-reference.md rules                                     |
+| </quick_reference>        |
 
 <when_to_use>
 Use when:
+
 - User asks for a presentation, slide deck, or pitch deck
 - User needs a memo, agenda, letterhead, or training document
 - User wants marketing content, one-pager, or external-facing material
@@ -34,10 +36,11 @@ Use when:
 - User says "make it look like UWM" or references brand guidelines
 
 Do NOT use when:
+
 - Building web application UI (use uwm-frontend-dev / DREAM framework instead)
 - Writing code documentation or READMEs
 - Creating non-UWM content with no branding requirement
-</when_to_use>
+  </when_to_use>
 
 <the_process>
 
@@ -48,6 +51,7 @@ Read `resources/brand-reference.md` to load the complete brand spec into context
 ## 2. Select the Closest Template
 
 Read the matching template from `resources/`:
+
 - **Presentations**: `template-presentation.html`
 - **Documents** (memo/agenda/letterhead/job-aid): `template-document.html`
 - **Marketing one-pagers**: `template-one-pager.html`
@@ -68,6 +72,7 @@ Read `resources/uwm-logo.png` and embed it as a base64 data URI in the output HT
 ## 4. Output Self-Contained HTML
 
 Write the final HTML file. It must be:
+
 - **Self-contained**: All CSS embedded in `<style>` tags (copy from template)
 - **Single external dependency**: Google Fonts `@import` for Roboto only
 - **All colors via CSS variables**: Use `var(--uwm-blue)`, `var(--uwm-teal)`, etc.
@@ -100,11 +105,13 @@ Customizes slides with engineering content.
 Outputs: q1-engineering-review.html with embedded UWM branding.
 
 Key checks:
+
 - Slide titles are ALL CAPS
 - Colors use var(--uwm-*) variables
 - Orange emphasis on key metrics
 - Footer on every slide with confidentiality notice
 </code>
+
 </example>
 
 <example>
@@ -134,16 +141,19 @@ User: "Create a branded newsletter"
 
 Claude reads resources/brand-reference.md and resources/brand-system.css.
 Composes new layout following brand rules:
+
 - Embeds brand-system.css inline
 - Uses heading hierarchy (h1=Blue, h2=Teal, h3=Green, h4=Orange)
 - Body text in var(--uwm-dark-gray)
 - UWM text logo in header
 - All colors via CSS variables
 </code>
+
 </example>
 </examples>
 
 <critical_rules>
+
 ## Rules That Have No Exceptions
 
 1. **All colors via CSS variables** — Never hardcode hex values. Use `var(--uwm-blue)`, utility classes like `.uwm-bg-teal`, etc.
@@ -156,7 +166,7 @@ Composes new layout following brand rules:
 8. **Contrast at distance** — Projected presentations lose contrast. Use only Dark Gray and Blue for slide text. Orange for short emphasis spans only (1-3 words). Never use Green or Teal as primary text color on slides. The color-coded heading hierarchy is for documents only, not presentations.
 9. **Read brand-reference.md first** — Always load the brand spec before creating content.
 10. **Dark mode requires explicit request and confirmation** — Never apply `.uwm-dark` by default. Always warn the user that it is an unofficial variant not approved by UWM Marketing before generating.
-</critical_rules>
+    </critical_rules>
 
 <resources>
 **Brand specification:** `resources/brand-reference.md` — Complete color palette (hex, RGB, CMYK, Pantone), fonts, logo rules, heading hierarchy, slide layouts, document formats
@@ -164,6 +174,7 @@ Composes new layout following brand rules:
 **CSS brand system:** `resources/brand-system.css` — CSS custom properties, font imports, typography scale, utility classes, slide system, print styles
 
 **Templates:**
+
 - `resources/template-presentation.html` — 6-slide deck (title, content, sidebar, three-card, split, closing)
 - `resources/template-document.html` — 4 formats (memo, agenda, letterhead, job-aid)
 - `resources/template-one-pager.html` — Marketing one-pager (hero, stats, content, CTA)

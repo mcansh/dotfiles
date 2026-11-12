@@ -26,6 +26,7 @@ Compress natural language files (CLAUDE.md, todos, preferences) into caveman-spe
 cd <directory_containing_this_SKILL.md> && python3 -m scripts <absolute_filepath>
 
 3. The CLI will:
+
 - detect file type (no tokens)
 - call Claude to compress
 - validate output (no tokens)
@@ -37,6 +38,7 @@ cd <directory_containing_this_SKILL.md> && python3 -m scripts <absolute_filepath
 ## Compression Rules
 
 ### Remove
+
 - Articles: a, an, the
 - Filler: just, really, basically, actually, simply, essentially, generally
 - Pleasantries: "sure", "certainly", "of course", "happy to", "I'd recommend"
@@ -45,6 +47,7 @@ cd <directory_containing_this_SKILL.md> && python3 -m scripts <absolute_filepath
 - Connective fluff: "however", "furthermore", "additionally", "in addition"
 
 ### Preserve EXACTLY (never modify)
+
 - Code blocks (fenced ``` and indented)
 - Inline code (`backtick content`)
 - URLs and links (full URLs, markdown links)
@@ -56,6 +59,7 @@ cd <directory_containing_this_SKILL.md> && python3 -m scripts <absolute_filepath
 - Environment variables (`$HOME`, `NODE_ENV`)
 
 ### Preserve Structure
+
 - All markdown headings (keep exact heading text, compress body below)
 - Bullet point hierarchy (keep nesting level)
 - Numbered lists (keep numbering)
@@ -63,6 +67,7 @@ cd <directory_containing_this_SKILL.md> && python3 -m scripts <absolute_filepath
 - Frontmatter/YAML headers in markdown files
 
 ### Compress
+
 - Use short synonyms: "big" not "extensive", "fix" not "implement a solution for", "use" not "utilize"
 - Fragments OK: "Run tests before commit" not "You should always run tests before committing"
 - Drop "you should", "make sure to", "remember to" — just state the action
@@ -70,8 +75,9 @@ cd <directory_containing_this_SKILL.md> && python3 -m scripts <absolute_filepath
 - Keep one example where multiple examples show the same pattern
 
 CRITICAL RULE:
-Anything inside ``` ... ``` must be copied EXACTLY.
+Anything inside `...` must be copied EXACTLY.
 Do not:
+
 - remove comments
 - remove spacing
 - reorder lines
@@ -82,6 +88,7 @@ Inline code (`...`) must be preserved EXACTLY.
 Do not modify anything inside backticks.
 
 If file contains code blocks:
+
 - Treat code blocks as read-only regions
 - Only compress text outside them
 - Do not merge sections around code
@@ -89,15 +96,19 @@ If file contains code blocks:
 ## Pattern
 
 Original:
+
 > You should always make sure to run the test suite before pushing any changes to the main branch. This is important because it helps catch bugs early and prevents broken builds from being deployed to production.
 
 Compressed:
+
 > Run tests before push to main. Catch bugs early, prevent broken prod deploys.
 
 Original:
+
 > The application uses a microservices architecture with the following components. The API gateway handles all incoming requests and routes them to the appropriate service. The authentication service is responsible for managing user sessions and JWT tokens.
 
 Compressed:
+
 > Microservices architecture. API gateway route all requests to services. Auth service manage user sessions + JWT tokens.
 
 ## Boundaries

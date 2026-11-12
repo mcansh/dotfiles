@@ -13,20 +13,21 @@ LOW FREEDOM - Program.cs registration order is rigid (Vault FIRST, then services
 
 <quick_reference>
 
-| Integration | Package | Key Setup | Required? |
-|-------------|---------|-----------|-----------|
-| Auth (Biz Service) | `USFS.Library.Authentication` | `AddUsfsAuthenticationServices()`, `UseUsfsAuthentication()` | YES |
-| Auth (BFF/UI) | `UWMC.Library.User.Passport` | `AddPassport()`, `UsePassport()`, `MapPassportEndpoints()` | YES (BFF only) |
-| Vault | `UWMC.Vault` | `builder.AddVaultSecrets()` — MUST be FIRST | YES |
-| Database | `Microsoft.EntityFrameworkCore.SqlServer` | `AddDbContext<T>()` with Vault credentials | If DB needed |
-| Kafka | `UWMC.Library.Messaging.Kafka` | `AddUWMCMessagingKafka()`, separate consumer repo | If events needed |
-| Feature Flags | `UWMC.Library.FeatureFlags.Split` | `AddUWMCFeatureFlags()` with Split/Harness provider | If gradual rollout |
-| Health Check | `USFS.Library.HealthCheck` | `AddUSFSHealthCheck()`, `UseUSFSHealthCheck()` | YES |
-| Logging | `USFS.Library.Logging` | `AddUSFSLogging()` | YES |
+| Integration        | Package                                   | Key Setup                                                    | Required?          |
+| ------------------ | ----------------------------------------- | ------------------------------------------------------------ | ------------------ |
+| Auth (Biz Service) | `USFS.Library.Authentication`             | `AddUsfsAuthenticationServices()`, `UseUsfsAuthentication()` | YES                |
+| Auth (BFF/UI)      | `UWMC.Library.User.Passport`              | `AddPassport()`, `UsePassport()`, `MapPassportEndpoints()`   | YES (BFF only)     |
+| Vault              | `UWMC.Vault`                              | `builder.AddVaultSecrets()` — MUST be FIRST                  | YES                |
+| Database           | `Microsoft.EntityFrameworkCore.SqlServer` | `AddDbContext<T>()` with Vault credentials                   | If DB needed       |
+| Kafka              | `UWMC.Library.Messaging.Kafka`            | `AddUWMCMessagingKafka()`, separate consumer repo            | If events needed   |
+| Feature Flags      | `UWMC.Library.FeatureFlags.Split`         | `AddUWMCFeatureFlags()` with Split/Harness provider          | If gradual rollout |
+| Health Check       | `USFS.Library.HealthCheck`                | `AddUSFSHealthCheck()`, `UseUSFSHealthCheck()`               | YES                |
+| Logging            | `USFS.Library.Logging`                    | `AddUSFSLogging()`                                           | YES                |
 
 </quick_reference>
 
 <when_to_use>
+
 - Setting up authentication on a new or existing v3 service
 - Adding Kafka producer or consumer capabilities
 - Configuring database access with Entity Framework Core
@@ -34,7 +35,7 @@ LOW FREEDOM - Program.cs registration order is rigid (Vault FIRST, then services
 - Adding feature flag support
 - Wiring up a complete Program.cs for a new v3 service
 - NOT for: API design (use design-api), business logic implementation (use implement-feature), test setup (use test-strategy)
-</when_to_use>
+  </when_to_use>
 
 <the_process>
 
@@ -42,12 +43,12 @@ LOW FREEDOM - Program.cs registration order is rigid (Vault FIRST, then services
 
 Before configuring infrastructure, identify which service type you are building. This determines the authentication paradigm:
 
-| Service Type | Repo Pattern | Auth Paradigm | Auth Package |
-|-------------|-------------|---------------|-------------|
-| Business Service | `cell-biz-{name}` | ADFS JWT Bearer | `USFS.Library.Authentication` |
-| Kafka Consumer | `cell-biz-{name}-consumer` | Service account / no HTTP auth | N/A (background worker) |
-| BFF | `cell-bff-{name}` or `cell-biz-bff-{name}` | Passport (cookie + bearer) | `UWMC.Library.User.Passport` |
-| UI Service | `cell-ui-{name}` | Passport endpoints | `UWMC.Library.User.Passport` |
+| Service Type     | Repo Pattern                               | Auth Paradigm                  | Auth Package                  |
+| ---------------- | ------------------------------------------ | ------------------------------ | ----------------------------- |
+| Business Service | `cell-biz-{name}`                          | ADFS JWT Bearer                | `USFS.Library.Authentication` |
+| Kafka Consumer   | `cell-biz-{name}-consumer`                 | Service account / no HTTP auth | N/A (background worker)       |
+| BFF              | `cell-bff-{name}` or `cell-biz-bff-{name}` | Passport (cookie + bearer)     | `UWMC.Library.User.Passport`  |
+| UI Service       | `cell-ui-{name}`                           | Passport endpoints             | `UWMC.Library.User.Passport`  |
 
 **Key discovery from real services:** Most business services (cell-biz-*) do NOT use UWMC.Library.User.Passport. They use ADFS JWT Bearer authentication via `USFS.Library.Authentication`. The Passport library is primarily used by BFF and UI-facing services that need cookie-based auth and login endpoints.
 
@@ -167,6 +168,7 @@ public partial class Program;
 ```
 
 **Passport appsettings.json:**
+
 ```json
 {
   "Passport": {
@@ -177,6 +179,7 @@ public partial class Program;
 ```
 
 **Passport authorization attributes:**
+
 ```csharp
 // AND logic — user must be in ALL required groups
 [RequireSecurityGroup("GRP-YourTeam")]
@@ -253,6 +256,7 @@ For new services, always use `UWMC.Vault` with `builder.AddVaultSecrets()`.
 ### What Vault Provides
 
 After `AddVaultSecrets()`, these values are available via `IConfiguration`:
+
 - Database credentials: `Configuration["DbRoleName:Username"]`, `Configuration["DbRoleName:Password"]`
 - Kafka service account: `Configuration["KafkaServiceAccount:Username"]`, `Configuration["KafkaServiceAccount:Password"]`
 - API keys for downstream services
@@ -269,6 +273,7 @@ After `AddVaultSecrets()`, these values are available via `IConfiguration`:
 Each v3 service owns its database exclusively. No other service reads or writes to it.
 
 **Exceptions (same team, same domain only):**
+
 - CQRS pattern (read/write split with separate DbContexts)
 - HTTP/Kafka split (cell-biz-{name} and cell-biz-{name}-consumer share the database)
 
@@ -277,6 +282,7 @@ Each v3 service owns its database exclusively. No other service reads or writes 
 Three patterns exist in production. Use the one that matches your service's credential management:
 
 **Pattern 1: Simple AddDbContext (Windows Auth / Single Credential)**
+
 ```csharp
 // Used when connection string comes directly from configuration
 builder.Services.AddDbContext<YourDbContext>(options =>
@@ -285,6 +291,7 @@ builder.Services.AddDbContext<YourDbContext>(options =>
 ```
 
 **Pattern 2: Rotating Credentials via Vault (Keystone Pattern)**
+
 ```csharp
 // Used when Vault provides rotating username/password separately
 var dbRoleName = builder.Configuration["DbRoleName"];
@@ -297,6 +304,7 @@ builder.Services.AddDbContext<YourDbContext>(options =>
 ```
 
 With a connection string template in appsettings:
+
 ```json
 {
   "ConnectionStrings": {
@@ -307,6 +315,7 @@ With a connection string template in appsettings:
 ```
 
 **Pattern 3: Manual DbContextOptionsBuilder**
+
 ```csharp
 // Used when you need custom configuration (e.g., CosmosDB)
 builder.Services.AddDbContext<YourDbContext>((sp, options) =>
@@ -337,6 +346,7 @@ public class YourDbContext : DbContext
 ```
 
 Entity configurations go in separate files:
+
 ```csharp
 // Data/Configurations/ConditionConfiguration.cs
 public class ConditionConfiguration : IEntityTypeConfiguration<Condition>
@@ -355,11 +365,13 @@ public class ConditionConfiguration : IEntityTypeConfiguration<Condition>
 Two migration approaches exist at UWM:
 
 **Redgate Migrations (most common in modern services):**
+
 - Migrations live in versioned folders (e.g., `Migrations/V1__Initial.sql`)
 - Applied on startup via `app.UseSqlDatabase<RedgateMigrationDbContext>()`
 - Requires `UWMC.Library.Database.Redgate` or similar package
 
 **EF Core Standard Migrations:**
+
 - Generated via `dotnet ef migrations add MigrationName`
 - Applied on startup via `context.Database.Migrate()` or `app.UseSqlDatabase<T>()`
 - Migration files in standard `Migrations/` folder with timestamp prefixes
@@ -379,16 +391,17 @@ app.UseSqlDatabase<YourMigrationDbContext>();
 
 UWM's v3 pattern requires HTTP API and Kafka consumer to be **separate repositories and deployments**:
 
-| Repo | Purpose | Contains |
-|------|---------|----------|
-| `cell-biz-{name}` | HTTP API + Kafka **producer** | Controllers, business logic, event publishing |
-| `cell-biz-{name}-consumer` | Kafka **consumer** | Message handlers, event processing |
+| Repo                       | Purpose                       | Contains                                      |
+| -------------------------- | ----------------------------- | --------------------------------------------- |
+| `cell-biz-{name}`          | HTTP API + Kafka **producer** | Controllers, business logic, event publishing |
+| `cell-biz-{name}-consumer` | Kafka **consumer**            | Message handlers, event processing            |
 
 Both repos share the same business domain and may share the same database (same team exception to one-service-per-database rule).
 
 ### Producer Setup (in cell-biz-{name})
 
 **Registration:**
+
 ```csharp
 // Program.cs — after Vault (needs Kafka credentials)
 var username = builder.Configuration["KafkaServiceAccount:Username"];
@@ -398,6 +411,7 @@ builder.Services.AddUWMCMessagingKafka(
 ```
 
 **Producer class:**
+
 ```csharp
 public interface ILoanEventProducer
 {
@@ -427,6 +441,7 @@ public class LoanEventProducer : ILoanEventProducer
 ```
 
 **Registration:**
+
 ```csharp
 builder.Services.AddTransient<ILoanEventProducer, LoanEventProducer>();
 ```
@@ -434,6 +449,7 @@ builder.Services.AddTransient<ILoanEventProducer, LoanEventProducer>();
 ### Consumer Setup (in cell-biz-{name}-consumer)
 
 **Message handler:**
+
 ```csharp
 [MessageHandler("LoanUpdatedConsumer")]
 public class LoanUpdatedConsumer : IConsumerHandler<string, LoanUpdatedEvent>
@@ -454,6 +470,7 @@ public class LoanUpdatedConsumer : IConsumerHandler<string, LoanUpdatedEvent>
 ```
 
 **Consumer startup:**
+
 ```csharp
 // Program.cs of consumer service
 app.UseUWMCMessagingConsumers(true, typeof(Program).Assembly);
@@ -496,6 +513,7 @@ await app.RunAsync();
 ### Kafka Topic Naming Convention
 
 Topics follow: `{domain}.{event-name}.{version}`
+
 - Example: `borrower.profile-updated.v1`
 - Example: `conditions.condition-satisfied.v1`
 
@@ -505,11 +523,11 @@ Topics follow: `{domain}.{event-name}.{version}`
 
 Three providers exist in production. New services should use Split (or Harness when available):
 
-| Provider | Package | Status |
-|----------|---------|--------|
-| Split | `UWMC.Library.FeatureFlags.Split` | Current standard |
-| Harness | (TBD) | Replacing Split |
-| Rollout | `UWMC.Library.FeatureFlags.Rollout` | Legacy, do not use for new services |
+| Provider | Package                             | Status                              |
+| -------- | ----------------------------------- | ----------------------------------- |
+| Split    | `UWMC.Library.FeatureFlags.Split`   | Current standard                    |
+| Harness  | (TBD)                               | Replacing Split                     |
+| Rollout  | `UWMC.Library.FeatureFlags.Rollout` | Legacy, do not use for new services |
 
 ### Registration
 
@@ -577,6 +595,7 @@ public class ConditionOrchestrator
 ### Testing with Feature Flags
 
 In unit tests, mock `IFeatureFlagManager`:
+
 ```csharp
 var mockFeatureFlags = new Mock<IFeatureFlagManager>(MockBehavior.Strict);
 mockFeatureFlags
@@ -603,6 +622,7 @@ app.UseUSFSHealthCheck();
 ```
 
 Or with a dedicated controller:
+
 ```csharp
 [ApiController]
 [AllowAnonymous]
@@ -654,6 +674,7 @@ public class BorrowerResponse
 ```
 
 **PII vs NPI:**
+
 - `[PersonallyIdentifiableInformation]` — Name, SSN, DOB, address, phone, email
 - `[NonpublicPersonalInformation]` — Financial data: income, account numbers, loan terms, credit score
 
@@ -690,6 +711,7 @@ public static class ServiceCollectionExtensions
 ```
 
 Then in Program.cs:
+
 ```csharp
 builder.Services.AddApplicationServices();
 ```
@@ -707,6 +729,7 @@ appsettings.Production.json         # PRD environment
 ```
 
 **Common overrides per environment:**
+
 - `UseVault` — `false` in Development, `true` everywhere else
 - `ConnectionStrings` — local DB in Development, Vault-provided elsewhere
 - `Passport.ApplicationEdgeUrl` — environment-specific URL
@@ -775,6 +798,7 @@ app.UseUWMCMessagingConsumers(true, typeof(Program).Assembly);
 await app.RunAsync();
 public partial class Program;
 ```
+
 </example>
 
 <example>
@@ -822,6 +846,7 @@ public partial class Program;
   }
 }
 ```
+
 </example>
 
 <example>
@@ -891,6 +916,7 @@ public class LoanStatusChangedHandler
     }
 }
 ```
+
 </example>
 
 </examples>
@@ -967,16 +993,20 @@ Before completing infrastructure integration:
 <integration>
 
 **This skill is called by:**
+
 - `develop-business-service` orchestrator (Phase 4)
 - Direct invocation via `/uwm-business-service-dev:integrate-infrastructure`
 
 **This skill should be used after:**
+
 - `implement-feature` (Phase 3) — business logic is in place, now connect infrastructure
 
 **This skill should be used before:**
+
 - `test-strategy` (Phase 5) — integration tests need infrastructure configured first
 
 **Related skills:**
+
 - `design-api` — designs the API contract this skill wires up
 - `implement-feature` — implements business logic this skill connects to infrastructure
 - `test-strategy` — tests the infrastructure integrations this skill configures
@@ -986,6 +1016,7 @@ Before completing infrastructure integration:
 <resources>
 
 **UWM packages referenced in this skill:**
+
 - `UWMC.Library.User.Passport` — GUP authentication for BFF/UI services
 - `USFS.Library.Authentication` — ADFS JWT auth for business services
 - `UWMC.Vault` — Modern Vault integration
@@ -998,11 +1029,13 @@ Before completing infrastructure integration:
 - `Microsoft.EntityFrameworkCore.SqlServer` — SQL Server EF Core provider
 
 **Confluence references:**
+
 - "Global User Passport System Design" — Full GUP/Passport documentation
 - "PII and NPI Masking Standard" — Compliance requirements for log masking
 - "V3 Service Onboarding" — New service setup checklist
 
 **Bitbucket reference services:**
+
 - `cell-biz-borrower` (EH project) — Modern Program.cs with full infrastructure stack
 - `cell-biz-condition` (EH project) — Legacy Startup.cs, JWT Bearer auth
 - `cell-keystone` (GGF project) — Modern .NET with Vault rotating credentials

@@ -50,18 +50,18 @@ npm install -D @testing-library/react @testing-library/jest-dom @testing-library
 ### Step 5: Set up main.tsx
 
 ```tsx
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
-import { DreamThemeProvider } from 'lib-node-dream-ui'
-import '@fontsource-variable/roboto'
-import '@fontsource-variable/open-sans'
-import 'lib-node-dream-ui/external.css'
-import 'lib-node-dream-ui/index.css'
-import './index.css'
-import App from './App.tsx'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import { DreamThemeProvider } from "lib-node-dream-ui";
+import "@fontsource-variable/roboto";
+import "@fontsource-variable/open-sans";
+import "lib-node-dream-ui/external.css";
+import "lib-node-dream-ui/index.css";
+import "./index.css";
+import App from "./App.tsx";
 
-createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <DreamThemeProvider family="external" mode="light">
@@ -69,7 +69,7 @@ createRoot(document.getElementById('root')!).render(
       </DreamThemeProvider>
     </BrowserRouter>
   </StrictMode>,
-)
+);
 ```
 
 Use `family="internal"` and import `lib-node-dream-ui/internal.css` instead for employee-facing apps.
@@ -80,12 +80,12 @@ Always use deep imports for tree-shaking:
 
 ```tsx
 // Correct
-import Button from 'lib-node-dream-ui/Button'
-import Card from 'lib-node-dream-ui/Card'
-import Typography from 'lib-node-dream-ui/Typography'
+import Button from "lib-node-dream-ui/Button";
+import Card from "lib-node-dream-ui/Card";
+import Typography from "lib-node-dream-ui/Typography";
 
 // Wrong - do NOT use barrel imports
-import { Button, Card } from 'lib-node-dream-ui'
+import { Button, Card } from "lib-node-dream-ui";
 ```
 
 ## Component Selection Guide
@@ -93,6 +93,7 @@ import { Button, Card } from 'lib-node-dream-ui'
 ### "I need a..." Decision Tree
 
 **Page layout:**
+
 - App shell with header → `TopNavigation` + `SideNavigation`
 - Content sections → `Box` + `Stack`
 - Card grid → `Card` with CSS Grid or MUI Grid
@@ -101,6 +102,7 @@ import { Button, Card } from 'lib-node-dream-ui'
 - Step-by-step flow → `Stepper` or `SteppedModal`
 
 **User input:**
+
 - Short text → `InputField`
 - Long text → `TextArea`
 - Select from list → `SelectField` (single) or `MultiSelectField` (multi)
@@ -114,6 +116,7 @@ import { Button, Card } from 'lib-node-dream-ui'
 - Formatted number → `MaskedInput`
 
 **Actions:**
+
 - Primary action → `Button`
 - Icon-only action → `IconButton`
 - Dropdown actions → `Menu` + `MenuItem` or `PopoverMenu`
@@ -121,6 +124,7 @@ import { Button, Card } from 'lib-node-dream-ui'
 - Navigation link → `Link`
 
 **Display data:**
+
 - Text content → `Typography` (use Dream variants: `titleL`, `bodyM`, `dataL`, etc.)
 - Data table → `DataGrid` (interactive) or `Table` (simple)
 - Charts → `BarChart`, `PieChart`, `Gauge`
@@ -132,6 +136,7 @@ import { Button, Card } from 'lib-node-dream-ui'
 - PDF document → `PdfViewer`
 
 **Feedback:**
+
 - Inline message → `Alert`
 - Temporary notification → `Snackbar`
 - Confirmation needed → `Dialog`
@@ -141,6 +146,7 @@ import { Button, Card } from 'lib-node-dream-ui'
 - Guided tour → `useTour` hook
 
 **Navigation:**
+
 - App header → `TopNavigation`
 - Sidebar → `SideNavigation`
 - Page breadcrumbs → `Breadcrumb`
@@ -152,12 +158,12 @@ import { Button, Card } from 'lib-node-dream-ui'
 ### Dashboard with Card Grid
 
 ```tsx
-import Box from 'lib-node-dream-ui/Box'
-import Card from 'lib-node-dream-ui/Card'
-import CardText from 'lib-node-dream-ui/CardText'
-import Typography from 'lib-node-dream-ui/Typography'
-import TopNavigation from 'lib-node-dream-ui/TopNavigation'
-import 'lib-node-dream-ui/TopNavigation.css'
+import Box from "lib-node-dream-ui/Box";
+import Card from "lib-node-dream-ui/Card";
+import CardText from "lib-node-dream-ui/CardText";
+import Typography from "lib-node-dream-ui/Typography";
+import TopNavigation from "lib-node-dream-ui/TopNavigation";
+import "lib-node-dream-ui/TopNavigation.css";
 
 function Dashboard() {
   return (
@@ -165,40 +171,39 @@ function Dashboard() {
       <TopNavigation title="My App" />
       <Box sx={{ p: 3 }}>
         <Typography variant="titleL">Welcome</Typography>
-        <Box sx={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-          gap: 2,
-          mt: 2
-        }}>
-          {cards.map(card => (
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
+            gap: 2,
+            mt: 2,
+          }}
+        >
+          {cards.map((card) => (
             <Card key={card.id}>
-              <CardText
-                title={card.title}
-                description={card.description}
-              />
+              <CardText title={card.title} description={card.description} />
             </Card>
           ))}
         </Box>
       </Box>
     </>
-  )
+  );
 }
 ```
 
 ### Form Page
 
 ```tsx
-import Box from 'lib-node-dream-ui/Box'
-import Stack from 'lib-node-dream-ui/Stack'
-import InputField from 'lib-node-dream-ui/InputField'
-import SelectField from 'lib-node-dream-ui/SelectField'
-import Button from 'lib-node-dream-ui/Button'
-import Typography from 'lib-node-dream-ui/Typography'
+import Box from "lib-node-dream-ui/Box";
+import Stack from "lib-node-dream-ui/Stack";
+import InputField from "lib-node-dream-ui/InputField";
+import SelectField from "lib-node-dream-ui/SelectField";
+import Button from "lib-node-dream-ui/Button";
+import Typography from "lib-node-dream-ui/Typography";
 
 function FormPage() {
   return (
-    <Box sx={{ maxWidth: 600, mx: 'auto', p: 3 }}>
+    <Box sx={{ maxWidth: 600, mx: "auto", p: 3 }}>
       <Typography variant="titleL">Create Item</Typography>
       <Stack spacing={3} sx={{ mt: 2 }}>
         <InputField label="Name" required />
@@ -206,14 +211,14 @@ function FormPage() {
         <SelectField
           label="Category"
           options={[
-            { label: 'Option A', value: 'a' },
-            { label: 'Option B', value: 'b' },
+            { label: "Option A", value: "a" },
+            { label: "Option B", value: "b" },
           ]}
         />
         <Button variant="contained">Submit</Button>
       </Stack>
     </Box>
-  )
+  );
 }
 ```
 
@@ -222,30 +227,34 @@ function FormPage() {
 ### Accessing theme tokens in styles
 
 ```tsx
-import { useTheme } from '@mui/material/styles'
+import { useTheme } from "@mui/material/styles";
 
 function MyComponent() {
-  const theme = useTheme()
+  const theme = useTheme();
   return (
-    <Box sx={{
-      backgroundColor: theme.fill.background.high,
-      color: theme.text.neutral.default,
-      boxShadow: theme.shadows[200],
-      borderRadius: theme.radius?.md,
-    }}>
+    <Box
+      sx={{
+        backgroundColor: theme.fill.background.high,
+        color: theme.text.neutral.default,
+        boxShadow: theme.shadows[200],
+        borderRadius: theme.radius?.md,
+      }}
+    >
       Content
     </Box>
-  )
+  );
 }
 ```
 
 ### Theme-aware sx prop
 
 ```tsx
-<Box sx={(theme) => ({
-  backgroundColor: theme.fill.background.default,
-  color: theme.text.neutral.default,
-})}>
+<Box
+  sx={(theme) => ({
+    backgroundColor: theme.fill.background.default,
+    color: theme.text.neutral.default,
+  })}
+>
   Themed content
 </Box>
 ```
@@ -253,26 +262,26 @@ function MyComponent() {
 ### Toggling dark mode
 
 ```tsx
-import { useDreamTheme } from 'lib-node-dream-ui'
+import { useDreamTheme } from "lib-node-dream-ui";
 
 function ThemeToggle() {
-  const { mode, setMode } = useDreamTheme()
+  const { mode, setMode } = useDreamTheme();
   return (
-    <Button onClick={() => setMode(mode === 'light' ? 'dark' : 'light')}>
-      Switch to {mode === 'light' ? 'Dark' : 'Light'} Mode
+    <Button onClick={() => setMode(mode === "light" ? "dark" : "light")}>
+      Switch to {mode === "light" ? "Dark" : "Light"} Mode
     </Button>
-  )
+  );
 }
 ```
 
 ## Anti-Patterns
 
-- **Do NOT use barrel imports**  - Always deep import (`lib-node-dream-ui/Button`)
+- **Do NOT use barrel imports** - Always deep import (`lib-node-dream-ui/Button`)
 - **Do NOT use raw MUI components** when Dream equivalent exists
-- **Do NOT hardcode colors**  - Use theme tokens for light/dark mode support
-- **Do NOT use `@fontsource/roboto`**  - Use `@fontsource-variable/roboto`
-- **Do NOT use deprecated `ONavProvider`**  - Use `TopNavigation` + `SideNavigation`
-- **Do NOT create custom MUI themes**  - Use `DreamThemeProvider`
+- **Do NOT hardcode colors** - Use theme tokens for light/dark mode support
+- **Do NOT use `@fontsource/roboto`** - Use `@fontsource-variable/roboto`
+- **Do NOT use deprecated `ONavProvider`** - Use `TopNavigation` + `SideNavigation`
+- **Do NOT create custom MUI themes** - Use `DreamThemeProvider`
 
 ## Reference
 

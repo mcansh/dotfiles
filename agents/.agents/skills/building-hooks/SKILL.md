@@ -12,11 +12,12 @@ MEDIUM FREEDOM - Follow progressive enhancement (observe → automate → enforc
 </rigidity_level>
 
 <quick_reference>
-| Phase | Approach | Example |
-|-------|----------|---------|
-| 1. Observe | Non-blocking, report only | Log edits, display reminders |
-| 2. Automate | Background tasks, non-blocking | Auto-format, run builds |
-| 3. Enforce | Blocking only when necessary | Block dangerous ops, require fixes |
+
+| Phase       | Approach                       | Example                            |
+| ----------- | ------------------------------ | ---------------------------------- |
+| 1. Observe  | Non-blocking, report only      | Log edits, display reminders       |
+| 2. Automate | Background tasks, non-blocking | Auto-format, run builds            |
+| 3. Enforce  | Blocking only when necessary   | Block dangerous ops, require fixes |
 
 **Most used events:** UserPromptSubmit (before processing), Stop (after completion)
 
@@ -25,36 +26,41 @@ MEDIUM FREEDOM - Follow progressive enhancement (observe → automate → enforc
 
 <when_to_use>
 Use hooks for:
+
 - Automatic quality checks (build, lint, format)
 - Workflow automation (skill activation, context injection)
 - Error prevention (catching issues early)
 - Consistent behavior (formatting, conventions)
 
 **Never use hooks for:**
+
 - Complex business logic (use tools/scripts)
 - Slow operations that block workflow (use background jobs)
 - Anything requiring LLM reasoning (hooks are deterministic)
-</when_to_use>
+  </when_to_use>
 
 <hook_lifecycle_events>
-| Event | When Fires | Use Cases |
-|-------|------------|-----------|
-| UserPromptSubmit | Before Claude processes prompt | Validation, context injection, skill activation |
-| Stop | After Claude finishes | Build checks, formatting, quality reminders |
-| PostToolUse | After each tool execution | Logging, tracking, validation |
-| PreToolUse | Before tool execution | Permission checks, validation |
-| ToolError | When tool fails | Error handling, fallbacks |
-| SessionStart | New session begins | Environment setup, context loading |
-| SessionEnd | Session closes | Cleanup, logging |
-| Error | Unhandled error | Error recovery, notifications |
-</hook_lifecycle_events>
+
+| Event                    | When Fires                     | Use Cases                                       |
+| ------------------------ | ------------------------------ | ----------------------------------------------- |
+| UserPromptSubmit         | Before Claude processes prompt | Validation, context injection, skill activation |
+| Stop                     | After Claude finishes          | Build checks, formatting, quality reminders     |
+| PostToolUse              | After each tool execution      | Logging, tracking, validation                   |
+| PreToolUse               | Before tool execution          | Permission checks, validation                   |
+| ToolError                | When tool fails                | Error handling, fallbacks                       |
+| SessionStart             | New session begins             | Environment setup, context loading              |
+| SessionEnd               | Session closes                 | Cleanup, logging                                |
+| Error                    | Unhandled error                | Error recovery, notifications                   |
+| </hook_lifecycle_events> |
 
 <progressive_enhancement>
+
 ## Phase 1: Observation (Non-Blocking)
 
 **Goal:** Understand patterns before acting
 
 **Examples:**
+
 - Log file edits (PostToolUse)
 - Display reminders (Stop, non-blocking)
 - Track metrics
@@ -68,6 +74,7 @@ Use hooks for:
 **Goal:** Automate tedious tasks
 
 **Examples:**
+
 - Auto-format edited files (Stop)
 - Run builds after changes (Stop)
 - Inject helpful context (UserPromptSubmit)
@@ -81,6 +88,7 @@ Use hooks for:
 **Goal:** Prevent errors, enforce standards
 
 **Examples:**
+
 - Block dangerous operations (PreToolUse)
 - Require fixes before continuing (Stop, blocking)
 - Validate inputs (UserPromptSubmit, blocking)
@@ -89,11 +97,13 @@ Use hooks for:
 </progressive_enhancement>
 
 <common_hook_patterns>
+
 ## Pattern 1: Build Checker (Stop Hook)
 
 **Problem:** TypeScript errors left behind
 
 **Solution:**
+
 ```bash
 #!/bin/bash
 # Stop hook - runs after Claude finishes
@@ -121,6 +131,7 @@ done
 ```
 
 **Configuration:**
+
 ```json
 {
   "event": "Stop",
@@ -139,6 +150,7 @@ done
 **Problem:** Inconsistent formatting
 
 **Solution:**
+
 ```bash
 #!/bin/bash
 # Stop hook - format all edited files
@@ -169,6 +181,7 @@ echo "✅ Formatting complete"
 **Problem:** Claude forgets error handling
 
 **Solution:**
+
 ```bash
 #!/bin/bash
 # Stop hook - gentle reminder
@@ -212,6 +225,7 @@ fi
 </common_hook_patterns>
 
 <hook_composition>
+
 ## Naming for Order Control
 
 Multiple hooks for same event run in **alphabetical order** by filename.
@@ -235,13 +249,16 @@ If Hook B depends on Hook A's output:
 3. **Option 3:** File-based communication
 
 **Example:**
+
 ```bash
 # 10-track-edits.sh writes to edit-log.txt
 # 20-check-builds.sh reads from edit-log.txt
 ```
+
 </hook_composition>
 
 <testing_hooks>
+
 ## Test in Isolation
 
 ```bash
@@ -277,22 +294,25 @@ EDIT_LOG=/tmp/test-edit-log.txt bash ~/.claude/hooks/build-checker.sh
 ## Debugging
 
 **Enable logging:**
+
 ```bash
 set -x  # Debug output
 exec 2>~/.claude/hooks/debug.log
 ```
 
 **Check execution:**
+
 ```bash
 tail -f ~/.claude/logs/hooks.log
 ```
 
 **Common issues:**
+
 - Timeout (>10 second default)
 - Wrong working directory
 - Missing environment variables
 - File permissions
-</testing_hooks>
+  </testing_hooks>
 
 <examples>
 <example>
@@ -306,19 +326,20 @@ tail -f ~/.claude/logs/hooks.log
 npm run build
 
 if [ $? -ne 0 ]; then
-  echo "BUILD FAILED - BLOCKING"
-  exit 1  # Blocks Claude
+echo "BUILD FAILED - BLOCKING"
+exit 1 # Blocks Claude
 fi
 </code>
 
 <why_it_fails>
+
 - No observation period to understand patterns
 - Blocks even for minor errors
 - No escape hatch if hook misbehaves
 - Might block during experimentation
 - Frustrates workflow when building is slow
 - Haven't identified when blocking is actually needed
-</why_it_fails>
+  </why_it_fails>
 
 <correction>
 **Phase 1: Observe (1 week)**
@@ -334,6 +355,7 @@ fi
 ```
 
 **After 1 week, review:**
+
 - How often do errors appear?
 - Are they usually fixed quickly?
 - Do they cause real problems or just noise?
@@ -360,11 +382,13 @@ fi
 Never reached - non-blocking works fine!
 
 **What you gain:**
+
 - Understood patterns before acting
 - Non-blocking keeps workflow smooth
 - Helpful messages without friction
 - Can experiment without frustration
 </correction>
+
 </example>
 
 <example>
@@ -375,24 +399,29 @@ Never reached - non-blocking works fine!
 # Stop hook that's too slow
 
 # Run full test suite (takes 45 seconds!)
+
 npm test
 
 # Run linter (takes 10 seconds)
+
 npm run lint
 
 # Run build (takes 30 seconds)
+
 npm run build
 
 # Total: 85 seconds of blocking!
+
 </code>
 
 <why_it_fails>
+
 - Hook takes 85 seconds to complete
 - Blocks Claude for entire duration
 - User can't continue working
 - Frustrating, likely to be disabled
 - Defeats purpose of automation
-</why_it_fails>
+  </why_it_fails>
 
 <correction>
 **Make hook fast (<2 seconds):**
@@ -430,11 +459,13 @@ echo "⏳ Tests running in background (check /tmp/test-results.txt)"
 ```
 
 **What you gain:**
+
 - Hook completes instantly
 - Workflow not blocked
 - Still get quality checks
 - User can continue working
 </correction>
+
 </example>
 
 <example>
@@ -449,12 +480,13 @@ prettier --write "$file"
 </code>
 
 <why_it_fails>
+
 - If edit-log.txt missing → hook fails silently
 - If file path invalid → prettier errors not caught
 - If prettier not installed → silent failure
 - No logging, can't debug
 - User has no idea hook ran or failed
-</why_it_fails>
+  </why_it_fails>
 
 <correction>
 **Add error handling:**
@@ -500,12 +532,14 @@ fi
 ```
 
 **What you gain:**
+
 - Errors logged and visible
 - Graceful handling of missing files
 - Can debug when issues occur
 - Clear feedback to user
 - Hook doesn't fail silently
 </correction>
+
 </example>
 </examples>
 
@@ -524,6 +558,7 @@ fi
 ## Dangerous Patterns
 
 ❌ **Don't:**
+
 ```bash
 # DANGEROUS - executes arbitrary code
 cmd=$(tail -1 ~/.claude/edit-log.txt)
@@ -531,6 +566,7 @@ eval "$cmd"
 ```
 
 ✅ **Do:**
+
 ```bash
 # SAFE - validates and sanitizes
 file=$(tail -1 ~/.claude/edit-log.txt | grep "^/.*\.ts$")
@@ -538,9 +574,11 @@ if [ -f "$file" ]; then
   prettier --write "$file"
 fi
 ```
+
 </security>
 
 <critical_rules>
+
 ## Rules That Have No Exceptions
 
 1. **Start with Phase 1 (observe)** → Understand patterns before acting
@@ -558,7 +596,7 @@ All of these mean: **STOP. Follow progressive enhancement.**
 - "I'll add error handling later" (Hook errors silent, add now)
 - "Hook is slow but thorough" (Slow hooks block workflow, optimize)
 - "Need access to everything" (Minimal permissions only)
-</critical_rules>
+  </critical_rules>
 
 <verification_checklist>
 Before deploying hook:
@@ -580,11 +618,13 @@ Before deploying hook:
 **This skill covers:** Hook creation and patterns
 
 **Related skills:**
+
 - hyperpowers:skills-auto-activation (complete skill activation hook)
 - hyperpowers:verification-before-completion (quality hooks automate this)
 - hyperpowers:testing-anti-patterns (avoid in hooks)
 
 **Hook patterns support:**
+
 - Automatic skill activation
 - Build verification
 - Code formatting
@@ -599,9 +639,11 @@ Before deploying hook:
 - [Testing strategies](resources/testing-hooks.md)
 
 **Official documentation:**
+
 - [Anthropic Hooks Guide](https://docs.claude.com/en/docs/claude-code/hooks-guide)
 
 **When stuck:**
+
 - Hook failing silently → Add logging, check ~/.claude/hooks/debug.log
 - Hook too slow → Profile execution, move slow parts to background
 - Hook blocking incorrectly → Return to Phase 1, observe patterns

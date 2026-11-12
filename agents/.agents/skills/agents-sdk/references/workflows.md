@@ -4,15 +4,15 @@ Use Agents for interactive communication and state management. Add a Workflow wh
 
 ## Read for the task
 
-| Task | Documentation |
-| --- | --- |
-| Define a typed `AgentWorkflow`, start it from an Agent, and configure bindings | [Quick start](https://developers.cloudflare.com/agents/runtime/execution/run-workflows/#quick-start) |
-| Call back into the originating Agent and understand durable versus non-durable helpers | [AgentWorkflow class](https://developers.cloudflare.com/agents/runtime/execution/run-workflows/#agentworkflow-class) |
-| Send events, query instances, pause, resume, terminate, or delete tracked workflows | [Agent workflow methods](https://developers.cloudflare.com/agents/runtime/execution/run-workflows/#agent-workflow-methods) |
-| Receive progress, completion, errors, and custom events | [Lifecycle callbacks](https://developers.cloudflare.com/agents/runtime/execution/run-workflows/#lifecycle-callbacks) |
-| Approve or reject a waiting task | [Human-in-the-loop approval](https://developers.cloudflare.com/agents/runtime/execution/run-workflows/#human-in-the-loop-approval) |
-| Persist Workflow results into Agent state | [State synchronization](https://developers.cloudflare.com/agents/runtime/execution/run-workflows/#state-synchronization) |
-| Define steps, parameters, retries, and returned values | [Workers API](https://developers.cloudflare.com/workflows/build/workers-api/) |
+| Task                                                                                   | Documentation                                                                                                                      |
+| -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| Define a typed `AgentWorkflow`, start it from an Agent, and configure bindings         | [Quick start](https://developers.cloudflare.com/agents/runtime/execution/run-workflows/#quick-start)                               |
+| Call back into the originating Agent and understand durable versus non-durable helpers | [AgentWorkflow class](https://developers.cloudflare.com/agents/runtime/execution/run-workflows/#agentworkflow-class)               |
+| Send events, query instances, pause, resume, terminate, or delete tracked workflows    | [Agent workflow methods](https://developers.cloudflare.com/agents/runtime/execution/run-workflows/#agent-workflow-methods)         |
+| Receive progress, completion, errors, and custom events                                | [Lifecycle callbacks](https://developers.cloudflare.com/agents/runtime/execution/run-workflows/#lifecycle-callbacks)               |
+| Approve or reject a waiting task                                                       | [Human-in-the-loop approval](https://developers.cloudflare.com/agents/runtime/execution/run-workflows/#human-in-the-loop-approval) |
+| Persist Workflow results into Agent state                                              | [State synchronization](https://developers.cloudflare.com/agents/runtime/execution/run-workflows/#state-synchronization)           |
+| Define steps, parameters, retries, and returned values                                 | [Workers API](https://developers.cloudflare.com/workflows/build/workers-api/)                                                      |
 
 ## Design checks
 

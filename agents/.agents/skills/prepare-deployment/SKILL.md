@@ -15,23 +15,24 @@ LOW FREEDOM - Base Docker images, security hardening, port configuration, and He
 
 <quick_reference>
 
-| Component | Required Configuration |
-|-----------|----------------------|
-| **Dockerfile (build)** | `FROM artifacts.uwm.com/build-images/uwm-dotnet-sdk-sonar:{version}-redhat` |
-| **Dockerfile (runtime)** | `FROM artifacts.uwm.com/build-images/uwm-aspnet-runtime:{version}-redhat` |
-| **Security** | `RUN /tmp/hardening.sh` then `USER uwm` |
-| **Port** | `ENV ASPNETCORE_URLS=http://*:5000` and `EXPOSE 5000` |
-| **Health check** | `/hc` via USFS library or custom controller, `[AllowAnonymous]` |
-| **Helm base values** | `framework: dotnet`, `containerPort: 5000`, vault enabled |
-| **Helm env overrides** | `values.Integration.yaml`, `values.Staging.yaml`, `values.Production.yaml` |
-| **Jenkinsfile** | `buildPipeline { majorVersion = 1; portDeploy = true }` |
-| **PactFlow** | `iac/pacts.json` with `blockRelease: true` |
-| **RepoMetaData** | `RepoMetaData.json` at repo root |
-| **Local dev** | `dockercompose/docker-compose.yml` with `.env` |
+| Component                | Required Configuration                                                      |
+| ------------------------ | --------------------------------------------------------------------------- |
+| **Dockerfile (build)**   | `FROM artifacts.uwm.com/build-images/uwm-dotnet-sdk-sonar:{version}-redhat` |
+| **Dockerfile (runtime)** | `FROM artifacts.uwm.com/build-images/uwm-aspnet-runtime:{version}-redhat`   |
+| **Security**             | `RUN /tmp/hardening.sh` then `USER uwm`                                     |
+| **Port**                 | `ENV ASPNETCORE_URLS=http://*:5000` and `EXPOSE 5000`                       |
+| **Health check**         | `/hc` via USFS library or custom controller, `[AllowAnonymous]`             |
+| **Helm base values**     | `framework: dotnet`, `containerPort: 5000`, vault enabled                   |
+| **Helm env overrides**   | `values.Integration.yaml`, `values.Staging.yaml`, `values.Production.yaml`  |
+| **Jenkinsfile**          | `buildPipeline { majorVersion = 1; portDeploy = true }`                     |
+| **PactFlow**             | `iac/pacts.json` with `blockRelease: true`                                  |
+| **RepoMetaData**         | `RepoMetaData.json` at repo root                                            |
+| **Local dev**            | `dockercompose/docker-compose.yml` with `.env`                              |
 
 </quick_reference>
 
 <when_to_use>
+
 - Setting up initial Dockerfile for a new v3 service
 - Configuring Helm values.yaml for Kubernetes deployment
 - Setting up Jenkinsfile for CI/CD pipeline
@@ -41,10 +42,11 @@ LOW FREEDOM - Base Docker images, security hardening, port configuration, and He
 - Setting up PactFlow contract testing configuration
 
 **Do NOT use for:**
+
 - Business logic implementation (use `implement-feature`)
 - Infrastructure integration like GUP, Kafka, Vault (use `integrate-infrastructure`)
 - Test strategy and test writing (use `test-strategy`)
-</when_to_use>
+  </when_to_use>
 
 <the_process>
 
@@ -116,6 +118,7 @@ ENTRYPOINT ["dotnet", "UWMC.Business.YourService.dll"]
 ```
 
 **Key differences between versions:**
+
 - Build alias: `build-kestrel-env` (net8.0) vs `build` (net10.0)
 - COPY strategy: Granular (net8.0) vs `COPY . ./` (net10.0)
 - Pact testing: Supported in net8.0 Dockerfiles, not yet in net10.0
@@ -123,6 +126,7 @@ ENTRYPOINT ["dotnet", "UWMC.Business.YourService.dll"]
 ### Container Image Hardening Requirements
 
 These are mandatory per the Container Image Hardening Standard:
+
 1. Only use UWM base images from `artifacts.uwm.com/build-images/`
 2. Use `COPY` instead of `ADD`
 3. Include `RUN /tmp/hardening.sh` in runtime stage
@@ -202,6 +206,7 @@ autoscaling:
 ```
 
 **Key fields explained:**
+
 - `framework: dotnet` — Tells the Helm base chart this is a .NET service
 - `partOf` — Logical grouping (e.g., `biz-your-service`)
 - `istio.enabled/tls` — Istio service mesh with mTLS (always enabled)
@@ -215,6 +220,7 @@ autoscaling:
 Create three environment override files:
 
 **iac/values.Integration.yaml:**
+
 ```yaml
 istio:
   hostName: your-service.int.uwm.com
@@ -229,6 +235,7 @@ autoscaling:
 ```
 
 **iac/values.Staging.yaml:**
+
 ```yaml
 istio:
   hostName: your-service.stage.uwm.com
@@ -251,6 +258,7 @@ resources:
 ```
 
 **iac/values.Production.yaml:**
+
 ```yaml
 istio:
   hostName: your-service.uwm.com
@@ -265,6 +273,7 @@ autoscaling:
 ```
 
 **How value overlaying works:**
+
 1. Harness clones `kubernetes-templates` repo (base chart)
 2. Reads base chart `values.yaml` → overlays your `iac/values.yaml` → overlays environment-specific `values.{Environment}.yaml`
 3. Runs `helm template` to generate K8s manifests
@@ -291,17 +300,18 @@ buildPipeline {
 
 ### Available buildPipeline Options
 
-| Variable | Type | Required | Description |
-|----------|------|----------|-------------|
-| `majorVersion` | int | Yes | Major version number. New services start at 1. |
-| `portDeploy` | bool | Yes | Triggers Port deployment steps. Required for CD. |
-| `useCheckmarx` | bool | Recommended | Enables Checkmarx SAST security scanning. |
-| `checkmarxConfig` | map | No | Checkmarx configuration (e.g., `preset: '44'`). |
-| `newcbk8s` | bool | No | New container-based K8s deployment flag. |
-| `useFeatureEnvironments` | bool | No | Enables feature environment support. |
-| `namespaceOverride` | string | No | Custom K8s namespace (default: `uwm-${bbProjectKey}`). |
+| Variable                 | Type   | Required    | Description                                            |
+| ------------------------ | ------ | ----------- | ------------------------------------------------------ |
+| `majorVersion`           | int    | Yes         | Major version number. New services start at 1.         |
+| `portDeploy`             | bool   | Yes         | Triggers Port deployment steps. Required for CD.       |
+| `useCheckmarx`           | bool   | Recommended | Enables Checkmarx SAST security scanning.              |
+| `checkmarxConfig`        | map    | No          | Checkmarx configuration (e.g., `preset: '44'`).        |
+| `newcbk8s`               | bool   | No          | New container-based K8s deployment flag.               |
+| `useFeatureEnvironments` | bool   | No          | Enables feature environment support.                   |
+| `namespaceOverride`      | string | No          | Custom K8s namespace (default: `uwm-${bbProjectKey}`). |
 
 **For new services**, start with:
+
 ```groovy
 buildPipeline {
     majorVersion = 1
@@ -396,6 +406,7 @@ src/UWMC.Business.YourService/
 The active environment is set via the `ASPNETCORE_ENVIRONMENT` variable in Helm values (`env.ASPNETCORE_ENVIRONMENT: ${env.name}`).
 
 **Key configuration differences by environment:**
+
 - `ApplicationEdgeUrl` — GUP edge URL per environment
 - Database connection strings — Vault-injected per environment
 - External service URLs — Different base URLs per environment
@@ -409,6 +420,7 @@ The active environment is set via the `ASPNETCORE_ENVIRONMENT` variable in Helm 
 Create a `dockercompose/` directory at the repo root:
 
 ### dockercompose/.env
+
 ```env
 BACKEND_IMAGE_NAME=cell-biz-your-service
 BACKEND_DOCKERFILE_PATH=src/UWMC.Business.YourService/Dockerfile
@@ -421,6 +433,7 @@ LOCAL_DB_PORT=14333
 ### dockercompose/docker-compose.yml
 
 **Minimal (no local database):**
+
 ```yaml
 services:
   uwmc.business.yourservice:
@@ -445,6 +458,7 @@ networks:
 ```
 
 **With local SQL Server:**
+
 ```yaml
 services:
   uwmc.business.yourservice:
@@ -462,7 +476,20 @@ services:
     ports:
       - ${LOCAL_DB_PORT}:1433
     healthcheck:
-      test: ["CMD", "/opt/mssql-tools/bin/sqlcmd", "-S", "localhost", "-U", "sa", "-P", "${LOCAL_DB_PASSWORD}", "-C", "-Q", "SELECT 1"]
+      test:
+        [
+          "CMD",
+          "/opt/mssql-tools/bin/sqlcmd",
+          "-S",
+          "localhost",
+          "-U",
+          "sa",
+          "-P",
+          "${LOCAL_DB_PASSWORD}",
+          "-C",
+          "-Q",
+          "SELECT 1",
+        ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -514,13 +541,15 @@ Create `RepoMetaData.json` at the repository root to document service metadata:
     "InternalConsumer": [],
     "ExternalConsumer": []
   },
-  "Persistent_DB": [{
-    "Name": "your-service-db",
-    "Database_Type": "SQL Server",
-    "Data_Retention_Policy": {"TTL": "N/A", "Archivable": "N/A"}
-  }],
+  "Persistent_DB": [
+    {
+      "Name": "your-service-db",
+      "Database_Type": "SQL Server",
+      "Data_Retention_Policy": { "TTL": "N/A", "Archivable": "N/A" }
+    }
+  ],
   "Cache_DB": [],
-  "Message_Broker": {"Name": "N/A"},
+  "Message_Broker": { "Name": "N/A" },
   "UWM_MicroService_Version": "V3",
   "Feature_Flag_Location": "Harness"
 }
@@ -545,6 +574,7 @@ Create `iac/pacts.json` for contract testing integration:
 ```
 
 **Key fields:**
+
 - `pacticipant` — Uppercase repo name (e.g., `CELL-BIZ-YOUR-SERVICE`)
 - `blockRelease: true` — **Required for CD readiness.** Blocks release if contract verification fails.
 - `skipPactFlow: false` — Set to `true` only during initial development before contracts exist
@@ -555,12 +585,12 @@ Create `iac/pacts.json` for contract testing integration:
 
 These gates are enforced by the CI pipeline (via the SDK image's `dotnet-build-test-analyze-publish.sh` script):
 
-| Gate | Threshold | Tool |
-|------|-----------|------|
-| Code Coverage | >= 80% | SonarQube (baked into SDK image) |
-| Mutation Score | >= 80 | Stryker.NET (run locally and in pipeline) |
-| Security Scanning | No High/Critical | Checkmarx SAST (via Jenkinsfile `useCheckmarx`) |
-| Dependency Vulnerabilities | No High/Critical | Snyk / ArmorCode |
+| Gate                       | Threshold        | Tool                                            |
+| -------------------------- | ---------------- | ----------------------------------------------- |
+| Code Coverage              | >= 80%           | SonarQube (baked into SDK image)                |
+| Mutation Score             | >= 80            | Stryker.NET (run locally and in pipeline)       |
+| Security Scanning          | No High/Critical | Checkmarx SAST (via Jenkinsfile `useCheckmarx`) |
+| Dependency Vulnerabilities | No High/Critical | Snyk / ArmorCode                                |
 
 ---
 
@@ -593,7 +623,9 @@ Before a service is approved for Continuous Deployment, all of the following mus
 # CORRECT: Complete deployment configuration
 
 # 1. Dockerfile with UWM base images
+
 # src/UWMC.Business.LoanConditions/Dockerfile
+
 FROM artifacts.uwm.com/build-images/uwm-dotnet-sdk-sonar:8.0-redhat AS build-kestrel-env
 ARG BRANCH_NAME
 ARG RUN_SONAR
@@ -614,17 +646,22 @@ COPY --from=build-kestrel-env /app/publish .
 ENTRYPOINT ["dotnet", "UWMC.Business.LoanConditions.dll"]
 
 # 2. Jenkinsfile
+
 buildPipeline {
-    majorVersion = 1
-    portDeploy = true
-    useCheckmarx = true
-    checkmarxConfig = [preset: '44']
+majorVersion = 1
+portDeploy = true
+useCheckmarx = true
+checkmarxConfig = [preset: '44']
 }
 
 # 3. iac/values.yaml with probes matching /hc endpoint
+
 # 4. Health check via AddUSFSHealthCheck() → /hc
+
 # 5. RepoMetaData.json with ownership and dependencies
+
 # 6. iac/pacts.json with blockRelease: true
+
 </code>
 </example>
 
@@ -639,12 +676,13 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0
 </code>
 
 <why_it_fails>
+
 - UWM base images include SonarQube analysis tooling (SDK) and security hardening scripts (runtime)
 - The `dotnet-build-test-analyze-publish.sh` script is baked into the UWM SDK image — it won't exist in Microsoft's image
 - The `/tmp/hardening.sh` script is baked into the UWM runtime image — security hardening will fail
 - Deployment will be rejected because the image doesn't meet UWM security requirements
 - Must use `artifacts.uwm.com/build-images/uwm-dotnet-sdk-sonar` and `uwm-aspnet-runtime`
-</why_it_fails>
+  </why_it_fails>
 </example>
 
 <example>
@@ -663,11 +701,12 @@ public class HealthCheckController : ControllerBase
 </code>
 
 <why_it_fails>
+
 - Kubernetes startup, readiness, and liveness probes make HTTP requests without auth tokens
 - If the health check requires auth, probes will get 401 responses
 - K8s will think the pod is unhealthy and continuously restart it
 - Must use `[AllowAnonymous]` on health check endpoints
-</why_it_fails>
+  </why_it_fails>
 
 <correction>
 [ApiController]
@@ -689,21 +728,24 @@ public class HealthCheckController : ControllerBase
 # WRONG: Mismatch between values.yaml and actual endpoint
 
 # values.yaml says:
+
 startupProbe:
-  httpGet:
-    path: /hc        # <-- expects /hc
-    port: 5000
+httpGet:
+path: /hc # <-- expects /hc
+port: 5000
 
 # But the controller maps to /healthcheck
-[Route("[controller]")]      # HealthCheckController → /healthcheck
+
+[Route("[controller]")] # HealthCheckController → /healthcheck
 public class HealthCheckController : ControllerBase { }
 </code>
 
 <why_it_fails>
+
 - K8s probes hit /hc but the endpoint is at /healthcheck
 - Probes get 404 responses → pod marked unhealthy → continuous restarts
 - The probe path in values.yaml MUST match the actual endpoint path
-</why_it_fails>
+  </why_it_fails>
 </example>
 
 <example>
@@ -721,10 +763,11 @@ ENTRYPOINT ["dotnet", "UWMC.Business.YourService.dll"]
 </code>
 
 <why_it_fails>
+
 - Container Image Hardening Standard requires explicit non-root user
 - `/tmp/hardening.sh` removes unnecessary packages and tightens permissions
 - Running as root is a security violation that will be flagged in reviews
-</why_it_fails>
+  </why_it_fails>
 
 <correction>
 FROM artifacts.uwm.com/build-images/uwm-aspnet-runtime:8.0-redhat
@@ -779,6 +822,7 @@ ENTRYPOINT ["dotnet", "UWMC.Business.YourService.dll"]
 Before claiming deployment preparation complete, verify ALL of the following:
 
 ### Dockerfile
+
 - [ ] Build stage uses `artifacts.uwm.com/build-images/uwm-dotnet-sdk-sonar:{version}-redhat`
 - [ ] Runtime stage uses `artifacts.uwm.com/build-images/uwm-aspnet-runtime:{version}-redhat`
 - [ ] Security hardening: `RUN /tmp/hardening.sh` present in runtime stage
@@ -789,6 +833,7 @@ Before claiming deployment preparation complete, verify ALL of the following:
 - [ ] ENTRYPOINT references correct assembly name
 
 ### Helm Configuration
+
 - [ ] `iac/values.yaml` exists with `framework: dotnet` and `containerPort: 5000`
 - [ ] Vault enabled with correct role name
 - [ ] Startup, readiness, and liveness probes configured
@@ -799,17 +844,20 @@ Before claiming deployment preparation complete, verify ALL of the following:
 - [ ] Each environment file has correct `istio.hostName` (int/stage/prod URLs)
 
 ### Jenkinsfile
+
 - [ ] `buildPipeline` with `majorVersion` set
 - [ ] `portDeploy = true`
 - [ ] `useCheckmarx = true` with `checkmarxConfig`
 
 ### Health Check
+
 - [ ] Health check endpoint defined and returns 200 OK when healthy
 - [ ] Endpoint allows anonymous access (`[AllowAnonymous]`)
 - [ ] Endpoint path matches values.yaml probe paths
 - [ ] Database connectivity check included (if service has a database)
 
 ### Other Configuration
+
 - [ ] Environment-specific appsettings files exist (Development, Integration, Staging, Production)
 - [ ] `RepoMetaData.json` exists with correct ownership and metadata
 - [ ] `iac/pacts.json` exists with `blockRelease: true`
@@ -817,6 +865,7 @@ Before claiming deployment preparation complete, verify ALL of the following:
 - [ ] `dockercompose/.env` exists with correct build configuration
 
 ### CD Readiness (for production deployment approval)
+
 - [ ] Stryker mutation score >= 80
 - [ ] SonarQube code coverage >= 80%
 - [ ] Integration tests pass with TestContainers
@@ -831,10 +880,12 @@ Before claiming deployment preparation complete, verify ALL of the following:
 <integration>
 
 **This skill is called by:**
+
 - `develop-business-service` orchestrator (Phase 6 — final phase)
 - Developers directly when setting up deployment configuration
 
 **Prerequisites (should be complete before this phase):**
+
 - `create-v3-service` (Phase 1) — Keystone provisioning done
 - `design-api` (Phase 2) — API endpoints designed
 - `implement-feature` (Phase 3) — Business logic implemented with TDD
@@ -842,6 +893,7 @@ Before claiming deployment preparation complete, verify ALL of the following:
 - `test-strategy` (Phase 5) — Integration, contract, and E2E tests written
 
 **This skill does NOT depend on** but works alongside:
+
 - `test-strategy` — CD Readiness requires test artifacts from Phase 5
 
 </integration>
@@ -849,6 +901,7 @@ Before claiming deployment preparation complete, verify ALL of the following:
 <resources>
 
 **Confluence Documentation:**
+
 - Container Image Hardening Standard: https://kb.uwm.com/display/ITSTD/Container+Image+Hardening+Standard
 - CI/CD Qualifying Readiness Checklist: https://kb.uwm.com/pages/viewpage.action?pageId=1511560835
 - CD PE Validation: https://kb.uwm.com/display/PE/Continuous+Deployment%28CD%29+Principal+Engineering+%28PE%29+Validation
@@ -856,23 +909,28 @@ Before claiming deployment preparation complete, verify ALL of the following:
 - ArgoCD Helm Chart Configuration: https://kb.uwm.com/display/STACKTREK/ArgoCD+%7C+Helm+Chart+Configuration+for+Automated+Deploy+Process
 
 **UWM Docker Base Images:**
+
 - Build: `artifacts.uwm.com/build-images/uwm-dotnet-sdk-sonar:{version}-redhat` (8.0 or 10.0)
 - Runtime: `artifacts.uwm.com/build-images/uwm-aspnet-runtime:{version}-redhat` (8.0 or 10.0)
 - SQL Server (local dev): `artifacts.uwm.com/microsoft/mssql/server:2022-CU13-ubuntu-22.04`
 
 **Reference Services (verified patterns):**
+
 - `cell-biz-borrower` — net8.0, USFS health check at /hc
 - `cell-biz-broker-preferences` — net8.0, custom HealthCheckController at /healthcheck
 - `cell-biz-condition` — net8.0, USFS health check, PactFlow configured
 - `cell-keystone` — net10.0, custom Healthz controller at /api/healthz, KEDA autoscaling
 
 **Health Check Libraries:**
+
 - `USFS.Library.Extensions.Diagnostics.HealthChecks` — Standard `/hc` endpoint (recommended)
 
 **PactFlow:**
+
 - UWM PactFlow instance: `https://uwm1.pactflow.io`
 
 **When stuck:**
+
 - Deployment failures → Check Harness pipeline logs, verify values.yaml
 - Health check issues → Verify probe path matches endpoint, check [AllowAnonymous]
 - SonarQube gate failures → Check code coverage locally before pushing
