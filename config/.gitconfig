@@ -7,13 +7,22 @@
 	path = ~/.gitconfig-work
 
 [includeIf "gitdir:~/Developer/github.com/uwm/"]
-	path = ~/.gitconfig-work
+	path = ~/.gitconfig-uwm-github
 
 [includeIf "gitdir:~/.vscode-insiders/agent-plugins/code.uwm.com"]
 	path = ~/.gitconfig-work
 
 [includeIf "gitdir:/workspaces/"]
 	path = ~/.gitconfig-codespaces
+
+[includeIf "hasconfig:remote.*.url:ssh://git@gitlab.uwm.com/**"]
+	path = ~/.gitconfig-uwm-gitlab
+[includeIf "hasconfig:remote.*.url:https://gitlab.uwm.com/**"]
+	path = ~/.gitconfig-uwm-gitlab
+[includeIf "hasconfig:remote.*.url:git@ssh.gitlab.uwm.com:*"]
+	path = ~/.gitconfig-uwm-gitlab
+[includeIf "hasconfig:remote.*.url:git@ssh.gitlab.uwm.com:**/*"]
+	path = ~/.gitconfig-uwm-gitlab
 
 
 [push]
@@ -162,5 +171,3 @@
 [pager]
 	# diff = diffnav
 	diff = delta
-[safe]
-	directory = /Users/lmcansh/Developer/uwm/uwm

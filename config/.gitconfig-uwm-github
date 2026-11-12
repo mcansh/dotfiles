@@ -1,0 +1,11 @@
+[user]
+	name = Logan McAnsh
+	email = 177250213+lmcansh_uwmuser@users.noreply.github.com
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEZhnNG31iUmDv1vnFTN7doP0gb0Q9ZrSyY/GjintFpm
+
+[core]
+	sshCommand = ssh -o IdentitiesOnly=yes -i /Users/lmcansh/.ssh/lmcansh_uwmuser.pub
+	hooksPath = ~/.git_hooks
+
+[remote "origin"]
+	tagOpt = --no-tags

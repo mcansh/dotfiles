@@ -1,0 +1,7 @@
+[user]
+	name = Logan McAnsh
+	email = lmcansh@uwm.com
+	signingkey = D70D4906B881030B
+[gpg]
+	format = openpgp
+	program = /usr/local/bin/gpg
