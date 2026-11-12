@@ -61,9 +61,14 @@ for (const { major, minor, patch } of nodeVersions) {
 // keep the latest version
 // delete the rest
 for (let [major, versions] of versionMap) {
-  let nonLatestVersions = versions.slice(1).filter((version) =>
-    !nodeVersions.some((node) => node.active && `${node.major}.${node.minor}.${node.patch}` === version),
-  );
+  let nonLatestVersions = versions
+    .slice(1)
+    .filter(
+      (version) =>
+        !nodeVersions.some(
+          (node) => node.active && `${node.major}.${node.minor}.${node.patch}` === version,
+        ),
+    );
 
   if (nonLatestVersions.length === 0) {
     console.log(`keeping latest Node v${major} version: ${versions.at(0)}`);
