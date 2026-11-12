@@ -1,4 +1,5 @@
 <!-- factory-log-managed:start -->
+
 # Factory Log
 
 Use `factorylog` for work that creates a durable outcome such as code,

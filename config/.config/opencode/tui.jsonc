@@ -6,10 +6,8 @@
     "notifications": true,
   },
   "scroll_acceleration": {
-    "enabled": true
+    "enabled": true,
   },
   "mouse": true,
-  "plugin": [
-    "@slkiser/opencode-quota"
-  ]
+  "plugin": ["@slkiser/opencode-quota"],
 }
