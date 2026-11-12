@@ -9,5 +9,4 @@
     "enabled": true,
   },
   "mouse": true,
-  "plugin": ["@slkiser/opencode-quota"],
 }

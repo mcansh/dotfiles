@@ -2,8 +2,6 @@
   "$schema": "https://opencode.ai/config.json",
   "update": "auto",
   "plugins": [
-    "@plannotator/opencode@latest",
-    "@slkiser/opencode-quota@latest",
     "/Users/lmcansh/Developer/github.com/mcansh/pstack-opencode",
   ],
   "permissions": [
