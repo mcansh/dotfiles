@@ -1,7 +1,11 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "autoupdate": true,
-  "plugin": ["@plannotator/opencode@latest", "@slkiser/opencode-quota@latest"],
+  "plugins": [
+    "@plannotator/opencode@latest",
+    "@slkiser/opencode-quota@latest",
+    "/Users/lmcansh/Developer/github.com/mcansh/pstack-opencode",
+  ],
   "permission": {
     "external_directory": {
       "*": "allow",
