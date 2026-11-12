@@ -27,25 +27,21 @@ export async function setRandomColor() {
   if (!accent) {
     try {
       await exec(`defaults delete NSGlobalDomain AppleAccentColor`);
-    } catch (error) {
+    } catch {
       // it's possible we deleted it already so we'll ignore this error
     }
   } else {
-    await exec(
-      `defaults write NSGlobalDomain AppleAccentColor -integer ${accent}`,
-    );
+    await exec(`defaults write NSGlobalDomain AppleAccentColor -integer ${accent}`);
   }
 
   if (!highlight) {
     try {
       await exec(`defaults delete NSGlobalDomain AppleHighlightColor`);
-    } catch (error) {
+    } catch {
       // it's possible we deleted it already so we'll ignore this error
     }
   } else {
-    await exec(
-      `defaults write NSGlobalDomain AppleHighlightColor -string "${highlight}"`,
-    );
+    await exec(`defaults write NSGlobalDomain AppleHighlightColor -string "${highlight}"`);
   }
 
   // send notification that preferences have changed
