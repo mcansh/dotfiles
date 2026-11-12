@@ -8,8 +8,10 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   "icon_theme": null,
-  "markdown_preview_code_font_family": ".ZedMono",
-  "markdown_preview_font_family": ".ZedSans",
+  "markdown_preview": {
+    "code_font_family": ".ZedMono",
+    "font_family": ".ZedSans"
+  },
   "debugger": {
     "dock": "left"
   },
@@ -83,7 +85,9 @@
   "restore_on_startup": "empty_tab",
   "base_keymap": "Atom",
   "agent": {
-    "sidebar_side": "right",
+    "threads_sidebar": {
+      "position": "right"
+    },
     "favorite_models": [
       {
         "provider": "openai-subscribed",
@@ -137,7 +141,7 @@
   },
   "project_panel": {
     "dock": "right",
-    "folder_icons": false,
+    "folder_indicator": "chevron",
     "file_icons": false,
     "hide_root": true,
     "sort_mode": "mixed",
