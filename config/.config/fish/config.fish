@@ -164,9 +164,17 @@ fish_add_path /Users/lmcansh/.opencode/bin
 
 direnv hook fish | source
 
-# >>> grok installer >>>
-fish_add_path $HOME/.grok/bin
-# <<< grok installer <<<
+# nub shims
+set -gx PATH (test -n "$XDG_DATA_HOME"; and echo $XDG_DATA_HOME; or echo $HOME/.local/share)/nub/shims $PATH
+
+
+# lane https://github.com/lukeed/lane
+lane shellenv fish | source
+
 
 # An unchanged PATH is a successful config reload.
 return 0
+
+# >>> grok installer >>>
+fish_add_path $HOME/.grok/bin
+# <<< grok installer <<<
