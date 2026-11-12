@@ -3,15 +3,11 @@ import type {
   FinickyConfig,
 } from "/Applications/Finicky.app/Contents/Resources/finicky.d.ts";
 
-const DEFAULT_BROWSER = {
-  name: "Helium",
-  profile: "You",
-} satisfies BrowserSpecification;
+const IS_WORK = finicky.getSystemInfo().name === "s01ppi035992";
 
-const WORK_BROWSER = {
-  name: "Helium",
-  profile: "work",
-} satisfies BrowserSpecification;
+const DEFAULT_BROWSER = (
+  IS_WORK ? { name: "Helium", profile: "You" } : "Safari"
+) satisfies BrowserSpecification;
 
 export default {
   defaultBrowser: DEFAULT_BROWSER,
@@ -54,25 +50,21 @@ export default {
       browser: DEFAULT_BROWSER,
     },
 
-    // uwm
-    {
-      match(url, { opener }) {
-        let hosts = [
-          "uwm.com",
-          "uwm.csod.com",
-          "url.us.m.mimecastprotect.com",
-          "work.uwm.com",
-          "code.uwm.com",
-          "gitlab.uwm.com",
-        ];
-        return (
-          opener?.bundleId === "com.microsoft.teams2" ||
-          hosts.includes(url.host) ||
-          url.href.startsWith("https://github.com/Uwm-Cyborg")
-        );
-      },
-      browser: WORK_BROWSER,
-    },
+    ...(IS_WORK
+      ? ([
+          {
+            match(url, { opener }) {
+              return (
+                opener?.bundleId === "com.microsoft.teams2" ||
+                url.host === "uwm.com" ||
+                url.host.endsWith(".uwm.com") ||
+                url.href.startsWith("https://github.com/Uwm-Cyborg")
+              );
+            },
+            browser: { name: "Helium", profile: "work" },
+          },
+        ] satisfies NonNullable<FinickyConfig["handlers"]>)
+      : []),
   ],
 } satisfies FinickyConfig;
 
