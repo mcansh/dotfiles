@@ -1,0 +1,4 @@
+{
+  "name": "building-mcp-server-on-cloudflare",
+  "description": "Builds remote MCP (Model Context Protocol) servers on Cloudflare Workers\nwith tools, OAuth authentication, and production deployment. Generates\nserver code, configures auth providers, and deploys to Workers.\n\nUse when: user wants to \"build MCP server\", \"create MCP tools\", \"remote\nMCP\", \"deploy MCP\", add \"OAuth to MCP\", or mentions Model Context Protocol\non Cloudflare. Also triggers on \"MCP authentication\" or \"MCP deployment\".\nBiases towards retrieval from Cloudflare docs over pre-trained knowledge."
+}

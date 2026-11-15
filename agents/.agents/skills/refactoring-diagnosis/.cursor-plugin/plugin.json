@@ -1,0 +1,4 @@
+{
+  "name": "refactoring-diagnosis",
+  "description": "Use when identifying bad code/design and selecting refactor targets - produces a diagnosis report with smells, risks, and refactor vs rewrite decision"
+}

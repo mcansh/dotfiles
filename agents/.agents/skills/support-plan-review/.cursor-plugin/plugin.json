@@ -1,0 +1,4 @@
+{
+  "name": "support-plan-review",
+  "description": "Use when a team needs to assess their project's support readiness before production launch — walks through UWM Support Planning requirements (mandatory, recommended, ideal state), identifies gaps, and helps create actionable tasks to close them. Triggered by \"support plan\", \"support review\", \"launch readiness\", or \"support checklist\"."
+}

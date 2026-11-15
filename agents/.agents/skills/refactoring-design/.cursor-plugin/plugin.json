@@ -1,0 +1,4 @@
+{
+  "name": "refactoring-design",
+  "description": "Use when designing a refactor after diagnosis - selects patterns, defines composition and DI seams, and produces a test-ready refactor design spec"
+}

@@ -1,0 +1,71 @@
+name: Cursor marketplace
+
+on:
+  pull_request:
+    paths:
+      - 'agents/.agents/skills/**'
+      - '.cursor-plugin/**'
+      - 'scripts/*cursor-marketplace*'
+      - 'tests/test_cursor_marketplace.py'
+      - '.github/workflows/cursor-marketplace.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'agents/.agents/skills/**'
+      - '.cursor-plugin/**'
+      - 'scripts/*cursor-marketplace*'
+      - 'tests/test_cursor_marketplace.py'
+      - '.github/workflows/cursor-marketplace.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cursor-marketplace-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: scripts/requirements-cursor-marketplace.txt
+      - run: python -m pip install -r scripts/requirements-cursor-marketplace.txt
+      - run: python -m unittest discover -s tests -p 'test_cursor_marketplace.py'
+      # Skill-only PRs can merge; the main-branch job commits their metadata.
+      - run: python scripts/sync-cursor-marketplace.py
+      - run: python scripts/sync-cursor-marketplace.py --check
+
+  sync:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r scripts/requirements-cursor-marketplace.txt
+      - run: python scripts/sync-cursor-marketplace.py
+      - name: Commit generated metadata when changed
+        run: |
+          git add -- .cursor-plugin/marketplace.json 'agents/.agents/skills/*/.cursor-plugin/plugin.json'
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'chore: sync Cursor skills marketplace'
+          git push origin HEAD:main
+      - run: python scripts/sync-cursor-marketplace.py --check

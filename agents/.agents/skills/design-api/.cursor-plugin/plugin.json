@@ -1,0 +1,4 @@
+{
+  "name": "design-api",
+  "description": "Use when designing HTTP API endpoints for a v3 business service - covers REST standards, DTO design, versioning, error handling, and API security per UWM standards"
+}

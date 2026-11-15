@@ -1,0 +1,4 @@
+{
+  "name": "create-pr",
+  "description": "Generate a pull request title and detailed PR description from all changes in the current branch. Use when the user asks for a PR title, PR description, pull request summary, or help preparing a PR body."
+}

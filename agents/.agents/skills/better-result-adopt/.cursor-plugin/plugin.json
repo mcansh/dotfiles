@@ -1,0 +1,4 @@
+{
+  "name": "better-result-adopt",
+  "description": "Adopt better-result in an existing TypeScript codebase. Use when replacing try/catch, Promise rejection handling, null sentinels, or thrown domain exceptions with typed Result workflows."
+}

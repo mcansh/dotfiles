@@ -1,0 +1,4 @@
+{
+  "name": "merge-pr-stack",
+  "description": "Use when merging a stack of approved Bitbucket PRs — auto-detects the stack from the repo, merges master into each feature branch (--no-ff), resolves conflicts intelligently, pushes, and merges each PR via API bottom-up."
+}

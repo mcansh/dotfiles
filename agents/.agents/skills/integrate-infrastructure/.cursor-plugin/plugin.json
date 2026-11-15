@@ -1,0 +1,4 @@
+{
+  "name": "integrate-infrastructure",
+  "description": "Use when connecting a v3 service to infrastructure - GUP auth, Kafka (UWMC.Library.Messaging.Kafka), EF Core, Vault (UWMC.Vault), feature flags (UWMC.Library.FeatureFlags)"
+}

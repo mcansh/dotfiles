@@ -1,0 +1,4 @@
+{
+  "name": "create-v3-service",
+  "description": "Use when creating a brand new v3 business service - guides through Keystone provisioning, ARCOM approval, starter kit setup, and base Dockerfile configuration"
+}

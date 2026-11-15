@@ -1,0 +1,4 @@
+{
+  "name": "local-sonar-scan",
+  "description": "Run a local SonarQube scan using dotnet-sonarscanner — builds, analyzes, and uploads results without needing to push code first. Use when the user says \"local scan\", \"sonar scan\", \"scan locally\", or wants SonarQube results before pushing."
+}

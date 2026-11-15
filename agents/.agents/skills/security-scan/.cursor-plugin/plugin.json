@@ -1,0 +1,4 @@
+{
+  "name": "security-scan",
+  "description": "Run a Snyk security scan on the current project — code analysis (SAST) and dependency scanning (SCA). Use when the user says \"security scan\", \"snyk scan\", \"check vulnerabilities\", or \"dependency audit\"."
+}

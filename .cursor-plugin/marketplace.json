@@ -1,0 +1,476 @@
+{
+  "name": "mcansh-dotfiles",
+  "owner": {
+    "name": "Logan McAnsh"
+  },
+  "metadata": {
+    "description": "Agent skills from mcansh/dotfiles"
+  },
+  "plugins": [
+    {
+      "name": "address-pr-feedback",
+      "description": "Use when responding to code review comments on a Bitbucket PR — walks through each comment with Socratic discussion, researches when needed, makes code changes, pushes, and posts threaded replies.",
+      "source": "agents/.agents/skills/address-pr-feedback"
+    },
+    {
+      "name": "agents-sdk",
+      "description": "Build, debug, or review Cloudflare Agents SDK applications using the agents package.",
+      "source": "agents/.agents/skills/agents-sdk"
+    },
+    {
+      "name": "analyzing-test-effectiveness",
+      "description": "Use to audit test quality with SRE scrutiny - identifies weak tests, missing cases, and creates task docs for improvements",
+      "source": "agents/.agents/skills/analyzing-test-effectiveness"
+    },
+    {
+      "name": "better-result-adopt",
+      "description": "Adopt better-result in an existing TypeScript codebase. Use when replacing try/catch, Promise rejection handling, null sentinels, or thrown domain exceptions with typed Result workflows.",
+      "source": "agents/.agents/skills/better-result-adopt"
+    },
+    {
+      "name": "better-result-migrate-v2",
+      "description": "Migrate better-result TaggedError usage from the v1 class-based API to the v2 factory-based API. Use when upgrading a codebase that still extends TaggedError directly or calls the old static helpers.",
+      "source": "agents/.agents/skills/better-result-migrate-v2"
+    },
+    {
+      "name": "brainstorming",
+      "description": "Use when shaping a feature before implementation - turns rough ideas into an approved markdown spec and local task directory",
+      "source": "agents/.agents/skills/brainstorming"
+    },
+    {
+      "name": "bro",
+      "description": "restate the last message in plain human language, with no jargon.",
+      "source": "agents/.agents/skills/bro"
+    },
+    {
+      "name": "building-ai-agent-on-cloudflare",
+      "description": "Builds AI agents on Cloudflare using the Agents SDK with state management,\nreal-time WebSockets, scheduled tasks, tool integration, and chat capabilities.\nGenerates production-ready agent code deployed to Workers.\n\nUse when: user wants to \"build an agent\", \"AI agent\", \"chat agent\", \"stateful\nagent\", mentions \"Agents SDK\", needs \"real-time AI\", \"WebSocket AI\", or asks\nabout agent \"state management\", \"scheduled tasks\", or \"tool calling\".\nBiases towards retrieval from Cloudflare docs over pre-trained knowledge.",
+      "source": "agents/.agents/skills/building-ai-agent-on-cloudflare"
+    },
+    {
+      "name": "building-hooks",
+      "description": "Use when creating Claude Code hooks - covers hook patterns, composition, testing, progressive enhancement from simple to advanced",
+      "source": "agents/.agents/skills/building-hooks"
+    },
+    {
+      "name": "building-mcp-server-on-cloudflare",
+      "description": "Builds remote MCP (Model Context Protocol) servers on Cloudflare Workers\nwith tools, OAuth authentication, and production deployment. Generates\nserver code, configures auth providers, and deploys to Workers.\n\nUse when: user wants to \"build MCP server\", \"create MCP tools\", \"remote\nMCP\", \"deploy MCP\", add \"OAuth to MCP\", or mentions Model Context Protocol\non Cloudflare. Also triggers on \"MCP authentication\" or \"MCP deployment\".\nBiases towards retrieval from Cloudflare docs over pre-trained knowledge.",
+      "source": "agents/.agents/skills/building-mcp-server-on-cloudflare"
+    },
+    {
+      "name": "caveman",
+      "description": "Ultra-compressed communication mode. Cuts token usage ~75% by speaking like caveman while keeping full technical accuracy. Supports intensity levels: lite, full (default), ultra, wenyan-lite, wenyan-full, wenyan-ultra. Use when user says \"caveman mode\", \"talk like caveman\", \"use caveman\", \"less tokens\", \"be brief\", or invokes /caveman. Also auto-triggers when token efficiency is requested.",
+      "source": "agents/.agents/skills/caveman"
+    },
+    {
+      "name": "caveman-compress",
+      "description": "Compress natural language memory files (CLAUDE.md, todos, preferences) into caveman format to save input tokens. Preserves all technical substance, code, URLs, and structure. Compressed version overwrites the original file. Human-readable backup saved as FILE.original.md. Trigger: /caveman:compress <filepath> or \"compress memory file\"",
+      "source": "agents/.agents/skills/caveman-compress"
+    },
+    {
+      "name": "cloudflare",
+      "description": "Discover and choose Cloudflare products for apps, APIs, AI agents, storage, networking, and security. Use for architecture and product selection, including when the user describes a need without naming a Cloudflare product; then find the relevant skill or documentation.",
+      "source": "agents/.agents/skills/cloudflare"
+    },
+    {
+      "name": "compress",
+      "description": "Compress natural language memory files (CLAUDE.md, todos, preferences) into caveman format to save input tokens. Preserves all technical substance, code, URLs, and structure. Compressed version overwrites the original file. Human-readable backup saved as FILE.original.md. Trigger: /caveman:compress <filepath> or \"compress memory file\"",
+      "source": "agents/.agents/skills/compress"
+    },
+    {
+      "name": "create-allin-package",
+      "description": "Use when creating a new package in the allin-ui monorepo - guides through component taxonomy (UFA/IAP/SCL), Turbo scaffolding, dependency configuration, and manifest setup",
+      "source": "agents/.agents/skills/create-allin-package"
+    },
+    {
+      "name": "create-branded-content",
+      "description": "Use when creating UWM branded content — presentations, pitch decks, documents, memos, agendas, marketing materials, one-pagers, or any content that needs UWM Brand Standards 2025 compliance. Produces self-contained HTML files with proper branding.",
+      "source": "agents/.agents/skills/create-branded-content"
+    },
+    {
+      "name": "create-pr",
+      "description": "Generate a pull request title and detailed PR description from all changes in the current branch. Use when the user asks for a PR title, PR description, pull request summary, or help preparing a PR body.",
+      "source": "agents/.agents/skills/create-pr"
+    },
+    {
+      "name": "create-v3-service",
+      "description": "Use when creating a brand new v3 business service - guides through Keystone provisioning, ARCOM approval, starter kit setup, and base Dockerfile configuration",
+      "source": "agents/.agents/skills/create-v3-service"
+    },
+    {
+      "name": "cyborg-trail",
+      "description": "Use when a user wants to play The Cyborg Trail — a gamified learning experience for terminal basics, marketplace skills, and the Kourai SDLC. Invoked with /cyborg-trail.",
+      "source": "agents/.agents/skills/cyborg-trail"
+    },
+    {
+      "name": "debugging-with-tools",
+      "description": "Use when encountering bugs or test failures - systematic debugging using debuggers, internet research, and agents to find root cause before fixing",
+      "source": "agents/.agents/skills/debugging-with-tools"
+    },
+    {
+      "name": "design-an-interface",
+      "description": "Generate multiple radically different interface designs for a module using parallel sub-agents. Use when user wants to design an API, explore interface options, compare module shapes, or mentions \"design it twice\".",
+      "source": "agents/.agents/skills/design-an-interface"
+    },
+    {
+      "name": "design-api",
+      "description": "Use when designing HTTP API endpoints for a v3 business service - covers REST standards, DTO design, versioning, error handling, and API security per UWM standards",
+      "source": "agents/.agents/skills/design-api"
+    },
+    {
+      "name": "design-ui-component",
+      "description": "Use when designing or implementing UI components in allin-ui — enforces DREAM design system standards, props conventions, TypeScript strictness, theming, and accessibility",
+      "source": "agents/.agents/skills/design-ui-component"
+    },
+    {
+      "name": "develop-business-service",
+      "description": "Golden path for developing v3 business services at UWM - automatically guides through service creation, API design, TDD implementation, infrastructure integration, testing, and deployment",
+      "source": "agents/.agents/skills/develop-business-service"
+    },
+    {
+      "name": "develop-frontend",
+      "description": "Golden path orchestrator for frontend development at UWM — auto-detects context (allin-ui vs SPA, new vs existing, UFA/SCL/IAP), chains through phase skills, and enforces standards at every checkpoint",
+      "source": "agents/.agents/skills/develop-frontend"
+    },
+    {
+      "name": "dispatching-parallel-agents",
+      "description": "Use when facing 3+ independent failures that can be investigated without shared state or dependencies - dispatches multiple Claude agents to investigate and fix independent problems concurrently",
+      "source": "agents/.agents/skills/dispatching-parallel-agents"
+    },
+    {
+      "name": "dream-framework",
+      "description": "Use when creating a new web project, scaffolding a React app, or needing Dream Design System component guidance - covers setup, component selection, theming, and layout patterns",
+      "source": "agents/.agents/skills/dream-framework"
+    },
+    {
+      "name": "durable-objects",
+      "description": "Build, debug, or review Cloudflare Durable Objects code for persistent state and coordination.",
+      "source": "agents/.agents/skills/durable-objects"
+    },
+    {
+      "name": "edit-article",
+      "description": "Edit and improve articles by restructuring sections, improving clarity, and tightening prose. Use when user wants to edit, revise, or improve an article draft.",
+      "source": "agents/.agents/skills/edit-article"
+    },
+    {
+      "name": "emil-design-eng",
+      "description": "This skill encodes Emil Kowalski's philosophy on UI polish, component design, animation decisions, and the invisible details that make software feel great.",
+      "source": "agents/.agents/skills/emil-design-eng"
+    },
+    {
+      "name": "executing-plans",
+      "description": "Use to execute an approved local markdown task directory iteratively - work the current Now slice, update docs, then stop",
+      "source": "agents/.agents/skills/executing-plans"
+    },
+    {
+      "name": "find-skills",
+      "description": "Helps users discover and install agent skills when they ask questions like \"how do I do X\", \"find a skill for X\", \"is there a skill that can...\", or express interest in extending capabilities. This skill should be used when the user is looking for functionality that might exist as an installable skill.",
+      "source": "agents/.agents/skills/find-skills"
+    },
+    {
+      "name": "finishing-a-development-branch",
+      "description": "Use when implementation is complete and verified - delete finished local task docs, present integration options, and clean up safely",
+      "source": "agents/.agents/skills/finishing-a-development-branch"
+    },
+    {
+      "name": "fixing-bugs",
+      "description": "Use when encountering a bug - reproduce it, track it in task docs, fix it with a regression test, and verify the result",
+      "source": "agents/.agents/skills/fixing-bugs"
+    },
+    {
+      "name": "generate-demo",
+      "description": "Use when completed work needs to be demonstrated — identifies spec changes from a branch, generates realistic demo data, creates a docker-compose environment running the real application with seeded data, and writes a step-by-step DEMO-GUIDE.md for presenting to stakeholders. Use after implementation is complete and you want to show what was built.",
+      "source": "agents/.agents/skills/generate-demo"
+    },
+    {
+      "name": "gh-stack",
+      "description": "Manage stacked branches and pull requests with the gh-stack GitHub CLI extension. Use when the user wants to create, push, rebase, sync, navigate, or view stacks of dependent PRs. Triggers on tasks involving stacked diffs, dependent pull requests, branch chains, or incremental code review workflows.",
+      "source": "agents/.agents/skills/gh-stack"
+    },
+    {
+      "name": "git-guardrails-claude-code",
+      "description": "Set up Claude Code hooks to block dangerous git commands (push, reset --hard, clean, branch -D, etc.) before they execute. Use when user wants to prevent destructive git operations, add git safety hooks, or block git push/reset in Claude Code.",
+      "source": "agents/.agents/skills/git-guardrails-claude-code"
+    },
+    {
+      "name": "github-triage",
+      "description": "Triage GitHub issues through a label-based state machine with interactive grilling sessions. Use when user wants to triage issues, review incoming bugs or feature requests, prepare issues for an AFK agent, or manage issue workflow.",
+      "source": "agents/.agents/skills/github-triage"
+    },
+    {
+      "name": "grill-me",
+      "description": "A relentless interview to sharpen a plan or design.",
+      "source": "agents/.agents/skills/grill-me"
+    },
+    {
+      "name": "how",
+      "description": "Explain how something works in this codebase by exploring code and producing a clear architectural explanation. Optionally critique the architecture for issues.",
+      "source": "agents/.agents/skills/how"
+    },
+    {
+      "name": "implement-feature",
+      "description": "Implement business logic with strict TDD - write .feature specs, derive xUnit tests, achieve >=80 mutation score and >=80% coverage",
+      "source": "agents/.agents/skills/implement-feature"
+    },
+    {
+      "name": "implement-ui-feature",
+      "description": "Use when implementing a UI feature in allin-ui — enforces strict TDD with .feature specs, derives Vitest unit tests, integrates GUP auth patterns, and maintains clean business logic boundaries",
+      "source": "agents/.agents/skills/implement-ui-feature"
+    },
+    {
+      "name": "improve-codebase-architecture",
+      "description": "Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.",
+      "source": "agents/.agents/skills/improve-codebase-architecture"
+    },
+    {
+      "name": "integrate-infrastructure",
+      "description": "Use when connecting a v3 service to infrastructure - GUP auth, Kafka (UWMC.Library.Messaging.Kafka), EF Core, Vault (UWMC.Vault), feature flags (UWMC.Library.FeatureFlags)",
+      "source": "agents/.agents/skills/integrate-infrastructure"
+    },
+    {
+      "name": "jira-sync",
+      "description": "Use when a bd hook fires indicating a bd item was viewed, completed, or updated — synchronizes bd epics and tasks with corresponding Jira epics and stories using JIT (just-in-time) creation and status management.",
+      "source": "agents/.agents/skills/jira-sync"
+    },
+    {
+      "name": "local-sonar-scan",
+      "description": "Run a local SonarQube scan using dotnet-sonarscanner — builds, analyzes, and uploads results without needing to push code first. Use when the user says \"local scan\", \"sonar scan\", \"scan locally\", or wants SonarQube results before pushing.",
+      "source": "agents/.agents/skills/local-sonar-scan"
+    },
+    {
+      "name": "maintain-legacy-spa",
+      "description": "Lightweight reference for maintaining legacy cell-ui-xxx SPAs — covers which UWM standards still apply, what differs from allin-ui, and when to consider migration",
+      "source": "agents/.agents/skills/maintain-legacy-spa"
+    },
+    {
+      "name": "managing-task-docs",
+      "description": "Use for advanced markdown task-doc operations - split work, reprioritize slices, delete finished local task dirs, and keep docs clean",
+      "source": "agents/.agents/skills/managing-task-docs"
+    },
+    {
+      "name": "merge-pr-stack",
+      "description": "Use when merging a stack of approved Bitbucket PRs — auto-detects the stack from the repo, merges master into each feature branch (--no-ff), resolves conflicts intelligently, pushes, and merges each PR via API bottom-up.",
+      "source": "agents/.agents/skills/merge-pr-stack"
+    },
+    {
+      "name": "migrate-spa-to-allin",
+      "description": "Use when migrating a legacy cell-ui-xxx dedicated SPA to the allin-ui monorepo — covers pre-migration assessment, package scaffolding, dependency migration, build tool conversion, auth migration to GUP, DREAM adoption, and testing migration",
+      "source": "agents/.agents/skills/migrate-spa-to-allin"
+    },
+    {
+      "name": "migrate-to-shoehorn",
+      "description": "Migrate test files from `as` type assertions to @total-typescript/shoehorn. Use when user mentions shoehorn, wants to replace `as` in tests, or needs partial test data.",
+      "source": "agents/.agents/skills/migrate-to-shoehorn"
+    },
+    {
+      "name": "obsidian-vault",
+      "description": "Search, create, and manage notes in the Obsidian vault with wikilinks and index notes. Use when user wants to find, create, or organize notes in Obsidian.",
+      "source": "agents/.agents/skills/obsidian-vault"
+    },
+    {
+      "name": "prd-to-issues",
+      "description": "Break a PRD into independently-grabbable GitHub issues using tracer-bullet vertical slices. Use when user wants to convert a PRD to issues, create implementation tickets, or break down a PRD into work items.",
+      "source": "agents/.agents/skills/prd-to-issues"
+    },
+    {
+      "name": "prd-to-plan",
+      "description": "Turn a PRD into a multi-phase implementation plan using tracer-bullet vertical slices, saved as a local Markdown file in ./plans/. Use when user wants to break down a PRD, create an implementation plan, plan phases from a PRD, or mentions \"tracer bullets\".",
+      "source": "agents/.agents/skills/prd-to-plan"
+    },
+    {
+      "name": "prepare-deployment",
+      "description": "Use when preparing a v3 service for CI/CD - multi-stage Dockerfile with UWM base images, Helm values.yaml, Jenkinsfile, health checks, and CD readiness",
+      "source": "agents/.agents/skills/prepare-deployment"
+    },
+    {
+      "name": "qa",
+      "description": "Interactive QA session where user reports bugs or issues conversationally, and the agent files GitHub issues. Explores the codebase in the background for context and domain language. Use when user wants to report bugs, do QA, file issues conversationally, or mentions \"QA session\".",
+      "source": "agents/.agents/skills/qa"
+    },
+    {
+      "name": "quality-scan",
+      "description": "Run the full pre-push quality gate — SonarQube analysis + Snyk security scan on the current branch. Use when the user says \"quality scan\", \"quality gate\", \"run sonar\", \"pre-push check\", or before pushing code.",
+      "source": "agents/.agents/skills/quality-scan"
+    },
+    {
+      "name": "react-doctor",
+      "description": "Use when finishing a feature, fixing a bug, before committing React code, or when the user wants to improve code quality or clean up a codebase. Checks for score regression. Covers lint, dead code, accessibility, bundle size, architecture diagnostics.",
+      "source": "agents/.agents/skills/react-doctor"
+    },
+    {
+      "name": "record-demo",
+      "description": "Use after generate-demo has created a DEMO-GUIDE.md — records a narrated screen-captured MP4 video of the demo being performed. Drives the UI with Playwright, generates narration audio with macOS say (system default voice), and assembles the final video with FFmpeg. Supports two modes - a 5-minute C-suite pitch and a longer general audience demo.",
+      "source": "agents/.agents/skills/record-demo"
+    },
+    {
+      "name": "refactoring-design",
+      "description": "Use when designing a refactor after diagnosis - selects patterns, defines composition and DI seams, and produces a test-ready refactor design spec",
+      "source": "agents/.agents/skills/refactoring-design"
+    },
+    {
+      "name": "refactoring-diagnosis",
+      "description": "Use when identifying bad code/design and selecting refactor targets - produces a diagnosis report with smells, risks, and refactor vs rewrite decision",
+      "source": "agents/.agents/skills/refactoring-diagnosis"
+    },
+    {
+      "name": "refactoring-safely",
+      "description": "Use when refactoring code - tracks the refactor in task docs and preserves behavior through small verified changes",
+      "source": "agents/.agents/skills/refactoring-safely"
+    },
+    {
+      "name": "remix-ui",
+      "description": "Build the UI of a Remix app. Use when creating pages, layouts, client entries, interactions, stateful UI, navigation, hydration, styling, animations, reusable mixins, or UI tests.",
+      "source": "agents/.agents/skills/remix-ui"
+    },
+    {
+      "name": "request-refactor-plan",
+      "description": "Create a detailed refactor plan with tiny commits via user interview, then file it as a GitHub issue. Use when user wants to plan a refactor, create a refactoring RFC, or break a refactor into safe incremental steps.",
+      "source": "agents/.agents/skills/request-refactor-plan"
+    },
+    {
+      "name": "review-bitbucket-pr",
+      "description": "Review a Bitbucket PR using specialized agents and post findings as inline comments",
+      "source": "agents/.agents/skills/review-bitbucket-pr"
+    },
+    {
+      "name": "review-implementation",
+      "description": "Use after executing a task directory - verifies implementation against plan.md, acceptance checks, and anti-goals",
+      "source": "agents/.agents/skills/review-implementation"
+    },
+    {
+      "name": "root-cause-tracing",
+      "description": "Use when errors occur deep in execution - traces bugs backward through call stack to find original trigger, not just symptom",
+      "source": "agents/.agents/skills/root-cause-tracing"
+    },
+    {
+      "name": "sandbox-sdk",
+      "description": "Build sandboxed applications for secure code execution. Load when building AI code execution, code interpreters, CI/CD systems, interactive dev environments, or executing untrusted code. Covers Sandbox SDK lifecycle, commands, files, code interpreter, and preview URLs. Biases towards retrieval from Cloudflare docs over pre-trained knowledge.",
+      "source": "agents/.agents/skills/sandbox-sdk"
+    },
+    {
+      "name": "scaffold-exercises",
+      "description": "Create exercise directory structures with sections, problems, solutions, and explainers that pass linting. Use when user wants to scaffold exercises, create exercise stubs, or set up a new course section.",
+      "source": "agents/.agents/skills/scaffold-exercises"
+    },
+    {
+      "name": "security-scan",
+      "description": "Run a Snyk security scan on the current project — code analysis (SAST) and dependency scanning (SCA). Use when the user says \"security scan\", \"snyk scan\", \"check vulnerabilities\", or \"dependency audit\".",
+      "source": "agents/.agents/skills/security-scan"
+    },
+    {
+      "name": "setup-pre-commit",
+      "description": "Set up Husky pre-commit hooks with lint-staged (Prettier), type checking, and tests in the current repo. Use when user wants to add pre-commit hooks, set up Husky, configure lint-staged, or add commit-time formatting/typechecking/testing.",
+      "source": "agents/.agents/skills/setup-pre-commit"
+    },
+    {
+      "name": "setup-quality-tools",
+      "description": "Guided first-time setup for SonarQube and Snyk quality gate tools. Use when a developer needs to configure tokens, authenticate, or troubleshoot quality gate connectivity.",
+      "source": "agents/.agents/skills/setup-quality-tools"
+    },
+    {
+      "name": "skills-auto-activation",
+      "description": "Use when skills aren't activating reliably - covers official solutions (better descriptions) and custom hook system for deterministic skill activation",
+      "source": "agents/.agents/skills/skills-auto-activation"
+    },
+    {
+      "name": "sre-task-refinement",
+      "description": "Use when hardening a spec or task docs - stress-tests edge cases, failure modes, and acceptance checks before implementation",
+      "source": "agents/.agents/skills/sre-task-refinement"
+    },
+    {
+      "name": "support-plan-review",
+      "description": "Use when a team needs to assess their project's support readiness before production launch — walks through UWM Support Planning requirements (mandatory, recommended, ideal state), identifies gaps, and helps create actionable tasks to close them. Triggered by \"support plan\", \"support review\", \"launch readiness\", or \"support checklist\".",
+      "source": "agents/.agents/skills/support-plan-review"
+    },
+    {
+      "name": "tailwindcss",
+      "description": "tailwindcss",
+      "source": "agents/.agents/skills/tailwindcss"
+    },
+    {
+      "name": "tdd",
+      "description": "Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions \"red-green-refactor\", or wants integration tests.",
+      "source": "agents/.agents/skills/tdd"
+    },
+    {
+      "name": "test-driven-development",
+      "description": "Drives development with tests using the red-green-refactor loop. Use when implementing any logic, fixing any bug, or changing any behavior. Use when you need to prove that code works, when a bug report arrives, or when you're about to modify existing functionality.",
+      "source": "agents/.agents/skills/test-driven-development"
+    },
+    {
+      "name": "test-frontend",
+      "description": "Use when setting up comprehensive test strategy for an allin-ui package — covers Vitest configuration, Stryker mutation testing optimization, Playwright E2E/soak/perf tests, coverage reporting, SonarQube integration, and pipeline compliance",
+      "source": "agents/.agents/skills/test-frontend"
+    },
+    {
+      "name": "test-strategy",
+      "description": "Use when adding integration, contract, and E2E tests after functional code is written - TestContainers, WireMock, PactFlow, minimal E2E smoke tests",
+      "source": "agents/.agents/skills/test-strategy"
+    },
+    {
+      "name": "testing-anti-patterns",
+      "description": "Use when writing or changing tests, adding mocks - prevents testing mock behavior, production pollution with test-only methods, and mocking without understanding dependencies",
+      "source": "agents/.agents/skills/testing-anti-patterns"
+    },
+    {
+      "name": "triage-issue",
+      "description": "Triage a bug or issue by exploring the codebase to find root cause, then create a GitHub issue with a TDD-based fix plan. Use when user reports a bug, wants to file an issue, mentions \"triage\", or wants to investigate and plan a fix for a problem.",
+      "source": "agents/.agents/skills/triage-issue"
+    },
+    {
+      "name": "ubiquitous-language",
+      "description": "Extract a DDD-style ubiquitous language glossary from the current conversation, flagging ambiguities and proposing canonical terms. Saves to UBIQUITOUS_LANGUAGE.md. Use when user wants to define domain terms, build a glossary, harden terminology, create a ubiquitous language, or mentions \"domain model\" or \"DDD\".",
+      "source": "agents/.agents/skills/ubiquitous-language"
+    },
+    {
+      "name": "using-hyper",
+      "description": "Use when starting any conversation - establishes skill selection and the local task-doc workflow",
+      "source": "agents/.agents/skills/using-hyper"
+    },
+    {
+      "name": "verification-before-completion",
+      "description": "Use before claiming work complete, fixed, or passing - requires fresh evidence before any completion claim",
+      "source": "agents/.agents/skills/verification-before-completion"
+    },
+    {
+      "name": "web-perf",
+      "description": "Audit, diagnose, or optimize website loading and interaction performance, Core Web Vitals, and Lighthouse performance scores.",
+      "source": "agents/.agents/skills/web-perf"
+    },
+    {
+      "name": "workers-best-practices",
+      "description": "Cloudflare Workers best practices for production applications. Use when writing, reviewing, or configuring Workers.",
+      "source": "agents/.agents/skills/workers-best-practices"
+    },
+    {
+      "name": "wrangler",
+      "description": "Run or troubleshoot Wrangler CLI commands and configure Worker projects for local development, Previews, deployment, and Cloudflare resource management.",
+      "source": "agents/.agents/skills/wrangler"
+    },
+    {
+      "name": "write-a-prd",
+      "description": "Create a PRD through user interview, codebase exploration, and module design, then submit as a GitHub issue. Use when user wants to write a PRD, create a product requirements document, or plan a new feature.",
+      "source": "agents/.agents/skills/write-a-prd"
+    },
+    {
+      "name": "write-a-skill",
+      "description": "Create new agent skills with proper structure, progressive disclosure, and bundled resources. Use when user wants to create, write, or build a new skill.",
+      "source": "agents/.agents/skills/write-a-skill"
+    },
+    {
+      "name": "write-readme",
+      "description": "Write or rewrite package README files in the style used by the Remix repository. Use when drafting a new package README, revising an existing README, or reviewing README structure, examples, installation instructions, and section ordering for Remix packages.",
+      "source": "agents/.agents/skills/write-readme"
+    },
+    {
+      "name": "writing-plans",
+      "description": "Use after a spec is approved - distills plan.md into context.md and a rolling markdown backlog",
+      "source": "agents/.agents/skills/writing-plans"
+    },
+    {
+      "name": "writing-skills",
+      "description": "Use when creating new skills, editing existing skills, or verifying skills work - applies TDD to documentation by testing with subagents before writing",
+      "source": "agents/.agents/skills/writing-skills"
+    }
+  ]
+}

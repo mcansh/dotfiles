@@ -1,0 +1,4 @@
+{
+  "name": "sre-task-refinement",
+  "description": "Use when hardening a spec or task docs - stress-tests edge cases, failure modes, and acceptance checks before implementation"
+}

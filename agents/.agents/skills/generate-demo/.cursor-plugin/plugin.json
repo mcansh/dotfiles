@@ -1,0 +1,4 @@
+{
+  "name": "generate-demo",
+  "description": "Use when completed work needs to be demonstrated — identifies spec changes from a branch, generates realistic demo data, creates a docker-compose environment running the real application with seeded data, and writes a step-by-step DEMO-GUIDE.md for presenting to stakeholders. Use after implementation is complete and you want to show what was built."
+}

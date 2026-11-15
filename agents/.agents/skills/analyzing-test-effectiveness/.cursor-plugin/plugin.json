@@ -1,0 +1,4 @@
+{
+  "name": "analyzing-test-effectiveness",
+  "description": "Use to audit test quality with SRE scrutiny - identifies weak tests, missing cases, and creates task docs for improvements"
+}

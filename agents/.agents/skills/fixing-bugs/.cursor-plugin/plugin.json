@@ -1,0 +1,4 @@
+{
+  "name": "fixing-bugs",
+  "description": "Use when encountering a bug - reproduce it, track it in task docs, fix it with a regression test, and verify the result"
+}
