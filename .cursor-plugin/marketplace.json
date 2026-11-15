@@ -8,6 +8,11 @@
   },
   "plugins": [
     {
+      "name": "add-dark-mode",
+      "description": "Add dark mode with colors, shadows, and surfaces handled the way a designer would.",
+      "source": "agents/.agents/skills/add-dark-mode"
+    },
+    {
       "name": "address-pr-feedback",
       "description": "Use when responding to code review comments on a Bitbucket PR — walks through each comment with Socratic discussion, researches when needed, makes code changes, pushes, and posts threaded replies.",
       "source": "agents/.agents/skills/address-pr-feedback"
@@ -38,6 +43,11 @@
       "source": "agents/.agents/skills/brainstorming"
     },
     {
+      "name": "brand-kit",
+      "description": "Generate a complete visual identity and marketing-site mockup board from a product idea.",
+      "source": "agents/.agents/skills/brand-kit"
+    },
+    {
       "name": "bro",
       "description": "restate the last message in plain human language, with no jargon.",
       "source": "agents/.agents/skills/bro"
@@ -58,6 +68,11 @@
       "source": "agents/.agents/skills/building-mcp-server-on-cloudflare"
     },
     {
+      "name": "canonicalize-tailwind",
+      "description": "Sort, normalize, deduplicate, and resolve conflicting Tailwind utility classes.",
+      "source": "agents/.agents/skills/canonicalize-tailwind"
+    },
+    {
       "name": "caveman",
       "description": "Ultra-compressed communication mode. Cuts token usage ~75% by speaking like caveman while keeping full technical accuracy. Supports intensity levels: lite, full (default), ultra, wenyan-lite, wenyan-full, wenyan-ultra. Use when user says \"caveman mode\", \"talk like caveman\", \"use caveman\", \"less tokens\", \"be brief\", or invokes /caveman. Also auto-triggers when token efficiency is requested.",
       "source": "agents/.agents/skills/caveman"
@@ -71,6 +86,11 @@
       "name": "cloudflare",
       "description": "Discover and choose Cloudflare products for apps, APIs, AI agents, storage, networking, and security. Use for architecture and product selection, including when the user describes a need without naming a Cloudflare product; then find the relevant skill or documentation.",
       "source": "agents/.agents/skills/cloudflare"
+    },
+    {
+      "name": "componentize",
+      "description": "Extract and organize existing UI into reusable components with thoughtful APIs.",
+      "source": "agents/.agents/skills/componentize"
     },
     {
       "name": "compress",
@@ -103,9 +123,19 @@
       "source": "agents/.agents/skills/cyborg-trail"
     },
     {
+      "name": "dark-mode-image",
+      "description": "Create dark-mode variants of raster images for dark UI contexts.",
+      "source": "agents/.agents/skills/dark-mode-image"
+    },
+    {
       "name": "debugging-with-tools",
       "description": "Use when encountering bugs or test failures - systematic debugging using debuggers, internet research, and agents to find root cause before fixing",
       "source": "agents/.agents/skills/debugging-with-tools"
+    },
+    {
+      "name": "design",
+      "description": "Design and build new UI with the complete ui.sh design guideline system.",
+      "source": "agents/.agents/skills/design"
     },
     {
       "name": "design-an-interface",
@@ -208,6 +238,11 @@
       "source": "agents/.agents/skills/how"
     },
     {
+      "name": "ideas",
+      "description": "Compare multiple UI options in-browser with the ui.sh picker.",
+      "source": "agents/.agents/skills/ideas"
+    },
+    {
       "name": "implement-feature",
       "description": "Implement business logic with strict TDD - write .feature specs, derive xUnit tests, achieve >=80 mutation score and >=80% coverage",
       "source": "agents/.agents/skills/implement-feature"
@@ -243,9 +278,19 @@
       "source": "agents/.agents/skills/maintain-legacy-spa"
     },
     {
+      "name": "make-responsive",
+      "description": "Adapt existing UI across mobile, tablet, and desktop breakpoints.",
+      "source": "agents/.agents/skills/make-responsive"
+    },
+    {
       "name": "managing-task-docs",
       "description": "Use for advanced markdown task-doc operations - split work, reprioritize slices, delete finished local task dirs, and keep docs clean",
       "source": "agents/.agents/skills/managing-task-docs"
+    },
+    {
+      "name": "markup-from-image",
+      "description": "Convert screenshots, Figma exports, mockups, or wireframes into semantic unstyled markup.",
+      "source": "agents/.agents/skills/markup-from-image"
     },
     {
       "name": "merge-pr-stack",
