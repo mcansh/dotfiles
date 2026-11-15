@@ -1,0 +1,4 @@
+{
+  "name": "implement-ui-feature",
+  "description": "Use when implementing a UI feature in allin-ui — enforces strict TDD with .feature specs, derives Vitest unit tests, integrates GUP auth patterns, and maintains clean business logic boundaries"
+}

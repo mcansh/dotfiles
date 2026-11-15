@@ -1,0 +1,4 @@
+{
+  "name": "refactoring-safely",
+  "description": "Use when refactoring code - tracks the refactor in task docs and preserves behavior through small verified changes"
+}

@@ -15,3 +15,4 @@ config/.config/fish/fish_variables*
 config/.config/zed/prompts/prompts-library-db.0.mdb/lock.mdb
 
 node_modules/
+__pycache__/

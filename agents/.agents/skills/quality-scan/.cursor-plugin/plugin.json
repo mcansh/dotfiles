@@ -1,0 +1,4 @@
+{
+  "name": "quality-scan",
+  "description": "Run the full pre-push quality gate — SonarQube analysis + Snyk security scan on the current branch. Use when the user says \"quality scan\", \"quality gate\", \"run sonar\", \"pre-push check\", or before pushing code."
+}

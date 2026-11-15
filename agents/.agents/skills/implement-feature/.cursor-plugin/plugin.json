@@ -1,0 +1,4 @@
+{
+  "name": "implement-feature",
+  "description": "Implement business logic with strict TDD - write .feature specs, derive xUnit tests, achieve >=80 mutation score and >=80% coverage"
+}

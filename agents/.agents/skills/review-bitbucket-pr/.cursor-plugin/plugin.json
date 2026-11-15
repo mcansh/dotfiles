@@ -1,0 +1,4 @@
+{
+  "name": "review-bitbucket-pr",
+  "description": "Review a Bitbucket PR using specialized agents and post findings as inline comments"
+}

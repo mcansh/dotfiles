@@ -1,0 +1,4 @@
+{
+  "name": "testing-anti-patterns",
+  "description": "Use when writing or changing tests, adding mocks - prevents testing mock behavior, production pollution with test-only methods, and mocking without understanding dependencies"
+}

@@ -1,0 +1,4 @@
+{
+  "name": "executing-plans",
+  "description": "Use to execute an approved local markdown task directory iteratively - work the current Now slice, update docs, then stop"
+}

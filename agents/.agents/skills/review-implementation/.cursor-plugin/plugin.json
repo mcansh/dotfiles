@@ -1,0 +1,4 @@
+{
+  "name": "review-implementation",
+  "description": "Use after executing a task directory - verifies implementation against plan.md, acceptance checks, and anti-goals"
+}

@@ -1,0 +1,4 @@
+{
+  "name": "writing-skills",
+  "description": "Use when creating new skills, editing existing skills, or verifying skills work - applies TDD to documentation by testing with subagents before writing"
+}

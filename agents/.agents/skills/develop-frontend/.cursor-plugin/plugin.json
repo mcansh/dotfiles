@@ -1,0 +1,4 @@
+{
+  "name": "develop-frontend",
+  "description": "Golden path orchestrator for frontend development at UWM — auto-detects context (allin-ui vs SPA, new vs existing, UFA/SCL/IAP), chains through phase skills, and enforces standards at every checkpoint"
+}

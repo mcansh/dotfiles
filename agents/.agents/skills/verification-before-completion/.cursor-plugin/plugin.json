@@ -1,0 +1,4 @@
+{
+  "name": "verification-before-completion",
+  "description": "Use before claiming work complete, fixed, or passing - requires fresh evidence before any completion claim"
+}
