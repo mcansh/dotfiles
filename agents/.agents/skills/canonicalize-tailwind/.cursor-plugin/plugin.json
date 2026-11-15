@@ -1,4 +1,0 @@
-{
-  "name": "canonicalize-tailwind",
-  "description": "Sort, normalize, deduplicate, and resolve conflicting Tailwind utility classes."
-}
