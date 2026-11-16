@@ -23,8 +23,10 @@ organization.
 ### Keeping the catalog in sync
 
 Edit skills normally. The **Cursor marketplace** GitHub Action validates skill
-frontmatter on pull requests and regenerates and commits metadata after changes
-reach `main`. It also supports manual runs on `main`. Skill additions, metadata
+frontmatter on pull requests and commits regenerated metadata directly to PR
+branches in this repository. It also syncs after changes reach `main` and supports
+manual runs on `main`. Fork PRs and Dependabot-triggered runs receive validation
+only; regenerate locally and commit the metadata when needed. Skill additions, metadata
 edits, renames, and deletions are picked up automatically. The generated files
 are owned by the sync script; edit `SKILL.md`, not the generated JSON.
 
@@ -37,8 +39,10 @@ python3 scripts/sync-cursor-marketplace.py --check
 python3 -m unittest discover -s tests -p 'test_cursor_marketplace.py'
 ```
 
-The sync job needs permission to push to `main`; branch rules must allow the
-Actions bot to commit generated metadata. Cursor's Auto Refresh handles pulling
+The sync job needs permission to push to the PR branch or `main`; branch rules
+must allow the Actions bot to commit generated metadata. It uses a normal push
+and fails if the branch advances during generation; rerun the workflow to sync
+from the latest branch tip. Cursor's Auto Refresh handles pulling
 those commits into Cursor. This does not submit plugins to Cursor's public
 marketplace or update skills from their upstream repositories.
 
