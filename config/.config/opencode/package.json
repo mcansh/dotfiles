@@ -4,6 +4,17 @@
   },
   "devDependencies": {
     "jsonc-parser": "3.3.1",
-    "zod": "4.3.5"
+    "zod": "4.6.6"
+  },
+  "packageManager": "npm@12.2.2",
+  "overrides": {
+    "@opencode-ai/plugin": {
+      "effect": "4.0.0-beta.103",
+      "zod": "$zod"
+    },
+    "toml": "5.0.1"
+  },
+  "scripts": {
+    "test": "node --test security.test.mjs"
   }
 }
