@@ -1,4 +1,0 @@
-{
-  "name": "migrate-spa-to-allin",
-  "description": "Use when migrating a legacy cell-ui-xxx dedicated SPA to the allin-ui monorepo — covers pre-migration assessment, package scaffolding, dependency migration, build tool conversion, auth migration to GUP, DREAM adoption, and testing migration"
-}

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Typography"
+  short_description: "Fonts, type scales, and text that wraps and reads well"

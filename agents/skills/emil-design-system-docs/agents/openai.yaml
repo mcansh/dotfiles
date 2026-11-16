@@ -1,0 +1,3 @@
+interface:
+  display_name: "Design System Docs"
+  short_description: "Docs that tell your agent which component to use, and when"

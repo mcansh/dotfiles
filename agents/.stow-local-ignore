@@ -1,1 +1,33 @@
 \.DS_Store
+
+# Keep UWM skills installed locally, outside Stow.
+(?i)skills/[^/]*uwm[^/]*
+skills/address-pr-feedback
+skills/create-allin-package
+skills/create-branded-content
+skills/create-pr
+skills/create-v3-service
+skills/cyborg-trail
+skills/design-api
+skills/design-ui-component
+skills/develop-business-service
+skills/develop-frontend
+skills/dream-framework
+skills/implement-feature
+skills/implement-ui-feature
+skills/integrate-infrastructure
+skills/jira-sync
+skills/local-sonar-scan
+skills/maintain-legacy-spa
+skills/merge-pr-stack
+skills/migrate-spa-to-allin
+skills/prepare-deployment
+skills/record-demo
+skills/review-bitbucket-pr
+skills/setup-quality-tools
+skills/support-plan-review
+skills/test-frontend
+skills/test-strategy
+
+# Source files are reached through tool-specific skill links.
+^/skills

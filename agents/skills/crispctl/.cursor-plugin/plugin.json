@@ -1,0 +1,4 @@
+{
+  "name": "crispctl",
+  "description": "Control displays on a Mac that runs Crisp through its crispctl command line tool. Use when the user wants to read or set display brightness, switch Extra Brightness or HDR, list displays, disconnect and reconnect a display, switch a monitor's input, change Image Adjustment (contrast, color temperature, gamma), or list and apply saved presets from a script, a shortcut or an agent."
+}

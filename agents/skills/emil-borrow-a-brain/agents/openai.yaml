@@ -1,0 +1,5 @@
+interface:
+  display_name: "Borrow a Brain"
+  short_description: "Turn someone’s published work into a skill you can ask"
+policy:
+  allow_implicit_invocation: false

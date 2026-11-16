@@ -1,0 +1,4 @@
+{
+  "name": "conventional-commit-message",
+  "description": "Draft Conventional Commit messages. Use when the user asks for help writing a commit message, provides a change summary, asks how to describe current changes, or wants a git commit subject/body."
+}

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Interaction Details"
+  short_description: "Tooltips, drags, and timers that respond the way you expect"

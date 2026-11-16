@@ -1,0 +1,3 @@
+interface:
+  display_name: "Animations"
+  short_description: "When to animate, and the easing and duration when you do"

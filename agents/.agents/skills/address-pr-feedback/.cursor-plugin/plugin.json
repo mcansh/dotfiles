@@ -1,4 +1,0 @@
-{
-  "name": "address-pr-feedback",
-  "description": "Use when responding to code review comments on a Bitbucket PR — walks through each comment with Socratic discussion, researches when needed, makes code changes, pushes, and posts threaded replies."
-}

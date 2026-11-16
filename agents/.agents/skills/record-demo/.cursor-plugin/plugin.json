@@ -1,4 +1,0 @@
-{
-  "name": "record-demo",
-  "description": "Use after generate-demo has created a DEMO-GUIDE.md — records a narrated screen-captured MP4 video of the demo being performed. Drives the UI with Playwright, generates narration audio with macOS say (system default voice), and assembles the final video with FFmpeg. Supports two modes - a 5-minute C-suite pitch and a longer general audience demo."
-}

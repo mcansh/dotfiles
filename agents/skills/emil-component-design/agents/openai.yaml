@@ -1,0 +1,3 @@
+interface:
+  display_name: "Component Design"
+  short_description: "Component APIs that compose instead of growing props"

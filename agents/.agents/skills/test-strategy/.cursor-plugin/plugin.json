@@ -1,4 +1,0 @@
-{
-  "name": "test-strategy",
-  "description": "Use when adding integration, contract, and E2E tests after functional code is written - TestContainers, WireMock, PactFlow, minimal E2E smoke tests"
-}

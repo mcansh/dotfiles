@@ -49,7 +49,7 @@ target_dir = Path(sys.argv[2]).expanduser().resolve()
 packages = sys.argv[3:]
 
 skip_names = {".DS_Store", ".stow-local-ignore", "fish_variables", "lock.mdb"}
-skip_paths = {Path(".config/opencode/node_modules")}
+skip_paths = {Path(".config/opencode/node_modules"), Path("skills")}
 
 def should_skip(path: Path, package_root: Path) -> bool:
     relative_path = path.relative_to(package_root)

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Build a Tool"
+  short_description: "Build the tool that makes what your agent keeps missing"
+policy:
+  allow_implicit_invocation: false

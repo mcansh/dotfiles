@@ -26,6 +26,8 @@ def sync(root, check=False):
     expected = {}
     names = set()
     for source in sorted(skills.glob("*/SKILL.md")):
+        if source.is_symlink() and not source.exists():
+            continue
         text = source.read_text(encoding="utf-8")
         lines = text.splitlines()
         if not lines or lines[0] != "---" or "---" not in lines[1:]:

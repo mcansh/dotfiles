@@ -1,0 +1,4 @@
+{
+  "name": "kero",
+  "description": "Drive terminal sessions in Kero — start agents and commands in their own sessions or panes, here or on another machine, type into them, wait for them, read their screens, and report your own status. Use when running inside Kero ($KERO_PANE is set) and the task needs another terminal, a long-running process, a parallel agent, or the user's attention."
+}

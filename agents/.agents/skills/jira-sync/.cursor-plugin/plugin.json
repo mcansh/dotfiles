@@ -1,4 +1,0 @@
-{
-  "name": "jira-sync",
-  "description": "Use when a bd hook fires indicating a bd item was viewed, completed, or updated — synchronizes bd epics and tasks with corresponding Jira epics and stories using JIT (just-in-time) creation and status management."
-}

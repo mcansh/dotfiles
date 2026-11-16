@@ -16,3 +16,32 @@ config/.config/zed/prompts/prompts-library-db.0.mdb/lock.mdb
 
 node_modules/
 __pycache__/
+
+# Keep UWM skills local to this machine.
+agents/**/skills/*[uU][wW][mM]*
+agents/**/skills/address-pr-feedback
+agents/**/skills/create-allin-package
+agents/**/skills/create-branded-content
+agents/**/skills/create-pr
+agents/**/skills/create-v3-service
+agents/**/skills/cyborg-trail
+agents/**/skills/design-api
+agents/**/skills/design-ui-component
+agents/**/skills/develop-business-service
+agents/**/skills/develop-frontend
+agents/**/skills/dream-framework
+agents/**/skills/implement-feature
+agents/**/skills/implement-ui-feature
+agents/**/skills/integrate-infrastructure
+agents/**/skills/jira-sync
+agents/**/skills/local-sonar-scan
+agents/**/skills/maintain-legacy-spa
+agents/**/skills/merge-pr-stack
+agents/**/skills/migrate-spa-to-allin
+agents/**/skills/prepare-deployment
+agents/**/skills/record-demo
+agents/**/skills/review-bitbucket-pr
+agents/**/skills/setup-quality-tools
+agents/**/skills/support-plan-review
+agents/**/skills/test-frontend
+agents/**/skills/test-strategy

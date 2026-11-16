@@ -1,0 +1,3 @@
+interface:
+  display_name: "Unslop Code"
+  short_description: "Remove the tells that mark a diff as AI-written"

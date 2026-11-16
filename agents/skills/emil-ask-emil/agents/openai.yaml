@@ -1,0 +1,5 @@
+interface:
+  display_name: "Ask Emil"
+  short_description: "Tells you which skill to run, and in what order"
+policy:
+  allow_implicit_invocation: false

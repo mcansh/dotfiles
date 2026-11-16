@@ -1,0 +1,1 @@
+/Applications/Kero.app/Contents/Resources/SKILL.md

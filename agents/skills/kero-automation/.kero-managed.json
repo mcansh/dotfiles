@@ -1,0 +1,8 @@
+{
+  "format_version" : 2,
+  "links" : {
+    "SKILL.md" : "/Applications/Kero.app/Contents/Resources/SKILL.md",
+    "agents/openai.yaml" : "/Applications/Kero.app/Contents/Resources/openai.yaml"
+  },
+  "skill" : "kero-automation"
+}

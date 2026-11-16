@@ -1,4 +1,0 @@
-{
-  "name": "prepare-deployment",
-  "description": "Use when preparing a v3 service for CI/CD - multi-stage Dockerfile with UWM base images, Helm values.yaml, Jenkinsfile, health checks, and CD readiness"
-}

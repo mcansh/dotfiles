@@ -1,4 +1,0 @@
-{
-  "name": "test-frontend",
-  "description": "Use when setting up comprehensive test strategy for an allin-ui package — covers Vitest configuration, Stryker mutation testing optimization, Playwright E2E/soak/perf tests, coverage reporting, SonarQube integration, and pipeline compliance"
-}

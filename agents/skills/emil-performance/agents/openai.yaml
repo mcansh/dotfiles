@@ -1,0 +1,3 @@
+interface:
+  display_name: "Performance"
+  short_description: "Smooth long lists, no layout shift, and faster loads"

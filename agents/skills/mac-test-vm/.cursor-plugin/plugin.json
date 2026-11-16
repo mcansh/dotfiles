@@ -1,0 +1,4 @@
+{
+  "name": "mac-test-vm",
+  "description": "Launches, screenshots and clicks through Mac app builds inside a headless macOS test VM with the testvm command, so testing never takes over the user's screen. Use it every time you're about to open, relaunch, screenshot, click or UI-test a Mac app you built (Xcode, SwiftPM or Electron), instead of running `open` on this Mac. Also use it when the user mentions the test VM or testvm, or says agents keep taking over their screen."
+}

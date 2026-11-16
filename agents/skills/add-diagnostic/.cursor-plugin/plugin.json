@@ -1,0 +1,4 @@
+{
+  "name": "add-diagnostic",
+  "description": "Add a new diagnostic code following the defineDiagnostics() conventions from nostics"
+}

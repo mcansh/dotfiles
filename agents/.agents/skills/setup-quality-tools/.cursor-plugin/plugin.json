@@ -1,4 +1,0 @@
-{
-  "name": "setup-quality-tools",
-  "description": "Guided first-time setup for SonarQube and Snyk quality gate tools. Use when a developer needs to configure tokens, authenticate, or troubleshoot quality gate connectivity."
-}

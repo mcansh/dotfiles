@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'agents/.agents/skills/**'
+      - 'agents/skills/**'
       - '.cursor-plugin/**'
       - 'scripts/*cursor-marketplace*'
       - 'tests/test_cursor_marketplace.py'
@@ -12,6 +13,7 @@ on:
     branches: [main]
     paths:
       - 'agents/.agents/skills/**'
+      - 'agents/skills/**'
       - '.cursor-plugin/**'
       - 'scripts/*cursor-marketplace*'
       - 'tests/test_cursor_marketplace.py'
@@ -67,7 +69,7 @@ jobs:
       - run: python scripts/sync-cursor-marketplace.py
       - name: Commit generated metadata when changed
         run: |
-          git add -- .cursor-plugin/marketplace.json 'agents/.agents/skills/*/.cursor-plugin/plugin.json'
+          git add -- .cursor-plugin/marketplace.json 'agents/skills/*/.cursor-plugin/plugin.json'
           if git diff --cached --quiet; then
             exit 0
           fi

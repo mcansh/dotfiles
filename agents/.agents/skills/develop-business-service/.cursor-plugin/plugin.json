@@ -1,4 +1,0 @@
-{
-  "name": "develop-business-service",
-  "description": "Golden path for developing v3 business services at UWM - automatically guides through service creation, API design, TDD implementation, infrastructure integration, testing, and deployment"
-}

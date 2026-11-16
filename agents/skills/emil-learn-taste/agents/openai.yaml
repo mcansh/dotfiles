@@ -1,0 +1,5 @@
+interface:
+  display_name: "Learn Taste"
+  short_description: "Turns your corrections into rules the next agent follows"
+policy:
+  allow_implicit_invocation: false

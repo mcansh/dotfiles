@@ -86,6 +86,15 @@ class MarketplaceTests(unittest.TestCase):
             self.sync()
         self.assertFalse((self.root / marketplace.MARKETPLACE).exists())
 
+    def test_unavailable_external_skill_is_omitted(self):
+        self.skill("sample", "name: sample\ndescription: Available")
+        external = self.root / marketplace.SKILLS / "external/SKILL.md"
+        external.parent.mkdir()
+        external.symlink_to(self.root / "missing-app/SKILL.md")
+        self.sync()
+        self.assertEqual([p["name"] for p in self.catalog()["plugins"]], ["sample"])
+        self.assertTrue(self.sync(check=True))
+
 
 if __name__ == "__main__":
     unittest.main()

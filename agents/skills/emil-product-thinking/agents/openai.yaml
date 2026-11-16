@@ -1,0 +1,5 @@
+interface:
+  display_name: "Product Thinking"
+  short_description: "Grills you on a product idea before you build it"
+policy:
+  allow_implicit_invocation: false

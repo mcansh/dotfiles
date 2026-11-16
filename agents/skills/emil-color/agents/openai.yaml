@@ -1,0 +1,3 @@
+interface:
+  display_name: "Color"
+  short_description: "Palettes in OKLCH, with contrast that holds in dark mode"

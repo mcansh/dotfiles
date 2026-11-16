@@ -1,4 +1,0 @@
-{
-  "name": "create-allin-package",
-  "description": "Use when creating a new package in the allin-ui monorepo - guides through component taxonomy (UFA/IAP/SCL), Turbo scaffolding, dependency configuration, and manifest setup"
-}
