@@ -3,11 +3,18 @@ import type {
   FinickyConfig,
 } from "/Applications/Finicky.app/Contents/Resources/finicky.d.ts";
 
-const IS_WORK = finicky.getSystemInfo().name === "s01ppi035992";
+// const IS_WORK = finicky.getSystemInfo().name === "s01ppi035992";
 
-const DEFAULT_BROWSER = (
-  IS_WORK ? { name: "Helium", profile: "You" } : "Safari"
-) satisfies BrowserSpecification;
+const DEFAULT_BROWSER = { name: "Helium", profile: "You" } satisfies BrowserSpecification;
+
+const WORK_BROWSER = { name: "Helium", profile: "work" } satisfies BrowserSpecification;
+// const DEFAULT_BROWSER = (
+//   IS_WORK ? { name: "Helium", profile: "You" } : "Safari"
+// ) satisfies BrowserSpecification;
+//
+// const WORK_BROWSER = (
+//   IS_WORK ? { name: "Helium", profile: "work" } : "Safari"
+// ) satisfies BrowserSpecification;
 
 export default {
   defaultBrowser: DEFAULT_BROWSER,
@@ -50,21 +57,17 @@ export default {
       browser: DEFAULT_BROWSER,
     },
 
-    ...(IS_WORK
-      ? ([
-          {
-            match(url, { opener }) {
-              return (
-                opener?.bundleId === "com.microsoft.teams2" ||
-                url.host === "uwm.com" ||
-                url.host.endsWith(".uwm.com") ||
-                url.href.startsWith("https://github.com/Uwm-Cyborg")
-              );
-            },
-            browser: { name: "Helium", profile: "work" },
-          },
-        ] satisfies NonNullable<FinickyConfig["handlers"]>)
-      : []),
+    {
+      match(url, { opener }) {
+        return (
+          opener?.bundleId === "com.microsoft.teams2" ||
+          url.host === "uwm.com" ||
+          url.host.endsWith(".uwm.com") ||
+          url.href.startsWith("https://github.com/Uwm-Cyborg")
+        );
+      },
+      browser: WORK_BROWSER,
+    },
   ],
 } satisfies FinickyConfig;
 
