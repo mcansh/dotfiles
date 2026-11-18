@@ -2,6 +2,20 @@
 
 my macbooks dotfiles
 
+## Global skills
+
+Edit managed skills in `agents/skills/`. The global links under
+`~/.agents/skills/` resolve to these files.
+
+Run `update-skills` to fetch updates for all managed skills or pass skill names
+to update a subset. Fish's `update-all` also runs this command. Use it for
+global updates because running `npx skills update --global` directly replaces
+the links with copies.
+
+Run `update-skills --link` to restore the global links without fetching updates.
+It saves matching installed directories in a backup under `~/.agents/` and
+reports any conflicting local content.
+
 ## Cursor skills marketplace
 
 Each skill in `agents/.agents/skills/` is an individually installable Cursor

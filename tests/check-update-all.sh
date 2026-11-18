@@ -22,7 +22,7 @@ if [ "$step" = "$UPDATE_ALL_TEST_FAIL" ]; then
 fi
 STUB
 chmod +x "$test_dir/stub"
-clis=(sudo brew nub node rustup gem mas corepack pnpm npm ncu yarn softwareupdate)
+clis=(sudo brew nub node rustup gem mas corepack pnpm npm ncu yarn npx update-skills softwareupdate)
 
 install_stubs() {
     rm -f "$test_dir/bin/"*
@@ -69,6 +69,7 @@ install_stubs
 run_update 0
 has_run 'rustup update'
 has_run "node $test_dir/home/.dotfiles/nub-node-cleanup.mjs"
+has_run 'update-skills '
 has_run 'softwareupdate --install --all --verbose --restart'
 
 # Each missing CLI is skipped without making unrelated updates fail.
@@ -88,7 +89,7 @@ for step in 'brew update' 'brew doctor' 'brew outdated' 'brew upgrade' \
     'brew upgrade --cask' 'brew cleanup' 'nub node install latest' \
     "node $test_dir/home/.dotfiles/nub-node-cleanup.mjs" 'rustup update' \
     'gem update' 'gem update --system' 'mas outdated' 'mas upgrade' \
-    'pnpm update --interactive --latest --global' 'ncu -g' 'yarn global upgrade' \
+    'pnpm update --interactive --latest --global' 'ncu -g' 'yarn global upgrade' 'update-skills ' \
     'softwareupdate --install --all --verbose --restart'; do
     export UPDATE_ALL_TEST_FAIL="$step"
     run_update 1

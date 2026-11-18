@@ -87,6 +87,13 @@ function update-all
         end
     end
 
+    if command -q update-skills; and command -q npx
+        echo '▲ Updating dotfiles skills'
+        update-skills; or set failed 1
+    else
+        echo '▲ update-skills or npx not installed, skipping skills updates'
+    end
+
     if command -q softwareupdate
         echo '▲ Running macOS Upgrade 🍏'
         softwareupdate --install --all --verbose --restart; or set failed 1
