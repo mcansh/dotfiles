@@ -10,6 +10,7 @@ set -gx DENO_INSTALL "$HOME/.deno"
 set -gx PNPM_HOME "$HOME/Library/pnpm"
 set -gx SSH_AUTH_SOCK "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 set -gx PHP_INI_SCAN_DIR "$HOME/Library/Application Support/Herd/config/php:$PHP_INI_SCAN_DIR"
+set -gx HOMEBREW_UPGRADE_GREEDY 1
 
 # Load private environment variables without spawning grep and xargs.
 if test -f "$HOME/.dotfiles/env.ignored"
@@ -159,22 +160,31 @@ if command -q codex
     end
 end
 
-# opencode
+# >>> opencode >>>
 fish_add_path /Users/lmcansh/.opencode/bin
+# <<< opencode <<<
 
 direnv hook fish | source
 
-# nub shims
+# >>> nub shims >>>
 set -gx PATH (test -n "$XDG_DATA_HOME"; and echo $XDG_DATA_HOME; or echo $HOME/.local/share)/nub/shims $PATH
+# <<< nub shims <<<
 
-
-# lane https://github.com/lukeed/lane
+# >>> lane >>>
+# https://github.com/lukeed/lane
 lane shellenv fish | source
+# <<< lane <<<
 
-
-# An unchanged PATH is a successful config reload.
-return 0
 
 # >>> grok installer >>>
 fish_add_path $HOME/.grok/bin
 # <<< grok installer <<<
+
+# >>> uwm glab installer >>>
+if test -r "$HOME/.config/op/plugins.sh"
+    source "$HOME/.config/op/plugins.sh"
+end
+# <<< uwm glab installer <<<
+
+# An unchanged PATH is a successful config reload.
+return 0
