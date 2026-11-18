@@ -106,10 +106,10 @@
     },
     "default_model": {
       "speed": "fast",
-      "effort": "low",
+      "effort": "medium",
       "enable_thinking": true,
       "provider": "openai-subscribed",
-      "model": "gpt-6.1-sol"
+      "model": "gpt-6.2-sol"
     },
     "commit_message_model": {
       "provider": "openai-subscribed",
