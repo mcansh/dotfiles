@@ -8,3 +8,11 @@
 
 [remote "origin"]
 	tagOpt = --no-tags
+[url "https://gitlab.uwm.com/"]
+	insteadOf = git@gitlab.uwm.com:
+	insteadOf = ssh://git@gitlab.uwm.com/
+	insteadOf = git@ssh.gitlab.uwm.com:
+	insteadOf = ssh://git@ssh.gitlab.uwm.com/
+[credential "https://gitlab.uwm.com"]
+	helper = ""
+	helper = !/opt/homebrew/bin/glab auth git-credential
